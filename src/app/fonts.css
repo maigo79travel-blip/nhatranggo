@@ -1,0 +1,84 @@
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/43adbc7c773ef89f.woff2) format("truetype");
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/f2374e6da2f0a833.woff2) format("truetype");
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/0ee86126fb55b4c6.woff2) format("truetype");
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/cbf4f5937e04d9a0.woff2) format("truetype");
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(/fonts/9c0e6cce7702efbb.woff2) format("truetype");
+}
+@font-face {
+  font-family: "Material Symbols Outlined";
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url(/fonts/d0194be9caae4fca.woff2) format("truetype");
+}
+@font-face {
+  font-family: "Material Symbols Outlined";
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url(/fonts/a57ef69290812053.woff2) format("truetype");
+}
+@font-face {
+  font-family: "Material Symbols Outlined";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(/fonts/5af09939d99f73ed.woff2) format("truetype");
+}
+@font-face {
+  font-family: "Material Symbols Outlined";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/62bd20dee50e06c0.woff2) format("truetype");
+}
+@font-face {
+  font-family: "Material Symbols Outlined";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/68dc38d5a41b7915.woff2) format("truetype");
+}
+@font-face {
+  font-family: "Material Symbols Outlined";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/7e27852ca5f952bc.woff2) format("truetype");
+}
+@font-face {
+  font-family: "Material Symbols Outlined";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/155d62f63ab2403f.woff2) format("truetype");
+}

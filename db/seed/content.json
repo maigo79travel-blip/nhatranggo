@@ -1,0 +1,5139 @@
+[
+  {
+    "key": "home.attributes-001",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "data-alt": "Breathtaking aerial panorama of Nha Trang coastal bay with turquoise azure waters, luxury modern beachfront resorts, pristine white sand beaches and lush tropical palm trees bathed in golden natural morning sunlight under soft wispy clouds. High resolution cinematic travel photography.",
+      "backgroundImage": "url('/images/64e979737a5d7de4.jpg')"
+    },
+    "label": "Breathtaking aerial panorama of Nha Trang coastal bay with turquoise azure waters, luxury modern beachfront resorts, pristine white sand beaches and l"
+  },
+  {
+    "key": "home.attributes-002",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "placeholder": "Bạn muốn đi đâu?",
+      "defaultValue": "Nha Trang, Cam Ranh",
+      "aria-label": "Bạn muốn đi đâu?"
+    },
+    "label": "Bạn muốn đi đâu? · Nha Trang, Cam Ranh · Bạn muốn đi đâu?"
+  },
+  {
+    "key": "home.attributes-003",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-004",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-005",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-006",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-007",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-008",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-009",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-010",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-011",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "data-alt": "Panoramic overhead view of Nha Trang crescent bay with azure sea water, golden sandy beach lined with green palm trees and luxury skyscrapers",
+      "backgroundImage": "url('/images/07eaa0892315c5ca.jpg')"
+    },
+    "label": "Panoramic overhead view of Nha Trang crescent bay with azure sea water, golden sandy beach lined with green palm trees and luxury skyscrapers · url('/"
+  },
+  {
+    "key": "home.attributes-012",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-013",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "data-alt": "Da Lat pine hills morning mist Xuan Huong Lake tranquil peaceful nature scenery Vietnam",
+      "backgroundImage": "url('/images/c394838ce599ce62.jpg')"
+    },
+    "label": "Da Lat pine hills morning mist Xuan Huong Lake tranquil peaceful nature scenery Vietnam · url('/images/c394838ce599ce62.jpg')"
+  },
+  {
+    "key": "home.attributes-014",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-015",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "data-alt": "Da Nang Dragon Bridge over Han river and My Khe beach coastline luxury resorts",
+      "backgroundImage": "url('/images/391c9adc5fa131a2.jpg')"
+    },
+    "label": "Da Nang Dragon Bridge over Han river and My Khe beach coastline luxury resorts · url('/images/391c9adc5fa131a2.jpg')"
+  },
+  {
+    "key": "home.attributes-016",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-017",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "data-alt": "Phu Quoc island tropical coast with traditional fishing boats floating on clear emerald sea water",
+      "backgroundImage": "url('/images/f1eb07f99dded4ba.jpg')"
+    },
+    "label": "Phu Quoc island tropical coast with traditional fishing boats floating on clear emerald sea water · url('/images/f1eb07f99dded4ba.jpg')"
+  },
+  {
+    "key": "home.attributes-018",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-019",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "data-alt": "Sapa terraced rice fields in golden harvest season under misty Fansipan mountains",
+      "backgroundImage": "url('/images/d1b9b15bb6269830.jpg')"
+    },
+    "label": "Sapa terraced rice fields in golden harvest season under misty Fansipan mountains · url('/images/d1b9b15bb6269830.jpg')"
+  },
+  {
+    "key": "home.attributes-020",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-021",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "data-alt": "Ha Long Bay limestone karst karsts floating islands and traditional junks cruising on emerald sea water",
+      "backgroundImage": "url('/images/23bfeb94d30a6df0.jpg')"
+    },
+    "label": "Ha Long Bay limestone karst karsts floating islands and traditional junks cruising on emerald sea water · url('/images/23bfeb94d30a6df0.jpg')"
+  },
+  {
+    "key": "home.attributes-022",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-023",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "data-alt": "Hoi An ancient town illuminated with colorful silk lanterns along the Thu Bon river at twilight",
+      "backgroundImage": "url('/images/e008eec67b7464f4.jpg')"
+    },
+    "label": "Hoi An ancient town illuminated with colorful silk lanterns along the Thu Bon river at twilight · url('/images/e008eec67b7464f4.jpg')"
+  },
+  {
+    "key": "home.attributes-024",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-025",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "data-alt": "Vung Tau coastal road Bai Sau beach tropical breeze and modern hotel skyline",
+      "backgroundImage": "url('/images/513d40f73f166f3d.jpg')"
+    },
+    "label": "Vung Tau coastal road Bai Sau beach tropical breeze and modern hotel skyline · url('/images/513d40f73f166f3d.jpg')"
+  },
+  {
+    "key": "home.attributes-026",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-027",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "data-alt": "Quy Nhon Ky Co Eo Gio rugged sea cliffs and pristine turquoise ocean coves with wooden boardwalk",
+      "backgroundImage": "url('/images/5787f0bf4635923b.jpg')"
+    },
+    "label": "Quy Nhon Ky Co Eo Gio rugged sea cliffs and pristine turquoise ocean coves with wooden boardwalk · url('/images/5787f0bf4635923b.jpg')"
+  },
+  {
+    "key": "home.attributes-028",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-029",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "data-alt": "The Anam Cam Ranh colonial indochine style luxury resort villa bedroom with teak wood and garden pool view",
+      "backgroundImage": "url('/images/9ed3e425cab0a1c1.jpg')"
+    },
+    "label": "The Anam Cam Ranh colonial indochine style luxury resort villa bedroom with teak wood and garden pool view · url('/images/9ed3e425cab0a1c1.jpg')"
+  },
+  {
+    "key": "home.attributes-030",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-031",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "data-alt": "Sunny Nha Trang beach with turquoise clear calm sea during ideal summer season with palm tree shade",
+      "backgroundImage": "url('/images/db6193186f88b535.jpg')"
+    },
+    "label": "Sunny Nha Trang beach with turquoise clear calm sea during ideal summer season with palm tree shade · url('/images/db6193186f88b535.jpg')"
+  },
+  {
+    "key": "home.attributes-032",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-033",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "data-alt": "Coastal paradise at The Anam Cam Ranh with multiple swimming pools overlooking private white sand beach and coconut palm trees",
+      "backgroundImage": "url('/images/5a21620b5d18066f.jpg')"
+    },
+    "label": "Coastal paradise at The Anam Cam Ranh with multiple swimming pools overlooking private white sand beach and coconut palm trees · url('/images/5a21620b"
+  },
+  {
+    "key": "home.attributes-034",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-035",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "data-alt": "Vinh Hy Bay Vietnam aerial view with turquoise blue lagoon, sea cliffs, small fishing boats and limestone formations",
+      "backgroundImage": "url('/images/fe3ca871bb03f253.jpg')"
+    },
+    "label": "Vinh Hy Bay Vietnam aerial view with turquoise blue lagoon, sea cliffs, small fishing boats and limestone formations · url('/images/fe3ca871bb03f253.j"
+  },
+  {
+    "key": "home.attributes-036",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-037",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-038",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-039",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-040",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "home.attributes-041",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "{{contact.zalo}}"
+    },
+    "label": "https://zalo.me/0846477222"
+  },
+  {
+    "key": "home.attributes-042",
+    "scope": "home",
+    "kind": "attributes",
+    "value": {
+      "href": "tel:{{contact.telephone}}"
+    },
+    "label": "tel:0846477222"
+  },
+  {
+    "key": "home.text-043",
+    "scope": "home",
+    "kind": "text",
+    "value": "Hơn 500+ khách sạn đang có sẵn trên toàn quốc",
+    "label": "Hơn 500+ khách sạn đang có sẵn trên toàn quốc"
+  },
+  {
+    "key": "home.text-044",
+    "scope": "home",
+    "kind": "text",
+    "value": "\n        Khám phá kỳ nghỉ tuyệt vời ",
+    "label": "Khám phá kỳ nghỉ tuyệt vời"
+  },
+  {
+    "key": "home.text-045",
+    "scope": "home",
+    "kind": "text",
+    "value": "giá tốt nhất",
+    "label": "giá tốt nhất"
+  },
+  {
+    "key": "home.text-046",
+    "scope": "home",
+    "kind": "text",
+    "value": "\n        Hotel • Resort 5 Sao • Tour Đảo Hằng Ngày • Combo Trọn Gói Tiết Kiệm\n      ",
+    "label": "Hotel • Resort 5 Sao • Tour Đảo Hằng Ngày • Combo Trọn Gói Tiết Kiệm"
+  },
+  {
+    "key": "home.text-047",
+    "scope": "home",
+    "kind": "text",
+    "value": "Khách sạn & Resort",
+    "label": "Khách sạn & Resort"
+  },
+  {
+    "key": "home.text-048",
+    "scope": "home",
+    "kind": "text",
+    "value": "Tour hằng ngày",
+    "label": "Tour hằng ngày"
+  },
+  {
+    "key": "home.text-049",
+    "scope": "home",
+    "kind": "text",
+    "value": "Combo trọn gói",
+    "label": "Combo trọn gói"
+  },
+  {
+    "key": "home.text-050",
+    "scope": "home",
+    "kind": "text",
+    "value": "Dịch vụ vé & Show",
+    "label": "Dịch vụ vé & Show"
+  },
+  {
+    "key": "home.text-051",
+    "scope": "home",
+    "kind": "text",
+    "value": "Điểm đến / Khách sạn",
+    "label": "Điểm đến / Khách sạn"
+  },
+  {
+    "key": "home.text-052",
+    "scope": "home",
+    "kind": "text",
+    "value": "Nhận phòng - Trả phòng",
+    "label": "Nhận phòng - Trả phòng"
+  },
+  {
+    "key": "home.text-053",
+    "scope": "home",
+    "kind": "text",
+    "value": "11/11/2026",
+    "label": "11/11/2026"
+  },
+  {
+    "key": "home.text-054",
+    "scope": "home",
+    "kind": "text",
+    "value": "1 đêm",
+    "label": "1 đêm"
+  },
+  {
+    "key": "home.text-055",
+    "scope": "home",
+    "kind": "text",
+    "value": "12/11/2026",
+    "label": "12/11/2026"
+  },
+  {
+    "key": "home.text-056",
+    "scope": "home",
+    "kind": "text",
+    "value": "Số phòng & Khách",
+    "label": "Số phòng & Khách"
+  },
+  {
+    "key": "home.text-057",
+    "scope": "home",
+    "kind": "text",
+    "value": "1 Phòng, 2 Khách",
+    "label": "1 Phòng, 2 Khách"
+  },
+  {
+    "key": "home.text-058",
+    "scope": "home",
+    "kind": "text",
+    "value": "Tìm kiếm",
+    "label": "Tìm kiếm"
+  },
+  {
+    "key": "home.text-059",
+    "scope": "home",
+    "kind": "text",
+    "value": "Gợi ý hot:",
+    "label": "Gợi ý hot:"
+  },
+  {
+    "key": "home.text-060",
+    "scope": "home",
+    "kind": "text",
+    "value": "Resort Bãi Dài Cam Ranh",
+    "label": "Resort Bãi Dài Cam Ranh"
+  },
+  {
+    "key": "home.text-061",
+    "scope": "home",
+    "kind": "text",
+    "value": "Tour 3 Đảo Nha Trang VIP",
+    "label": "Tour 3 Đảo Nha Trang VIP"
+  },
+  {
+    "key": "home.text-062",
+    "scope": "home",
+    "kind": "text",
+    "value": "VinWonders Hòn Tre",
+    "label": "VinWonders Hòn Tre"
+  },
+  {
+    "key": "home.text-063",
+    "scope": "home",
+    "kind": "text",
+    "value": "Combo Phú Quốc 3N2Đ",
+    "label": "Combo Phú Quốc 3N2Đ"
+  },
+  {
+    "key": "home.text-064",
+    "scope": "home",
+    "kind": "text",
+    "value": "500+",
+    "label": "500+"
+  },
+  {
+    "key": "home.text-065",
+    "scope": "home",
+    "kind": "text",
+    "value": "Khách sạn toàn quốc",
+    "label": "Khách sạn toàn quốc"
+  },
+  {
+    "key": "home.text-066",
+    "scope": "home",
+    "kind": "text",
+    "value": "2M+",
+    "label": "2M+"
+  },
+  {
+    "key": "home.text-067",
+    "scope": "home",
+    "kind": "text",
+    "value": "Lượt đặt thành công",
+    "label": "Lượt đặt thành công"
+  },
+  {
+    "key": "home.text-068",
+    "scope": "home",
+    "kind": "text",
+    "value": "98%",
+    "label": "98%"
+  },
+  {
+    "key": "home.text-069",
+    "scope": "home",
+    "kind": "text",
+    "value": "Khách hàng hài lòng",
+    "label": "Khách hàng hài lòng"
+  },
+  {
+    "key": "home.text-070",
+    "scope": "home",
+    "kind": "text",
+    "value": "24/7",
+    "label": "24/7"
+  },
+  {
+    "key": "home.text-071",
+    "scope": "home",
+    "kind": "text",
+    "value": "Hỗ trợ hotline & Zalo",
+    "label": "Hỗ trợ hotline & Zalo"
+  },
+  {
+    "key": "home.text-072",
+    "scope": "home",
+    "kind": "text",
+    "value": "Vừa đặt phòng tại ",
+    "label": "Vừa đặt phòng tại"
+  },
+  {
+    "key": "home.text-073",
+    "scope": "home",
+    "kind": "text",
+    "value": "Cam Lâm, Khánh Hòa",
+    "label": "Cam Lâm, Khánh Hòa"
+  },
+  {
+    "key": "home.text-074",
+    "scope": "home",
+    "kind": "text",
+    "value": ": Khách hàng ",
+    "label": ": Khách hàng"
+  },
+  {
+    "key": "home.text-075",
+    "scope": "home",
+    "kind": "text",
+    "value": "0888xxx***",
+    "label": "0888xxx***"
+  },
+  {
+    "key": "home.text-076",
+    "scope": "home",
+    "kind": "text",
+    "value": " vừa giữ chỗ thành công ",
+    "label": "vừa giữ chỗ thành công"
+  },
+  {
+    "key": "home.text-077",
+    "scope": "home",
+    "kind": "text",
+    "value": "1 phòng Deluxe Ocean View",
+    "label": "1 phòng Deluxe Ocean View"
+  },
+  {
+    "key": "home.text-078",
+    "scope": "home",
+    "kind": "text",
+    "value": "!",
+    "label": "!"
+  },
+  {
+    "key": "home.text-079",
+    "scope": "home",
+    "kind": "text",
+    "value": "Ưu đãi trọn gói đặc biệt",
+    "label": "Ưu đãi trọn gói đặc biệt"
+  },
+  {
+    "key": "home.text-080",
+    "scope": "home",
+    "kind": "text",
+    "value": "\n            Khách sạn + tour + vé Vinpearl + vé máy bay\n          ",
+    "label": "Khách sạn + tour + vé Vinpearl + vé máy bay"
+  },
+  {
+    "key": "home.text-081",
+    "scope": "home",
+    "kind": "text",
+    "value": "\n            Gói du lịch trọn vẹn, tối ưu lịch trình và ngân sách cho gia đình, cặp đôi hoặc nhóm bạn.\n          ",
+    "label": "Gói du lịch trọn vẹn, tối ưu lịch trình và ngân sách cho gia đình, cặp đôi hoặc nhóm bạn."
+  },
+  {
+    "key": "home.text-082",
+    "scope": "home",
+    "kind": "text",
+    "value": "Ưu đãi kết thúc sau:",
+    "label": "Ưu đãi kết thúc sau:"
+  },
+  {
+    "key": "home.text-083",
+    "scope": "home",
+    "kind": "text",
+    "value": "02",
+    "label": "02"
+  },
+  {
+    "key": "home.text-084",
+    "scope": "home",
+    "kind": "text",
+    "value": "Ngày",
+    "label": "Ngày"
+  },
+  {
+    "key": "home.text-085",
+    "scope": "home",
+    "kind": "text",
+    "value": ":",
+    "label": ":"
+  },
+  {
+    "key": "home.text-086",
+    "scope": "home",
+    "kind": "text",
+    "value": "14",
+    "label": "14"
+  },
+  {
+    "key": "home.text-087",
+    "scope": "home",
+    "kind": "text",
+    "value": "Giờ",
+    "label": "Giờ"
+  },
+  {
+    "key": "home.text-088",
+    "scope": "home",
+    "kind": "text",
+    "value": ":",
+    "label": ":"
+  },
+  {
+    "key": "home.text-089",
+    "scope": "home",
+    "kind": "text",
+    "value": "38",
+    "label": "38"
+  },
+  {
+    "key": "home.text-090",
+    "scope": "home",
+    "kind": "text",
+    "value": "Phút",
+    "label": "Phút"
+  },
+  {
+    "key": "home.text-091",
+    "scope": "home",
+    "kind": "text",
+    "value": ":",
+    "label": ":"
+  },
+  {
+    "key": "home.text-092",
+    "scope": "home",
+    "kind": "text",
+    "value": "45",
+    "label": "45"
+  },
+  {
+    "key": "home.text-093",
+    "scope": "home",
+    "kind": "text",
+    "value": "Giây",
+    "label": "Giây"
+  },
+  {
+    "key": "home.text-094",
+    "scope": "home",
+    "kind": "text",
+    "value": "Ưu đãi độc quyền Booking Travel",
+    "label": "Ưu đãi độc quyền Booking Travel"
+  },
+  {
+    "key": "home.text-095",
+    "scope": "home",
+    "kind": "text",
+    "value": "\n          Khách sạn có giá tốt nhất\n        ",
+    "label": "Khách sạn có giá tốt nhất"
+  },
+  {
+    "key": "home.text-096",
+    "scope": "home",
+    "kind": "text",
+    "value": "Tất cả",
+    "label": "Tất cả"
+  },
+  {
+    "key": "home.text-097",
+    "scope": "home",
+    "kind": "text",
+    "value": "Cam Ranh",
+    "label": "Cam Ranh"
+  },
+  {
+    "key": "home.text-098",
+    "scope": "home",
+    "kind": "text",
+    "value": "Nha Trang",
+    "label": "Nha Trang"
+  },
+  {
+    "key": "home.text-099",
+    "scope": "home",
+    "kind": "text",
+    "value": "Sát biển",
+    "label": "Sát biển"
+  },
+  {
+    "key": "home.text-100",
+    "scope": "home",
+    "kind": "text",
+    "value": "Hồ bơi vô cực",
+    "label": "Hồ bơi vô cực"
+  },
+  {
+    "key": "home.text-101",
+    "scope": "home",
+    "kind": "text",
+    "value": "Xem tất cả",
+    "label": "Xem tất cả"
+  },
+  {
+    "key": "home.text-102",
+    "scope": "home",
+    "kind": "text",
+    "value": "Khám phá vịnh biển & du thuyền",
+    "label": "Khám phá vịnh biển & du thuyền"
+  },
+  {
+    "key": "home.text-103",
+    "scope": "home",
+    "kind": "text",
+    "value": "\n          Tour hàng ngày giá tốt\n        ",
+    "label": "Tour hàng ngày giá tốt"
+  },
+  {
+    "key": "home.text-104",
+    "scope": "home",
+    "kind": "text",
+    "value": "Xem tất cả tour",
+    "label": "Xem tất cả tour"
+  },
+  {
+    "key": "home.text-105",
+    "scope": "home",
+    "kind": "text",
+    "value": "Khám phá theo điểm đến",
+    "label": "Khám phá theo điểm đến"
+  },
+  {
+    "key": "home.text-106",
+    "scope": "home",
+    "kind": "text",
+    "value": "\n          Chọn vị trí bạn yêu thích\n        ",
+    "label": "Chọn vị trí bạn yêu thích"
+  },
+  {
+    "key": "home.text-107",
+    "scope": "home",
+    "kind": "text",
+    "value": "Tất cả điểm đến",
+    "label": "Tất cả điểm đến"
+  },
+  {
+    "key": "home.text-108",
+    "scope": "home",
+    "kind": "text",
+    "value": "Top #1 Yêu Thích",
+    "label": "Top #1 Yêu Thích"
+  },
+  {
+    "key": "home.text-109",
+    "scope": "home",
+    "kind": "text",
+    "value": "Nha Trang",
+    "label": "Nha Trang"
+  },
+  {
+    "key": "home.text-110",
+    "scope": "home",
+    "kind": "text",
+    "value": "Biển đẹp, trung tâm sôi động, nhiều lựa chọn nghỉ dưỡng",
+    "label": "Biển đẹp, trung tâm sôi động, nhiều lựa chọn nghỉ dưỡng"
+  },
+  {
+    "key": "home.text-111",
+    "scope": "home",
+    "kind": "text",
+    "value": "1.024 khách sạn & resort",
+    "label": "1.024 khách sạn & resort"
+  },
+  {
+    "key": "home.text-112",
+    "scope": "home",
+    "kind": "text",
+    "value": "Đà Lạt",
+    "label": "Đà Lạt"
+  },
+  {
+    "key": "home.text-113",
+    "scope": "home",
+    "kind": "text",
+    "value": "Khí hậu mát mẻ, homestay thơ mộng",
+    "label": "Khí hậu mát mẻ, homestay thơ mộng"
+  },
+  {
+    "key": "home.text-114",
+    "scope": "home",
+    "kind": "text",
+    "value": "1.186 khách sạn",
+    "label": "1.186 khách sạn"
+  },
+  {
+    "key": "home.text-115",
+    "scope": "home",
+    "kind": "text",
+    "value": "Đà Nẵng",
+    "label": "Đà Nẵng"
+  },
+  {
+    "key": "home.text-116",
+    "scope": "home",
+    "kind": "text",
+    "value": "Biển Mỹ Khê & trung tâm sầm uất",
+    "label": "Biển Mỹ Khê & trung tâm sầm uất"
+  },
+  {
+    "key": "home.text-117",
+    "scope": "home",
+    "kind": "text",
+    "value": "1.356 khách sạn",
+    "label": "1.356 khách sạn"
+  },
+  {
+    "key": "home.text-118",
+    "scope": "home",
+    "kind": "text",
+    "value": "Phú Quốc",
+    "label": "Phú Quốc"
+  },
+  {
+    "key": "home.text-119",
+    "scope": "home",
+    "kind": "text",
+    "value": "Resort biển đảo phù hợp gia đình",
+    "label": "Resort biển đảo phù hợp gia đình"
+  },
+  {
+    "key": "home.text-120",
+    "scope": "home",
+    "kind": "text",
+    "value": "921 khách sạn",
+    "label": "921 khách sạn"
+  },
+  {
+    "key": "home.text-121",
+    "scope": "home",
+    "kind": "text",
+    "value": "Sapa",
+    "label": "Sapa"
+  },
+  {
+    "key": "home.text-122",
+    "scope": "home",
+    "kind": "text",
+    "value": "Núi rừng, ruộng bậc thang kỳ vĩ",
+    "label": "Núi rừng, ruộng bậc thang kỳ vĩ"
+  },
+  {
+    "key": "home.text-123",
+    "scope": "home",
+    "kind": "text",
+    "value": "612 khách sạn",
+    "label": "612 khách sạn"
+  },
+  {
+    "key": "home.text-124",
+    "scope": "home",
+    "kind": "text",
+    "value": "Hạ Long",
+    "label": "Hạ Long"
+  },
+  {
+    "key": "home.text-125",
+    "scope": "home",
+    "kind": "text",
+    "value": "Kỳ quan vịnh biển & du thuyền 5 sao",
+    "label": "Kỳ quan vịnh biển & du thuyền 5 sao"
+  },
+  {
+    "key": "home.text-126",
+    "scope": "home",
+    "kind": "text",
+    "value": "679 khách sạn",
+    "label": "679 khách sạn"
+  },
+  {
+    "key": "home.text-127",
+    "scope": "home",
+    "kind": "text",
+    "value": "Hội An",
+    "label": "Hội An"
+  },
+  {
+    "key": "home.text-128",
+    "scope": "home",
+    "kind": "text",
+    "value": "Phố cổ di sản & văn hóa bản địa",
+    "label": "Phố cổ di sản & văn hóa bản địa"
+  },
+  {
+    "key": "home.text-129",
+    "scope": "home",
+    "kind": "text",
+    "value": "785 khách sạn",
+    "label": "785 khách sạn"
+  },
+  {
+    "key": "home.text-130",
+    "scope": "home",
+    "kind": "text",
+    "value": "Vũng Tàu",
+    "label": "Vũng Tàu"
+  },
+  {
+    "key": "home.text-131",
+    "scope": "home",
+    "kind": "text",
+    "value": "Gần TP.HCM, nghỉ ngơi cuối tuần",
+    "label": "Gần TP.HCM, nghỉ ngơi cuối tuần"
+  },
+  {
+    "key": "home.text-132",
+    "scope": "home",
+    "kind": "text",
+    "value": "524 khách sạn",
+    "label": "524 khách sạn"
+  },
+  {
+    "key": "home.text-133",
+    "scope": "home",
+    "kind": "text",
+    "value": "Quy Nhơn",
+    "label": "Quy Nhơn"
+  },
+  {
+    "key": "home.text-134",
+    "scope": "home",
+    "kind": "text",
+    "value": "Biển hoang sơ, ẩm thực hải sản giá tốt",
+    "label": "Biển hoang sơ, ẩm thực hải sản giá tốt"
+  },
+  {
+    "key": "home.text-135",
+    "scope": "home",
+    "kind": "text",
+    "value": "332 khách sạn",
+    "label": "332 khách sạn"
+  },
+  {
+    "key": "home.text-136",
+    "scope": "home",
+    "kind": "text",
+    "value": "Cẩm nang kinh nghiệm bỏ túi",
+    "label": "Cẩm nang kinh nghiệm bỏ túi"
+  },
+  {
+    "key": "home.text-137",
+    "scope": "home",
+    "kind": "text",
+    "value": "\n          Bài viết mới nhất\n        ",
+    "label": "Bài viết mới nhất"
+  },
+  {
+    "key": "home.text-138",
+    "scope": "home",
+    "kind": "text",
+    "value": "Xem tất cả bài viết",
+    "label": "Xem tất cả bài viết"
+  },
+  {
+    "key": "home.text-139",
+    "scope": "home",
+    "kind": "text",
+    "value": " 202 lượt xem\n          ",
+    "label": "202 lượt xem"
+  },
+  {
+    "key": "home.text-140",
+    "scope": "home",
+    "kind": "text",
+    "value": "26/10/2026",
+    "label": "26/10/2026"
+  },
+  {
+    "key": "home.text-141",
+    "scope": "home",
+    "kind": "text",
+    "value": "\n              Review The Anam Cam Ranh: Khu nghỉ dưỡng đẳng cấp ven biển Bãi Dài\n            ",
+    "label": "Review The Anam Cam Ranh: Khu nghỉ dưỡng đẳng cấp ven biển Bãi Dài"
+  },
+  {
+    "key": "home.text-142",
+    "scope": "home",
+    "kind": "text",
+    "value": "\n              Khám phá The Anam Cam Ranh - kiến trúc Đông Dương hoài cổ, hồ bơi tràn bờ sát biển cùng dịch vụ 5 sao chuẩn quốc tế.\n            ",
+    "label": "Khám phá The Anam Cam Ranh - kiến trúc Đông Dương hoài cổ, hồ bơi tràn bờ sát biển cùng dịch vụ 5 sao chuẩn quốc tế."
+  },
+  {
+    "key": "home.text-143",
+    "scope": "home",
+    "kind": "text",
+    "value": "Đọc tiếp",
+    "label": "Đọc tiếp"
+  },
+  {
+    "key": "home.text-144",
+    "scope": "home",
+    "kind": "text",
+    "value": " 427 lượt xem\n          ",
+    "label": "427 lượt xem"
+  },
+  {
+    "key": "home.text-145",
+    "scope": "home",
+    "kind": "text",
+    "value": "24/09/2026",
+    "label": "24/09/2026"
+  },
+  {
+    "key": "home.text-146",
+    "scope": "home",
+    "kind": "text",
+    "value": "\n              Nên Đi Du Lịch Nha Trang Mùa Nào Đẹp Nhất? Thời Tiết & Kinh Nghiệm Thực Tế\n            ",
+    "label": "Nên Đi Du Lịch Nha Trang Mùa Nào Đẹp Nhất? Thời Tiết & Kinh Nghiệm Thực Tế"
+  },
+  {
+    "key": "home.text-147",
+    "scope": "home",
+    "kind": "text",
+    "value": "\n              Nên đi Nha Trang vào tháng mấy? Cập nhật đặc điểm thời tiết 4 mùa, thời điểm biển êm nắng đẹp nhất và cẩm nang săn phòng giá tốt.\n            ",
+    "label": "Nên đi Nha Trang vào tháng mấy? Cập nhật đặc điểm thời tiết 4 mùa, thời điểm biển êm nắng đẹp nhất và cẩm nang săn phòng giá tốt."
+  },
+  {
+    "key": "home.text-148",
+    "scope": "home",
+    "kind": "text",
+    "value": "Đọc tiếp",
+    "label": "Đọc tiếp"
+  },
+  {
+    "key": "home.text-149",
+    "scope": "home",
+    "kind": "text",
+    "value": " 433 lượt xem\n          ",
+    "label": "433 lượt xem"
+  },
+  {
+    "key": "home.text-150",
+    "scope": "home",
+    "kind": "text",
+    "value": "23/09/2026",
+    "label": "23/09/2026"
+  },
+  {
+    "key": "home.text-151",
+    "scope": "home",
+    "kind": "text",
+    "value": "\n              Review The Anam Cam Ranh: Khu nghỉ dưỡng 5 sao đẳng cấp ven biển Bãi Dài\n            ",
+    "label": "Review The Anam Cam Ranh: Khu nghỉ dưỡng 5 sao đẳng cấp ven biển Bãi Dài"
+  },
+  {
+    "key": "home.text-152",
+    "scope": "home",
+    "kind": "text",
+    "value": "\n              Khu nghỉ dưỡng lý tưởng cho tuần trăng mật và gia đình với không gian xanh mát, bãi biển riêng và ẩm thực phong phú.\n            ",
+    "label": "Khu nghỉ dưỡng lý tưởng cho tuần trăng mật và gia đình với không gian xanh mát, bãi biển riêng và ẩm thực phong phú."
+  },
+  {
+    "key": "home.text-153",
+    "scope": "home",
+    "kind": "text",
+    "value": "Đọc tiếp",
+    "label": "Đọc tiếp"
+  },
+  {
+    "key": "home.text-154",
+    "scope": "home",
+    "kind": "text",
+    "value": " 401 lượt xem\n          ",
+    "label": "401 lượt xem"
+  },
+  {
+    "key": "home.text-155",
+    "scope": "home",
+    "kind": "text",
+    "value": "22/09/2026",
+    "label": "22/09/2026"
+  },
+  {
+    "key": "home.text-156",
+    "scope": "home",
+    "kind": "text",
+    "value": "\n              Hành trình Tour Vịnh Vĩnh Hy - Hang Rái - Đồng Cừu khởi hành từ Nha Trang\n            ",
+    "label": "Hành trình Tour Vịnh Vĩnh Hy - Hang Rái - Đồng Cừu khởi hành từ Nha Trang"
+  },
+  {
+    "key": "home.text-157",
+    "scope": "home",
+    "kind": "text",
+    "value": "\n              Cung đường ven biển đẹp bậc nhất Việt Nam: ngắm thềm san hô cổ Hang Rái, check-in thảo nguyên cừu và thưởng thức hải sản Vĩnh Hy.\n            ",
+    "label": "Cung đường ven biển đẹp bậc nhất Việt Nam: ngắm thềm san hô cổ Hang Rái, check-in thảo nguyên cừu và thưởng thức hải sản Vĩnh Hy."
+  },
+  {
+    "key": "home.text-158",
+    "scope": "home",
+    "kind": "text",
+    "value": "Đọc tiếp",
+    "label": "Đọc tiếp"
+  },
+  {
+    "key": "home.text-159",
+    "scope": "home",
+    "kind": "text",
+    "value": "Chủ đề được đọc nhiều nhất",
+    "label": "Chủ đề được đọc nhiều nhất"
+  },
+  {
+    "key": "home.text-160",
+    "scope": "home",
+    "kind": "text",
+    "value": "Lưu ngay kinh nghiệm hữu ích cho chuyến đi sắp tới",
+    "label": "Lưu ngay kinh nghiệm hữu ích cho chuyến đi sắp tới"
+  },
+  {
+    "key": "home.text-161",
+    "scope": "home",
+    "kind": "text",
+    "value": "Kinh nghiệm Phú Quốc cho bé",
+    "label": "Kinh nghiệm Phú Quốc cho bé"
+  },
+  {
+    "key": "home.text-162",
+    "scope": "home",
+    "kind": "text",
+    "value": "Cẩm nang Đà Lạt tự túc",
+    "label": "Cẩm nang Đà Lạt tự túc"
+  },
+  {
+    "key": "home.text-163",
+    "scope": "home",
+    "kind": "text",
+    "value": "Săn phòng view biển Trần Phú",
+    "label": "Săn phòng view biển Trần Phú"
+  },
+  {
+    "key": "home.text-164",
+    "scope": "home",
+    "kind": "text",
+    "value": "Kinh nghiệm lặn Hòn Mun",
+    "label": "Kinh nghiệm lặn Hòn Mun"
+  },
+  {
+    "key": "home.text-165",
+    "scope": "home",
+    "kind": "text",
+    "value": "Đồng hành cùng phát triển",
+    "label": "Đồng hành cùng phát triển"
+  },
+  {
+    "key": "home.text-166",
+    "scope": "home",
+    "kind": "text",
+    "value": "\n          Bạn muốn hợp tác cùng Booking Travel?\n        ",
+    "label": "Bạn muốn hợp tác cùng Booking Travel?"
+  },
+  {
+    "key": "home.text-167",
+    "scope": "home",
+    "kind": "text",
+    "value": "\n          Chúng tôi hỗ trợ kết nối hơn 500+ khách sạn, resort, đối tác tour lữ hành và nhà xe đến hàng triệu du khách trên cả nước. Để lại thông tin hoặc nhắn Zalo để chuyên viên liên hệ ngay.\n        ",
+    "label": "Chúng tôi hỗ trợ kết nối hơn 500+ khách sạn, resort, đối tác tour lữ hành và nhà xe đến hàng triệu du khách trên cả nước. Để lại thông tin hoặc nhắn Z"
+  },
+  {
+    "key": "home.text-168",
+    "scope": "home",
+    "kind": "text",
+    "value": "Liên hệ hợp tác Zalo ({{contact.phone}})",
+    "label": "Liên hệ hợp tác Zalo (084.64.77.222)"
+  },
+  {
+    "key": "home.text-169",
+    "scope": "home",
+    "kind": "text",
+    "value": "Gọi Hotline trực tiếp",
+    "label": "Gọi Hotline trực tiếp"
+  },
+  {
+    "key": "home.text-170",
+    "scope": "home",
+    "kind": "text",
+    "value": "\n          Cam kết dịch vụ Booking Travel\n        ",
+    "label": "Cam kết dịch vụ Booking Travel"
+  },
+  {
+    "key": "home.text-171",
+    "scope": "home",
+    "kind": "text",
+    "value": "Giá phòng minh bạch 100%, không phụ phí ẩn",
+    "label": "Giá phòng minh bạch 100%, không phụ phí ẩn"
+  },
+  {
+    "key": "home.text-172",
+    "scope": "home",
+    "kind": "text",
+    "value": "Hỗ trợ kiểm tra phòng trống và giữ chỗ tức thì",
+    "label": "Hỗ trợ kiểm tra phòng trống và giữ chỗ tức thì"
+  },
+  {
+    "key": "home.text-173",
+    "scope": "home",
+    "kind": "text",
+    "value": "Đội ngũ tư vấn am hiểu sâu từng địa phương",
+    "label": "Đội ngũ tư vấn am hiểu sâu từng địa phương"
+  },
+  {
+    "key": "home.text-174",
+    "scope": "home",
+    "kind": "text",
+    "value": "Chính sách thanh toán linh hoạt: VNPAY, MoMo, Visa/MC",
+    "label": "Chính sách thanh toán linh hoạt: VNPAY, MoMo, Visa/MC"
+  },
+  {
+    "key": "hotels.attributes-001",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "Breadcrumb"
+    },
+    "label": "Breadcrumb"
+  },
+  {
+    "key": "hotels.attributes-002",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "href": "/"
+    },
+    "label": "/"
+  },
+  {
+    "key": "hotels.attributes-003",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "Lựa chọn",
+      "defaultValue": "nhatrang"
+    },
+    "label": "Lựa chọn · nhatrang"
+  },
+  {
+    "key": "hotels.attributes-004",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "defaultValue": "2024-05-18",
+      "aria-label": "date"
+    },
+    "label": "2024-05-18 · date"
+  },
+  {
+    "key": "hotels.attributes-005",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "defaultValue": "2024-05-20",
+      "aria-label": "date"
+    },
+    "label": "2024-05-20 · date"
+  },
+  {
+    "key": "hotels.attributes-006",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "Lựa chọn",
+      "defaultValue": "2 Người lớn, 1 Phòng"
+    },
+    "label": "Lựa chọn · 2 Người lớn, 1 Phòng"
+  },
+  {
+    "key": "hotels.attributes-007",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "Lựa chọn",
+      "defaultValue": "Tất cả khách sạn"
+    },
+    "label": "Lựa chọn · Tất cả khách sạn"
+  },
+  {
+    "key": "hotels.attributes-008",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "hotels.attributes-009",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "hotels.attributes-010",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "hotels.attributes-011",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "href": "#"
+    },
+    "label": "#"
+  },
+  {
+    "key": "hotels.attributes-012",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "price-range"
+    },
+    "label": "price-range"
+  },
+  {
+    "key": "hotels.attributes-013",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "price-range"
+    },
+    "label": "price-range"
+  },
+  {
+    "key": "hotels.attributes-014",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "price-range"
+    },
+    "label": "price-range"
+  },
+  {
+    "key": "hotels.attributes-015",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "price-range"
+    },
+    "label": "price-range"
+  },
+  {
+    "key": "hotels.attributes-016",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "defaultValue": "3500000",
+      "aria-label": "range"
+    },
+    "label": "3500000 · range"
+  },
+  {
+    "key": "hotels.attributes-017",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "star-rating"
+    },
+    "label": "star-rating"
+  },
+  {
+    "key": "hotels.attributes-018",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "star-rating"
+    },
+    "label": "star-rating"
+  },
+  {
+    "key": "hotels.attributes-019",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "star-rating"
+    },
+    "label": "star-rating"
+  },
+  {
+    "key": "hotels.attributes-020",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "checkbox"
+    },
+    "label": "checkbox"
+  },
+  {
+    "key": "hotels.attributes-021",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "checkbox"
+    },
+    "label": "checkbox"
+  },
+  {
+    "key": "hotels.attributes-022",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "checkbox"
+    },
+    "label": "checkbox"
+  },
+  {
+    "key": "hotels.attributes-023",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "checkbox"
+    },
+    "label": "checkbox"
+  },
+  {
+    "key": "hotels.attributes-024",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "checkbox"
+    },
+    "label": "checkbox"
+  },
+  {
+    "key": "hotels.attributes-025",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "checkbox"
+    },
+    "label": "checkbox"
+  },
+  {
+    "key": "hotels.attributes-026",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "checkbox"
+    },
+    "label": "checkbox"
+  },
+  {
+    "key": "hotels.attributes-027",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "checkbox"
+    },
+    "label": "checkbox"
+  },
+  {
+    "key": "hotels.attributes-028",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "checkbox"
+    },
+    "label": "checkbox"
+  },
+  {
+    "key": "hotels.attributes-029",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "checkbox"
+    },
+    "label": "checkbox"
+  },
+  {
+    "key": "hotels.attributes-030",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "checkbox"
+    },
+    "label": "checkbox"
+  },
+  {
+    "key": "hotels.attributes-031",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "checkbox"
+    },
+    "label": "checkbox"
+  },
+  {
+    "key": "hotels.attributes-032",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "checkbox"
+    },
+    "label": "checkbox"
+  },
+  {
+    "key": "hotels.attributes-033",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "checkbox"
+    },
+    "label": "checkbox"
+  },
+  {
+    "key": "hotels.attributes-034",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "href": "{{contact.zalo}}"
+    },
+    "label": "https://zalo.me/0846477222"
+  },
+  {
+    "key": "hotels.attributes-035",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "data-alt": "A modern static map aerial perspective showing Tran Phu coastal avenue and resort bay in Nha Trang Vietnam with crisp turquoise ocean waters and soft warm sunlight.",
+      "data-location": "Tran Phu, Nha Trang, Khanh Hoa",
+      "backgroundImage": "url('/images/a97932f78a8f3d68.jpg')"
+    },
+    "label": "A modern static map aerial perspective showing Tran Phu coastal avenue and resort bay in Nha Trang Vietnam with crisp turquoise ocean waters and soft "
+  },
+  {
+    "key": "hotels.attributes-036",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "Chế độ xem danh sách"
+    },
+    "label": "Chế độ xem danh sách"
+  },
+  {
+    "key": "hotels.attributes-037",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "Chế độ xem lưới"
+    },
+    "label": "Chế độ xem lưới"
+  },
+  {
+    "key": "hotels.attributes-038",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "Phân trang danh sách khách sạn"
+    },
+    "label": "Phân trang danh sách khách sạn"
+  },
+  {
+    "key": "hotels.attributes-039",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "Trang trước"
+    },
+    "label": "Trang trước"
+  },
+  {
+    "key": "hotels.attributes-040",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "Trang tiếp theo"
+    },
+    "label": "Trang tiếp theo"
+  },
+  {
+    "key": "hotels.attributes-041",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "href": "tel:{{contact.telephone}}"
+    },
+    "label": "tel:0846477222"
+  },
+  {
+    "key": "hotels.attributes-042",
+    "scope": "hotels",
+    "kind": "attributes",
+    "value": {
+      "href": "{{contact.zalo}}"
+    },
+    "label": "https://zalo.me/0846477222"
+  },
+  {
+    "key": "hotels.text-043",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Trang chủ",
+    "label": "Trang chủ"
+  },
+  {
+    "key": "hotels.text-044",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Khách sạn & Resort",
+    "label": "Khách sạn & Resort"
+  },
+  {
+    "key": "hotels.text-045",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Hơn 1.200+ Đối tác Khách sạn & Resort Nghỉ Dưỡng",
+    "label": "Hơn 1.200+ Đối tác Khách sạn & Resort Nghỉ Dưỡng"
+  },
+  {
+    "key": "hotels.text-046",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Tìm & Đặt Phòng Khách Sạn, Resort Giá Tốt Nhất",
+    "label": "Tìm & Đặt Phòng Khách Sạn, Resort Giá Tốt Nhất"
+  },
+  {
+    "key": "hotels.text-047",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "\n            Cam kết giá đại lý trực tiếp rẻ hơn các sàn quốc tế, giữ phòng nhanh qua Zalo, miễn phí bữa sáng và nâng cấp phòng tùy tình trạng.\n          ",
+    "label": "Cam kết giá đại lý trực tiếp rẻ hơn các sàn quốc tế, giữ phòng nhanh qua Zalo, miễn phí bữa sáng và nâng cấp phòng tùy tình trạng."
+  },
+  {
+    "key": "hotels.text-048",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Đảm bảo đối tác",
+    "label": "Đảm bảo đối tác"
+  },
+  {
+    "key": "hotels.text-049",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "100% Xác Nhận Ngay",
+    "label": "100% Xác Nhận Ngay"
+  },
+  {
+    "key": "hotels.text-050",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Điểm đến",
+    "label": "Điểm đến"
+  },
+  {
+    "key": "hotels.text-051",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Nha Trang - Khánh Hòa",
+    "label": "Nha Trang - Khánh Hòa"
+  },
+  {
+    "key": "hotels.text-052",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Bãi Dài Cam Ranh",
+    "label": "Bãi Dài Cam Ranh"
+  },
+  {
+    "key": "hotels.text-053",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Phú Quốc (Kiên Giang)",
+    "label": "Phú Quốc (Kiên Giang)"
+  },
+  {
+    "key": "hotels.text-054",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Đà Nẵng & Hội An",
+    "label": "Đà Nẵng & Hội An"
+  },
+  {
+    "key": "hotels.text-055",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Đà Lạt (Lâm Đồng)",
+    "label": "Đà Lạt (Lâm Đồng)"
+  },
+  {
+    "key": "hotels.text-056",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Vũng Tàu & Hồ Tràm",
+    "label": "Vũng Tàu & Hồ Tràm"
+  },
+  {
+    "key": "hotels.text-057",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Quy Nhơn - Bình Định",
+    "label": "Quy Nhơn - Bình Định"
+  },
+  {
+    "key": "hotels.text-058",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Nhận phòng",
+    "label": "Nhận phòng"
+  },
+  {
+    "key": "hotels.text-059",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Trả phòng",
+    "label": "Trả phòng"
+  },
+  {
+    "key": "hotels.text-060",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Số khách & phòng",
+    "label": "Số khách & phòng"
+  },
+  {
+    "key": "hotels.text-061",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "2 Người lớn, 1 Phòng",
+    "label": "2 Người lớn, 1 Phòng"
+  },
+  {
+    "key": "hotels.text-062",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "2 Người lớn, 1 Trẻ em",
+    "label": "2 Người lớn, 1 Trẻ em"
+  },
+  {
+    "key": "hotels.text-063",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "4 Người lớn, 2 Phòng",
+    "label": "4 Người lớn, 2 Phòng"
+  },
+  {
+    "key": "hotels.text-064",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Gia đình 6 Khách, Villa",
+    "label": "Gia đình 6 Khách, Villa"
+  },
+  {
+    "key": "hotels.text-065",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Đoàn công ty (>10 Khách)",
+    "label": "Đoàn công ty (>10 Khách)"
+  },
+  {
+    "key": "hotels.text-066",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Loại hình / Sao",
+    "label": "Loại hình / Sao"
+  },
+  {
+    "key": "hotels.text-067",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Tất cả khách sạn",
+    "label": "Tất cả khách sạn"
+  },
+  {
+    "key": "hotels.text-068",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Resort sát biển 5 sao",
+    "label": "Resort sát biển 5 sao"
+  },
+  {
+    "key": "hotels.text-069",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Villa hồ bơi riêng",
+    "label": "Villa hồ bơi riêng"
+  },
+  {
+    "key": "hotels.text-070",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Khách sạn phố 4 sao",
+    "label": "Khách sạn phố 4 sao"
+  },
+  {
+    "key": "hotels.text-071",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Căn hộ view biển cao cấp",
+    "label": "Căn hộ view biển cao cấp"
+  },
+  {
+    "key": "hotels.text-072",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Tìm Kiếm",
+    "label": "Tìm Kiếm"
+  },
+  {
+    "key": "hotels.text-073",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Gợi ý tìm kiếm hot:",
+    "label": "Gợi ý tìm kiếm hot:"
+  },
+  {
+    "key": "hotels.text-074",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Bãi Dài Cam Ranh All-inclusive",
+    "label": "Bãi Dài Cam Ranh All-inclusive"
+  },
+  {
+    "key": "hotels.text-075",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Đường Trần Phú có bãi tắm",
+    "label": "Đường Trần Phú có bãi tắm"
+  },
+  {
+    "key": "hotels.text-076",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Villa Hồ bơi riêng",
+    "label": "Villa Hồ bơi riêng"
+  },
+  {
+    "key": "hotels.text-077",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Khách sạn 5 sao dưới 1,5 triệu",
+    "label": "Khách sạn 5 sao dưới 1,5 triệu"
+  },
+  {
+    "key": "hotels.text-078",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Bộ Lọc Tìm Kiếm",
+    "label": "Bộ Lọc Tìm Kiếm"
+  },
+  {
+    "key": "hotels.text-079",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Đặt lại",
+    "label": "Đặt lại"
+  },
+  {
+    "key": "hotels.text-080",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Khoảng giá / đêm",
+    "label": "Khoảng giá / đêm"
+  },
+  {
+    "key": "hotels.text-081",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "VND",
+    "label": "VND"
+  },
+  {
+    "key": "hotels.text-082",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Dưới 1.000.000đ",
+    "label": "Dưới 1.000.000đ"
+  },
+  {
+    "key": "hotels.text-083",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "(18)",
+    "label": "(18)"
+  },
+  {
+    "key": "hotels.text-084",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "1.000.000đ - 2.000.000đ",
+    "label": "1.000.000đ - 2.000.000đ"
+  },
+  {
+    "key": "hotels.text-085",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "(54)",
+    "label": "(54)"
+  },
+  {
+    "key": "hotels.text-086",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "2.000.000đ - 4.000.000đ",
+    "label": "2.000.000đ - 4.000.000đ"
+  },
+  {
+    "key": "hotels.text-087",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "(42)",
+    "label": "(42)"
+  },
+  {
+    "key": "hotels.text-088",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Trên 4.000.000đ (Luxury)",
+    "label": "Trên 4.000.000đ (Luxury)"
+  },
+  {
+    "key": "hotels.text-089",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "(14)",
+    "label": "(14)"
+  },
+  {
+    "key": "hotels.text-090",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "500k",
+    "label": "500k"
+  },
+  {
+    "key": "hotels.text-091",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Tối đa 3.500k/đêm",
+    "label": "Tối đa 3.500k/đêm"
+  },
+  {
+    "key": "hotels.text-092",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "8.000k+",
+    "label": "8.000k+"
+  },
+  {
+    "key": "hotels.text-093",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Hạng sao chuẩn quốc tế",
+    "label": "Hạng sao chuẩn quốc tế"
+  },
+  {
+    "key": "hotels.text-094",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "3 Sao",
+    "label": "3 Sao"
+  },
+  {
+    "key": "hotels.text-095",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "4 Sao",
+    "label": "4 Sao"
+  },
+  {
+    "key": "hotels.text-096",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "5 Sao VIP",
+    "label": "5 Sao VIP"
+  },
+  {
+    "key": "hotels.text-097",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Khu vực địa lý",
+    "label": "Khu vực địa lý"
+  },
+  {
+    "key": "hotels.text-098",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Trục đường biển Trần Phú",
+    "label": "Trục đường biển Trần Phú"
+  },
+  {
+    "key": "hotels.text-099",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "(64)",
+    "label": "(64)"
+  },
+  {
+    "key": "hotels.text-100",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Bãi Dài Cam Ranh Resort",
+    "label": "Bãi Dài Cam Ranh Resort"
+  },
+  {
+    "key": "hotels.text-101",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "(38)",
+    "label": "(38)"
+  },
+  {
+    "key": "hotels.text-102",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Đảo Hòn Tre (Vinpearl)",
+    "label": "Đảo Hòn Tre (Vinpearl)"
+  },
+  {
+    "key": "hotels.text-103",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "(9)",
+    "label": "(9)"
+  },
+  {
+    "key": "hotels.text-104",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Trung tâm Phố Tây Nguyễn Thiện Thuật",
+    "label": "Trung tâm Phố Tây Nguyễn Thiện Thuật"
+  },
+  {
+    "key": "hotels.text-105",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "(22)",
+    "label": "(22)"
+  },
+  {
+    "key": "hotels.text-106",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Khu biệt thự ven biển An Viên",
+    "label": "Khu biệt thự ven biển An Viên"
+  },
+  {
+    "key": "hotels.text-107",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "(11)",
+    "label": "(11)"
+  },
+  {
+    "key": "hotels.text-108",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Tiện ích đặc quyền",
+    "label": "Tiện ích đặc quyền"
+  },
+  {
+    "key": "hotels.text-109",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Hồ bơi vô cực tràn bờ",
+    "label": "Hồ bơi vô cực tràn bờ"
+  },
+  {
+    "key": "hotels.text-110",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Bãi tắm riêng sát biển",
+    "label": "Bãi tắm riêng sát biển"
+  },
+  {
+    "key": "hotels.text-111",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Miễn phí buffet sáng cao cấp",
+    "label": "Miễn phí buffet sáng cao cấp"
+  },
+  {
+    "key": "hotels.text-112",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Đưa đón sân bay miễn phí",
+    "label": "Đưa đón sân bay miễn phí"
+  },
+  {
+    "key": "hotels.text-113",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Công viên nước nội khu (Water Park)",
+    "label": "Công viên nước nội khu (Water Park)"
+  },
+  {
+    "key": "hotels.text-114",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Liệu trình Spa & Massage tặng kèm",
+    "label": "Liệu trình Spa & Massage tặng kèm"
+  },
+  {
+    "key": "hotels.text-115",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Miễn phí 1-2 trẻ em dưới 6-12 tuổi",
+    "label": "Miễn phí 1-2 trẻ em dưới 6-12 tuổi"
+  },
+  {
+    "key": "hotels.text-116",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Chính sách linh hoạt",
+    "label": "Chính sách linh hoạt"
+  },
+  {
+    "key": "hotels.text-117",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Miễn phí hủy phòng trước 48h",
+    "label": "Miễn phí hủy phòng trước 48h"
+  },
+  {
+    "key": "hotels.text-118",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Thanh toán linh hoạt / Giữ chỗ 0đ",
+    "label": "Thanh toán linh hoạt / Giữ chỗ 0đ"
+  },
+  {
+    "key": "hotels.text-119",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Cần phòng gấp giá đoàn?",
+    "label": "Cần phòng gấp giá đoàn?"
+  },
+  {
+    "key": "hotels.text-120",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "\n              Liên hệ nhân viên hỗ trợ trực tiếp để lấy báo giá voucher sỉ độc quyền tại Nha Trang & Cam Ranh.\n            ",
+    "label": "Liên hệ nhân viên hỗ trợ trực tiếp để lấy báo giá voucher sỉ độc quyền tại Nha Trang & Cam Ranh."
+  },
+  {
+    "key": "hotels.text-121",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Chat Zalo Ngay (24/7)",
+    "label": "Chat Zalo Ngay (24/7)"
+  },
+  {
+    "key": "hotels.text-122",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Xem 128 Khách Sạn Trên Bản Đồ",
+    "label": "Xem 128 Khách Sạn Trên Bản Đồ"
+  },
+  {
+    "key": "hotels.text-123",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Khám phá vị trí đắc địa gần bãi biển & ẩm thực",
+    "label": "Khám phá vị trí đắc địa gần bãi biển & ẩm thực"
+  },
+  {
+    "key": "hotels.text-124",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "128 khách sạn & resort",
+    "label": "128 khách sạn & resort"
+  },
+  {
+    "key": "hotels.text-125",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "tại Nha Trang - Cam Ranh",
+    "label": "tại Nha Trang - Cam Ranh"
+  },
+  {
+    "key": "hotels.text-126",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Sắp xếp:",
+    "label": "Sắp xếp:"
+  },
+  {
+    "key": "hotels.text-127",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "\n              Ưu đãi tốt nhất\n            ",
+    "label": "Ưu đãi tốt nhất"
+  },
+  {
+    "key": "hotels.text-128",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "\n              Giá thấp nhất\n            ",
+    "label": "Giá thấp nhất"
+  },
+  {
+    "key": "hotels.text-129",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "\n              Đánh giá cao nhất\n            ",
+    "label": "Đánh giá cao nhất"
+  },
+  {
+    "key": "hotels.text-130",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "\n              Gần biển nhất\n            ",
+    "label": "Gần biển nhất"
+  },
+  {
+    "key": "hotels.text-131",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "\n            Hiển thị ",
+    "label": "Hiển thị"
+  },
+  {
+    "key": "hotels.text-132",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "1 - 6",
+    "label": "1 - 6"
+  },
+  {
+    "key": "hotels.text-133",
+    "scope": "hotels",
+    "kind": "text",
+    "value": " trên tổng số ",
+    "label": "trên tổng số"
+  },
+  {
+    "key": "hotels.text-134",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "128",
+    "label": "128"
+  },
+  {
+    "key": "hotels.text-135",
+    "scope": "hotels",
+    "kind": "text",
+    "value": " khách sạn\n          ",
+    "label": "khách sạn"
+  },
+  {
+    "key": "hotels.text-136",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "1",
+    "label": "1"
+  },
+  {
+    "key": "hotels.text-137",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "2",
+    "label": "2"
+  },
+  {
+    "key": "hotels.text-138",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "3",
+    "label": "3"
+  },
+  {
+    "key": "hotels.text-139",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "...",
+    "label": "..."
+  },
+  {
+    "key": "hotels.text-140",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "12",
+    "label": "12"
+  },
+  {
+    "key": "hotels.text-141",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "\n          An Tâm Tuyệt Đối Khi Đặt Dịch Vụ\n        ",
+    "label": "An Tâm Tuyệt Đối Khi Đặt Dịch Vụ"
+  },
+  {
+    "key": "hotels.text-142",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "\n          Cam Kết Chất Lượng Dịch Vụ Từ Booking Travel\n        ",
+    "label": "Cam Kết Chất Lượng Dịch Vụ Từ Booking Travel"
+  },
+  {
+    "key": "hotels.text-143",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "\n          Là đối tác chiến lược cấp 1 của các tập đoàn khách sạn quốc tế tại Nha Trang - Cam Ranh, chúng tôi mang tới quyền lợi vượt trội cho quý khách.\n        ",
+    "label": "Là đối tác chiến lược cấp 1 của các tập đoàn khách sạn quốc tế tại Nha Trang - Cam Ranh, chúng tôi mang tới quyền lợi vượt trội cho quý khách."
+  },
+  {
+    "key": "hotels.text-144",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Giá Minh Bạch - Không Phí Ẩn",
+    "label": "Giá Minh Bạch - Không Phí Ẩn"
+  },
+  {
+    "key": "hotels.text-145",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "\n            Mức giá hiển thị là giá thanh toán cuối cùng đã bao gồm 100% thuế VAT, phí dịch vụ và bữa sáng buffet chuẩn resort. Cam kết hoàn tiền chênh lệch nếu tìm thấy giá công khai thấp hơn.\n          ",
+    "label": "Mức giá hiển thị là giá thanh toán cuối cùng đã bao gồm 100% thuế VAT, phí dịch vụ và bữa sáng buffet chuẩn resort. Cam kết hoàn tiền chênh lệch nếu t"
+  },
+  {
+    "key": "hotels.text-146",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Giữ Phòng & Chăm Sóc Zalo 24/7",
+    "label": "Giữ Phòng & Chăm Sóc Zalo 24/7"
+  },
+  {
+    "key": "hotels.text-147",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "\n            Đội ngũ chuyên viên du lịch địa phương tại 38 Nguyễn Thái Học, Nha Trang đồng hành cùng bạn trước, trong và sau chuyến đi. Hỗ trợ nhận phòng sớm, nâng hạng view miễn phí.\n          ",
+    "label": "Đội ngũ chuyên viên du lịch địa phương tại 38 Nguyễn Thái Học, Nha Trang đồng hành cùng bạn trước, trong và sau chuyến đi. Hỗ trợ nhận phòng sớm, nâng"
+  },
+  {
+    "key": "hotels.text-148",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Đổi Ngày Linh Hoạt & Hoàn Tiền Nhanh",
+    "label": "Đổi Ngày Linh Hoạt & Hoàn Tiền Nhanh"
+  },
+  {
+    "key": "hotels.text-149",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "\n            Hỗ trợ đổi ngày lưu trú linh hoạt do thời tiết, lịch trình công tác hoặc vấn đề sức khỏe cá nhân. Thủ tục hoàn hủy minh bạch, nhanh chóng chỉ trong 2-4 giờ làm việc.\n          ",
+    "label": "Hỗ trợ đổi ngày lưu trú linh hoạt do thời tiết, lịch trình công tác hoặc vấn đề sức khỏe cá nhân. Thủ tục hoàn hủy minh bạch, nhanh chóng chỉ trong 2-"
+  },
+  {
+    "key": "hotels.text-150",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Đại lý chính thức Vinpearl, Accor, Meliá",
+    "label": "Đại lý chính thức Vinpearl, Accor, Meliá"
+  },
+  {
+    "key": "hotels.text-151",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Bảo mật giao dịch chứng chỉ PCI-DSS",
+    "label": "Bảo mật giao dịch chứng chỉ PCI-DSS"
+  },
+  {
+    "key": "hotels.text-152",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Tư vấn chọn khách sạn hợp gu:",
+    "label": "Tư vấn chọn khách sạn hợp gu:"
+  },
+  {
+    "key": "hotels.text-153",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "{{contact.phone}}",
+    "label": "084.64.77.222"
+  },
+  {
+    "key": "hotels.text-154",
+    "scope": "hotels",
+    "kind": "text",
+    "value": "Hỏi Báo Giá Qua Zalo",
+    "label": "Hỏi Báo Giá Qua Zalo"
+  },
+  {
+    "key": "tours.attributes-001",
+    "scope": "tours",
+    "kind": "attributes",
+    "value": {
+      "href": "/"
+    },
+    "label": "/"
+  },
+  {
+    "key": "tours.attributes-002",
+    "scope": "tours",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "Lựa chọn"
+    },
+    "label": "Lựa chọn"
+  },
+  {
+    "key": "tours.attributes-003",
+    "scope": "tours",
+    "kind": "attributes",
+    "value": {
+      "defaultValue": "2025-04-15",
+      "aria-label": "date"
+    },
+    "label": "2025-04-15 · date"
+  },
+  {
+    "key": "tours.attributes-004",
+    "scope": "tours",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "Lựa chọn"
+    },
+    "label": "Lựa chọn"
+  },
+  {
+    "key": "tours.attributes-005",
+    "scope": "tours",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "Lựa chọn"
+    },
+    "label": "Lựa chọn"
+  },
+  {
+    "key": "tours.attributes-006",
+    "scope": "tours",
+    "kind": "attributes",
+    "value": {
+      "href": "tel:{{contact.telephone}}"
+    },
+    "label": "tel:0846477222"
+  },
+  {
+    "key": "tours.attributes-007",
+    "scope": "tours",
+    "kind": "attributes",
+    "value": {
+      "href": "{{contact.zalo}}"
+    },
+    "label": "https://zalo.me/0846477222"
+  },
+  {
+    "key": "tours.text-008",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n          Trang chủ\n        ",
+    "label": "Trang chủ"
+  },
+  {
+    "key": "tours.text-009",
+    "scope": "tours",
+    "kind": "text",
+    "value": "/",
+    "label": "/"
+  },
+  {
+    "key": "tours.text-010",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Tour Hằng Ngày",
+    "label": "Tour Hằng Ngày"
+  },
+  {
+    "key": "tours.text-011",
+    "scope": "tours",
+    "kind": "text",
+    "value": "DỊCH VỤ TOUR ĐẢO & TRẢI NGHIỆM CHUYÊN NGHIỆP TẠI NHA TRANG",
+    "label": "DỊCH VỤ TOUR ĐẢO & TRẢI NGHIỆM CHUYÊN NGHIỆP TẠI NHA TRANG"
+  },
+  {
+    "key": "tours.text-012",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n            Tour Ghép & Tour Riêng Khởi Hành Hàng Ngày - ",
+    "label": "Tour Ghép & Tour Riêng Khởi Hành Hàng Ngày -"
+  },
+  {
+    "key": "tours.text-013",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Trải Nghiệm Chuẩn 5 Sao",
+    "label": "Trải Nghiệm Chuẩn 5 Sao"
+  },
+  {
+    "key": "tours.text-014",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n            Khám phá vẻ đẹp vịnh biển Nha Trang, thiên đường san hô Hòn Mun, du thuyền hoàng hôn lãng mạn và các cung đường khám phá Nam Trung Bộ với cano đời mới, hướng dẫn viên bản địa chu đáo.\n          ",
+    "label": "Khám phá vẻ đẹp vịnh biển Nha Trang, thiên đường san hô Hòn Mun, du thuyền hoàng hôn lãng mạn và các cung đường khám phá Nam Trung Bộ với cano đời mới"
+  },
+  {
+    "key": "tours.text-015",
+    "scope": "tours",
+    "kind": "text",
+    "value": "4.96",
+    "label": "4.96"
+  },
+  {
+    "key": "tours.text-016",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Từ 18.500+ lượt khách đánh giá thực tế",
+    "label": "Từ 18.500+ lượt khách đánh giá thực tế"
+  },
+  {
+    "key": "tours.text-017",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n          Tất cả (28)\n        ",
+    "label": "Tất cả (28)"
+  },
+  {
+    "key": "tours.text-018",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n          Tour Đảo Nha Trang VIP\n        ",
+    "label": "Tour Đảo Nha Trang VIP"
+  },
+  {
+    "key": "tours.text-019",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n          Du Thuyền Ngắm Hoàng Hôn\n        ",
+    "label": "Du Thuyền Ngắm Hoàng Hôn"
+  },
+  {
+    "key": "tours.text-020",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n          Lặn Ngắm San Hô Hòn Mun\n        ",
+    "label": "Lặn Ngắm San Hô Hòn Mun"
+  },
+  {
+    "key": "tours.text-021",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n          Tour Vĩnh Hy - Hang Rái\n        ",
+    "label": "Tour Vĩnh Hy - Hang Rái"
+  },
+  {
+    "key": "tours.text-022",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n          Tour City & Văn Hóa\n        ",
+    "label": "Tour City & Văn Hóa"
+  },
+  {
+    "key": "tours.text-023",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n          Tour Đà Lạt Trong Ngày\n        ",
+    "label": "Tour Đà Lạt Trong Ngày"
+  },
+  {
+    "key": "tours.text-024",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Điểm khởi hành",
+    "label": "Điểm khởi hành"
+  },
+  {
+    "key": "tours.text-025",
+    "scope": "tours",
+    "kind": "text",
+    "value": "TP. Nha Trang (Khách sạn trung tâm)",
+    "label": "TP. Nha Trang (Khách sạn trung tâm)"
+  },
+  {
+    "key": "tours.text-026",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Bãi Dài / Cam Ranh Resorts",
+    "label": "Bãi Dài / Cam Ranh Resorts"
+  },
+  {
+    "key": "tours.text-027",
+    "scope": "tours",
+    "kind": "text",
+    "value": "TP. Đà Lạt (Lâm Đồng)",
+    "label": "TP. Đà Lạt (Lâm Đồng)"
+  },
+  {
+    "key": "tours.text-028",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Phan Rang - Ninh Thuận",
+    "label": "Phan Rang - Ninh Thuận"
+  },
+  {
+    "key": "tours.text-029",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Ngày khởi hành",
+    "label": "Ngày khởi hành"
+  },
+  {
+    "key": "tours.text-030",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Số lượng khách",
+    "label": "Số lượng khách"
+  },
+  {
+    "key": "tours.text-031",
+    "scope": "tours",
+    "kind": "text",
+    "value": "2 Người lớn (Cặp đôi/Gia đình nhỏ)",
+    "label": "2 Người lớn (Cặp đôi/Gia đình nhỏ)"
+  },
+  {
+    "key": "tours.text-032",
+    "scope": "tours",
+    "kind": "text",
+    "value": "1 Khách (Đi một mình ghép đoàn)",
+    "label": "1 Khách (Đi một mình ghép đoàn)"
+  },
+  {
+    "key": "tours.text-033",
+    "scope": "tours",
+    "kind": "text",
+    "value": "4-6 Khách (Nhóm bạn / Gia đình)",
+    "label": "4-6 Khách (Nhóm bạn / Gia đình)"
+  },
+  {
+    "key": "tours.text-034",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Đoàn đông (> 10 khách - Tour riêng cano)",
+    "label": "Đoàn đông (> 10 khách - Tour riêng cano)"
+  },
+  {
+    "key": "tours.text-035",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Tìm tour ngay",
+    "label": "Tìm tour ngay"
+  },
+  {
+    "key": "tours.text-036",
+    "scope": "tours",
+    "kind": "text",
+    "value": " Miễn phí hủy trước 24h\n          ",
+    "label": "Miễn phí hủy trước 24h"
+  },
+  {
+    "key": "tours.text-037",
+    "scope": "tours",
+    "kind": "text",
+    "value": " Cano composite đời mới 2024\n          ",
+    "label": "Cano composite đời mới 2024"
+  },
+  {
+    "key": "tours.text-038",
+    "scope": "tours",
+    "kind": "text",
+    "value": " Đã bao gồm bảo hiểm 50.000.000đ/vụ\n          ",
+    "label": "Đã bao gồm bảo hiểm 50.000.000đ/vụ"
+  },
+  {
+    "key": "tours.text-039",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Tour Nổi Bật & Bán Chạy Nhất Vịnh Biển",
+    "label": "Tour Nổi Bật & Bán Chạy Nhất Vịnh Biển"
+  },
+  {
+    "key": "tours.text-040",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Trải Nghiệm Được Yêu Thích Nhất Tuần Này",
+    "label": "Trải Nghiệm Được Yêu Thích Nhất Tuần Này"
+  },
+  {
+    "key": "tours.text-041",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n          Cam kết khởi hành mỗi ngày dù chỉ từ 1 khách, chất lượng phục vụ đồng nhất chuẩn quốc tế.\n        ",
+    "label": "Cam kết khởi hành mỗi ngày dù chỉ từ 1 khách, chất lượng phục vụ đồng nhất chuẩn quốc tế."
+  },
+  {
+    "key": "tours.text-042",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Đa Dạng Trải Nghiệm Khám Phá",
+    "label": "Đa Dạng Trải Nghiệm Khám Phá"
+  },
+  {
+    "key": "tours.text-043",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Danh Sách Tour Khởi Hành Trong Ngày",
+    "label": "Danh Sách Tour Khởi Hành Trong Ngày"
+  },
+  {
+    "key": "tours.text-044",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Sắp xếp:",
+    "label": "Sắp xếp:"
+  },
+  {
+    "key": "tours.text-045",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Phổ biến & Đặt nhiều nhất",
+    "label": "Phổ biến & Đặt nhiều nhất"
+  },
+  {
+    "key": "tours.text-046",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Giá từ thấp đến cao",
+    "label": "Giá từ thấp đến cao"
+  },
+  {
+    "key": "tours.text-047",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Giá từ cao đến thấp",
+    "label": "Giá từ cao đến thấp"
+  },
+  {
+    "key": "tours.text-048",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Đánh giá 5 sao cao nhất",
+    "label": "Đánh giá 5 sao cao nhất"
+  },
+  {
+    "key": "tours.text-049",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Bạn Cần Thuê Cano Riêng Hoặc Thiết Kế Tour Đoàn Riêng?",
+    "label": "Bạn Cần Thuê Cano Riêng Hoặc Thiết Kế Tour Đoàn Riêng?"
+  },
+  {
+    "key": "tours.text-050",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n              Đội tàu cano composite 12 đến 45 chỗ đời mới, linh hoạt giờ xuất bến theo yêu cầu gia đình và công ty.\n            ",
+    "label": "Đội tàu cano composite 12 đến 45 chỗ đời mới, linh hoạt giờ xuất bến theo yêu cầu gia đình và công ty."
+  },
+  {
+    "key": "tours.text-051",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Hotline: {{contact.phone}}",
+    "label": "Hotline: 084.64.77.222"
+  },
+  {
+    "key": "tours.text-052",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Báo giá Zalo ngay",
+    "label": "Báo giá Zalo ngay"
+  },
+  {
+    "key": "tours.text-053",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Đặt Tour Siêu Tốc Trong 3 Phút",
+    "label": "Đặt Tour Siêu Tốc Trong 3 Phút"
+  },
+  {
+    "key": "tours.text-054",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Quy Trình Đơn Giản & Cam Kết Chất Lượng",
+    "label": "Quy Trình Đơn Giản & Cam Kết Chất Lượng"
+  },
+  {
+    "key": "tours.text-055",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n          Không cần thanh toán trước 100%, hủy tour đổi ngày linh hoạt, an tâm trải nghiệm kỳ nghỉ tuyệt đối.\n        ",
+    "label": "Không cần thanh toán trước 100%, hủy tour đổi ngày linh hoạt, an tâm trải nghiệm kỳ nghỉ tuyệt đối."
+  },
+  {
+    "key": "tours.text-056",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n            1\n          ",
+    "label": "1"
+  },
+  {
+    "key": "tours.text-057",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Chọn Tour & Ngày Đi",
+    "label": "Chọn Tour & Ngày Đi"
+  },
+  {
+    "key": "tours.text-058",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n            Chọn hành trình mong muốn và ngày khởi hành, điền thông tin khách sạn để xe đón tận nơi.\n          ",
+    "label": "Chọn hành trình mong muốn và ngày khởi hành, điền thông tin khách sạn để xe đón tận nơi."
+  },
+  {
+    "key": "tours.text-059",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n            2\n          ",
+    "label": "2"
+  },
+  {
+    "key": "tours.text-060",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Xác Nhận Qua Zalo Tức Thì",
+    "label": "Xác Nhận Qua Zalo Tức Thì"
+  },
+  {
+    "key": "tours.text-061",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n            Điều hành gửi phiếu xác nhận tour qua Zalo trong vòng 5 phút kèm số xe và tên bác tài/HDV.\n          ",
+    "label": "Điều hành gửi phiếu xác nhận tour qua Zalo trong vòng 5 phút kèm số xe và tên bác tài/HDV."
+  },
+  {
+    "key": "tours.text-062",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n            3\n          ",
+    "label": "3"
+  },
+  {
+    "key": "tours.text-063",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Xe Đón Đúng Giờ",
+    "label": "Xe Đón Đúng Giờ"
+  },
+  {
+    "key": "tours.text-064",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n            Xe du lịch đời mới và HDV đón quý khách tại sảnh khách sạn đúng hẹn, hỗ trợ mang hành lý chu đáo.\n          ",
+    "label": "Xe du lịch đời mới và HDV đón quý khách tại sảnh khách sạn đúng hẹn, hỗ trợ mang hành lý chu đáo."
+  },
+  {
+    "key": "tours.text-065",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n            4\n          ",
+    "label": "4"
+  },
+  {
+    "key": "tours.text-066",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Trải Nghiệm & Thanh Toán",
+    "label": "Trải Nghiệm & Thanh Toán"
+  },
+  {
+    "key": "tours.text-067",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n            Trải nghiệm dịch vụ 5 sao trọn vẹn, thanh toán linh hoạt bằng tiền mặt hoặc chuyển khoản sau chuyến đi.\n          ",
+    "label": "Trải nghiệm dịch vụ 5 sao trọn vẹn, thanh toán linh hoạt bằng tiền mặt hoặc chuyển khoản sau chuyến đi."
+  },
+  {
+    "key": "tours.text-068",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Hướng Dẫn Viên Bản Địa 5 Sao",
+    "label": "Hướng Dẫn Viên Bản Địa 5 Sao"
+  },
+  {
+    "key": "tours.text-069",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n              Am hiểu văn hóa biển đảo, nhiệt tình, kiêm thợ chụp ảnh có tâm giúp bạn lưu giữ mọi khoảnh khắc thanh xuân rực rỡ.\n            ",
+    "label": "Am hiểu văn hóa biển đảo, nhiệt tình, kiêm thợ chụp ảnh có tâm giúp bạn lưu giữ mọi khoảnh khắc thanh xuân rực rỡ."
+  },
+  {
+    "key": "tours.text-070",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Bảo Hiểm Du Lịch Tối Đa",
+    "label": "Bảo Hiểm Du Lịch Tối Đa"
+  },
+  {
+    "key": "tours.text-071",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n              100% khách hàng tham gia tour biển đảo đều được cấp bảo hiểm du lịch Bảo Việt trách nhiệm tối đa 50.000.000đ/vụ.\n            ",
+    "label": "100% khách hàng tham gia tour biển đảo đều được cấp bảo hiểm du lịch Bảo Việt trách nhiệm tối đa 50.000.000đ/vụ."
+  },
+  {
+    "key": "tours.text-072",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Hủy Miễn Phí Trước 24H",
+    "label": "Hủy Miễn Phí Trước 24H"
+  },
+  {
+    "key": "tours.text-073",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n              Thời tiết xấu, biển động hoặc thay đổi lịch trình cá nhân? Hoàn tiền 100% hoặc đổi ngày đi dễ dàng chỉ với 1 tin nhắn.\n            ",
+    "label": "Thời tiết xấu, biển động hoặc thay đổi lịch trình cá nhân? Hoàn tiền 100% hoặc đổi ngày đi dễ dàng chỉ với 1 tin nhắn."
+  },
+  {
+    "key": "tours.text-074",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Câu Hỏi Thường Gặp Khi Đi Tour Đảo Nha Trang",
+    "label": "Câu Hỏi Thường Gặp Khi Đi Tour Đảo Nha Trang"
+  },
+  {
+    "key": "tours.text-075",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Trẻ em hoặc người lớn tuổi có đi tour 3 đảo cano được không?",
+    "label": "Trẻ em hoặc người lớn tuổi có đi tour 3 đảo cano được không?"
+  },
+  {
+    "key": "tours.text-076",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n              Hoàn toàn được! Booking Travel sử dụng cano composite đời mới có mái che kín, lướt êm ái trên biển vịnh Nha Trang vốn kín gió. Tại Hòn Tằm có xe điện đưa đón người lớn tuổi và trẻ nhỏ lên tận khu tắm bùn khoáng nóng và nhà hàng.\n            ",
+    "label": "Hoàn toàn được! Booking Travel sử dụng cano composite đời mới có mái che kín, lướt êm ái trên biển vịnh Nha Trang vốn kín gió. Tại Hòn Tằm có xe điện "
+  },
+  {
+    "key": "tours.text-077",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Tôi không biết bơi có thể tham gia lặn san hô được không?",
+    "label": "Tôi không biết bơi có thể tham gia lặn san hô được không?"
+  },
+  {
+    "key": "tours.text-078",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n              Chắc chắn được! Với dịch vụ lặn ngắm san hô (Scuba diving) hoặc đi bộ dưới đáy biển (Seawalker), luôn có thợ lặn chuyên nghiệp 1 kèm 1 đưa bạn xuống nước một cách nhẹ nhàng an toàn. Bạn cũng sẽ được trang bị áo phao, kính lặn và ống thở tiêu chuẩn.\n            ",
+    "label": "Chắc chắn được! Với dịch vụ lặn ngắm san hô (Scuba diving) hoặc đi bộ dưới đáy biển (Seawalker), luôn có thợ lặn chuyên nghiệp 1 kèm 1 đưa bạn xuống n"
+  },
+  {
+    "key": "tours.text-079",
+    "scope": "tours",
+    "kind": "text",
+    "value": "Nếu trời mưa hoặc biển động thì tour xử lý như thế nào?",
+    "label": "Nếu trời mưa hoặc biển động thì tour xử lý như thế nào?"
+  },
+  {
+    "key": "tours.text-080",
+    "scope": "tours",
+    "kind": "text",
+    "value": "\n              An toàn của quý khách là ưu tiên số 1 của Booking Travel. Trường hợp cảng vụ cấm tàu do sóng gió, công ty sẽ thông báo sớm trước giờ khởi hành và hoàn lại 100% tiền đặt cọc (nếu có) hoặc hỗ trợ đổi qua các tour city/nội thành phù hợp thời tiết.\n            ",
+    "label": "An toàn của quý khách là ưu tiên số 1 của Booking Travel. Trường hợp cảng vụ cấm tàu do sóng gió, công ty sẽ thông báo sớm trước giờ khởi hành và hoàn"
+  },
+  {
+    "key": "transfers.attributes-001",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "href": "tel:{{contact.telephone}}"
+    },
+    "label": "tel:0846477222"
+  },
+  {
+    "key": "transfers.attributes-002",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "defaultValue": "oneway",
+      "aria-label": "trip_type"
+    },
+    "label": "oneway · trip_type"
+  },
+  {
+    "key": "transfers.attributes-003",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "defaultValue": "roundtrip",
+      "aria-label": "trip_type"
+    },
+    "label": "roundtrip · trip_type"
+  },
+  {
+    "key": "transfers.attributes-004",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "pickup-select"
+    },
+    "label": "pickup-select"
+  },
+  {
+    "key": "transfers.attributes-005",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "aria-label": "dropoff-select"
+    },
+    "label": "dropoff-select"
+  },
+  {
+    "key": "transfers.attributes-006",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "defaultValue": "2025-03-15",
+      "aria-label": "date"
+    },
+    "label": "2025-03-15 · date"
+  },
+  {
+    "key": "transfers.attributes-007",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "defaultValue": "09:30",
+      "aria-label": "time"
+    },
+    "label": "09:30 · time"
+  },
+  {
+    "key": "transfers.attributes-008",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "placeholder": "VD: VN1340, VJ772...",
+      "aria-label": "VD: VN1340, VJ772..."
+    },
+    "label": "VD: VN1340, VJ772... · VD: VN1340, VJ772..."
+  },
+  {
+    "key": "transfers.attributes-009",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "href": "{{contact.zalo}}"
+    },
+    "label": "https://zalo.me/0846477222"
+  },
+  {
+    "key": "transfers.attributes-010",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "href": "{{contact.zalo}}?text=Toi_muon_dat_xe_San_Bay_Cam_Ranh_ve_Nha_Trang"
+    },
+    "label": "https://zalo.me/0846477222?text=Toi_muon_dat_xe_San_Bay_Cam_Ranh_ve_Nha_Trang"
+  },
+  {
+    "key": "transfers.attributes-011",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "href": "{{contact.zalo}}?text=Toi_muon_dat_xe_Cam_Ranh_ve_Resort_Bai_Dai"
+    },
+    "label": "https://zalo.me/0846477222?text=Toi_muon_dat_xe_Cam_Ranh_ve_Resort_Bai_Dai"
+  },
+  {
+    "key": "transfers.attributes-012",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "href": "{{contact.zalo}}?text=Toi_muon_dat_xe_Nha_Trang_di_Da_Lat"
+    },
+    "label": "https://zalo.me/0846477222?text=Toi_muon_dat_xe_Nha_Trang_di_Da_Lat"
+  },
+  {
+    "key": "transfers.attributes-013",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "href": "{{contact.zalo}}?text=Toi_muon_dat_xe_Nha_Trang_di_Tuy_Hoa"
+    },
+    "label": "https://zalo.me/0846477222?text=Toi_muon_dat_xe_Nha_Trang_di_Tuy_Hoa"
+  },
+  {
+    "key": "transfers.attributes-014",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "href": "{{contact.zalo}}?text=Toi_muon_dat_xe_Nha_Trang_di_Phan_Rang"
+    },
+    "label": "https://zalo.me/0846477222?text=Toi_muon_dat_xe_Nha_Trang_di_Phan_Rang"
+  },
+  {
+    "key": "transfers.attributes-015",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "data-alt": "Modern Toyota Vios white sedan parked beside coastal road in Nha Trang Vietnam, clear azure sky, clean body, premium travel service, commercial automotive photography",
+      "src": "/images/1cf8d9e6f4f053e9.jpg"
+    },
+    "label": "Modern Toyota Vios white sedan parked beside coastal road in Nha Trang Vietnam, clear azure sky, clean body, premium travel service, commercial automo"
+  },
+  {
+    "key": "transfers.attributes-016",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "href": "{{contact.zalo}}?text=Toi_muon_thue_xe_4_cho"
+    },
+    "label": "https://zalo.me/0846477222?text=Toi_muon_thue_xe_4_cho"
+  },
+  {
+    "key": "transfers.attributes-017",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "data-alt": "Modern Mitsubishi Xpander MPV premium silver grey vehicle parked at Cam Ranh resort entrance, lush palm trees background, sunny tropical day, clean commercial shot",
+      "src": "/images/4b41156f58769fe1.jpg"
+    },
+    "label": "Modern Mitsubishi Xpander MPV premium silver grey vehicle parked at Cam Ranh resort entrance, lush palm trees background, sunny tropical day, clean co"
+  },
+  {
+    "key": "transfers.attributes-018",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "href": "{{contact.zalo}}?text=Toi_muon_thue_xe_7_cho"
+    },
+    "label": "https://zalo.me/0846477222?text=Toi_muon_thue_xe_7_cho"
+  },
+  {
+    "key": "transfers.attributes-019",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "data-alt": "Luxury Dcar Limousine luxury black van VIP interior view, leather massage captain chairs with ambient starlight ceiling lighting, executive transport in Vietnam, cinematic warm lighting",
+      "src": "/images/36ff63e7cca371b1.jpg"
+    },
+    "label": "Luxury Dcar Limousine luxury black van VIP interior view, leather massage captain chairs with ambient starlight ceiling lighting, executive transport "
+  },
+  {
+    "key": "transfers.attributes-020",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "href": "{{contact.zalo}}?text=Toi_muon_thue_xe_Limousine_9_cho_VIP"
+    },
+    "label": "https://zalo.me/0846477222?text=Toi_muon_thue_xe_Limousine_9_cho_VIP"
+  },
+  {
+    "key": "transfers.attributes-021",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "data-alt": "Modern Hyundai Solati or Ford Transit 16 seater white minibus parked at Cam Ranh International Airport dropoff terminal, sunny clear sky, elegant corporate tourism transport",
+      "src": "/images/fa7a41904f0ace9b.jpg"
+    },
+    "label": "Modern Hyundai Solati or Ford Transit 16 seater white minibus parked at Cam Ranh International Airport dropoff terminal, sunny clear sky, elegant corp"
+  },
+  {
+    "key": "transfers.attributes-022",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "href": "{{contact.zalo}}?text=Toi_muon_thue_xe_16_cho"
+    },
+    "label": "https://zalo.me/0846477222?text=Toi_muon_thue_xe_16_cho"
+  },
+  {
+    "key": "transfers.attributes-023",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "href": "tel:{{contact.telephone}}"
+    },
+    "label": "tel:0846477222"
+  },
+  {
+    "key": "transfers.attributes-024",
+    "scope": "transfers",
+    "kind": "attributes",
+    "value": {
+      "href": "{{contact.zalo}}"
+    },
+    "label": "https://zalo.me/0846477222"
+  },
+  {
+    "key": "transfers.text-025",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n          Đội xe du lịch đời mới 2023 - 2024\n        ",
+    "label": "Đội xe du lịch đời mới 2023 - 2024"
+  },
+  {
+    "key": "transfers.text-026",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n          Giá niêm yết trọn gói - Không phí ẩn\n        ",
+    "label": "Giá niêm yết trọn gói - Không phí ẩn"
+  },
+  {
+    "key": "transfers.text-027",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n            Dịch Vụ Xe Đưa Đón ",
+    "label": "Dịch Vụ Xe Đưa Đón"
+  },
+  {
+    "key": "transfers.text-028",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Sân Bay Cam Ranh",
+    "label": "Sân Bay Cam Ranh"
+  },
+  {
+    "key": "transfers.text-029",
+    "scope": "transfers",
+    "kind": "text",
+    "value": " & Xe Hợp Đồng Du Lịch Uy Tín\n          ",
+    "label": "& Xe Hợp Đồng Du Lịch Uy Tín"
+  },
+  {
+    "key": "transfers.text-030",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n            Xe đời mới 4 - 7 - 16 - 29 - 45 chỗ & Limousine VIP thương gia. Đón trả tận nơi tại Nha Trang, Bãi Dài, Đà Lạt, Phú Yên. Tài xế chuẩn phong cách dịch vụ, đúng giờ, chủ động kiểm tra giờ hạ cánh miễn phí.\n          ",
+    "label": "Xe đời mới 4 - 7 - 16 - 29 - 45 chỗ & Limousine VIP thương gia. Đón trả tận nơi tại Nha Trang, Bãi Dài, Đà Lạt, Phú Yên. Tài xế chuẩn phong cách dịch "
+  },
+  {
+    "key": "transfers.text-031",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Hotline Điều Hành Xe 24/7",
+    "label": "Hotline Điều Hành Xe 24/7"
+  },
+  {
+    "key": "transfers.text-032",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "{{contact.phone}}",
+    "label": "084.64.77.222"
+  },
+  {
+    "key": "transfers.text-033",
+    "scope": "transfers",
+    "kind": "text",
+    "value": " Phản hồi Zalo tức thì trong 60 giây\n              ",
+    "label": "Phản hồi Zalo tức thì trong 60 giây"
+  },
+  {
+    "key": "transfers.text-034",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Đưa đón Sân bay Cam Ranh",
+    "label": "Đưa đón Sân bay Cam Ranh"
+  },
+  {
+    "key": "transfers.text-035",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Xe Liên Tỉnh (Đà Lạt - Phú Yên)",
+    "label": "Xe Liên Tỉnh (Đà Lạt - Phú Yên)"
+  },
+  {
+    "key": "transfers.text-036",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Thuê xe theo ngày / City Tour",
+    "label": "Thuê xe theo ngày / City Tour"
+  },
+  {
+    "key": "transfers.text-037",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Một chiều (One-way)",
+    "label": "Một chiều (One-way)"
+  },
+  {
+    "key": "transfers.text-038",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Khứ hồi (Round-trip) - Tiết kiệm thêm 10%",
+    "label": "Khứ hồi (Round-trip) - Tiết kiệm thêm 10%"
+  },
+  {
+    "key": "transfers.text-039",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Điểm đón",
+    "label": "Điểm đón"
+  },
+  {
+    "key": "transfers.text-040",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Sân bay Cam Ranh (Ga Quốc nội / Quốc tế)",
+    "label": "Sân bay Cam Ranh (Ga Quốc nội / Quốc tế)"
+  },
+  {
+    "key": "transfers.text-041",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Trung tâm Nha Trang (Trần Phú / Phố Tây)",
+    "label": "Trung tâm Nha Trang (Trần Phú / Phố Tây)"
+  },
+  {
+    "key": "transfers.text-042",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Khu nghỉ dưỡng Bãi Dài (Cam Lâm)",
+    "label": "Khu nghỉ dưỡng Bãi Dài (Cam Lâm)"
+  },
+  {
+    "key": "transfers.text-043",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "TP. Đà Lạt (Lâm Đồng)",
+    "label": "TP. Đà Lạt (Lâm Đồng)"
+  },
+  {
+    "key": "transfers.text-044",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Địa chỉ riêng / Khách sạn khác...",
+    "label": "Địa chỉ riêng / Khách sạn khác..."
+  },
+  {
+    "key": "transfers.text-045",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Điểm đến / Khách sạn",
+    "label": "Điểm đến / Khách sạn"
+  },
+  {
+    "key": "transfers.text-046",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Trung tâm Nha Trang (Trần Phú, Hùng Vương)",
+    "label": "Trung tâm Nha Trang (Trần Phú, Hùng Vương)"
+  },
+  {
+    "key": "transfers.text-047",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Resort Bãi Dài (Movenpick, Alma, Anam...)",
+    "label": "Resort Bãi Dài (Movenpick, Alma, Anam...)"
+  },
+  {
+    "key": "transfers.text-048",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Sân bay Quốc tế Cam Ranh (CXR)",
+    "label": "Sân bay Quốc tế Cam Ranh (CXR)"
+  },
+  {
+    "key": "transfers.text-049",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Biển Dốc Lết / KDL Ninh Hòa",
+    "label": "Biển Dốc Lết / KDL Ninh Hòa"
+  },
+  {
+    "key": "transfers.text-050",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Thành phố Đà Lạt (Khách sạn / Villa)",
+    "label": "Thành phố Đà Lạt (Khách sạn / Villa)"
+  },
+  {
+    "key": "transfers.text-051",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Tuy Hòa - Phú Yên",
+    "label": "Tuy Hòa - Phú Yên"
+  },
+  {
+    "key": "transfers.text-052",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Ngày & Giờ đón",
+    "label": "Ngày & Giờ đón"
+  },
+  {
+    "key": "transfers.text-053",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Số hiệu chuyến bay (Tùy chọn)",
+    "label": "Số hiệu chuyến bay (Tùy chọn)"
+  },
+  {
+    "key": "transfers.text-054",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Dòng xe phục vụ",
+    "label": "Dòng xe phục vụ"
+  },
+  {
+    "key": "transfers.text-055",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Xe 4 chỗ Sedan (Vios, Accent, City)",
+    "label": "Xe 4 chỗ Sedan (Vios, Accent, City)"
+  },
+  {
+    "key": "transfers.text-056",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "4 Chỗ",
+    "label": "4 Chỗ"
+  },
+  {
+    "key": "transfers.text-057",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "7 Chỗ",
+    "label": "7 Chỗ"
+  },
+  {
+    "key": "transfers.text-058",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "16 Chỗ",
+    "label": "16 Chỗ"
+  },
+  {
+    "key": "transfers.text-059",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Limousine 9 Chỗ VIP",
+    "label": "Limousine 9 Chỗ VIP"
+  },
+  {
+    "key": "transfers.text-060",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Tra Cứu Giá & Đặt Xe Ngay",
+    "label": "Tra Cứu Giá & Đặt Xe Ngay"
+  },
+  {
+    "key": "transfers.text-061",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n                Tuyến đề xuất: ",
+    "label": "Tuyến đề xuất:"
+  },
+  {
+    "key": "transfers.text-062",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Sân bay Cam Ranh ⇄ Trung tâm Nha Trang (Trần Phú)",
+    "label": "Sân bay Cam Ranh ⇄ Trung tâm Nha Trang (Trần Phú)"
+  },
+  {
+    "key": "transfers.text-063",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n                Bao gồm tài xế đón bảng tên, phí bến bãi & cao tốc, nước suối khăn lạnh, hỗ trợ đổi chuyến.\n              ",
+    "label": "Bao gồm tài xế đón bảng tên, phí bến bãi & cao tốc, nước suối khăn lạnh, hỗ trợ đổi chuyến."
+  },
+  {
+    "key": "transfers.text-064",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Giá trọn gói một chiều",
+    "label": "Giá trọn gói một chiều"
+  },
+  {
+    "key": "transfers.text-065",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "250.000đ",
+    "label": "250.000đ"
+  },
+  {
+    "key": "transfers.text-066",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n              Đặt nhanh qua Zalo\n            ",
+    "label": "Đặt nhanh qua Zalo"
+  },
+  {
+    "key": "transfers.text-067",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Theo dõi giờ bay tự động",
+    "label": "Theo dõi giờ bay tự động"
+  },
+  {
+    "key": "transfers.text-068",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Đón khách bằng bảng tên trang trọng",
+    "label": "Đón khách bằng bảng tên trang trọng"
+  },
+  {
+    "key": "transfers.text-069",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Hủy miễn phí trước 2 tiếng",
+    "label": "Hủy miễn phí trước 2 tiếng"
+  },
+  {
+    "key": "transfers.text-070",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Không phụ phí ban đêm (trước 22h)",
+    "label": "Không phụ phí ban đêm (trước 22h)"
+  },
+  {
+    "key": "transfers.text-071",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Minh bạch & Chuẩn xác",
+    "label": "Minh bạch & Chuẩn xác"
+  },
+  {
+    "key": "transfers.text-072",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Bảng Báo Giá Xe Đưa Đón & Liên Tỉnh Niêm Yết",
+    "label": "Bảng Báo Giá Xe Đưa Đón & Liên Tỉnh Niêm Yết"
+  },
+  {
+    "key": "transfers.text-073",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n            Tất cả mức giá dưới đây là giá trọn gói niêm yết áp dụng cho năm 2025. Cam kết không phát sinh bất kỳ khoản phí ngoài nào khác.\n          ",
+    "label": "Tất cả mức giá dưới đây là giá trọn gói niêm yết áp dụng cho năm 2025. Cam kết không phát sinh bất kỳ khoản phí ngoài nào khác."
+  },
+  {
+    "key": "transfers.text-074",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Đã bao gồm VAT & Phí cầu đường",
+    "label": "Đã bao gồm VAT & Phí cầu đường"
+  },
+  {
+    "key": "transfers.text-075",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Lộ Trình / Tuyến Đường Phổ Biến",
+    "label": "Lộ Trình / Tuyến Đường Phổ Biến"
+  },
+  {
+    "key": "transfers.text-076",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Xe 4 Chỗ",
+    "label": "Xe 4 Chỗ"
+  },
+  {
+    "key": "transfers.text-077",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Sedan 3 khách",
+    "label": "Sedan 3 khách"
+  },
+  {
+    "key": "transfers.text-078",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Xe 7 Chỗ",
+    "label": "Xe 7 Chỗ"
+  },
+  {
+    "key": "transfers.text-079",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "SUV 5 khách",
+    "label": "SUV 5 khách"
+  },
+  {
+    "key": "transfers.text-080",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Xe 16 Chỗ",
+    "label": "Xe 16 Chỗ"
+  },
+  {
+    "key": "transfers.text-081",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Transit 12-15 khách",
+    "label": "Transit 12-15 khách"
+  },
+  {
+    "key": "transfers.text-082",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Limousine 9 Chỗ VIP",
+    "label": "Limousine 9 Chỗ VIP"
+  },
+  {
+    "key": "transfers.text-083",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Ghế massage",
+    "label": "Ghế massage"
+  },
+  {
+    "key": "transfers.text-084",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Thao tác",
+    "label": "Thao tác"
+  },
+  {
+    "key": "transfers.text-085",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Sân bay Cam Ranh ⇄ Trung tâm TP. Nha Trang",
+    "label": "Sân bay Cam Ranh ⇄ Trung tâm TP. Nha Trang"
+  },
+  {
+    "key": "transfers.text-086",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Khoảng cách 35km • Thời gian di chuyển: 35-40 phút (Đèo Cù Hin)",
+    "label": "Khoảng cách 35km • Thời gian di chuyển: 35-40 phút (Đèo Cù Hin)"
+  },
+  {
+    "key": "transfers.text-087",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Đặt xe",
+    "label": "Đặt xe"
+  },
+  {
+    "key": "transfers.text-088",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Sân bay Cam Ranh ⇄ Resort Bãi Dài (Cam Lâm)",
+    "label": "Sân bay Cam Ranh ⇄ Resort Bãi Dài (Cam Lâm)"
+  },
+  {
+    "key": "transfers.text-089",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Khoảng cách 7 - 12km (Mövenpick, Alma, Radisson Blu, The Anam...)",
+    "label": "Khoảng cách 7 - 12km (Mövenpick, Alma, Radisson Blu, The Anam...)"
+  },
+  {
+    "key": "transfers.text-090",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Đặt xe",
+    "label": "Đặt xe"
+  },
+  {
+    "key": "transfers.text-091",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Nha Trang ⇄ TP. Đà Lạt (Cung đèo Khánh Lê sương mù)",
+    "label": "Nha Trang ⇄ TP. Đà Lạt (Cung đèo Khánh Lê sương mù)"
+  },
+  {
+    "key": "transfers.text-092",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Khoảng cách 135km • Thời gian di chuyển: 3.0 - 3.5 giờ",
+    "label": "Khoảng cách 135km • Thời gian di chuyển: 3.0 - 3.5 giờ"
+  },
+  {
+    "key": "transfers.text-093",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Đặt xe",
+    "label": "Đặt xe"
+  },
+  {
+    "key": "transfers.text-094",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Nha Trang ⇄ Tuy Hòa (Phú Yên) / Đèo Cả",
+    "label": "Nha Trang ⇄ Tuy Hòa (Phú Yên) / Đèo Cả"
+  },
+  {
+    "key": "transfers.text-095",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Khoảng cách 120km • Ghé Mũi Điện - Vũng Rô theo yêu cầu",
+    "label": "Khoảng cách 120km • Ghé Mũi Điện - Vũng Rô theo yêu cầu"
+  },
+  {
+    "key": "transfers.text-096",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Đặt xe",
+    "label": "Đặt xe"
+  },
+  {
+    "key": "transfers.text-097",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Nha Trang ⇄ Phan Rang - Tháp Chàm / Ninh Thuận",
+    "label": "Nha Trang ⇄ Phan Rang - Tháp Chàm / Ninh Thuận"
+  },
+  {
+    "key": "transfers.text-098",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Khoảng cách 105km • Cung đường ven biển Bình Hưng - Vĩnh Hy",
+    "label": "Khoảng cách 105km • Cung đường ven biển Bình Hưng - Vĩnh Hy"
+  },
+  {
+    "key": "transfers.text-099",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Đặt xe",
+    "label": "Đặt xe"
+  },
+  {
+    "key": "transfers.text-100",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Ghi chú:",
+    "label": "Ghi chú:"
+  },
+  {
+    "key": "transfers.text-101",
+    "scope": "transfers",
+    "kind": "text",
+    "value": " Giá đã bao gồm phí xăng dầu, phí cầu đường, bến bãi đỗ tại sân bay và công tài xế. Không phụ thu giờ đêm trước 22:00.",
+    "label": "Giá đã bao gồm phí xăng dầu, phí cầu đường, bến bãi đỗ tại sân bay và công tài xế. Không phụ thu giờ đêm trước 22:00."
+  },
+  {
+    "key": "transfers.text-102",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Áp dụng đến hết 31/12/2025",
+    "label": "Áp dụng đến hết 31/12/2025"
+  },
+  {
+    "key": "transfers.text-103",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Chất lượng phương tiện 5 sao",
+    "label": "Chất lượng phương tiện 5 sao"
+  },
+  {
+    "key": "transfers.text-104",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Hệ Thống Đội Xe Du Lịch Đời Mới Cao Cấp",
+    "label": "Hệ Thống Đội Xe Du Lịch Đời Mới Cao Cấp"
+  },
+  {
+    "key": "transfers.text-105",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n          100% xe phục vụ đều là xe gia đình / xe hợp đồng du lịch đời mới từ 2022 trở lên, được bảo dưỡng định kỳ, nội thất sạch sẽ, êm ái và không mùi say xe.\n        ",
+    "label": "100% xe phục vụ đều là xe gia đình / xe hợp đồng du lịch đời mới từ 2022 trở lên, được bảo dưỡng định kỳ, nội thất sạch sẽ, êm ái và không mùi say xe."
+  },
+  {
+    "key": "transfers.text-106",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n              Sedan Tiêu Chuẩn\n            ",
+    "label": "Sedan Tiêu Chuẩn"
+  },
+  {
+    "key": "transfers.text-107",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Xe 4 Chỗ Tiện Lợi",
+    "label": "Xe 4 Chỗ Tiện Lợi"
+  },
+  {
+    "key": "transfers.text-108",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Toyota Vios, Hyundai Accent, Honda City",
+    "label": "Toyota Vios, Hyundai Accent, Honda City"
+  },
+  {
+    "key": "transfers.text-109",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Tối đa 3 khách",
+    "label": "Tối đa 3 khách"
+  },
+  {
+    "key": "transfers.text-110",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "2 Vali lớn + 2 balo",
+    "label": "2 Vali lớn + 2 balo"
+  },
+  {
+    "key": "transfers.text-111",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Máy lạnh mát sâu",
+    "label": "Máy lạnh mát sâu"
+  },
+  {
+    "key": "transfers.text-112",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Ghế da êm ái",
+    "label": "Ghế da êm ái"
+  },
+  {
+    "key": "transfers.text-113",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Chỉ từ",
+    "label": "Chỉ từ"
+  },
+  {
+    "key": "transfers.text-114",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "250.000đ",
+    "label": "250.000đ"
+  },
+  {
+    "key": "transfers.text-115",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n                Chọn xe này\n              ",
+    "label": "Chọn xe này"
+  },
+  {
+    "key": "transfers.text-116",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n              Gia Đình & Nhóm Bạn\n            ",
+    "label": "Gia Đình & Nhóm Bạn"
+  },
+  {
+    "key": "transfers.text-117",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Xe 7 Chỗ Rộng Rãi",
+    "label": "Xe 7 Chỗ Rộng Rãi"
+  },
+  {
+    "key": "transfers.text-118",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Mitsubishi Xpander, Toyota Innova, Fortuner",
+    "label": "Mitsubishi Xpander, Toyota Innova, Fortuner"
+  },
+  {
+    "key": "transfers.text-119",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Tối đa 5-6 khách",
+    "label": "Tối đa 5-6 khách"
+  },
+  {
+    "key": "transfers.text-120",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "4 Vali vừa + balo",
+    "label": "4 Vali vừa + balo"
+  },
+  {
+    "key": "transfers.text-121",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Khoang xe thoáng đãng",
+    "label": "Khoang xe thoáng đãng"
+  },
+  {
+    "key": "transfers.text-122",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Có sạc điện thoại",
+    "label": "Có sạc điện thoại"
+  },
+  {
+    "key": "transfers.text-123",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Chỉ từ",
+    "label": "Chỉ từ"
+  },
+  {
+    "key": "transfers.text-124",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "300.000đ",
+    "label": "300.000đ"
+  },
+  {
+    "key": "transfers.text-125",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n                Chọn xe này\n              ",
+    "label": "Chọn xe này"
+  },
+  {
+    "key": "transfers.text-126",
+    "scope": "transfers",
+    "kind": "text",
+    "value": " VIP Thương Gia\n            ",
+    "label": "VIP Thương Gia"
+  },
+  {
+    "key": "transfers.text-127",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Dcar Limousine 9 Chỗ VIP",
+    "label": "Dcar Limousine 9 Chỗ VIP"
+  },
+  {
+    "key": "transfers.text-128",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Transit / Solati Dcar President độ VIP",
+    "label": "Transit / Solati Dcar President độ VIP"
+  },
+  {
+    "key": "transfers.text-129",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Ghế massage ngả lưng",
+    "label": "Ghế massage ngả lưng"
+  },
+  {
+    "key": "transfers.text-130",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "TV Led & Cổng sạc",
+    "label": "TV Led & Cổng sạc"
+  },
+  {
+    "key": "transfers.text-131",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Nước & Khăn miễn phí",
+    "label": "Nước & Khăn miễn phí"
+  },
+  {
+    "key": "transfers.text-132",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Cốp để 6-8 vali",
+    "label": "Cốp để 6-8 vali"
+  },
+  {
+    "key": "transfers.text-133",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Chỉ từ",
+    "label": "Chỉ từ"
+  },
+  {
+    "key": "transfers.text-134",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "600.000đ",
+    "label": "600.000đ"
+  },
+  {
+    "key": "transfers.text-135",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n                Chọn Limousine\n              ",
+    "label": "Chọn Limousine"
+  },
+  {
+    "key": "transfers.text-136",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n              Đoàn Tour / Công Ty\n            ",
+    "label": "Đoàn Tour / Công Ty"
+  },
+  {
+    "key": "transfers.text-137",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Xe 16 Chỗ Du Lịch",
+    "label": "Xe 16 Chỗ Du Lịch"
+  },
+  {
+    "key": "transfers.text-138",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Ford Transit & Hyundai Solati thế hệ mới",
+    "label": "Ford Transit & Hyundai Solati thế hệ mới"
+  },
+  {
+    "key": "transfers.text-139",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Tối đa 12-15 khách",
+    "label": "Tối đa 12-15 khách"
+  },
+  {
+    "key": "transfers.text-140",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Khoang hành lý rộng",
+    "label": "Khoang hành lý rộng"
+  },
+  {
+    "key": "transfers.text-141",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Trang bị micro thuyết minh",
+    "label": "Trang bị micro thuyết minh"
+  },
+  {
+    "key": "transfers.text-142",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Hệ thống cân bằng an toàn",
+    "label": "Hệ thống cân bằng an toàn"
+  },
+  {
+    "key": "transfers.text-143",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Chỉ từ",
+    "label": "Chỉ từ"
+  },
+  {
+    "key": "transfers.text-144",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "550.000đ",
+    "label": "550.000đ"
+  },
+  {
+    "key": "transfers.text-145",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n                Chọn xe này\n              ",
+    "label": "Chọn xe này"
+  },
+  {
+    "key": "transfers.text-146",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Trải nghiệm an tâm",
+    "label": "Trải nghiệm an tâm"
+  },
+  {
+    "key": "transfers.text-147",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Lợi Ích Vượt Trội Khi Đặt Xe Tại Booking Travel",
+    "label": "Lợi Ích Vượt Trội Khi Đặt Xe Tại Booking Travel"
+  },
+  {
+    "key": "transfers.text-148",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n          Chúng tôi mang đến chuẩn mực phục vụ chuyên nghiệp, lấy sự an toàn và hài lòng của hành khách làm tôn chỉ hàng đầu.\n        ",
+    "label": "Chúng tôi mang đến chuẩn mực phục vụ chuyên nghiệp, lấy sự an toàn và hài lòng của hành khách làm tôn chỉ hàng đầu."
+  },
+  {
+    "key": "transfers.text-149",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Theo dõi chuyến bay tự động",
+    "label": "Theo dõi chuyến bay tự động"
+  },
+  {
+    "key": "transfers.text-150",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n              Dù máy bay bị delay (hoãn chuyến) hay hạ cánh sớm, tài xế sẽ chủ động canh chỉnh giờ đón tại ga, không tính phí chờ đợi của khách.\n            ",
+    "label": "Dù máy bay bị delay (hoãn chuyến) hay hạ cánh sớm, tài xế sẽ chủ động canh chỉnh giờ đón tại ga, không tính phí chờ đợi của khách."
+  },
+  {
+    "key": "transfers.text-151",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Miễn phí hủy chuyến trước 2 tiếng",
+    "label": "Miễn phí hủy chuyến trước 2 tiếng"
+  },
+  {
+    "key": "transfers.text-152",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n              Linh hoạt tối đa cho kế hoạch thay đổi đột xuất. Chỉ cần báo qua hotline hoặc Zalo trước giờ đón 2 giờ, bạn được hủy hoặc đổi giờ miễn phí 100%.\n            ",
+    "label": "Linh hoạt tối đa cho kế hoạch thay đổi đột xuất. Chỉ cần báo qua hotline hoặc Zalo trước giờ đón 2 giờ, bạn được hủy hoặc đổi giờ miễn phí 100%."
+  },
+  {
+    "key": "transfers.text-153",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Tài xế lịch thiệp & Thạo đường",
+    "label": "Tài xế lịch thiệp & Thạo đường"
+  },
+  {
+    "key": "transfers.text-154",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n              Tài xế địa phương ăn mặc chỉnh tề, luôn niềm nở, hỗ trợ khuân vác hành lý tận tay và sẵn sàng giới thiệu các địa điểm ăn uống ngon - bổ - rẻ.\n            ",
+    "label": "Tài xế địa phương ăn mặc chỉnh tề, luôn niềm nở, hỗ trợ khuân vác hành lý tận tay và sẵn sàng giới thiệu các địa điểm ăn uống ngon - bổ - rẻ."
+  },
+  {
+    "key": "transfers.text-155",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Tổng đài điều xe 24/7 tức thì",
+    "label": "Tổng đài điều xe 24/7 tức thì"
+  },
+  {
+    "key": "transfers.text-156",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n              Không gọi bot tự động. Tổng đài viên và kỹ thuật viên điều phối xe trực tiếp 24/7 qua Zalo & Hotline: ",
+    "label": "Không gọi bot tự động. Tổng đài viên và kỹ thuật viên điều phối xe trực tiếp 24/7 qua Zalo & Hotline:"
+  },
+  {
+    "key": "transfers.text-157",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "{{contact.phone}}",
+    "label": "084.64.77.222"
+  },
+  {
+    "key": "transfers.text-158",
+    "scope": "transfers",
+    "kind": "text",
+    "value": " giải quyết trong 30 giây.\n            ",
+    "label": "giải quyết trong 30 giây."
+  },
+  {
+    "key": "transfers.text-159",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Cần xe đón khẩn cấp tại Sân bay Cam Ranh trong 15 phút?",
+    "label": "Cần xe đón khẩn cấp tại Sân bay Cam Ranh trong 15 phút?"
+  },
+  {
+    "key": "transfers.text-160",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n            Đội xe luôn túc trực tại bãi đỗ ga sân bay Cam Ranh và trung tâm Nha Trang. Sẵn sàng điều động xe ngay khi bạn hạ cánh!\n          ",
+    "label": "Đội xe luôn túc trực tại bãi đỗ ga sân bay Cam Ranh và trung tâm Nha Trang. Sẵn sàng điều động xe ngay khi bạn hạ cánh!"
+  },
+  {
+    "key": "transfers.text-161",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Gọi Ngay {{contact.phone}}",
+    "label": "Gọi Ngay 084.64.77.222"
+  },
+  {
+    "key": "transfers.text-162",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Nhắn Zalo Nhận Báo Giá",
+    "label": "Nhắn Zalo Nhận Báo Giá"
+  },
+  {
+    "key": "transfers.text-163",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Giải đáp thắc mắc",
+    "label": "Giải đáp thắc mắc"
+  },
+  {
+    "key": "transfers.text-164",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Câu Hỏi Thường Gặp Khi Thuê Xe Đưa Đón",
+    "label": "Câu Hỏi Thường Gặp Khi Thuê Xe Đưa Đón"
+  },
+  {
+    "key": "transfers.text-165",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "1. Tôi làm thế nào để nhận diện tài xế đón tại sân bay Cam Ranh?",
+    "label": "1. Tôi làm thế nào để nhận diện tài xế đón tại sân bay Cam Ranh?"
+  },
+  {
+    "key": "transfers.text-166",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n            Trước giờ hạ cánh 30 phút, tổng đài sẽ gửi thông tin tài xế (Họ tên, SĐT, biển số xe) qua Zalo/Tin nhắn cho bạn. Khi ra khỏi cửa ga đến, tài xế sẽ cầm ",
+    "label": "Trước giờ hạ cánh 30 phút, tổng đài sẽ gửi thông tin tài xế (Họ tên, SĐT, biển số xe) qua Zalo/Tin nhắn cho bạn. Khi ra khỏi cửa ga đến, tài xế sẽ cầm"
+  },
+  {
+    "key": "transfers.text-167",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "bảng đón in rõ tên Quý khách",
+    "label": "bảng đón in rõ tên Quý khách"
+  },
+  {
+    "key": "transfers.text-168",
+    "scope": "transfers",
+    "kind": "text",
+    "value": " đứng chờ ngay tại sảnh. Trường hợp đông đúc, bạn chỉ cần nhấc máy gọi thẳng cho tài xế hoặc hotline {{contact.phone}} để được hướng dẫn gặp mặt nhanh nhất.\n          ",
+    "label": "đứng chờ ngay tại sảnh. Trường hợp đông đúc, bạn chỉ cần nhấc máy gọi thẳng cho tài xế hoặc hotline 084.64.77.222 để được hướng dẫn gặp mặt nhanh nhất"
+  },
+  {
+    "key": "transfers.text-169",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "2. Nếu máy bay bị trễ giờ (delay) thì tôi có bị phạt thêm phí chờ không?",
+    "label": "2. Nếu máy bay bị trễ giờ (delay) thì tôi có bị phạt thêm phí chờ không?"
+  },
+  {
+    "key": "transfers.text-170",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Hoàn toàn không mất thêm bất kỳ chi phí nào!",
+    "label": "Hoàn toàn không mất thêm bất kỳ chi phí nào!"
+  },
+  {
+    "key": "transfers.text-171",
+    "scope": "transfers",
+    "kind": "text",
+    "value": " Đội ngũ điều hành Booking Travel có hệ thống theo dõi trực tiếp radar số hiệu chuyến bay của bạn. Dù máy bay trễ 1-3 tiếng, tài xế vẫn sẽ chủ động căn giờ đáp mới và chờ đón bạn an toàn và chu đáo.\n          ",
+    "label": "Đội ngũ điều hành Booking Travel có hệ thống theo dõi trực tiếp radar số hiệu chuyến bay của bạn. Dù máy bay trễ 1-3 tiếng, tài xế vẫn sẽ chủ động căn"
+  },
+  {
+    "key": "transfers.text-172",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "3. Giá xe đưa đón trên website đã bao gồm các loại thuế phí gì?",
+    "label": "3. Giá xe đưa đón trên website đã bao gồm các loại thuế phí gì?"
+  },
+  {
+    "key": "transfers.text-173",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n            Mức giá niêm yết của Booking Travel là ",
+    "label": "Mức giá niêm yết của Booking Travel là"
+  },
+  {
+    "key": "transfers.text-174",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "giá trọn gói",
+    "label": "giá trọn gói"
+  },
+  {
+    "key": "transfers.text-175",
+    "scope": "transfers",
+    "kind": "text",
+    "value": ": đã bao gồm xăng xe, công tài xế, phí vào cổng sân bay Cam Ranh và các trạm thu phí cầu đường trên tuyến. Bạn không phải trả thêm tiền boa hay bất kỳ khoản phụ thu nào khác (ngoại trừ đón/trả phát sinh ngoài lộ trình đã đăng ký).\n          ",
+    "label": ": đã bao gồm xăng xe, công tài xế, phí vào cổng sân bay Cam Ranh và các trạm thu phí cầu đường trên tuyến. Bạn không phải trả thêm tiền boa hay bất kỳ"
+  },
+  {
+    "key": "transfers.text-176",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "4. Tôi đi từ Nha Trang lên Đà Lạt hoặc Phú Yên có thể dừng chụp ảnh dọc đường không?",
+    "label": "4. Tôi đi từ Nha Trang lên Đà Lạt hoặc Phú Yên có thể dừng chụp ảnh dọc đường không?"
+  },
+  {
+    "key": "transfers.text-177",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n            Có! Vì đây là xe hợp đồng thuê riêng (Private Car), bạn hoàn toàn chủ động lịch trình. Trên cung đường đèo Khánh Lê (đi Đà Lạt) hoặc đèo Cả - vịnh Vũng Rô (đi Phú Yên), tài xế sẵn sàng dừng lại tại các điểm dừng ngắm cảnh, uống cà phê giải lao khoảng 15-20 phút mà không tính thêm chi phí.\n          ",
+    "label": "Có! Vì đây là xe hợp đồng thuê riêng (Private Car), bạn hoàn toàn chủ động lịch trình. Trên cung đường đèo Khánh Lê (đi Đà Lạt) hoặc đèo Cả - vịnh Vũn"
+  },
+  {
+    "key": "transfers.text-178",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "5. Phương thức thanh toán khi sử dụng dịch vụ xe ra sao?",
+    "label": "5. Phương thức thanh toán khi sử dụng dịch vụ xe ra sao?"
+  },
+  {
+    "key": "transfers.text-179",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "\n            Bạn có thể lựa chọn thanh toán linh hoạt: ",
+    "label": "Bạn có thể lựa chọn thanh toán linh hoạt:"
+  },
+  {
+    "key": "transfers.text-180",
+    "scope": "transfers",
+    "kind": "text",
+    "value": "Thanh toán trực tiếp bằng tiền mặt cho tài xế",
+    "label": "Thanh toán trực tiếp bằng tiền mặt cho tài xế"
+  },
+  {
+    "key": "transfers.text-181",
+    "scope": "transfers",
+    "kind": "text",
+    "value": " sau khi chuyến đi hoàn tất, hoặc chuyển khoản quét mã VietQR / MoMo / VNPay về tài khoản công ty Booking Travel.\n          ",
+    "label": "sau khi chuyến đi hoàn tất, hoặc chuyển khoản quét mã VietQR / MoMo / VNPay về tài khoản công ty Booking Travel."
+  },
+  {
+    "key": "header.attributes-001",
+    "scope": "header",
+    "kind": "attributes",
+    "value": {
+      "href": "tel:{{contact.telephone}}"
+    },
+    "label": "tel:0846477222"
+  },
+  {
+    "key": "header.attributes-002",
+    "scope": "header",
+    "kind": "attributes",
+    "value": {
+      "href": "{{contact.zalo}}"
+    },
+    "label": "https://zalo.me/0846477222"
+  },
+  {
+    "key": "header.attributes-003",
+    "scope": "header",
+    "kind": "attributes",
+    "value": {
+      "href": "#yeu-thich"
+    },
+    "label": "#yeu-thich"
+  },
+  {
+    "key": "header.attributes-004",
+    "scope": "header",
+    "kind": "attributes",
+    "value": {
+      "href": "/"
+    },
+    "label": "/"
+  },
+  {
+    "key": "header.attributes-005",
+    "scope": "header",
+    "kind": "attributes",
+    "value": {
+      "href": "/"
+    },
+    "label": "/"
+  },
+  {
+    "key": "header.attributes-006",
+    "scope": "header",
+    "kind": "attributes",
+    "value": {
+      "href": "/khach-san"
+    },
+    "label": "/khach-san"
+  },
+  {
+    "key": "header.attributes-007",
+    "scope": "header",
+    "kind": "attributes",
+    "value": {
+      "href": "/tour-hang-ngay"
+    },
+    "label": "/tour-hang-ngay"
+  },
+  {
+    "key": "header.attributes-008",
+    "scope": "header",
+    "kind": "attributes",
+    "value": {
+      "href": "/#combo"
+    },
+    "label": "/#combo"
+  },
+  {
+    "key": "header.attributes-009",
+    "scope": "header",
+    "kind": "attributes",
+    "value": {
+      "href": "/xe-dua-don"
+    },
+    "label": "/xe-dua-don"
+  },
+  {
+    "key": "header.attributes-010",
+    "scope": "header",
+    "kind": "attributes",
+    "value": {
+      "href": "/#cam-nang"
+    },
+    "label": "/#cam-nang"
+  },
+  {
+    "key": "header.attributes-011",
+    "scope": "header",
+    "kind": "attributes",
+    "value": {
+      "href": "/#lien-he"
+    },
+    "label": "/#lien-he"
+  },
+  {
+    "key": "header.attributes-012",
+    "scope": "header",
+    "kind": "attributes",
+    "value": {
+      "href": "{{contact.zalo}}"
+    },
+    "label": "https://zalo.me/0846477222"
+  },
+  {
+    "key": "header.attributes-013",
+    "scope": "header",
+    "kind": "attributes",
+    "value": {
+      "href": "#tra-cuu",
+      "title": "Tra cứu đơn hàng"
+    },
+    "label": "#tra-cuu · Tra cứu đơn hàng"
+  },
+  {
+    "key": "header.text-014",
+    "scope": "header",
+    "kind": "text",
+    "value": "Hotline 24/7: ",
+    "label": "Hotline 24/7:"
+  },
+  {
+    "key": "header.text-015",
+    "scope": "header",
+    "kind": "text",
+    "value": "{{contact.phone}}",
+    "label": "084.64.77.222"
+  },
+  {
+    "key": "header.text-016",
+    "scope": "header",
+    "kind": "text",
+    "value": "Hợp tác đối tác Zalo",
+    "label": "Hợp tác đối tác Zalo"
+  },
+  {
+    "key": "header.text-017",
+    "scope": "header",
+    "kind": "text",
+    "value": "Mục yêu thích",
+    "label": "Mục yêu thích"
+  },
+  {
+    "key": "header.text-018",
+    "scope": "header",
+    "kind": "text",
+    "value": "VI",
+    "label": "VI"
+  },
+  {
+    "key": "header.text-019",
+    "scope": "header",
+    "kind": "text",
+    "value": "|",
+    "label": "|"
+  },
+  {
+    "key": "header.text-020",
+    "scope": "header",
+    "kind": "text",
+    "value": "EN",
+    "label": "EN"
+  },
+  {
+    "key": "header.text-021",
+    "scope": "header",
+    "kind": "text",
+    "value": "BOOKING",
+    "label": "BOOKING"
+  },
+  {
+    "key": "header.text-022",
+    "scope": "header",
+    "kind": "text",
+    "value": "TRAVEL",
+    "label": "TRAVEL"
+  },
+  {
+    "key": "header.text-023",
+    "scope": "header",
+    "kind": "text",
+    "value": "bookingtravel.vn",
+    "label": "bookingtravel.vn"
+  },
+  {
+    "key": "header.text-024",
+    "scope": "header",
+    "kind": "text",
+    "value": "Trang chủ",
+    "label": "Trang chủ"
+  },
+  {
+    "key": "header.text-025",
+    "scope": "header",
+    "kind": "text",
+    "value": "Khách sạn",
+    "label": "Khách sạn"
+  },
+  {
+    "key": "header.text-026",
+    "scope": "header",
+    "kind": "text",
+    "value": "Tour hằng ngày",
+    "label": "Tour hằng ngày"
+  },
+  {
+    "key": "header.text-027",
+    "scope": "header",
+    "kind": "text",
+    "value": "Combo trọn gói",
+    "label": "Combo trọn gói"
+  },
+  {
+    "key": "header.text-028",
+    "scope": "header",
+    "kind": "text",
+    "value": "Xe đưa đón",
+    "label": "Xe đưa đón"
+  },
+  {
+    "key": "header.text-029",
+    "scope": "header",
+    "kind": "text",
+    "value": "Cẩm nang du lịch",
+    "label": "Cẩm nang du lịch"
+  },
+  {
+    "key": "header.text-030",
+    "scope": "header",
+    "kind": "text",
+    "value": "Liên hệ",
+    "label": "Liên hệ"
+  },
+  {
+    "key": "header.text-031",
+    "scope": "header",
+    "kind": "text",
+    "value": "Tư vấn Zalo",
+    "label": "Tư vấn Zalo"
+  },
+  {
+    "key": "footer.attributes-001",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "tel:{{contact.telephone}}"
+    },
+    "label": "tel:0846477222"
+  },
+  {
+    "key": "footer.attributes-002",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "mailto:{{contact.email}}"
+    },
+    "label": "mailto:info@bookingtravel.vn"
+  },
+  {
+    "key": "footer.attributes-003",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "https://bookingtravel.vn"
+    },
+    "label": "https://bookingtravel.vn"
+  },
+  {
+    "key": "footer.attributes-004",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "/khach-san"
+    },
+    "label": "/khach-san"
+  },
+  {
+    "key": "footer.attributes-005",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "/khach-san"
+    },
+    "label": "/khach-san"
+  },
+  {
+    "key": "footer.attributes-006",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "/tour-hang-ngay"
+    },
+    "label": "/tour-hang-ngay"
+  },
+  {
+    "key": "footer.attributes-007",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "/#combo"
+    },
+    "label": "/#combo"
+  },
+  {
+    "key": "footer.attributes-008",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "/tour-hang-ngay"
+    },
+    "label": "/tour-hang-ngay"
+  },
+  {
+    "key": "footer.attributes-009",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "/tour-hang-ngay"
+    },
+    "label": "/tour-hang-ngay"
+  },
+  {
+    "key": "footer.attributes-010",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "/#lien-he"
+    },
+    "label": "/#lien-he"
+  },
+  {
+    "key": "footer.attributes-011",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "/#lien-he"
+    },
+    "label": "/#lien-he"
+  },
+  {
+    "key": "footer.attributes-012",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "/#lien-he"
+    },
+    "label": "/#lien-he"
+  },
+  {
+    "key": "footer.attributes-013",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "/#lien-he"
+    },
+    "label": "/#lien-he"
+  },
+  {
+    "key": "footer.attributes-014",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "/#lien-he"
+    },
+    "label": "/#lien-he"
+  },
+  {
+    "key": "footer.attributes-015",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "/#lien-he"
+    },
+    "label": "/#lien-he"
+  },
+  {
+    "key": "footer.attributes-016",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "placeholder": "Nhập email của bạn...",
+      "aria-label": "Nhập email của bạn..."
+    },
+    "label": "Nhập email của bạn... · Nhập email của bạn..."
+  },
+  {
+    "key": "footer.attributes-017",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "/#lien-he"
+    },
+    "label": "/#lien-he"
+  },
+  {
+    "key": "footer.attributes-018",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "/#lien-he"
+    },
+    "label": "/#lien-he"
+  },
+  {
+    "key": "footer.attributes-019",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "/#lien-he"
+    },
+    "label": "/#lien-he"
+  },
+  {
+    "key": "footer.attributes-020",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "{{contact.zalo}}",
+      "title": "Tư vấn qua Zalo"
+    },
+    "label": "https://zalo.me/0846477222 · Tư vấn qua Zalo"
+  },
+  {
+    "key": "footer.attributes-021",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "tel:{{contact.telephone}}",
+      "title": "Gọi Hotline: {{contact.phone}}"
+    },
+    "label": "tel:0846477222 · Gọi Hotline: 084.64.77.222"
+  },
+  {
+    "key": "footer.attributes-022",
+    "scope": "footer",
+    "kind": "attributes",
+    "value": {
+      "href": "/#lien-he",
+      "title": "Gửi yêu cầu hỗ trợ"
+    },
+    "label": "/#lien-he · Gửi yêu cầu hỗ trợ"
+  },
+  {
+    "key": "footer.text-023",
+    "scope": "footer",
+    "kind": "text",
+    "value": "BOOKING TRAVEL",
+    "label": "BOOKING TRAVEL"
+  },
+  {
+    "key": "footer.text-024",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Nền tảng du lịch trực tuyến",
+    "label": "Nền tảng du lịch trực tuyến"
+  },
+  {
+    "key": "footer.text-025",
+    "scope": "footer",
+    "kind": "text",
+    "value": "CÔNG TY TNHH BOOKING TRAVEL",
+    "label": "CÔNG TY TNHH BOOKING TRAVEL"
+  },
+  {
+    "key": "footer.text-026",
+    "scope": "footer",
+    "kind": "text",
+    "value": "38 Tầng Trệt chung cư A - Nguyễn Thái Học, Phường Vạn Thạnh, TP. Nha Trang, Tỉnh Khánh Hòa",
+    "label": "38 Tầng Trệt chung cư A - Nguyễn Thái Học, Phường Vạn Thạnh, TP. Nha Trang, Tỉnh Khánh Hòa"
+  },
+  {
+    "key": "footer.text-027",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Hotline hỗ trợ: ",
+    "label": "Hotline hỗ trợ:"
+  },
+  {
+    "key": "footer.text-028",
+    "scope": "footer",
+    "kind": "text",
+    "value": "{{contact.phone}}",
+    "label": "084.64.77.222"
+  },
+  {
+    "key": "footer.text-029",
+    "scope": "footer",
+    "kind": "text",
+    "value": "{{contact.email}}",
+    "label": "info@bookingtravel.vn"
+  },
+  {
+    "key": "footer.text-030",
+    "scope": "footer",
+    "kind": "text",
+    "value": "https://bookingtravel.vn",
+    "label": "https://bookingtravel.vn"
+  },
+  {
+    "key": "footer.text-031",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Dịch vụ nổi bật",
+    "label": "Dịch vụ nổi bật"
+  },
+  {
+    "key": "footer.text-032",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Khách sạn Nha Trang",
+    "label": "Khách sạn Nha Trang"
+  },
+  {
+    "key": "footer.text-033",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Resort Phú Quốc & Cam Ranh",
+    "label": "Resort Phú Quốc & Cam Ranh"
+  },
+  {
+    "key": "footer.text-034",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Tour 3 đảo Nha Trang VIP",
+    "label": "Tour 3 đảo Nha Trang VIP"
+  },
+  {
+    "key": "footer.text-035",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Combo Bay & Nghỉ dưỡng",
+    "label": "Combo Bay & Nghỉ dưỡng"
+  },
+  {
+    "key": "footer.text-036",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Vé VinWonders & Cáp treo",
+    "label": "Vé VinWonders & Cáp treo"
+  },
+  {
+    "key": "footer.text-037",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Vé xe đưa đón sân bay",
+    "label": "Vé xe đưa đón sân bay"
+  },
+  {
+    "key": "footer.text-038",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Chính sách & Quy định",
+    "label": "Chính sách & Quy định"
+  },
+  {
+    "key": "footer.text-039",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Chính sách thanh toán",
+    "label": "Chính sách thanh toán"
+  },
+  {
+    "key": "footer.text-040",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Chính sách hoàn hủy & đổi lịch",
+    "label": "Chính sách hoàn hủy & đổi lịch"
+  },
+  {
+    "key": "footer.text-041",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Chính sách bảo mật thông tin",
+    "label": "Chính sách bảo mật thông tin"
+  },
+  {
+    "key": "footer.text-042",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Điều khoản & điều kiện sử dụng",
+    "label": "Điều khoản & điều kiện sử dụng"
+  },
+  {
+    "key": "footer.text-043",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Quy chế hoạt động sàn OTA",
+    "label": "Quy chế hoạt động sàn OTA"
+  },
+  {
+    "key": "footer.text-044",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Quy trình giải quyết khiếu nại",
+    "label": "Quy trình giải quyết khiếu nại"
+  },
+  {
+    "key": "footer.text-045",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Phương thức thanh toán",
+    "label": "Phương thức thanh toán"
+  },
+  {
+    "key": "footer.text-046",
+    "scope": "footer",
+    "kind": "text",
+    "value": "VNPAY",
+    "label": "VNPAY"
+  },
+  {
+    "key": "footer.text-047",
+    "scope": "footer",
+    "kind": "text",
+    "value": "MOMO",
+    "label": "MOMO"
+  },
+  {
+    "key": "footer.text-048",
+    "scope": "footer",
+    "kind": "text",
+    "value": "ZALOPAY",
+    "label": "ZALOPAY"
+  },
+  {
+    "key": "footer.text-049",
+    "scope": "footer",
+    "kind": "text",
+    "value": "VISA/MC",
+    "label": "VISA/MC"
+  },
+  {
+    "key": "footer.text-050",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Đăng ký nhận ưu đãi VIP",
+    "label": "Đăng ký nhận ưu đãi VIP"
+  },
+  {
+    "key": "footer.text-051",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Gửi",
+    "label": "Gửi"
+  },
+  {
+    "key": "footer.text-052",
+    "scope": "footer",
+    "kind": "text",
+    "value": "© 2024 CÔNG TY TNHH BOOKING TRAVEL. Bản quyền thuộc về bookingtravel.vn. Giấy phép kinh doanh lữ hành quốc tế.",
+    "label": "© 2024 CÔNG TY TNHH BOOKING TRAVEL. Bản quyền thuộc về bookingtravel.vn. Giấy phép kinh doanh lữ hành quốc tế."
+  },
+  {
+    "key": "footer.text-053",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Điều khoản",
+    "label": "Điều khoản"
+  },
+  {
+    "key": "footer.text-054",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Bảo mật",
+    "label": "Bảo mật"
+  },
+  {
+    "key": "footer.text-055",
+    "scope": "footer",
+    "kind": "text",
+    "value": "Liên hệ",
+    "label": "Liên hệ"
+  },
+  {
+    "key": "site.metadata",
+    "scope": "site",
+    "kind": "settings",
+    "label": "Tiêu đề và mô tả website",
+    "value": {
+      "title": "Booking Travel | Khách sạn, Tour & Xe đưa đón",
+      "description": "Khám phá Nha Trang, Cam Ranh: khách sạn, resort, tour đảo và xe đưa đón. Tư vấn 24/7."
+    }
+  },
+  {
+    "key": "site.contact",
+    "scope": "site",
+    "kind": "settings",
+    "label": "Thông tin liên hệ dùng chung",
+    "value": {
+      "phone": "084.64.77.222",
+      "telephone": "0846477222",
+      "zalo": "https://zalo.me/0846477222",
+      "email": "info@bookingtravel.vn"
+    }
+  },
+  {
+    "key": "site.mobile-navigation",
+    "scope": "site",
+    "kind": "settings",
+    "label": "Menu điện thoại",
+    "value": [
+      {
+        "href": "/",
+        "label": "Trang chủ"
+      },
+      {
+        "href": "/khach-san",
+        "label": "Khách sạn & Resort"
+      },
+      {
+        "href": "/tour-hang-ngay",
+        "label": "Tour hằng ngày"
+      },
+      {
+        "href": "/xe-dua-don",
+        "label": "Xe đưa đón"
+      }
+    ]
+  },
+  {
+    "key": "metadata.hotels",
+    "scope": "hotels",
+    "kind": "settings",
+    "label": "SEO: tiêu đề trang",
+    "value": {
+      "title": "Khách sạn & Resort giá tốt"
+    }
+  },
+  {
+    "key": "metadata.tours",
+    "scope": "tours",
+    "kind": "settings",
+    "label": "SEO: tiêu đề trang",
+    "value": {
+      "title": "Tour đảo Nha Trang hằng ngày"
+    }
+  },
+  {
+    "key": "metadata.transfers",
+    "scope": "transfers",
+    "kind": "settings",
+    "label": "SEO: tiêu đề trang",
+    "value": {
+      "title": "Xe sân bay & Du lịch liên tỉnh"
+    }
+  }
+]

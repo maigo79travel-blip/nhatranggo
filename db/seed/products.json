@@ -1,0 +1,2147 @@
+[
+  {
+    "id": "hotels-1",
+    "type": "hotel",
+    "title": "Khách sạn The Empyrean Nha Trang",
+    "price": 1091000,
+    "image": "/images/73d194e93f20b6c8.jpg",
+    "location": "2 Trần Phú, P. Lộc Thọ, TP. Nha Trang (Cách Quảng trường 2/4 chỉ 100m)",
+    "rating": 4.8,
+    "description": "Tiết kiệm 25% Flash Deal Hôm Nay favorite photo_camera 32 hình ảnh star star star star star 5 Sao Quốc Tế Rất Tuyệt Vời 1.250 đánh giá 4.8 Khách sạn The Empyrean Nha Trang location_on 2 Trần Phú, P. Lộc Thọ, TP. Nha Trang (Cách Quảng trường 2/4 chỉ 100m) pool Hồ bơi vô cực tầng 40 visibility View trọn vẹn vịnh Nha Trang restaurant Miễn phí Buffet sáng 2 khách check_circle Miễn phí hủy phòng trước 48h • Xác nhận tức thì qua Zalo 1.800.000đ 1.091.000đ /đêm Đã gồm thuế, phí & bữa sáng chat Xem phòng & Đặt ngay",
+    "collection_id": "hotels-collection-1",
+    "template_id": "hotels-1",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "alt": "The Empyrean Nha Trang Hotel infinity pool",
+          "data-alt": "High-end 5 star hotel suite with private balcony and modern rooftop infinity pool overlooking turquoise Nha Trang Bay under soft golden sunlight, luxurious architectural details and ocean breeze."
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "aria-label": "Lưu vào danh sách yêu thích"
+        },
+        "label": "Lưu vào danh sách yêu thích"
+      },
+      "field-003": {
+        "kind": "attributes",
+        "value": {
+          "href": "{{contact.zalo}}",
+          "title": "Tư vấn giữ phòng"
+        },
+        "label": "https://zalo.me/0846477222 · Tư vấn giữ phòng"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "\n                  Tiết kiệm 25%\n                ",
+        "label": "Tiết kiệm 25%"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": "\n                  Flash Deal Hôm Nay\n                ",
+        "label": "Flash Deal Hôm Nay"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "32 hình ảnh",
+        "label": "32 hình ảnh"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "5 Sao Quốc Tế",
+        "label": "5 Sao Quốc Tế"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "Rất Tuyệt Vời",
+        "label": "Rất Tuyệt Vời"
+      },
+      "field-009": {
+        "kind": "text",
+        "value": "1.250 đánh giá",
+        "label": "1.250 đánh giá"
+      },
+      "field-010": {
+        "kind": "text",
+        "value": "\n                    Hồ bơi vô cực tầng 40\n                  ",
+        "label": "Hồ bơi vô cực tầng 40"
+      },
+      "field-011": {
+        "kind": "text",
+        "value": "\n                    View trọn vẹn vịnh Nha Trang\n                  ",
+        "label": "View trọn vẹn vịnh Nha Trang"
+      },
+      "field-012": {
+        "kind": "text",
+        "value": "\n                    Miễn phí Buffet sáng 2 khách\n                  ",
+        "label": "Miễn phí Buffet sáng 2 khách"
+      },
+      "field-013": {
+        "kind": "text",
+        "value": "Miễn phí hủy phòng trước 48h • Xác nhận tức thì qua Zalo",
+        "label": "Miễn phí hủy phòng trước 48h • Xác nhận tức thì qua Zalo"
+      },
+      "field-014": {
+        "kind": "text",
+        "value": "/đêm",
+        "label": "/đêm"
+      },
+      "field-015": {
+        "kind": "text",
+        "value": "Đã gồm thuế, phí & bữa sáng",
+        "label": "Đã gồm thuế, phí & bữa sáng"
+      },
+      "field-016": {
+        "kind": "text",
+        "value": "\n                    Xem phòng & Đặt ngay\n                  ",
+        "label": "Xem phòng & Đặt ngay"
+      }
+    },
+    "original_price": 1800000
+  },
+  {
+    "id": "hotels-2",
+    "type": "hotel",
+    "title": "Mövenpick Resort Cam Ranh",
+    "price": 2969000,
+    "image": "/images/d22690201e60d171.jpg",
+    "location": "Bãi Dài, Xã Cam Hải Đông, Cam Ranh (Cách sân bay Cam Ranh 10 phút)",
+    "rating": 4.9,
+    "description": "Thương hiệu Quốc tế Accor Giảm 30% Hè 2024 favorite photo_camera 48 hình ảnh star star star star star 5 Sao Resort Xuất Sắc 890 đánh giá 4.9 Mövenpick Resort Cam Ranh location_on Bãi Dài, Xã Cam Hải Đông, Cam Ranh (Cách sân bay Cam Ranh 10 phút) cookie Miễn phí Giờ Sô-cô-la (Chocolate Hour) qr_code_2 Công viên nước Water Park 6.000m² beach_access Bãi cát trắng mịn riêng 800m child_friendly Tặng vé Water Park cho bé • Xe bus đón tiễn trung tâm Nha Trang 4.200.000đ 2.969.000đ /đêm Phòng Seaview Deluxe • Bữa sáng 5 sao chat Xem phòng & Đặt ngay",
+    "collection_id": "hotels-collection-1",
+    "template_id": "hotels-2",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "alt": "Movenpick Resort Cam Ranh",
+          "data-alt": "Expansive 5-star beachfront resort in Bai Dai Cam Ranh with huge outdoor tropical water park, turquoise wave pools, modern coastal villas and lush palms under bright sunny skies."
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "aria-label": "Lưu vào danh sách yêu thích"
+        },
+        "label": "Lưu vào danh sách yêu thích"
+      },
+      "field-003": {
+        "kind": "attributes",
+        "value": {
+          "href": "{{contact.zalo}}",
+          "title": "Tư vấn giữ phòng"
+        },
+        "label": "https://zalo.me/0846477222 · Tư vấn giữ phòng"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "\n                  Thương hiệu Quốc tế Accor\n                ",
+        "label": "Thương hiệu Quốc tế Accor"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": "\n                  Giảm 30% Hè 2024\n                ",
+        "label": "Giảm 30% Hè 2024"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "48 hình ảnh",
+        "label": "48 hình ảnh"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "5 Sao Resort",
+        "label": "5 Sao Resort"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "Xuất Sắc",
+        "label": "Xuất Sắc"
+      },
+      "field-009": {
+        "kind": "text",
+        "value": "890 đánh giá",
+        "label": "890 đánh giá"
+      },
+      "field-010": {
+        "kind": "text",
+        "value": "\n                    Miễn phí Giờ Sô-cô-la (Chocolate Hour)\n                  ",
+        "label": "Miễn phí Giờ Sô-cô-la (Chocolate Hour)"
+      },
+      "field-011": {
+        "kind": "text",
+        "value": "\n                    Công viên nước Water Park 6.000m²\n                  ",
+        "label": "Công viên nước Water Park 6.000m²"
+      },
+      "field-012": {
+        "kind": "text",
+        "value": "\n                    Bãi cát trắng mịn riêng 800m\n                  ",
+        "label": "Bãi cát trắng mịn riêng 800m"
+      },
+      "field-013": {
+        "kind": "text",
+        "value": "Tặng vé Water Park cho bé • Xe bus đón tiễn trung tâm Nha Trang",
+        "label": "Tặng vé Water Park cho bé • Xe bus đón tiễn trung tâm Nha Trang"
+      },
+      "field-014": {
+        "kind": "text",
+        "value": "/đêm",
+        "label": "/đêm"
+      },
+      "field-015": {
+        "kind": "text",
+        "value": "Phòng Seaview Deluxe • Bữa sáng 5 sao",
+        "label": "Phòng Seaview Deluxe • Bữa sáng 5 sao"
+      },
+      "field-016": {
+        "kind": "text",
+        "value": "\n                    Xem phòng & Đặt ngay\n                  ",
+        "label": "Xem phòng & Đặt ngay"
+      }
+    },
+    "original_price": 4200000
+  },
+  {
+    "id": "hotels-3",
+    "type": "hotel",
+    "title": "Alma Resort Cam Ranh",
+    "price": 3309500,
+    "image": "/images/fcee2de6d9947a93.jpg",
+    "location": "Nguyễn Tất Thành, Bãi Dài, Cam Ranh, Khánh Hòa",
+    "rating": 4.9,
+    "description": "Top Resort Gia Đình favorite photo_camera 55 hình ảnh star star star star star 5 Sao Siêu Sang Xuất Sắc 1.040 đánh giá 4.9 Alma Resort Cam Ranh location_on Nguyễn Tất Thành, Bãi Dài, Cam Ranh, Khánh Hòa pool 12 Hồ bơi tràn bờ view biển theaters Rạp chiếu phim Alma Cinema miễn phí museum Bảo tàng khoa học trẻ em check_circle Tặng voucher ăn uống 300.000đ khi đặt trước 7 ngày 4.500.000đ 3.309.500đ /đêm Căn hộ Suite 1PN • Bữa sáng quốc tế chat Xem phòng & Đặt ngay",
+    "collection_id": "hotels-collection-1",
+    "template_id": "hotels-3",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "alt": "Alma Resort Cam Ranh",
+          "data-alt": "Panoramic aerial view of Alma Resort Cam Ranh with 12 cascading infinity pools stepping down to private ocean beach, modern glass suites and green coastal parkways."
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "aria-label": "Lưu vào danh sách yêu thích"
+        },
+        "label": "Lưu vào danh sách yêu thích"
+      },
+      "field-003": {
+        "kind": "attributes",
+        "value": {
+          "href": "{{contact.zalo}}",
+          "title": "Tư vấn giữ phòng"
+        },
+        "label": "https://zalo.me/0846477222 · Tư vấn giữ phòng"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "\n                  Top Resort Gia Đình\n                ",
+        "label": "Top Resort Gia Đình"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": "55 hình ảnh",
+        "label": "55 hình ảnh"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "5 Sao Siêu Sang",
+        "label": "5 Sao Siêu Sang"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "Xuất Sắc",
+        "label": "Xuất Sắc"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "1.040 đánh giá",
+        "label": "1.040 đánh giá"
+      },
+      "field-009": {
+        "kind": "text",
+        "value": "\n                    12 Hồ bơi tràn bờ view biển\n                  ",
+        "label": "12 Hồ bơi tràn bờ view biển"
+      },
+      "field-010": {
+        "kind": "text",
+        "value": "\n                    Rạp chiếu phim Alma Cinema miễn phí\n                  ",
+        "label": "Rạp chiếu phim Alma Cinema miễn phí"
+      },
+      "field-011": {
+        "kind": "text",
+        "value": "\n                    Bảo tàng khoa học trẻ em\n                  ",
+        "label": "Bảo tàng khoa học trẻ em"
+      },
+      "field-012": {
+        "kind": "text",
+        "value": "Tặng voucher ăn uống 300.000đ khi đặt trước 7 ngày",
+        "label": "Tặng voucher ăn uống 300.000đ khi đặt trước 7 ngày"
+      },
+      "field-013": {
+        "kind": "text",
+        "value": "/đêm",
+        "label": "/đêm"
+      },
+      "field-014": {
+        "kind": "text",
+        "value": "Căn hộ Suite 1PN • Bữa sáng quốc tế",
+        "label": "Căn hộ Suite 1PN • Bữa sáng quốc tế"
+      },
+      "field-015": {
+        "kind": "text",
+        "value": "\n                    Xem phòng & Đặt ngay\n                  ",
+        "label": "Xem phòng & Đặt ngay"
+      }
+    },
+    "original_price": 4500000
+  },
+  {
+    "id": "hotels-4",
+    "type": "hotel",
+    "title": "Fusion Resort Cam Ranh - All Spa Inclusive",
+    "price": 3684000,
+    "image": "/images/f98ceb49e182d3da.jpg",
+    "location": "Bãi Dài, Cam Hải Đông, Cam Ranh, Khánh Hòa",
+    "rating": 5,
+    "description": "Bao Trọn Gói Liệu Trình Spa favorite photo_camera 40 hình ảnh star star star star star 5 Sao Luxury Xuất Sắc Tuyệt Đối 650 đánh giá 5.0 Fusion Resort Cam Ranh - All Spa Inclusive location_on Bãi Dài, Cam Hải Đông, Cam Ranh, Khánh Hòa spa Miễn phí Spa mỗi khách hằng ngày breakfast_dining Ăn sáng mọi lúc mọi nơi (Anywhere Anytime) deck Villa có hồ bơi riêng biệt lập check_circle Đổi ngày linh hoạt miễn phí trước 5 ngày 5.100.000đ 3.684.000đ /đêm Chic Suite Private Pool • Gồm Spa chat Xem phòng & Đặt ngay",
+    "collection_id": "hotels-collection-1",
+    "template_id": "hotels-4",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "alt": "Fusion Resort Cam Ranh",
+          "data-alt": "Luxurious beachfront pool villa at Fusion Resort Cam Ranh with wooden sundeck, private turquoise swimming pool, swaying coconut palms and tranquil ocean background."
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "aria-label": "Lưu vào danh sách yêu thích"
+        },
+        "label": "Lưu vào danh sách yêu thích"
+      },
+      "field-003": {
+        "kind": "attributes",
+        "value": {
+          "href": "{{contact.zalo}}",
+          "title": "Tư vấn giữ phòng"
+        },
+        "label": "https://zalo.me/0846477222 · Tư vấn giữ phòng"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "\n                  Bao Trọn Gói Liệu Trình Spa\n                ",
+        "label": "Bao Trọn Gói Liệu Trình Spa"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": "40 hình ảnh",
+        "label": "40 hình ảnh"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "5 Sao Luxury",
+        "label": "5 Sao Luxury"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "Xuất Sắc Tuyệt Đối",
+        "label": "Xuất Sắc Tuyệt Đối"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "650 đánh giá",
+        "label": "650 đánh giá"
+      },
+      "field-009": {
+        "kind": "text",
+        "value": "\n                    Miễn phí Spa mỗi khách hằng ngày\n                  ",
+        "label": "Miễn phí Spa mỗi khách hằng ngày"
+      },
+      "field-010": {
+        "kind": "text",
+        "value": "\n                    Ăn sáng mọi lúc mọi nơi (Anywhere Anytime)\n                  ",
+        "label": "Ăn sáng mọi lúc mọi nơi (Anywhere Anytime)"
+      },
+      "field-011": {
+        "kind": "text",
+        "value": "\n                    Villa có hồ bơi riêng biệt lập\n                  ",
+        "label": "Villa có hồ bơi riêng biệt lập"
+      },
+      "field-012": {
+        "kind": "text",
+        "value": "Đổi ngày linh hoạt miễn phí trước 5 ngày",
+        "label": "Đổi ngày linh hoạt miễn phí trước 5 ngày"
+      },
+      "field-013": {
+        "kind": "text",
+        "value": "/đêm",
+        "label": "/đêm"
+      },
+      "field-014": {
+        "kind": "text",
+        "value": "Chic Suite Private Pool • Gồm Spa",
+        "label": "Chic Suite Private Pool • Gồm Spa"
+      },
+      "field-015": {
+        "kind": "text",
+        "value": "\n                    Xem phòng & Đặt ngay\n                  ",
+        "label": "Xem phòng & Đặt ngay"
+      }
+    },
+    "original_price": 5100000
+  },
+  {
+    "id": "hotels-5",
+    "type": "hotel",
+    "title": "Diamond Bay Hotel Nha Trang",
+    "price": 1148000,
+    "image": "/images/fc5b18e17a512b93.jpg",
+    "location": "20 Trần Phú, P. Lộc Thọ, TP. Nha Trang (Đối diện Trung tâm Thương mại Nha Trang Center)",
+    "rating": 4.7,
+    "description": "Trung Tâm Phố Biển favorite photo_camera 28 hình ảnh star star star star 4 Sao Cao Cấp Rất Tốt 740 đánh giá 4.7 Diamond Bay Hotel Nha Trang location_on 20 Trần Phú, P. Lộc Thọ, TP. Nha Trang (Đối diện Trung tâm Thương mại Nha Trang Center) beach_access View biển trực diện bãi tắm shopping_bag Gắn liền TTTM mua sắm ẩm thực restaurant Bao gồm Buffet sáng hàng ngày check_circle Vị trí thuận tiện đi bộ tắm biển và chợ đêm 1.500.000đ 1.148.000đ /đêm Phòng Deluxe City • Bữa sáng 2 người chat Xem phòng & Đặt ngay",
+    "collection_id": "hotels-collection-1",
+    "template_id": "hotels-5",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "alt": "Diamond Bay Hotel Nha Trang",
+          "data-alt": "Diamond Bay Hotel Nha Trang situated right at 20 Tran Phu coastal avenue, high-rise elegant city hotel facade facing Nha Trang beach promenade under clear blue daylight."
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "aria-label": "Lưu vào danh sách yêu thích"
+        },
+        "label": "Lưu vào danh sách yêu thích"
+      },
+      "field-003": {
+        "kind": "attributes",
+        "value": {
+          "href": "{{contact.zalo}}",
+          "title": "Tư vấn giữ phòng"
+        },
+        "label": "https://zalo.me/0846477222 · Tư vấn giữ phòng"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "\n                  Trung Tâm Phố Biển\n                ",
+        "label": "Trung Tâm Phố Biển"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": "28 hình ảnh",
+        "label": "28 hình ảnh"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "4 Sao Cao Cấp",
+        "label": "4 Sao Cao Cấp"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "Rất Tốt",
+        "label": "Rất Tốt"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "740 đánh giá",
+        "label": "740 đánh giá"
+      },
+      "field-009": {
+        "kind": "text",
+        "value": "\n                    View biển trực diện bãi tắm\n                  ",
+        "label": "View biển trực diện bãi tắm"
+      },
+      "field-010": {
+        "kind": "text",
+        "value": "\n                    Gắn liền TTTM mua sắm ẩm thực\n                  ",
+        "label": "Gắn liền TTTM mua sắm ẩm thực"
+      },
+      "field-011": {
+        "kind": "text",
+        "value": "\n                    Bao gồm Buffet sáng hàng ngày\n                  ",
+        "label": "Bao gồm Buffet sáng hàng ngày"
+      },
+      "field-012": {
+        "kind": "text",
+        "value": "Vị trí thuận tiện đi bộ tắm biển và chợ đêm",
+        "label": "Vị trí thuận tiện đi bộ tắm biển và chợ đêm"
+      },
+      "field-013": {
+        "kind": "text",
+        "value": "/đêm",
+        "label": "/đêm"
+      },
+      "field-014": {
+        "kind": "text",
+        "value": "Phòng Deluxe City • Bữa sáng 2 người",
+        "label": "Phòng Deluxe City • Bữa sáng 2 người"
+      },
+      "field-015": {
+        "kind": "text",
+        "value": "\n                    Xem phòng & Đặt ngay\n                  ",
+        "label": "Xem phòng & Đặt ngay"
+      }
+    },
+    "original_price": 1500000
+  },
+  {
+    "id": "hotels-6",
+    "type": "hotel",
+    "title": "Duyên Hà Resort Cam Ranh",
+    "price": 2499000,
+    "image": "/images/9fa0dee262932b0d.jpg",
+    "location": "Lô D9B, Khu du lịch Bắc Bán Đảo Cam Ranh, Khánh Hòa",
+    "rating": 4.8,
+    "description": "Ưu đãi Combo Gia Đình favorite photo_camera 36 hình ảnh star star star star star 5 Sao Resort Rất Tuyệt Vời 510 đánh giá 4.8 Duyên Hà Resort Cam Ranh location_on Lô D9B, Khu du lịch Bắc Bán Đảo Cam Ranh, Khánh Hòa restaurant_menu 6 Nhà hàng ẩm thực Á - Âu chuẩn vị pool Hồ bơi rộng 2.500m² giữa vườn nhiệt đới airport_shuttle Đưa đón sân bay theo lịch trình check_circle Miễn phí phụ thu cho 1 bé dưới 12 tuổi 3.600.000đ 2.499.000đ /đêm Phòng Deluxe Garden View • Buffet sáng chat Xem phòng & Đặt ngay",
+    "collection_id": "hotels-collection-1",
+    "template_id": "hotels-6",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "alt": "Duyen Ha Resort Cam Ranh",
+          "data-alt": "Duyen Ha Resort Cam Ranh luxury beachfront view with modern architectural villas, landscaped tropical gardens, blue swimming lagoon and warm evening ambient lights."
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "aria-label": "Lưu vào danh sách yêu thích"
+        },
+        "label": "Lưu vào danh sách yêu thích"
+      },
+      "field-003": {
+        "kind": "attributes",
+        "value": {
+          "href": "{{contact.zalo}}",
+          "title": "Tư vấn giữ phòng"
+        },
+        "label": "https://zalo.me/0846477222 · Tư vấn giữ phòng"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "\n                  Ưu đãi Combo Gia Đình\n                ",
+        "label": "Ưu đãi Combo Gia Đình"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": "36 hình ảnh",
+        "label": "36 hình ảnh"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "5 Sao Resort",
+        "label": "5 Sao Resort"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "Rất Tuyệt Vời",
+        "label": "Rất Tuyệt Vời"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "510 đánh giá",
+        "label": "510 đánh giá"
+      },
+      "field-009": {
+        "kind": "text",
+        "value": "\n                    6 Nhà hàng ẩm thực Á - Âu chuẩn vị\n                  ",
+        "label": "6 Nhà hàng ẩm thực Á - Âu chuẩn vị"
+      },
+      "field-010": {
+        "kind": "text",
+        "value": "\n                    Hồ bơi rộng 2.500m² giữa vườn nhiệt đới\n                  ",
+        "label": "Hồ bơi rộng 2.500m² giữa vườn nhiệt đới"
+      },
+      "field-011": {
+        "kind": "text",
+        "value": "\n                    Đưa đón sân bay theo lịch trình\n                  ",
+        "label": "Đưa đón sân bay theo lịch trình"
+      },
+      "field-012": {
+        "kind": "text",
+        "value": "Miễn phí phụ thu cho 1 bé dưới 12 tuổi",
+        "label": "Miễn phí phụ thu cho 1 bé dưới 12 tuổi"
+      },
+      "field-013": {
+        "kind": "text",
+        "value": "/đêm",
+        "label": "/đêm"
+      },
+      "field-014": {
+        "kind": "text",
+        "value": "Phòng Deluxe Garden View • Buffet sáng",
+        "label": "Phòng Deluxe Garden View • Buffet sáng"
+      },
+      "field-015": {
+        "kind": "text",
+        "value": "\n                    Xem phòng & Đặt ngay\n                  ",
+        "label": "Xem phòng & Đặt ngay"
+      }
+    },
+    "original_price": 3600000
+  },
+  {
+    "id": "tours-1",
+    "type": "tour",
+    "title": "Tour 3 Đảo Nha Trang VIP: Hòn Mun - Làng Chài - Tắm Bùn Khoáng Hòn Tằm",
+    "price": 650000,
+    "image": "/images/35b38682657b6ce8.jpg",
+    "location": "Nha Trang, Khánh Hòa",
+    "rating": 4.9,
+    "description": "local_fire_department Bán chạy #1 • Tiết kiệm 15% favorite schedule 08:00 - 16:00 Hằng Ngày Cano Cao Tốc pin_drop Nha Trang • Vịnh San Hô star 4.9 (3.4k lượt đặt) Tour 3 Đảo Nha Trang VIP: Hòn Mun - Làng Chài - Tắm Bùn Khoáng Hòn Tằm bathtub Tắm bùn Hòn Tằm 5* scuba_diving San hô Hòn Mun restaurant Bữa trưa hải sản bè nổi airport_shuttle Đón trả tận nơi 760.000đ 650.000đ /khách -15% HÔM NAY menu_book Xem lịch trình bolt Đặt tour ngay",
+    "collection_id": "tours-collection-1",
+    "template_id": "tours-1",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "alt": "Tour 3 Đảo Nha Trang VIP Hòn Mun Hòn Tằm",
+          "data-alt": "Modern speed boat cruising on azure waters near Hon Tam island Nha Trang Vietnam, turquoise coral sea with dramatic green hills, golden morning sunlight, luxury speed boat cutting through white spray, travel photography."
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "aria-label": "Lưu vào yêu thích"
+        },
+        "label": "Lưu vào yêu thích"
+      },
+      "field-003": {
+        "kind": "attributes",
+        "value": {
+          "href": "{{contact.zalo}}?text=Tôi%20muốn%20đặt%20Tour%203%20Đảo%20Nha%20Trang%20VIP%20650k"
+        },
+        "label": "https://zalo.me/0846477222?text=Tôi%20muốn%20đặt%20Tour%203%20Đảo%20Nha%20Trang%20VIP%20650k"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "Bán chạy #1 • Tiết kiệm 15%",
+        "label": "Bán chạy #1 • Tiết kiệm 15%"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": " 08:00 - 16:00 Hằng Ngày\n              ",
+        "label": "08:00 - 16:00 Hằng Ngày"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "\n                Cano Cao Tốc\n              ",
+        "label": "Cano Cao Tốc"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": " Nha Trang • Vịnh San Hô\n              ",
+        "label": "Nha Trang • Vịnh San Hô"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "(3.4k lượt đặt)",
+        "label": "(3.4k lượt đặt)"
+      },
+      "field-009": {
+        "kind": "text",
+        "value": " Tắm bùn Hòn Tằm 5*\n              ",
+        "label": "Tắm bùn Hòn Tằm 5*"
+      },
+      "field-010": {
+        "kind": "text",
+        "value": " San hô Hòn Mun\n              ",
+        "label": "San hô Hòn Mun"
+      },
+      "field-011": {
+        "kind": "text",
+        "value": " Bữa trưa hải sản bè nổi\n              ",
+        "label": "Bữa trưa hải sản bè nổi"
+      },
+      "field-012": {
+        "kind": "text",
+        "value": " Đón trả tận nơi\n              ",
+        "label": "Đón trả tận nơi"
+      },
+      "field-013": {
+        "kind": "text",
+        "value": "/khách",
+        "label": "/khách"
+      },
+      "field-014": {
+        "kind": "text",
+        "value": "-15% HÔM NAY",
+        "label": "-15% HÔM NAY"
+      },
+      "field-015": {
+        "kind": "text",
+        "value": "Xem lịch trình",
+        "label": "Xem lịch trình"
+      },
+      "field-016": {
+        "kind": "text",
+        "value": "Đặt tour ngay",
+        "label": "Đặt tour ngay"
+      }
+    },
+    "original_price": 760000
+  },
+  {
+    "id": "tours-2",
+    "type": "tour",
+    "title": "Du Thuyền Ngắm Hoàng Hôn Vịnh Nha Trang & Tiệc Tối BBQ Hải Sản Tôm Hùm",
+    "price": 1050000,
+    "image": "/images/4b66d83a9bc98726.jpg",
+    "location": "Nha Trang, Khánh Hòa",
+    "rating": 5,
+    "description": "diamond Trải nghiệm 5 Sao Thượng Lưu favorite wb_twilight 16:30 - 21:00 Hằng Ngày Sealife / Emperor Cruises sailing Vịnh Nha Trang Twilight star 5.0 (1.8k đánh giá) Du Thuyền Ngắm Hoàng Hôn Vịnh Nha Trang & Tiệc Tối BBQ Hải Sản Tôm Hùm set_meal Set Tôm hùm & Bò Mỹ music_note Nhạc sống Violin & Guitar wine_bar Cocktail & Canapé miễn phí photo_camera Thợ chụp ảnh riêng 1.250.000đ 1.050.000đ /khách TẶNG RƯỢU VANG menu_book Xem lịch trình bolt Đặt tour ngay",
+    "collection_id": "tours-collection-1",
+    "template_id": "tours-2",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "alt": "Tour Du Thuyền Hoàng Hôn Vịnh Nha Trang",
+          "data-alt": "Luxury cruise ship cruising at golden sunset in Nha Trang bay Vietnam, warm orange pink skies reflecting on tranquil ocean waters, passengers enjoying wine and violin music on deck, cinematic luxury hospitality photography."
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "aria-label": "Lưu vào yêu thích"
+        },
+        "label": "Lưu vào yêu thích"
+      },
+      "field-003": {
+        "kind": "attributes",
+        "value": {
+          "href": "{{contact.zalo}}?text=Tôi%20muốn%20đặt%20Tour%20Du%20Thuyền%20Hoàng%20Hôn%201050k"
+        },
+        "label": "https://zalo.me/0846477222?text=Tôi%20muốn%20đặt%20Tour%20Du%20Thuyền%20Hoàng%20Hôn%201050k"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "Trải nghiệm 5 Sao Thượng Lưu",
+        "label": "Trải nghiệm 5 Sao Thượng Lưu"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": " 16:30 - 21:00 Hằng Ngày\n              ",
+        "label": "16:30 - 21:00 Hằng Ngày"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "\n                Sealife / Emperor Cruises\n              ",
+        "label": "Sealife / Emperor Cruises"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": " Vịnh Nha Trang Twilight\n              ",
+        "label": "Vịnh Nha Trang Twilight"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "(1.8k đánh giá)",
+        "label": "(1.8k đánh giá)"
+      },
+      "field-009": {
+        "kind": "text",
+        "value": " Set Tôm hùm & Bò Mỹ\n              ",
+        "label": "Set Tôm hùm & Bò Mỹ"
+      },
+      "field-010": {
+        "kind": "text",
+        "value": " Nhạc sống Violin & Guitar\n              ",
+        "label": "Nhạc sống Violin & Guitar"
+      },
+      "field-011": {
+        "kind": "text",
+        "value": " Cocktail & Canapé miễn phí\n              ",
+        "label": "Cocktail & Canapé miễn phí"
+      },
+      "field-012": {
+        "kind": "text",
+        "value": " Thợ chụp ảnh riêng\n              ",
+        "label": "Thợ chụp ảnh riêng"
+      },
+      "field-013": {
+        "kind": "text",
+        "value": "/khách",
+        "label": "/khách"
+      },
+      "field-014": {
+        "kind": "text",
+        "value": "TẶNG RƯỢU VANG",
+        "label": "TẶNG RƯỢU VANG"
+      },
+      "field-015": {
+        "kind": "text",
+        "value": "Xem lịch trình",
+        "label": "Xem lịch trình"
+      },
+      "field-016": {
+        "kind": "text",
+        "value": "Đặt tour ngay",
+        "label": "Đặt tour ngay"
+      }
+    },
+    "original_price": 1250000
+  },
+  {
+    "id": "tours-3",
+    "type": "tour",
+    "title": "Tour Khám Phá Cung Đường Biển Vĩnh Hy - Hang Rái - Vườn Nho - Đồng Cừu",
+    "price": 790000,
+    "image": "/images/c0fc0a1f9db4a986.jpg",
+    "location": "Nha Trang, Khánh Hòa",
+    "rating": 4.8,
+    "description": "explore Cung Đường Biển Đẹp Nhất favorite schedule 07:30 - 17:00 Hằng Ngày Xe Limousine / Dcar landscape Ninh Thuận • Vĩnh Hy star 4.8 (2.1k đánh giá) Tour Khám Phá Cung Đường Biển Vĩnh Hy - Hang Rái - Vườn Nho - Đồng Cừu water_drop Thác trên biển Hang Rái eco Hái nho tươi tại giàn cruelty_free Check-in Đồng Cừu Suối Tiên restaurant_menu Trọn gói ăn trưa bè vịnh 890.000đ 790.000đ /khách -12% TRỌN GÓI menu_book Xem lịch trình bolt Đặt tour ngay",
+    "collection_id": "tours-collection-1",
+    "template_id": "tours-3",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "alt": "Tour Vĩnh Hy Hang Rái Vườn Nho Đồng Cừu",
+          "data-alt": "Hang Rai coral reef cascade with water falls pouring into emerald green ocean in Ninh Thuan Vietnam, coastal highway winding next to cliffs, sunny weather, vibrant natural travel landscape."
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "aria-label": "Lưu vào yêu thích"
+        },
+        "label": "Lưu vào yêu thích"
+      },
+      "field-003": {
+        "kind": "attributes",
+        "value": {
+          "href": "{{contact.zalo}}?text=Tôi%20muốn%20đặt%20Tour%20Vĩnh%20Hy%20Hang%20Rái%20790k"
+        },
+        "label": "https://zalo.me/0846477222?text=Tôi%20muốn%20đặt%20Tour%20Vĩnh%20Hy%20Hang%20Rái%20790k"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "Cung Đường Biển Đẹp Nhất",
+        "label": "Cung Đường Biển Đẹp Nhất"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": " 07:30 - 17:00 Hằng Ngày\n              ",
+        "label": "07:30 - 17:00 Hằng Ngày"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "\n                Xe Limousine / Dcar\n              ",
+        "label": "Xe Limousine / Dcar"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": " Ninh Thuận • Vĩnh Hy\n              ",
+        "label": "Ninh Thuận • Vĩnh Hy"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "(2.1k đánh giá)",
+        "label": "(2.1k đánh giá)"
+      },
+      "field-009": {
+        "kind": "text",
+        "value": " Thác trên biển Hang Rái\n              ",
+        "label": "Thác trên biển Hang Rái"
+      },
+      "field-010": {
+        "kind": "text",
+        "value": " Hái nho tươi tại giàn\n              ",
+        "label": "Hái nho tươi tại giàn"
+      },
+      "field-011": {
+        "kind": "text",
+        "value": " Check-in Đồng Cừu Suối Tiên\n              ",
+        "label": "Check-in Đồng Cừu Suối Tiên"
+      },
+      "field-012": {
+        "kind": "text",
+        "value": " Trọn gói ăn trưa bè vịnh\n              ",
+        "label": "Trọn gói ăn trưa bè vịnh"
+      },
+      "field-013": {
+        "kind": "text",
+        "value": "/khách",
+        "label": "/khách"
+      },
+      "field-014": {
+        "kind": "text",
+        "value": "-12% TRỌN GÓI",
+        "label": "-12% TRỌN GÓI"
+      },
+      "field-015": {
+        "kind": "text",
+        "value": "Xem lịch trình",
+        "label": "Xem lịch trình"
+      },
+      "field-016": {
+        "kind": "text",
+        "value": "Đặt tour ngay",
+        "label": "Đặt tour ngay"
+      }
+    },
+    "original_price": 890000
+  },
+  {
+    "id": "tours-4",
+    "type": "tour",
+    "title": "Tour Lặn Biển Bình Khí Scuba Diving & Đi Bộ Dưới Đáy Biển (Seawalker) Hòn Mun",
+    "price": 850000,
+    "image": "/images/a40e97132e6874e5.jpg",
+    "location": "Nha Trang, Khánh Hòa",
+    "rating": 4.9,
+    "description": "Không cần biết bơi vẫn lặn ngắm san hô sống động. Huấn luyện viên PADI chứng chỉ quốc tế hướng dẫn tận tình, bao gồm thiết bị lặn cao cấp và bảo hiểm chuyên dụng.",
+    "collection_id": "tours-collection-2",
+    "template_id": "tours-4",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "alt": "Lặn biển bình khí Scuba Diving Hòn Mun",
+          "data-alt": "Scuba diver exploring vibrant coral reef underwater in Hon Mun marine reserve Nha Trang Vietnam, schools of tropical colorful fishes, crystal clear emerald blue water, sun rays beaming down, underwater action photography."
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "href": "{{contact.zalo}}?text=Tôi%20muốn%20đặt%20Tour%20Lặn%20Biển%20Scuba%20Diving%20850k"
+        },
+        "label": "https://zalo.me/0846477222?text=Tôi%20muốn%20đặt%20Tour%20Lặn%20Biển%20Scuba%20Diving%20850k"
+      },
+      "field-003": {
+        "kind": "text",
+        "value": "\n              Kèm riêng 1:1 chuyên nghiệp\n            ",
+        "label": "Kèm riêng 1:1 chuyên nghiệp"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": " Tặng ảnh & clip lặn miễn phí\n            ",
+        "label": "Tặng ảnh & clip lặn miễn phí"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": " Khu Bảo Tồn Biển Hòn Mun\n              ",
+        "label": "Khu Bảo Tồn Biển Hòn Mun"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "\n                4.9 (980)\n              ",
+        "label": "4.9 (980)"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "Giá trọn gói",
+        "label": "Giá trọn gói"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "Đặt ngay",
+        "label": "Đặt ngay"
+      }
+    }
+  },
+  {
+    "id": "tours-5",
+    "type": "tour",
+    "title": "Tour City Nha Trang: Tháp Bà Ponagar - Viện Hải Dương Học - Chùa Long Sơn - Nhà Thờ Núi",
+    "price": 450000,
+    "image": "/images/7e7c72f00370f9c1.jpg",
+    "location": "Nha Trang, Khánh Hòa",
+    "rating": 4.8,
+    "description": "Khám phá trọn vẹn văn hóa lịch sử xứ Trầm Hương trong nửa ngày hoặc 1 ngày. Bao gồm xe máy lạnh đời mới, vé các điểm tham quan, bữa trưa nem nướng Nha Trang đặc sản.",
+    "collection_id": "tours-collection-2",
+    "template_id": "tours-5",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "alt": "Tour City Nha Trang Tháp Bà Ponagar",
+          "data-alt": "Ponagar Cham Towers ancient red brick architecture in Nha Trang Vietnam under clear blue sky, traditional stone carvings, tranquil courtyard with green palms, cultural tourism landmark photography."
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "href": "{{contact.zalo}}?text=Tôi%20muốn%20đặt%20Tour%20City%20Nha%20Trang%20450k"
+        },
+        "label": "https://zalo.me/0846477222?text=Tôi%20muốn%20đặt%20Tour%20City%20Nha%20Trang%20450k"
+      },
+      "field-003": {
+        "kind": "text",
+        "value": "\n              Lý tưởng cho gia đình\n            ",
+        "label": "Lý tưởng cho gia đình"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": " Ghép đoàn hoặc xe riêng\n            ",
+        "label": "Ghép đoàn hoặc xe riêng"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": " Di tích văn hóa lịch sử\n              ",
+        "label": "Di tích văn hóa lịch sử"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "\n                4.8 (1.2k)\n              ",
+        "label": "4.8 (1.2k)"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "Giá trọn gói",
+        "label": "Giá trọn gói"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "Đặt ngay",
+        "label": "Đặt ngay"
+      }
+    }
+  },
+  {
+    "id": "tours-6",
+    "type": "tour",
+    "title": "Tour Check-in Săn Mây Đà Lạt Khởi Hành Từ Nha Trang Trong Ngày (Đi Sáng Về Tối)",
+    "price": 890000,
+    "image": "/images/ffa0f940aa51cba7.jpg",
+    "location": "Nha Trang, Khánh Hòa",
+    "rating": 4.9,
+    "description": "Chinh phục đèo Omega Khánh Lê hùng vĩ, đón biển mây bồng bềnh tại Cầu Đất, đồi chè xanh mướt, đồi hoa cẩm tú cầu, thưởng thức lẩu rau Leguda Đà Lạt nức tiếng.",
+    "collection_id": "tours-collection-2",
+    "template_id": "tours-6",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "alt": "Tour Săn Mây Đà Lạt Khởi Hành Từ Nha Trang",
+          "data-alt": "Spectacular sea of clouds over green pine hills and tea plantations in Cau Dat Da Lat Vietnam at sunrise, ethereal morning mist, soft golden dawn sunlight, atmospheric travel photography."
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "href": "{{contact.zalo}}?text=Tôi%20muốn%20đặt%20Tour%20Săn%20Mây%20Đà%20Lạt%20Trong%20Ngày%20890k"
+        },
+        "label": "https://zalo.me/0846477222?text=Tôi%20muốn%20đặt%20Tour%20Săn%20Mây%20Đà%20Lạt%20Trong%20Ngày%20890k"
+      },
+      "field-003": {
+        "kind": "text",
+        "value": "\n              Khởi hành từ Nha Trang\n            ",
+        "label": "Khởi hành từ Nha Trang"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": " Đèo Khánh Lê mây mù kỳ vĩ\n            ",
+        "label": "Đèo Khánh Lê mây mù kỳ vĩ"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": " Cao nguyên hoa Đà Lạt\n              ",
+        "label": "Cao nguyên hoa Đà Lạt"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "\n                4.9 (1.5k)\n              ",
+        "label": "4.9 (1.5k)"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "Giá trọn gói",
+        "label": "Giá trọn gói"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "Đặt ngay",
+        "label": "Đặt ngay"
+      }
+    }
+  },
+  {
+    "id": "tours-7",
+    "type": "tour",
+    "title": "Tour Khám Phá Đảo Điệp Sơn - Con Đường Đi Bộ Dưới Biển Độc Nhất & Bãi Biển Dốc Lết",
+    "price": 690000,
+    "image": "/images/c88f4aba2916702a.jpg",
+    "location": "Nha Trang, Khánh Hòa",
+    "rating": 4.8,
+    "description": "Đi bộ trên doi cát trắng mịn giữa lòng đại dương xanh biếc, tắm biển Dốc Lết hoang sơ và thưởng thức hải sản tươi nướng mỡ hành ngay tại bè đảo.",
+    "collection_id": "tours-collection-2",
+    "template_id": "tours-7",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "alt": "Tour Điệp Sơn Con Đường Dưới Biển Dốc Lết",
+          "data-alt": "Unique sandbar walking path connecting green islands in the middle of the sea at Diep Son Khanh Hoa Vietnam, turquoise blue ocean waters, white sand trail, tropical sunny beach view."
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "href": "{{contact.zalo}}?text=Tôi%20muốn%20đặt%20Tour%20Điệp%20Sơn%20690k"
+        },
+        "label": "https://zalo.me/0846477222?text=Tôi%20muốn%20đặt%20Tour%20Điệp%20Sơn%20690k"
+      },
+      "field-003": {
+        "kind": "text",
+        "value": "\n              Con đường bộ xuyên biển\n            ",
+        "label": "Con đường bộ xuyên biển"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": " Vịnh Vân Phong\n              ",
+        "label": "Vịnh Vân Phong"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": "\n                4.8 (850)\n              ",
+        "label": "4.8 (850)"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "Giá trọn gói",
+        "label": "Giá trọn gói"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "Đặt ngay",
+        "label": "Đặt ngay"
+      }
+    }
+  },
+  {
+    "id": "tours-8",
+    "type": "tour",
+    "title": "Tour Sinh Thái Đầm Nha Phu: Suối Hoa Lan & Vương Quốc Đảo Khỉ Tự Nhiên",
+    "price": 590000,
+    "image": "/images/3602def1d6dc6196.jpg",
+    "location": "Nha Trang, Khánh Hòa",
+    "rating": 4.7,
+    "description": "Vui chơi cùng hơn 1.200 chú khỉ tự nhiên, xem xiếc thú nghệ thuật, dạo bước qua vườn bướm khổng lồ và con đường nón lá rực rỡ sắc màu tại Hoa Lan.",
+    "collection_id": "tours-collection-2",
+    "template_id": "tours-8",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "alt": "Tour Đảo Khỉ Suối Hoa Lan Đầm Nha Phu",
+          "data-alt": "Green ecotourism island with lush orchid gardens and friendly monkeys in Nha Phu bay Nha Trang Vietnam, wooden pier on tranquil waters, sunny family friendly tourism destination."
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "href": "{{contact.zalo}}?text=Tôi%20muốn%20đặt%20Tour%20Đảo%20Khỉ%20590k"
+        },
+        "label": "https://zalo.me/0846477222?text=Tôi%20muốn%20đặt%20Tour%20Đảo%20Khỉ%20590k"
+      },
+      "field-003": {
+        "kind": "text",
+        "value": "\n              Sinh thái sinh động\n            ",
+        "label": "Sinh thái sinh động"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": " Đầm Nha Phu\n              ",
+        "label": "Đầm Nha Phu"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": "\n                4.7 (720)\n              ",
+        "label": "4.7 (720)"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "Giá trọn gói",
+        "label": "Giá trọn gói"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "Đặt ngay",
+        "label": "Đặt ngay"
+      }
+    }
+  },
+  {
+    "id": "tours-9",
+    "type": "tour",
+    "title": "Tour Trải Nghiệm Đảo Robinson: Tiệc Rượu Vang Nổi, Chèo Sup & Đua Thuyền Kayak",
+    "price": 620000,
+    "image": "/images/45d3427c57b6fb2d.jpg",
+    "location": "Nha Trang, Khánh Hòa",
+    "rating": 4.9,
+    "description": "Thư giãn tại bãi tắm cát trắng mịn hoang sơ, tham gia tiệc khiêu vũ trên biển, quầy bar cocktail nổi, chèo thuyền kayak và tắm biển tự do ngắm san hô.",
+    "collection_id": "tours-collection-2",
+    "template_id": "tours-9",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "alt": "Tour Đảo Robinson Quán Bar Nổi Tiệc Rượu Vang",
+          "data-alt": "Robinson island beach party in Nha Trang Vietnam with floating bar in turquoise crystal sea, kayaks, paddleboards, happy tourists enjoying summer holiday, vibrant tropical mood."
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "href": "{{contact.zalo}}?text=Tôi%20muốn%20đặt%20Tour%20Đảo%20Robinson%20620k"
+        },
+        "label": "https://zalo.me/0846477222?text=Tôi%20muốn%20đặt%20Tour%20Đảo%20Robinson%20620k"
+      },
+      "field-003": {
+        "kind": "text",
+        "value": "\n              Tiệc Bar nổi trên biển\n            ",
+        "label": "Tiệc Bar nổi trên biển"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": " Đảo Robinson\n              ",
+        "label": "Đảo Robinson"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": "\n                4.9 (1.1k)\n              ",
+        "label": "4.9 (1.1k)"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "Giá trọn gói",
+        "label": "Giá trọn gói"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "Đặt ngay",
+        "label": "Đặt ngay"
+      }
+    }
+  },
+  {
+    "id": "home-1",
+    "type": "combo",
+    "title": "Combo 4N3Đ Phú Quốc Resort 5 Sao",
+    "price": 4190000,
+    "image": "/images/8fedf6a0b98bca19.jpg",
+    "location": "Nha Trang, Khánh Hòa",
+    "rating": 5,
+    "description": "Nghỉ dưỡng 03 đêm tại resort 4-5 sao sang trọng sát biển + vé máy bay khứ hồi + tour lặn ngắm san hô.",
+    "collection_id": "home-collection-1",
+    "template_id": "home-1",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "data-alt": "Luxury beachfront five star resort in Phu Quoc Vietnam with infinity swimming pool overlooking emerald ocean waters during clear day"
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "href": "#"
+        },
+        "label": "#"
+      },
+      "field-003": {
+        "kind": "text",
+        "value": "Trọn Gói All-In-One",
+        "label": "Trọn Gói All-In-One"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "4 ngày 3 đêm",
+        "label": "4 ngày 3 đêm"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": " Khởi hành hằng ngày\n                ",
+        "label": "Khởi hành hằng ngày"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "Chỉ từ",
+        "label": "Chỉ từ"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "\n                  Đặt combo\n                ",
+        "label": "Đặt combo"
+      }
+    },
+    "original_price": 5490000
+  },
+  {
+    "id": "home-2",
+    "type": "combo",
+    "title": "Combo 3N2Đ Phú Quốc Bãi Dài",
+    "price": 2990000,
+    "image": "/images/87e6467ac15e2eb9.jpg",
+    "location": "Nha Trang, Khánh Hòa",
+    "rating": 5,
+    "description": "Nghỉ dưỡng resort 4-5 sao sát biển với hồ bơi vô cực ngắm hoàng hôn + vé cáp treo Hòn Thơm.",
+    "collection_id": "home-collection-1",
+    "template_id": "home-2",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "data-alt": "Stunning ocean sunset infinity pool at a luxury island resort in Phu Quoc with lounge chairs and tropical palms"
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "href": "#"
+        },
+        "label": "#"
+      },
+      "field-003": {
+        "kind": "text",
+        "value": "Combo Siêu Hot",
+        "label": "Combo Siêu Hot"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "3 ngày 2 đêm",
+        "label": "3 ngày 2 đêm"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": " Khởi hành hằng ngày\n                ",
+        "label": "Khởi hành hằng ngày"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "Chỉ từ",
+        "label": "Chỉ từ"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "\n                  Đặt combo\n                ",
+        "label": "Đặt combo"
+      }
+    },
+    "original_price": 3990000
+  },
+  {
+    "id": "home-3",
+    "type": "combo",
+    "title": "Combo 4N3Đ Nha Trang Biển Xanh",
+    "price": 3690000,
+    "image": "/images/25ba7392800717e8.jpg",
+    "location": "Nha Trang, Khánh Hòa",
+    "rating": 5,
+    "description": "03 đêm khách sạn 4-5 sao trung tâm phố biển Nha Trang + Tour cano cao tốc 3 đảo VIP + tắm bùn Hòn Tằm.",
+    "collection_id": "home-collection-1",
+    "template_id": "home-3",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "data-alt": "Nha Trang beachfront city view hotel with infinity pool overlooking Tran Phu boulevard and pristine ocean bay"
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "href": "#"
+        },
+        "label": "#"
+      },
+      "field-003": {
+        "kind": "text",
+        "value": "Bán chạy nhất",
+        "label": "Bán chạy nhất"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "4 ngày 3 đêm",
+        "label": "4 ngày 3 đêm"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": " Khởi hành hằng ngày\n                ",
+        "label": "Khởi hành hằng ngày"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "Chỉ từ",
+        "label": "Chỉ từ"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "\n                  Đặt combo\n                ",
+        "label": "Đặt combo"
+      }
+    },
+    "original_price": 4890000
+  },
+  {
+    "id": "home-4",
+    "type": "hotel",
+    "title": "Khách sạn Empyrean Nha Trang",
+    "price": 1091000,
+    "image": "/images/7a64ee191cb1ce0b.jpg",
+    "location": "02 Nguyễn Thị Minh Khai, Lộc Thọ, Nha Trang",
+    "rating": 4.8,
+    "description": "Tiết kiệm 20% favorite star 4.8 Còn 2 phòng Khách sạn Empyrean Nha Trang location_on 02 Nguyễn Thị Minh Khai, Lộc Thọ, Nha Trang pool Hồ bơi vô cực view trọn vịnh Nha Trang explore Đối diện Quảng trường 2/4 trung tâm beach_access Sát biển Trần Phú & Chợ đêm Hạn ưu đãi: 23:59, 30/05/2026 1.650.000đ 1.091.000đ /đêm Đặt phòng",
+    "collection_id": "home-collection-2",
+    "template_id": "home-4",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "data-alt": "Empyrean Hotel Nha Trang high rise luxury building facing ocean square 2-4 and Tran Phu beach with rooftop infinity pool"
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "href": "#"
+        },
+        "label": "#"
+      },
+      "field-003": {
+        "kind": "text",
+        "value": "Tiết kiệm 20%",
+        "label": "Tiết kiệm 20%"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "Còn 2 phòng",
+        "label": "Còn 2 phòng"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": "Hồ bơi vô cực view trọn vịnh Nha Trang",
+        "label": "Hồ bơi vô cực view trọn vịnh Nha Trang"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "Đối diện Quảng trường 2/4 trung tâm",
+        "label": "Đối diện Quảng trường 2/4 trung tâm"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "Sát biển Trần Phú & Chợ đêm",
+        "label": "Sát biển Trần Phú & Chợ đêm"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "Hạn ưu đãi:",
+        "label": "Hạn ưu đãi:"
+      },
+      "field-009": {
+        "kind": "text",
+        "value": "23:59, 30/05/2026",
+        "label": "23:59, 30/05/2026"
+      },
+      "field-010": {
+        "kind": "text",
+        "value": "/đêm",
+        "label": "/đêm"
+      },
+      "field-011": {
+        "kind": "text",
+        "value": "\n                Đặt phòng\n              ",
+        "label": "Đặt phòng"
+      }
+    },
+    "original_price": 1650000
+  },
+  {
+    "id": "home-5",
+    "type": "hotel",
+    "title": "Khu nghỉ dưỡng Movenpick Cam Ranh",
+    "price": 2969000,
+    "image": "/images/6344fd703c86d5f9.jpg",
+    "location": "Bãi Dài, Cam Hải Đông, Cam Lâm, Khánh Hòa",
+    "rating": 4.9,
+    "description": "Tiết kiệm 24% favorite star 4.9 Miễn phí hủy Khu nghỉ dưỡng Movenpick Cam Ranh location_on Bãi Dài, Cam Hải Đông, Cam Lâm, Khánh Hòa icecream Chocolate Hour Thụy Sĩ miễn phí mỗi ngày water_drop Công viên nước Water Park mạo hiểm cottage Làng Thụy Sĩ giải trí sầm uất (Swiss Village) Hạn ưu đãi: 23:59, 31/05/2026 3.950.000đ 2.969.000đ /đêm Đặt phòng",
+    "collection_id": "home-collection-2",
+    "template_id": "home-5",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "data-alt": "Movenpick Resort Cam Ranh five star luxury property with swiss architecture, vast water park, turquoise pool and beachfront villas"
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "href": "#"
+        },
+        "label": "#"
+      },
+      "field-003": {
+        "kind": "text",
+        "value": "Tiết kiệm 24%",
+        "label": "Tiết kiệm 24%"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "Miễn phí hủy",
+        "label": "Miễn phí hủy"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": "Chocolate Hour Thụy Sĩ miễn phí mỗi ngày",
+        "label": "Chocolate Hour Thụy Sĩ miễn phí mỗi ngày"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "Công viên nước Water Park mạo hiểm",
+        "label": "Công viên nước Water Park mạo hiểm"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "Làng Thụy Sĩ giải trí sầm uất (Swiss Village)",
+        "label": "Làng Thụy Sĩ giải trí sầm uất (Swiss Village)"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "Hạn ưu đãi:",
+        "label": "Hạn ưu đãi:"
+      },
+      "field-009": {
+        "kind": "text",
+        "value": "23:59, 31/05/2026",
+        "label": "23:59, 31/05/2026"
+      },
+      "field-010": {
+        "kind": "text",
+        "value": "/đêm",
+        "label": "/đêm"
+      },
+      "field-011": {
+        "kind": "text",
+        "value": "\n                Đặt phòng\n              ",
+        "label": "Đặt phòng"
+      }
+    },
+    "original_price": 3950000
+  },
+  {
+    "id": "home-6",
+    "type": "hotel",
+    "title": "Khu nghỉ dưỡng ALMA Cam Ranh",
+    "price": 3309500,
+    "image": "/images/1af8695d2714c023.jpg",
+    "location": "Bắc bán đảo Cam Ranh, Cam Lâm, Khánh Hòa",
+    "rating": 4.9,
+    "description": "Tiết kiệm 18% favorite star 4.9 Gần biển Bãi Dài Khu nghỉ dưỡng ALMA Cam Ranh location_on Bắc bán đảo Cam Ranh, Cam Lâm, Khánh Hòa surfing Splash Water Park rộng 6.000m² pool Hệ thống 12 hồ bơi vô cực tràn biển theaters Rạp chiếu phim Alma Cinema miễn phí Hạn ưu đãi: 23:59, 02/06/2026 4.600.000đ 3.309.500đ /đêm Đặt phòng",
+    "collection_id": "home-collection-2",
+    "template_id": "home-6",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "data-alt": "ALMA Resort Cam Ranh wide multi tiered swimming pool cascade leading straight to emerald ocean beach with modern architectural pavilions"
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "href": "#"
+        },
+        "label": "#"
+      },
+      "field-003": {
+        "kind": "text",
+        "value": "Tiết kiệm 18%",
+        "label": "Tiết kiệm 18%"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "Gần biển Bãi Dài",
+        "label": "Gần biển Bãi Dài"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": "Splash Water Park rộng 6.000m²",
+        "label": "Splash Water Park rộng 6.000m²"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "Hệ thống 12 hồ bơi vô cực tràn biển",
+        "label": "Hệ thống 12 hồ bơi vô cực tràn biển"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "Rạp chiếu phim Alma Cinema miễn phí",
+        "label": "Rạp chiếu phim Alma Cinema miễn phí"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "Hạn ưu đãi:",
+        "label": "Hạn ưu đãi:"
+      },
+      "field-009": {
+        "kind": "text",
+        "value": "23:59, 02/06/2026",
+        "label": "23:59, 02/06/2026"
+      },
+      "field-010": {
+        "kind": "text",
+        "value": "/đêm",
+        "label": "/đêm"
+      },
+      "field-011": {
+        "kind": "text",
+        "value": "\n                Đặt phòng\n              ",
+        "label": "Đặt phòng"
+      }
+    },
+    "original_price": 4600000
+  },
+  {
+    "id": "home-7",
+    "type": "hotel",
+    "title": "Khu nghỉ dưỡng Fusion Cam Ranh",
+    "price": 3684000,
+    "image": "/images/4831ff3e9df35ee2.jpg",
+    "location": "Nguyễn Tất Thành, Bãi Dài, Cam Ranh",
+    "rating": 4.9,
+    "description": "Tiết kiệm 22% favorite star 4.9 Bao gồm Spa Khu nghỉ dưỡng Fusion Cam Ranh location_on Nguyễn Tất Thành, Bãi Dài, Cam Ranh spa Miễn phí liệu trình Spa trọn gói hàng ngày restaurant Bữa sáng mọi lúc mọi nơi độc quyền villa Villa hồ bơi riêng biệt lập hướng biển Hạn ưu đãi: 23:59, 05/06/2026 4.850.000đ 3.684.000đ /đêm Đặt phòng",
+    "collection_id": "home-collection-2",
+    "template_id": "home-7",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "data-alt": "Fusion Resort Cam Ranh all spa inclusive beachfront villa with private plunge pool set atop coastal sand dunes"
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "href": "#"
+        },
+        "label": "#"
+      },
+      "field-003": {
+        "kind": "text",
+        "value": "Tiết kiệm 22%",
+        "label": "Tiết kiệm 22%"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "Bao gồm Spa",
+        "label": "Bao gồm Spa"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": "Miễn phí liệu trình Spa trọn gói hàng ngày",
+        "label": "Miễn phí liệu trình Spa trọn gói hàng ngày"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "Bữa sáng mọi lúc mọi nơi độc quyền",
+        "label": "Bữa sáng mọi lúc mọi nơi độc quyền"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "Villa hồ bơi riêng biệt lập hướng biển",
+        "label": "Villa hồ bơi riêng biệt lập hướng biển"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "Hạn ưu đãi:",
+        "label": "Hạn ưu đãi:"
+      },
+      "field-009": {
+        "kind": "text",
+        "value": "23:59, 05/06/2026",
+        "label": "23:59, 05/06/2026"
+      },
+      "field-010": {
+        "kind": "text",
+        "value": "/đêm",
+        "label": "/đêm"
+      },
+      "field-011": {
+        "kind": "text",
+        "value": "\n                Đặt phòng\n              ",
+        "label": "Đặt phòng"
+      }
+    },
+    "original_price": 4850000
+  },
+  {
+    "id": "home-8",
+    "type": "hotel",
+    "title": "Khu nghỉ dưỡng Duyên Hà Cam Ranh",
+    "price": 2499000,
+    "image": "/images/c28f12d1178339bb.jpg",
+    "location": "Bãi Dài, Cam Hải Đông, Cam Lâm",
+    "rating": 4.9,
+    "description": "Tiết kiệm 20% favorite star 4.9 Còn 2 phòng Khu nghỉ dưỡng Duyên Hà Cam Ranh location_on Bãi Dài, Cam Hải Đông, Cam Lâm beach_access Bãi biển riêng cát trắng Bãi Dài pool Hồ bơi ngoài trời phong cách nhiệt đới dining 06 nhà hàng & quầy bar Á - Âu thượng hạng Hạn ưu đãi: 23:59, 30/05/2026 3.300.000đ 2.499.000đ /đêm Đặt phòng",
+    "collection_id": "home-collection-2",
+    "template_id": "home-8",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "data-alt": "Duyen Ha Resort Cam Ranh tropical landscaped gardens expansive lagoon swimming pool and elegant white architecture"
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "href": "#"
+        },
+        "label": "#"
+      },
+      "field-003": {
+        "kind": "text",
+        "value": "Tiết kiệm 20%",
+        "label": "Tiết kiệm 20%"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "Còn 2 phòng",
+        "label": "Còn 2 phòng"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": "Bãi biển riêng cát trắng Bãi Dài",
+        "label": "Bãi biển riêng cát trắng Bãi Dài"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "Hồ bơi ngoài trời phong cách nhiệt đới",
+        "label": "Hồ bơi ngoài trời phong cách nhiệt đới"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "06 nhà hàng & quầy bar Á - Âu thượng hạng",
+        "label": "06 nhà hàng & quầy bar Á - Âu thượng hạng"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "Hạn ưu đãi:",
+        "label": "Hạn ưu đãi:"
+      },
+      "field-009": {
+        "kind": "text",
+        "value": "23:59, 30/05/2026",
+        "label": "23:59, 30/05/2026"
+      },
+      "field-010": {
+        "kind": "text",
+        "value": "/đêm",
+        "label": "/đêm"
+      },
+      "field-011": {
+        "kind": "text",
+        "value": "\n                Đặt phòng\n              ",
+        "label": "Đặt phòng"
+      }
+    },
+    "original_price": 3300000
+  },
+  {
+    "id": "home-9",
+    "type": "hotel",
+    "title": "Khu nghỉ dưỡng CostaBella Nha Trang",
+    "price": 1810000,
+    "image": "/images/256701ff4d2ceb31.jpg",
+    "location": "Phước Hạ, Phước Đồng, Nha Trang",
+    "rating": 4.8,
+    "description": "Tiết kiệm 24% favorite star 4.8 Miễn phí hủy Khu nghỉ dưỡng CostaBella Nha Trang location_on Phước Hạ, Phước Đồng, Nha Trang beach_access Bãi biển riêng tư tĩnh lặng qr_code_2 Công viên nước Aqua Park giải trí pool Hồ bơi ngoài trời view toàn cảnh núi Hạn ưu đãi: 23:59, 31/05/2026 2.450.000đ 1.810.000đ /đêm Đặt phòng",
+    "collection_id": "home-collection-2",
+    "template_id": "home-9",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "data-alt": "CostaBella Resort Nha Trang beachfront retreat surrounded by lush green hills overlooking tranquil sea bay with water slides"
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "href": "#"
+        },
+        "label": "#"
+      },
+      "field-003": {
+        "kind": "text",
+        "value": "Tiết kiệm 24%",
+        "label": "Tiết kiệm 24%"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "Miễn phí hủy",
+        "label": "Miễn phí hủy"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": "Bãi biển riêng tư tĩnh lặng",
+        "label": "Bãi biển riêng tư tĩnh lặng"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "Công viên nước Aqua Park giải trí",
+        "label": "Công viên nước Aqua Park giải trí"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "Hồ bơi ngoài trời view toàn cảnh núi",
+        "label": "Hồ bơi ngoài trời view toàn cảnh núi"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "Hạn ưu đãi:",
+        "label": "Hạn ưu đãi:"
+      },
+      "field-009": {
+        "kind": "text",
+        "value": "23:59, 31/05/2026",
+        "label": "23:59, 31/05/2026"
+      },
+      "field-010": {
+        "kind": "text",
+        "value": "/đêm",
+        "label": "/đêm"
+      },
+      "field-011": {
+        "kind": "text",
+        "value": "\n                Đặt phòng\n              ",
+        "label": "Đặt phòng"
+      }
+    },
+    "original_price": 2450000
+  },
+  {
+    "id": "home-10",
+    "type": "hotel",
+    "title": "Khu nghỉ dưỡng Swandor Cam Ranh",
+    "price": 2916000,
+    "image": "/images/b96c0145908e489e.jpg",
+    "location": "Nguyễn Tất Thành, Bãi Dài, Cam Lâm",
+    "rating": 4.9,
+    "description": "Tiết kiệm 18% favorite star 4.9 Gần biển Bãi Dài Khu nghỉ dưỡng Swandor Cam Ranh location_on Nguyễn Tất Thành, Bãi Dài, Cam Lâm beach_access Sát biển Bãi Dài nguyên sơ tuyệt đẹp restaurant_menu Ultra All-Inclusive trọn gói 24h ẩm thực pool Hệ thống hồ bơi ngoài trời quy mô lớn Hạn ưu đãi: 23:59, 02/06/2026 4.200.000đ 2.916.000đ /đêm Đặt phòng",
+    "collection_id": "home-collection-2",
+    "template_id": "home-10",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "data-alt": "Swandor Hotels Resorts Cam Ranh all inclusive beachfront resort swimming pools, umbrellas, and direct beach access"
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "href": "#"
+        },
+        "label": "#"
+      },
+      "field-003": {
+        "kind": "text",
+        "value": "Tiết kiệm 18%",
+        "label": "Tiết kiệm 18%"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "Gần biển Bãi Dài",
+        "label": "Gần biển Bãi Dài"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": "Sát biển Bãi Dài nguyên sơ tuyệt đẹp",
+        "label": "Sát biển Bãi Dài nguyên sơ tuyệt đẹp"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "Ultra All-Inclusive trọn gói 24h ẩm thực",
+        "label": "Ultra All-Inclusive trọn gói 24h ẩm thực"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "Hệ thống hồ bơi ngoài trời quy mô lớn",
+        "label": "Hệ thống hồ bơi ngoài trời quy mô lớn"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "Hạn ưu đãi:",
+        "label": "Hạn ưu đãi:"
+      },
+      "field-009": {
+        "kind": "text",
+        "value": "23:59, 02/06/2026",
+        "label": "23:59, 02/06/2026"
+      },
+      "field-010": {
+        "kind": "text",
+        "value": "/đêm",
+        "label": "/đêm"
+      },
+      "field-011": {
+        "kind": "text",
+        "value": "\n                Đặt phòng\n              ",
+        "label": "Đặt phòng"
+      }
+    },
+    "original_price": 4200000
+  },
+  {
+    "id": "home-11",
+    "type": "hotel",
+    "title": "Khách sạn Diamond Bay Nha Trang",
+    "price": 1148000,
+    "image": "/images/a8a7a548b5cf3776.jpg",
+    "location": "20 Trần Phú, Lộc Thọ, Nha Trang",
+    "rating": 4.9,
+    "description": "Tiết kiệm 24% favorite star 4.9 Miễn phí hủy Khách sạn Diamond Bay Nha Trang location_on 20 Trần Phú, Lộc Thọ, Nha Trang visibility View biển Trần Phú trực diện ngoạn mục pool Hồ bơi vô cực ngoài trời tầng thượng free_breakfast Ăn sáng buffet phong phú Á - Âu Hạn ưu đãi: 23:59, 31/05/2026 1.650.000đ 1.148.000đ /đêm Đặt phòng",
+    "collection_id": "home-collection-2",
+    "template_id": "home-11",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "data-alt": "Diamond Bay Hotel Nha Trang seafront location on Tran Phu street with views of Nha Trang bay and contemporary pool lounge"
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "href": "#"
+        },
+        "label": "#"
+      },
+      "field-003": {
+        "kind": "text",
+        "value": "Tiết kiệm 24%",
+        "label": "Tiết kiệm 24%"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "Miễn phí hủy",
+        "label": "Miễn phí hủy"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": "View biển Trần Phú trực diện ngoạn mục",
+        "label": "View biển Trần Phú trực diện ngoạn mục"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "Hồ bơi vô cực ngoài trời tầng thượng",
+        "label": "Hồ bơi vô cực ngoài trời tầng thượng"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "Ăn sáng buffet phong phú Á - Âu",
+        "label": "Ăn sáng buffet phong phú Á - Âu"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "Hạn ưu đãi:",
+        "label": "Hạn ưu đãi:"
+      },
+      "field-009": {
+        "kind": "text",
+        "value": "23:59, 31/05/2026",
+        "label": "23:59, 31/05/2026"
+      },
+      "field-010": {
+        "kind": "text",
+        "value": "/đêm",
+        "label": "/đêm"
+      },
+      "field-011": {
+        "kind": "text",
+        "value": "\n                Đặt phòng\n              ",
+        "label": "Đặt phòng"
+      }
+    },
+    "original_price": 1650000
+  },
+  {
+    "id": "home-12",
+    "type": "tour",
+    "title": "Tour Du Thuyền Ngắm Hoàng Hôn Vịnh Nha Trang & Tiệc Tối BBQ",
+    "price": 1050000,
+    "image": "/images/835b080064c05ed8.jpg",
+    "location": "Nha Trang, Khánh Hòa",
+    "rating": 4.9,
+    "description": "Lênh đênh ngắm hoàng hôn vịnh biển Nha Trang thơ mộng, thưởng thức buffet hải sản cao cấp, cocktail và hòa mình cùng ban nhạc sống du dương.",
+    "collection_id": "home-collection-3",
+    "template_id": "home-12",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "data-alt": "Luxury cruise yacht sailing across Nha Trang bay during glowing golden sunset with guests enjoying champagne dinner on deck"
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "href": "#"
+        },
+        "label": "#"
+      },
+      "field-003": {
+        "kind": "text",
+        "value": "Trải nghiệm 5 sao",
+        "label": "Trải nghiệm 5 sao"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "Khởi hành hằng ngày",
+        "label": "Khởi hành hằng ngày"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": "•",
+        "label": "•"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "1.2k+ lượt đặt",
+        "label": "1.2k+ lượt đặt"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "•",
+        "label": "•"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "Trong ngày",
+        "label": "Trong ngày"
+      },
+      "field-009": {
+        "kind": "text",
+        "value": "Đón trả tận nơi tại trung tâm TP. Nha Trang",
+        "label": "Đón trả tận nơi tại trung tâm TP. Nha Trang"
+      },
+      "field-010": {
+        "kind": "text",
+        "value": "Giá trọn gói từ",
+        "label": "Giá trọn gói từ"
+      },
+      "field-011": {
+        "kind": "text",
+        "value": "\n              Đặt tour\n            ",
+        "label": "Đặt tour"
+      }
+    },
+    "original_price": 1250000
+  },
+  {
+    "id": "home-13",
+    "type": "tour",
+    "title": "Tour 3 Đảo Nha Trang VIP: Hòn Mun – Làng Chài – Hòn Tằm",
+    "price": 650000,
+    "image": "/images/bffc15dd15c935f8.jpg",
+    "location": "Nha Trang, Khánh Hòa",
+    "rating": 4.9,
+    "description": "Cano cao tốc đời mới, lặn ngắm san hô tại khu bảo tồn Hòn Mun, thưởng thức hải sản Làng Chài và tắm bùn khoáng nóng trọn gói tại Hòn Tằm resort.",
+    "collection_id": "home-collection-3",
+    "template_id": "home-13",
+    "content": {
+      "field-001": {
+        "kind": "attributes",
+        "value": {
+          "data-alt": "Tourists scuba diving and snorkeling with colorful tropical fish and vibrant coral reef in Hon Mun marine protected area Nha Trang"
+        },
+        "label": "Ảnh dịch vụ"
+      },
+      "field-002": {
+        "kind": "attributes",
+        "value": {
+          "href": "#"
+        },
+        "label": "#"
+      },
+      "field-003": {
+        "kind": "text",
+        "value": "Bán chạy nhất",
+        "label": "Bán chạy nhất"
+      },
+      "field-004": {
+        "kind": "text",
+        "value": "Khởi hành hằng ngày",
+        "label": "Khởi hành hằng ngày"
+      },
+      "field-005": {
+        "kind": "text",
+        "value": "•",
+        "label": "•"
+      },
+      "field-006": {
+        "kind": "text",
+        "value": "1.2k+ lượt đặt",
+        "label": "1.2k+ lượt đặt"
+      },
+      "field-007": {
+        "kind": "text",
+        "value": "•",
+        "label": "•"
+      },
+      "field-008": {
+        "kind": "text",
+        "value": "Trong ngày",
+        "label": "Trong ngày"
+      },
+      "field-009": {
+        "kind": "text",
+        "value": "Đón tại khách sạn trung tâm Nha Trang",
+        "label": "Đón tại khách sạn trung tâm Nha Trang"
+      },
+      "field-010": {
+        "kind": "text",
+        "value": "Giá trọn gói từ",
+        "label": "Giá trọn gói từ"
+      },
+      "field-011": {
+        "kind": "text",
+        "value": "\n              Đặt tour\n            ",
+        "label": "Đặt tour"
+      }
+    },
+    "original_price": 750000
+  }
+]

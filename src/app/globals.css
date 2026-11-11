@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  --site-padding-x: 1rem;
+}
+@media (min-width: 640px) {
+  :root {
+    --site-padding-x: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    --site-padding-x: 3rem;
+  }
+}
+@media (min-width: 1280px) {
+  :root {
+    --site-padding-x: 4rem;
+  }
+}
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    overscroll-behavior: none;
+  }
+  main > :first-child {
+    margin-top: 0 !important;
+  }
+  main > :last-child {
+    margin-bottom: 0 !important;
+  }
+}
+::-webkit-scrollbar {
+  display: none;
+}
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+@layer base {
+  .material-symbols-outlined {
+    font-family: "Material Symbols Outlined";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "liga";
+  }
+}
+:focus-visible {
+  outline: 2px solid rgb(var(--color-primary));
+  outline-offset: 3px;
+}
+button,
+a,
+input,
+select {
+  touch-action: manipulation;
+}
+button {
+  cursor: pointer;
+  white-space: nowrap;
+}
+@layer components {
+  .site-container {
+    width: 100%;
+    padding-inline: var(--site-padding-x);
+  }
+  .card-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  }
+  .card-grid-compact {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr));
+  }
+  .card-grid-wide {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr));
+  }
+  .action-link {
+    @apply inline-flex items-center justify-center shrink-0 whitespace-nowrap;
+  }
+  .price-actions a,
+  .price-actions button {
+    @apply shrink-0 whitespace-nowrap;
+  }
+}
+.price-stack [data-sale-price] {
+  white-space: nowrap;
+}
+[data-filter-hidden="true"] {
+  display: none !important;
+}
+@media (max-width: 640px) {
+  h1.text-display {
+    font-size: 32px;
+    line-height: 40px;
+  }
+  header .h-20 {
+    gap: 8px;
+  }
+}
