@@ -25,7 +25,7 @@ export function PriceStack({
             {money(product.original_price)}
           </span>
         )}
-      <div className="price-stack-content">{children}</div>
+      <div>{children}</div>
     </div>
   );
 }

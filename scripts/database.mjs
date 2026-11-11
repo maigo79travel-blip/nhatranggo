@@ -1,13 +1,10 @@
 import fs from "node:fs";
 import pg from "pg";
+import { migrate } from "./lib/migrations.mjs";
 const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 try {
   if (process.argv[2] === "migrate") {
-    for (const file of fs
-      .readdirSync("db")
-      .filter((f) => /^\d.*\.sql$/.test(f))
-      .sort())
-      await db.query(fs.readFileSync("db/" + file, "utf8"));
+    await migrate(db);
     console.log("Migration complete");
   } else if (process.argv[2] === "seed") {
     const client = await db.connect();

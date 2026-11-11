@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Product } from "@/lib/types";
 import { api, inputClass, type Row } from "./api";
@@ -36,6 +36,23 @@ export function ProductEditor({
 }) {
   const [error, setError] = useState("");
   const [tab, setTab] = useState("general");
+  const [references, setReferences] = useState<{
+    destinations: Row[];
+    partners: Row[];
+  }>({ destinations: [], partners: [] });
+  useEffect(() => {
+    let live = true;
+    void Promise.all([api("destinations"), api("partners")])
+      .then(([d, p]) => {
+        if (live) setReferences({ destinations: d.data, partners: p.data });
+      })
+      .catch((e) => {
+        if (live) setError((e as Error).message);
+      });
+    return () => {
+      live = false;
+    };
+  }, []);
   return (
     <form
       className="ad-editor space-y-4"
@@ -79,6 +96,8 @@ export function ProductEditor({
             position: Number(f.get("position")),
             active: f.get("active") === "on",
             content,
+            destination_id: f.get("destination_id") || null,
+            partner_id: f.get("partner_id") || null,
           });
         } catch {
           setError("Thuộc tính bổ sung phải là JSON hợp lệ.");
@@ -162,6 +181,36 @@ export function ProductEditor({
             className="w-48 h-28 rounded-lg object-cover"
           />
         )}
+        <label className="block">
+          Địa phương
+          <select
+            name="destination_id"
+            className="ad-input"
+            defaultValue={product.destination_id || ""}
+          >
+            <option value="">Chưa phân loại</option>
+            {references.destinations.map((d) => (
+              <option key={String(d.id)} value={String(d.id)}>
+                {String(d.name)}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="block">
+          Đối tác cung cấp
+          <select
+            name="partner_id"
+            className="ad-input"
+            defaultValue={product.partner_id || ""}
+          >
+            <option value="">Chưa phân công</option>
+            {references.partners.map((d) => (
+              <option key={String(d.id)} value={String(d.id)}>
+                {String(d.name)}
+              </option>
+            ))}
+          </select>
+        </label>
         <Field
           label="Địa điểm"
           name="location"
@@ -260,6 +309,8 @@ export function ContentEditor({
     telephone: "Số điện thoại",
     email: "Email liên hệ",
     zalo: "Liên kết Zalo",
+    whatsapp: "Liên kết WhatsApp",
+    telegram: "Liên kết Telegram",
     description: "Mô tả",
     "aria-label": "Nhãn hỗ trợ truy cập",
     "data-alt": "Mô tả hình ảnh",

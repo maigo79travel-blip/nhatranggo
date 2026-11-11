@@ -4,7 +4,7 @@ export function TransfersFleet() {
   return (
     <section className="w-full py-20 bg-background">
       <div className="site-container">
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center mx-auto mb-14">
           <span className="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">
             <ContentText contentKey="transfers.text-103" />
           </span>

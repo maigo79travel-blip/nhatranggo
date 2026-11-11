@@ -28,7 +28,7 @@ export function ToursFeatured() {
               <ContentText contentKey="tours.text-040" />
             </h2>
           </div>
-          <p className="font-body-md text-body-md text-on-surface-variant max-w-md md:text-right">
+          <p className="font-body-md text-body-md text-on-surface-variant md:text-right">
             <ContentText contentKey="tours.text-041" />
           </p>
         </div>
@@ -58,17 +58,7 @@ export function ToursFeatured() {
                     <ContentText contentKey="field-004" />
                   </span>
                 </div>
-                <ContentElement
-                  contentKey="field-002"
-                  tag="button"
 
-                  className="absolute top-4 right-4 w-9 h-9 rounded-full bg-surface-card/85 backdrop-blur-md flex items-center justify-center text-on-surface hover:text-sale-crimson transition-colors shadow-sm"
-                  type="button"
-                >
-                  <span className="material-symbols-outlined text-[18px]">
-                    {"favorite"}
-                  </span>
-                </ContentElement>
                 <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-on-primary text-body-sm font-body-sm">
                   <span className="bg-inverse-surface/80 backdrop-blur-md px-2.5 py-1 rounded-lg flex items-center gap-1">
                     <span className="material-symbols-outlined text-[14px]">
@@ -211,17 +201,7 @@ export function ToursFeatured() {
                     <ContentText contentKey="field-004" />
                   </span>
                 </div>
-                <ContentElement
-                  contentKey="field-002"
-                  tag="button"
 
-                  className="absolute top-4 right-4 w-9 h-9 rounded-full bg-surface-card/85 backdrop-blur-md flex items-center justify-center text-on-surface hover:text-sale-crimson transition-colors shadow-sm"
-                  type="button"
-                >
-                  <span className="material-symbols-outlined text-[18px]">
-                    {"favorite"}
-                  </span>
-                </ContentElement>
                 <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-on-primary text-body-sm font-body-sm">
                   <span className="bg-inverse-surface/80 backdrop-blur-md px-2.5 py-1 rounded-lg flex items-center gap-1">
                     <span className="material-symbols-outlined text-[14px]">
@@ -364,17 +344,7 @@ export function ToursFeatured() {
                     <ContentText contentKey="field-004" />
                   </span>
                 </div>
-                <ContentElement
-                  contentKey="field-002"
-                  tag="button"
 
-                  className="absolute top-4 right-4 w-9 h-9 rounded-full bg-surface-card/85 backdrop-blur-md flex items-center justify-center text-on-surface hover:text-sale-crimson transition-colors shadow-sm"
-                  type="button"
-                >
-                  <span className="material-symbols-outlined text-[18px]">
-                    {"favorite"}
-                  </span>
-                </ContentElement>
                 <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-on-primary text-body-sm font-body-sm">
                   <span className="bg-inverse-surface/80 backdrop-blur-md px-2.5 py-1 rounded-lg flex items-center gap-1">
                     <span className="material-symbols-outlined text-[14px]">

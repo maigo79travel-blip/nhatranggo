@@ -1,19 +1,16 @@
 "use client";
 import { createContext, useContext } from "react";
+import type { BookingDraft } from "@/modules/travel/search";
 import type { Product } from "@/lib/types";
 
-export type CatalogContextType = {
+type CatalogContextType = {
   products: Product[];
-  open: (p: Product) => void;
-  favorites: string[];
-  toggle: (id: string) => void;
+  open: (p: Product, initialValues?: BookingDraft) => void;
 };
 
 export const CatalogContext = createContext<CatalogContextType>({
   products: [],
   open: () => {},
-  favorites: [],
-  toggle: () => {},
 });
 
 export const useCatalog = () => useContext(CatalogContext);

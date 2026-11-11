@@ -1,5 +1,10 @@
 import { ContentText, ContentElement } from "@/components/content";
-export function SiteFooter() {
+import type { ReactNode } from "react";
+export function SiteFooter({
+  informationLinks,
+}: {
+  informationLinks: ReactNode;
+}) {
   return (
     <footer
       className="w-full bg-surface-container-low text-on-surface pt-16 pb-10 shadow-footer"
@@ -140,66 +145,7 @@ export function SiteFooter() {
               <ContentText contentKey="footer.text-038" />
             </h4>
             <ul className="flex flex-col gap-2.5 font-body-md text-body-md text-on-surface-variant">
-              <li>
-                <ContentElement
-                  contentKey="footer.attributes-010"
-                  tag="a"
-                  className="hover:text-primary transition-colors"
-                  data-path="chinh-sach-thanh-toan"
-                >
-                  <ContentText contentKey="footer.text-039" />
-                </ContentElement>
-              </li>
-              <li>
-                <ContentElement
-                  contentKey="footer.attributes-011"
-                  tag="a"
-                  className="hover:text-primary transition-colors"
-                  data-path="chinh-sach-hoan-huy"
-                >
-                  <ContentText contentKey="footer.text-040" />
-                </ContentElement>
-              </li>
-              <li>
-                <ContentElement
-                  contentKey="footer.attributes-012"
-                  tag="a"
-                  className="hover:text-primary transition-colors"
-                  data-path="chinh-sach-bao-mat"
-                >
-                  <ContentText contentKey="footer.text-041" />
-                </ContentElement>
-              </li>
-              <li>
-                <ContentElement
-                  contentKey="footer.attributes-013"
-                  tag="a"
-                  className="hover:text-primary transition-colors"
-                  data-path="dieu-khoan-su-dung"
-                >
-                  <ContentText contentKey="footer.text-042" />
-                </ContentElement>
-              </li>
-              <li>
-                <ContentElement
-                  contentKey="footer.attributes-014"
-                  tag="a"
-                  className="hover:text-primary transition-colors"
-                  data-path="quy-dinh-chung"
-                >
-                  <ContentText contentKey="footer.text-043" />
-                </ContentElement>
-              </li>
-              <li>
-                <ContentElement
-                  contentKey="footer.attributes-015"
-                  tag="a"
-                  className="hover:text-primary transition-colors"
-                  data-path="giai-quyet-khieu-nai"
-                >
-                  <ContentText contentKey="footer.text-044" />
-                </ContentElement>
-              </li>
+              {informationLinks}
             </ul>
           </div>
           <div className="lg:col-span-3 flex flex-col gap-4">
@@ -218,26 +164,6 @@ export function SiteFooter() {
               </div>
               <div className="bg-surface-container-lowest p-2 rounded-lg flex items-center justify-center text-label-sm font-label-sm text-on-surface shadow-sm">
                 <ContentText contentKey="footer.text-049" />
-              </div>
-            </div>
-            <div className="mt-2">
-              <h5 className="font-label-lg text-label-lg text-on-surface mb-2">
-                <ContentText contentKey="footer.text-050" />
-              </h5>
-              <div className="flex items-center gap-2">
-                <ContentElement
-                  contentKey="footer.attributes-016"
-                  tag="input"
-                  className="w-full px-3 py-2 text-body-sm font-body-sm rounded-lg bg-surface-container-lowest text-on-surface outline-none focus:ring-2 focus:ring-primary shadow-sm"
-
-                  type="email"
-                />
-                <button
-                  className="px-4 py-2 bg-primary hover:bg-ocean-deep text-on-primary text-label-sm font-label-sm rounded-lg shadow-sm shrink-0 transition-colors"
-                  type="button"
-                >
-                  <ContentText contentKey="footer.text-051" />
-                </button>
               </div>
             </div>
           </div>
@@ -279,9 +205,10 @@ export function SiteFooter() {
 }
 export function ContactButtons() {
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <div className="site-contact-shortcuts flex justify-center gap-3 bg-surface-container-lowest p-4 lg:fixed lg:bottom-6 lg:right-6 lg:z-50 lg:flex-col lg:items-end lg:bg-transparent lg:p-0">
       <ContentElement
         contentKey="footer.attributes-020"
+        aria-label="Tư vấn qua Zalo"
         tag="a"
         className="w-12 h-12 rounded-full bg-primary text-on-primary shadow-xl hover:shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 group"
 
@@ -292,6 +219,7 @@ export function ContactButtons() {
       </ContentElement>
       <ContentElement
         contentKey="footer.attributes-021"
+        aria-label="Gọi hotline"
         tag="a"
         className="w-12 h-12 rounded-full bg-sale-crimson text-on-error shadow-xl hover:shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 animate-pulse"
       >
@@ -299,6 +227,7 @@ export function ContactButtons() {
       </ContentElement>
       <ContentElement
         contentKey="footer.attributes-022"
+        aria-label="Đến phần liên hệ"
         tag="a"
         className="w-12 h-12 rounded-full bg-secondary text-on-secondary shadow-xl hover:shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110"
         data-path="lien-he"

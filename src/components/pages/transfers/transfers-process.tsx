@@ -1,4 +1,4 @@
-import { ContentText, ContentElement } from "@/components/content";
+import { ContentText } from "@/components/content";
 
 export function TransfersProcess() {
   return (
@@ -15,7 +15,8 @@ export function TransfersProcess() {
         <div className="flex flex-col gap-4" id="faq-accordion">
           <div className="faq-item bg-surface-container-lowest rounded-2xl shadow-sm overflow-hidden transition-all">
             <button
-              className="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4"
+              aria-expanded={true}
+              className="faq-toggle whitespace-normal w-full p-6 text-left flex items-center justify-between gap-4"
               type="button"
             >
               <span className="font-title-md text-title-md text-on-surface">
@@ -36,7 +37,8 @@ export function TransfersProcess() {
 
           <div className="faq-item bg-surface-container-lowest rounded-2xl shadow-sm overflow-hidden transition-all">
             <button
-              className="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4"
+              aria-expanded={true}
+              className="faq-toggle whitespace-normal w-full p-6 text-left flex items-center justify-between gap-4"
               type="button"
             >
               <span className="font-title-md text-title-md text-on-surface">
@@ -56,7 +58,8 @@ export function TransfersProcess() {
 
           <div className="faq-item bg-surface-container-lowest rounded-2xl shadow-sm overflow-hidden transition-all">
             <button
-              className="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4"
+              aria-expanded={true}
+              className="faq-toggle whitespace-normal w-full p-6 text-left flex items-center justify-between gap-4"
               type="button"
             >
               <span className="font-title-md text-title-md text-on-surface">
@@ -77,7 +80,8 @@ export function TransfersProcess() {
 
           <div className="faq-item bg-surface-container-lowest rounded-2xl shadow-sm overflow-hidden transition-all">
             <button
-              className="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4"
+              aria-expanded={true}
+              className="faq-toggle whitespace-normal w-full p-6 text-left flex items-center justify-between gap-4"
               type="button"
             >
               <span className="font-title-md text-title-md text-on-surface">
@@ -94,7 +98,8 @@ export function TransfersProcess() {
 
           <div className="faq-item bg-surface-container-lowest rounded-2xl shadow-sm overflow-hidden transition-all">
             <button
-              className="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4"
+              aria-expanded={true}
+              className="faq-toggle whitespace-normal w-full p-6 text-left flex items-center justify-between gap-4"
               type="button"
             >
               <span className="font-title-md text-title-md text-on-surface">

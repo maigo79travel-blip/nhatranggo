@@ -1,5 +1,4 @@
 export type Row = Record<string, unknown>;
-export type AdminUser = { id: string; username: string };
 export const inputClass = "ad-input";
 export async function api(resource: string, method = "GET", body?: unknown) {
   const response = await fetch("/api/admin/" + resource, {

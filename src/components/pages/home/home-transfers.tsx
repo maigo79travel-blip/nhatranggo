@@ -1,3 +1,4 @@
+import { HomeLink } from "@/modules/home/home-link";
 import { ContentText, ContentElement } from "@/components/content";
 
 export function HomeTransfers() {
@@ -15,12 +16,10 @@ export function HomeTransfers() {
             <ContentText contentKey="home.text-106" />
           </h2>
         </div>
-        <ContentElement
+        <HomeLink
           contentKey="home.attributes-009"
-          tag="a"
           className="text-primary hover:text-ocean-deep font-label-lg text-label-lg flex items-center gap-1 group"
-
-          data-action="details"
+          href="/dich-vu?type=hotel"
         >
           <span>
             <ContentText contentKey="home.text-107" />
@@ -28,16 +27,15 @@ export function HomeTransfers() {
           <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">
             {"arrow_forward"}
           </span>
-        </ContentElement>
+        </HomeLink>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-        <ContentElement
+        <HomeLink
           contentKey="home.attributes-010"
-          tag="a"
           className="relative rounded-3xl overflow-hidden group min-h-[300px] lg:col-span-2 lg:row-span-2 shadow-md hover:shadow-xl transition-all duration-300"
-
-          data-action="details"
+          href="/dich-vu?type=hotel"
+          queryKey="home.text-109"
         >
           <ContentElement
             contentKey="home.attributes-011"
@@ -66,14 +64,13 @@ export function HomeTransfers() {
               </span>
             </div>
           </div>
-        </ContentElement>
+        </HomeLink>
 
-        <ContentElement
+        <HomeLink
           contentKey="home.attributes-012"
-          tag="a"
           className="relative rounded-2xl overflow-hidden group min-h-[220px] shadow-md hover:shadow-xl transition-all duration-300"
-
-          data-action="details"
+          href="/dich-vu?type=hotel"
+          queryKey="home.text-112"
         >
           <ContentElement
             contentKey="home.attributes-013"
@@ -92,14 +89,13 @@ export function HomeTransfers() {
               <ContentText contentKey="home.text-114" />
             </span>
           </div>
-        </ContentElement>
+        </HomeLink>
 
-        <ContentElement
+        <HomeLink
           contentKey="home.attributes-014"
-          tag="a"
           className="relative rounded-2xl overflow-hidden group min-h-[220px] shadow-md hover:shadow-xl transition-all duration-300"
-
-          data-action="details"
+          href="/dich-vu?type=hotel"
+          queryKey="home.text-115"
         >
           <ContentElement
             contentKey="home.attributes-015"
@@ -118,14 +114,13 @@ export function HomeTransfers() {
               <ContentText contentKey="home.text-117" />
             </span>
           </div>
-        </ContentElement>
+        </HomeLink>
 
-        <ContentElement
+        <HomeLink
           contentKey="home.attributes-016"
-          tag="a"
           className="relative rounded-2xl overflow-hidden group min-h-[220px] shadow-md hover:shadow-xl transition-all duration-300"
-
-          data-action="details"
+          href="/dich-vu?type=hotel"
+          queryKey="home.text-118"
         >
           <ContentElement
             contentKey="home.attributes-017"
@@ -144,14 +139,13 @@ export function HomeTransfers() {
               <ContentText contentKey="home.text-120" />
             </span>
           </div>
-        </ContentElement>
+        </HomeLink>
 
-        <ContentElement
+        <HomeLink
           contentKey="home.attributes-018"
-          tag="a"
           className="relative rounded-2xl overflow-hidden group min-h-[220px] shadow-md hover:shadow-xl transition-all duration-300"
-
-          data-action="details"
+          href="/dich-vu?type=hotel"
+          queryKey="home.text-121"
         >
           <ContentElement
             contentKey="home.attributes-019"
@@ -170,14 +164,13 @@ export function HomeTransfers() {
               <ContentText contentKey="home.text-123" />
             </span>
           </div>
-        </ContentElement>
+        </HomeLink>
 
-        <ContentElement
+        <HomeLink
           contentKey="home.attributes-020"
-          tag="a"
           className="relative rounded-2xl overflow-hidden group min-h-[220px] shadow-md hover:shadow-xl transition-all duration-300"
-
-          data-action="details"
+          href="/dich-vu?type=hotel"
+          queryKey="home.text-124"
         >
           <ContentElement
             contentKey="home.attributes-021"
@@ -196,14 +189,13 @@ export function HomeTransfers() {
               <ContentText contentKey="home.text-126" />
             </span>
           </div>
-        </ContentElement>
+        </HomeLink>
 
-        <ContentElement
+        <HomeLink
           contentKey="home.attributes-022"
-          tag="a"
           className="relative rounded-2xl overflow-hidden group min-h-[220px] shadow-md hover:shadow-xl transition-all duration-300"
-
-          data-action="details"
+          href="/dich-vu?type=hotel"
+          queryKey="home.text-127"
         >
           <ContentElement
             contentKey="home.attributes-023"
@@ -222,14 +214,13 @@ export function HomeTransfers() {
               <ContentText contentKey="home.text-129" />
             </span>
           </div>
-        </ContentElement>
+        </HomeLink>
 
-        <ContentElement
+        <HomeLink
           contentKey="home.attributes-024"
-          tag="a"
           className="relative rounded-2xl overflow-hidden group min-h-[220px] shadow-md hover:shadow-xl transition-all duration-300"
-
-          data-action="details"
+          href="/dich-vu?type=hotel"
+          queryKey="home.text-130"
         >
           <ContentElement
             contentKey="home.attributes-025"
@@ -248,14 +239,13 @@ export function HomeTransfers() {
               <ContentText contentKey="home.text-132" />
             </span>
           </div>
-        </ContentElement>
+        </HomeLink>
 
-        <ContentElement
+        <HomeLink
           contentKey="home.attributes-026"
-          tag="a"
           className="relative rounded-2xl overflow-hidden group min-h-[220px] shadow-md hover:shadow-xl transition-all duration-300"
-
-          data-action="details"
+          href="/dich-vu?type=hotel"
+          queryKey="home.text-133"
         >
           <ContentElement
             contentKey="home.attributes-027"
@@ -274,7 +264,7 @@ export function HomeTransfers() {
               <ContentText contentKey="home.text-135" />
             </span>
           </div>
-        </ContentElement>
+        </HomeLink>
       </div>
     </section>
   );

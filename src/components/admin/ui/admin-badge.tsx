@@ -20,7 +20,7 @@ export function Status({ value }: { value: unknown }) {
   return (
     <Badge
       tone={
-        value === "confirmed"
+        value === "confirmed" || value === "completed"
           ? "green"
           : value === "cancelled"
             ? "red"
@@ -29,6 +29,7 @@ export function Status({ value }: { value: unknown }) {
     >
       {{
         confirmed: "Đã xác nhận",
+        completed: "Hoàn tất",
         cancelled: "Đã hủy",
         pending: "Chờ xác nhận",
       }[String(value)] || String(value)}

@@ -1,3 +1,4 @@
+import { HomeLink } from "@/modules/home/home-link";
 import {
   ContentText,
   ContentElement,
@@ -22,12 +23,10 @@ export function HomeTours() {
             <ContentText contentKey="home.text-103" />
           </h2>
         </div>
-        <ContentElement
+        <HomeLink
           contentKey="home.attributes-008"
-          tag="a"
           className="text-primary hover:text-ocean-deep font-label-lg text-label-lg flex items-center gap-1 group"
-
-          data-action="details"
+          href="/tour-hang-ngay"
         >
           <span>
             <ContentText contentKey="home.text-104" />
@@ -35,7 +34,7 @@ export function HomeTours() {
           <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">
             {"arrow_forward"}
           </span>
-        </ContentElement>
+        </HomeLink>
       </div>
 
       <div className="card-grid-wide gap-8">

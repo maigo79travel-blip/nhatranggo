@@ -1,3 +1,4 @@
+import { UntemplatedServices } from "@/modules/travel/untemplated-services";
 import { ToursHero } from "./tours/tours-hero";
 import { ToursFeatured } from "./tours/tours-featured";
 import { ToursDaily } from "./tours/tours-daily";
@@ -10,6 +11,7 @@ export default function ToursPage() {
         <ToursHero />
         <ToursFeatured />
         <ToursDaily />
+        <UntemplatedServices type="tour" />
         <ToursFaq />
       </div>
     </main>

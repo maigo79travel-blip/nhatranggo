@@ -1,3 +1,4 @@
+import { DestinationOptions } from "@/modules/travel/destination-options";
 import { ContentText, ContentElement, FareValue } from "@/components/content";
 
 export function TransfersHero() {
@@ -21,7 +22,7 @@ export function TransfersHero() {
         </div>
 
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
-          <div className="max-w-3xl">
+          <div className="min-w-0">
             <h1 className="font-display text-display text-on-surface tracking-tight leading-tight">
               <ContentText contentKey="transfers.text-027" />
               <span className="text-primary">
@@ -29,9 +30,6 @@ export function TransfersHero() {
               </span>
               <ContentText contentKey="transfers.text-029" />
             </h1>
-            <p className="font-body-lg text-body-lg text-on-surface-variant mt-4 leading-relaxed">
-              <ContentText contentKey="transfers.text-030" />
-            </p>
           </div>
           <div className="flex flex-col sm:flex-row lg:flex-col items-start sm:items-center lg:items-end gap-3 shrink-0">
             <ContentElement
@@ -48,7 +46,7 @@ export function TransfersHero() {
                 <div className="font-label-sm text-label-sm text-outline">
                   <ContentText contentKey="transfers.text-031" />
                 </div>
-                <div className="font-title-lg text-title-lg font-bold text-primary">
+                <div className="font-title-md text-title-md font-bold text-primary">
                   <ContentText contentKey="transfers.text-032" />
                 </div>
               </div>
@@ -72,6 +70,7 @@ export function TransfersHero() {
           <div className="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-border-light/40">
             <div className="flex flex-wrap items-center gap-2">
               <button
+                aria-pressed={true}
                 type="button"
                 data-tab="tab-airport"
                 className="tab-btn px-4 py-2 rounded-full bg-primary text-on-primary font-label-lg text-label-lg shadow-sm transition-all"
@@ -79,6 +78,7 @@ export function TransfersHero() {
                 <ContentText contentKey="transfers.text-034" />
               </button>
               <button
+                aria-pressed={false}
                 type="button"
                 data-tab="tab-intercity"
                 className="tab-btn px-4 py-2 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-lg text-label-lg transition-all"
@@ -86,6 +86,7 @@ export function TransfersHero() {
                 <ContentText contentKey="transfers.text-035" />
               </button>
               <button
+                aria-pressed={false}
                 type="button"
                 data-tab="tab-daily"
                 className="tab-btn px-4 py-2 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-lg text-label-lg transition-all"
@@ -135,23 +136,10 @@ export function TransfersHero() {
                 contentKey="transfers.attributes-004"
                 tag="select"
                 id="pickup-select"
+                defaultValue="CXR"
                 className="w-full bg-transparent font-title-md text-title-md text-on-surface focus:outline-none cursor-pointer"
               >
-                <option value="CXR">
-                  <ContentText contentKey="transfers.text-040" />
-                </option>
-                <option value="NT_CENTER">
-                  <ContentText contentKey="transfers.text-041" />
-                </option>
-                <option value="BAI_DAI">
-                  <ContentText contentKey="transfers.text-042" />
-                </option>
-                <option value="DALAT">
-                  <ContentText contentKey="transfers.text-043" />
-                </option>
-                <option value="OTHER">
-                  <ContentText contentKey="transfers.text-044" />
-                </option>
+                <DestinationOptions />
               </ContentElement>
             </div>
 
@@ -166,26 +154,10 @@ export function TransfersHero() {
                 contentKey="transfers.attributes-005"
                 tag="select"
                 id="dropoff-select"
+                defaultValue="NT_CENTER"
                 className="w-full bg-transparent font-title-md text-title-md text-on-surface focus:outline-none cursor-pointer"
               >
-                <option value="NT_CENTER">
-                  <ContentText contentKey="transfers.text-046" />
-                </option>
-                <option value="BAI_DAI">
-                  <ContentText contentKey="transfers.text-047" />
-                </option>
-                <option value="CXR">
-                  <ContentText contentKey="transfers.text-048" />
-                </option>
-                <option value="DOC_LET">
-                  <ContentText contentKey="transfers.text-049" />
-                </option>
-                <option value="DALAT">
-                  <ContentText contentKey="transfers.text-050" />
-                </option>
-                <option value="TUY_HOA">
-                  <ContentText contentKey="transfers.text-051" />
-                </option>
+                <DestinationOptions />
               </ContentElement>
             </div>
 
@@ -237,6 +209,7 @@ export function TransfersHero() {
               </div>
               <div className="flex flex-wrap items-center gap-2">
                 <button
+                  aria-pressed={true}
                   type="button"
                   data-veh="4cho"
                   data-name="Xe 4 chỗ Sedan (Vios, Accent, City)"
@@ -245,6 +218,7 @@ export function TransfersHero() {
                   <ContentText contentKey="transfers.text-056" />
                 </button>
                 <button
+                  aria-pressed={false}
                   type="button"
                   data-veh="7cho"
                   data-name="Xe 7 chỗ MPV/SUV (Xpander, Innova, Fortuner)"
@@ -253,6 +227,7 @@ export function TransfersHero() {
                   <ContentText contentKey="transfers.text-057" />
                 </button>
                 <button
+                  aria-pressed={false}
                   type="button"
                   data-veh="16cho"
                   data-name="Xe 16 chỗ (Solati, Transit)"
@@ -261,6 +236,7 @@ export function TransfersHero() {
                   <ContentText contentKey="transfers.text-058" />
                 </button>
                 <button
+                  aria-pressed={false}
                   type="button"
                   data-veh="limo9"
                   data-name="Limousine 9 chỗ VIP"

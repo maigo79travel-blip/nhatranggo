@@ -33,7 +33,7 @@ export function ResourceTable({
           ? ["TUYẾN ĐƯỜNG", "LOẠI XE", "GIÁ MỖI CHUYẾN"]
           : section === "bookings"
             ? ["KHÁCH HÀNG", "DỊCH VỤ", "NGÀY SỬ DỤNG", "TRẠNG THÁI"]
-            : ["EMAIL KHÁCH HÀNG", "NGÀY ĐĂNG KÝ", "TRẠNG THÁI"];
+            : [];
 
   return (
     <div
@@ -221,30 +221,7 @@ export function ResourceTable({
                         <Status value={row.status} />
                       </td>
                     </>
-                  ) : (
-                    <>
-                      <td>
-                        <div className="ad-content-cell">
-                          <span className="ad-file-icon">
-                            <Icon name="alternate_email" />
-                          </span>
-                          <button
-                            type="button"
-                            className="ad-row-title"
-                            onClick={() => onEdit(row)}
-                          >
-                            {String(row.email)}
-                          </button>
-                        </div>
-                      </td>
-                      <td className="ad-cell-muted">
-                        {dateLabel(row.created_at)}
-                      </td>
-                      <td>
-                        <Badge tone="green">Đã đăng ký</Badge>
-                      </td>
-                    </>
-                  )}
+                  ) : null}
                   <td>
                     <button
                       type="button"
@@ -252,13 +229,7 @@ export function ResourceTable({
                       aria-label={`Chỉnh sửa ${String(row.title || row.label || row.email || routeLabel(row.route))}`}
                       onClick={() => onEdit(row)}
                     >
-                      <Icon
-                        name={
-                          section === "subscribers"
-                            ? "chevron_right"
-                            : "edit_square"
-                        }
-                      />
+                      <Icon name="edit_square" />
                     </button>
                   </td>
                 </tr>

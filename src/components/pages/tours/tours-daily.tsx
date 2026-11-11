@@ -4,7 +4,6 @@ import {
   ProductValue,
   CatalogCollection,
 } from "@/components/content";
-import { PriceStack } from "@/components/price-stack";
 import { CatalogCard, ProductField } from "@/components/catalog";
 
 export function ToursDaily() {

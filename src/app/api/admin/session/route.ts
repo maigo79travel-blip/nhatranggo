@@ -41,7 +41,7 @@ export async function POST(request: Request) {
       { status: 400 },
     );
   const { rows } = await db.query(
-    "SELECT id,password_hash FROM admin_users WHERE username=$1",
+    "SELECT id,password_hash FROM admin_users WHERE username=$1 AND active=true",
     [data.username],
   );
   if (!rows[0] || !verifyPassword(data.password, rows[0].password_hash)) {

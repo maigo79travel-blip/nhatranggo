@@ -1,263 +1,105 @@
-import { ContentText, ContentElement } from "@/components/content";
-
-export function HomeReviews() {
+import { ContentText } from "@/components/content";
+import { HomeLink } from "@/modules/home/home-link";
+import { listArticles } from "@/modules/blog/service";
+export async function HomeReviews() {
+  const articles = (await listArticles()).slice(0, 4);
   return (
-    <section className="site-container py-12 w-full">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+    <section id="cam-nang" className="site-container py-12 w-full">
+      <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
         <div>
-          <div className="flex items-center gap-2 font-label-sm text-label-sm font-bold text-secondary uppercase tracking-widest mb-1.5">
-            <span className="w-6 h-0.5 bg-secondary rounded-full"></span>
-            <span>
-              <ContentText contentKey="home.text-136" />
-            </span>
-          </div>
-          <h2 className="font-headline-lg text-headline-lg font-bold text-on-surface">
+          <p className="text-label-sm font-bold text-secondary uppercase tracking-widest mb-2">
+            <ContentText contentKey="home.text-136" />
+          </p>
+          <h2 className="text-headline-lg font-bold">
             <ContentText contentKey="home.text-137" />
           </h2>
         </div>
-        <ContentElement
+        <HomeLink
           contentKey="home.attributes-028"
-          tag="a"
-          className="text-primary hover:text-ocean-deep font-label-lg text-label-lg flex items-center gap-1 group"
-
-          data-action="details"
+          href="/blog"
+          className="text-primary font-semibold"
         >
-          <span>
-            <ContentText contentKey="home.text-138" />
+          <ContentText contentKey="home.text-138" />
+          <span
+            className="material-symbols-outlined align-middle ml-1"
+            aria-hidden="true"
+          >
+            arrow_forward
           </span>
-          <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">
-            {"arrow_forward"}
-          </span>
-        </ContentElement>
+        </HomeLink>
       </div>
-
       <div className="card-grid-compact">
-        <article className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
-          <div className="relative h-44 overflow-hidden">
-            <ContentElement
-              contentKey="home.attributes-029"
-              tag="div"
-              className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-            ></ContentElement>
-            <span className="absolute bottom-2 left-2 px-2.5 py-1 rounded-md bg-surface-container-lowest/90 backdrop-blur-md font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1">
-              <span className="material-symbols-outlined text-[14px] text-primary">
-                {"visibility"}
-              </span>
-              <ContentText contentKey="home.text-139" />
-            </span>
-          </div>
-          <div className="p-5 flex-1 flex flex-col justify-between">
-            <div>
-              <div className="font-label-sm text-label-sm text-outline mb-2">
-                <ContentText contentKey="home.text-140" />
-              </div>
-              <h3 className="font-title-md text-title-md font-bold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
-                <ContentText contentKey="home.text-141" />
+        {articles.map((article) => (
+          <article
+            key={article.id}
+            className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col"
+          >
+            {article.image && (
+              <a
+                href={"/blog/" + article.slug}
+                tabIndex={-1}
+                aria-hidden="true"
+              >
+                <img
+                  src={article.image}
+                  alt=""
+                  loading="lazy"
+                  className="w-full h-44 object-cover"
+                />
+              </a>
+            )}
+            <div className="p-5 flex-1 flex flex-col gap-3">
+              {article.category && (
+                <p className="text-label-sm text-secondary">
+                  {article.category}
+                </p>
+              )}
+              <h3 className="text-title-md font-bold">
+                <a href={"/blog/" + article.slug}>{article.title}</a>
               </h3>
-              <p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-3 mt-2">
-                <ContentText contentKey="home.text-142" />
+              <p className="text-body-md text-on-surface-variant line-clamp-3">
+                {article.excerpt}
               </p>
+              <a
+                className="text-primary font-semibold mt-auto pt-3"
+                href={"/blog/" + article.slug}
+              >
+                Đọc tiếp<span className="sr-only">: {article.title}</span>
+                <span
+                  className="material-symbols-outlined align-middle"
+                  aria-hidden="true"
+                >
+                  chevron_right
+                </span>
+              </a>
             </div>
-            <ContentElement
-              contentKey="home.attributes-030"
-              tag="a"
-              className="font-label-md text-label-md text-primary hover:text-ocean-deep flex items-center gap-1 mt-4 pt-2"
-
-              data-action="details"
-            >
-              <span>
-                <ContentText contentKey="home.text-143" />
-              </span>
-              <span className="material-symbols-outlined text-[16px]">
-                {"chevron_right"}
-              </span>
-            </ContentElement>
-          </div>
-        </article>
-
-        <article className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
-          <div className="relative h-44 overflow-hidden">
-            <ContentElement
-              contentKey="home.attributes-031"
-              tag="div"
-              className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-            ></ContentElement>
-            <span className="absolute bottom-2 left-2 px-2.5 py-1 rounded-md bg-surface-container-lowest/90 backdrop-blur-md font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1">
-              <span className="material-symbols-outlined text-[14px] text-primary">
-                {"visibility"}
-              </span>
-              <ContentText contentKey="home.text-144" />
-            </span>
-          </div>
-          <div className="p-5 flex-1 flex flex-col justify-between">
-            <div>
-              <div className="font-label-sm text-label-sm text-outline mb-2">
-                <ContentText contentKey="home.text-145" />
-              </div>
-              <h3 className="font-title-md text-title-md font-bold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
-                <ContentText contentKey="home.text-146" />
-              </h3>
-              <p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-3 mt-2">
-                <ContentText contentKey="home.text-147" />
-              </p>
-            </div>
-            <ContentElement
-              contentKey="home.attributes-032"
-              tag="a"
-              className="font-label-md text-label-md text-primary hover:text-ocean-deep flex items-center gap-1 mt-4 pt-2"
-
-              data-action="details"
-            >
-              <span>
-                <ContentText contentKey="home.text-148" />
-              </span>
-              <span className="material-symbols-outlined text-[16px]">
-                {"chevron_right"}
-              </span>
-            </ContentElement>
-          </div>
-        </article>
-
-        <article className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
-          <div className="relative h-44 overflow-hidden">
-            <ContentElement
-              contentKey="home.attributes-033"
-              tag="div"
-              className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-            ></ContentElement>
-            <span className="absolute bottom-2 left-2 px-2.5 py-1 rounded-md bg-surface-container-lowest/90 backdrop-blur-md font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1">
-              <span className="material-symbols-outlined text-[14px] text-primary">
-                {"visibility"}
-              </span>
-              <ContentText contentKey="home.text-149" />
-            </span>
-          </div>
-          <div className="p-5 flex-1 flex flex-col justify-between">
-            <div>
-              <div className="font-label-sm text-label-sm text-outline mb-2">
-                <ContentText contentKey="home.text-150" />
-              </div>
-              <h3 className="font-title-md text-title-md font-bold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
-                <ContentText contentKey="home.text-151" />
-              </h3>
-              <p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-3 mt-2">
-                <ContentText contentKey="home.text-152" />
-              </p>
-            </div>
-            <ContentElement
-              contentKey="home.attributes-034"
-              tag="a"
-              className="font-label-md text-label-md text-primary hover:text-ocean-deep flex items-center gap-1 mt-4 pt-2"
-
-              data-action="details"
-            >
-              <span>
-                <ContentText contentKey="home.text-153" />
-              </span>
-              <span className="material-symbols-outlined text-[16px]">
-                {"chevron_right"}
-              </span>
-            </ContentElement>
-          </div>
-        </article>
-
-        <article className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
-          <div className="relative h-44 overflow-hidden">
-            <ContentElement
-              contentKey="home.attributes-035"
-              tag="div"
-              className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-            ></ContentElement>
-            <span className="absolute bottom-2 left-2 px-2.5 py-1 rounded-md bg-surface-container-lowest/90 backdrop-blur-md font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1">
-              <span className="material-symbols-outlined text-[14px] text-primary">
-                {"visibility"}
-              </span>
-              <ContentText contentKey="home.text-154" />
-            </span>
-          </div>
-          <div className="p-5 flex-1 flex flex-col justify-between">
-            <div>
-              <div className="font-label-sm text-label-sm text-outline mb-2">
-                <ContentText contentKey="home.text-155" />
-              </div>
-              <h3 className="font-title-md text-title-md font-bold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
-                <ContentText contentKey="home.text-156" />
-              </h3>
-              <p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-3 mt-2">
-                <ContentText contentKey="home.text-157" />
-              </p>
-            </div>
-            <ContentElement
-              contentKey="home.attributes-036"
-              tag="a"
-              className="font-label-md text-label-md text-primary hover:text-ocean-deep flex items-center gap-1 mt-4 pt-2"
-
-              data-action="details"
-            >
-              <span>
-                <ContentText contentKey="home.text-158" />
-              </span>
-              <span className="material-symbols-outlined text-[16px]">
-                {"chevron_right"}
-              </span>
-            </ContentElement>
-          </div>
-        </article>
+          </article>
+        ))}
       </div>
-
-      <div className="mt-8 p-6 bg-surface-container-low rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center shrink-0">
-            <span className="material-symbols-outlined text-[20px]">
-              {"auto_stories"}
-            </span>
-          </div>
-          <div>
-            <h4 className="font-title-md text-title-md font-bold text-on-surface">
-              <ContentText contentKey="home.text-159" />
-            </h4>
-            <p className="font-body-sm text-body-sm text-on-surface-variant">
-              <ContentText contentKey="home.text-160" />
-            </p>
-          </div>
-        </div>
+      {!articles.length && (
+        <p className="rounded-xl bg-surface-container-low p-5">
+          Chưa có bài viết được đăng trong ngôn ngữ này.{" "}
+          <a href="/blog" className="text-primary underline">
+            Xem chuyên mục bài viết
+          </a>
+        </p>
+      )}
+      <div className="mt-8 p-6 bg-surface-container-low rounded-2xl">
+        <h3 className="text-title-md font-bold mb-3">
+          <ContentText contentKey="home.text-159" />
+        </h3>
         <div className="flex flex-wrap gap-2">
-          <ContentElement
-            contentKey="home.attributes-037"
-            tag="a"
-            className="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface hover:text-primary font-label-sm text-label-sm transition-colors shadow-sm action-link"
-
-            data-action="details"
-          >
-            <ContentText contentKey="home.text-161" />
-          </ContentElement>
-          <ContentElement
-            contentKey="home.attributes-038"
-            tag="a"
-            className="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface hover:text-primary font-label-sm text-label-sm transition-colors shadow-sm action-link"
-
-            data-action="details"
-          >
-            <ContentText contentKey="home.text-162" />
-          </ContentElement>
-          <ContentElement
-            contentKey="home.attributes-039"
-            tag="a"
-            className="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface hover:text-primary font-label-sm text-label-sm transition-colors shadow-sm action-link"
-
-            data-action="details"
-          >
-            <ContentText contentKey="home.text-163" />
-          </ContentElement>
-          <ContentElement
-            contentKey="home.attributes-040"
-            tag="a"
-            className="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface hover:text-primary font-label-sm text-label-sm transition-colors shadow-sm action-link"
-
-            data-action="details"
-          >
-            <ContentText contentKey="home.text-164" />
-          </ContentElement>
+          {[37, 38, 39, 40].map((key, index) => (
+            <HomeLink
+              key={key}
+              contentKey={"home.attributes-" + String(key).padStart(3, "0")}
+              href="/blog"
+              queryKey={"home.text-" + (161 + index)}
+              className="px-3 py-2 rounded-lg bg-surface-container-lowest text-primary text-body-md"
+            >
+              <ContentText contentKey={"home.text-" + (161 + index)} />
+            </HomeLink>
+          ))}
         </div>
       </div>
     </section>

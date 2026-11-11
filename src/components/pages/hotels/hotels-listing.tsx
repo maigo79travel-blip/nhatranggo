@@ -638,17 +638,7 @@ export function HotelsListing() {
                       <ContentText contentKey="field-005" />
                     </span>
                   </div>
-                  <ContentElement
-                    contentKey="field-002"
-                    tag="button"
 
-                    className="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-outline hover:text-sale-crimson transition-colors"
-                    type="button"
-                  >
-                    <span className="material-symbols-outlined text-[20px]">
-                      {"favorite"}
-                    </span>
-                  </ContentElement>
                   <div className="absolute bottom-3 left-3 bg-inverse-surface/80 backdrop-blur-md text-inverse-on-surface px-2.5 py-1 rounded-lg font-label-sm text-label-sm flex items-center gap-1">
                     <span className="material-symbols-outlined text-[14px]">
                       {"photo_camera"}
@@ -822,17 +812,7 @@ export function HotelsListing() {
                       <ContentText contentKey="field-005" />
                     </span>
                   </div>
-                  <ContentElement
-                    contentKey="field-002"
-                    tag="button"
 
-                    className="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-outline hover:text-sale-crimson transition-colors"
-                    type="button"
-                  >
-                    <span className="material-symbols-outlined text-[20px]">
-                      {"favorite"}
-                    </span>
-                  </ContentElement>
                   <div className="absolute bottom-3 left-3 bg-inverse-surface/80 backdrop-blur-md text-inverse-on-surface px-2.5 py-1 rounded-lg font-label-sm text-label-sm flex items-center gap-1">
                     <span className="material-symbols-outlined text-[14px]">
                       {"photo_camera"}
@@ -1003,17 +983,7 @@ export function HotelsListing() {
                       <ContentText contentKey="field-004" />
                     </span>
                   </div>
-                  <ContentElement
-                    contentKey="field-002"
-                    tag="button"
 
-                    className="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-outline hover:text-sale-crimson transition-colors"
-                    type="button"
-                  >
-                    <span className="material-symbols-outlined text-[20px]">
-                      {"favorite"}
-                    </span>
-                  </ContentElement>
                   <div className="absolute bottom-3 left-3 bg-inverse-surface/80 backdrop-blur-md text-inverse-on-surface px-2.5 py-1 rounded-lg font-label-sm text-label-sm flex items-center gap-1">
                     <span className="material-symbols-outlined text-[14px]">
                       {"photo_camera"}
@@ -1179,17 +1149,7 @@ export function HotelsListing() {
                       <ContentText contentKey="field-004" />
                     </span>
                   </div>
-                  <ContentElement
-                    contentKey="field-002"
-                    tag="button"
 
-                    className="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-outline hover:text-sale-crimson transition-colors"
-                    type="button"
-                  >
-                    <span className="material-symbols-outlined text-[20px]">
-                      {"favorite"}
-                    </span>
-                  </ContentElement>
                   <div className="absolute bottom-3 left-3 bg-inverse-surface/80 backdrop-blur-md text-inverse-on-surface px-2.5 py-1 rounded-lg font-label-sm text-label-sm flex items-center gap-1">
                     <span className="material-symbols-outlined text-[14px]">
                       {"photo_camera"}
@@ -1355,17 +1315,7 @@ export function HotelsListing() {
                       <ContentText contentKey="field-004" />
                     </span>
                   </div>
-                  <ContentElement
-                    contentKey="field-002"
-                    tag="button"
 
-                    className="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-outline hover:text-sale-crimson transition-colors"
-                    type="button"
-                  >
-                    <span className="material-symbols-outlined text-[20px]">
-                      {"favorite"}
-                    </span>
-                  </ContentElement>
                   <div className="absolute bottom-3 left-3 bg-inverse-surface/80 backdrop-blur-md text-inverse-on-surface px-2.5 py-1 rounded-lg font-label-sm text-label-sm flex items-center gap-1">
                     <span className="material-symbols-outlined text-[14px]">
                       {"photo_camera"}
@@ -1525,17 +1475,7 @@ export function HotelsListing() {
                       <ContentText contentKey="field-004" />
                     </span>
                   </div>
-                  <ContentElement
-                    contentKey="field-002"
-                    tag="button"
 
-                    className="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-outline hover:text-sale-crimson transition-colors"
-                    type="button"
-                  >
-                    <span className="material-symbols-outlined text-[20px]">
-                      {"favorite"}
-                    </span>
-                  </ContentElement>
                   <div className="absolute bottom-3 left-3 bg-inverse-surface/80 backdrop-blur-md text-inverse-on-surface px-2.5 py-1 rounded-lg font-label-sm text-label-sm flex items-center gap-1">
                     <span className="material-symbols-outlined text-[14px]">
                       {"photo_camera"}

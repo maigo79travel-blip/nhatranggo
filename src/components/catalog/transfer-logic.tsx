@@ -62,6 +62,7 @@ export function TransferLogic({
       if (el.matches(".vehicle-chip")) {
         vehicle = el.dataset.veh || "4cho";
         document.querySelectorAll(".vehicle-chip").forEach((b) => {
+          b.setAttribute("aria-pressed", String(b === el));
           b.classList.toggle("bg-primary", b === el);
           b.classList.toggle("text-on-primary", b === el);
           b.classList.toggle("bg-surface-container", b !== el);
@@ -72,6 +73,14 @@ export function TransferLogic({
       }
 
       if (el.matches(".tab-btn") && pickup && dropoff) {
+        document.querySelectorAll(".tab-btn").forEach((button) => {
+          const active = button === el;
+          button.setAttribute("aria-pressed", String(active));
+          button.classList.toggle("bg-primary", active);
+          button.classList.toggle("text-on-primary", active);
+          button.classList.toggle("bg-surface-container", !active);
+          button.classList.toggle("text-on-surface-variant", !active);
+        });
         pickup.value = el.dataset.tab === "tab-airport" ? "CXR" : "NT_CENTER";
         dropoff.value =
           el.dataset.tab === "tab-intercity"

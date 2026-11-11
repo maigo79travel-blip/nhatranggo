@@ -1,5 +1,6 @@
 import { z } from "zod";
-export const safeUrl = (value: string) =>
+import { contentAttributeKeys } from "./content-attributes";
+const safeUrl = (value: string) =>
   !value || /^(\/[^/]|\/\s*$|#|https?:\/\/|tel:|mailto:)/i.test(value);
 const entry = z
   .object({
@@ -13,19 +14,6 @@ const entry = z
     if (value.kind === "text" && typeof value.value !== "string")
       ctx.addIssue({ code: "custom", message: "Nội dung phải là văn bản" });
     if (value.kind === "attributes") {
-      const allowed = new Set([
-        "href",
-        "src",
-        "alt",
-        "title",
-        "placeholder",
-        "defaultValue",
-        "value",
-        "aria-label",
-        "data-alt",
-        "data-location",
-        "backgroundImage",
-      ]);
       if (
         !value.value ||
         typeof value.value !== "object" ||
@@ -35,7 +23,7 @@ const entry = z
         return;
       }
       for (const [key, val] of Object.entries(value.value)) {
-        if (!allowed.has(key) || typeof val !== "string")
+        if (!contentAttributeKeys.has(key) || typeof val !== "string")
           ctx.addIssue({
             code: "custom",
             message: "Thuộc tính không được hỗ trợ",
@@ -74,6 +62,8 @@ export const productSchema = z
     position: z.coerce.number().int().min(0),
     active: z.boolean(),
     content: z.record(z.string(), entry),
+    destination_id: z.uuid().nullable().default(null),
+    partner_id: z.uuid().nullable().default(null),
   })
   .refine((p) => p.original_price == null || p.original_price >= p.price, {
     message: "Giá gốc phải lớn hơn hoặc bằng giá bán",

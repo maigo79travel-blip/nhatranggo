@@ -1,10 +1,10 @@
-import { ContentText, ContentElement } from "@/components/content";
+import { ContentText } from "@/components/content";
 
 export function ToursFaq() {
   return (
     <section className="w-full py-16 bg-surface-container-lowest">
       <div className="site-container">
-        <div className="text-center max-w-2xl mx-auto mb-14">
+        <div className="text-center mx-auto mb-14">
           <span className="font-label-lg text-label-lg text-primary uppercase tracking-wider">
             <ContentText contentKey="tours.text-053" />
           </span>

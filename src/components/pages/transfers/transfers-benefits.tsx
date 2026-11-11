@@ -4,7 +4,7 @@ export function TransfersBenefits() {
   return (
     <section className="w-full py-20 bg-surface-subtle">
       <div className="site-container">
-        <div className="text-center max-w-2xl mx-auto mb-14">
+        <div className="text-center mx-auto mb-14">
           <span className="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">
             <ContentText contentKey="transfers.text-146" />
           </span>
@@ -86,7 +86,7 @@ export function TransfersBenefits() {
         </div>
 
         <div className="mt-12 bg-gradient-to-r from-primary via-ocean-deep to-secondary text-on-primary rounded-3xl p-8 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-6">
-          <div className="max-w-2xl">
+          <div className="min-w-0">
             <h3 className="font-headline-md text-headline-md font-bold">
               <ContentText contentKey="transfers.text-159" />
             </h3>

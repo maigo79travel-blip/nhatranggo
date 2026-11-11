@@ -1,14 +1,11 @@
 import fs from "node:fs";
 import pg from "pg";
+import { migrate } from "./lib/migrations.mjs";
 const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+await migrate(db);
 const client = await db.connect();
 try {
   await client.query("BEGIN");
-  for (const file of fs
-    .readdirSync("db")
-    .filter((f) => /^\d.*\.sql$/.test(f))
-    .sort())
-    await client.query(fs.readFileSync("db/" + file, "utf8"));
   const products = JSON.parse(fs.readFileSync("db/seed/products.json", "utf8"));
   const entries = JSON.parse(fs.readFileSync("db/seed/content.json", "utf8"));
   for (const [position, p] of products.entries()) {

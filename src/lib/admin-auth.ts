@@ -7,7 +7,8 @@ import {
 } from "node:crypto";
 import { cookies } from "next/headers";
 import { db } from "./db";
-export const SESSION_COOKIE = "booking_admin";
+import type { AdminUser } from "./types";
+const SESSION_COOKIE = "booking_admin";
 const digest = (value: string) =>
   createHash("sha256").update(value).digest("hex");
 export function verifyPassword(password: string, stored: string) {
@@ -29,8 +30,8 @@ export function passwordHash(password: string) {
 export async function adminUser() {
   const token = (await cookies()).get(SESSION_COOKIE)?.value;
   if (!token) return null;
-  const { rows } = await db.query<{ id: string; username: string }>(
-    "SELECT u.id,u.username FROM admin_sessions s JOIN admin_users u ON u.id=s.user_id WHERE s.token_hash=$1 AND s.expires_at>now()",
+  const { rows } = await db.query<AdminUser>(
+    "SELECT u.id,u.username,u.role FROM admin_sessions s JOIN admin_users u ON u.id=s.user_id WHERE s.token_hash=$1 AND s.expires_at>now() AND u.active=true",
     [digest(token)],
   );
   return rows[0] || null;

@@ -2,14 +2,9 @@
 import { Icon } from "../ui/admin-icon";
 import { Status } from "../ui/admin-badge";
 import { Empty } from "../ui/admin-empty";
-import { typeLabels, dateLabel, type Row } from "../api";
-
-export type OverviewData = {
-  stats: Record<string, number>;
-  categories: { type: string; count: number }[];
-  bookings: Row[];
-  updates: Row[];
-};
+import { money } from "@/lib/types";
+import { typeLabels, dateLabel } from "../api";
+import type { AdminOverviewData } from "@/lib/types";
 
 export function OverviewPanel({
   data,
@@ -18,7 +13,7 @@ export function OverviewPanel({
   navigate,
   onRefresh,
 }: {
-  data: OverviewData | null;
+  data: AdminOverviewData | null;
   loading: boolean;
   syncedAt: string;
   navigate: (s: string) => void;
@@ -54,11 +49,11 @@ export function OverviewPanel({
       tone: "purple",
     },
     {
-      title: "Email nhận ưu đãi",
-      value: data?.stats.subscribers,
-      subtitle: "Khách hàng đã đăng ký",
-      icon: "mark_email_read",
-      section: "subscribers",
+      title: "Đơn hoàn tất",
+      value: data?.stats.completed,
+      subtitle: "Đã xử lý hoàn tất",
+      icon: "task_alt",
+      section: "bookings",
       tone: "amber",
     },
   ];
@@ -87,6 +82,15 @@ export function OverviewPanel({
             </div>
           </button>
         ))}
+      </div>
+      <div className="ad-panel p-5 my-5">
+        <p>Tổng giá trị đã xác nhận của đơn hoàn tất</p>
+        <strong className="text-headline-md text-primary">
+          {money(data?.stats.revenue || 0)}
+        </strong>
+        <p className="text-body-sm text-outline">
+          Tổng theo giá trị nhân viên nhập khi xác nhận đơn.
+        </p>
       </div>
       <section className="ad-welcome">
         <div>

@@ -1,6 +1,14 @@
+import { SiteDataProvider } from "@/components/content";
+import { getSiteData } from "@/lib/catalog";
 import { adminUser } from "@/lib/admin-auth";
-import { AdminDashboard } from "@/components/admin/dashboard";
+import { AdminWorkspace } from "@/components/admin/workspace";
 export default async function AdminPage() {
   const user = await adminUser();
-  return <AdminDashboard user={user} />;
+  if (!user) return <AdminWorkspace user={null} />;
+  const data = await getSiteData();
+  return (
+    <SiteDataProvider data={data}>
+      <AdminWorkspace user={user} />
+    </SiteDataProvider>
+  );
 }

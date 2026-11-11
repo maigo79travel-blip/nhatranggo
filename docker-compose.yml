@@ -2,7 +2,7 @@ services:
   db:
     image: postgres:17-alpine
     ports:
-      - "127.0.0.1:15432:5432"
+      - "127.0.0.1:${DB_PORT:-15432}:5432"
     environment:
       POSTGRES_USER: booking
       POSTGRES_PASSWORD: booking_local

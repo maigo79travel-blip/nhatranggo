@@ -26,18 +26,7 @@ export function CatalogCard({
         const target = event.target as HTMLElement;
         const action = target.closest("button,a");
         if (!action) return;
-        if (action.textContent?.includes("favorite")) {
-          event.preventDefault();
-          c.toggle(productId);
-          action.setAttribute(
-            "aria-pressed",
-            String(!c.favorites.includes(productId)),
-          );
-          action.classList.toggle(
-            "text-sale-crimson",
-            !c.favorites.includes(productId),
-          );
-        } else if (
+        if (
           action.tagName === "BUTTON" ||
           action.getAttribute("href") === "#"
         ) {

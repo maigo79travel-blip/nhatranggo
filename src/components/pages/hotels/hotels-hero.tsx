@@ -48,9 +48,6 @@ export function HotelsHero() {
             <h1 className="font-display text-display text-on-surface tracking-tight">
               <ContentText contentKey="hotels.text-046" />
             </h1>
-            <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mt-1">
-              <ContentText contentKey="hotels.text-047" />
-            </p>
           </div>
           <div className="flex items-center gap-3 shrink-0">
             <div className="flex items-center gap-2 bg-surface-container-lowest px-4 py-2 rounded-xl shadow-sm text-on-surface">
@@ -196,7 +193,7 @@ export function HotelsHero() {
 
             <div className="lg:col-span-2 flex items-center">
               <button
-                className="w-full h-full min-h-[52px] bg-gradient-to-r from-gold-amber to-amber-500 hover:from-amber-400 hover:to-amber-500 text-on-background font-title-md text-title-md rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
+                className="w-full h-full min-h-[52px] bg-gradient-to-r from-gold-amber to-tertiary-fixed-dim hover:from-gold-amber hover:to-tertiary-fixed-dim text-on-background font-title-md text-title-md rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
                 type="submit"
               >
                 <span className="material-symbols-outlined text-[22px]">

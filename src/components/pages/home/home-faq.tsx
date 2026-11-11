@@ -3,9 +3,9 @@ import { ContentText, ContentElement } from "@/components/content";
 export function HomeFaq() {
   return (
     <section className="site-container py-10 w-full mb-8">
-      <div className="rounded-3xl bg-gradient-to-r from-secondary via-primary to-ocean-deep p-8 md:p-12 shadow-xl text-on-primary flex flex-col lg:flex-row items-center justify-between gap-8 relative overflow-hidden">
+      <div className="rounded-3xl bg-gradient-to-r from-secondary via-primary to-ocean-deep p-8 md:p-12 shadow-xl text-on-primary grid lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] items-center gap-8 relative overflow-hidden">
         <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-secondary-container/20 blur-3xl pointer-events-none"></div>
-        <div className="max-w-2xl text-center lg:text-left relative z-10">
+        <div className="text-center lg:text-left relative z-10">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-lowest/20 backdrop-blur-md font-label-sm text-label-sm uppercase tracking-wider text-ocean-light mb-3">
             <span className="material-symbols-outlined text-[16px] text-gold-amber">
               {"handshake"}
@@ -51,7 +51,7 @@ export function HomeFaq() {
           </div>
         </div>
 
-        <div className="bg-surface-container-lowest/15 backdrop-blur-xl p-6 rounded-2xl max-w-sm w-full shrink-0 relative z-10 text-on-primary">
+        <div className="bg-surface-container-lowest/15 backdrop-blur-xl p-6 rounded-2xl w-full min-w-0 relative z-10 text-on-primary">
           <div className="font-label-lg text-label-lg font-bold uppercase tracking-wider text-gold-amber mb-3 flex items-center gap-1.5">
             <span className="material-symbols-outlined text-[18px]">
               {"verified"}

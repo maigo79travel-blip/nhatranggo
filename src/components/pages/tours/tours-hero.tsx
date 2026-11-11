@@ -27,7 +27,7 @@ export function ToursHero() {
         </nav>
 
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
-          <div className="max-w-3xl">
+          <div className="min-w-0">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ocean-light text-primary font-label-sm text-label-sm mb-3">
               <span
                 className="material-symbols-outlined text-[16px] text-primary"
@@ -45,9 +45,6 @@ export function ToursHero() {
                 <ContentText contentKey="tours.text-013" />
               </span>
             </h1>
-            <p className="font-body-lg text-body-lg text-on-surface-variant mt-3 max-w-2xl">
-              <ContentText contentKey="tours.text-014" />
-            </p>
           </div>
 
           <div className="flex items-center gap-4 bg-surface-subtle p-3 rounded-2xl shadow-sm shrink-0">
@@ -105,12 +102,13 @@ export function ToursHero() {
         </div>
 
         <div
-          className="flex items-center gap-2 overflow-x-auto pb-4 no-scrollbar -mx-2 px-2"
+          className="flex items-center gap-2 overflow-x-auto pb-4 -mx-2 px-2"
           id="categoryFilterBar"
         >
           <button
-            className="tour-cat-btn px-4 py-2.5 rounded-full font-label-lg text-label-lg bg-primary text-on-primary shadow-sm hover:shadow transition-all shrink-0 active"
+            className="tour-cat-btn px-4 py-2.5 rounded-full font-label-lg text-label-lg bg-primary text-on-primary shadow-sm hover:shadow transition-all shrink-0"
             data-category="all"
+            aria-pressed={true}
             type="button"
           >
             <ContentText contentKey="tours.text-017" />
@@ -118,6 +116,7 @@ export function ToursHero() {
           <button
             className="tour-cat-btn px-4 py-2.5 rounded-full font-label-lg text-label-lg bg-surface-container text-on-surface hover:bg-ocean-light hover:text-primary transition-all shrink-0"
             data-category="dao-nha-trang"
+            aria-pressed={false}
             type="button"
           >
             <ContentText contentKey="tours.text-018" />
@@ -125,6 +124,7 @@ export function ToursHero() {
           <button
             className="tour-cat-btn px-4 py-2.5 rounded-full font-label-lg text-label-lg bg-surface-container text-on-surface hover:bg-ocean-light hover:text-primary transition-all shrink-0"
             data-category="du-thuyen"
+            aria-pressed={false}
             type="button"
           >
             <ContentText contentKey="tours.text-019" />
@@ -132,6 +132,7 @@ export function ToursHero() {
           <button
             className="tour-cat-btn px-4 py-2.5 rounded-full font-label-lg text-label-lg bg-surface-container text-on-surface hover:bg-ocean-light hover:text-primary transition-all shrink-0"
             data-category="lan-bien"
+            aria-pressed={false}
             type="button"
           >
             <ContentText contentKey="tours.text-020" />
@@ -139,6 +140,7 @@ export function ToursHero() {
           <button
             className="tour-cat-btn px-4 py-2.5 rounded-full font-label-lg text-label-lg bg-surface-container text-on-surface hover:bg-ocean-light hover:text-primary transition-all shrink-0"
             data-category="vinh-hy"
+            aria-pressed={false}
             type="button"
           >
             <ContentText contentKey="tours.text-021" />
@@ -146,6 +148,7 @@ export function ToursHero() {
           <button
             className="tour-cat-btn px-4 py-2.5 rounded-full font-label-lg text-label-lg bg-surface-container text-on-surface hover:bg-ocean-light hover:text-primary transition-all shrink-0"
             data-category="city"
+            aria-pressed={false}
             type="button"
           >
             <ContentText contentKey="tours.text-022" />
@@ -153,6 +156,7 @@ export function ToursHero() {
           <button
             className="tour-cat-btn px-4 py-2.5 rounded-full font-label-lg text-label-lg bg-surface-container text-on-surface hover:bg-ocean-light hover:text-primary transition-all shrink-0"
             data-category="da-lat"
+            aria-pressed={false}
             type="button"
           >
             <ContentText contentKey="tours.text-023" />

@@ -9,13 +9,13 @@ import { CatalogCard, ProductField } from "@/components/catalog";
 
 export function HomeFlashDeals() {
   return (
-    <section className="site-container py-12 w-full">
+    <section id="combo" className="site-container py-12 w-full">
       <div className="rounded-3xl bg-gradient-to-br from-primary via-ocean-deep to-primary-container p-6 md:p-10 shadow-xl text-on-primary relative overflow-hidden">
         <div className="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-secondary-container/10 blur-2xl"></div>
         <div className="absolute -left-16 -bottom-16 w-80 h-80 rounded-full bg-gold-amber/10 blur-2xl"></div>
 
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 relative z-10 mb-8">
-          <div className="max-w-2xl">
+          <div className="min-w-0">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm uppercase font-bold tracking-wider mb-3">
               <span className="material-symbols-outlined text-[16px]">
                 {"local_fire_department"}
@@ -125,17 +125,6 @@ export function HomeFlashDeals() {
                     <ContentText contentKey="field-004" />
                   </span>
                 </div>
-                <button
-                  className="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-sale-crimson hover:bg-surface-container-lowest shadow-sm transition-transform hover:scale-110"
-                  type="button"
-                >
-                  <span
-                    className="material-symbols-outlined text-[20px]"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                  >
-                    {"favorite"}
-                  </span>
-                </button>
               </div>
               <div className="p-5 flex-1 flex flex-col justify-between">
                 <div>
@@ -216,14 +205,6 @@ export function HomeFlashDeals() {
                     <ContentText contentKey="field-004" />
                   </span>
                 </div>
-                <button
-                  className="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-outline hover:text-sale-crimson shadow-sm transition-transform hover:scale-110"
-                  type="button"
-                >
-                  <span className="material-symbols-outlined text-[20px]">
-                    {"favorite"}
-                  </span>
-                </button>
               </div>
               <div className="p-5 flex-1 flex flex-col justify-between">
                 <div>
@@ -304,14 +285,6 @@ export function HomeFlashDeals() {
                     <ContentText contentKey="field-004" />
                   </span>
                 </div>
-                <button
-                  className="absolute top-3 right-3 w-9 h-9 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-outline hover:text-sale-crimson shadow-sm transition-transform hover:scale-110"
-                  type="button"
-                >
-                  <span className="material-symbols-outlined text-[20px]">
-                    {"favorite"}
-                  </span>
-                </button>
               </div>
               <div className="p-5 flex-1 flex flex-col justify-between">
                 <div>

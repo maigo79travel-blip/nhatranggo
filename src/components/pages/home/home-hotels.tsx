@@ -1,3 +1,11 @@
+"use client";
+import { HomeLink } from "@/modules/home/home-link";
+import { useState } from "react";
+import { useSiteData } from "@/components/content";
+import {
+  matchesHotelFilter,
+  type HomeHotelFilter,
+} from "@/modules/home/hotel-filter";
 import {
   ContentText,
   ContentElement,
@@ -8,8 +16,13 @@ import { PriceStack } from "@/components/price-stack";
 import { CatalogCard, ProductField } from "@/components/catalog";
 
 export function HomeHotels() {
+  const [filter, setFilter] = useState<HomeHotelFilter>("all");
+  const products = useSiteData().products.filter(
+    (p) =>
+      p.collection_id === "home-collection-2" && matchesHotelFilter(p, filter),
+  );
   return (
-    <section className="site-container py-10 w-full">
+    <section id="home-hotels" className="site-container py-10 w-full">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
           <div className="flex items-center gap-2 font-label-sm text-label-sm font-bold text-secondary uppercase tracking-widest mb-1.5">
@@ -24,27 +37,32 @@ export function HomeHotels() {
         </div>
 
         <div className="flex items-center gap-2 overflow-x-auto pb-1">
-          <button className="hotel-filter active px-4 py-2 rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm transition-all">
-            <ContentText contentKey="home.text-096" />
-          </button>
-          <button className="hotel-filter px-4 py-2 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md transition-all">
-            <ContentText contentKey="home.text-097" />
-          </button>
-          <button className="hotel-filter px-4 py-2 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md transition-all">
-            <ContentText contentKey="home.text-098" />
-          </button>
-          <button className="hotel-filter px-4 py-2 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md transition-all">
-            <ContentText contentKey="home.text-099" />
-          </button>
-          <button className="hotel-filter px-4 py-2 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md transition-all">
-            <ContentText contentKey="home.text-100" />
-          </button>
-          <ContentElement
+          {(
+            [
+              "all",
+              "cam-ranh",
+              "nha-trang",
+              "beach",
+              "pool",
+            ] as HomeHotelFilter[]
+          ).map((value, index) => (
+            <button
+              key={value}
+              type="button"
+              data-hotel-filter={value}
+              aria-pressed={filter === value}
+              onClick={() => setFilter(value)}
+              className={`hotel-filter shrink-0 px-4 py-2 rounded-full font-label-md text-label-md transition-colors ${filter === value ? "bg-primary text-on-primary shadow-sm" : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"}`}
+            >
+              <ContentText
+                contentKey={"home.text-" + String(96 + index).padStart(3, "0")}
+              />
+            </button>
+          ))}
+          <HomeLink
             contentKey="home.attributes-007"
-            tag="a"
             className="px-4 py-2 rounded-full text-primary hover:text-ocean-deep font-label-md text-label-md flex items-center gap-1 whitespace-nowrap"
-
-            data-action="details"
+            href="/khach-san"
           >
             <span>
               <ContentText contentKey="home.text-101" />
@@ -52,12 +70,20 @@ export function HomeHotels() {
             <span className="material-symbols-outlined text-[16px]">
               {"arrow_forward"}
             </span>
-          </ContentElement>
+          </HomeLink>
         </div>
       </div>
 
+      <p role="status" className="text-body-md text-outline mb-4">
+        {products.length
+          ? `${products.length} dịch vụ phù hợp`
+          : "Chưa có khách sạn phù hợp với bộ lọc."}
+      </p>
       <div className="card-grid-compact">
-        <CatalogCollection collectionId="home-collection-2">
+        <CatalogCollection
+          collectionId="home-collection-2"
+          productIds={products.map((p) => p.id)}
+        >
           <CatalogCard
             className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
             productId="home-4"
@@ -74,14 +100,6 @@ export function HomeHotels() {
               <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-bold shadow-sm">
                 <ContentText contentKey="field-003" />
               </span>
-              <button
-                className="absolute top-3 right-3 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-outline hover:text-sale-crimson shadow-sm"
-                type="button"
-              >
-                <span className="material-symbols-outlined text-[18px]">
-                  {"favorite"}
-                </span>
-              </button>
             </div>
             <div className="p-4 flex-1 flex flex-col justify-between">
               <div>
@@ -190,14 +208,6 @@ export function HomeHotels() {
               <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-bold shadow-sm">
                 <ContentText contentKey="field-003" />
               </span>
-              <button
-                className="absolute top-3 right-3 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-outline hover:text-sale-crimson shadow-sm"
-                type="button"
-              >
-                <span className="material-symbols-outlined text-[18px]">
-                  {"favorite"}
-                </span>
-              </button>
             </div>
             <div className="p-4 flex-1 flex flex-col justify-between">
               <div>
@@ -306,14 +316,6 @@ export function HomeHotels() {
               <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-bold shadow-sm">
                 <ContentText contentKey="field-003" />
               </span>
-              <button
-                className="absolute top-3 right-3 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-outline hover:text-sale-crimson shadow-sm"
-                type="button"
-              >
-                <span className="material-symbols-outlined text-[18px]">
-                  {"favorite"}
-                </span>
-              </button>
             </div>
             <div className="p-4 flex-1 flex flex-col justify-between">
               <div>
@@ -422,14 +424,6 @@ export function HomeHotels() {
               <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-bold shadow-sm">
                 <ContentText contentKey="field-003" />
               </span>
-              <button
-                className="absolute top-3 right-3 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-outline hover:text-sale-crimson shadow-sm"
-                type="button"
-              >
-                <span className="material-symbols-outlined text-[18px]">
-                  {"favorite"}
-                </span>
-              </button>
             </div>
             <div className="p-4 flex-1 flex flex-col justify-between">
               <div>
@@ -538,14 +532,6 @@ export function HomeHotels() {
               <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-bold shadow-sm">
                 <ContentText contentKey="field-003" />
               </span>
-              <button
-                className="absolute top-3 right-3 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-outline hover:text-sale-crimson shadow-sm"
-                type="button"
-              >
-                <span className="material-symbols-outlined text-[18px]">
-                  {"favorite"}
-                </span>
-              </button>
             </div>
             <div className="p-4 flex-1 flex flex-col justify-between">
               <div>
@@ -654,14 +640,6 @@ export function HomeHotels() {
               <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-bold shadow-sm">
                 <ContentText contentKey="field-003" />
               </span>
-              <button
-                className="absolute top-3 right-3 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-outline hover:text-sale-crimson shadow-sm"
-                type="button"
-              >
-                <span className="material-symbols-outlined text-[18px]">
-                  {"favorite"}
-                </span>
-              </button>
             </div>
             <div className="p-4 flex-1 flex flex-col justify-between">
               <div>
@@ -770,14 +748,6 @@ export function HomeHotels() {
               <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-bold shadow-sm">
                 <ContentText contentKey="field-003" />
               </span>
-              <button
-                className="absolute top-3 right-3 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-outline hover:text-sale-crimson shadow-sm"
-                type="button"
-              >
-                <span className="material-symbols-outlined text-[18px]">
-                  {"favorite"}
-                </span>
-              </button>
             </div>
             <div className="p-4 flex-1 flex flex-col justify-between">
               <div>
@@ -886,14 +856,6 @@ export function HomeHotels() {
               <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-bold shadow-sm">
                 <ContentText contentKey="field-003" />
               </span>
-              <button
-                className="absolute top-3 right-3 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-outline hover:text-sale-crimson shadow-sm"
-                type="button"
-              >
-                <span className="material-symbols-outlined text-[18px]">
-                  {"favorite"}
-                </span>
-              </button>
             </div>
             <div className="p-4 flex-1 flex flex-col justify-between">
               <div>

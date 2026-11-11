@@ -12,7 +12,7 @@ export function TransfersFareTable() {
             <h2 className="font-headline-lg text-headline-lg text-on-surface mt-1">
               <ContentText contentKey="transfers.text-072" />
             </h2>
-            <p className="font-body-md text-body-md text-on-surface-variant mt-2 max-w-2xl">
+            <p className="font-body-md text-body-md text-on-surface-variant mt-2 ">
               <ContentText contentKey="transfers.text-073" />
             </p>
           </div>

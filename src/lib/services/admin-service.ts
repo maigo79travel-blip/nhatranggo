@@ -14,7 +14,8 @@ export async function getAdminOverview(): Promise<AdminOverviewData> {
       (SELECT count(*)::int FROM bookings) AS bookings,
       (SELECT count(*)::int FROM bookings WHERE status='pending') AS pending,
       (SELECT count(*)::int FROM site_content) AS content,
-      (SELECT count(*)::int FROM subscribers) AS subscribers,
+      (SELECT count(*)::int FROM bookings WHERE status='completed') AS completed,
+      (SELECT COALESCE(sum(confirmed_total),0)::float FROM bookings WHERE status='completed') AS revenue,
       (SELECT count(*)::int FROM transfer_fares) AS fares`),
     db.query(
       "SELECT type,count(*)::int AS count FROM products WHERE type<>'transfer' AND active GROUP BY type ORDER BY count(*) DESC",
@@ -41,7 +42,6 @@ const RESOURCE_QUERIES: Record<string, string> = {
   fares: "SELECT * FROM transfer_fares ORDER BY route,vehicle",
   bookings:
     "SELECT b.*,b.departure_date::text AS departure_date,p.title FROM bookings b JOIN products p ON p.id=b.product_id ORDER BY b.created_at DESC LIMIT 500",
-  subscribers: "SELECT * FROM subscribers ORDER BY created_at DESC",
 };
 
 export async function getAdminResourceList(
@@ -68,7 +68,7 @@ export async function updateAdminProduct(p: zType.infer<typeof productSchema>) {
     throw new Error("Sửa giá xe tại mục Bảng giá xe");
   }
   const { rows } = await db.query(
-    "UPDATE products SET title=$2,type=$3,price=$4,original_price=$5,image=$6,location=$7,rating=$8,description=$9,position=$10,active=$11,content=$12,updated_at=now() WHERE id=$1 RETURNING *",
+    "UPDATE products SET title=$2,type=$3,price=$4,original_price=$5,image=$6,location=$7,rating=$8,description=$9,position=$10,active=$11,content=$12,destination_id=$13,partner_id=$14,updated_at=now() WHERE id=$1 RETURNING *",
     [
       p.id,
       p.title,
@@ -82,6 +82,8 @@ export async function updateAdminProduct(p: zType.infer<typeof productSchema>) {
       p.position,
       p.active,
       JSON.stringify(p.content),
+      p.destination_id,
+      p.partner_id,
     ],
   );
   return rows[0] || null;
@@ -106,9 +108,21 @@ export async function updateAdminContent(
       telephone: z.string().regex(/^[+0-9]+$/),
       zalo: z.url().refine((url) => url.startsWith("https://")),
       email: z.email(),
+      whatsapp: z
+        .union([
+          z.url().refine((url) => url.startsWith("https://")),
+          z.literal(""),
+        ])
+        .optional(),
+      telegram: z
+        .union([
+          z.url().refine((url) => url.startsWith("https://")),
+          z.literal(""),
+        ])
+        .optional(),
     }).parse(p.value);
   }
-  if (key === "site.mobile-navigation") {
+  if (key === "site.mobile-navigation" || key === "site.navigation") {
     z.array(
       z.object({
         label: z.string().min(1).max(100),
@@ -160,17 +174,6 @@ export async function updateAdminFare(
   } finally {
     client.release();
   }
-}
-
-export async function updateAdminBookingStatus(
-  id: string,
-  status: "pending" | "confirmed" | "cancelled",
-) {
-  const result = await db.query(
-    "UPDATE bookings SET status=$2 WHERE id=$1 RETURNING id,status",
-    [id, status],
-  );
-  return result.rows[0] || null;
 }
 
 export async function changeAdminPassword(

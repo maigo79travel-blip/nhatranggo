@@ -1,18 +1,25 @@
-﻿import "server-only";
+import "server-only";
 import { cache } from "react";
+import { cookies } from "next/headers";
 import { db } from "./db";
-import type { SiteData, ContentEntry, Fare } from "@/components/content";
-import type { Product } from "./types";
+import { parseLocale } from "@/modules/settings/locale";
+import type { SiteData, ContentEntry, Fare, Product } from "./types";
 export const getSiteData = cache(async (): Promise<SiteData> => {
-  const [products, entries, fares] = await Promise.all([
+  const locale = parseLocale((await cookies()).get("site_locale")?.value);
+  const [products, entries, fares, destinations] = await Promise.all([
     db.query<Product>(
-      "SELECT * FROM products WHERE active=true ORDER BY position,id",
+      `SELECT p.*,COALESCE(t.value->>'title',p.title) AS title,COALESCE(t.value->>'description',p.description) AS description,COALESCE(t.value->>'location',p.location) AS location,COALESCE(t.value->'content',p.content) AS content FROM products p LEFT JOIN translations t ON t.entity='product' AND t.entity_key=p.id AND t.locale=$1 WHERE p.active=true AND NOT EXISTS(SELECT 1 FROM transfer_routes r WHERE p.id LIKE 'transfer-'||r.code||'-%' AND r.active=false) ORDER BY p.position,p.id`,
+      [locale],
     ),
     db.query<ContentEntry & { key: string }>(
-      "SELECT key,kind,label,value FROM site_content ORDER BY key",
+      `SELECT c.key,c.kind,c.label,COALESCE(t.value->'value',c.value) AS value FROM site_content c LEFT JOIN translations t ON t.entity='content' AND t.entity_key=c.key AND t.locale=$1 ORDER BY c.key`,
+      [locale],
     ),
     db.query<Fare>(
-      "SELECT route,vehicle,price FROM transfer_fares ORDER BY route,vehicle",
+      "SELECT f.route,f.vehicle,f.price FROM transfer_fares f LEFT JOIN transfer_routes r ON r.code=f.route WHERE r.id IS NULL OR r.active=true ORDER BY f.route,f.vehicle",
+    ),
+    db.query<{ id: string; name: string; code: string }>(
+      "SELECT id,name,code FROM destinations WHERE active=true ORDER BY name",
     ),
   ]);
   return {
@@ -21,5 +28,7 @@ export const getSiteData = cache(async (): Promise<SiteData> => {
       entries.rows.map(({ key, ...entry }) => [key, entry]),
     ),
     fares: fares.rows,
+    destinations: destinations.rows,
+    locale,
   };
 });

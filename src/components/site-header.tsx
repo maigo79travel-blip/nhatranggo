@@ -1,9 +1,39 @@
 "use client";
-import { ContentText, ContentElement } from "@/components/content";
+import {
+  ContentText,
+  ContentElement,
+  ContentLink,
+  useSiteData,
+} from "@/components/content";
+import Link from "next/link";
+import type { ReactNode } from "react";
+import { LanguageSelector } from "@/modules/settings/language-selector";
+import { MobileNav } from "./catalog/mobile-nav";
 
 import { usePathname } from "next/navigation";
-export function SiteHeader() {
+function HeaderNavLink({
+  children,
+  href,
+}: {
+  href: string;
+  children: ReactNode;
+}) {
   const pathname = usePathname();
+  const active = href === pathname;
+  return (
+    <Link
+      href={href}
+      aria-current={active ? "page" : undefined}
+      className={`px-3.5 py-2 rounded-full font-label-lg text-label-lg transition-colors action-link ${active ? "bg-primary text-on-primary shadow-sm" : "text-on-surface-variant hover:bg-surface-container hover:text-on-surface"}`}
+    >
+      {children}
+    </Link>
+  );
+}
+export function SiteHeader() {
+  const { content } = useSiteData();
+  const navigation = content["site.navigation"]?.value as
+    { href: string; label: string }[] | undefined;
   return (
     <header className="fixed top-0 left-0 w-full z-50 shadow-header">
       <div className="bg-primary text-on-primary text-body-sm font-body-sm">
@@ -41,47 +71,17 @@ export function SiteHeader() {
             </ContentElement>
           </div>
           <div className="flex items-center gap-5">
-            <ContentElement
-              contentKey="header.attributes-003"
-              tag="a"
-              className="flex items-center gap-1.5 hover:text-ocean-light transition-colors"
-              data-path="danh-sach-yeu-thich"
-            >
-              <span className="material-symbols-outlined text-[15px] text-gold-amber">
-                {"favorite"}
-              </span>
-              <span className="hidden md:inline">
-                <ContentText contentKey="header.text-017" />
-              </span>
-            </ContentElement>
-            <div className="flex items-center gap-1.5 bg-primary-container/40 px-2 py-0.5 rounded-full">
-              <span className="material-symbols-outlined text-[14px]">
-                {"language"}
-              </span>
-              <button
-                className="font-label-sm text-label-sm uppercase hover:text-ocean-light transition-colors"
-                type="button"
-              >
-                <ContentText contentKey="header.text-018" />
-              </button>
-              <span className="opacity-40 text-label-sm">
-                <ContentText contentKey="header.text-019" />
-              </span>
-              <button
-                className="font-label-sm text-label-sm uppercase text-on-primary/70 hover:text-on-primary transition-colors"
-                type="button"
-              >
-                <ContentText contentKey="header.text-020" />
-              </button>
-            </div>
+            <Link href="/tra-cuu" className="hover:underline text-body-sm">
+              Tra cứu
+            </Link>
+            <LanguageSelector />
           </div>
         </div>
       </div>
       <div className="bg-surface-container-lowest/95 backdrop-blur-xl">
         <div className="h-20 site-container flex items-center justify-between gap-3">
-          <ContentElement
+          <ContentLink
             contentKey="header.attributes-004"
-            tag="a"
             className="flex items-center gap-3 shrink-0"
             data-path="trang-chu"
           >
@@ -101,68 +101,18 @@ export function SiteHeader() {
                 <ContentText contentKey="header.text-023" />
               </span>
             </div>
-          </ContentElement>
+          </ContentLink>
           <nav
-            data-current={pathname}
+            aria-label="Điều hướng chính"
             className="hidden xl:flex shrink-0 items-center gap-0 whitespace-nowrap [&>a]:px-2.5 [&>a]:text-[13px]"
-            data-active-classes="bg-primary text-on-primary font-bold rounded-full shadow-sm"
           >
-            <ContentElement
-              contentKey="header.attributes-005"
-              tag="a"
-              className="px-3.5 py-2 rounded-full font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all action-link"
-              data-path="trang-chu"
-            >
-              <ContentText contentKey="header.text-024" />
-            </ContentElement>
-            <ContentElement
-              contentKey="header.attributes-006"
-              tag="a"
-              className="px-3.5 py-2 rounded-full font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all action-link"
-              data-path="khach-san"
-            >
-              <ContentText contentKey="header.text-025" />
-            </ContentElement>
-            <ContentElement
-              contentKey="header.attributes-007"
-              tag="a"
-              className="px-3.5 py-2 rounded-full font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all action-link"
-              data-path="tour-hang-ngay"
-            >
-              <ContentText contentKey="header.text-026" />
-            </ContentElement>
-            <ContentElement
-              contentKey="header.attributes-008"
-              tag="a"
-              className="px-3.5 py-2 rounded-full font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all action-link"
-              data-path="combo-tron-goi"
-            >
-              <ContentText contentKey="header.text-027" />
-            </ContentElement>
-            <ContentElement
-              contentKey="header.attributes-009"
-              tag="a"
-              className="px-3.5 py-2 rounded-full font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all action-link"
-              data-path="xe-dua-don"
-            >
-              <ContentText contentKey="header.text-028" />
-            </ContentElement>
-            <ContentElement
-              contentKey="header.attributes-010"
-              tag="a"
-              className="px-3.5 py-2 rounded-full font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all action-link"
-              data-path="cam-nang-du-lich"
-            >
-              <ContentText contentKey="header.text-029" />
-            </ContentElement>
-            <ContentElement
-              contentKey="header.attributes-011"
-              tag="a"
-              className="px-3.5 py-2 rounded-full font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all action-link"
-              data-path="lien-he"
-            >
-              <ContentText contentKey="header.text-030" />
-            </ContentElement>
+            {(navigation || [])
+              .filter((item) => /^(\/[^/]|\/$|https?:\/\/|#)/.test(item.href))
+              .map((item) => (
+                <HeaderNavLink key={item.href} href={item.href}>
+                  {item.label}
+                </HeaderNavLink>
+              ))}
           </nav>
           <div className="flex items-center gap-3 shrink-0">
             <ContentElement
@@ -179,6 +129,7 @@ export function SiteHeader() {
                 <ContentText contentKey="header.text-031" />
               </span>
             </ContentElement>
+            <MobileNav />
           </div>
         </div>
       </div>

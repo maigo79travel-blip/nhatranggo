@@ -119,11 +119,16 @@
   margin-bottom: 14px;
 }
 .ad-sidebar nav {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 .ad-nav-item {
+  flex-shrink: 0;
+  white-space: normal;
   display: flex;
   align-items: center;
   width: 100%;
@@ -330,7 +335,6 @@
   font-size: 13px;
 }
 .ad-content {
-  max-width: 1660px;
   margin: 0 auto;
   padding: 33px 36px 0;
 }
@@ -1548,20 +1552,6 @@
 .ad-detail-grid > div:last-child {
   grid-column: 1/-1;
 }
-.ad-subscriber-detail {
-  text-align: center;
-  padding: 35px 0;
-}
-.ad-subscriber-detail h2 {
-  font-size: 18px;
-  margin: 18px 0 12px;
-  overflow-wrap: anywhere;
-}
-.ad-subscriber-detail p {
-  font-size: 13px;
-  color: var(--ad-muted);
-  margin-top: 20px;
-}
 .ad-account-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.7fr) minmax(260px, 1fr);
@@ -2316,9 +2306,6 @@
   }
   .ad-table-bookings {
     min-width: 650px;
-  }
-  .ad-table-subscribers {
-    min-width: 490px;
   }
   .ad-table-products .ad-row-title {
     max-width: 230px;

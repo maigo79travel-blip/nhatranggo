@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { adminUser, sameOrigin } from "@/lib/admin-auth";
 import { productSchema, contentSchema } from "@/lib/admin-validation";
+import { bookingSchema } from "@/lib/validation";
+import { db } from "@/lib/db";
 import {
   getAdminOverview,
   getAdminResourceList,
@@ -8,157 +10,209 @@ import {
   updateAdminProduct,
   updateAdminContent,
   updateAdminFare,
-  updateAdminBookingStatus,
   changeAdminPassword,
 } from "@/lib/services/admin-service";
-
-type RouteContext = { params: Promise<{ resource: string }> };
-
-const unauthorized = () =>
-  Response.json({ error: "Vui lòng đăng nhập" }, { status: 401 });
-
-export async function GET(request: Request, context: RouteContext) {
-  if (!(await adminUser())) return unauthorized();
-  const { resource } = await context.params;
-
-  if (resource === "overview") {
-    try {
-      const data = await getAdminOverview();
+import { createBooking } from "@/lib/services/booking-service";
+import { resources } from "@/modules/admin/resources";
+import { canAccess } from "@/modules/admin/permissions";
+import {
+  listRecords,
+  saveRecord,
+  removeRecord,
+  ModuleError,
+} from "@/modules/admin/service";
+import { moduleError } from "@/modules/admin/http";
+import {
+  bookingUpdateSchema,
+  updateBooking,
+  exportBookings,
+} from "@/modules/bookings/service";
+type Context = { params: Promise<{ resource: string }> };
+async function handle(request: Request, context: Context) {
+  try {
+    const user = await adminUser();
+    if (!user)
+      return Response.json({ error: "Vui lòng đăng nhập" }, { status: 401 });
+    const { resource } = await context.params;
+    if (
+      !canAccess(user, resource) &&
+      !(
+        request.method === "GET" &&
+        resource === "products" &&
+        user.role === "booking"
+      )
+    )
+      return Response.json(
+        { error: "Bạn không có quyền truy cập module này" },
+        { status: 403 },
+      );
+    const method = request.method;
+    if (method !== "GET" && !sameOrigin(request))
+      return Response.json({ error: "Yêu cầu không hợp lệ" }, { status: 403 });
+    if (method === "GET") {
+      if (resource === "booking-export")
+        return new Response(await exportBookings(), {
+          headers: {
+            "Content-Type": "text/csv; charset=utf-8",
+            "Content-Disposition": 'attachment; filename="bookings.csv"',
+          },
+        });
+      if (resource === "overview") {
+        const data = await getAdminOverview();
+        if (user.role === "editor") {
+          data.bookings = [];
+          data.stats.bookings = 0;
+          data.stats.pending = 0;
+          data.stats.completed = 0;
+          data.stats.revenue = 0;
+        }
+        return Response.json({ data });
+      }
+      const url = new URL(request.url);
+      if (resource === "bookings" && url.searchParams.has("phone"))
+        return Response.json({
+          data: (
+            await db.query(
+              "SELECT b.*,b.departure_date::text,p.title FROM bookings b JOIN products p ON p.id=b.product_id WHERE phone=$1 ORDER BY created_at DESC",
+              [url.searchParams.get("phone")],
+            )
+          ).rows,
+        });
+      if (resource === "bookings" && url.searchParams.has("history"))
+        return Response.json({
+          data: (
+            await db.query(
+              "SELECT h.status,h.notes,h.created_at,u.username FROM booking_history h LEFT JOIN admin_users u ON u.id=h.actor_id WHERE h.booking_id=$1 ORDER BY h.created_at DESC",
+              [z.uuid().parse(url.searchParams.get("history"))],
+            )
+          ).rows,
+        });
+      const data = resources[resource]
+        ? await listRecords(resource)
+        : await getAdminResourceList(resource);
+      if (!data) throw new ModuleError("Không tìm thấy module", 404);
       return Response.json({ data });
-    } catch {
-      return Response.json(
-        { error: "Không tải được tổng quan. Vui lòng thử lại." },
-        { status: 503 },
-      );
     }
-  }
-
-  try {
-    const data = await getAdminResourceList(resource);
-    if (!data) {
-      return Response.json(
-        { error: "Không tìm thấy dữ liệu" },
-        { status: 404 },
-      );
-    }
-    return Response.json({ data });
-  } catch {
-    return Response.json({ error: "Không tải được dữ liệu" }, { status: 503 });
-  }
-}
-
-export async function POST(request: Request, context: RouteContext) {
-  if (!(await adminUser())) return unauthorized();
-  if (!sameOrigin(request)) {
-    return Response.json({ error: "Yêu cầu không hợp lệ" }, { status: 403 });
-  }
-
-  const { resource } = await context.params;
-  if (resource !== "products") {
-    return Response.json({ error: "Không hỗ trợ thao tác" }, { status: 405 });
-  }
-
-  try {
-    const body = z
-      .object({
-        cloneId: z.string().max(100),
-        title: z.string().trim().min(2).max(300),
-      })
-      .parse(await request.json());
-
-    const cloned = await cloneAdminProduct(body.cloneId, body.title);
-    return cloned
-      ? Response.json({ data: cloned }, { status: 201 })
-      : Response.json({ error: "Mẫu không tồn tại" }, { status: 404 });
-  } catch {
-    return Response.json(
-      { error: "Không tạo được dịch vụ. Kiểm tra tên và mẫu." },
-      { status: 400 },
-    );
-  }
-}
-
-export async function PATCH(request: Request, context: RouteContext) {
-  const user = await adminUser();
-  if (!user) return unauthorized();
-  if (!sameOrigin(request)) {
-    return Response.json({ error: "Yêu cầu không hợp lệ" }, { status: 403 });
-  }
-
-  const { resource } = await context.params;
-
-  try {
     const body = await request.json();
-
+    if (resources[resource]) {
+      if (method === "DELETE")
+        return Response.json({
+          data: await removeRecord(resource, z.uuid().parse(body.id), user),
+        });
+      return Response.json(
+        {
+          data: await saveRecord(
+            resource,
+            body,
+            user,
+            method === "PATCH" ? z.uuid().parse(body.id) : undefined,
+          ),
+        },
+        { status: method === "POST" ? 201 : 200 },
+      );
+    }
     if (resource === "products") {
-      const p = productSchema.parse(body);
-      try {
-        const updated = await updateAdminProduct(p);
-        return updated
-          ? Response.json({ data: updated })
-          : Response.json({ error: "Không tìm thấy dịch vụ" }, { status: 404 });
-      } catch (err) {
-        if ((err as Error).message === "Sửa giá xe tại mục Bảng giá xe") {
-          return Response.json(
-            { error: (err as Error).message },
-            { status: 400 },
-          );
-        }
-        throw err;
+      if (method === "DELETE") {
+        const result = await db.query(
+          "UPDATE products SET active=false,updated_at=now() WHERE id=$1 RETURNING id",
+          [z.string().max(100).parse(body.id)],
+        );
+        if (!result.rowCount)
+          throw new ModuleError("Không tìm thấy dịch vụ", 404);
+        return Response.json({ data: result.rows[0] });
       }
-    }
-
-    if (resource === "content") {
-      const p = contentSchema.parse(body);
-      const key = z.string().min(1).max(200).parse(body.key);
-      try {
-        const updated = await updateAdminContent(key, p);
-        return updated
-          ? Response.json({ data: updated })
-          : Response.json(
-              { error: "Không tìm thấy nội dung" },
-              { status: 404 },
-            );
-      } catch (err) {
-        if ((err as Error).message === "Không được đổi loại trường nội dung") {
-          return Response.json(
-            { error: (err as Error).message },
-            { status: 400 },
-          );
+      if (method === "POST") {
+        const input = z
+          .object({
+            cloneId: z.string().max(100).optional(),
+            title: z.string().trim().min(2).max(300),
+            type: z.enum(["hotel", "tour", "combo"]).default("hotel"),
+          })
+          .parse(body);
+        if (input.cloneId) {
+          const data = await cloneAdminProduct(input.cloneId, input.title);
+          if (!data) throw new ModuleError("Mẫu không tồn tại", 404);
+          return Response.json({ data }, { status: 201 });
         }
-        throw err;
+        const data = (
+          await db.query(
+            "INSERT INTO products(id,type,title,price,location,active) VALUES(gen_random_uuid()::text,$1,$2,0,'',false) RETURNING *",
+            [input.type, input.title],
+          )
+        ).rows[0];
+        return Response.json({ data }, { status: 201 });
       }
+      return Response.json({
+        data: await updateAdminProduct(productSchema.parse(body)),
+      });
     }
-
+    if (resource === "content")
+      return Response.json({
+        data: await updateAdminContent(
+          z.string().max(200).parse(body.key),
+          contentSchema.parse(body),
+        ),
+      });
     if (resource === "fares") {
       const p = z
         .object({
-          route: z.string().max(100),
+          route: z.string().regex(/^[A-Z0-9_]{2,100}$/),
           vehicle: z.enum(["4cho", "7cho", "16cho", "limo9"]),
           price: z.coerce.number().int().min(0).max(2000000000),
         })
         .parse(body);
-
-      const updated = await updateAdminFare(p.route, p.vehicle, p.price);
-      return updated
-        ? Response.json({ data: updated })
-        : Response.json({ error: "Không tìm thấy tuyến xe" }, { status: 404 });
+      if (method === "POST") {
+        const route = (
+          await db.query(
+            "SELECT title FROM transfer_routes WHERE code=$1 AND active=true",
+            [p.route],
+          )
+        ).rows[0];
+        if (!route) throw new ModuleError("Hãy tạo tuyến xe trước");
+        const client = await db.connect();
+        try {
+          await client.query("BEGIN");
+          const result = await client.query(
+            "INSERT INTO transfer_fares(route,vehicle,price) VALUES($1,$2,$3) RETURNING *",
+            [p.route, p.vehicle, p.price],
+          );
+          await client.query(
+            "INSERT INTO products(id,type,title,price,location,description) VALUES($1,'transfer',$2,$3,$4,'Giá tham khảo mỗi chuyến')",
+            [
+              `transfer-${p.route}-${p.vehicle}`,
+              `${route.title} · ${p.vehicle}`,
+              p.price,
+              route.title,
+            ],
+          );
+          await client.query("COMMIT");
+          return Response.json({ data: result.rows[0] }, { status: 201 });
+        } catch (e) {
+          await client.query("ROLLBACK");
+          throw e;
+        } finally {
+          client.release();
+        }
+      }
+      return Response.json({
+        data: await updateAdminFare(p.route, p.vehicle, p.price),
+      });
     }
-
     if (resource === "bookings") {
-      const p = z
-        .object({
-          id: z.uuid(),
-          status: z.enum(["pending", "confirmed", "cancelled"]),
-        })
-        .parse(body);
-
-      const updated = await updateAdminBookingStatus(p.id, p.status);
-      return updated
-        ? Response.json({ data: updated })
-        : Response.json({ error: "Không tìm thấy yêu cầu" }, { status: 404 });
+      if (method === "DELETE")
+        throw new ModuleError(
+          "Booking phải lưu lịch sử. Hãy chuyển sang Đã hủy",
+        );
+      return Response.json(
+        {
+          data:
+            method === "POST"
+              ? await createBooking(bookingSchema.parse(body))
+              : await updateBooking(bookingUpdateSchema.parse(body), user.id),
+        },
+        { status: method === "POST" ? 201 : 200 },
+      );
     }
-
     if (resource === "account") {
       const p = z
         .object({
@@ -166,34 +220,15 @@ export async function PATCH(request: Request, context: RouteContext) {
           newPassword: z.string().min(12).max(200),
         })
         .parse(body);
-
-      try {
-        await changeAdminPassword(user, p.currentPassword, p.newPassword);
-        return Response.json({
-          ok: true,
-          message: "Đã đổi mật khẩu. Vui lòng đăng nhập lại.",
-        });
-      } catch (err) {
-        if ((err as Error).message === "Mật khẩu hiện tại không đúng") {
-          return Response.json(
-            { error: (err as Error).message },
-            { status: 400 },
-          );
-        }
-        throw err;
-      }
+      await changeAdminPassword(user, p.currentPassword, p.newPassword);
+      return Response.json({ ok: true });
     }
-
-    return Response.json({ error: "Không hỗ trợ thao tác" }, { status: 404 });
+    throw new ModuleError("Không hỗ trợ thao tác", 404);
   } catch (error) {
-    return Response.json(
-      {
-        error:
-          error instanceof z.ZodError
-            ? error.issues[0]?.message
-            : "Không lưu được dữ liệu. Vui lòng thử lại.",
-      },
-      { status: error instanceof z.ZodError ? 400 : 503 },
-    );
+    return moduleError(error);
   }
 }
+export const GET = handle;
+export const POST = handle;
+export const PATCH = handle;
+export const DELETE = handle;

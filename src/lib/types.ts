@@ -1,7 +1,5 @@
-export type ContentKind = "text" | "attributes" | "settings";
-
 export type ContentEntry = {
-  kind: ContentKind;
+  kind: "text" | "attributes" | "settings";
   label: string;
   value: unknown;
 };
@@ -20,6 +18,8 @@ export type Product = {
   template_id?: string | null;
   active?: boolean;
   position?: number;
+  destination_id?: string | null;
+  partner_id?: string | null;
   content?: Record<string, ContentEntry>;
 };
 
@@ -33,9 +33,9 @@ export type SiteData = {
   products: Product[];
   content: Record<string, ContentEntry>;
   fares: Fare[];
+  destinations: { id: string; name: string; code: string }[];
+  locale: "vi" | "en" | "ru" | "ko" | "zh";
 };
-
-export type BookingStatus = "pending" | "confirmed" | "cancelled" | string;
 
 export type Booking = {
   id: string;
@@ -46,19 +46,15 @@ export type Booking = {
   guests: number;
   unit_price: number;
   notes?: string;
-  status: BookingStatus;
+  status: string;
   created_at?: string;
   title?: string;
-};
-
-export type Subscriber = {
-  email: string;
-  created_at?: string;
 };
 
 export type AdminUser = {
   id: string;
   username: string;
+  role: "super_admin" | "booking" | "editor";
 };
 
 export type AdminOverviewData = {
@@ -68,7 +64,8 @@ export type AdminOverviewData = {
     bookings: number;
     pending: number;
     content: number;
-    subscribers: number;
+    completed: number;
+    revenue: number;
     fares: number;
   };
   categories: { type: string; count: number }[];

@@ -1,3 +1,4 @@
+import { ModuleError } from "@/modules/admin/service";
 import { bookingSchema } from "@/lib/validation";
 import {
   createBooking,
@@ -25,8 +26,8 @@ export async function POST(request: Request) {
     return Response.json(booking, { status: 201 });
   } catch (error) {
     const message = (error as Error).message;
-    if (message === "Dịch vụ không tồn tại") {
-      return Response.json({ error: message }, { status: 404 });
+    if (error instanceof ModuleError) {
+      return Response.json({ error: message }, { status: error.status });
     }
     return Response.json(
       { error: "Chưa gửi được yêu cầu. Vui lòng thử lại hoặc gọi hotline." },

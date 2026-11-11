@@ -13,7 +13,7 @@ export async function getFareQuote(
 ): Promise<FareQuote | null> {
   const route = `${pickup}_${dropoff}`;
   const { rows } = await db.query<{ price: number }>(
-    "SELECT price FROM transfer_fares WHERE route=$1 AND vehicle=$2",
+    "SELECT f.price FROM transfer_fares f LEFT JOIN transfer_routes r ON r.code=f.route JOIN products p ON p.id='transfer-'||f.route||'-'||f.vehicle WHERE f.route=$1 AND f.vehicle=$2 AND p.active=true AND (r.id IS NULL OR r.active=true)",
     [route, vehicle],
   );
 

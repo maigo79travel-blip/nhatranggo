@@ -1,3 +1,5 @@
+import { HomeLink } from "@/modules/home/home-link";
+import { HomeSearch } from "@/modules/home/home-search";
 import { ContentText, ContentElement } from "@/components/content";
 
 export function HomeHero() {
@@ -22,185 +24,48 @@ export function HomeHero() {
             </span>
           </div>
 
-          <h1 className="font-display text-display text-on-primary drop-shadow-sm max-w-4xl tracking-tight leading-tight">
+          <h1 className="font-display text-display text-on-primary drop-shadow-sm tracking-tight leading-tight">
             <ContentText contentKey="home.text-044" />
             <br className="hidden sm:inline" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-amber via-secondary-container to-gold-soft drop-shadow">
               <ContentText contentKey="home.text-045" />
             </span>
           </h1>
-          <p className="font-body-lg text-body-lg text-ocean-light/90 max-w-2xl mt-4 mb-10 font-medium">
-            <ContentText contentKey="home.text-046" />
-          </p>
-
-          <div className="w-full bg-surface-container-lowest/95 backdrop-blur-2xl rounded-2xl shadow-2xl p-4 md:p-6 text-left">
-            <div className="flex items-center gap-2 pb-4 overflow-x-auto">
-              <button
-                className="search-tab-btn flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-on-primary font-label-lg text-label-lg shadow-sm transition-all"
-                data-target="hotel-tab"
-                type="button"
-              >
-                <span className="material-symbols-outlined text-[19px]">
-                  {"hotel"}
-                </span>
-                <span>
-                  <ContentText contentKey="home.text-047" />
-                </span>
-              </button>
-              <button
-                className="search-tab-btn flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-lg text-label-lg transition-all"
-                data-target="tour-tab"
-                type="button"
-              >
-                <span className="material-symbols-outlined text-[19px]">
-                  {"kayaking"}
-                </span>
-                <span>
-                  <ContentText contentKey="home.text-048" />
-                </span>
-              </button>
-              <button
-                className="search-tab-btn flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-lg text-label-lg transition-all"
-                data-target="combo-tab"
-                type="button"
-              >
-                <span className="material-symbols-outlined text-[19px]">
-                  {"flight_takeoff"}
-                </span>
-                <span>
-                  <ContentText contentKey="home.text-049" />
-                </span>
-              </button>
-              <button
-                className="search-tab-btn flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-lg text-label-lg transition-all"
-                data-target="ticket-tab"
-                type="button"
-              >
-                <span className="material-symbols-outlined text-[19px]">
-                  {"confirmation_number"}
-                </span>
-                <span>
-                  <ContentText contentKey="home.text-050" />
-                </span>
-              </button>
-            </div>
-
-            <form className="grid grid-cols-1 md:grid-cols-12 gap-3 pt-2 items-center">
-              <div className="md:col-span-4 bg-surface-container-low hover:bg-surface-container rounded-xl p-3 flex items-center gap-3 transition-colors cursor-pointer group">
-                <div className="w-10 h-10 rounded-lg bg-primary-fixed flex items-center justify-center text-primary group-hover:scale-105 transition-transform shrink-0">
-                  <span className="material-symbols-outlined text-[22px]">
-                    {"location_on"}
-                  </span>
-                </div>
-                <div className="min-w-0 flex-1">
-                  <label className="block font-label-sm text-label-sm text-outline uppercase tracking-wider">
-                    <ContentText contentKey="home.text-051" />
-                  </label>
-                  <ContentElement
-                    contentKey="home.attributes-002"
-                    tag="input"
-                    className="w-full bg-transparent font-title-md text-title-md text-on-surface focus:outline-none truncate"
-
-                    type="text"
-                  />
-                </div>
-              </div>
-
-              <div className="md:col-span-4 bg-surface-container-low hover:bg-surface-container rounded-xl p-3 flex items-center gap-3 transition-colors cursor-pointer group">
-                <div className="w-10 h-10 rounded-lg bg-secondary-fixed flex items-center justify-center text-secondary group-hover:scale-105 transition-transform shrink-0">
-                  <span className="material-symbols-outlined text-[22px]">
-                    {"calendar_month"}
-                  </span>
-                </div>
-                <div className="min-w-0 flex-1">
-                  <label className="block font-label-sm text-label-sm text-outline uppercase tracking-wider">
-                    <ContentText contentKey="home.text-052" />
-                  </label>
-                  <div className="flex items-center gap-1.5 font-label-lg text-label-lg text-on-surface truncate">
-                    <span>
-                      <ContentText contentKey="home.text-053" />
-                    </span>
-                    <span className="text-outline text-label-sm font-label-sm bg-surface-container-high px-1.5 py-0.5 rounded-full">
-                      <ContentText contentKey="home.text-054" />
-                    </span>
-                    <span>
-                      <ContentText contentKey="home.text-055" />
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="md:col-span-2 bg-surface-container-low hover:bg-surface-container rounded-xl p-3 flex items-center gap-3 transition-colors cursor-pointer group">
-                <div className="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center text-primary group-hover:scale-105 transition-transform shrink-0">
-                  <span className="material-symbols-outlined text-[22px]">
-                    {"group"}
-                  </span>
-                </div>
-                <div className="min-w-0 flex-1">
-                  <label className="block font-label-sm text-label-sm text-outline uppercase tracking-wider">
-                    <ContentText contentKey="home.text-056" />
-                  </label>
-                  <div className="font-label-lg text-label-lg text-on-surface truncate">
-                    <ContentText contentKey="home.text-057" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="md:col-span-2">
-                <button
-                  className="w-full h-[58px] rounded-xl bg-gradient-to-r from-gold-amber to-tertiary-fixed-dim hover:from-gold-amber hover:to-gold-amber text-on-tertiary-fixed font-title-md text-title-md flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5"
-                  type="submit"
-                >
-                  <span className="material-symbols-outlined text-[22px]">
-                    {"search"}
-                  </span>
-                  <span>
-                    <ContentText contentKey="home.text-058" />
-                  </span>
-                </button>
-              </div>
-            </form>
+          <div className="w-full bg-surface-container-lowest/95 backdrop-blur-2xl rounded-2xl shadow-2xl p-4 md:p-6 mt-8 text-left">
+            <HomeSearch />
 
             <div className="flex flex-wrap items-center gap-2 mt-4 pt-3 text-body-sm font-body-sm text-on-surface-variant">
               <span className="font-label-sm text-label-sm text-outline uppercase">
                 <ContentText contentKey="home.text-059" />
               </span>
-              <ContentElement
+              <HomeLink
                 contentKey="home.attributes-003"
-                tag="a"
                 className="px-2.5 py-1 rounded-md bg-surface-container hover:bg-primary-fixed hover:text-primary transition-colors action-link"
-
-                data-action="details"
+                href="/dich-vu?type=hotel&q=B%C3%A3i%20D%C3%A0i"
               >
                 <ContentText contentKey="home.text-060" />
-              </ContentElement>
-              <ContentElement
+              </HomeLink>
+              <HomeLink
                 contentKey="home.attributes-004"
-                tag="a"
                 className="px-2.5 py-1 rounded-md bg-surface-container hover:bg-primary-fixed hover:text-primary transition-colors action-link"
-
-                data-action="details"
+                href="/dich-vu?type=tour&q=3%20%C4%90%E1%BA%A3o"
               >
                 <ContentText contentKey="home.text-061" />
-              </ContentElement>
-              <ContentElement
+              </HomeLink>
+              <HomeLink
                 contentKey="home.attributes-005"
-                tag="a"
                 className="px-2.5 py-1 rounded-md bg-surface-container hover:bg-primary-fixed hover:text-primary transition-colors action-link"
-
-                data-action="details"
+                href="/dich-vu?type=tour&q=VinWonders"
               >
                 <ContentText contentKey="home.text-062" />
-              </ContentElement>
-              <ContentElement
+              </HomeLink>
+              <HomeLink
                 contentKey="home.attributes-006"
-                tag="a"
                 className="px-2.5 py-1 rounded-md bg-surface-container hover:bg-primary-fixed hover:text-primary transition-colors action-link"
-
-                data-action="details"
+                href="/dich-vu?type=combo&q=Ph%C3%BA%20Qu%E1%BB%91c"
               >
                 <ContentText contentKey="home.text-063" />
-              </ContentElement>
+              </HomeLink>
             </div>
           </div>
 

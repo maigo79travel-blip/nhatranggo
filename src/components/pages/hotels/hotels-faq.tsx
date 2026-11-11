@@ -4,7 +4,7 @@ export function HotelsFaq() {
   return (
     <section className="site-container py-10 w-full">
       <div className="bg-surface-container-lowest rounded-3xl p-8 lg:p-10 shadow-sm">
-        <div className="text-center max-w-3xl mx-auto mb-10">
+        <div className="text-center mx-auto mb-10">
           <span className="px-3.5 py-1 rounded-full bg-secondary/10 text-secondary font-label-sm text-label-sm uppercase font-bold tracking-wider">
             <ContentText contentKey="hotels.text-141" />
           </span>
@@ -31,7 +31,7 @@ export function HotelsFaq() {
           </div>
 
           <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-surface-subtle hover:bg-ocean-light/30 transition-all duration-300">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-secondary to-teal-700 text-on-secondary flex items-center justify-center shadow-lg mb-4">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-secondary to-on-secondary-fixed-variant text-on-secondary flex items-center justify-center shadow-lg mb-4">
               <span className="material-symbols-outlined text-[32px]">
                 {"support_agent"}
               </span>
@@ -45,7 +45,7 @@ export function HotelsFaq() {
           </div>
 
           <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-surface-subtle hover:bg-ocean-light/30 transition-all duration-300">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-gold-amber to-amber-600 text-on-background flex items-center justify-center shadow-lg mb-4">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-gold-amber to-tertiary-container text-on-background flex items-center justify-center shadow-lg mb-4">
               <span className="material-symbols-outlined text-[32px]">
                 {"published_with_changes"}
               </span>
@@ -78,8 +78,8 @@ export function HotelsFaq() {
               </span>
             </div>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="text-right">
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <div className="text-center sm:text-right">
               <span className="font-body-sm text-body-sm text-outline block">
                 <ContentText contentKey="hotels.text-152" />
               </span>

@@ -8,15 +8,19 @@ import {
   Children,
   isValidElement,
   cloneElement,
+  type AnchorHTMLAttributes,
 } from "react";
-import type { Product, ContentEntry, Fare, SiteData } from "@/lib/types";
+import Link from "next/link";
+import type { SiteData } from "@/lib/types";
 import { money } from "@/lib/types";
+import { contentAttributeKeys } from "@/lib/content-attributes";
 
-export type { ContentEntry, Fare, SiteData };
 const DataContext = createContext<SiteData>({
   products: [],
   content: {},
   fares: [],
+  destinations: [],
+  locale: "vi",
 });
 const ScopeContext = createContext<string | null>(null);
 export function SiteDataProvider({
@@ -33,7 +37,7 @@ export function useProduct(id?: string) {
   const scope = useContext(ScopeContext);
   return useSiteData().products.find((p) => p.id === (scope || id));
 }
-export function useContent(key: string): unknown {
+function useContent(key: string): unknown {
   const data = useSiteData();
   const scope = useContext(ScopeContext);
   const value = scope
@@ -78,25 +82,12 @@ export function ContentOption({
     </option>
   );
 }
-const attributeKeys = new Set([
-  "href",
-  "src",
-  "alt",
-  "title",
-  "placeholder",
-  "defaultValue",
-  "value",
-  "aria-label",
-  "data-alt",
-  "data-location",
-  "backgroundImage",
-]);
 export function useContentAttributes(contentKey?: string) {
   const value = useContent(contentKey || "");
   const attrs: Record<string, unknown> = {};
   if (value && typeof value === "object")
     for (const [k, v] of Object.entries(value)) {
-      if (attributeKeys.has(k)) {
+      if (contentAttributeKeys.has(k)) {
         if (
           (k === "href" || k === "src") &&
           typeof v === "string" &&
@@ -108,6 +99,26 @@ export function useContentAttributes(contentKey?: string) {
     }
   return attrs;
 }
+export function ContentLink({
+  contentKey,
+  children,
+  ...props
+}: AnchorHTMLAttributes<HTMLAnchorElement> & { contentKey: string }) {
+  const attrs = useContentAttributes(contentKey);
+  const href = typeof attrs.href === "string" ? attrs.href : props.href;
+  if (!href)
+    return (
+      <a {...props} {...attrs}>
+        {children}
+      </a>
+    );
+  return (
+    <Link {...props} {...attrs} href={href}>
+      {children}
+    </Link>
+  );
+}
+
 export function ContentElement({
   contentKey,
   tag,
@@ -157,13 +168,17 @@ export function FareValue({
 }
 export function CatalogCollection({
   collectionId,
+  productIds,
   children,
 }: {
   collectionId: string;
+  productIds?: string[];
   children: ReactNode;
 }) {
   const products = useSiteData().products.filter(
-    (p) => p.collection_id === collectionId,
+    (p) =>
+      p.collection_id === collectionId &&
+      (!productIds || productIds.includes(p.id)),
   );
   const templates = Children.toArray(children).filter(
     isValidElement,

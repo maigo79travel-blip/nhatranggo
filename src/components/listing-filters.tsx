@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import type { Product } from "@/lib/types";
+import { sortCatalogCards } from "./catalog/sort-cards";
 
 // Enhances the original controls without replacing their source layouts.
 export function ListingFilters({ products }: { products: Product[] }) {
@@ -93,20 +94,17 @@ export function ListingFilters({ products }: { products: Product[] }) {
           products.find((p) => p.id === card.dataset.productId)
             ?.collection_id === "tours-collection-2",
       );
-      const parent = list[0]?.parentElement;
-      if (!parent) return;
-      list.sort((a, b) => {
-        const x = products.find((p) => p.id === a.dataset.productId)!;
-        const y = products.find((p) => p.id === b.dataset.productId)!;
-        return select.value === "price-desc"
-          ? y.price - x.price
+      sortCatalogCards(
+        list,
+        products,
+        select.value === "price-desc"
+          ? "price-desc"
           : /price|low|asc/.test(select.value)
-            ? x.price - y.price
+            ? "price"
             : /rating/.test(select.value)
-              ? y.rating - x.rating
-              : products.indexOf(x) - products.indexOf(y);
-      });
-      list.forEach((card) => parent.appendChild(card));
+              ? "rating"
+              : "recommended",
+      );
     };
     const initialQuery = new URLSearchParams(window.location.search)
       .get("q")

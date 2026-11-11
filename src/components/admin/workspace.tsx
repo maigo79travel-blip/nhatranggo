@@ -1,14 +1,7 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  api,
-  rowKey,
-  scopeLabels,
-  dateLabel,
-  type Row,
-  type AdminUser,
-} from "./api";
+import { api, rowKey, scopeLabels, type Row } from "./api";
 import {
   ProductEditor,
   ContentEditor,
@@ -17,8 +10,13 @@ import {
   Save,
 } from "./editors";
 import { useSiteData } from "../content";
-import type { Product } from "@/lib/types";
+import type { Product, AdminUser, AdminOverviewData } from "@/lib/types";
 import "./admin.css";
+import { resources } from "@/modules/admin/resources";
+import { ModulePanel } from "@/modules/admin/module-panel";
+import { ManualBooking } from "@/modules/bookings/manual-booking";
+import { FareCreate } from "@/modules/travel/fare-create";
+import { canAccess } from "@/modules/admin/permissions";
 
 // UI sub-components
 import { Icon } from "./ui/admin-icon";
@@ -29,12 +27,10 @@ import { Empty } from "./ui/admin-empty";
 import { EditorDrawer } from "./ui/editor-drawer";
 
 // Panels
-import { OverviewPanel, type OverviewData } from "./panels/overview-panel";
+import { OverviewPanel } from "./panels/overview-panel";
 import { ResourceTable } from "./panels/resource-table";
 import { BookingEditor } from "./panels/booking-editor";
 import { Login } from "./panels/login-form";
-
-export { Icon };
 
 const sections = [
   {
@@ -68,12 +64,6 @@ const sections = [
     description: "Chăm chút từng nội dung trên website của bạn.",
   },
   {
-    id: "subscribers",
-    label: "Email ưu đãi",
-    icon: "mark_email_read",
-    description: "Kết nối với những khách hàng quan tâm đến ưu đãi.",
-  },
-  {
     id: "account",
     label: "Tài khoản",
     icon: "manage_accounts",
@@ -81,16 +71,27 @@ const sections = [
   },
 ];
 
+const allSections = [
+  ...sections,
+  ...Object.entries(resources).map(([id, resource]) => ({
+    id,
+    label: resource.label,
+    icon: resource.icon,
+    description: "Quản lý dữ liệu " + resource.label.toLowerCase(),
+  })),
+];
 const PAGE_SIZE = 10;
 
 export function AdminWorkspace({ user }: { user: AdminUser | null }) {
   const router = useRouter();
   const site = useSiteData();
   const [section, setSection] = useState("overview");
-  const [overview, setOverview] = useState<OverviewData | null>(null);
+  const [overview, setOverview] = useState<AdminOverviewData | null>(null);
   const [rows, setRows] = useState<Row[]>([]);
   const [selected, setSelected] = useState<Row | null>(null);
   const [creating, setCreating] = useState(false);
+  const [manualBooking, setManualBooking] = useState(false);
+  const [newFare, setNewFare] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("all");
@@ -103,7 +104,7 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
   );
   const [syncedAt, setSyncedAt] = useState("");
   const requestId = useRef(0);
-  const modalOpen = Boolean(selected) || creating;
+  const modalOpen = Boolean(selected) || creating || manualBooking || newFare;
 
   useEffect(() => {
     if (!modalOpen) return;
@@ -137,7 +138,7 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
 
   const load = useCallback(async () => {
     const current = ++requestId.current;
-    if (!user || section === "account") return;
+    if (!user || section === "account" || resources[section]) return;
     setLoading(true);
     try {
       if (section === "overview") await refreshOverview();
@@ -180,13 +181,17 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
   }, [notice]);
 
   const navigate = (id: string) => {
+    if (user && !canAccess(user, id)) {
+      notify("Bạn không có quyền vào mục này", true);
+      return;
+    }
     setSection(id);
     setMenuOpen(false);
     setSelected(null);
     setNotice(null);
   };
 
-  const current = sections.find((item) => item.id === section)!;
+  const current = allSections.find((item) => item.id === section)!;
 
   async function save(body: unknown) {
     setSaving(true);
@@ -294,8 +299,8 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
         <Brand light />
         <span className="ad-nav-caption">KHÔNG GIAN LÀM VIỆC</span>
         <nav aria-label="Điều hướng quản trị">
-          {sections
-            .filter((s) => s.id !== "account")
+          {allSections
+            .filter((s) => s.id !== "account" && canAccess(user, s.id))
             .map((item) => (
               <button
                 type="button"
@@ -399,6 +404,29 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
           </div>
         </header>
         <main className="ad-content">
+          {section === "bookings" && (
+            <div className="flex flex-wrap gap-3 mb-4">
+              <button
+                type="button"
+                className="ad-button ad-button-primary"
+                onClick={() => setManualBooking(true)}
+              >
+                Tạo đơn thủ công
+              </button>
+              <a className="ad-button" href="/api/admin/booking-export">
+                Xuất CSV (Excel)
+              </a>
+            </div>
+          )}
+          {section === "fares" && (
+            <button
+              type="button"
+              className="ad-button ad-button-primary mb-4"
+              onClick={() => setNewFare(true)}
+            >
+              Thêm mức giá
+            </button>
+          )}
           <div className="ad-page-heading">
             <div>
               <div className="ad-eyebrow">BOOKING TRAVEL ADMIN</div>
@@ -442,7 +470,9 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
               )}
             </div>
           </div>
-          {section === "overview" ? (
+          {resources[section] ? (
+            <ModulePanel key={section} resource={section} />
+          ) : section === "overview" ? (
             <OverviewPanel
               data={overview}
               loading={loading}
@@ -483,7 +513,7 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
               </aside>
             </div>
           ) : (
-            <section className="ad-panel ad-resource-panel">
+            <section className="ad-panel">
               <div className="ad-resource-heading">
                 <div>
                   <h2>
@@ -727,9 +757,7 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
         open={Boolean(selected)}
         title={heading}
         onClose={() => setSelected(null)}
-        saveForm={
-          selected && section !== "subscribers" ? "ad-record-form" : undefined
-        }
+        saveForm={selected ? "ad-record-form" : undefined}
         busy={saving}
       >
         {notice?.error && (
@@ -739,12 +767,30 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
         )}
         {selected &&
           (section === "products" ? (
-            <ProductEditor
-              key={String(selected.id)}
-              product={selected as unknown as Product}
-              busy={saving}
-              onSave={save}
-            />
+            <>
+              <ProductEditor
+                key={String(selected.id)}
+                product={selected as unknown as Product}
+                busy={saving}
+                onSave={save}
+              />
+              <button
+                type="button"
+                className="ad-button mt-4"
+                onClick={async () => {
+                  try {
+                    await api("products", "DELETE", { id: selected.id });
+                    setSelected(null);
+                    void load();
+                    router.refresh();
+                  } catch (e) {
+                    notify((e as Error).message, true);
+                  }
+                }}
+              >
+                Ẩn / Lưu trữ dịch vụ
+              </button>
+            </>
           ) : section === "content" ? (
             <ContentEditor
               key={String(selected.key)}
@@ -790,16 +836,32 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
             </form>
           ) : section === "bookings" ? (
             <BookingEditor row={selected} busy={saving} onSave={save} />
-          ) : (
-            <div className="ad-subscriber-detail">
-              <span className="ad-heading-icon">
-                <Icon name="mark_email_read" />
-              </span>
-              <h2>{String(selected.email)}</h2>
-              <Badge tone="green">Đã đăng ký nhận ưu đãi</Badge>
-              <p>Ngày đăng ký: {dateLabel(selected.created_at)}</p>
-            </div>
-          ))}
+          ) : null)}
+      </EditorDrawer>
+      <EditorDrawer
+        open={manualBooking}
+        title="Tạo booking thủ công"
+        onClose={() => {
+          setManualBooking(false);
+          void load();
+        }}
+      >
+        {manualBooking && <ManualBooking />}
+      </EditorDrawer>
+      <EditorDrawer
+        open={newFare}
+        title="Thêm mức giá xe"
+        onClose={() => setNewFare(false)}
+      >
+        {newFare && (
+          <FareCreate
+            onSaved={() => {
+              setNewFare(false);
+              void load();
+              router.refresh();
+            }}
+          />
+        )}
       </EditorDrawer>
       <EditorDrawer
         open={creating}
@@ -814,8 +876,8 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
         )}
         <div className="ad-form-note">
           <Icon name="info" />
-          Chọn một dịch vụ hiện có làm mẫu. Dịch vụ mới được lưu thành bản nháp
-          để bạn hoàn thiện trước khi hiển thị.
+          Chọn một mẫu có sẵn hoặc tạo dịch vụ mới. Dịch vụ được lưu thành bản
+          nháp để bạn hoàn thiện trước khi hiển thị.
         </div>
         <form
           className="ad-editor"
@@ -848,14 +910,9 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
         >
           <label className="ad-field">
             Mẫu bố cục
-            <select
-              className="ad-input"
-              name="cloneId"
-              required
-              defaultValue=""
-            >
+            <select className="ad-input" name="cloneId" defaultValue="">
               <option value="" disabled>
-                Chọn dịch vụ mẫu
+                Tạo dịch vụ mới (không cần mẫu)
               </option>
               {baseRows
                 .filter((r) => r.template_id)
@@ -864,6 +921,14 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
                     {String(row.title)}
                   </option>
                 ))}
+            </select>
+          </label>
+          <label className="ad-field">
+            Loại dịch vụ
+            <select className="ad-input" name="type">
+              <option value="hotel">Khách sạn</option>
+              <option value="tour">Tour</option>
+              <option value="combo">Combo</option>
             </select>
           </label>
           <Field
