@@ -1,4 +1,6 @@
 "use client";
+
+import brand from "@/config/brand.json";
 import { Icon } from "./admin-icon";
 
 export function Brand({ light = false }: { light?: boolean }) {
@@ -9,7 +11,8 @@ export function Brand({ light = false }: { light?: boolean }) {
       </span>
       <span>
         <strong>
-          BOOKING<span>TRAVEL</span>
+          {brand.wordmarkPrimary}
+          <span>{brand.wordmarkSecondary}</span>
         </strong>
         <small>KHÔNG GIAN QUẢN TRỊ</small>
       </span>

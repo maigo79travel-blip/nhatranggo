@@ -754,8 +754,8 @@
     "key": "home.text-094",
     "scope": "home",
     "kind": "text",
-    "value": "Ưu đãi độc quyền Booking Travel",
-    "label": "Ưu đãi độc quyền Booking Travel"
+    "value": "Ưu đãi độc quyền {{brand.name}}",
+    "label": "Ưu đãi độc quyền {{brand.name}}"
   },
   {
     "key": "home.text-095",
@@ -1258,8 +1258,8 @@
     "key": "home.text-166",
     "scope": "home",
     "kind": "text",
-    "value": "\n          Bạn muốn hợp tác cùng Booking Travel?\n        ",
-    "label": "Bạn muốn hợp tác cùng Booking Travel?"
+    "value": "\n          Bạn muốn hợp tác cùng {{brand.name}}?\n        ",
+    "label": "Bạn muốn hợp tác cùng {{brand.name}}?"
   },
   {
     "key": "home.text-167",
@@ -1286,8 +1286,8 @@
     "key": "home.text-170",
     "scope": "home",
     "kind": "text",
-    "value": "\n          Cam kết dịch vụ Booking Travel\n        ",
-    "label": "Cam kết dịch vụ Booking Travel"
+    "value": "\n          Cam kết dịch vụ {{brand.name}}\n        ",
+    "label": "Cam kết dịch vụ {{brand.name}}"
   },
   {
     "key": "home.text-171",
@@ -2400,8 +2400,8 @@
     "key": "hotels.text-142",
     "scope": "hotels",
     "kind": "text",
-    "value": "\n          Cam Kết Chất Lượng Dịch Vụ Từ Booking Travel\n        ",
-    "label": "Cam Kết Chất Lượng Dịch Vụ Từ Booking Travel"
+    "value": "\n          Cam Kết Chất Lượng Dịch Vụ Từ {{brand.name}}\n        ",
+    "label": "Cam Kết Chất Lượng Dịch Vụ Từ {{brand.name}}"
   },
   {
     "key": "hotels.text-143",
@@ -3031,8 +3031,8 @@
     "key": "tours.text-076",
     "scope": "tours",
     "kind": "text",
-    "value": "\n              Hoàn toàn được! Booking Travel sử dụng cano composite đời mới có mái che kín, lướt êm ái trên biển vịnh Nha Trang vốn kín gió. Tại Hòn Tằm có xe điện đưa đón người lớn tuổi và trẻ nhỏ lên tận khu tắm bùn khoáng nóng và nhà hàng.\n            ",
-    "label": "Hoàn toàn được! Booking Travel sử dụng cano composite đời mới có mái che kín, lướt êm ái trên biển vịnh Nha Trang vốn kín gió. Tại Hòn Tằm có xe điện "
+    "value": "\n              Hoàn toàn được! {{brand.name}} sử dụng cano composite đời mới có mái che kín, lướt êm ái trên biển vịnh Nha Trang vốn kín gió. Tại Hòn Tằm có xe điện đưa đón người lớn tuổi và trẻ nhỏ lên tận khu tắm bùn khoáng nóng và nhà hàng.\n            ",
+    "label": "Hoàn toàn được! {{brand.name}} sử dụng cano composite đời mới có mái che kín, lướt êm ái trên biển vịnh Nha Trang vốn kín gió. Tại Hòn Tằm có xe điện "
   },
   {
     "key": "tours.text-077",
@@ -3059,8 +3059,8 @@
     "key": "tours.text-080",
     "scope": "tours",
     "kind": "text",
-    "value": "\n              An toàn của quý khách là ưu tiên số 1 của Booking Travel. Trường hợp cảng vụ cấm tàu do sóng gió, công ty sẽ thông báo sớm trước giờ khởi hành và hoàn lại 100% tiền đặt cọc (nếu có) hoặc hỗ trợ đổi qua các tour city/nội thành phù hợp thời tiết.\n            ",
-    "label": "An toàn của quý khách là ưu tiên số 1 của Booking Travel. Trường hợp cảng vụ cấm tàu do sóng gió, công ty sẽ thông báo sớm trước giờ khởi hành và hoàn"
+    "value": "\n              An toàn của quý khách là ưu tiên số 1 của {{brand.name}}. Trường hợp cảng vụ cấm tàu do sóng gió, công ty sẽ thông báo sớm trước giờ khởi hành và hoàn lại 100% tiền đặt cọc (nếu có) hoặc hỗ trợ đổi qua các tour city/nội thành phù hợp thời tiết.\n            ",
+    "label": "An toàn của quý khách là ưu tiên số 1 của {{brand.name}}. Trường hợp cảng vụ cấm tàu do sóng gió, công ty sẽ thông báo sớm trước giờ khởi hành và hoàn"
   },
   {
     "key": "transfers.attributes-001",
@@ -4145,8 +4145,8 @@
     "key": "transfers.text-147",
     "scope": "transfers",
     "kind": "text",
-    "value": "Lợi Ích Vượt Trội Khi Đặt Xe Tại Booking Travel",
-    "label": "Lợi Ích Vượt Trội Khi Đặt Xe Tại Booking Travel"
+    "value": "Lợi Ích Vượt Trội Khi Đặt Xe Tại {{brand.name}}",
+    "label": "Lợi Ích Vượt Trội Khi Đặt Xe Tại {{brand.name}}"
   },
   {
     "key": "transfers.text-148",
@@ -4313,8 +4313,8 @@
     "key": "transfers.text-171",
     "scope": "transfers",
     "kind": "text",
-    "value": " Đội ngũ điều hành Booking Travel có hệ thống theo dõi trực tiếp radar số hiệu chuyến bay của bạn. Dù máy bay trễ 1-3 tiếng, tài xế vẫn sẽ chủ động căn giờ đáp mới và chờ đón bạn an toàn và chu đáo.\n          ",
-    "label": "Đội ngũ điều hành Booking Travel có hệ thống theo dõi trực tiếp radar số hiệu chuyến bay của bạn. Dù máy bay trễ 1-3 tiếng, tài xế vẫn sẽ chủ động căn"
+    "value": " Đội ngũ điều hành {{brand.name}} có hệ thống theo dõi trực tiếp radar số hiệu chuyến bay của bạn. Dù máy bay trễ 1-3 tiếng, tài xế vẫn sẽ chủ động căn giờ đáp mới và chờ đón bạn an toàn và chu đáo.\n          ",
+    "label": "Đội ngũ điều hành {{brand.name}} có hệ thống theo dõi trực tiếp radar số hiệu chuyến bay của bạn. Dù máy bay trễ 1-3 tiếng, tài xế vẫn sẽ chủ động căn"
   },
   {
     "key": "transfers.text-172",
@@ -4327,8 +4327,8 @@
     "key": "transfers.text-173",
     "scope": "transfers",
     "kind": "text",
-    "value": "\n            Mức giá niêm yết của Booking Travel là ",
-    "label": "Mức giá niêm yết của Booking Travel là"
+    "value": "\n            Mức giá niêm yết của {{brand.name}} là ",
+    "label": "Mức giá niêm yết của {{brand.name}} là"
   },
   {
     "key": "transfers.text-174",
@@ -4383,8 +4383,8 @@
     "key": "transfers.text-181",
     "scope": "transfers",
     "kind": "text",
-    "value": " sau khi chuyến đi hoàn tất, hoặc chuyển khoản quét mã VietQR / MoMo / VNPay về tài khoản công ty Booking Travel.\n          ",
-    "label": "sau khi chuyến đi hoàn tất, hoặc chuyển khoản quét mã VietQR / MoMo / VNPay về tài khoản công ty Booking Travel."
+    "value": " sau khi chuyến đi hoàn tất, hoặc chuyển khoản quét mã VietQR / MoMo / VNPay về tài khoản công ty {{brand.name}}.\n          ",
+    "label": "sau khi chuyến đi hoàn tất, hoặc chuyển khoản quét mã VietQR / MoMo / VNPay về tài khoản công ty {{brand.name}}."
   },
   {
     "key": "header.attributes-001",
@@ -4557,22 +4557,22 @@
     "key": "header.text-021",
     "scope": "header",
     "kind": "text",
-    "value": "BOOKING",
+    "value": "{{brand.wordmarkPrimary}}",
     "label": "BOOKING"
   },
   {
     "key": "header.text-022",
     "scope": "header",
     "kind": "text",
-    "value": "TRAVEL",
+    "value": "{{brand.wordmarkSecondary}}",
     "label": "TRAVEL"
   },
   {
     "key": "header.text-023",
     "scope": "header",
     "kind": "text",
-    "value": "bookingtravel.vn",
-    "label": "bookingtravel.vn"
+    "value": "{{brand.tagline}}",
+    "label": "{{brand.name}}"
   },
   {
     "key": "header.text-024",
@@ -4646,16 +4646,16 @@
     "value": {
       "href": "mailto:{{contact.email}}"
     },
-    "label": "mailto:info@bookingtravel.vn"
+    "label": "mailto:info@{{brand.name}}"
   },
   {
     "key": "footer.attributes-003",
     "scope": "footer",
     "kind": "attributes",
     "value": {
-      "href": "https://bookingtravel.vn"
+      "href": "{{contact.website}}"
     },
-    "label": "https://bookingtravel.vn"
+    "label": "{{contact.website}}"
   },
   {
     "key": "footer.attributes-004",
@@ -4803,41 +4803,11 @@
     "label": "/#lien-he"
   },
   {
-    "key": "footer.attributes-020",
-    "scope": "footer",
-    "kind": "attributes",
-    "value": {
-      "href": "{{contact.zalo}}",
-      "title": "Tư vấn qua Zalo"
-    },
-    "label": "https://zalo.me/0846477222 · Tư vấn qua Zalo"
-  },
-  {
-    "key": "footer.attributes-021",
-    "scope": "footer",
-    "kind": "attributes",
-    "value": {
-      "href": "tel:{{contact.telephone}}",
-      "title": "Gọi Hotline: {{contact.phone}}"
-    },
-    "label": "tel:0846477222 · Gọi Hotline: 084.64.77.222"
-  },
-  {
-    "key": "footer.attributes-022",
-    "scope": "footer",
-    "kind": "attributes",
-    "value": {
-      "href": "/#lien-he",
-      "title": "Gửi yêu cầu hỗ trợ"
-    },
-    "label": "/#lien-he · Gửi yêu cầu hỗ trợ"
-  },
-  {
     "key": "footer.text-023",
     "scope": "footer",
     "kind": "text",
-    "value": "BOOKING TRAVEL",
-    "label": "BOOKING TRAVEL"
+    "value": "{{brand.name}}",
+    "label": "{{brand.name}}"
   },
   {
     "key": "footer.text-024",
@@ -4850,8 +4820,8 @@
     "key": "footer.text-025",
     "scope": "footer",
     "kind": "text",
-    "value": "CÔNG TY TNHH BOOKING TRAVEL",
-    "label": "CÔNG TY TNHH BOOKING TRAVEL"
+    "value": "{{brand.name}}",
+    "label": "{{brand.name}}"
   },
   {
     "key": "footer.text-026",
@@ -4879,14 +4849,14 @@
     "scope": "footer",
     "kind": "text",
     "value": "{{contact.email}}",
-    "label": "info@bookingtravel.vn"
+    "label": "info@{{brand.name}}"
   },
   {
     "key": "footer.text-030",
     "scope": "footer",
     "kind": "text",
-    "value": "https://bookingtravel.vn",
-    "label": "https://bookingtravel.vn"
+    "value": "{{brand.name}}",
+    "label": "{{contact.website}}"
   },
   {
     "key": "footer.text-031",
@@ -5039,8 +5009,8 @@
     "key": "footer.text-052",
     "scope": "footer",
     "kind": "text",
-    "value": "© 2024 CÔNG TY TNHH BOOKING TRAVEL. Bản quyền thuộc về bookingtravel.vn. Giấy phép kinh doanh lữ hành quốc tế.",
-    "label": "© 2024 CÔNG TY TNHH BOOKING TRAVEL. Bản quyền thuộc về bookingtravel.vn. Giấy phép kinh doanh lữ hành quốc tế."
+    "value": "© {{brand.name}}. Bảo lưu mọi quyền.",
+    "label": "© 2024 {{brand.name}}. Bản quyền thuộc về {{brand.name}}. Giấy phép kinh doanh lữ hành quốc tế."
   },
   {
     "key": "footer.text-053",
@@ -5069,7 +5039,7 @@
     "kind": "settings",
     "label": "Tiêu đề và mô tả website",
     "value": {
-      "title": "Booking Travel | Khách sạn, Tour & Xe đưa đón",
+      "title": "{{brand.name}} | Khách sạn, Tour & Xe đưa đón",
       "description": "Khám phá Nha Trang, Cam Ranh: khách sạn, resort, tour đảo và xe đưa đón. Tư vấn 24/7."
     }
   },
@@ -5079,10 +5049,16 @@
     "kind": "settings",
     "label": "Thông tin liên hệ dùng chung",
     "value": {
-      "phone": "084.64.77.222",
-      "telephone": "0846477222",
-      "zalo": "https://zalo.me/0846477222",
-      "email": "info@bookingtravel.vn"
+      "telephone": "0878458885",
+      "phone": "0878.458.885",
+      "zalo": "https://zalo.me/0878458885",
+      "telegram": "https://t.me/Nyachang_taksi_tury",
+      "whatsapp": "https://wa.me/84878458885",
+      "kakao": "0878458885",
+      "international": "+84 878 458 885",
+      "facebook": "https://www.facebook.com/share/1BhL4Qut3u/?mibextid=wwXIfr",
+      "website": "/",
+      "email": ""
     }
   },
   {

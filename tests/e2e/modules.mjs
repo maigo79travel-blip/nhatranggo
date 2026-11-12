@@ -515,15 +515,9 @@ try {
           `${path} container width is capped at ${width}`,
         );
       }
-      if (width < 1024) {
-        assert.equal(
-          await ui
-            .locator(".site-contact-shortcuts")
-            .evaluate((element) => getComputedStyle(element).position),
-          "static",
-          "Contact shortcuts obscure mobile fields",
-        );
-      }
+      await expect(
+        ui.locator(".floating-contacts [data-contact-channel]"),
+      ).toHaveCount(6);
       assert.equal(
         await ui.evaluate(
           () => document.documentElement.scrollWidth > innerWidth,

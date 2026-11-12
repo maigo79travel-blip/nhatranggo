@@ -2,7 +2,7 @@ import "server-only";
 import { randomUUID } from "node:crypto";
 import { z } from "zod";
 import { db } from "@/lib/db";
-import { ModuleError } from "../admin/service";
+import { AppError } from "@/lib/errors";
 import { status, id, text } from "../admin/validation";
 export const bookingUpdateSchema = z.object({
   id: z.uuid(),
@@ -34,7 +34,7 @@ export async function updateBooking(
         "SELECT id FROM partners WHERE id=$1 AND active=true",
         [input.partner_id],
       );
-      if (!partner.rowCount) throw new ModuleError("Đối tác không hoạt động");
+      if (!partner.rowCount) throw new AppError("Đối tác không hoạt động");
     }
     const result = await client.query(
       "UPDATE bookings SET status=$2,partner_id=$3,internal_notes=$4,customer_name=COALESCE($5,customer_name),phone=COALESCE($6,phone),confirmed_total=$7,updated_at=now() WHERE id=$1 RETURNING *",
@@ -48,7 +48,7 @@ export async function updateBooking(
         input.confirmed_total,
       ],
     );
-    if (!result.rowCount) throw new ModuleError("Không tìm thấy yêu cầu", 404);
+    if (!result.rowCount) throw new AppError("Không tìm thấy yêu cầu", 404);
     await client.query(
       "INSERT INTO booking_history(id,booking_id,actor_id,status,notes) VALUES($1,$2,$3,$4,$5)",
       [randomUUID(), input.id, actorId, input.status, input.internal_notes],

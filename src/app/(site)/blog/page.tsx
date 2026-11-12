@@ -57,9 +57,11 @@ export default async function BlogPage({
         </FilterField>
         <button
           type="submit"
+          aria-label="Tìm bài viết"
           className="public-primary-button catalog-search-submit"
         >
-          <PublicIcon name="search" className="text-xl" /> Tìm bài viết
+          <PublicIcon name="search" className="text-xl" />
+          <span className="hidden sm:inline">Tìm bài viết</span>
         </button>
       </Form>
       <div className="public-card-grid">

@@ -1,5 +1,7 @@
+import { AppError } from "@/lib/errors";
 import { z } from "zod";
-import { adminUser, sameOrigin } from "@/lib/admin-auth";
+import { adminUser } from "@/lib/admin-auth";
+import { sameOrigin } from "@/lib/request-security";
 import { productSchema, contentSchema } from "@/lib/admin-validation";
 import { bookingSchema } from "@/lib/validation";
 import { db } from "@/lib/db";
@@ -15,13 +17,8 @@ import {
 import { createBooking } from "@/lib/services/booking-service";
 import { resources } from "@/modules/admin/resources";
 import { canAccess } from "@/modules/admin/permissions";
-import {
-  listRecords,
-  saveRecord,
-  removeRecord,
-  ModuleError,
-} from "@/modules/admin/service";
-import { moduleError } from "@/modules/admin/http";
+import { listRecords, saveRecord, removeRecord } from "@/modules/admin/service";
+import { errorResponse, readJson } from "@/lib/http";
 import {
   bookingUpdateSchema,
   updateBooking,
@@ -90,10 +87,10 @@ async function handle(request: Request, context: Context) {
       const data = resources[resource]
         ? await listRecords(resource)
         : await getAdminResourceList(resource);
-      if (!data) throw new ModuleError("Không tìm thấy module", 404);
+      if (!data) throw new AppError("Không tìm thấy module", 404);
       return Response.json({ data });
     }
-    const body = await request.json();
+    const body = await readJson(request, 1048576);
     if (resources[resource]) {
       if (method === "DELETE")
         return Response.json({
@@ -117,8 +114,7 @@ async function handle(request: Request, context: Context) {
           "UPDATE products SET active=false,updated_at=now() WHERE id=$1 RETURNING id",
           [z.string().max(100).parse(body.id)],
         );
-        if (!result.rowCount)
-          throw new ModuleError("Không tìm thấy dịch vụ", 404);
+        if (!result.rowCount) throw new AppError("Không tìm thấy dịch vụ", 404);
         return Response.json({ data: result.rows[0] });
       }
       if (method === "POST") {
@@ -131,7 +127,7 @@ async function handle(request: Request, context: Context) {
           .parse(body);
         if (input.cloneId) {
           const data = await cloneAdminProduct(input.cloneId, input.title);
-          if (!data) throw new ModuleError("Mẫu không tồn tại", 404);
+          if (!data) throw new AppError("Mẫu không tồn tại", 404);
           return Response.json({ data }, { status: 201 });
         }
         const data = (
@@ -168,7 +164,7 @@ async function handle(request: Request, context: Context) {
             [p.route],
           )
         ).rows[0];
-        if (!route) throw new ModuleError("Hãy tạo tuyến xe trước");
+        if (!route) throw new AppError("Hãy tạo tuyến xe trước");
         const client = await db.connect();
         try {
           await client.query("BEGIN");
@@ -200,9 +196,7 @@ async function handle(request: Request, context: Context) {
     }
     if (resource === "bookings") {
       if (method === "DELETE")
-        throw new ModuleError(
-          "Booking phải lưu lịch sử. Hãy chuyển sang Đã hủy",
-        );
+        throw new AppError("Booking phải lưu lịch sử. Hãy chuyển sang Đã hủy");
       return Response.json(
         {
           data:
@@ -223,9 +217,9 @@ async function handle(request: Request, context: Context) {
       await changeAdminPassword(user, p.currentPassword, p.newPassword);
       return Response.json({ ok: true });
     }
-    throw new ModuleError("Không hỗ trợ thao tác", 404);
+    throw new AppError("Không hỗ trợ thao tác", 404);
   } catch (error) {
-    return moduleError(error);
+    return errorResponse(error);
   }
 }
 export const GET = handle;

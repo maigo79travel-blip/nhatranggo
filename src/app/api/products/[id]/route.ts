@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+import { publicProductWhere } from "@/lib/services/product-visibility";
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ id: string }> },
@@ -6,9 +7,10 @@ export async function GET(
   try {
     const { id } = await params;
     const product = (
-      await db.query("SELECT id FROM products WHERE id=$1 AND active=true", [
-        id,
-      ])
+      await db.query(
+        `SELECT p.id FROM products p WHERE p.id=$1 AND ${publicProductWhere}`,
+        [id],
+      )
     ).rows[0];
     if (!product)
       return Response.json({ error: "Dịch vụ không tồn tại" }, { status: 404 });

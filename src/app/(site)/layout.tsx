@@ -3,10 +3,21 @@ import type { Metadata } from "next";
 import { getSiteData } from "@/lib/catalog";
 import { SiteDataProvider } from "@/components/content";
 import { WebsiteShell } from "@/components/website-shell";
+import { contactInfo, resolveContent } from "@/lib/content-values";
+import brand from "@/config/brand.json";
 export async function generateMetadata(): Promise<Metadata> {
   const data = await getSiteData();
-  const meta = data.content["site.metadata"]?.value as Metadata | undefined;
-  return meta || {};
+  const meta = resolveContent(
+    data.content["site.metadata"]?.value,
+    contactInfo(data.content),
+  ) as Metadata | undefined;
+  return {
+    ...meta,
+    title: {
+      default: typeof meta?.title === "string" ? meta.title : brand.name,
+      template: `%s | ${brand.name}`,
+    },
+  };
 }
 export default async function SiteLayout({
   children,

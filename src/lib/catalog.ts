@@ -4,11 +4,12 @@ import { cookies } from "next/headers";
 import { db } from "./db";
 import { parseLocale } from "@/modules/settings/locale";
 import type { SiteData, ContentEntry, Fare, Product } from "./types";
+import { publicProductWhere } from "./services/product-visibility";
 export const getSiteData = cache(async (): Promise<SiteData> => {
   const locale = parseLocale((await cookies()).get("site_locale")?.value);
   const [products, entries, fares, destinations] = await Promise.all([
     db.query<Product>(
-      `SELECT p.*,COALESCE(t.value->>'title',p.title) AS title,COALESCE(t.value->>'description',p.description) AS description,COALESCE(t.value->>'location',p.location) AS location,COALESCE(t.value->'content',p.content) AS content FROM products p LEFT JOIN translations t ON t.entity='product' AND t.entity_key=p.id AND t.locale=$1 WHERE p.active=true AND NOT EXISTS(SELECT 1 FROM transfer_routes r WHERE p.id LIKE 'transfer-'||r.code||'-%' AND r.active=false) ORDER BY p.position,p.id`,
+      `SELECT p.*,COALESCE(t.value->>'title',p.title) AS title,COALESCE(t.value->>'description',p.description) AS description,COALESCE(t.value->>'location',p.location) AS location,COALESCE(t.value->'content',p.content) AS content FROM products p LEFT JOIN translations t ON t.entity='product' AND t.entity_key=p.id AND t.locale=$1 WHERE ${publicProductWhere} ORDER BY p.position,p.id`,
       [locale],
     ),
     db.query<ContentEntry & { key: string }>(

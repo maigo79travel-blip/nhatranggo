@@ -1,3 +1,6 @@
+"use client";
+import { useSiteData } from "@/components/content";
+import { contactInfo } from "@/lib/content-values";
 import { ContentText, ContentElement } from "@/components/content";
 import type { ReactNode } from "react";
 export function SiteFooter({
@@ -5,6 +8,7 @@ export function SiteFooter({
 }: {
   informationLinks: ReactNode;
 }) {
+  const contact = contactInfo(useSiteData().content);
   return (
     <footer
       className="w-full bg-surface-container-low text-on-surface pt-16 pb-10 shadow-footer"
@@ -51,16 +55,18 @@ export function SiteFooter({
                   <ContentText contentKey="footer.text-028" />
                 </strong>
               </ContentElement>
-              <ContentElement
-                contentKey="footer.attributes-002"
-                tag="a"
-                className="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2"
-              >
-                <span className="material-symbols-outlined text-[16px] text-primary">
-                  {"mail"}
-                </span>
-                <ContentText contentKey="footer.text-029" />
-              </ContentElement>
+              {contact.email && (
+                <ContentElement
+                  contentKey="footer.attributes-002"
+                  tag="a"
+                  className="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2"
+                >
+                  <span className="material-symbols-outlined text-[16px] text-primary">
+                    {"mail"}
+                  </span>
+                  <ContentText contentKey="footer.text-029" />
+                </ContentElement>
+              )}
               <ContentElement
                 contentKey="footer.attributes-003"
                 tag="a"
@@ -201,41 +207,5 @@ export function SiteFooter({
         </div>
       </div>
     </footer>
-  );
-}
-export function ContactButtons() {
-  return (
-    <div className="site-contact-shortcuts flex justify-center gap-3 bg-surface-container-lowest p-4 lg:fixed lg:bottom-6 lg:right-6 lg:z-50 lg:flex-col lg:items-end lg:bg-transparent lg:p-0">
-      <ContentElement
-        contentKey="footer.attributes-020"
-        aria-label="Tư vấn qua Zalo"
-        tag="a"
-        className="w-12 h-12 rounded-full bg-primary text-on-primary shadow-xl hover:shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 group"
-
-        rel="noopener"
-        target="_blank"
-      >
-        <span className="material-symbols-outlined text-[24px]">{"chat"}</span>
-      </ContentElement>
-      <ContentElement
-        contentKey="footer.attributes-021"
-        aria-label="Gọi hotline"
-        tag="a"
-        className="w-12 h-12 rounded-full bg-sale-crimson text-on-error shadow-xl hover:shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 animate-pulse"
-      >
-        <span className="material-symbols-outlined text-[24px]">{"call"}</span>
-      </ContentElement>
-      <ContentElement
-        contentKey="footer.attributes-022"
-        aria-label="Đến phần liên hệ"
-        tag="a"
-        className="w-12 h-12 rounded-full bg-secondary text-on-secondary shadow-xl hover:shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110"
-        data-path="lien-he"
-      >
-        <span className="material-symbols-outlined text-[24px]">
-          {"mark_chat_unread"}
-        </span>
-      </ContentElement>
-    </div>
   );
 }

@@ -1,3 +1,4 @@
+import brand from "@/config/brand.json";
 import Link from "next/link";
 import { PublicIcon } from "@/modules/settings/public-ui";
 
@@ -29,7 +30,7 @@ export function SupportGuide({ lookup = false }: { lookup?: boolean }) {
         [
           "support_agent",
           "Nhận tư vấn",
-          "Đội ngũ BookingTravel sẽ liên hệ để kiểm tra thông tin.",
+          `Đội ngũ ${brand.name} sẽ liên hệ để kiểm tra thông tin.`,
         ],
         [
           "task_alt",
@@ -43,7 +44,7 @@ export function SupportGuide({ lookup = false }: { lookup?: boolean }) {
         <PublicIcon name={lookup ? "travel_explore" : "support_agent"} />
       </div>
       <p className="text-secondary text-xs font-bold uppercase tracking-widest">
-        BookingTravel đồng hành
+        {brand.name} đồng hành
       </p>
       <h2 className="text-2xl font-bold">
         {lookup

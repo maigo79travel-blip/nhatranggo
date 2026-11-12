@@ -5,17 +5,10 @@ import { db } from "@/lib/db";
 import { passwordHash } from "@/lib/admin-auth";
 import type { AdminUser } from "@/lib/types";
 import { resources } from "./resources";
-export class ModuleError extends Error {
-  constructor(
-    message: string,
-    public status = 400,
-  ) {
-    super(message);
-  }
-}
+import { AppError } from "@/lib/errors";
 export async function listRecords(resource: string) {
   const definition = resources[resource];
-  if (!definition) throw new ModuleError("Không tìm thấy module", 404);
+  if (!definition) throw new AppError("Không tìm thấy module", 404);
   const columns =
     resource === "users" ? "id,username,role,active,created_at" : "*";
   return (
@@ -31,7 +24,7 @@ export async function saveRecord(
   recordId?: string,
 ) {
   const definition = resources[resource];
-  if (!definition) throw new ModuleError("Không tìm thấy module", 404);
+  if (!definition) throw new AppError("Không tìm thấy module", 404);
   const values = definition.schema.parse(body) as Record<string, unknown>;
   if (recordId) z.uuid().parse(recordId);
   const client = await db.connect();
@@ -40,12 +33,12 @@ export async function saveRecord(
     if (resource === "users") {
       await client.query("LOCK TABLE admin_users IN SHARE ROW EXCLUSIVE MODE");
       if (!recordId && !values.password)
-        throw new ModuleError("Tài khoản mới cần mật khẩu từ 12 ký tự");
+        throw new AppError("Tài khoản mới cần mật khẩu từ 12 ký tự");
       if (
         recordId === actor.id &&
         (!values.active || values.role !== "super_admin")
       )
-        throw new ModuleError(
+        throw new AppError(
           "Không được tự khóa hoặc hạ quyền tài khoản đang dùng",
         );
       if (recordId && (!values.active || values.role !== "super_admin")) {
@@ -54,7 +47,7 @@ export async function saveRecord(
           [recordId],
         );
         if (count.rows[0].n < 1)
-          throw new ModuleError("Phải giữ ít nhất một quản trị cao nhất");
+          throw new AppError("Phải giữ ít nhất một quản trị cao nhất");
       }
       if (values.password)
         values.password_hash = passwordHash(String(values.password));
@@ -76,7 +69,7 @@ export async function saveRecord(
           )
         ).rowCount
       )
-        throw new ModuleError(
+        throw new AppError(
           "Điểm đến đã có tuyến xe; giữ mã hiện tại hoặc tạo điểm đến mới",
         );
     }
@@ -86,7 +79,7 @@ export async function saveRecord(
         [[values.pickup_id, values.dropoff_id]],
       );
       if (endpoints.rowCount !== 2)
-        throw new ModuleError("Điểm đón / trả không hoạt động");
+        throw new AppError("Điểm đón / trả không hoạt động");
       values.code =
         endpoints.rows.find((r) => r.id === values.pickup_id).code +
         "_" +
@@ -108,7 +101,7 @@ export async function saveRecord(
           )
         ).rowCount
       )
-        throw new ModuleError(
+        throw new AppError(
           "Tuyến đã có bảng giá; hãy tạo tuyến mới khi đổi điểm đón trả",
         );
     }
@@ -117,7 +110,7 @@ export async function saveRecord(
         values.product_id,
       ]);
       if (p.rows[0]?.type !== (resource === "rooms" ? "hotel" : "tour"))
-        throw new ModuleError("Loại dịch vụ không phù hợp");
+        throw new AppError("Loại dịch vụ không phù hợp");
     }
     const columns = Object.keys(values);
     const params = columns.map((key) =>
@@ -136,7 +129,7 @@ export async function saveRecord(
         `INSERT INTO ${definition.table}(id,${columns.join(",")}) VALUES($1,${columns.map((_, index) => `$${index + 2}`).join(",")}) RETURNING *`,
         [randomUUID(), ...params],
       );
-    if (!result.rowCount) throw new ModuleError("Không tìm thấy bản ghi", 404);
+    if (!result.rowCount) throw new AppError("Không tìm thấy bản ghi", 404);
     if (resource === "users" && recordId)
       await client.query("DELETE FROM admin_sessions WHERE user_id=$1", [
         recordId,
@@ -159,16 +152,16 @@ export async function removeRecord(
 ) {
   z.uuid().parse(id);
   const definition = resources[resource];
-  if (!definition) throw new ModuleError("Không tìm thấy module", 404);
+  if (!definition) throw new AppError("Không tìm thấy module", 404);
   if (resource === "requests")
-    throw new ModuleError(
+    throw new AppError(
       "Yêu cầu dịch vụ phải giữ lịch sử; hãy chuyển trạng thái Đã hủy",
     );
   if (resource === "users") {
     const row = (
       await db.query("SELECT username,role FROM admin_users WHERE id=$1", [id])
     ).rows[0];
-    if (!row) throw new ModuleError("Không tìm thấy tài khoản", 404);
+    if (!row) throw new AppError("Không tìm thấy tài khoản", 404);
     return saveRecord(
       resource,
       { username: row.username, role: row.role, active: false },
@@ -182,6 +175,6 @@ export async function removeRecord(
       : `DELETE FROM ${definition.table} WHERE id=$1 RETURNING id`,
     [id],
   );
-  if (!result.rowCount) throw new ModuleError("Không tìm thấy bản ghi", 404);
+  if (!result.rowCount) throw new AppError("Không tìm thấy bản ghi", 404);
   return result.rows[0];
 }

@@ -2,44 +2,40 @@ import { PublicForm } from "@/modules/support/public-form";
 import { PublicPage } from "@/modules/settings/public-page";
 import { getSiteData } from "@/lib/catalog";
 import { PublicIcon } from "@/modules/settings/public-ui";
+import { contactInfo } from "@/lib/content-values";
+import { contactChannels } from "@/modules/support/contact-channels";
 export default async function ContactPage() {
   const { content } = await getSiteData();
-  const contact = content["site.contact"]?.value as
-    Record<string, string> | undefined;
+  const contact = contactInfo(content);
   return (
     <PublicPage title="Liên hệ & Hỗ trợ">
       <div className="flex flex-wrap gap-3 mb-7">
-        {Object.entries({
-          telephone: "Gọi điện",
-          zalo: "Zalo",
-          whatsapp: "WhatsApp",
-          telegram: "Telegram",
-          email: "Email",
-        }).map(([key, label]) => {
-          const value = contact?.[key];
-          if (!value) return null;
-          const href =
-            key === "telephone"
-              ? "tel:" + value
-              : key === "email"
-                ? "mailto:" + value
-                : value;
-          return /^(https?:\/\/|tel:|mailto:)/.test(href) ? (
-            <a className="public-contact-link" key={key} href={href}>
-              <PublicIcon
-                name={
-                  key === "telephone"
-                    ? "call"
-                    : key === "email"
-                      ? "mail"
-                      : "chat"
-                }
-                className="text-xl"
-              />
-              {label}
+        {contactChannels(contact)
+          .filter((channel) => channel.href)
+          .map((channel) => (
+            <a
+              className="public-contact-link"
+              key={channel.key}
+              href={channel.href}
+              target={channel.key === "telephone" ? undefined : "_blank"}
+              rel={
+                channel.key === "telephone" ? undefined : "noopener noreferrer"
+              }
+            >
+              {channel.image ? (
+                <img src={channel.image} alt="" width={20} height={20} />
+              ) : (
+                <PublicIcon name="call" className="text-xl" />
+              )}
+              {channel.label}
             </a>
-          ) : null;
-        })}
+          ))}
+        {contact.email && (
+          <a className="public-contact-link" href={"mailto:" + contact.email}>
+            <PublicIcon name="mail" className="text-xl" />
+            Email
+          </a>
+        )}
       </div>
       <PublicForm kind="contact" />
     </PublicPage>

@@ -60,7 +60,3 @@ export async function destroySession() {
     ]);
   jar.delete(SESSION_COOKIE);
 }
-export function sameOrigin(request: Request) {
-  const origin = request.headers.get("origin");
-  return !origin || origin === new URL(request.url).origin;
-}

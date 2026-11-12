@@ -1,4 +1,6 @@
 "use client";
+
+import brand from "@/config/brand.json";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "../api";
@@ -21,7 +23,7 @@ export function Login() {
         <div className="ad-login-story-content">
           <span className="ad-login-tag">
             <i />
-            BOOKING TRAVEL WORKSPACE
+            {brand.name.toUpperCase()} WORKSPACE
           </span>
           <h2>
             Mọi hành trình.
@@ -48,7 +50,7 @@ export function Login() {
           </div>
         </div>
         <div className="ad-login-story-footer">
-          <span>BOOKINGTRAVEL.VN</span>
+          <span>{brand.name}</span>
           <span>Khởi đầu cho những kỳ nghỉ trọn vẹn.</span>
         </div>
       </section>
@@ -63,7 +65,7 @@ export function Login() {
           </span>
           <span className="ad-eyebrow">CHÀO MỪNG BẠN TRỞ LẠI</span>
           <h1>Đăng nhập quản trị</h1>
-          <p>Đăng nhập để tiếp tục quản lý Booking Travel.</p>
+          <p>Đăng nhập để tiếp tục quản lý {brand.name}.</p>
           <form
             onSubmit={async (e) => {
               e.preventDefault();
@@ -131,7 +133,7 @@ export function Login() {
             Không gian dành riêng cho quản trị viên.
           </div>
         </div>
-        <footer>Booking Travel · Không gian quản trị</footer>
+        <footer>{brand.name} · Không gian quản trị</footer>
       </section>
     </main>
   );

@@ -1,63 +1,64 @@
+import { z } from "zod";
 import { db } from "@/lib/db";
 import {
   adminUser,
   verifyPassword,
   createSession,
   destroySession,
-  sameOrigin,
 } from "@/lib/admin-auth";
-const attempts = new Map<string, { count: number; reset: number }>();
+import { sameOrigin, secureCookies, rateLimit } from "@/lib/request-security";
+import { readJson, errorResponse } from "@/lib/http";
+import { AppError } from "@/lib/errors";
+
 export async function GET() {
-  const user = await adminUser();
-  return user
-    ? Response.json({ user })
-    : Response.json({ error: "Vui lòng đăng nhập" }, { status: 401 });
+  try {
+    const user = await adminUser();
+    return user
+      ? Response.json({ user })
+      : Response.json({ error: "Vui lòng đăng nhập" }, { status: 401 });
+  } catch (error) {
+    return errorResponse(error);
+  }
 }
 export async function POST(request: Request) {
-  if (!sameOrigin(request))
-    return Response.json({ error: "Yêu cầu không hợp lệ" }, { status: 403 });
-  const ip = request.headers.get("x-forwarded-for") || "local";
-  const now = Date.now();
-  let limit = attempts.get(ip);
-  if (!limit || limit.reset < now) {
-    limit = { count: 0, reset: now + 15 * 60 * 1000 };
-    attempts.set(ip, limit);
-  }
-  if (limit.count >= 10)
-    return Response.json({ error: "Thử lại sau 15 phút" }, { status: 429 });
-  let data;
   try {
-    data = await request.json();
-  } catch {
-    return Response.json({ error: "Dữ liệu không hợp lệ" }, { status: 400 });
-  }
-  if (
-    typeof data.username !== "string" ||
-    typeof data.password !== "string" ||
-    data.password.length > 200
-  )
-    return Response.json(
-      { error: "Thông tin đăng nhập không hợp lệ" },
-      { status: 400 },
+    if (!sameOrigin(request)) throw new AppError("Yêu cầu không hợp lệ", 403);
+    const data = z
+      .object({
+        username: z.string().trim().min(1).max(80),
+        password: z.string().min(1).max(200),
+      })
+      .parse(await readJson(request));
+    const key = await rateLimit(
+      request,
+      "login",
+      10,
+      900,
+      data.username.toLowerCase(),
     );
-  const { rows } = await db.query(
-    "SELECT id,password_hash FROM admin_users WHERE username=$1 AND active=true",
-    [data.username],
-  );
-  if (!rows[0] || !verifyPassword(data.password, rows[0].password_hash)) {
-    limit.count++;
-    return Response.json(
-      { error: "Tên đăng nhập hoặc mật khẩu không đúng" },
-      { status: 401 },
+    const { rows } = await db.query(
+      "SELECT id,password_hash FROM admin_users WHERE username=$1 AND active=true",
+      [data.username],
     );
+    const validPassword = verifyPassword(
+      data.password,
+      rows[0]?.password_hash || `login-placeholder:${"0".repeat(128)}`,
+    );
+    if (!rows[0] || !validPassword)
+      throw new AppError("Tên đăng nhập hoặc mật khẩu không đúng", 401);
+    await db.query("DELETE FROM request_limits WHERE key=$1", [key]);
+    await createSession(rows[0].id, secureCookies(request));
+    return Response.json({ ok: true });
+  } catch (error) {
+    return errorResponse(error);
   }
-  attempts.delete(ip);
-  await createSession(rows[0].id, new URL(request.url).protocol === "https:");
-  return Response.json({ ok: true });
 }
 export async function DELETE(request: Request) {
-  if (!sameOrigin(request))
-    return Response.json({ error: "Yêu cầu không hợp lệ" }, { status: 403 });
-  await destroySession();
-  return Response.json({ ok: true });
+  try {
+    if (!sameOrigin(request)) throw new AppError("Yêu cầu không hợp lệ", 403);
+    await destroySession();
+    return Response.json({ ok: true });
+  } catch (error) {
+    return errorResponse(error);
+  }
 }

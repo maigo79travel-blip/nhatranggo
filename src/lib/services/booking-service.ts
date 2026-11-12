@@ -1,10 +1,12 @@
+import brand from "@/config/brand.json";
 import "server-only";
 import { randomUUID } from "node:crypto";
 import { db } from "@/lib/db";
 import type { z } from "zod";
 import type { bookingSchema } from "@/lib/validation";
 import type { Booking } from "@/lib/types";
-import { ModuleError } from "@/modules/admin/service";
+import { AppError } from "@/lib/errors";
+import { publicProductWhere } from "./product-visibility";
 type CreateBookingInput = z.infer<typeof bookingSchema>;
 export async function createBooking(input: CreateBookingInput) {
   const client = await db.connect();
@@ -12,14 +14,14 @@ export async function createBooking(input: CreateBookingInput) {
     await client.query("BEGIN");
     const product = (
       await client.query(
-        "SELECT price,type FROM products p WHERE id=$1 AND active=true AND NOT EXISTS(SELECT 1 FROM transfer_routes r WHERE p.id LIKE 'transfer-'||r.code||'-%' AND r.active=false)",
+        `SELECT p.price,p.type FROM products p WHERE p.id=$1 AND ${publicProductWhere}`,
         [input.productId],
       )
     ).rows[0];
-    if (!product) throw new ModuleError("Dịch vụ không tồn tại", 404);
+    if (!product) throw new AppError("Dịch vụ không tồn tại", 404);
     let price = product.price;
     if (product.type === "hotel" && !input.returnDate)
-      throw new ModuleError("Vui lòng chọn ngày trả phòng");
+      throw new AppError("Vui lòng chọn ngày trả phòng");
     if (input.roomId) {
       const room = (
         await client.query(
@@ -28,7 +30,7 @@ export async function createBooking(input: CreateBookingInput) {
         )
       ).rows[0];
       if (!room || input.guests > room.capacity)
-        throw new ModuleError("Loại phòng không phù hợp số khách");
+        throw new AppError("Loại phòng không phù hợp số khách");
       price = room.price;
     }
     const scheduled = await client.query(
@@ -40,7 +42,7 @@ export async function createBooking(input: CreateBookingInput) {
       scheduled.rowCount &&
       !scheduled.rows.some((r) => r.date === input.date)
     )
-      throw new ModuleError("Tour chưa có lịch khởi hành ngày đã chọn");
+      throw new AppError("Tour chưa có lịch khởi hành ngày đã chọn");
     const bookingId = randomUUID();
     await client.query(
       "INSERT INTO bookings(id,product_id,customer_name,phone,departure_date,guests,unit_price,notes,return_date,departure_time,room_id) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",
@@ -70,8 +72,7 @@ export async function createBooking(input: CreateBookingInput) {
     return {
       id: bookingId,
       status: "pending",
-      message:
-        "Đã nhận yêu cầu. MAIGO79 sẽ kiểm tra với đối tác và liên hệ xác nhận tình trạng chỗ, tổng giá.",
+      message: `Đã nhận yêu cầu. ${brand.name} sẽ kiểm tra với đối tác và liên hệ xác nhận tình trạng chỗ, tổng giá.`,
     };
   } catch (error) {
     await client.query("ROLLBACK");

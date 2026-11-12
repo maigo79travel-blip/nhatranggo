@@ -90,8 +90,8 @@ try {
     .evaluateAll((cards) => cards.map((card) => card.dataset.serviceId));
   assert.ok(regionIds.length > 0);
   await expect(
-    page.getByRole("combobox", { name: "Loại dịch vụ", exact: true }),
-  ).toHaveValue("hotel");
+    page.getByRole("radio", { name: "Khách sạn", exact: true }),
+  ).toBeChecked();
   await home();
   await search
     .getByLabel("Ngày nhận phòng", { exact: true })

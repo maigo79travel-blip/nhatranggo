@@ -14,6 +14,7 @@ import Link from "next/link";
 import type { SiteData } from "@/lib/types";
 import { money } from "@/lib/types";
 import { contentAttributeKeys } from "@/lib/content-attributes";
+import { contactInfo, resolveContent } from "@/lib/content-values";
 
 const DataContext = createContext<SiteData>({
   products: [],
@@ -43,22 +44,7 @@ function useContent(key: string): unknown {
   const value = scope
     ? data.products.find((p) => p.id === scope)?.content?.[key]?.value
     : data.content[key]?.value;
-  const contact = data.content["site.contact"]?.value as
-    Record<string, string> | undefined;
-  function resolve(value: unknown): unknown {
-    if (typeof value === "string")
-      return value.replace(
-        /\{\{contact\.([a-z]+)\}\}/g,
-        (_, key) => contact?.[key] || "",
-      );
-    if (Array.isArray(value)) return value.map(resolve);
-    if (value && typeof value === "object")
-      return Object.fromEntries(
-        Object.entries(value).map(([key, value]) => [key, resolve(value)]),
-      );
-    return value;
-  }
-  return resolve(value);
+  return resolveContent(value, contactInfo(data.content));
 }
 export function ContentText({ contentKey }: { contentKey: string }) {
   const value = useContent(contentKey);

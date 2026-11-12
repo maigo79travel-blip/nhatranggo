@@ -1,4 +1,6 @@
 "use client";
+
+import brand from "@/config/brand.json";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { api, rowKey, scopeLabels, type Row } from "./api";
@@ -429,7 +431,7 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
           )}
           <div className="ad-page-heading">
             <div>
-              <div className="ad-eyebrow">BOOKING TRAVEL ADMIN</div>
+              <div className="ad-eyebrow">{brand.name.toUpperCase()} ADMIN</div>
               <h1>{current.label}</h1>
               <p>
                 {section === "overview"
@@ -726,8 +728,8 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
           )}
           <footer className="ad-footer">
             <span>
-              Booking Travel<span className="ad-footer-dot">·</span>Không gian
-              quản trị
+              {brand.name}
+              <span className="ad-footer-dot">·</span>Không gian quản trị
             </span>
             <span>
               <i className={overview ? "is-connected" : ""} />

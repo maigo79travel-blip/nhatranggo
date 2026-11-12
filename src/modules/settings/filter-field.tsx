@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { cloneElement, type ReactElement } from "react";
 import { PublicIcon } from "./public-ui";
 
 export function FilterField({
@@ -9,7 +9,7 @@ export function FilterField({
 }: {
   label: string;
   icon: string;
-  children: ReactNode;
+  children: ReactElement<{ "aria-label"?: string }>;
   className?: string;
 }) {
   return (
@@ -17,7 +17,7 @@ export function FilterField({
       <PublicIcon name={icon} className="catalog-filter-icon" />
       <span className="catalog-filter-body">
         <span className="catalog-filter-label">{label}</span>
-        {children}
+        {cloneElement(children, { "aria-label": label })}
       </span>
     </label>
   );

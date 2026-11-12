@@ -40,7 +40,7 @@ export function ServiceFilters({
         {serviceTypes.map((type) => (
           <label key={type.value} className="catalog-type-option">
             <input
-              className="sr-only"
+              className="catalog-type-input"
               type="radio"
               name="type"
               value={type.value}
