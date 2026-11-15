@@ -1,7 +1,10 @@
 import fs from "node:fs";
 import pg from "pg";
 import { migrate } from "./lib/migrations.mjs";
-const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+import { connectionOptions } from "../db/connection.mjs";
+const db = new pg.Pool(
+  connectionOptions(process.env.DIRECT_URL || process.env.DATABASE_URL),
+);
 try {
   if (process.argv[2] === "migrate") {
     await migrate(db);

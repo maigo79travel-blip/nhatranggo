@@ -37,7 +37,7 @@ jobs:
             sleep 1
           done
           curl -fsS http://localhost:3001/api/health
-      - run: npm test && npm run test:cms && npm run test:modules && npm run test:home && npm run test:navigation && npm run test:production
+      - run: npm run test:deployment && npm test && npm run test:cms && npm run test:modules && npm run test:home && npm run test:navigation && npm run test:production
       - uses: actions/upload-artifact@v4
         if: failure()
         with:

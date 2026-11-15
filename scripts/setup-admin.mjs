@@ -1,7 +1,10 @@
 import fs from "node:fs";
 import { randomBytes, randomUUID, scryptSync } from "node:crypto";
 import pg from "pg";
-const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+import { connectionOptions } from "../db/connection.mjs";
+const db = new pg.Pool(
+  connectionOptions(process.env.DIRECT_URL || process.env.DATABASE_URL),
+);
 try {
   const username = process.env.ADMIN_USERNAME || "admin";
   if (

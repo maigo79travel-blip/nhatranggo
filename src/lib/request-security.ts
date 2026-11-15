@@ -4,16 +4,30 @@ import { db } from "./db";
 import { AppError } from "./errors";
 
 function publicOrigin(request: Request) {
-  return new URL(process.env.APP_URL || request.url).origin;
+  const deployment =
+    process.env.VERCEL_ENV === "preview"
+      ? process.env.VERCEL_URL
+      : process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL;
+  return new URL(
+    process.env.APP_URL || (deployment ? `https://${deployment}` : request.url),
+  ).origin;
 }
 
 export function sameOrigin(request: Request) {
   const origin = request.headers.get("origin");
-  return !origin || origin === publicOrigin(request);
+  if (!origin || origin === publicOrigin(request)) return true;
+  if (process.env.VERCEL_ENV === "preview") {
+    return [process.env.VERCEL_URL, process.env.VERCEL_BRANCH_URL].some(
+      (host) => host && origin === `https://${host}`,
+    );
+  }
+  return false;
 }
 
 export function secureCookies(request: Request) {
-  return publicOrigin(request).startsWith("https:");
+  return (
+    Boolean(process.env.VERCEL) || publicOrigin(request).startsWith("https:")
+  );
 }
 
 export async function rateLimit(
@@ -24,7 +38,7 @@ export async function rateLimit(
   identity = "",
 ) {
   const address =
-    process.env.TRUST_PROXY === "true"
+    process.env.VERCEL === "1" || process.env.TRUST_PROXY === "true"
       ? request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local"
       : "direct";
   const key = createHash("sha256")

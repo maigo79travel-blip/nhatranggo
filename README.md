@@ -65,6 +65,7 @@ npm run test:modules
 npm run test:home
 npm run test:navigation
 npm run test:production
+npm run test:deployment
 ```
 
 Test dùng Chromium đi kèm Playwright hoặc đường dẫn đặt tại `PLAYWRIGHT_CHROMIUM_EXECUTABLE`; `TEST_URL` đổi địa chỉ server. Chỉ chạy test ghi dữ liệu trên database phát triển/kiểm thử. `test:home` kiểm tra tab tìm kiếm, ngày/số khách, bộ lọc, nút đặt chỗ và các liên kết Home. `test:modules` kiểm tra thêm CSS/font, kích thước ô nhập, trạng thái tra cứu và responsive của 8 loại trang ở 5 kích thước màn hình (320–1920px), bao gồm kiểm tra khung trang không bị giới hạn chiều rộng. `test:navigation` xác nhận chuyển trang qua header không reload và giữ CSS. Ảnh kiểm tra lưu trong `test-results/`; test module tự dọn dữ liệu có mã riêng.
@@ -79,3 +80,5 @@ npm run start
 Trước khi chạy bản mới, cấu hình `DATABASE_URL`, `APP_URL` và chạy `npm run db:migrate` một lần cho môi trường đích. Build tạo bản standalone kèm ảnh/CSS; `npm start` kiểm tra cấu hình rồi chạy bản này. Có `Dockerfile`, `compose.production.yml`, `/api/health` và workflow CI. [Hướng dẫn triển khai](docs/production.md) · [Nguồn floating từ Maigo local](docs/contact-source.md). Seed không ghi đè chỉnh sửa đã có. Có thể xem lịch sử schema trong bảng `schema_migrations`.
 
 Hosting Việt Nam, TLS, backup/restore và cPanel không được tự cấu hình bởi repository này. Xuất booking hiện là CSV UTF-8 để mở bằng Excel; chưa có thanh toán online, tồn kho thời gian thực, kho upload ảnh hoặc tự động gửi email/SMS. Những chức năng đó không được coi là module đã triển khai.
+
+Hướng dẫn Vercel + Supabase: [docs/vercel.md](docs/vercel.md). Script database ưu tiên `DIRECT_URL` cho session pooler; runtime dùng `DATABASE_URL` cho transaction pooler.
