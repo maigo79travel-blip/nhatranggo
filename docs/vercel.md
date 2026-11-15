@@ -37,6 +37,7 @@ Nếu đã có dữ liệu, chỉ chạy migration, không khởi tạo lại d�
 
 1. Import repository GitHub `maigo79travel-blip/nhatranggo`, nhánh `main`.
 2. Framework Next.js, Root Directory `./`, Install/Build/Output để theo cấu hình repository.
+   Install Command là `npm ci --include=dev`, bảo đảm Tailwind, Autoprefixer và TypeScript vẫn được cài khi môi trường đặt `NODE_ENV=production` hoặc `NPM_CONFIG_OMIT=dev`. Các gói này cần trong lúc build. Nếu đã ghi đè Install Command trên dashboard, dùng cùng lệnh này.
 3. Thêm biến môi trường **Production**: `DATABASE_URL` là URI transaction pooler. Đánh dấu giá trị này là Sensitive. Không dùng tiền tố `NEXT_PUBLIC_`.
 4. `APP_URL` là URL HTTPS chính thức khi đã có domain; nếu chưa đặt, server tự lấy production URL từ Vercel. Preview chấp nhận deployment URL và branch URL do Vercel cung cấp. Vercel tự bật cookie Secure và sử dụng IP do proxy Vercel cung cấp; self-host vẫn dùng cấu hình `TRUST_PROXY` riêng.
 5. Deploy và kiểm tra `/api/health`, trang chủ, `/dich-vu`, đăng nhập `/admin` và một yêu cầu đặt chỗ được phép thử nghiệm.

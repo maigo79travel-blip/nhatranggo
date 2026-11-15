@@ -25,7 +25,11 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
+      - name: Install build tools with production environment
+        run: npm ci --include=dev
+        env:
+          NODE_ENV: production
+          NPM_CONFIG_OMIT: dev
       - run: npm audit --omit=dev --audit-level=high
       - run: npx playwright install --with-deps chromium
       - run: touch .env && npm run db:migrate && npm run db:seed && npm run admin:setup
