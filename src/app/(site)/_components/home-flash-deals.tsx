@@ -52,7 +52,7 @@ export function HomeFlashDeals() {
       <HomeHeading contentKey="home.text-080">
         <HomeSectionLink
           contentKey="home.attributes-008"
-          href="/dich-vu?type=combo"
+          href="/tour-hang-ngay?type=combo"
         >
           Xem tất cả ưu đãi
         </HomeSectionLink>

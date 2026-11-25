@@ -2,16 +2,20 @@ import { AppError } from "@/lib/errors";
 import { z } from "zod";
 import { adminUser } from "@/modules/admin/auth";
 import { sameOrigin } from "@/lib/request-security";
-import { productSchema, contentSchema } from "@/modules/admin/content-validation";
+import {
+  productSchema,
+  contentSchema,
+} from "@/modules/admin/content-validation";
 import { bookingSchema } from "@/modules/bookings/validation";
 import { db } from "@/lib/db";
+import { writeFare } from "@/modules/travel/fare-admin";
+import { publicProductWhere } from "@/modules/travel/product-visibility";
 import {
   getAdminOverview,
   getAdminResourceList,
   cloneAdminProduct,
   updateAdminProduct,
   updateAdminContent,
-  updateAdminFare,
   changeAdminPassword,
 } from "@/modules/admin/core-resources";
 import { createBooking } from "@/modules/bookings/service";
@@ -23,7 +27,13 @@ import {
   bookingUpdateSchema,
   updateBooking,
   exportBookings,
+  listAdminBookings,
 } from "@/modules/bookings/admin-service";
+import {
+  bookingPageSchema,
+  readBookingFilters,
+} from "@/modules/bookings/admin-filters";
+
 type Context = { params: Promise<{ resource: string }> };
 async function handle(request: Request, context: Context) {
   try {
@@ -47,51 +57,69 @@ async function handle(request: Request, context: Context) {
     if (method !== "GET" && !sameOrigin(request))
       return Response.json({ error: "Yêu cầu không hợp lệ" }, { status: 403 });
     if (method === "GET") {
-      if (resource === "booking-export")
-        return new Response(await exportBookings(), {
+      const { searchParams } = new URL(request.url);
+      if (resource === "booking-export") {
+        const format = z
+          .enum(["csv", "xlsx"])
+          .parse(searchParams.get("format") ?? "csv");
+        const { body, type } = await exportBookings(
+          readBookingFilters(searchParams),
+          format,
+        );
+        return new Response(body, {
           headers: {
-            "Content-Type": "text/csv; charset=utf-8",
-            "Content-Disposition": 'attachment; filename="bookings.csv"',
+            "Content-Type": type,
+            "Content-Disposition": `attachment; filename="bookings.${format}"`,
+            "Cache-Control": "private, no-store",
           },
         });
-      if (resource === "overview") {
-        const data = await getAdminOverview();
-        if (user.role === "editor") {
-          data.bookings = [];
-          data.stats.bookings = 0;
-          data.stats.pending = 0;
-          data.stats.completed = 0;
-          data.stats.revenue = 0;
-        }
-        return Response.json({ data });
       }
-      const url = new URL(request.url);
-      if (resource === "bookings" && url.searchParams.has("phone"))
+      if (resource === "overview")
+        return Response.json({
+          data: await getAdminOverview(canAccess(user, "bookings")),
+        });
+      if (resource === "bookings" && searchParams.has("phone"))
         return Response.json({
           data: (
             await db.query(
               "SELECT b.*,b.departure_date::text,p.title FROM bookings b JOIN products p ON p.id=b.product_id WHERE phone=$1 ORDER BY created_at DESC",
-              [url.searchParams.get("phone")],
+              [searchParams.get("phone")],
             )
           ).rows,
         });
-      if (resource === "bookings" && url.searchParams.has("history"))
+      if (resource === "bookings" && searchParams.has("history"))
         return Response.json({
           data: (
             await db.query(
               "SELECT h.status,h.notes,h.created_at,u.username FROM booking_history h LEFT JOIN admin_users u ON u.id=h.actor_id WHERE h.booking_id=$1 ORDER BY h.created_at DESC",
-              [z.uuid().parse(url.searchParams.get("history"))],
+              [z.uuid().parse(searchParams.get("history"))],
             )
           ).rows,
         });
-      const data = resources[resource]
+      if (resource === "bookings" && searchParams.has("page"))
+        return Response.json(
+          await listAdminBookings(
+            readBookingFilters(searchParams),
+            bookingPageSchema.parse(searchParams.get("page")),
+          ),
+        );
+      if (
+        resource === "products" &&
+        (user.role === "booking" || searchParams.get("bookable") === "1")
+      ) {
+        const { rows } = await db.query(
+          `SELECT p.id,p.type,p.title,p.price,p.active FROM products p WHERE ${publicProductWhere} ORDER BY p.position,p.id`,
+        );
+        return Response.json({ data: rows });
+      }
+      const data = Object.hasOwn(resources, resource)
         ? await listRecords(resource)
         : await getAdminResourceList(resource);
       if (!data) throw new AppError("Không tìm thấy module", 404);
       return Response.json({ data });
     }
     const body = await readJson(request, 1048576);
-    if (resources[resource]) {
+    if (Object.hasOwn(resources, resource)) {
       if (method === "DELETE")
         return Response.json({
           data: await removeRecord(resource, z.uuid().parse(body.id), user),
@@ -111,8 +139,8 @@ async function handle(request: Request, context: Context) {
     if (resource === "products") {
       if (method === "DELETE") {
         const result = await db.query(
-          "UPDATE products SET active=false,updated_at=now() WHERE id=$1 RETURNING id",
-          [z.string().max(100).parse(body.id)],
+          "UPDATE products SET active=false,updated_at=now() WHERE id=$1 AND type<>'transfer' RETURNING id",
+          [z.string().min(1).max(100).parse(body.id)],
         );
         if (!result.rowCount) throw new AppError("Không tìm thấy dịch vụ", 404);
         return Response.json({ data: result.rows[0] });
@@ -142,57 +170,21 @@ async function handle(request: Request, context: Context) {
         data: await updateAdminProduct(productSchema.parse(body)),
       });
     }
-    if (resource === "content")
+    if (resource === "content") {
+      if (method !== "PATCH")
+        throw new AppError("Chỉ hỗ trợ cập nhật trường nội dung hiện có", 405, {
+          Allow: "GET, PATCH",
+        });
       return Response.json({
         data: await updateAdminContent(
-          z.string().max(200).parse(body.key),
+          z.string().min(1).max(200).parse(body.key),
           contentSchema.parse(body),
         ),
       });
+    }
     if (resource === "fares") {
-      const p = z
-        .object({
-          route: z.string().regex(/^[A-Z0-9_]{2,100}$/),
-          vehicle: z.enum(["4cho", "7cho", "16cho", "limo9"]),
-          price: z.coerce.number().int().min(0).max(2000000000),
-        })
-        .parse(body);
-      if (method === "POST") {
-        const route = (
-          await db.query(
-            "SELECT title FROM transfer_routes WHERE code=$1 AND active=true",
-            [p.route],
-          )
-        ).rows[0];
-        if (!route) throw new AppError("Hãy tạo tuyến xe trước");
-        const client = await db.connect();
-        try {
-          await client.query("BEGIN");
-          const result = await client.query(
-            "INSERT INTO transfer_fares(route,vehicle,price) VALUES($1,$2,$3) RETURNING *",
-            [p.route, p.vehicle, p.price],
-          );
-          await client.query(
-            "INSERT INTO products(id,type,title,price,location,description) VALUES($1,'transfer',$2,$3,$4,'Giá tham khảo mỗi chuyến')",
-            [
-              `transfer-${p.route}-${p.vehicle}`,
-              `${route.title} · ${p.vehicle}`,
-              p.price,
-              route.title,
-            ],
-          );
-          await client.query("COMMIT");
-          return Response.json({ data: result.rows[0] }, { status: 201 });
-        } catch (e) {
-          await client.query("ROLLBACK");
-          throw e;
-        } finally {
-          client.release();
-        }
-      }
-      return Response.json({
-        data: await updateAdminFare(p.route, p.vehicle, p.price),
-      });
+      const data = await writeFare(method, body);
+      return Response.json({ data }, { status: method === "POST" ? 201 : 200 });
     }
     if (resource === "bookings") {
       if (method === "DELETE")
@@ -201,7 +193,7 @@ async function handle(request: Request, context: Context) {
         {
           data:
             method === "POST"
-              ? await createBooking(bookingSchema.parse(body))
+              ? await createBooking(bookingSchema.parse(body), user.id)
               : await updateBooking(bookingUpdateSchema.parse(body), user.id),
         },
         { status: method === "POST" ? 201 : 200 },

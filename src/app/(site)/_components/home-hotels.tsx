@@ -5,6 +5,7 @@ import { ContentText, useSiteData } from "@/components/content";
 import { matchesHotelFilter, type HomeHotelFilter } from "./hotel-filter";
 import { PriceStack } from "@/components/price-stack";
 import { CatalogCard, ProductField } from "@/components/catalog";
+import { HomeCardRating } from "./home-card-rating";
 
 const filterOptions: HomeHotelFilter[] = [
   "all",
@@ -110,15 +111,7 @@ export function HomeHotels() {
               <div className="flex flex-1 flex-col justify-between p-5 lg:p-6">
                 <div>
                   <div className="flex items-center justify-between text-body-sm font-body-sm mb-2 gap-2">
-                    <span className="flex items-center gap-1 text-base font-extrabold text-promo-ink">
-                      <span
-                        className="material-symbols-outlined text-[16px]"
-                        style={{ fontVariationSettings: "'FILL' 1" }}
-                      >
-                        {"star"}
-                      </span>
-                      <span>{product.rating}</span>
-                    </span>
+                    <HomeCardRating rating={product.rating} variant="hotel" />
                     <span className="inline-flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm truncate">
                       <img
                         src="/images/figma/icons/pin.svg"

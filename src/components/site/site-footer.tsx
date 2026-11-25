@@ -1,6 +1,6 @@
 "use client";
 import { useSiteData } from "@/components/content";
-import { contactInfo } from "@/lib/content-values";
+import { contactInfo, contentImageUrl } from "@/lib/content-values";
 import { ContentText, ContentElement } from "@/components/content";
 import type { ReactNode } from "react";
 import brand from "@/config/brand.json";
@@ -32,7 +32,8 @@ export function SiteFooter({
 }: {
   informationLinks: ReactNode;
 }) {
-  const contact = contactInfo(useSiteData().content);
+  const { content } = useSiteData();
+  const contact = contactInfo(content);
   return (
     <footer
       className="w-full bg-background text-on-surface pt-8 pb-24 md:pb-6"
@@ -44,9 +45,12 @@ export function SiteFooter({
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 bg-surface-muted flex items-center justify-center">
                 <img
-                  src="/images/figma/logo-mark.png"
+                  src={contentImageUrl(
+                    content["site.logo"]?.value,
+                    "/images/figma/logo-mark.png",
+                  )}
                   alt={brand.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div className="flex flex-col leading-tight">

@@ -3,18 +3,15 @@
 import brand from "@/config/brand.json";
 import { Icon } from "./admin-icon";
 
-export function Brand({ light = false }: { light?: boolean }) {
+export function Brand() {
   return (
-    <a href="/admin" className={`ad-brand ${light ? "ad-brand-light" : ""}`}>
+    <a href="/admin" className="ad-brand">
       <span className="ad-brand-mark">
         <Icon name="tsunami" />
       </span>
       <span>
-        <strong>
-          {brand.wordmarkPrimary}
-          <span>{brand.wordmarkSecondary}</span>
-        </strong>
-        <small>KHÔNG GIAN QUẢN TRỊ</small>
+        <strong>{brand.name}</strong>
+        <small>Quản trị</small>
       </span>
     </a>
   );

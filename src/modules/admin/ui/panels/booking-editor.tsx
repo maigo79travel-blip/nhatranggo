@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { api } from "../api";
 import { money } from "@/lib/types";
 import { Status } from "../primitives/admin-badge";
-import { dateLabel, type Row } from "../api";
+import { dateLabel, typeLabels, type Row } from "../api";
 import { Save } from "../editors";
 
 export function BookingEditor({
@@ -40,15 +40,15 @@ export function BookingEditor({
       id="ad-record-form"
       onSubmit={(e) => {
         e.preventDefault();
+        const form = new FormData(e.currentTarget);
         void onSave({
           id: row.id,
-          status: new FormData(e.currentTarget).get("status"),
-          partner_id: new FormData(e.currentTarget).get("partner_id") || null,
-          internal_notes: new FormData(e.currentTarget).get("internal_notes"),
-          confirmed_total:
-            new FormData(e.currentTarget).get("confirmed_total") || null,
-          name: new FormData(e.currentTarget).get("name"),
-          phone: new FormData(e.currentTarget).get("phone"),
+          status: form.get("status"),
+          partner_id: form.get("partner_id") || null,
+          internal_notes: form.get("internal_notes"),
+          confirmed_total: form.get("confirmed_total") || null,
+          name: form.get("name"),
+          phone: form.get("phone"),
         });
       }}
     >
@@ -61,14 +61,22 @@ export function BookingEditor({
         {[
           ["Khách hàng", row.customer_name],
           ["Số điện thoại", row.phone],
+          ["Loại dịch vụ", typeLabels[String(row.product_type)]],
           ["Ngày sử dụng", dateLabel(row.departure_date)],
+          ...(row.return_date
+            ? [["Ngày trả phòng", dateLabel(row.return_date)]]
+            : []),
+          ...(row.departure_time
+            ? [["Giờ đón", String(row.departure_time).slice(0, 5)]]
+            : []),
+          ...(row.room_title ? [["Loại phòng", row.room_title]] : []),
           ["Số khách", row.guests],
           ["Giá tham khảo đã ghi nhận", money(Number(row.unit_price))],
           ["Ghi chú", row.notes],
         ].map(([label, value]) => (
           <div key={String(label)}>
             <dt>{String(label)}</dt>
-            <dd>{String(value || "—")}</dd>
+            <dd>{String(value ?? "—")}</dd>
           </div>
         ))}
       </dl>
@@ -111,11 +119,19 @@ export function BookingEditor({
           defaultValue={String(row.partner_id || "")}
         >
           <option value="">Chưa phân công</option>
-          {partners.map((p) => (
-            <option key={String(p.id)} value={String(p.id)}>
-              {String(p.name)} · {String(p.kind)}
-            </option>
-          ))}
+          {partners
+            .filter((p) => p.active || p.id === row.partner_id)
+            .map((p) => (
+              <option key={String(p.id)} value={String(p.id)}>
+                {String(p.name)} ·{" "}
+                {p.kind === "driver"
+                  ? "Tài xế"
+                  : p.kind === "hotel"
+                    ? "Khách sạn"
+                    : "Nhà tour"}
+                {!p.active ? " (đã ẩn)" : ""}
+              </option>
+            ))}
         </select>
       </label>
       <label className="ad-field">

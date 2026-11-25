@@ -52,7 +52,12 @@ function QuoteField({
 
 export function TransfersHero() {
   const { vehicle, selectVehicle } = useTransferVehicle();
-  const { fares, products, destinations } = useSiteData();
+  const {
+    fares,
+    products,
+    destinations,
+    transferRoutes: routes,
+  } = useSiteData();
   const catalog = useCatalog();
   const heroLabel = useContent("transfers.text-027");
   const heroSubtitle = useContent("transfers.text-029");
@@ -61,8 +66,25 @@ export function TransfersHero() {
   const label = typeof heroLabel === "string" ? heroLabel.trim() : defaultLabel;
   const subtitle =
     typeof heroSubtitle === "string" ? heroSubtitle.trim() : defaultSubtitle;
-  const [pickup, setPickup] = useState<string>(defaultRoute.pickup);
-  const [dropoff, setDropoff] = useState<string>(defaultRoute.dropoff);
+  const routeChoices = transferRoutes.map((option) => ({
+    ...option,
+    route:
+      routes.find(
+        (route) =>
+          route.category === option.id &&
+          route.pickup === option.pickup &&
+          route.dropoff === option.dropoff,
+      ) || routes.find((route) => route.category === option.id),
+  }));
+  const initialRoute =
+    routeChoices.find((option) => option.id === defaultRoute.id)?.route ||
+    routes[0];
+  const [pickup, setPickup] = useState(
+    initialRoute?.pickup ?? destinations[0]?.code ?? "",
+  );
+  const [dropoff, setDropoff] = useState(
+    initialRoute?.dropoff ?? destinations[1]?.code ?? "",
+  );
   const [trip, setTrip] = useState("one-way");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -154,17 +176,20 @@ export function TransfersHero() {
                 role="group"
                 aria-label="Dịch vụ xe"
               >
-                {transferRoutes.map((option) => (
+                {routeChoices.map((option) => (
                   <button
                     key={option.id}
                     type="button"
-                    className="transfer-pill transfer-pill-muted"
+                    className="transfer-pill transfer-pill-muted disabled:cursor-not-allowed disabled:opacity-50"
+                    disabled={!option.route}
                     aria-pressed={
-                      pickup === option.pickup && dropoff === option.dropoff
+                      pickup === option.route?.pickup &&
+                      dropoff === option.route?.dropoff
                     }
                     onClick={() => {
-                      setPickup(option.pickup);
-                      setDropoff(option.dropoff);
+                      if (!option.route) return;
+                      setPickup(option.route.pickup);
+                      setDropoff(option.route.dropoff);
                       setError("");
                     }}
                   >

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
+import { useContent } from "@/components/content";
 import { nextDate, vietnamToday } from "@/modules/travel/search";
 
 export interface HotelSearchState {
@@ -54,6 +55,10 @@ export function HotelsHero({
   onSearch: (next: HotelSearchState) => void;
 }) {
   const [draft, setDraft] = useState(search);
+  const storedTitle = useContent("hotels.text-046");
+  const heroTitle = typeof storedTitle === "string" ? storedTitle.trim() : "";
+  const customTitle =
+    heroTitle && heroTitle !== "Tìm & Đặt Phòng Khách Sạn, Resort Giá Tốt Nhất";
 
   useEffect(() => {
     setDraft(search);
@@ -72,12 +77,18 @@ export function HotelsHero({
           id="hotel-title"
           className="hotel-hero-title font-extrabold tracking-tight"
         >
-          Tìm &amp; Đặt Phòng
-          <span className="hotel-hero-accent mt-3 block uppercase">
-            Khách sạn &amp; Resort
-            <br />
-            Giá tốt nhất
-          </span>
+          {customTitle ? (
+            heroTitle
+          ) : (
+            <>
+              Tìm &amp; Đặt Phòng
+              <span className="hotel-hero-accent mt-3 block uppercase">
+                Khách sạn &amp; Resort
+                <br />
+                Giá tốt nhất
+              </span>
+            </>
+          )}
         </h1>
 
         <form

@@ -145,39 +145,6 @@ button {
   .catalog-filters {
     @apply space-y-4;
   }
-  .catalog-type-options {
-    @apply flex flex-wrap items-center gap-2 min-w-0 mb-5;
-  }
-  .catalog-type-option {
-    position: relative;
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-border-subtle bg-surface px-4 py-2.5 text-sm font-semibold text-on-surface-variant cursor-pointer;
-    min-height: 44px;
-    transition:
-      background-color 150ms,
-      color 150ms,
-      border-color 150ms,
-      box-shadow 150ms;
-  }
-  .catalog-type-input {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-    border-radius: inherit;
-  }
-  .catalog-type-option:hover {
-    @apply border-primary/30 text-primary;
-  }
-  .catalog-type-option:has(input:checked) {
-    @apply border-primary bg-primary text-on-primary;
-    box-shadow: 0 3px 10px rgb(var(--color-primary) / 0.15);
-  }
-  .catalog-type-option:focus-within {
-    outline: 2px solid rgb(var(--color-focus-ring));
-    outline-offset: 3px;
-  }
   .catalog-search-bar {
     @apply grid gap-2 p-2 bg-surface border border-border-subtle rounded-3xl;
     grid-template-columns: minmax(0, 1fr) auto;

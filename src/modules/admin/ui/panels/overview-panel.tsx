@@ -1,299 +1,241 @@
 "use client";
+
 import { Icon } from "../primitives/admin-icon";
 import { Status } from "../primitives/admin-badge";
 import { Empty } from "../primitives/admin-empty";
-import { money } from "@/lib/types";
+import { money, type AdminOverviewData } from "@/lib/types";
 import { typeLabels, dateLabel } from "../api";
-import type { AdminOverviewData } from "@/lib/types";
+
+const quickActions = [
+  { id: "products", icon: "luggage", title: "Quản lý dịch vụ" },
+  { id: "content", icon: "edit_note", title: "Chỉnh sửa nội dung" },
+  { id: "fares", icon: "airport_shuttle", title: "Cập nhật giá xe" },
+];
 
 export function OverviewPanel({
   data,
   loading,
   syncedAt,
+  canNavigate,
   navigate,
-  onRefresh,
 }: {
   data: AdminOverviewData | null;
   loading: boolean;
   syncedAt: string;
-  navigate: (s: string) => void;
-  onRefresh: () => void;
+  canNavigate: (section: string) => boolean;
+  navigate: (section: string) => void;
 }) {
-  const cards = [
-    {
-      title: "Dịch vụ đang hiển thị",
-      value: data?.stats.active_services,
-      subtitle: data
-        ? `${data.stats.services} dịch vụ trong danh mục`
-        : "Đang tải dữ liệu",
-      icon: "luggage",
-      section: "products",
-      tone: "blue",
-    },
-    {
-      title: "Yêu cầu đặt chỗ",
-      value: data?.stats.bookings,
-      subtitle: data
-        ? `${data.stats.pending} yêu cầu chờ xác nhận`
-        : "Đang tải dữ liệu",
-      icon: "confirmation_number",
-      section: "bookings",
-      tone: "teal",
-    },
-    {
-      title: "Nội dung website",
-      value: data?.stats.content,
-      subtitle: "Nội dung trên toàn bộ website",
-      icon: "article",
-      section: "content",
-      tone: "purple",
-    },
-    {
-      title: "Đơn hoàn tất",
-      value: data?.stats.completed,
-      subtitle: "Đã xử lý hoàn tất",
-      icon: "task_alt",
-      section: "bookings",
-      tone: "amber",
-    },
-  ];
-  const total = data?.categories.reduce((sum, c) => sum + c.count, 0) || 0;
+  const canManageBookings = canNavigate("bookings");
+  const canManageProducts = canNavigate("products");
+  const actions = quickActions.filter((action) => canNavigate(action.id));
+  const stats = data?.stats;
+  const total =
+    data?.categories.reduce((sum, item) => sum + item.count, 0) ?? 0;
 
   return (
-    <>
-      <div className="ad-stat-grid">
-        {cards.map((card) => (
-          <button
-            type="button"
-            key={card.title}
-            className={`ad-stat-card ad-stat-${card.tone}`}
-            onClick={() => navigate(card.section)}
-          >
-            <div>
-              <span className="ad-stat-label">{card.title}</span>
-              <span className="ad-stat-icon">
-                <Icon name={card.icon} />
-              </span>
+    <div className="ad-overview" aria-busy={loading}>
+      <dl className="ad-stat-grid" aria-label="Chỉ số vận hành">
+        {canManageBookings && (
+          <>
+            <div className="ad-stat-card ad-stat-priority">
+              <dt>Đơn chờ xác nhận</dt>
+              <dd className="ad-stat-value">{stats?.pending ?? "—"}</dd>
+              {stats && (
+                <dd className="ad-stat-meta">
+                  {stats.new_today} đơn mới hôm nay
+                </dd>
+              )}
+              <dd className="ad-stat-meta">
+                <button
+                  type="button"
+                  className="ad-text-button"
+                  onClick={() => navigate("bookings")}
+                >
+                  Mở danh sách đặt chỗ <Icon name="arrow_forward" />
+                </button>
+              </dd>
             </div>
-            <strong>{card.value ?? "—"}</strong>
-            <div>
-              <small>{card.subtitle}</small>
-              <Icon name="arrow_forward" />
+            <div className="ad-stat-card">
+              <dt>Đơn hoàn tất</dt>
+              <dd className="ad-stat-value">{stats?.completed ?? "—"}</dd>
+              <dd className="ad-stat-meta">
+                {stats ? `${stats.bookings} yêu cầu đã nhận` : "—"}
+              </dd>
             </div>
-          </button>
-        ))}
-      </div>
-      <div className="ad-panel p-5 my-5">
-        <p>Tổng giá trị đã xác nhận của đơn hoàn tất</p>
-        <strong className="text-headline-md text-primary">
-          {money(data?.stats.revenue || 0)}
-        </strong>
-        <p className="text-body-sm text-on-surface-variant">
-          Tổng theo giá trị nhân viên nhập khi xác nhận đơn.
-        </p>
-      </div>
-      <section className="ad-welcome">
-        <div>
-          <span className="ad-welcome-symbol">
-            <Icon name="explore" />
-          </span>
-          <div>
-            <h2>Một trải nghiệm tốt bắt đầu từ sự chăm chút.</h2>
-            <p>Cập nhật dịch vụ và nội dung để mỗi hành trình luôn sẵn sàng.</p>
-          </div>
+            <div className="ad-stat-card">
+              <dt>Giá trị đơn hoàn tất</dt>
+              <dd className="ad-stat-value">
+                {stats ? money(stats.revenue) : "—"}
+              </dd>
+              <dd className="ad-stat-meta">Theo giá trị khi xác nhận đơn</dd>
+            </div>
+          </>
+        )}
+        <div className="ad-stat-card">
+          <dt>Dịch vụ đang hiển thị</dt>
+          <dd className="ad-stat-value">{stats?.active_services ?? "—"}</dd>
+          <dd className="ad-stat-meta">
+            {stats ? `${stats.services} dịch vụ trong danh mục` : "—"}
+          </dd>
         </div>
-        <button type="button" onClick={() => navigate("products")}>
-          Quản lý dịch vụ
-          <Icon name="arrow_forward" />
-        </button>
-      </section>
+        {!canManageBookings && (
+          <div className="ad-stat-card">
+            <dt>Mục nội dung website</dt>
+            <dd className="ad-stat-value">{stats?.content ?? "—"}</dd>
+          </div>
+        )}
+      </dl>
+
       <div className="ad-overview-grid">
-        <section className="ad-panel">
-          <div className="ad-panel-heading ad-panel-heading-between">
-            <div>
+        {canManageBookings && (
+          <section className="ad-panel">
+            <div className="ad-panel-heading ad-panel-heading-between">
               <h2>Yêu cầu đặt chỗ gần đây</h2>
-              <p>Đồng hành cùng khách hàng từ bước đầu tiên.</p>
+              <button
+                type="button"
+                className="ad-text-button"
+                onClick={() => navigate("bookings")}
+              >
+                Xem tất cả <Icon name="arrow_forward" />
+              </button>
             </div>
-            <button
-              type="button"
-              className="ad-text-button"
-              onClick={() => navigate("bookings")}
-            >
-              Xem tất cả
-              <Icon name="arrow_forward" />
-            </button>
-          </div>
-          {data?.bookings.length ? (
-            <div className="ad-table-scroll">
-              <table className="ad-table">
-                <thead>
-                  <tr>
-                    <th>KHÁCH HÀNG</th>
-                    <th>DỊCH VỤ</th>
-                    <th>TRẠNG THÁI</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.bookings.map((row) => (
-                    <tr key={String(row.id)}>
-                      <td>
-                        <strong>{String(row.customer_name)}</strong>
-                        <small>{dateLabel(row.created_at)}</small>
-                      </td>
-                      <td className="ad-cell-service">{String(row.title)}</td>
-                      <td>
-                        <Status value={row.status} />
-                      </td>
+            {data?.bookings.length ? (
+              <div
+                className="ad-table-scroll"
+                role="region"
+                aria-label="Yêu cầu đặt chỗ gần đây"
+                tabIndex={0}
+              >
+                <table className="ad-table ad-table-recent">
+                  <thead>
+                    <tr>
+                      <th scope="col">Khách hàng</th>
+                      <th scope="col">Dịch vụ</th>
+                      <th scope="col">Trạng thái</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <Empty
-              icon="confirmation_number"
-              title={loading ? "Đang tải yêu cầu…" : "Chưa có yêu cầu đặt chỗ"}
-              text="Các yêu cầu mới từ website sẽ được tập hợp tại đây."
-            />
-          )}
-        </section>
-        <section className="ad-panel ad-distribution">
-          <div className="ad-panel-heading">
-            <div>
-              <h2>Danh mục dịch vụ</h2>
-              <p>Các dịch vụ đang hiển thị trên website.</p>
-            </div>
-          </div>
-          <div className="ad-distribution-total">
-            <strong>{data ? total : "—"}</strong>
-            <span>dịch vụ đang hiển thị</span>
-            <span className="ad-distribution-icon">
-              <Icon name="travel_explore" />
-            </span>
-          </div>
-          <div className="ad-stacked-bar">
-            {data?.categories.map((item) => (
-              <span
-                key={item.type}
-                className={`ad-bar-${item.type}`}
-                style={{ width: `${total ? (item.count / total) * 100 : 0}%` }}
+                  </thead>
+                  <tbody>
+                    {data.bookings.map((row) => (
+                      <tr key={String(row.id)}>
+                        <td>
+                          <strong>{String(row.customer_name)}</strong>
+                          <small>{dateLabel(row.created_at)}</small>
+                        </td>
+                        <td className="ad-cell-service">{String(row.title)}</td>
+                        <td>
+                          <Status value={row.status} />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <Empty
+                icon="confirmation_number"
+                title={
+                  loading ? "Đang tải yêu cầu…" : "Chưa có yêu cầu đặt chỗ"
+                }
               />
-            ))}
-          </div>
-          <div className="ad-distribution-list">
-            {data?.categories.map((item) => (
+            )}
+          </section>
+        )}
+        {canManageProducts && (
+          <section className="ad-panel">
+            <div className="ad-panel-heading ad-panel-heading-between">
+              <h2>Danh mục dịch vụ</h2>
               <button
                 type="button"
+                className="ad-text-button"
                 onClick={() => navigate("products")}
-                key={item.type}
               >
-                <span>
-                  <i className={`ad-bar-${item.type}`} />
-                  {typeLabels[item.type]}
-                </span>
-                <strong>
-                  {item.count}
-                  <small>
-                    {total ? Math.round((item.count / total) * 100) : 0}%
-                  </small>
-                </strong>
+                Xem danh mục <Icon name="arrow_forward" />
               </button>
-            ))}
-          </div>
-        </section>
-      </div>
-      <div className="ad-overview-grid ad-overview-bottom">
-        <section className="ad-panel">
-          <div className="ad-panel-heading">
-            <div>
+            </div>
+            {total > 0 ? (
+              <ul
+                className="ad-distribution-list"
+                aria-label="Dịch vụ đang hiển thị theo loại"
+              >
+                {data?.categories.map(({ type, count }) => (
+                  <li key={type}>
+                    <span>{typeLabels[type] ?? type}</span>
+                    <strong>{count}</strong>
+                    <span className="ad-distribution-track" aria-hidden="true">
+                      <span style={{ width: `${(count / total) * 100}%` }} />
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <Empty
+                icon="luggage"
+                title={
+                  loading ? "Đang tải danh mục…" : "Chưa có dịch vụ hiển thị"
+                }
+              />
+            )}
+          </section>
+        )}
+        {actions.length > 0 && (
+          <section className="ad-panel">
+            <div className="ad-panel-heading">
               <h2>Truy cập nhanh</h2>
-              <p>Những công việc thường ngày, ngay trong tầm tay.</p>
             </div>
-          </div>
-          <div className="ad-quick-grid">
-            {[
-              {
-                id: "products",
-                icon: "edit_location_alt",
-                title: "Chăm chút dịch vụ",
-                text: "Cập nhật thông tin và ưu đãi",
-              },
-              {
-                id: "content",
-                icon: "edit_note",
-                title: "Làm mới nội dung",
-                text: "Tiêu đề, hình ảnh và thông tin",
-              },
-              {
-                id: "fares",
-                icon: "airport_shuttle",
-                title: "Điều chỉnh giá xe",
-                text: "Giá theo tuyến và loại xe",
-              },
-            ].map((item) => (
-              <button
-                type="button"
-                key={item.id}
-                onClick={() => navigate(item.id)}
-              >
-                <span>
-                  <Icon name={item.icon} />
-                </span>
-                <strong>{item.title}</strong>
-                <small>{item.text}</small>
-                <Icon name="arrow_forward" />
-              </button>
-            ))}
-          </div>
-        </section>
-        <section className="ad-panel">
-          <div className="ad-panel-heading ad-panel-heading-between">
-            <div>
+            <div className="ad-quick-list">
+              {actions.map((action) => (
+                <button
+                  type="button"
+                  key={action.id}
+                  onClick={() => navigate(action.id)}
+                >
+                  <Icon name={action.icon} />
+                  <span>{action.title}</span>
+                  <Icon name="chevron_right" />
+                </button>
+              ))}
+            </div>
+          </section>
+        )}
+        {canManageProducts && (
+          <section className="ad-panel">
+            <div className="ad-panel-heading">
               <h2>Cập nhật gần đây</h2>
-              <p>Những dịch vụ vừa được chỉnh sửa.</p>
             </div>
-            <button
-              type="button"
-              className="ad-icon-button"
-              aria-label="Làm mới tổng quan"
-              disabled={loading}
-              onClick={onRefresh}
-            >
-              <Icon name="refresh" />
-            </button>
-          </div>
-          <div className="ad-update-list">
-            {data?.updates.map((row) => (
-              <button
-                type="button"
-                key={String(row.id)}
-                onClick={() => navigate("products")}
-              >
-                {row.image ? (
-                  <img src={String(row.image)} alt="" />
-                ) : (
-                  <span className="ad-thumbnail">
-                    <Icon name="luggage" />
-                  </span>
-                )}
-                <span>
-                  <strong>{String(row.title)}</strong>
-                  <small>
-                    {typeLabels[String(row.type)]} · {dateLabel(row.updated_at)}
-                  </small>
-                </span>
-                <Icon name="chevron_right" />
-              </button>
-            ))}
-          </div>
-        </section>
+            {data?.updates.length ? (
+              <ul className="ad-update-list">
+                {data.updates.map((row) => (
+                  <li key={String(row.id)}>
+                    {row.image ? (
+                      <img src={String(row.image)} alt="" loading="lazy" />
+                    ) : (
+                      <span className="ad-thumbnail">
+                        <Icon name="luggage" />
+                      </span>
+                    )}
+                    <div>
+                      <strong>{String(row.title)}</strong>
+                      <small>
+                        {typeLabels[String(row.type)]} ·{" "}
+                        {dateLabel(row.updated_at)}
+                      </small>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <Empty
+                icon="history"
+                title={loading ? "Đang tải cập nhật…" : "Chưa có cập nhật"}
+              />
+            )}
+          </section>
+        )}
       </div>
-      <div className="ad-sync-line">
-        <Icon name="sync" />
-        {syncedAt
-          ? `Đồng bộ gần nhất lúc ${syncedAt}`
-          : "Đang tải thông tin tổng quan…"}
-      </div>
-    </>
+
+      {syncedAt && (
+        <p className="ad-sync-line">Đồng bộ gần nhất lúc {syncedAt}</p>
+      )}
+    </div>
   );
 }

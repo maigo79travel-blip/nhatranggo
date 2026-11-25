@@ -3,11 +3,12 @@ import { HomeHeading, HomeSectionLink } from "./home-heading";
 import { ContentText, useSiteData } from "@/components/content";
 import { PriceStack } from "@/components/price-stack";
 import { CatalogCard, ProductField } from "@/components/catalog";
+import { HomeCardRating } from "./home-card-rating";
 
 export function HomeTours() {
   const tours = useSiteData()
     .products.filter((p) => p.type === "tour" && p.active)
-    .slice(0, 4);
+    .slice(0, 3);
 
   return (
     <section className="site-container w-full py-10 lg:py-[60px]">
@@ -20,7 +21,7 @@ export function HomeTours() {
         </HomeSectionLink>
       </HomeHeading>
 
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
         {tours.map((tour) => {
           const bookingsNote =
             (typeof tour.content?.["field-005"]?.value === "string" &&
@@ -46,18 +47,12 @@ export function HomeTours() {
               </div>
               <div className="p-5 flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-2 text-body-sm font-body-sm text-on-surface-variant mb-2">
-                    <span className="flex items-center gap-1 text-base font-extrabold text-sale-price">
-                      <span
-                        className="material-symbols-outlined text-[16px]"
-                        style={{ fontVariationSettings: "'FILL' 1" }}
-                      >
-                        {"star"}
-                      </span>
-                      <span>{tour.rating}</span>
+                  <div className="mb-2 flex flex-wrap items-center gap-x-2.5 gap-y-1">
+                    <HomeCardRating rating={tour.rating} variant="tour" />
+                    <span className="text-sm font-semibold leading-snug text-on-surface sm:text-base">
+                      <span aria-hidden="true">• </span>
+                      {bookingsNote}
                     </span>
-                    <span className="text-on-surface-variant">•</span>
-                    <span className="text-on-surface-variant">{bookingsNote}</span>
                   </div>
                   <ProductField
                     id={tour.id}

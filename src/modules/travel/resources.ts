@@ -30,11 +30,11 @@ export const travelResources: Record<string, ResourceDefinition> = {
     icon: "route",
     roles: ["editor"],
     archive: true,
-    columns: ["title", "code", "active"],
+    columns: ["title", "code", "category", "active"],
     schema: z
       .object({
         title,
-        code: z.string().default(""),
+        category: z.enum(["airport", "local", "intercity"]).optional(),
         pickup_id: z.uuid(),
         dropoff_id: z.uuid(),
         active: z.boolean(),
@@ -45,6 +45,16 @@ export const travelResources: Record<string, ResourceDefinition> = {
       ),
     fields: [
       { name: "title", label: "Tên tuyến", required: true },
+      {
+        name: "category",
+        label: "Nhóm tuyến",
+        type: "select",
+        options: [
+          { value: "airport", label: "Đưa đón sân bay" },
+          { value: "local", label: "Trong tỉnh / City Tour" },
+          { value: "intercity", label: "Liên tỉnh" },
+        ],
+      },
       {
         name: "pickup_id",
         label: "Điểm đón",
@@ -99,7 +109,7 @@ export const travelResources: Record<string, ResourceDefinition> = {
         type: "number",
         required: true,
       },
-      { name: "image", label: "Ảnh phòng" },
+      { name: "image", label: "Ảnh phòng", type: "image" },
       { name: "description", label: "Mô tả", type: "textarea" },
       { name: "active", label: "Hiển thị", type: "checkbox" },
     ],

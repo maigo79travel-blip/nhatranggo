@@ -1,5 +1,7 @@
 "use client";
 
+import Form from "next/form";
+import { serviceRoutes } from "@/modules/travel/service-routes";
 import { useState, type ReactNode } from "react";
 import { ContentText, useSiteData } from "@/components/content";
 import { nextDate, vietnamToday } from "@/modules/travel/search";
@@ -10,7 +12,7 @@ const tabs = [
   { type: "tour", icon: "map", key: "home.text-048" },
   { type: "combo", icon: "luggage", key: "home.text-049" },
   { type: "transfer", icon: "directions_car", key: "header.text-028" },
-];
+] as const;
 
 const inputClass =
   "block w-full min-w-0 bg-transparent text-sm font-bold text-on-surface focus:outline-none";
@@ -47,7 +49,7 @@ function SearchField({
 }
 
 export function HomeSearch() {
-  const [type, setType] = useState("hotel");
+  const [type, setType] = useState<(typeof tabs)[number]["type"]>("hotel");
   const [date, setDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
   const { content } = useSiteData();
@@ -92,13 +94,12 @@ export function HomeSearch() {
       </div>
 
       <div className="w-full rounded-b-[24px] bg-surface p-3 sm:rounded-b-[30px] sm:rounded-tr-[30px] sm:px-5 sm:py-4">
-        <form
-          action="/dich-vu"
-          method="GET"
+        <Form
+          action={serviceRoutes[type]}
           className={`grid grid-cols-1 items-center gap-3 min-[380px]:grid-cols-2 xl:gap-4 ${
             hotel
               ? "xl:grid-cols-[minmax(0,1.45fr)_repeat(3,minmax(0,1fr))_minmax(0,1.25fr)_auto]"
-              : "xl:grid-cols-[minmax(0,1.6fr)_repeat(3,minmax(0,1fr))_auto]"
+              : "xl:grid-cols-[minmax(0,1.6fr)_repeat(2,minmax(0,1fr))_auto]"
           }`}
         >
           <input type="hidden" name="type" value={type} />
@@ -162,19 +163,21 @@ export function HomeSearch() {
             />
           </SearchField>
 
-          <SearchField icon="hotel_class" label="Loại hình/ Sao">
-            <select
-              name="category"
-              defaultValue=""
-              aria-label="Loại hình hoặc hạng sao"
-              className={`${inputClass} cursor-pointer`}
-            >
-              <option value="">Tất cả</option>
-              <option value="5 sao">5 Sao Quốc Tế</option>
-              <option value="resort">Resort nghỉ dưỡng</option>
-              <option value="4 sao">4 Sao Cao Cấp</option>
-            </select>
-          </SearchField>
+          {hotel && (
+            <SearchField icon="hotel_class" label="Loại hình/ Sao">
+              <select
+                name="category"
+                defaultValue=""
+                aria-label="Loại hình hoặc hạng sao"
+                className={`${inputClass} cursor-pointer`}
+              >
+                <option value="">Tất cả</option>
+                <option value="5 sao">5 Sao Quốc Tế</option>
+                <option value="resort">Resort nghỉ dưỡng</option>
+                <option value="4 sao">4 Sao Cao Cấp</option>
+              </select>
+            </SearchField>
+          )}
 
           <button
             className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 text-sm font-bold text-on-primary transition-colors hover:bg-primary-hover min-[380px]:col-span-2 xl:col-span-1"
@@ -188,7 +191,7 @@ export function HomeSearch() {
             </span>
             <ContentText contentKey="home.text-058" />
           </button>
-        </form>
+        </Form>
 
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 pt-2.5 text-xs text-on-surface-variant">
           <span>
@@ -197,28 +200,28 @@ export function HomeSearch() {
           <HomeLink
             contentKey="home.attributes-003"
             className="font-bold text-brand-deep hover:underline transition-colors action-link"
-            href="/dich-vu?type=hotel&q=B%C3%A3i%20D%C3%A0i"
+            href="/khach-san?q=B%C3%A3i%20D%C3%A0i"
           >
             <ContentText contentKey="home.text-060" />
           </HomeLink>
           <HomeLink
             contentKey="home.attributes-004"
             className="font-bold text-brand-deep hover:underline transition-colors action-link"
-            href="/dich-vu?type=tour&q=3%20%C4%90%E1%BA%A3o"
+            href="/tour-hang-ngay?q=3%20%C4%90%E1%BA%A3o"
           >
             <ContentText contentKey="home.text-061" />
           </HomeLink>
           <HomeLink
             contentKey="home.attributes-005"
             className="font-bold text-brand-deep hover:underline transition-colors action-link"
-            href="/dich-vu?type=tour&q=VinWonders"
+            href="/tour-hang-ngay?q=VinWonders"
           >
             <ContentText contentKey="home.text-062" />
           </HomeLink>
           <HomeLink
             contentKey="home.attributes-006"
             className="font-bold text-brand-deep hover:underline transition-colors action-link"
-            href="/dich-vu?type=combo&q=Ph%C3%BA%20Qu%E1%BB%91c"
+            href="/tour-hang-ngay?type=combo&q=Ph%C3%BA%20Qu%E1%BB%91c"
           >
             <ContentText contentKey="home.text-063" />
           </HomeLink>

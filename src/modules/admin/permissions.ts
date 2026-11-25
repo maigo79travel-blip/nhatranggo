@@ -7,5 +7,8 @@ export function canAccess(user: AdminUser, resource: string) {
     return user.role === "booking";
   if (["products", "fares", "content"].includes(resource))
     return user.role === "editor";
-  return resources[resource]?.roles.includes(user.role) ?? false;
+  return (
+    Object.hasOwn(resources, resource) &&
+    resources[resource].roles.includes(user.role)
+  );
 }

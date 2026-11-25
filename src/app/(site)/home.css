@@ -1,3 +1,16 @@
+@font-face {
+  font-family: "Inter Rating";
+  src: url("/fonts/inter-rating-bold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+20, U+2E, U+30-39, U+2605;
+}
+
+.home-hotel-rating {
+  font-family: "Inter Rating", Inter, sans-serif;
+}
+
 @media (min-width: 1024px) {
   .home-destinations .home-heading {
     margin-bottom: 1rem;

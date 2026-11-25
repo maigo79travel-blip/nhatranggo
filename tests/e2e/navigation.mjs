@@ -67,6 +67,7 @@ try {
             !href.includes("#"),
         ),
     );
+  assert.ok(!hrefs.some((href) => href.startsWith("/dich-vu")));
   for (const href of hrefs.filter((href) => href !== "/")) {
     await desktop.locator(`a[href="${href}"]`).click();
     await check(href);
@@ -110,6 +111,10 @@ try {
             !href.includes("#"),
         ),
     );
+  assert.ok(!mobileHrefs.some((href) => href.startsWith("/dich-vu")));
+  for (const href of ["/khach-san", "/tour-hang-ngay", "/xe-dua-don"]) {
+    assert.ok(mobileHrefs.includes(href), href + " missing from mobile menu");
+  }
   await page.getByRole("button", { name: "Đóng menu", exact: true }).click();
   for (const href of mobileHrefs) {
     await page.getByRole("button", { name: "Mở menu", exact: true }).click();

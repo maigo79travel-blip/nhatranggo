@@ -1,6 +1,8 @@
 "use client";
 import type { AnchorHTMLAttributes } from "react";
+import Link from "next/link";
 import { useContentAttributes, useSiteData } from "@/components/content";
+import { resolveServiceHref } from "@/modules/travel/service-routes";
 export function HomeLink({
   contentKey,
   href,
@@ -22,12 +24,16 @@ export function HomeLink({
       ? (href.includes("?") ? "&" : "?") + "q=" + encodeURIComponent(query)
       : "");
   return (
-    <a
+    <Link
       {...props}
       {...attributes}
-      href={configured && configured !== "#" ? configured : fallback}
+      href={
+        configured && configured !== "#"
+          ? resolveServiceHref(configured, fallback)
+          : fallback
+      }
     >
       {children}
-    </a>
+    </Link>
   );
 }

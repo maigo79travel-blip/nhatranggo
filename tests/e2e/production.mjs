@@ -95,7 +95,7 @@ try {
   await fs.mkdir("test-results/production", { recursive: true });
   for (const width of [320, 390, 768, 1920]) {
     await page.setViewportSize({ width, height: 1000 });
-    await page.goto(baseURL + "/dich-vu?type=hotel&q=B%C3%A3i%20D%C3%A0i");
+    await page.goto(baseURL + "/khach-san?q=B%C3%A3i%20D%C3%A0i");
     await page.locator("body[data-hydrated=true]").waitFor();
     await page.evaluate(() => document.fonts.ready);
     await expect(page.locator("header")).toContainText("NHATRANGGO");

@@ -1,3 +1,10 @@
+import { CatalogScope } from "@/components/catalog/catalog-scope";
+import { getSiteData } from "@/lib/catalog";
+import {
+  hasServiceSearch,
+  type ServiceSearchParams,
+} from "@/modules/travel/service-routes";
+import { ServiceSearchResults } from "@/modules/travel/service-search-results";
 import { SitePageFrame } from "@/components/site/site-page-frame";
 import { pageMetadata } from "@/lib/page-metadata";
 import { TransfersHero } from "./_components/transfers-hero";
@@ -11,16 +18,26 @@ import "./transfers.css";
 
 export const generateMetadata = () => pageMetadata("transfers");
 
-export default function TransfersPage() {
+export default async function TransfersPage({
+  searchParams,
+}: {
+  searchParams: Promise<ServiceSearchParams>;
+}) {
+  const params = await searchParams;
+  if (hasServiceSearch(params))
+    return <ServiceSearchResults type="transfer" searchParams={params} />;
+
   return (
-    <SitePageFrame className="transfers-page">
-      <TransfersVehicleSelection>
-        <TransfersHero />
-        <TransfersFareTable />
-        <TransfersFleet />
-        <TransfersBenefits />
-        <TransfersProcess />
-      </TransfersVehicleSelection>
-    </SitePageFrame>
+    <CatalogScope data={await getSiteData("transfers")}>
+      <SitePageFrame className="transfers-page">
+        <TransfersVehicleSelection>
+          <TransfersHero />
+          <TransfersFareTable />
+          <TransfersFleet />
+          <TransfersBenefits />
+          <TransfersProcess />
+        </TransfersVehicleSelection>
+      </SitePageFrame>
+    </CatalogScope>
   );
 }

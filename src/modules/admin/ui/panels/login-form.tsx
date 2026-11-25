@@ -1,6 +1,7 @@
 "use client";
 
-import brand from "@/config/brand.json";
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "../api";
@@ -16,56 +17,16 @@ export function Login() {
 
   return (
     <main className="admin-ui ad-login">
-      <section className="ad-login-story">
-        <Brand light />
-        <div className="ad-login-orbit ad-orbit-one" />
-        <div className="ad-login-orbit ad-orbit-two" />
-        <div className="ad-login-story-content">
-          <span className="ad-login-tag">
-            <i />
-            {brand.name.toUpperCase()} WORKSPACE
-          </span>
-          <h2>
-            Mọi hành trình.
-            <br />
-            Một nơi <em>quản lý.</em>
-          </h2>
-          <p>
-            Không gian làm việc để chăm chút dịch vụ, kết nối khách hàng và vận
-            hành mỗi ngày.
-          </p>
-          <div className="ad-login-features">
-            <span>
-              <Icon name="luggage" />
-              Dịch vụ & ưu đãi
-            </span>
-            <span>
-              <Icon name="confirmation_number" />
-              Yêu cầu đặt chỗ
-            </span>
-            <span>
-              <Icon name="article" />
-              Nội dung website
-            </span>
-          </div>
-        </div>
-        <div className="ad-login-story-footer">
-          <span>{brand.name}</span>
-          <span>Khởi đầu cho những kỳ nghỉ trọn vẹn.</span>
-        </div>
-      </section>
       <section className="ad-login-form-area">
-        <a href="/" className="ad-login-back">
-          <Icon name="arrow_back" />
-          Về website
-        </a>
+        <header className="ad-login-header">
+          <Brand />
+          <Link href="/" className="ad-login-back">
+            <Icon name="arrow_back" />
+            Về website
+          </Link>
+        </header>
         <div className="ad-login-form">
-          <span className="ad-login-lock">
-            <Icon name="admin_panel_settings" />
-          </span>
-          <span className="ad-eyebrow">CHÀO MỪNG BẠN TRỞ LẠI</span>
           <h1>Đăng nhập quản trị</h1>
-          <p>Đăng nhập để tiếp tục quản lý {brand.name}.</p>
           <form
             onSubmit={async (e) => {
               e.preventDefault();
@@ -125,16 +86,18 @@ export function Login() {
               className="ad-button ad-button-primary ad-full-width"
             >
               {busy ? "Đang đăng nhập…" : "Đăng nhập"}
-              <Icon name="arrow_forward" />
             </button>
           </form>
-          <div className="ad-login-security">
-            <Icon name="lock" />
-            Không gian dành riêng cho quản trị viên.
-          </div>
         </div>
-        <footer>{brand.name} · Không gian quản trị</footer>
       </section>
+      <div className="ad-login-photo" aria-hidden="true">
+        <Image
+          src="/images/figma/hero-beach.png"
+          alt=""
+          fill
+          sizes="(max-width: 767px) 0px, 50vw"
+        />
+      </div>
     </main>
   );
 }

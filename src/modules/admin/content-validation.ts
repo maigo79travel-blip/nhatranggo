@@ -1,7 +1,13 @@
 import { z } from "zod";
-import { contentAttributeKeys } from "@/lib/content-attributes";
-const safeUrl = (value: string) =>
-  !value || /^(\/[^/]|\/\s*$|#|https?:\/\/|tel:|mailto:)/i.test(value);
+import {
+  contentAttributeKeys,
+  isPublicLink,
+  isPublicImageUrl,
+  isPublicBackgroundImage,
+} from "@/lib/content-attributes";
+
+const contactLink =
+  /^(?:\{\{contact\.(?:zalo|website|whatsapp|telegram|facebook)\}\}(?:[?#][^\s\\]*)?|tel:\{\{contact\.telephone\}\}|mailto:\{\{contact\.email\}\})$/;
 const entry = z
   .object({
     kind: z.enum(["text", "attributes", "settings"]),
@@ -29,20 +35,20 @@ const entry = z
             message: "Thuộc tính không được hỗ trợ",
           });
         if (
-          (key === "href" || key === "src") &&
           typeof val === "string" &&
-          !safeUrl(val) &&
-          !val.includes("{{contact.")
+          val &&
+          ((key === "href" && !isPublicLink(val) && !contactLink.test(val)) ||
+            (key === "src" && !isPublicImageUrl(val)))
         )
           ctx.addIssue({ code: "custom", message: "Liên kết không an toàn" });
         if (
           key === "backgroundImage" &&
           typeof val === "string" &&
-          !/^url\(['"]?(\/images\/|https?:\/\/)[^\n]*\)$/.test(val)
+          !isPublicBackgroundImage(val)
         )
           ctx.addIssue({
             code: "custom",
-            message: "Ảnh nền phải dùng đường dẫn /images/ hoặc HTTPS",
+            message: "Ảnh nền phải dùng một đường dẫn ảnh hợp lệ",
           });
       }
     }
@@ -55,12 +61,19 @@ export const productSchema = z
     type: z.enum(["hotel", "tour", "combo", "transfer"]),
     price: z.coerce.number().int().min(0).max(2000000000),
     original_price: z.coerce.number().int().min(0).max(2000000000).nullable(),
-    image: z.string().max(2000).refine(safeUrl, "Đường dẫn ảnh không hợp lệ"),
+    image: z
+      .string()
+      .max(2000)
+      .refine(
+        (value) => !value || isPublicImageUrl(value),
+        "Đường dẫn ảnh không hợp lệ",
+      ),
     location: z.string().max(1000),
     description: z.string().max(10000),
     rating: z.coerce.number().min(0).max(5),
-    position: z.coerce.number().int().min(0),
+    position: z.coerce.number().int().min(0).max(2147483647),
     active: z.boolean(),
+    featured: z.boolean().optional(),
     content: z.record(z.string(), entry),
     destination_id: z.uuid().nullable().default(null),
     partner_id: z.uuid().nullable().default(null),

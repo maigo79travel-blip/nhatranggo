@@ -10,7 +10,7 @@ export function Empty({
 }: {
   icon: string;
   title: string;
-  text: string;
+  text?: string;
   children?: ReactNode;
 }) {
   return (
@@ -19,7 +19,7 @@ export function Empty({
         <Icon name={icon} />
       </span>
       <h3>{title}</h3>
-      <p>{text}</p>
+      {text && <p>{text}</p>}
       {children}
     </div>
   );

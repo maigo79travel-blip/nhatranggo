@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isPublicImageUrl } from "./content-attributes";
 export const title = z.string().trim().min(1).max(300);
 export const text = z.string().max(20000).default("");
 export const slug = z
@@ -13,10 +14,7 @@ export const id = z.uuid().nullable().default(null);
 export const url = z
   .string()
   .max(2000)
-  .refine(
-    (v) => !v || /^(\/[^/]|https?:\/\/)/.test(v),
-    "Đường dẫn ảnh không hợp lệ",
-  )
+  .refine((v) => !v || isPublicImageUrl(v), "Đường dẫn ảnh không hợp lệ")
   .default("");
 export const money = z.coerce.number().int().min(0).max(2000000000);
 export const date = z.iso.date();

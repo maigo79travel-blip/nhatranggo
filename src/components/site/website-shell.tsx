@@ -1,10 +1,8 @@
 "use client";
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { SiteHeader } from "./site-header";
 import { SiteFooter } from "./site-footer";
 import { FloatingContacts } from "@/modules/support/floating-contacts";
-import { CatalogProvider } from "@/components/catalog";
-import { useSiteData } from "@/components/content";
 export function WebsiteShell({
   children,
   informationLinks,
@@ -12,13 +10,19 @@ export function WebsiteShell({
   children: ReactNode;
   informationLinks: ReactNode;
 }) {
-  const { products } = useSiteData();
+  useEffect(() => {
+    document.body.dataset.hydrated = "true";
+    return () => {
+      delete document.body.dataset.hydrated;
+    };
+  }, []);
+
   return (
-    <CatalogProvider products={products}>
+    <>
       <SiteHeader />
       {children}
       <SiteFooter informationLinks={informationLinks} />
       <FloatingContacts />
-    </CatalogProvider>
+    </>
   );
 }

@@ -6,14 +6,32 @@ import type { Product } from "@/lib/types";
 import { money } from "@/lib/types";
 import { DialogField } from "./dialog-field";
 
+type SubmitBooking = (values: Record<string, FormDataEntryValue>) => Promise<{
+  id: string;
+  message: string;
+}>;
+
+const submitPublicBooking: SubmitBooking = async (values) => {
+  const response = await fetch("/api/bookings", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(values),
+  });
+  const result = await response.json();
+  if (!response.ok) throw Error(result.error);
+  return result;
+};
+
 export function BookingDialogContent({
   product,
   onError,
   initialValues = {},
+  submitBooking = submitPublicBooking,
 }: {
   product: Product;
   initialValues?: BookingDraft;
   onError: (msg: string) => void;
+  submitBooking?: SubmitBooking;
 }) {
   const [date, setDate] = useState(initialValues.date || "");
   const [busy, setBusy] = useState(false);
@@ -59,16 +77,7 @@ export function BookingDialogContent({
           ([, value]) => value !== "",
         ),
       );
-      const res = await fetch("/api/bookings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...values,
-          productId: product.id,
-        }),
-      });
-      const result = await res.json();
-      if (!res.ok) throw Error(result.error);
+      const result = await submitBooking({ ...values, productId: product.id });
       setSuccess(
         `${result.message}\nMã yêu cầu: ${result.id}\nHãy lưu mã này để tra cứu.`,
       );
@@ -191,14 +200,19 @@ export function BookingDialogContent({
             />
           </label>
           <p className="text-body-sm text-on-surface-variant">
-            Đây là yêu cầu tư vấn. Nhân viên sẽ xác nhận chỗ trống và tổng giá
-            trước khi thanh toán.
+            {submitBooking === submitPublicBooking
+              ? "Đây là yêu cầu tư vấn. Nhân viên sẽ xác nhận chỗ trống và tổng giá trước khi thanh toán."
+              : "Đơn mới sẽ ở trạng thái chờ xác nhận."}
           </p>
           <button
             disabled={busy || loading}
             className="w-full py-3 rounded-xl bg-primary text-white font-bold disabled:opacity-50"
           >
-            {busy ? "Đang gửi…" : "Gửi yêu cầu đặt chỗ"}
+            {busy
+              ? "Đang gửi…"
+              : submitBooking === submitPublicBooking
+                ? "Gửi yêu cầu đặt chỗ"
+                : "Tạo đơn đặt chỗ"}
           </button>
         </form>
       )}

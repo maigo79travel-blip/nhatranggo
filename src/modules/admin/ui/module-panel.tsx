@@ -4,6 +4,10 @@ import { useRouter } from "next/navigation";
 import { resources } from "../resources";
 import { api, dateLabel, type Row } from "./api";
 import { EditorDrawer } from "./primitives/editor-drawer";
+import { Icon } from "./primitives/admin-icon";
+import { Empty } from "./primitives/admin-empty";
+import { Filter } from "./primitives/admin-filter";
+import { ImageField } from "./primitives/admin-image";
 import { MarkdownEditor } from "@/modules/blog/markdown-editor";
 import type { FieldDefinition } from "../types";
 function inputValue(field: FieldDefinition, value: unknown) {
@@ -23,10 +27,12 @@ export function ModulePanel({ resource }: { resource: string }) {
   const [selected, setSelected] = useState<Row | null>(null);
   const [options, setOptions] = useState<Record<string, Row[]>>({});
   const [query, setQuery] = useState("");
+  const [stateFilter, setStateFilter] = useState("all");
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [history, setHistory] = useState<Row[]>([]);
+  const [history, setHistory] = useState<Row[] | null>(null);
+  const [loadingHistory, setLoadingHistory] = useState(false);
   useEffect(() => {
     let live = true;
     setLoading(true);
@@ -73,57 +79,91 @@ export function ModulePanel({ resource }: { resource: string }) {
       : undefined;
     return String(reference?.title ?? reference?.name ?? value ?? "—");
   };
-  const filtered = rows.filter((row) =>
-    JSON.stringify(row).toLowerCase().includes(query.toLowerCase()),
+  const statusField = definition.fields.find(
+    (field) => field.name === "status" || field.name === "active",
+  );
+  const statusOptions: string[][] =
+    statusField?.name === "active"
+      ? [
+          ["true", "Đang hoạt động"],
+          ["false", "Đã ẩn"],
+        ]
+      : (statusField?.options ?? []).map(({ value, label }) => [value, label]);
+  const search = query.trim().toLowerCase();
+  const filtered = rows.filter(
+    (row) =>
+      (stateFilter === "all" ||
+        String(row[statusField?.name ?? ""]) === stateFilter) &&
+      (!search ||
+        definition.columns.some((column) =>
+          displayCell(column, row[column]).toLowerCase().includes(search),
+        )),
   );
   const [page, setPage] = useState(1);
-  useEffect(() => setPage(1), [query, resource]);
   const pageCount = Math.max(1, Math.ceil(filtered.length / 15));
   const actualPage = Math.min(page, pageCount);
-  const refresh = async () => {
-    const result = await api(resource);
-    setRows(result.data);
-    router.refresh();
-  };
   return (
-    <section className="ad-panel p-5 space-y-4">
-      <div className="flex flex-wrap justify-between gap-3">
-        <label className="flex-1 min-w-0">
-          Tìm dữ liệu
+    <section className="ad-panel">
+      <div className="ad-toolbar ad-module-toolbar">
+        <label className="ad-search">
+          <Icon name="search" />
           <input
-            className="ad-input"
+            aria-label="Tìm dữ liệu"
+            placeholder="Tìm trong danh sách…"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setPage(1);
+            }}
           />
         </label>
+        {statusOptions.length > 0 && (
+          <Filter
+            label="Lọc theo trạng thái"
+            value={stateFilter}
+            onChange={(value) => {
+              setStateFilter(value);
+              setPage(1);
+            }}
+            options={[["all", "Tất cả trạng thái"], ...statusOptions]}
+          />
+        )}
         <button
           type="button"
           className="ad-button ad-button-primary"
-          disabled={busy}
+          disabled={busy || loading}
           onClick={() => {
-            setHistory([]);
+            setHistory(null);
             setSelected({});
             setMessage("");
           }}
         >
+          <Icon name="add" />
           {resource === "articles" ? "Viết bài mới" : "Thêm mới"}
         </button>
       </div>
       {message && (
-        <p role="status" className="text-error break-words">
+        <p role="status" className="ad-module-message text-error break-words">
           {message}
         </p>
       )}
       {loading ? (
-        <p role="status">Đang tải dữ liệu…</p>
+        <p className="ad-module-message" role="status">
+          Đang tải dữ liệu…
+        </p>
       ) : (
         <>
-          <div className="ad-table-scroll">
-            <table className="ad-table">
+          <div
+            className="ad-table-scroll"
+            role="region"
+            aria-label={definition.label}
+            tabIndex={0}
+          >
+            <table className="ad-table ad-table-module">
               <thead>
                 <tr>
                   {definition.columns.map((column) => (
-                    <th key={column}>
+                    <th scope="col" key={column}>
                       {definition.fields.find((f) => f.name === column)
                         ?.label ||
                         (
@@ -135,7 +175,7 @@ export function ModulePanel({ resource }: { resource: string }) {
                         column}
                     </th>
                   ))}
-                  <th>Thao tác</th>
+                  <th scope="col">Thao tác</th>
                 </tr>
               </thead>
               <tbody>
@@ -151,7 +191,7 @@ export function ModulePanel({ resource }: { resource: string }) {
                           className="ad-text-button"
                           onClick={() => {
                             setSelected(row);
-                            setHistory([]);
+                            setHistory(null);
                             setMessage("");
                           }}
                         >
@@ -163,25 +203,34 @@ export function ModulePanel({ resource }: { resource: string }) {
               </tbody>
             </table>
           </div>
-          {!filtered.length && <p>Chưa có bản ghi phù hợp.</p>}
-          <div className="flex items-center gap-3">
-            <button
-              className="ad-button"
-              disabled={actualPage === 1}
-              onClick={() => setPage(actualPage - 1)}
-            >
-              Trước
-            </button>
-            <span>
-              {actualPage} / {pageCount}
-            </span>
-            <button
-              className="ad-button"
-              disabled={actualPage >= pageCount}
-              onClick={() => setPage(actualPage + 1)}
-            >
-              Sau
-            </button>
+          {!filtered.length && (
+            <Empty icon="search_off" title="Chưa có bản ghi phù hợp" />
+          )}
+          <div className="ad-pagination">
+            <p>{filtered.length} kết quả</p>
+            <div>
+              <button
+                type="button"
+                className="ad-page-button"
+                aria-label="Trang trước"
+                disabled={actualPage === 1}
+                onClick={() => setPage(actualPage - 1)}
+              >
+                <Icon name="chevron_left" />
+              </button>
+              <span>
+                {actualPage} / {pageCount}
+              </span>
+              <button
+                type="button"
+                className="ad-page-button"
+                aria-label="Trang sau"
+                disabled={actualPage >= pageCount}
+                onClick={() => setPage(actualPage + 1)}
+              >
+                <Icon name="chevron_right" />
+              </button>
+            </div>
           </div>
         </>
       )}
@@ -217,8 +266,17 @@ export function ModulePanel({ resource }: { resource: string }) {
                   else if (f.type === "password" && !raw) continue;
                   else value[f.name] = raw;
                 }
-                await api(resource, selected.id ? "PATCH" : "POST", value);
-                await refresh();
+                const { data } = await api(
+                  resource,
+                  selected.id ? "PATCH" : "POST",
+                  value,
+                );
+                setRows((previous) =>
+                  selected.id
+                    ? previous.map((row) => (row.id === data.id ? data : row))
+                    : [data, ...previous],
+                );
+                router.refresh();
                 setSelected(null);
                 setMessage("Đã lưu thay đổi");
               } catch (err) {
@@ -235,6 +293,13 @@ export function ModulePanel({ resource }: { resource: string }) {
                   name={field.name}
                   label={field.label}
                   initialValue={String(selected[field.name] || "")}
+                />
+              ) : field.type === "image" ? (
+                <ImageField
+                  key={field.name}
+                  name={field.name}
+                  label={field.label}
+                  initialValue={inputValue(field, selected[field.name])}
                 />
               ) : (
                 <label key={field.name} className="block text-body-md">
@@ -310,38 +375,56 @@ export function ModulePanel({ resource }: { resource: string }) {
             </button>
             {Boolean(selected.id) && (
               <>
-                <button
-                  type="button"
-                  className="ad-button"
-                  disabled={busy}
-                  onClick={async () => {
-                    if (
-                      !window.confirm(
-                        definition.archive
-                          ? "Ẩn bản ghi này?"
-                          : "Xóa bản ghi này?",
+                {resource !== "requests" && (
+                  <button
+                    type="button"
+                    className="ad-button"
+                    disabled={busy}
+                    onClick={async () => {
+                      if (
+                        !window.confirm(
+                          definition.archive
+                            ? "Ẩn bản ghi này?"
+                            : "Xóa bản ghi này?",
+                        )
                       )
-                    )
-                      return;
-                    setBusy(true);
-                    try {
-                      await api(resource, "DELETE", { id: selected.id });
-                      await refresh();
-                      setSelected(null);
-                    } catch (e) {
-                      setMessage((e as Error).message);
-                    } finally {
-                      setBusy(false);
-                    }
-                  }}
-                >
-                  {definition.archive ? "Ẩn / Ngừng hoạt động" : "Xóa"}
-                </button>
+                        return;
+                      setBusy(true);
+                      try {
+                        await api(resource, "DELETE", { id: selected.id });
+                        setRows((previous) =>
+                          definition.archive
+                            ? previous.map((row) =>
+                                row.id === selected.id
+                                  ? { ...row, active: false }
+                                  : row,
+                              )
+                            : previous.filter((row) => row.id !== selected.id),
+                        );
+                        router.refresh();
+                        setSelected(null);
+                        setMessage(
+                          definition.archive
+                            ? "Đã ngừng hiển thị bản ghi"
+                            : "Đã xóa bản ghi",
+                        );
+                      } catch (e) {
+                        setMessage((e as Error).message);
+                      } finally {
+                        setBusy(false);
+                      }
+                    }}
+                  >
+                    {definition.archive ? "Ẩn / Ngừng hoạt động" : "Xóa"}
+                  </button>
+                )}
                 {resource === "customers" && (
                   <button
                     type="button"
                     className="ad-button"
+                    disabled={loadingHistory}
                     onClick={async () => {
+                      setLoadingHistory(true);
                       try {
                         const data = await api(
                           "bookings?phone=" +
@@ -350,15 +433,20 @@ export function ModulePanel({ resource }: { resource: string }) {
                         setHistory(data.data);
                       } catch (e) {
                         setMessage((e as Error).message);
+                      } finally {
+                        setLoadingHistory(false);
                       }
                     }}
                   >
-                    Lịch sử booking
+                    {loadingHistory ? "Đang tải lịch sử…" : "Lịch sử booking"}
                   </button>
                 )}
               </>
             )}
-            {!!history.length && (
+            {history?.length === 0 && (
+              <p role="status">Khách hàng chưa có đơn đặt chỗ.</p>
+            )}
+            {!!history?.length && (
               <ul className="space-y-2">
                 {history.map((row) => (
                   <li key={String(row.id)}>

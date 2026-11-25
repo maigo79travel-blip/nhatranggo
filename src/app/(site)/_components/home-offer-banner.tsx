@@ -24,7 +24,7 @@ export function HomeOfferBanner() {
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-3">
             <Link
-              href="/dich-vu?type=combo"
+              href="/tour-hang-ngay?type=combo"
               className="flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full bg-white px-5 py-2.5 text-center text-sm font-bold text-on-surface hover:bg-surface-muted sm:justify-start"
             >
               <span

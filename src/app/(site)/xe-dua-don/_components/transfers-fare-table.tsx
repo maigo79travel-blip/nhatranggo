@@ -11,171 +11,17 @@ import { TransferHeading, TransferIcon } from "./transfers-ui";
 
 type RouteCategory = (typeof transferRoutes)[number]["id"];
 
-const fareRows: {
-  category: RouteCategory;
-  route: string;
-  icon: string;
-  title: string;
-  subtitle: string;
-}[] = [
-  {
-    category: "airport",
-    route: "CXR_NT_CENTER",
-    icon: "flight_takeoff",
-    title: "Sân bay Cam Ranh ⇄ Trung tâm Nha Trang",
-    subtitle: "Đón tiễn sân bay • Bao gồm phí cổng sân bay, cầu đường, VAT",
-  },
-  {
-    category: "airport",
-    route: "CXR_BAI_DAI",
-    icon: "flight_takeoff",
-    title: "Sân bay Cam Ranh ⇄ Resort Bãi Dài (Cam Lâm)",
-    subtitle: "Mövenpick, Alma, Radisson Blu, The Anam…",
-  },
-  {
-    category: "airport",
-    route: "CXR_NT_NORTH_WEST",
-    icon: "flight_land",
-    title: "Sân bay Cam Ranh ⇄ Bắc Nha Trang / Tây Nha Trang",
-    subtitle: "Khu vực Vĩnh Hải, Vĩnh Hòa, Diên Khánh • Bao gồm cầu đường, VAT",
-  },
-  {
-    category: "local",
-    route: "NT_CENTER_VINWONDER",
-    icon: "directions_boat",
-    title: "Nha Trang ⇄ Cảng du lịch / VinWonders",
-    subtitle: "Đưa đón tận nơi • Hỗ trợ chờ đón linh hoạt",
-  },
-  {
-    category: "local",
-    route: "NT_NORTH_WEST_VINWONDER",
-    icon: "directions_boat",
-    title: "Bắc, Tây Nha Trang ⇄ Cảng du lịch / VinWonders",
-    subtitle: "Áp dụng khu vực Bắc & Tây Nha Trang",
-  },
-  {
-    category: "local",
-    route: "BAI_DAI_VINWONDER",
-    icon: "beach_access",
-    title: "Resort Bãi Dài / Sân bay ⇄ Cảng du lịch / VinWonders",
-    subtitle: "Kết nối thẳng khu resort Bãi Dài & Cảng VinWonders",
-  },
-  {
-    category: "local",
-    route: "NT_CENTER_BAI_DAI",
-    icon: "apartment",
-    title: "Nha Trang ⇄ Resort Cam Ranh / Bãi Dài",
-    subtitle: "Mövenpick, Alma, Fusion, Duyên Hà, The Anam...",
-  },
-  {
-    category: "local",
-    route: "NT_CENTER_BA_HO",
-    icon: "landscape",
-    title: "Nha Trang ⇄ Ba Hồ",
-    subtitle: "Giá trọn gói 1 chiều • Chưa bao gồm vé vào cổng",
-  },
-  {
-    category: "local",
-    route: "NT_CENTER_DOC_LET",
-    icon: "beach_access",
-    title: "Nha Trang ⇄ Dốc Lết",
-    subtitle: "Giá trọn gói 1 chiều • Bao gồm cầu đường, VAT",
-  },
-  {
-    category: "local",
-    route: "NT_CENTER_YANG_BAY",
-    icon: "park",
-    title: "Nha Trang ⇄ Yang Bay",
-    subtitle: "Giá trọn gói 1 chiều • Chưa bao gồm vé khu du lịch",
-  },
-  {
-    category: "local",
-    route: "NT_CENTER_CITY_10H",
-    icon: "schedule",
-    title: "City tour Nha Trang trọn ngày (10 tiếng)",
-    subtitle: "Tham quan nội thành theo lịch trình riêng",
-  },
-  {
-    category: "local",
-    route: "NT_CENTER_CITY_1H",
-    icon: "timer",
-    title: "City tour Nha Trang theo giờ (1 giờ)",
-    subtitle: "Thuê xe linh hoạt theo giờ trong nội thành",
-  },
-  {
-    category: "intercity",
-    route: "NT_CENTER_TUY_HOA",
-    icon: "map",
-    title: "Nha Trang ⇄ Phú Yên (Tuy Hòa)",
-    subtitle: "Xe riêng đón tận nơi • Bao gồm cầu đường",
-  },
-  {
-    category: "intercity",
-    route: "NT_CENTER_MUI_NE",
-    icon: "beach_access",
-    title: "Nha Trang / Cam Ranh ⇄ Mũi Né",
-    subtitle: "Tuyến cao tốc / ven biển • Xe riêng 1 chiều",
-  },
-  {
-    category: "intercity",
-    route: "NT_CENTER_HCM",
-    icon: "location_city",
-    title: "Nha Trang / Cam Ranh ⇄ TP.HCM",
-    subtitle: "Đưa đón tận nơi • Bao gồm phí cao tốc, cầu đường",
-  },
-  {
-    category: "intercity",
-    route: "NT_CENTER_DALAT",
-    icon: "landscape",
-    title: "Nha Trang ⇄ Đà Lạt",
-    subtitle: "Cung đèo Khánh Lê • Xe riêng đời mới",
-  },
-  {
-    category: "intercity",
-    route: "NT_CENTER_QUY_NHON",
-    icon: "directions_car",
-    title: "Nha Trang / Sân bay Cam Ranh → Quy Nhơn",
-    subtitle: "Tuyến 1 chiều • Bao gồm cầu đường",
-  },
-  {
-    category: "intercity",
-    route: "NT_CENTER_DANANG",
-    icon: "location_city",
-    title: "Nha Trang ⇄ Đà Nẵng",
-    subtitle: "Xe riêng đường dài • Hỗ trợ dừng nghỉ theo yêu cầu",
-  },
-  {
-    category: "intercity",
-    route: "NT_CENTER_DALAT_2D1N",
-    icon: "tour",
-    title: "Tour Đà Lạt 2 ngày 1 đêm",
-    subtitle: "Trọn gói xe phục vụ lịch trình 2N1Đ",
-  },
-  {
-    category: "intercity",
-    route: "NT_CENTER_DALAT_1D",
-    icon: "tour",
-    title: "Tour Đà Lạt trong ngày",
-    subtitle: "Đi về trong ngày • Xe riêng đón tận nơi",
-  },
-  {
-    category: "intercity",
-    route: "HCM_MUI_NE",
-    icon: "directions_car",
-    title: "TP.HCM ⇄ Mũi Né",
-    subtitle: "Cao tốc Dầu Giây – Phan Thiết • Bao gồm cầu đường",
-  },
-];
-
 export function TransfersFareTable() {
   const [routeTab, setRouteTab] = useState<RouteCategory>("airport");
-  const { products, fares } = useSiteData();
+  const { products, fares, transferRoutes: routes } = useSiteData();
   const catalog = useCatalog();
   const fareByProduct = new Map(
     fares.map((fare) => [`transfer-${fare.route}-${fare.vehicle}`, fare.price]),
   );
   const productById = new Map(products.map((product) => [product.id, product]));
-  const visibleRows = fareRows.filter((row) => row.category === routeTab);
+  const visibleRows = routes.filter((row) => row.category === routeTab);
+  const routeIcon =
+    transferRoutes.find((route) => route.id === routeTab)?.icon || "route";
 
   return (
     <section className="transfer-section">
@@ -243,9 +89,16 @@ export function TransfersFareTable() {
                 </tr>
               </thead>
               <tbody>
+                {!visibleRows.length && (
+                  <tr>
+                    <td colSpan={transferVehicles.length + 2}>
+                      Chưa có tuyến xe trong nhóm này.
+                    </td>
+                  </tr>
+                )}
                 {visibleRows.map((row) => {
                   const offers = transferVehicles.map((vehicle) => {
-                    const id = `transfer-${row.route}-${vehicle.id}`;
+                    const id = `transfer-${row.code}-${vehicle.id}`;
                     const price = fareByProduct.get(id);
                     const product = productById.get(id);
                     return {
@@ -264,18 +117,13 @@ export function TransfersFareTable() {
                       }
                     : null;
                   return (
-                    <tr key={row.route}>
+                    <tr key={row.code}>
                       <td>
                         <div className="flex items-center gap-3">
                           <TransferIcon className="transfer-feature-icon text-xl">
-                            {row.icon}
+                            {routeIcon}
                           </TransferIcon>
-                          <div>
-                            <p className="font-bold">{row.title}</p>
-                            <p className="mt-1 text-sm text-on-surface-variant">
-                              {row.subtitle}
-                            </p>
-                          </div>
+                          <p className="font-bold">{row.title}</p>
                         </div>
                       </td>
                       {offers.map(({ vehicle, product }) => (

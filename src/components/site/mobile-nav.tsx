@@ -1,20 +1,44 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
+import { activeNavigationHref, navigationItems } from "@/lib/navigation";
 import Link from "next/link";
 import { useSiteData } from "@/components/content";
 import { LanguageSelector } from "./language-selector";
+import {
+  isLegacyServiceHref,
+  serviceRoutes,
+} from "@/modules/travel/service-routes";
+
+const categoryLinks = [
+  { href: serviceRoutes.hotel, label: "Khách sạn & Resort" },
+  { href: serviceRoutes.tour, label: "Tour hằng ngày" },
+  { href: serviceRoutes.transfer, label: "Xe đưa đón" },
+];
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const button = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
-  const items =
-    (useSiteData().content["site.mobile-navigation"]?.value as {
-      href: string;
-      label: string;
-    }[]) || [];
+  const { content } = useSiteData();
+  const search = useSearchParams();
+  const savedItems = navigationItems(content["site.mobile-navigation"]?.value);
+  const firstLegacyItem = savedItems.findIndex((item) =>
+    isLegacyServiceHref(item.href),
+  );
+  const missingCategories = categoryLinks.filter(
+    ({ href }) => !savedItems.some((item) => item.href === href),
+  );
+  const items = savedItems.flatMap((item, index) =>
+    isLegacyServiceHref(item.href)
+      ? index === firstLegacyItem
+        ? missingCategories
+        : []
+      : [item],
+  );
+
+  const activeHref = activeNavigationHref(items, pathname, search);
 
   useEffect(() => {
     if (!open) return;
@@ -56,30 +80,31 @@ export function MobileNav() {
           aria-label="Điều hướng trên điện thoại"
           className="absolute right-0 mt-2 w-60 max-h-[calc(100dvh-6rem)] overflow-y-auto bg-surface border border-border-subtle rounded-2xl shadow-floating p-3 flex flex-col gap-1"
         >
-          {items
-            .filter((item) => /^(\/[^/]|\/$|https?:\/\/|#)/.test(item.href))
-            .map(({ href, label }) => (
-              <Link
-                className={`p-3 rounded-xl font-label-lg text-label-lg transition-colors ${
-                  pathname === href
-                    ? "bg-surface-tinted text-primary font-bold"
-                    : "text-on-surface hover:bg-surface-muted"
-                }`}
-                key={href}
-                href={href}
-                aria-current={pathname === href ? "page" : undefined}
-                onClick={() => setOpen(false)}
-              >
-                {label}
-              </Link>
-            ))}
+          {items.map(({ href, label }) => (
+            <Link
+              className={`p-3 rounded-xl font-label-lg text-label-lg transition-colors ${
+                activeHref === href
+                  ? "bg-surface-tinted text-primary font-bold"
+                  : "text-on-surface hover:bg-surface-muted"
+              }`}
+              key={href}
+              href={href}
+              aria-current={activeHref === href ? "page" : undefined}
+              onClick={() => setOpen(false)}
+            >
+              {label}
+            </Link>
+          ))}
           {!items.some((item) => item.href === "/tra-cuu") && (
             <Link
               className="p-3 rounded-xl text-on-surface hover:bg-surface-muted font-label-lg text-label-lg flex items-center gap-2 border-t border-border-subtle mt-1 pt-3"
               href="/tra-cuu"
               onClick={() => setOpen(false)}
             >
-              <span className="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">
+              <span
+                className="material-symbols-outlined text-[18px] text-primary"
+                aria-hidden="true"
+              >
                 search
               </span>
               <span>Tra cứu</span>

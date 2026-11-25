@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { serviceRoutes } from "./src/modules/travel/service-routes";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const contentSecurityPolicy = [
@@ -17,6 +18,17 @@ const config: NextConfig = {
   ...(process.env.VERCEL ? {} : { output: "standalone" as const }),
   poweredByHeader: false,
   reactStrictMode: true,
+  async redirects() {
+    return [
+      ...Object.entries(serviceRoutes).map(([type, destination]) => ({
+        source: "/dich-vu",
+        has: [{ type: "query" as const, key: "type", value: type }],
+        destination,
+        permanent: true,
+      })),
+      { source: "/dich-vu", destination: "/", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

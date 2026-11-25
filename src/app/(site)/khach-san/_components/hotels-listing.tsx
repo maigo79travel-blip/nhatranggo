@@ -31,7 +31,7 @@ export function HotelsListing({
   search: HotelSearchState;
   onResetSearch: () => void;
 }) {
-  const { products } = useSiteData();
+  const { products, hotelCapacities } = useSiteData();
   const [filters, setFilters] = useState<FilterState>(emptyFilters);
   const [sort, setSort] = useState<SortMode>("recommended");
   const [page, setPage] = useState(1);
@@ -57,8 +57,11 @@ export function HotelsListing({
   }, [activeHotels]);
 
   const hotels = useMemo(() => {
-    const filtered = activeHotels.filter((product) =>
-      matchesFilters(product, filters, search),
+    const guests = Number(search.guests);
+    const filtered = activeHotels.filter(
+      (product) =>
+        (hotelCapacities[product.id] ?? Infinity) >= guests &&
+        matchesFilters(product, filters, search),
     );
     if (sort === "price-asc") return filtered.sort((a, b) => a.price - b.price);
     if (sort === "rating-desc")
@@ -77,7 +80,7 @@ export function HotelsListing({
           discount(a.price, a.original_price),
       );
     return filtered;
-  }, [activeHotels, filters, search, sort]);
+  }, [activeHotels, hotelCapacities, filters, search, sort]);
 
   useEffect(() => setPage(1), [search]);
 

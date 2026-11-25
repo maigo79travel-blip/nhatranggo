@@ -60,7 +60,7 @@ export const blogResources: Record<string, ResourceDefinition> = {
       },
       { name: "excerpt", label: "Tóm tắt", type: "textarea" },
       { name: "body", label: "Nội dung bài viết", type: "markdown" },
-      { name: "image", label: "Ảnh đại diện" },
+      { name: "image", label: "Ảnh đại diện", type: "image" },
       { name: "seo_title", label: "Tiêu đề SEO" },
       { name: "seo_description", label: "Mô tả SEO", type: "textarea" },
       {

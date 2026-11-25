@@ -106,7 +106,7 @@ try {
   await page.locator("#route-price").filter({ hasText: "350.000đ" }).waitFor();
   const airportFare = page
     .locator("tbody tr")
-    .filter({ hasText: "Resort Bãi Dài" });
+    .filter({ has: page.getByText(/^Sân bay Cam Ranh → Bãi Dài/) });
   await airportFare.getByRole("button", { name: /Đặt xe/ }).click();
   const transferDialog = page.getByRole("dialog");
   await transferDialog.waitFor({ state: "visible" });

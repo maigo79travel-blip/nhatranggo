@@ -8,13 +8,13 @@ const benefits = [
   { icon: "verified_user", title: "home.text-070", detail: "home.text-071" },
 ];
 
-export function HomeHero() {
+export function HomeHero({ image }: { image: string }) {
   return (
     <section className="relative isolate w-full bg-surface-muted">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 z-[-1] h-[350px] bg-cover bg-[center_bottom] lg:h-[453px] lg:bg-[length:110%_auto] lg:bg-[left_bottom]"
-        style={{ backgroundImage: "url('/images/figma/hero-beach.png')" }}
+        style={{ backgroundImage: `url(${JSON.stringify(image)})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-surface-brand/95 via-hero-overlay/45 to-transparent lg:right-[29%]" />
       </div>

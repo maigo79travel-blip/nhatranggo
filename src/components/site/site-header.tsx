@@ -4,18 +4,21 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { LanguageSelector } from "./language-selector";
 import { MobileNav } from "./mobile-nav";
+import { isLegacyServiceHref } from "@/modules/travel/service-routes";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import brand from "@/config/brand.json";
+import { contentImageUrl } from "@/lib/content-values";
+import { activeNavigationHref, navigationItems } from "@/lib/navigation";
 function HeaderNavLink({
   children,
   href,
+  active,
 }: {
   href: string;
+  active: boolean;
   children: ReactNode;
 }) {
-  const pathname = usePathname();
-  const active = href === pathname;
   return (
     <Link
       href={href}
@@ -37,9 +40,16 @@ function HeaderNavLink({
 export function SiteHeader() {
   const { content } = useSiteData();
   const pathname = usePathname();
-  const navigation = content["site.navigation"]?.value as
-    { href: string; label: string }[] | undefined;
-  const contactLink = navigation?.find((item) => item.href === "/lien-he");
+  const search = useSearchParams();
+  const navigation = navigationItems(content["site.navigation"]?.value).filter(
+    ({ href }) => !isLegacyServiceHref(href),
+  );
+  const contactLink = navigation.find((item) => item.href === "/lien-he");
+  const activeHref = activeNavigationHref(
+    [...navigation, { href: "/lien-he" }],
+    pathname,
+    search,
+  );
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-header border-b border-border-subtle/70">
       <div className="h-[76px] site-container flex items-center justify-between gap-4">
@@ -50,9 +60,12 @@ export function SiteHeader() {
         >
           <div className="w-11 h-11 rounded-xl overflow-hidden shrink-0 bg-surface-muted flex items-center justify-center">
             <img
-              src="/images/figma/logo-mark.png"
+              src={contentImageUrl(
+                content["site.logo"]?.value,
+                "/images/figma/logo-mark.png",
+              )}
               alt={brand.name}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </div>
           <div className="flex flex-col leading-tight">
@@ -69,14 +82,14 @@ export function SiteHeader() {
           aria-label="Điều hướng chính"
           className="hidden xl:flex shrink-0 items-center gap-1 whitespace-nowrap"
         >
-          {(navigation || [])
-            .filter(
-              (item) =>
-                item.href !== "/lien-he" &&
-                /^(\/[^/]|\/$|https?:\/\/|#)/.test(item.href),
-            )
+          {navigation
+            .filter((item) => item.href !== "/lien-he")
             .map((item) => (
-              <HeaderNavLink key={item.href} href={item.href}>
+              <HeaderNavLink
+                key={item.href}
+                href={item.href}
+                active={item.href === activeHref}
+              >
                 {item.label}
               </HeaderNavLink>
             ))}
@@ -99,7 +112,7 @@ export function SiteHeader() {
           </div>
           <Link
             href="/lien-he"
-            aria-current={pathname === "/lien-he" ? "page" : undefined}
+            aria-current={activeHref === "/lien-he" ? "page" : undefined}
             className="hidden min-h-11 items-center justify-center rounded-full border border-brand-light px-5 font-label-lg text-label-lg font-bold text-on-surface transition-colors hover:border-primary hover:bg-surface-muted sm:inline-flex"
           >
             {contactLink?.label || "Liên hệ"}

@@ -39,10 +39,7 @@ export function HomeDestinations() {
   return (
     <section className="home-destinations site-container w-full pt-4 pb-10 lg:pt-3 lg:pb-[42px]">
       <HomeHeading contentKey="home.text-106">
-        <HomeSectionLink
-          contentKey="home.attributes-009"
-          href="/dich-vu?type=hotel"
-        >
+        <HomeSectionLink contentKey="home.attributes-009" href="/khach-san">
           <ContentText contentKey="home.text-107" />
         </HomeSectionLink>
       </HomeHeading>
@@ -53,7 +50,7 @@ export function HomeDestinations() {
             <HomeLink
               key={item.link}
               contentKey={item.link}
-              href="/dich-vu?type=hotel"
+              href="/khach-san"
               queryKey={item.title}
               className={`group relative isolate flex min-w-0 items-end overflow-hidden rounded-[22px] bg-on-surface text-white sm:rounded-[26px] ${
                 featured
