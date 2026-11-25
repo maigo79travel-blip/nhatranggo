@@ -7,7 +7,7 @@ import { CatalogCard, ProductField } from "@/components/catalog";
 export function HomeTours() {
   const tours = useSiteData()
     .products.filter((p) => p.type === "tour" && p.active)
-    .slice(0, 3);
+    .slice(0, 4);
 
   return (
     <section className="site-container w-full py-10 lg:py-[60px]">
@@ -20,7 +20,7 @@ export function HomeTours() {
         </HomeSectionLink>
       </HomeHeading>
 
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
         {tours.map((tour) => {
           const bookingsNote =
             (typeof tour.content?.["field-005"]?.value === "string" &&
