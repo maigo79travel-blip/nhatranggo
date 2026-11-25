@@ -71,7 +71,7 @@ export function FloatingContacts() {
       >
         <div className="relative p-6 sm:p-8 text-center space-y-5">
           <button
-            className="absolute top-2 right-2 inline-flex items-center justify-center w-11 h-11 rounded-full hover:bg-surface-subtle"
+            className="absolute top-2 right-2 inline-flex items-center justify-center w-11 h-11 rounded-full hover:bg-surface-muted"
             type="button"
             aria-label={copy.close}
             onClick={() => dialog.current?.close()}
@@ -88,10 +88,10 @@ export function FloatingContacts() {
           <h2 id="kakao-dialog-title" className="text-xl font-bold">
             {copy.kakao}
           </h2>
-          <p className="text-sm text-outline leading-relaxed">
+          <p className="text-sm text-on-surface-variant leading-relaxed">
             {copy.kakaoDesc}
           </p>
-          <div className="rounded-xl bg-gold-soft/60 border border-gold-amber/40 p-4 space-y-2 text-left text-sm break-words">
+          <div className="rounded-xl bg-promo-surface/60 border border-promo-highlight/40 p-4 space-y-2 text-left text-sm break-words">
             <p>
               <strong>ID / Phone:</strong>{" "}
               <span className="select-all text-primary font-bold">

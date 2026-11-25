@@ -12,6 +12,19 @@ export async function readJson(
     )
   )
     throw new AppError("Yêu cầu phải dùng JSON", 415);
+  const bytes = await readRequestBytes(request, maxBytes);
+  try {
+    const result: unknown = JSON.parse(new TextDecoder().decode(bytes));
+    if (!result || typeof result !== "object" || Array.isArray(result))
+      throw new AppError("Dữ liệu không hợp lệ");
+    return result as Record<string, unknown>;
+  } catch (error) {
+    if (error instanceof AppError) throw error;
+    throw new AppError("Dữ liệu JSON không hợp lệ");
+  }
+}
+
+export async function readRequestBytes(request: Request, maxBytes: number) {
   if (Number(request.headers.get("content-length")) > maxBytes)
     throw new AppError("Dữ liệu gửi lên quá lớn", 413);
   const reader = request.body?.getReader();
@@ -35,13 +48,7 @@ export async function readJson(
       bytes.set(chunk, offset);
       offset += chunk.byteLength;
     }
-    const result: unknown = JSON.parse(new TextDecoder().decode(bytes));
-    if (!result || typeof result !== "object" || Array.isArray(result))
-      throw new AppError("Dữ liệu không hợp lệ");
-    return result as Record<string, unknown>;
-  } catch (error) {
-    if (error instanceof AppError) throw error;
-    throw new AppError("Dữ liệu JSON không hợp lệ");
+    return bytes;
   } finally {
     reader.releaseLock();
   }

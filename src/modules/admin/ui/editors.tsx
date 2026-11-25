@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Product } from "@/lib/types";
 import { api, inputClass, type Row } from "./api";
+import { ImageField } from "./primitives/admin-image";
+import { Icon } from "./primitives/admin-icon";
 export function Field({
   label,
   ...props
@@ -95,6 +97,7 @@ export function ProductEditor({
             rating: Number(f.get("rating")),
             position: Number(f.get("position")),
             active: f.get("active") === "on",
+            featured: f.get("featured") === "on",
             content,
             destination_id: f.get("destination_id") || null,
             partner_id: f.get("partner_id") || null,
@@ -169,18 +172,11 @@ export function ProductEditor({
             defaultValue={product.original_price ?? ""}
           />
         </div>
-        <Field
+        <ImageField
           label="Đường dẫn ảnh"
           name="image"
-          defaultValue={product.image}
+          initialValue={product.image}
         />
-        {product.image && (
-          <img
-            src={product.image}
-            alt="Ảnh dịch vụ"
-            className="w-48 h-28 rounded-lg object-cover"
-          />
-        )}
         <label className="block">
           Địa phương
           <select
@@ -241,9 +237,17 @@ export function ProductEditor({
           />
           Hiển thị trên website
         </label>
+        <label className="flex gap-2 items-center">
+          <input
+            type="checkbox"
+            name="featured"
+            defaultChecked={product.featured}
+          />
+          Ưu tiên trên trang chủ
+        </label>
       </div>
       <details
-        className="border border-border-light rounded-xl p-4"
+        className="border border-border-subtle rounded-xl p-4"
         open={tab === "details"}
         hidden={tab !== "details"}
       >
@@ -254,7 +258,7 @@ export function ProductEditor({
         <div className="mt-4 space-y-4">
           {Object.entries(product.content || {}).map(([key, entry]) => (
             <label className="block text-body-sm" key={key}>
-              <span className="block text-outline mb-1 break-words">
+              <span className="block text-on-surface-variant mb-1 break-words">
                 {key} · {entry.label}
               </span>
               <textarea
@@ -279,6 +283,93 @@ export function ProductEditor({
     </form>
   );
 }
+type NavigationItem = { label: string; href: string };
+
+function NavigationFields({
+  items,
+  update,
+}: {
+  items: NavigationItem[];
+  update: (items: NavigationItem[]) => void;
+}) {
+  function move(index: number, target: number) {
+    const next = [...items];
+    [next[index], next[target]] = [next[target], next[index]];
+    update(next);
+  }
+
+  return (
+    <div className="space-y-3">
+      {items.map((item, index) => (
+        <div key={index} className="ad-nav-edit-row">
+          <Field
+            label={`Nhãn mục ${index + 1}`}
+            value={item.label}
+            required
+            maxLength={100}
+            onChange={(event) =>
+              update(
+                items.map((entry, i) =>
+                  i === index ? { ...entry, label: event.target.value } : entry,
+                ),
+              )
+            }
+          />
+          <Field
+            label={`Liên kết mục ${index + 1}`}
+            value={item.href}
+            required
+            maxLength={2000}
+            onChange={(event) =>
+              update(
+                items.map((entry, i) =>
+                  i === index ? { ...entry, href: event.target.value } : entry,
+                ),
+              )
+            }
+          />
+          <div className="flex gap-1">
+            <button
+              type="button"
+              className="ad-icon-button"
+              aria-label={`Đưa mục ${index + 1} lên`}
+              disabled={index === 0}
+              onClick={() => move(index, index - 1)}
+            >
+              <Icon name="arrow_upward" />
+            </button>
+            <button
+              type="button"
+              className="ad-icon-button"
+              aria-label={`Đưa mục ${index + 1} xuống`}
+              disabled={index === items.length - 1}
+              onClick={() => move(index, index + 1)}
+            >
+              <Icon name="arrow_downward" />
+            </button>
+            <button
+              type="button"
+              className="ad-icon-button"
+              aria-label={`Xóa mục ${index + 1}`}
+              onClick={() => update(items.filter((_, i) => i !== index))}
+            >
+              <Icon name="delete" />
+            </button>
+          </div>
+        </div>
+      ))}
+      <button
+        type="button"
+        className="ad-button"
+        disabled={items.length >= 30}
+        onClick={() => update([...items, { label: "", href: "" }])}
+      >
+        <Icon name="add" /> Thêm mục menu
+      </button>
+    </div>
+  );
+}
+
 export function ContentEditor({
   row,
   busy,
@@ -291,12 +382,16 @@ export function ContentEditor({
   const [error, setError] = useState("");
   const [value, setValue] = useState(row.value);
   const [raw, setRaw] = useState(JSON.stringify(row.value, null, 2));
+  const isNavigation =
+    row.key === "site.navigation" || row.key === "site.mobile-navigation";
   const flat =
     value != null &&
     typeof value === "object" &&
     !Array.isArray(value) &&
     Object.values(value).every((v) => typeof v === "string");
-  const [rawMode, setRawMode] = useState(!flat && row.kind !== "text");
+  const [rawMode, setRawMode] = useState(
+    !isNavigation && !flat && row.kind !== "text",
+  );
   const labels: Record<string, string> = {
     href: "Liên kết",
     src: "Đường dẫn ảnh",
@@ -335,7 +430,7 @@ export function ContentEditor({
         }
       }}
     >
-      <p className="text-body-sm text-outline break-all">
+      <p className="text-body-sm text-on-surface-variant break-all">
         {String(row.scope)} · {String(row.key)}
       </p>
       <Field
@@ -344,7 +439,12 @@ export function ContentEditor({
         defaultValue={String(row.label)}
         required
       />
-      {row.kind === "text" ? (
+      {isNavigation ? (
+        <NavigationFields
+          items={Array.isArray(value) ? value : []}
+          update={setValue}
+        />
+      ) : row.kind === "text" ? (
         <label className="ad-field">
           Nội dung
           <textarea
@@ -397,16 +497,32 @@ export function ContentEditor({
           {!rawMode && flat ? (
             <div className="ad-product-basic">
               {Object.entries(value as Record<string, string>).map(
-                ([key, text]) => (
-                  <Field
-                    key={key}
-                    label={labels[key] || key}
-                    value={text}
-                    onChange={(e) =>
-                      setValue({ ...(value as object), [key]: e.target.value })
-                    }
-                  />
-                ),
+                ([key, text]) =>
+                  key === "src" ? (
+                    <ImageField
+                      key={key}
+                      label={labels[key]}
+                      initialValue={text}
+                      onChange={(url) =>
+                        setValue((previous: unknown) => ({
+                          ...(previous as object),
+                          [key]: url,
+                        }))
+                      }
+                    />
+                  ) : (
+                    <Field
+                      key={key}
+                      label={labels[key] || key}
+                      value={text}
+                      onChange={(e) =>
+                        setValue({
+                          ...(value as object),
+                          [key]: e.target.value,
+                        })
+                      }
+                    />
+                  ),
               )}
             </div>
           ) : (

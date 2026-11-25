@@ -8,13 +8,16 @@ import type { Booking } from "@/lib/types";
 import { AppError } from "@/lib/errors";
 import { publicProductWhere } from "@/modules/travel/product-visibility";
 type CreateBookingInput = z.infer<typeof bookingSchema>;
-export async function createBooking(input: CreateBookingInput) {
+export async function createBooking(
+  input: CreateBookingInput,
+  actorId?: string,
+) {
   const client = await db.connect();
   try {
     await client.query("BEGIN");
     const product = (
       await client.query(
-        `SELECT p.price,p.type FROM products p WHERE p.id=$1 AND ${publicProductWhere}`,
+        `SELECT p.price,p.type FROM products p WHERE p.id=$1 AND ${publicProductWhere} FOR SHARE OF p`,
         [input.productId],
       )
     ).rows[0];
@@ -23,9 +26,11 @@ export async function createBooking(input: CreateBookingInput) {
     if (product.type === "hotel" && !input.returnDate)
       throw new AppError("Vui lòng chọn ngày trả phòng");
     if (input.roomId) {
+      if (product.type !== "hotel")
+        throw new AppError("Loại phòng không phù hợp với dịch vụ");
       const room = (
         await client.query(
-          "SELECT price,capacity FROM rooms WHERE id=$1 AND product_id=$2 AND active=true",
+          "SELECT price,capacity FROM rooms WHERE id=$1 AND product_id=$2 AND active=true FOR SHARE",
           [input.roomId, input.productId],
         )
       ).rows[0];
@@ -33,16 +38,17 @@ export async function createBooking(input: CreateBookingInput) {
         throw new AppError("Loại phòng không phù hợp số khách");
       price = room.price;
     }
-    const scheduled = await client.query(
-      "SELECT date::text FROM departures WHERE product_id=$1 AND active=true",
-      [input.productId],
-    );
-    if (
-      product.type === "tour" &&
-      scheduled.rowCount &&
-      !scheduled.rows.some((r) => r.date === input.date)
-    )
-      throw new AppError("Tour chưa có lịch khởi hành ngày đã chọn");
+    if (product.type === "tour") {
+      const {
+        rows: [schedule],
+      } = await client.query<{ blocked: boolean }>(
+        `SELECT EXISTS(SELECT 1 FROM departures WHERE product_id=$1 AND active)
+            AND NOT EXISTS(SELECT 1 FROM departures WHERE product_id=$1 AND active AND date=$2::date) AS blocked`,
+        [input.productId, input.date],
+      );
+      if (schedule.blocked)
+        throw new AppError("Tour chưa có lịch khởi hành ngày đã chọn");
+    }
     const bookingId = randomUUID();
     await client.query(
       "INSERT INTO bookings(id,product_id,customer_name,phone,departure_date,guests,unit_price,notes,return_date,departure_time,room_id) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",
@@ -65,8 +71,13 @@ export async function createBooking(input: CreateBookingInput) {
       [randomUUID(), input.name, input.phone],
     );
     await client.query(
-      "INSERT INTO booking_history(id,booking_id,status,notes) VALUES($1,$2,'pending','Khách gửi yêu cầu')",
-      [randomUUID(), bookingId],
+      "INSERT INTO booking_history(id,booking_id,status,actor_id,notes) VALUES($1,$2,'pending',$3,$4)",
+      [
+        randomUUID(),
+        bookingId,
+        actorId ?? null,
+        actorId ? "Nhân viên tạo đơn thủ công" : "Khách gửi yêu cầu",
+      ],
     );
     await client.query("COMMIT");
     return {

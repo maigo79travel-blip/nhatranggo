@@ -16,23 +16,23 @@ export function ResourceTable({
   rows,
   loading,
   onEdit,
-  routeLabel,
+  routeLabel = String,
 }: {
   section: string;
   rows: Row[];
   loading: boolean;
   onEdit: (r: Row) => void;
-  routeLabel: (v: unknown) => string;
+  routeLabel?: (v: unknown) => string;
 }) {
   const headings =
     section === "products"
-      ? ["DỊCH VỤ", "LOẠI", "GIÁ BÁN", "TRẠNG THÁI", "VỊ TRÍ"]
+      ? ["Dịch vụ", "Loại", "Giá bán", "Trạng thái", "Vị trí"]
       : section === "content"
-        ? ["NỘI DUNG", "TRANG", "LOẠI NỘI DUNG", "CẬP NHẬT"]
+        ? ["Nội dung", "Trang", "Loại nội dung", "Cập nhật"]
         : section === "fares"
-          ? ["TUYẾN ĐƯỜNG", "LOẠI XE", "GIÁ MỖI CHUYẾN"]
+          ? ["Tuyến đường", "Loại xe", "Giá mỗi chuyến"]
           : section === "bookings"
-            ? ["KHÁCH HÀNG", "DỊCH VỤ", "NGÀY SỬ DỤNG", "TRẠNG THÁI"]
+            ? ["Khách hàng", "Dịch vụ", "Ngày sử dụng", "Trạng thái"]
             : [];
 
   return (
@@ -46,9 +46,11 @@ export function ResourceTable({
         <thead>
           <tr>
             {headings.map((h) => (
-              <th key={h}>{h}</th>
+              <th scope="col" key={h}>
+                {h}
+              </th>
             ))}
-            <th>
+            <th scope="col">
               <span className="sr-only">Thao tác</span>
             </th>
           </tr>
@@ -99,7 +101,7 @@ export function ResourceTable({
                         </div>
                       </td>
                       <td>
-                        <span className={`ad-type ad-type-${row.type}`}>
+                        <span className="ad-type">
                           {typeLabels[String(row.type)] || String(row.type)}
                         </span>
                       </td>
@@ -213,7 +215,10 @@ export function ResourceTable({
                         </button>
                         <small>{String(row.phone)}</small>
                       </td>
-                      <td className="ad-cell-service">{String(row.title)}</td>
+                      <td className="ad-cell-service">
+                        {String(row.title)}
+                        <small>{typeLabels[String(row.product_type)]}</small>
+                      </td>
                       <td className="ad-cell-muted">
                         {dateLabel(row.departure_date)}
                       </td>

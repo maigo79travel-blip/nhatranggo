@@ -1,6 +1,5 @@
 "use client";
 
-import brand from "@/config/brand.json";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { api, rowKey, scopeLabels, type Row } from "./api";
@@ -20,7 +19,6 @@ import { ManualBooking } from "./panels/manual-booking";
 import { FareCreate } from "./panels/fare-create";
 import { canAccess } from "../permissions";
 
-// UI sub-components
 import { Icon } from "./primitives/admin-icon";
 import { Badge } from "./primitives/admin-badge";
 import { Brand } from "./primitives/admin-brand";
@@ -28,10 +26,10 @@ import { Filter } from "./primitives/admin-filter";
 import { Empty } from "./primitives/admin-empty";
 import { EditorDrawer } from "./primitives/editor-drawer";
 
-// Panels
 import { OverviewPanel } from "./panels/overview-panel";
 import { ResourceTable } from "./panels/resource-table";
 import { BookingEditor } from "./panels/booking-editor";
+import { BookingsPanel } from "./panels/bookings-panel";
 import { Login } from "./panels/login-form";
 
 const sections = [
@@ -39,7 +37,6 @@ const sections = [
     id: "overview",
     label: "Tổng quan",
     icon: "space_dashboard",
-    description: "Mọi hoạt động, trong một góc nhìn.",
   },
   {
     id: "bookings",
@@ -51,7 +48,7 @@ const sections = [
     id: "products",
     label: "Dịch vụ",
     icon: "luggage",
-    description: "Quản lý khách sạn, tour du lịch và các gói combo.",
+    description: "Quản lý khách sạn, tour và combo đang bán.",
   },
   {
     id: "fares",
@@ -63,7 +60,7 @@ const sections = [
     id: "content",
     label: "Nội dung website",
     icon: "article",
-    description: "Chăm chút từng nội dung trên website của bạn.",
+    description: "Chỉnh sửa nội dung và hình ảnh trên các trang công khai.",
   },
   {
     id: "account",
@@ -73,19 +70,29 @@ const sections = [
   },
 ];
 
-const allSections = [
+const allSections: {
+  id: string;
+  label: string;
+  icon: string;
+  description?: string;
+}[] = [
   ...sections,
   ...Object.entries(resources).map(([id, resource]) => ({
     id,
     label: resource.label,
     icon: resource.icon,
-    description: "Quản lý dữ liệu " + resource.label.toLowerCase(),
   })),
 ];
 const PAGE_SIZE = 10;
+const roleLabels: Record<AdminUser["role"], string> = {
+  super_admin: "Quản trị viên",
+  editor: "Biên tập viên",
+  booking: "Nhân viên đặt chỗ",
+};
 
 export function AdminWorkspace({ user }: { user: AdminUser | null }) {
   const router = useRouter();
+  const userId = user?.id;
   const site = useSiteData();
   const [section, setSection] = useState("overview");
   const [overview, setOverview] = useState<AdminOverviewData | null>(null);
@@ -93,6 +100,7 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
   const [selected, setSelected] = useState<Row | null>(null);
   const [creating, setCreating] = useState(false);
   const [manualBooking, setManualBooking] = useState(false);
+  const [bookingVersion, setBookingVersion] = useState(0);
   const [newFare, setNewFare] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -106,16 +114,18 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
   );
   const [syncedAt, setSyncedAt] = useState("");
   const requestId = useRef(0);
+  const menuToggle = useRef<HTMLButtonElement>(null);
+  const menuClose = useRef<HTMLButtonElement>(null);
   const modalOpen = Boolean(selected) || creating || manualBooking || newFare;
 
   useEffect(() => {
-    if (!modalOpen) return;
+    if (!modalOpen && !menuOpen) return;
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = previous;
     };
-  }, [modalOpen]);
+  }, [modalOpen, menuOpen]);
 
   useEffect(() => {
     document.body.dataset.adminReady = "true";
@@ -124,10 +134,31 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
     };
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const frame = requestAnimationFrame(() =>
+      menuClose.current?.focus({ preventScroll: true }),
+    );
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const handleResize = () => {
+      if (desktop.matches) setMenuOpen(false);
+    };
+    desktop.addEventListener("change", handleResize);
+    return () => {
+      cancelAnimationFrame(frame);
+      desktop.removeEventListener("change", handleResize);
+    };
+  }, [menuOpen]);
+
+  function closeMenu() {
+    setMenuOpen(false);
+    requestAnimationFrame(() => menuToggle.current?.focus());
+  }
+
   const notify = (text: string, error = false) => setNotice({ text, error });
 
   const refreshOverview = useCallback(async () => {
-    if (!user) return;
+    if (!userId) return;
     const result = await api("overview");
     setOverview(result.data);
     setSyncedAt(
@@ -136,11 +167,17 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
         minute: "2-digit",
       }),
     );
-  }, [user]);
+  }, [userId]);
 
   const load = useCallback(async () => {
     const current = ++requestId.current;
-    if (!user || section === "account" || resources[section]) return;
+    if (
+      !userId ||
+      section === "account" ||
+      section === "bookings" ||
+      resources[section]
+    )
+      return;
     setLoading(true);
     try {
       if (section === "overview") await refreshOverview();
@@ -153,7 +190,7 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
     } finally {
       if (current === requestId.current) setLoading(false);
     }
-  }, [section, user, refreshOverview]);
+  }, [section, userId, refreshOverview]);
 
   useEffect(() => {
     setRows([]);
@@ -169,8 +206,9 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
   }, [load]);
 
   useEffect(() => {
-    if (user && section !== "overview") void refreshOverview().catch(() => {});
-  }, [user, section, refreshOverview]);
+    if (userId && section !== "overview")
+      void refreshOverview().catch(() => {});
+  }, [userId, section, refreshOverview]);
 
   useEffect(() => {
     setPage(1);
@@ -187,8 +225,14 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
       notify("Bạn không có quyền vào mục này", true);
       return;
     }
-    setSection(id);
-    setMenuOpen(false);
+    if (id !== section) {
+      requestId.current++;
+      setRows([]);
+      setLoading(id !== "account" && id !== "bookings" && !resources[id]);
+      setSection(id);
+      window.scrollTo(0, 0);
+    }
+    if (menuOpen) closeMenu();
     setSelected(null);
     setNotice(null);
   };
@@ -199,15 +243,18 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
     setSaving(true);
     try {
       const result = await api(section, "PATCH", body);
-      setRows((old) =>
-        old.map((row) =>
-          rowKey(row) === rowKey(result.data)
-            ? { ...row, ...result.data }
-            : row,
-        ),
-      );
+      if (section === "bookings") setBookingVersion((value) => value + 1);
+      else {
+        setRows((old) =>
+          old.map((row) =>
+            rowKey(row) === rowKey(result.data)
+              ? { ...row, ...result.data }
+              : row,
+          ),
+        );
+      }
       setSelected(null);
-      notify("Đã lưu thay đổi. Website đã sẵn sàng hiển thị nội dung mới.");
+      notify("Đã lưu thay đổi.");
       void refreshOverview().catch(() => {});
       router.refresh();
     } catch (error) {
@@ -220,6 +267,10 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
   async function logout() {
     try {
       await api("session", "DELETE");
+      setSection("overview");
+      setOverview(null);
+      setSyncedAt("");
+      if (menuOpen) closeMenu();
       router.refresh();
     } catch (error) {
       notify((error as Error).message, true);
@@ -240,9 +291,7 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
             ? row.scope
             : section === "fares"
               ? row.vehicle
-              : section === "bookings"
-                ? row.status
-                : row.type,
+              : row.type,
         ) === filter) &&
       (stateFilter === "all" ||
         Boolean(row.active) === (stateFilter === "active")),
@@ -294,12 +343,29 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
           type="button"
           className="ad-nav-shade"
           aria-label="Đóng menu"
-          onClick={() => setMenuOpen(false)}
+          tabIndex={-1}
+          onClick={closeMenu}
         />
       )}
-      <aside className={`ad-sidebar ${menuOpen ? "is-open" : ""}`}>
-        <Brand light />
-        <span className="ad-nav-caption">KHÔNG GIAN LÀM VIỆC</span>
+      <aside
+        className={`ad-sidebar ${menuOpen ? "is-open" : ""}`}
+        id="ad-sidebar"
+        onKeyDown={(event) => {
+          if (menuOpen && event.key === "Escape") closeMenu();
+        }}
+      >
+        <div className="ad-sidebar-heading">
+          <Brand />
+          <button
+            ref={menuClose}
+            type="button"
+            className="ad-icon-button ad-mobile-toggle"
+            aria-label="Đóng menu quản trị"
+            onClick={closeMenu}
+          >
+            <Icon name="close" />
+          </button>
+        </div>
         <nav aria-label="Điều hướng quản trị">
           {allSections
             .filter((s) => s.id !== "account" && canAccess(user, s.id))
@@ -314,41 +380,30 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
                 <Icon name={item.icon} />
                 <span>{item.label}</span>
                 {item.id === "bookings" && Boolean(overview?.stats.pending) && (
-                  <b className="ad-nav-count">{overview?.stats.pending}</b>
+                  <b className="ad-nav-count" title="Đơn chờ xác nhận">
+                    {overview?.stats.pending}
+                  </b>
                 )}
-                {section === item.id && <span className="ad-nav-active-dot" />}
               </button>
             ))}
         </nav>
-        <span className="ad-nav-caption ad-settings-caption">CÀI ĐẶT</span>
-        <button
-          type="button"
-          className={`ad-nav-item ${section === "account" ? "is-active" : ""}`}
-          aria-current={section === "account" ? "page" : undefined}
-          onClick={() => navigate("account")}
-        >
-          <Icon name="settings" />
-          <span>Tài khoản & bảo mật</span>
-        </button>
         <div className="ad-sidebar-bottom">
-          <div className="ad-website-card">
-            <span className="ad-site-icon">
-              <Icon name="public" />
-            </span>
-            <strong>Website của bạn</strong>
-            <p>Một điểm chạm, ngàn hành trình.</p>
-            <a href="/" target="_blank" rel="noopener">
-              Mở website
-              <Icon name="arrow_outward" />
-            </a>
-          </div>
+          <button
+            type="button"
+            className={`ad-nav-item ${section === "account" ? "is-active" : ""}`}
+            aria-current={section === "account" ? "page" : undefined}
+            onClick={() => navigate("account")}
+          >
+            <Icon name="settings" />
+            <span>Tài khoản &amp; bảo mật</span>
+          </button>
           <div className="ad-user">
             <span className="ad-avatar">
               {user.username.slice(0, 1).toUpperCase()}
             </span>
             <div>
               <strong>{user.username}</strong>
-              <small>Quản trị viên</small>
+              <small>{roleLabels[user.role]}</small>
             </div>
             <button
               type="button"
@@ -362,20 +417,22 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
           </div>
         </div>
       </aside>
-      <div className="ad-main">
+      <div className="ad-main" inert={menuOpen}>
         <header className="ad-topbar">
           <div className="ad-topbar-left">
             <button
+              ref={menuToggle}
               type="button"
               className="ad-icon-button ad-mobile-toggle"
               aria-label="Mở menu quản trị"
+              aria-controls="ad-sidebar"
               aria-expanded={menuOpen}
-              onClick={() => setMenuOpen(!menuOpen)}
+              onClick={() => setMenuOpen(true)}
             >
               <Icon name="menu" />
             </button>
             <span className="ad-breadcrumb">
-              Không gian quản trị
+              <span>Quản trị</span>
               <Icon name="chevron_right" />
               <strong>{current.label}</strong>
             </span>
@@ -390,7 +447,6 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
               <Icon name="open_in_new" />
               Xem website
             </a>
-            <span className="ad-topbar-divider" />
             <button
               type="button"
               className="ad-profile-button"
@@ -401,73 +457,66 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
                 {user.username.slice(0, 1).toUpperCase()}
               </span>
               <span>{user.username}</span>
-              <Icon name="expand_more" />
             </button>
           </div>
         </header>
         <main className="ad-content">
-          {section === "bookings" && (
-            <div className="flex flex-wrap gap-3 mb-4">
-              <button
-                type="button"
-                className="ad-button ad-button-primary"
-                onClick={() => setManualBooking(true)}
-              >
-                Tạo đơn thủ công
-              </button>
-              <a className="ad-button" href="/api/admin/booking-export">
-                Xuất CSV (Excel)
-              </a>
-            </div>
-          )}
-          {section === "fares" && (
-            <button
-              type="button"
-              className="ad-button ad-button-primary mb-4"
-              onClick={() => setNewFare(true)}
-            >
-              Thêm mức giá
-            </button>
-          )}
           <div className="ad-page-heading">
             <div>
-              <div className="ad-eyebrow">{brand.name.toUpperCase()} ADMIN</div>
               <h1>{current.label}</h1>
-              <p>
-                {section === "overview"
-                  ? `Chào ${user.username}, chúc bạn một ngày làm việc hiệu quả.`
-                  : current.description}
-              </p>
+              {current.description && <p>{current.description}</p>}
             </div>
             <div className="ad-heading-actions">
-              {section === "overview" ? (
-                <span className="ad-date">
-                  <Icon name="calendar_today" />
-                  {new Intl.DateTimeFormat("vi-VN", {
-                    day: "2-digit",
-                    month: "long",
-                    year: "numeric",
-                    timeZone: "Asia/Ho_Chi_Minh",
-                  }).format(new Date())}
-                </span>
-              ) : section === "products" ? (
+              {section === "overview" && (
+                <>
+                  <span className="ad-date">
+                    <Icon name="calendar_today" />
+                    {new Intl.DateTimeFormat("vi-VN", {
+                      day: "2-digit",
+                      month: "long",
+                      year: "numeric",
+                      timeZone: "Asia/Ho_Chi_Minh",
+                    }).format(new Date())}
+                  </span>
+                  <button
+                    type="button"
+                    className="ad-icon-button"
+                    aria-label="Làm mới tổng quan"
+                    title="Làm mới tổng quan"
+                    disabled={loading}
+                    onClick={() => void load()}
+                  >
+                    <Icon name="refresh" />
+                  </button>
+                </>
+              )}
+              {section === "bookings" && (
+                <>
+                  <button
+                    type="button"
+                    className="ad-button ad-button-primary"
+                    onClick={() => setManualBooking(true)}
+                  >
+                    <Icon name="add" /> Tạo đơn thủ công
+                  </button>
+                </>
+              )}
+              {section === "fares" && (
+                <button
+                  type="button"
+                  className="ad-button ad-button-primary"
+                  onClick={() => setNewFare(true)}
+                >
+                  <Icon name="add" /> Thêm mức giá
+                </button>
+              )}
+              {section === "products" && (
                 <button
                   type="button"
                   className="ad-button ad-button-primary"
                   onClick={() => setCreating(true)}
                 >
-                  <Icon name="add" />
-                  Thêm dịch vụ
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  className="ad-button ad-button-secondary"
-                  disabled={loading}
-                  onClick={() => void load()}
-                >
-                  <Icon name="refresh" />
-                  Làm mới dữ liệu
+                  <Icon name="add" /> Thêm dịch vụ
                 </button>
               )}
             </div>
@@ -479,9 +528,11 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
               data={overview}
               loading={loading}
               syncedAt={syncedAt}
+              canNavigate={(id) => canAccess(user, id)}
               navigate={navigate}
-              onRefresh={() => void load()}
             />
+          ) : section === "bookings" ? (
+            <BookingsPanel version={bookingVersion} onEdit={setSelected} />
           ) : section === "account" ? (
             <div className="ad-account-layout">
               <section className="ad-panel ad-account-card">
@@ -489,10 +540,7 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
                   <span className="ad-heading-icon">
                     <Icon name="lock" />
                   </span>
-                  <div>
-                    <h2>Bảo mật tài khoản</h2>
-                    <p>Cập nhật mật khẩu để bảo vệ không gian quản trị.</p>
-                  </div>
+                  <h2>Bảo mật tài khoản</h2>
                 </div>
                 <AccountEditor onMessage={(text) => notify(text)} />
               </section>
@@ -501,10 +549,8 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
                   {user.username.slice(0, 1).toUpperCase()}
                 </span>
                 <h2>{user.username}</h2>
-                <Badge tone="green">Quản trị viên</Badge>
+                <p className="ad-account-role">{roleLabels[user.role]}</p>
                 <dl>
-                  <dt>Quyền truy cập</dt>
-                  <dd>Quản lý toàn bộ nội dung</dd>
                   <dt>Thời hạn phiên đăng nhập</dt>
                   <dd>8 giờ</dd>
                 </dl>
@@ -517,29 +563,18 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
           ) : (
             <section className="ad-panel">
               <div className="ad-resource-heading">
-                <div>
-                  <h2>
-                    {section === "products"
-                      ? "Danh sách dịch vụ"
-                      : section === "content"
-                        ? "Thư viện nội dung"
-                        : section === "bookings"
-                          ? "Yêu cầu đặt chỗ"
-                          : section === "fares"
-                            ? "Giá xe niêm yết"
-                            : "Khách hàng đăng ký"}
-                    <span className="ad-count">{baseRows.length}</span>
-                  </h2>
-                  <p>
-                    {section === "products"
-                      ? "Tất cả dịch vụ, được tổ chức trong một danh sách."
-                      : section === "content"
-                        ? "Tìm và cập nhật nội dung tại từng vị trí trên website."
+                <h2>
+                  {section === "products"
+                    ? "Danh sách dịch vụ"
+                    : section === "content"
+                      ? "Thư viện nội dung"
+                      : section === "bookings"
+                        ? "Yêu cầu đặt chỗ"
                         : section === "fares"
-                          ? "Bảng giá và báo giá trực tuyến luôn được đồng bộ."
-                          : "Thông tin mới nhất được hiển thị ở đầu danh sách."}
-                  </p>
-                </div>
+                          ? "Giá xe niêm yết"
+                          : "Khách hàng đăng ký"}
+                  <span className="ad-count">{baseRows.length}</span>
+                </h2>
                 <button
                   type="button"
                   className="ad-icon-button"
@@ -614,19 +649,6 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
                     ]}
                   />
                 )}
-                {section === "bookings" && (
-                  <Filter
-                    label="Trạng thái đặt chỗ"
-                    value={filter}
-                    onChange={setFilter}
-                    options={[
-                      ["all", "Tất cả trạng thái"],
-                      ["pending", "Chờ xác nhận"],
-                      ["confirmed", "Đã xác nhận"],
-                      ["cancelled", "Đã hủy"],
-                    ]}
-                  />
-                )}
                 {section === "fares" && (
                   <Filter
                     label="Loại xe"
@@ -641,9 +663,6 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
                     ]}
                   />
                 )}
-                <span className="ad-result-count">
-                  {filtered.length} kết quả
-                </span>
               </div>
               <ResourceTable
                 section={section}
@@ -726,16 +745,6 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
               </div>
             </section>
           )}
-          <footer className="ad-footer">
-            <span>
-              {brand.name}
-              <span className="ad-footer-dot">·</span>Không gian quản trị
-            </span>
-            <span>
-              <i className={overview ? "is-connected" : ""} />
-              {overview ? "Dữ liệu đã đồng bộ" : "Đang kết nối dữ liệu"}
-            </span>
-          </footer>
         </main>
       </div>
       {notice && !(notice.error && (selected || creating)) && (
@@ -835,6 +844,34 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
                 tuyến. Yêu cầu đã gửi giữ nguyên giá đã ghi nhận.
               </div>
               <Save busy={saving} />
+              <button
+                type="button"
+                className="ad-button mt-4"
+                disabled={saving}
+                onClick={async () => {
+                  if (
+                    !window.confirm("Gỡ mức giá này khỏi bảng giá công khai?")
+                  )
+                    return;
+                  setSaving(true);
+                  try {
+                    await api("fares", "DELETE", {
+                      route: selected.route,
+                      vehicle: selected.vehicle,
+                    });
+                    setSelected(null);
+                    void load();
+                    void refreshOverview().catch(() => {});
+                    notify("Đã gỡ mức giá xe.");
+                  } catch (error) {
+                    notify((error as Error).message, true);
+                  } finally {
+                    setSaving(false);
+                  }
+                }}
+              >
+                Gỡ mức giá
+              </button>
             </form>
           ) : section === "bookings" ? (
             <BookingEditor row={selected} busy={saving} onSave={save} />
@@ -843,12 +880,18 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
       <EditorDrawer
         open={manualBooking}
         title="Tạo booking thủ công"
-        onClose={() => {
-          setManualBooking(false);
-          void load();
-        }}
+        onClose={() => setManualBooking(false)}
       >
-        {manualBooking && <ManualBooking />}
+        {manualBooking && (
+          <ManualBooking
+            onSaved={(id) => {
+              setManualBooking(false);
+              setBookingVersion((value) => value + 1);
+              void refreshOverview().catch(() => {});
+              notify(`Đã tạo đơn ${id}`);
+            }}
+          />
+        )}
       </EditorDrawer>
       <EditorDrawer
         open={newFare}
@@ -913,9 +956,7 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
           <label className="ad-field">
             Mẫu bố cục
             <select className="ad-input" name="cloneId" defaultValue="">
-              <option value="" disabled>
-                Tạo dịch vụ mới (không cần mẫu)
-              </option>
+              <option value="">Tạo dịch vụ mới (không cần mẫu)</option>
               {baseRows
                 .filter((r) => r.template_id)
                 .map((row) => (

@@ -31,7 +31,7 @@ node --env-file=.env.supabase scripts/database.mjs seed
 node --env-file=.env.supabase scripts/setup-admin.mjs
 ```
 
-Nếu đã có dữ liệu, chỉ chạy migration, không khởi tạo lại dữ liệu để thay thế database vận hành. Migration 009 bật RLS và thu hồi quyền trực tiếp của `anon`/`authenticated` trên các bảng ứng dụng. Website dùng kết nối server với tài khoản sở hữu bảng; không dùng Supabase Data API hay Supabase Auth.
+Nếu đã có dữ liệu, chỉ chạy migration, không khởi tạo lại dữ liệu để thay thế database vận hành. Chạy migration trước khi deploy phiên bản dùng các cột mới. Các migration 013–014 bổ sung nhóm tuyến, trạng thái mức giá và chỉ mục đọc danh mục. Migration 009 bật RLS và thu hồi quyền trực tiếp của `anon`/`authenticated` trên các bảng ứng dụng. Website dùng kết nối server với tài khoản sở hữu bảng; không dùng Supabase Data API hay Supabase Auth.
 
 ## Vercel
 
@@ -40,7 +40,7 @@ Nếu đã có dữ liệu, chỉ chạy migration, không khởi tạo lại d�
    Install Command là `npm ci --include=dev`, bảo đảm Tailwind, Autoprefixer và TypeScript vẫn được cài khi môi trường đặt `NODE_ENV=production` hoặc `NPM_CONFIG_OMIT=dev`. Các gói này cần trong lúc build. Nếu đã ghi đè Install Command trên dashboard, dùng cùng lệnh này.
 3. Thêm biến môi trường **Production**: `DATABASE_URL` là URI transaction pooler. Đánh dấu giá trị này là Sensitive. Không dùng tiền tố `NEXT_PUBLIC_`.
 4. `APP_URL` là URL HTTPS chính thức khi đã có domain; nếu chưa đặt, server tự lấy production URL từ Vercel. Preview chấp nhận deployment URL và branch URL do Vercel cung cấp. Vercel tự bật cookie Secure và sử dụng IP do proxy Vercel cung cấp; self-host vẫn dùng cấu hình `TRUST_PROXY` riêng.
-5. Deploy và kiểm tra `/api/health`, trang chủ, `/dich-vu`, đăng nhập `/admin` và một yêu cầu đặt chỗ được phép thử nghiệm.
+5. Deploy và kiểm tra `/api/health`, trang chủ, `/khach-san`, đăng nhập `/admin` và một yêu cầu đặt chỗ được phép thử nghiệm.
 
 Chỉ dùng database riêng cho Preview/Development. Các test e2e trong repository có ghi dữ liệu, không chạy toàn bộ các test đó trên database production.
 

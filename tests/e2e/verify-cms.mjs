@@ -12,14 +12,26 @@ const browser = await launchBrowser();
 const product = (await db.query("SELECT * FROM products WHERE id='hotels-1'"))
   .rows[0];
 const hero = (
-  await db.query(
-    "SELECT * FROM site_content WHERE scope='home' AND label LIKE '%Khám phá kỳ nghỉ%' LIMIT 1",
-  )
+  await db.query("SELECT * FROM site_content WHERE key='home.text-044'")
+).rows[0];
+const hotelHero = (
+  await db.query("SELECT * FROM site_content WHERE key='hotels.text-046'")
 ).rows[0];
 const fare = (
   await db.query(
     "SELECT * FROM transfer_fares WHERE route='CXR_NT_CENTER' AND vehicle='7cho'",
   )
+).rows[0];
+const archiveKey = { route: "CXR_BAI_DAI", vehicle: "4cho" };
+const archiveId = `transfer-${archiveKey.route}-${archiveKey.vehicle}`;
+const originalArchive = (
+  await db.query(
+    "SELECT active FROM transfer_fares WHERE route=$1 AND vehicle=$2",
+    [archiveKey.route, archiveKey.vehicle],
+  )
+).rows[0];
+const originalArchiveProduct = (
+  await db.query("SELECT active FROM products WHERE id=$1", [archiveId])
 ).rows[0];
 let cloneId;
 try {
@@ -95,6 +107,17 @@ try {
     .filter({ hasText: "Kỳ nghỉ được quản lý qua PostgreSQL" })
     .waitFor();
   console.log("Admin page content edit is reflected in the hero");
+  const updateHotelHeading = await page.request.patch(
+    base + "/api/admin/content",
+    {
+      data: { ...hotelHero, value: "Tiêu đề khách sạn từ CMS QA" },
+    },
+  );
+  assert.equal(updateHotelHeading.status(), 200);
+  await site.goto(base + "/khach-san");
+  await site
+    .getByRole("heading", { level: 1, name: "Tiêu đề khách sạn từ CMS QA" })
+    .waitFor();
   let res = await page.request.patch(base + "/api/admin/fares", {
     data: { ...fare, price: 329000 },
   });
@@ -164,6 +187,10 @@ try {
     },
   });
   assert.equal(bad.status(), 400);
+  const removed = await page.request.delete(base + "/api/admin/fares", {
+    data: archiveKey,
+  });
+  assert.equal(removed.status(), 200);
   execFileSync(
     process.execPath,
     ["--env-file=.env", "scripts/database.mjs", "seed"],
@@ -187,7 +214,26 @@ try {
     ).rows[0].price,
     329000,
   );
-  console.log("Re-seeding preserves product, site content and fare edits");
+  assert.equal(
+    (
+      await db.query(
+        "SELECT active FROM transfer_fares WHERE route=$1 AND vehicle=$2",
+        [archiveKey.route, archiveKey.vehicle],
+      )
+    ).rows[0].active,
+    false,
+  );
+  assert.equal(
+    (
+      await site.request.get(
+        base + "/api/fares?pickup=CXR&dropoff=BAI_DAI&vehicle=4cho",
+      )
+    ).status(),
+    404,
+  );
+  console.log(
+    "Re-seeding preserves product, site content, fare edits and archived fares",
+  );
   await page.getByRole("button", { name: "Đăng xuất", exact: true }).click();
   await page.getByRole("heading", { name: "Đăng nhập quản trị" }).waitFor();
   assert.equal(
@@ -207,6 +253,10 @@ try {
     hero.key,
     JSON.stringify(hero.value),
   ]);
+  await db.query("UPDATE site_content SET value=$2 WHERE key=$1", [
+    hotelHero.key,
+    JSON.stringify(hotelHero.value),
+  ]);
   await db.query(
     "UPDATE transfer_fares SET price=$3 WHERE route=$1 AND vehicle=$2",
     [fare.route, fare.vehicle, fare.price],
@@ -214,6 +264,14 @@ try {
   await db.query("UPDATE products SET price=$2 WHERE id=$1", [
     `transfer-${fare.route}-${fare.vehicle}`,
     fare.price,
+  ]);
+  await db.query(
+    "UPDATE transfer_fares SET active=$3 WHERE route=$1 AND vehicle=$2",
+    [archiveKey.route, archiveKey.vehicle, originalArchive.active],
+  );
+  await db.query("UPDATE products SET active=$2 WHERE id=$1", [
+    archiveId,
+    originalArchiveProduct.active,
   ]);
   if (cloneId) await db.query("DELETE FROM products WHERE id=$1", [cloneId]);
   await browser.close();

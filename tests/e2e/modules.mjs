@@ -2,6 +2,7 @@ import { launchBrowser } from "./browser.mjs";
 import { request, expect } from "@playwright/test";
 import fs from "node:fs/promises";
 import pg from "pg";
+import sharp from "sharp";
 import assert from "node:assert/strict";
 const baseURL = process.env.TEST_URL || "http://localhost:3001";
 const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
@@ -49,6 +50,28 @@ try {
   for (const resource of resources)
     assert.equal((await anonymous.get("/api/admin/" + resource)).status(), 401);
   await call(admin, "POST", "/api/admin/session", { username, password });
+  const image = await sharp({
+    create: {
+      width: 17,
+      height: 17,
+      channels: 3,
+      background: "#" + stamp.slice(-6),
+    },
+  })
+    .png()
+    .toBuffer();
+  const uploaded = await admin.post("/api/admin/media", {
+    data: image,
+    headers: { "Content-Type": "image/png" },
+  });
+  assert.equal(uploaded.status(), 201);
+  const { url: imageUrl } = await uploaded.json();
+  assert.match(imageUrl, /^\/api\/media\/[a-f0-9]{64}$/);
+  created.image = imageUrl.split("/").at(-1);
+  const downloaded = await anonymous.get(imageUrl);
+  assert.equal(downloaded.status(), 200);
+  assert.equal(downloaded.headers()["content-type"], "image/webp");
+  assert.equal((await sharp(await downloaded.body()).metadata()).width, 17);
   const category = await create("categories", {
     title: tag,
     slug: tag,
@@ -60,7 +83,8 @@ try {
     locale: "vi",
     category_id: category.id,
     excerpt: "Bài kiểm tra module",
-    body: "## Nội dung\n\n**Bài viết** có ảnh và liên kết.",
+    body: `## Nội dung\n\n**Bài viết** có ảnh và liên kết.\n\n![Ảnh kiểm thử](${imageUrl})`,
+    image: imageUrl,
     status: "draft",
   });
   assert.equal((await anonymous.get("/blog/" + tag)).status(), 404);
@@ -119,6 +143,83 @@ try {
     `/api/fares?pickup=${pickup.code}&dropoff=${destination.code}&vehicle=4cho`,
   );
   assert.equal(quote.price, 987000);
+  const fare = { route: route.code, vehicle: "4cho", price: 988000 };
+  const quotePath = `/api/fares?pickup=${pickup.code}&dropoff=${destination.code}&vehicle=4cho`;
+  const transferResults = `/api/products?type=transfer&q=${encodeURIComponent(tag)}`;
+  const transferDetails = `/api/products/${quote.productId}`;
+  assert.equal(route.category, "airport");
+  await call(anonymous, "DELETE", "/api/admin/fares", fare, 401);
+  await call(admin, "POST", "/api/admin/fares", fare, 409);
+  await call(admin, "PATCH", "/api/admin/fares", fare);
+  assert.equal((await call(anonymous, "GET", quotePath)).price, fare.price);
+  const list = await call(anonymous, "GET", transferResults);
+  assert.deepEqual(
+    list.data.map(({ id, price }) => ({ id, price })),
+    [{ id: quote.productId, price: fare.price }],
+  );
+  assert.equal(Object.hasOwn(list.data[0], "partner_id"), false);
+  await call(anonymous, "GET", "/api/products?limit=101", undefined, 400);
+  await call(anonymous, "GET", quotePath + "&vehicle=invalid", undefined, 400);
+  assert.ok((await (await anonymous.get("/xe-dua-don")).text()).includes(tag));
+
+  const renamed = `${tag} route-updated`;
+  await call(admin, "PATCH", "/api/admin/routes", {
+    ...route,
+    title: renamed,
+    active: false,
+  });
+  assert.deepEqual((await call(anonymous, "GET", transferResults)).data, []);
+  await call(anonymous, "GET", quotePath, undefined, 404);
+  await call(anonymous, "GET", transferDetails, undefined, 404);
+  assert.ok(
+    !(await (await anonymous.get("/xe-dua-don")).text()).includes(renamed),
+  );
+
+  await call(admin, "PATCH", "/api/admin/routes", {
+    ...route,
+    title: renamed,
+    active: true,
+  });
+  assert.ok(
+    (await (await anonymous.get("/xe-dua-don")).text()).includes(renamed),
+  );
+  assert.ok(
+    (await call(anonymous, "GET", transferResults)).data[0].title.startsWith(
+      renamed,
+    ),
+  );
+
+  await call(admin, "DELETE", "/api/admin/fares", {
+    route: route.code,
+    vehicle: "4cho",
+  });
+  await call(anonymous, "GET", quotePath, undefined, 404);
+  await call(anonymous, "GET", transferDetails, undefined, 404);
+  assert.equal(
+    (
+      await db.query("SELECT active FROM products WHERE id=$1", [
+        quote.productId,
+      ])
+    ).rows[0].active,
+    false,
+  );
+  await call(admin, "POST", "/api/admin/fares", fare, 201);
+  assert.equal((await call(anonymous, "GET", quotePath)).price, fare.price);
+  await call(
+    admin,
+    "DELETE",
+    "/api/admin/products",
+    { id: quote.productId },
+    404,
+  );
+  assert.equal((await call(anonymous, "GET", quotePath)).price, fare.price);
+  const homeHtml = await (await anonymous.get("/")).text();
+  assert.ok(!homeHtml.includes(quote.productId));
+  assert.ok(!homeHtml.includes("hotels.text-046"));
+  console.log(
+    "PASS public route and fare creation, update, hiding, reactivation, API validation and scoped Home payload",
+  );
+
   const partner = await create("partners", {
     name: tag,
     kind: "driver",
@@ -150,7 +251,7 @@ try {
   assert.ok(
     (
       await (
-        await anonymous.get("/dich-vu?destination=" + destination.id)
+        await anonymous.get("/khach-san?destination=" + destination.id)
       ).text()
     ).includes(tag),
   );
@@ -277,6 +378,29 @@ try {
       (c) => c.phone === phone,
     ),
   );
+  const matching = await call(
+    admin,
+    "GET",
+    `/api/admin/bookings?page=1&q=${booking.id}&status=completed&type=hotel&from=2099-12-01&to=2099-12-01`,
+  );
+  assert.equal(matching.total, 1);
+  assert.equal(matching.data[0].id, booking.id);
+  assert.equal(matching.data[0].room_title, room.title);
+  const excluded = await call(
+    admin,
+    "GET",
+    `/api/admin/bookings?page=1&q=${booking.id}&status=cancelled`,
+  );
+  assert.equal(excluded.total, 0);
+  const workbook = await admin.get(
+    `/api/admin/booking-export?format=xlsx&q=${booking.id}`,
+  );
+  assert.equal(workbook.status(), 200);
+  assert.match(workbook.headers()["content-disposition"], /bookings\.xlsx/);
+  assert.equal(
+    (await workbook.body()).subarray(0, 4).toString("hex"),
+    "504b0304",
+  );
   for (const kind of ["evisa", "fast-track"]) {
     const result = await call(
       anonymous,
@@ -324,7 +448,9 @@ try {
   });
   assert.ok(translation.id);
   await call(anonymous, "POST", "/api/locale", { locale: "en" });
-  const translated = await (await anonymous.get("/dich-vu")).text();
+  const translated = await (
+    await anonymous.get("/khach-san?destination=" + destination.id)
+  ).text();
   assert.ok(translated.includes("Translated " + tag));
   assert.ok(translated.includes('lang="en"'));
   await call(anonymous, "POST", "/api/locale", { locale: "vi" });
@@ -432,6 +558,35 @@ try {
       }),
     ).toBeVisible();
   }
+  await nav.getByRole("button", { name: /^Đặt chỗ/ }).click();
+  await ui
+    .getByRole("button", { name: "Tạo đơn thủ công", exact: true })
+    .click();
+  const manual = ui.getByRole("dialog");
+  await manual.getByLabel("Dịch vụ", { exact: true }).selectOption(tour.id);
+  await manual.getByLabel("Họ và tên").fill(`Thủ công ${tag}`);
+  await manual.getByLabel("Số điện thoại").fill(phone);
+  await manual.getByLabel("Ngày sử dụng").fill("2099-12-01");
+  await manual
+    .getByRole("button", { name: "Tạo đơn đặt chỗ", exact: true })
+    .click();
+  await expect(manual).toHaveCount(0);
+  await ui.getByLabel("Tìm dữ liệu").fill(`Thủ công ${tag}`);
+  await ui.getByRole("button", { name: "Lọc đơn", exact: true }).click();
+  await ui
+    .getByRole("button", { name: `Thủ công ${tag}`, exact: true })
+    .click();
+  await expect(ui.getByRole("dialog")).toContainText(
+    "Nhân viên tạo đơn thủ công",
+  );
+  await ui.keyboard.press("Escape");
+  await expect(ui.getByRole("link", { name: "Xuất Excel" })).toHaveAttribute(
+    "href",
+    /format=xlsx/,
+  );
+  console.log(
+    "PASS admin manual booking, dated filters, XLSX and uploaded WebP",
+  );
   await nav
     .getByRole("button", { name: "Blog & Tin tức", exact: true })
     .click();
@@ -460,7 +615,7 @@ try {
   for (const width of [1920, 1440, 768, 390, 320]) {
     await ui.setViewportSize({ width, height: 900 });
     for (const path of [
-      "/dich-vu",
+      "/khach-san?q=Bãi%20Dài",
       "/blog",
       "/e-visa",
       "/fast-track",
@@ -607,6 +762,8 @@ try {
       await db.query(`DELETE FROM ${table} WHERE id=ANY($1::uuid[])`, [
         created[resource],
       ]);
+  if (created.image)
+    await db.query("DELETE FROM site_images WHERE id=$1", [created.image]);
   await db.query("DELETE FROM customers WHERE phone=$1", [phone]);
   await db.end();
   await admin.dispose();

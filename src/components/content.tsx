@@ -3,6 +3,7 @@ import {
   createContext,
   createElement,
   useContext,
+  useMemo,
   type ReactNode,
   type ReactElement,
   Children,
@@ -13,13 +14,23 @@ import {
 import Link from "next/link";
 import type { SiteData } from "@/lib/types";
 import { money } from "@/lib/types";
-import { contentAttributeKeys } from "@/lib/content-attributes";
+import {
+  contentAttributeKeys,
+  isPublicBackgroundImage,
+  isPublicImageUrl,
+  isPublicLink,
+} from "@/lib/content-attributes";
 import { contactInfo, resolveContent } from "@/lib/content-values";
 
-const DataContext = createContext<SiteData>({
+const DataContext = createContext<
+  SiteData & { productById: Map<string, SiteData["products"][number]> }
+>({
+  productById: new Map(),
   products: [],
   content: {},
   fares: [],
+  transferRoutes: [],
+  hotelCapacities: {},
   destinations: [],
   locale: "vi",
 });
@@ -28,21 +39,33 @@ export function SiteDataProvider({
   data,
   children,
 }: {
-  data: SiteData;
+  data: Partial<SiteData>;
   children: ReactNode;
 }) {
-  return <DataContext.Provider value={data}>{children}</DataContext.Provider>;
+  const parent = useContext(DataContext);
+  const value = useMemo(
+    () => ({
+      ...parent,
+      ...data,
+      content: { ...parent.content, ...data.content },
+      productById: data.products
+        ? new Map(data.products.map((product) => [product.id, product]))
+        : parent.productById,
+    }),
+    [parent, data],
+  );
+  return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 }
 export const useSiteData = () => useContext(DataContext);
 export function useProduct(id?: string) {
   const scope = useContext(ScopeContext);
-  return useSiteData().products.find((p) => p.id === (scope || id));
+  return useSiteData().productById.get(scope || id || "");
 }
-function useContent(key: string): unknown {
+export function useContent(key: string): unknown {
   const data = useSiteData();
   const scope = useContext(ScopeContext);
   const value = scope
-    ? data.products.find((p) => p.id === scope)?.content?.[key]?.value
+    ? data.productById.get(scope)?.content?.[key]?.value
     : data.content[key]?.value;
   return resolveContent(value, contactInfo(data.content));
 }
@@ -73,15 +96,11 @@ export function useContentAttributes(contentKey?: string) {
   const attrs: Record<string, unknown> = {};
   if (value && typeof value === "object")
     for (const [k, v] of Object.entries(value)) {
-      if (contentAttributeKeys.has(k)) {
-        if (
-          (k === "href" || k === "src") &&
-          typeof v === "string" &&
-          !/^(\/[^/]|\/$|#|https?:\/\/|tel:|mailto:)/i.test(v)
-        )
-          continue;
-        attrs[k] = v;
-      }
+      if (!contentAttributeKeys.has(k) || typeof v !== "string") continue;
+      if (k === "href" && !isPublicLink(v)) continue;
+      if (k === "src" && !isPublicImageUrl(v)) continue;
+      if (k === "backgroundImage" && !isPublicBackgroundImage(v)) continue;
+      attrs[k] = v;
     }
   return attrs;
 }

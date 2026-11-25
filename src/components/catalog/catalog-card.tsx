@@ -1,6 +1,7 @@
 "use client";
 import { createElement, type ReactNode } from "react";
 import { useCatalog } from "./catalog-context";
+import { useProduct } from "@/components/content";
 
 export function CatalogCard({
   productId,
@@ -14,7 +15,7 @@ export function CatalogCard({
   [key: string]: unknown;
 }) {
   const c = useCatalog();
-  const p = c.products.find((item) => item.id === productId);
+  const p = useProduct(productId);
   if (!p) return null;
 
   return createElement(

@@ -29,7 +29,6 @@ PostgreSQL mặc định dùng cổng 15432. Nếu cổng đã được dùng, s
 | `/xe-dua-don`            | Tuyến xe, loại xe và báo giá                   |
 | `/khach-san`             | Khách sạn và loại phòng                        |
 | `/tour-hang-ngay`        | Tour và lịch khởi hành                         |
-| `/dich-vu`               | Danh mục chung, lọc loại dịch vụ và địa phương |
 | `/e-visa`, `/fast-track` | Gửi yêu cầu dịch vụ sân bay                    |
 | `/blog`, `/blog/[slug]`  | Bài viết, chủ đề, tìm kiếm                     |
 | `/tra-cuu`               | Tra cứu booking theo mã + điện thoại           |
@@ -38,7 +37,7 @@ PostgreSQL mặc định dùng cổng 15432. Nếu cổng đã được dùng, s
 
 Admin có Dịch vụ, Loại phòng, Lịch khởi hành tour, Tuyến xe, Bảng giá, Địa phương, Blog/Chuyên mục, Booking, E-Visa/Fast-track, Khách hàng, Đối tác/Tài xế, Liên hệ, Nội dung website, Trang thông tin, Ngôn ngữ và Tài khoản/Phân quyền.
 
-- Tạo dịch vụ mới từ mẫu hoặc tạo độc lập. Dịch vụ độc lập hiển thị trong danh mục chung và phần dịch vụ mới của trang khách sạn/tour khi được bật hiển thị.
+- Tạo dịch vụ mới từ mẫu hoặc tạo độc lập. Dịch vụ đã bật hiển thị xuất hiện trong kết quả tìm kiếm của trang tương ứng. Khách sạn và tour độc lập cũng được hiển thị trong danh sách cùng loại.
 - Tạo địa phương trước, tạo tuyến từ hai điểm đến rồi thêm mức giá theo loại xe. Mã tuyến sinh từ mã hai điểm đến. Không đổi mã điểm đến/tuyến đã có liên kết giá; tạo tuyến mới khi thay đổi hành trình.
 - Bài viết/trang có nháp, đã đăng và đã ẩn. Editor hỗ trợ tiêu đề, in đậm, danh sách, ảnh URL, liên kết và xem trước Markdown; không chạy HTML nhập vào.
 - Gửi booking tạo trạng thái chờ xác nhận. Nhân viên kiểm tra với đối tác rồi xác nhận, phân công, nhập tổng giá, hoàn tất hoặc hủy. Hủy không xóa lịch sử.
@@ -46,11 +45,12 @@ Admin có Dịch vụ, Loại phòng, Lịch khởi hành tour, Tuyến xe, Bả
 - Ngôn ngữ: vi/en/ru/ko/zh. Bài viết và trang thông tin có bản ghi riêng theo ngôn ngữ. Bản dịch CMS có dạng `{"value":"…"}`, bản dịch sản phẩm có `title`, `description`, `location`, `content`. Khi chưa nhập bản dịch CMS/dịch vụ, nội dung gốc vẫn được hiển thị. Quản trị chịu trách nhiệm nội dung và bản dịch được công bố.
 - Quản trị cao nhất có toàn quyền; nhân viên booking xử lý đơn, CRM, liên hệ; biên tập viên quản lý dịch vụ/nội dung. API kiểm tra quyền độc lập với menu.
 
-Nhận diện thương hiệu tại `src/config/brand.json`. Sửa màu tại `src/theme/colors.json`; Tailwind và CSS dùng cùng biến màu. `db/seed` chỉ dùng để khởi tạo; runtime luôn đọc PostgreSQL. Migration cũ được giữ để nâng cấp database hiện có; module yêu thích và newsletter đã bỏ khỏi ứng dụng theo phạm vi đề án.
+Nhận diện thương hiệu tại `src/config/brand.json`. Sửa màu tại `src/theme/colors.json`. Chọn sắc độ trong `ramps` và áp theo chức năng trong `roles`. Tailwind và CSS đọc cùng nguồn. [Hướng dẫn token màu](docs/design-system.md#màu-sắc). `db/seed` chỉ dùng để khởi tạo; runtime luôn đọc PostgreSQL. Migration cũ được giữ để nâng cấp database hiện có; module yêu thích và newsletter đã bỏ khỏi ứng dụng theo phạm vi đề án.
 
 ## Kiểm tra
 
 ```sh
+npm run test:theme
 npm run typecheck
 npm run build
 ```

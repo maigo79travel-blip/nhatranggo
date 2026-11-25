@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "Inter Rating";
+  src: url("/fonts/inter-rating-bold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+20, U+2E, U+30-39, U+2605;
+}
+
+.home-hotel-rating {
+  font-family: "Inter Rating", Inter, sans-serif;
+}
+
+@media (min-width: 1024px) {
+  .home-destinations .home-heading {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .home-page .site-container {
+    padding-inline: 5vw;
+  }
+}
+
+.home-booking-button {
+  @apply inline-flex min-h-11 shrink-0 items-center justify-center rounded-xl bg-primary px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-primary-hover;
+}

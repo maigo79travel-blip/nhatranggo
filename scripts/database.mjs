@@ -54,6 +54,20 @@ try {
             ],
           );
         }
+      await client.query(
+        `INSERT INTO transfer_routes(id,code,pickup_id,dropoff_id,title,category)
+         SELECT gen_random_uuid(),f.code,pickup.id,dropoff.id,pickup.name||' → '||dropoff.name,
+           CASE WHEN 'CXR' IN (pickup.code,dropoff.code) THEN 'airport'
+             WHEN pickup.code IN ('DALAT','TUY_HOA') OR dropoff.code IN ('DALAT','TUY_HOA') THEN 'intercity'
+             ELSE 'local' END
+         FROM unnest($1::text[]) AS f(code)
+         JOIN destinations pickup ON starts_with(f.code,pickup.code||'_')
+         JOIN destinations dropoff ON dropoff.code=substring(f.code FROM length(pickup.code)+2)
+         WHERE pickup.id<>dropoff.id
+         ORDER BY pickup.id,dropoff.id
+         ON CONFLICT(code) DO NOTHING`,
+        [Object.keys(fares)],
+      );
       await client.query("COMMIT");
       console.log(`Seeded ${products.length} cards and 32 transfer fares`);
       await import("./seed-content.mjs");

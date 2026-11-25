@@ -55,9 +55,10 @@ export async function saveRecord(
     }
     if (resource === "destinations" && recordId) {
       const old = (
-        await client.query("SELECT code FROM destinations WHERE id=$1", [
-          recordId,
-        ])
+        await client.query(
+          "SELECT code FROM destinations WHERE id=$1 FOR UPDATE",
+          [recordId],
+        )
       ).rows[0];
       if (
         old &&
@@ -75,21 +76,34 @@ export async function saveRecord(
     }
     if (resource === "routes") {
       const endpoints = await client.query(
-        "SELECT id,code FROM destinations WHERE id=ANY($1::uuid[]) AND active=true",
+        "SELECT id,code FROM destinations WHERE id=ANY($1::uuid[]) AND active=true FOR SHARE",
         [[values.pickup_id, values.dropoff_id]],
       );
       if (endpoints.rowCount !== 2)
         throw new AppError("Điểm đón / trả không hoạt động");
-      values.code =
-        endpoints.rows.find((r) => r.id === values.pickup_id).code +
-        "_" +
-        endpoints.rows.find((r) => r.id === values.dropoff_id).code;
+      const pickup = endpoints.rows.find((r) => r.id === values.pickup_id).code;
+      const dropoff = endpoints.rows.find(
+        (r) => r.id === values.dropoff_id,
+      ).code;
+      const code = pickup + "_" + dropoff;
+      if (code.length > 85)
+        throw new AppError("Mã tuyến không được dài hơn 85 ký tự");
+      values.code = code;
+      if (!recordId && !values.category) {
+        const codes = [pickup, dropoff];
+        values.category = codes.includes("CXR")
+          ? "airport"
+          : codes.some((value) => value === "DALAT" || value === "TUY_HOA")
+            ? "intercity"
+            : "local";
+      }
     }
     if (resource === "routes" && recordId) {
       const old = (
-        await client.query("SELECT code FROM transfer_routes WHERE id=$1", [
-          recordId,
-        ])
+        await client.query(
+          "SELECT code FROM transfer_routes WHERE id=$1 FOR UPDATE",
+          [recordId],
+        )
       ).rows[0];
       if (
         old &&
@@ -130,6 +144,14 @@ export async function saveRecord(
         [randomUUID(), ...params],
       );
     if (!result.rowCount) throw new AppError("Không tìm thấy bản ghi", 404);
+    if (resource === "routes" && recordId)
+      await client.query(
+        `UPDATE products p
+         SET title=$2||' · '||fare.vehicle,location=$2,updated_at=now()
+         FROM transfer_fares fare
+         WHERE fare.route=$1 AND p.id='transfer-'||fare.route||'-'||fare.vehicle AND p.type='transfer'`,
+        [values.code, values.title],
+      );
     if (resource === "users" && recordId)
       await client.query("DELETE FROM admin_sessions WHERE user_id=$1", [
         recordId,

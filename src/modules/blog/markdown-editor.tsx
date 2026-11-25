@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import { Markdown } from "./markdown";
+import { ImageUpload } from "@/modules/admin/ui/primitives/admin-image";
 export function MarkdownEditor({
   name,
   label,
@@ -18,11 +19,12 @@ export function MarkdownEditor({
     const start = field?.selectionStart ?? value.length;
     const end = field?.selectionEnd ?? start;
     setValue(
-      value.slice(0, start) +
+      (current) =>
+        current.slice(0, start) +
         before +
-        value.slice(start, end) +
+        current.slice(start, end) +
         after +
-        value.slice(end),
+        current.slice(end),
     );
     requestAnimationFrame(() => field?.focus());
   };
@@ -51,6 +53,12 @@ export function MarkdownEditor({
             {title}
           </button>
         ))}
+        <ImageUpload
+          onUploaded={(url) => {
+            setPreview(false);
+            insert(`\n\n![Mô tả ảnh](${url})\n\n`);
+          }}
+        />
         <button
           type="button"
           className="ad-button"
@@ -70,7 +78,7 @@ export function MarkdownEditor({
         hidden={preview}
       />
       {preview && (
-        <div className="border border-border-light rounded-xl p-4">
+        <div className="border border-border-subtle rounded-xl p-4">
           <Markdown value={value} />
         </div>
       )}

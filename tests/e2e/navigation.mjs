@@ -67,6 +67,7 @@ try {
             !href.includes("#"),
         ),
     );
+  assert.ok(!hrefs.some((href) => href.startsWith("/dich-vu")));
   for (const href of hrefs.filter((href) => href !== "/")) {
     await desktop.locator(`a[href="${href}"]`).click();
     await check(href);
@@ -81,6 +82,13 @@ try {
   await check(hrefs.filter((href) => href !== "/").at(-1));
   await page.locator('header a[data-path="trang-chu"]').click();
   await check("/");
+  const contact = page.locator("header").getByRole("link", {
+    name: "Liên hệ",
+    exact: true,
+  });
+  await contact.click();
+  await check("/lien-he");
+  await expect(contact).toHaveAttribute("aria-current", "page");
   await page
     .locator("header")
     .getByRole("link", { name: "Tra cứu", exact: true })
@@ -103,6 +111,10 @@ try {
             !href.includes("#"),
         ),
     );
+  assert.ok(!mobileHrefs.some((href) => href.startsWith("/dich-vu")));
+  for (const href of ["/khach-san", "/tour-hang-ngay", "/xe-dua-don"]) {
+    assert.ok(mobileHrefs.includes(href), href + " missing from mobile menu");
+  }
   await page.getByRole("button", { name: "Đóng menu", exact: true }).click();
   for (const href of mobileHrefs) {
     await page.getByRole("button", { name: "Mở menu", exact: true }).click();

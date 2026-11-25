@@ -56,7 +56,7 @@ body {
   }
 }
 :focus-visible {
-  outline: 2px solid rgb(var(--color-primary));
+  outline: 2px solid rgb(var(--color-focus-ring));
   outline-offset: 3px;
 }
 button,
@@ -107,17 +107,17 @@ button {
     padding-top: 76px;
   }
   .public-page-hero {
-    @apply border-b border-border-light;
+    @apply border-b border-border-subtle;
     padding-block: 20px 28px;
     background: linear-gradient(
       110deg,
-      rgb(var(--color-ocean-light) / 0.65),
-      rgb(var(--color-surface-container-lowest)),
-      rgb(var(--color-secondary-container) / 0.14)
+      rgb(var(--color-surface-brand) / 0.65),
+      rgb(var(--color-surface)),
+      rgb(var(--color-surface-brand) / 0.14)
     );
   }
   .public-breadcrumb {
-    @apply flex items-center gap-2 text-xs text-outline mb-4;
+    @apply flex items-center gap-2 text-xs text-on-surface-variant mb-4;
   }
   .public-breadcrumb a {
     @apply text-primary hover:underline shrink-0;
@@ -139,47 +139,14 @@ button {
   }
   .public-form-card,
   .public-reading {
-    @apply bg-surface-container-lowest border border-border-light rounded-2xl;
+    @apply bg-surface border border-border-subtle rounded-2xl;
     box-shadow: 0 4px 24px rgb(var(--color-primary) / 0.035);
   }
   .catalog-filters {
     @apply space-y-4;
   }
-  .catalog-type-options {
-    @apply flex flex-wrap items-center gap-2 min-w-0 mb-5;
-  }
-  .catalog-type-option {
-    position: relative;
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-border-light bg-surface-container-lowest px-4 py-2.5 text-sm font-semibold text-on-surface-variant cursor-pointer;
-    min-height: 44px;
-    transition:
-      background-color 150ms,
-      color 150ms,
-      border-color 150ms,
-      box-shadow 150ms;
-  }
-  .catalog-type-input {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-    border-radius: inherit;
-  }
-  .catalog-type-option:hover {
-    @apply border-primary/30 text-primary;
-  }
-  .catalog-type-option:has(input:checked) {
-    @apply border-primary bg-primary text-on-primary;
-    box-shadow: 0 3px 10px rgb(var(--color-primary) / 0.15);
-  }
-  .catalog-type-option:focus-within {
-    outline: 2px solid rgb(var(--color-primary));
-    outline-offset: 3px;
-  }
   .catalog-search-bar {
-    @apply grid gap-2 p-2 bg-surface-container-lowest border border-border-light rounded-3xl;
+    @apply grid gap-2 p-2 bg-surface border border-border-subtle rounded-3xl;
     grid-template-columns: minmax(0, 1fr) auto;
     box-shadow: 0 6px 24px rgb(var(--color-primary) / 0.05);
   }
@@ -190,16 +157,16 @@ button {
     @apply shrink-0 text-primary text-2xl;
   }
   .catalog-keyword-field {
-    @apply col-span-2 border-b border-border-light pb-2;
+    @apply col-span-2 border-b border-border-subtle pb-2;
   }
   .catalog-keyword-field > .catalog-filter-icon {
-    @apply inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-ocean-light/60;
+    @apply inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-surface-brand/60;
   }
   .catalog-filter-body {
     @apply block min-w-0 flex-1;
   }
   .catalog-filter-label {
-    @apply block text-xs font-semibold text-outline;
+    @apply block text-xs font-semibold text-on-surface-variant;
   }
   .catalog-filter-control {
     @apply block w-full min-w-0 rounded-lg bg-transparent text-base font-medium text-on-surface;
@@ -209,7 +176,7 @@ button {
     outline-offset: 0;
   }
   .catalog-filter-control::placeholder {
-    @apply text-outline font-normal;
+    @apply text-on-surface-variant font-normal;
   }
   .catalog-search-submit {
     @apply rounded-2xl self-stretch px-4 sm:px-7;
@@ -218,7 +185,7 @@ button {
     @apply grid grid-cols-2 gap-3 items-center;
   }
   .catalog-refinements .catalog-filter-field {
-    @apply rounded-2xl border border-border-light bg-surface-container-lowest px-3 py-2;
+    @apply rounded-2xl border border-border-subtle bg-surface px-3 py-2;
     transition: border-color 150ms;
   }
   .catalog-refinements .catalog-filter-field:focus-within {
@@ -228,7 +195,7 @@ button {
     @apply col-span-2;
   }
   .catalog-reset {
-    @apply inline-flex items-center justify-end gap-1.5 text-sm font-semibold text-outline hover:text-primary rounded-lg;
+    @apply inline-flex items-center justify-end gap-1.5 text-sm font-semibold text-on-surface-variant hover:text-primary rounded-lg;
     min-height: 44px;
   }
   @media (min-width: 360px) and (max-width: 639px) {
@@ -249,7 +216,7 @@ button {
       padding-bottom: 4px;
     }
     .catalog-destination-field {
-      @apply border-l border-border-light;
+      @apply border-l border-border-subtle;
     }
     .catalog-refinements {
       display: flex;
@@ -271,7 +238,7 @@ button {
   }
   .public-control,
   .public-form input {
-    @apply block w-full min-w-0 rounded-xl border border-outline-variant bg-surface-subtle px-3.5 py-3 text-base font-normal text-on-surface mt-2;
+    @apply block w-full min-w-0 rounded-xl border border-border-default bg-surface-muted px-3.5 py-3 text-base font-normal text-on-surface mt-2;
     min-height: 48px;
     max-width: 100%;
     transition:
@@ -280,11 +247,11 @@ button {
   }
   .public-control:focus,
   .public-form input:focus {
-    @apply border-primary bg-surface-container-lowest;
-    box-shadow: 0 0 0 3px rgb(var(--color-primary) / 0.1);
+    @apply border-focus-ring bg-surface;
+    box-shadow: 0 0 0 3px rgb(var(--color-focus-ring) / 0.1);
   }
   .public-control::placeholder {
-    @apply text-outline;
+    @apply text-on-surface-variant;
   }
   textarea.public-control {
     min-height: 120px;
@@ -299,7 +266,7 @@ button {
       box-shadow 150ms;
   }
   .public-primary-button:hover {
-    @apply bg-ocean-deep;
+    @apply bg-brand-deep;
     box-shadow: 0 4px 12px rgb(var(--color-primary) / 0.16);
   }
   .public-primary-button:disabled {
@@ -311,27 +278,27 @@ button {
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
   }
   .public-service-card {
-    @apply flex flex-col min-w-0 overflow-hidden rounded-2xl border border-border-light bg-surface-container-lowest shadow-card;
+    @apply flex flex-col min-w-0 overflow-hidden rounded-2xl border border-border-subtle bg-surface shadow-card;
   }
   .public-card-image {
-    @apply relative flex items-center justify-center overflow-hidden bg-ocean-light shrink-0;
+    @apply relative flex items-center justify-center overflow-hidden bg-surface-brand shrink-0;
     aspect-ratio: 16 / 10;
   }
   .public-card-image img {
     @apply h-full w-full object-cover;
   }
   .public-type-badge {
-    @apply absolute top-4 left-4 rounded-lg bg-surface-container-lowest px-3 py-1.5 text-xs font-bold text-primary;
+    @apply absolute top-4 left-4 rounded-lg bg-surface px-3 py-1.5 text-xs font-bold text-primary;
     box-shadow: 0 2px 8px rgb(var(--color-on-surface) / 0.08);
   }
   .public-card-content {
     @apply flex flex-col gap-3 flex-1 p-5 sm:p-6;
   }
   .public-card-bottom {
-    @apply mt-auto pt-4 border-t border-border-light;
+    @apply mt-auto pt-4 border-t border-border-subtle;
   }
   .public-empty-state {
-    @apply flex flex-col items-center text-center gap-3 rounded-2xl border border-dashed border-outline-variant bg-surface-container-lowest px-6 py-14;
+    @apply flex flex-col items-center text-center gap-3 rounded-2xl border border-dashed border-border-default bg-surface px-6 py-14;
   }
   .public-form-layout {
     @apply grid gap-7 items-start;
@@ -343,7 +310,7 @@ button {
     @apply space-y-6;
   }
   .public-form-heading {
-    @apply border-b border-border-light pb-6;
+    @apply border-b border-border-subtle pb-6;
   }
   .public-form-fields {
     @apply grid gap-5 min-w-0 sm:grid-cols-2;
@@ -352,14 +319,14 @@ button {
     @apply font-bold text-on-surface mb-5 text-base;
   }
   .public-form-note {
-    @apply flex items-start gap-3 rounded-xl bg-ocean-light/50 p-4 text-sm leading-relaxed text-on-primary-fixed-variant;
+    @apply flex items-start gap-3 rounded-xl bg-surface-brand/50 p-4 text-sm leading-relaxed text-on-surface-brand;
   }
   .public-support-card {
     @apply rounded-2xl border border-secondary/15 p-6 sm:p-8 space-y-6;
     background: linear-gradient(
       145deg,
-      rgb(var(--color-secondary-container) / 0.18),
-      rgb(var(--color-surface-container-lowest))
+      rgb(var(--color-surface-brand) / 0.18),
+      rgb(var(--color-surface))
     );
   }
   .public-support-heading {
@@ -369,27 +336,27 @@ button {
     @apply text-3xl;
   }
   .public-contact-link {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-border-light bg-surface-container-lowest px-5 py-3 font-semibold text-sm text-primary hover:border-primary;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-border-subtle bg-surface px-5 py-3 font-semibold text-sm text-primary hover:border-primary;
     min-height: 48px;
   }
   .public-feedback {
     @apply rounded-xl border p-4 text-sm leading-relaxed break-words;
   }
   .public-feedback-error {
-    @apply border-error/20 bg-error-container/40 text-error;
+    @apply border-error/20 bg-error-surface/40 text-error;
   }
   .public-feedback-success {
-    @apply border-secondary/20 bg-secondary-container/20 text-secondary;
+    @apply border-secondary/20 bg-surface-brand/20 text-primary;
   }
   .public-booking-status {
-    @apply inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-bold bg-gold-soft text-tertiary;
+    @apply inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-bold bg-promo-surface text-promo-ink;
   }
   .public-booking-status[data-status="confirmed"],
   .public-booking-status[data-status="completed"] {
-    @apply bg-secondary-container/30 text-secondary;
+    @apply bg-surface-brand/30 text-primary;
   }
   .public-booking-status[data-status="cancelled"] {
-    @apply bg-error-container text-error;
+    @apply bg-error-surface text-error;
   }
   .public-reading {
     @apply w-full p-5 sm:p-8 lg:p-10 leading-relaxed;
@@ -399,7 +366,7 @@ button {
     @apply leading-snug;
   }
   .floating-contacts {
-    @apply fixed z-40 flex items-center gap-1 rounded-full border border-border-light bg-surface-container-lowest/95 p-1.5 shadow-xl;
+    @apply fixed z-40 flex items-center gap-1 rounded-full border border-border-subtle bg-surface/95 p-1.5 shadow-xl;
     left: 50%;
     bottom: max(12px, env(safe-area-inset-bottom));
     transform: translateX(-50%);
@@ -410,7 +377,7 @@ button {
     min-height: 44px;
   }
   .floating-contact-icon {
-    @apply flex items-center justify-center w-9 h-9 rounded-full bg-white border border-border-light overflow-hidden shadow-sm;
+    @apply flex items-center justify-center w-9 h-9 rounded-full bg-white border border-border-subtle overflow-hidden shadow-sm;
     padding: 2px;
     transition: transform 150ms;
   }
@@ -428,14 +395,14 @@ button {
     padding: 4px;
   }
   .floating-contact-dialog {
-    @apply rounded-2xl border border-border-light bg-white text-on-surface shadow-2xl m-auto;
+    @apply rounded-2xl border border-border-subtle bg-white text-on-surface shadow-2xl m-auto;
     width: calc(100% - 32px);
     max-width: 400px;
     max-height: calc(100dvh - 32px);
     overflow-y: auto;
   }
   .floating-contact-dialog::backdrop {
-    background: rgb(var(--color-on-background) / 0.6);
+    background: rgb(var(--color-dialog-scrim) / 0.6);
   }
   @media (max-width: 767px) {
     body:has(.floating-contacts) {

@@ -65,8 +65,10 @@ Không commit `.env`, `.local`, `node_modules`, `.next`, `test-results` hoặc t
 
 - `content-values.ts` giải quyết placeholder thương hiệu/liên hệ trên client và metadata server; không tạo tên thương hiệu riêng trong từng component.
 - `contactInfo`, `contactChannels` và `FloatingContacts` sử dụng cùng `site.contact`; các bản dịch của cụm liên hệ lấy từ Maigo local.
-- `FilterField` dùng cho bộ lọc Dịch vụ và Blog. `PublicPage`, `PublicForm`, `SupportGuide`, `ServiceCards` dùng lại giữa các route liên quan.
-- `publicProductWhere` giữ cùng quy tắc hiển thị tại danh mục, chi tiết và tạo booking. `bookingSchema` dùng cho yêu cầu công khai và tạo đơn quản trị.
+- `FilterField` dùng cho bộ lọc trong kết quả tìm kiếm và Blog. `PublicPage`, `PublicForm`, `SupportGuide`, `ServiceCards` dùng lại giữa các route liên quan.
+- `publicProductWhere` giữ cùng quy tắc hiển thị tại danh mục, API chi tiết và tạo booking. Xe chỉ xuất hiện khi dịch vụ, mức giá, tuyến và hai điểm đón trả đều đang bật. Bảng giá hiển thị theo các tuyến đã lưu trong admin. Xóa mức giá là lưu trữ, để seed lại vẫn giữ trạng thái ẩn và đơn đã tạo vẫn tra cứu được.
+- Layout công khai tải nội dung chung cho header và footer. Trang chủ, Khách sạn, Tour và Đặt xe chỉ tải nội dung CMS và nhóm sản phẩm của trang. API `GET /api/products` nhận `type`, `q`, `sort`, `limit` (mặc định 50, tối đa 100) và `offset`. Phản hồi gồm `data` và `hasMore`.
+- `bookingSchema` dùng cho yêu cầu công khai và tạo đơn quản trị.
 - `AppError`, `readJson`, `errorResponse`, kiểm tra Origin/cookie và rate limiter tách khỏi module admin để các module công khai không phụ thuộc vào lớp CRUD quản trị.
 
 TypeScript kiểm tra biến và tham số không dùng. CI chạy typecheck, build và kiểm thử các luồng chính trên PostgreSQL riêng.

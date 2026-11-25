@@ -1,11 +1,11 @@
 import { PublicForm } from "@/modules/support/public-form";
 import { PublicPage } from "@/components/site/public-page";
-import { getSiteData } from "@/lib/catalog";
+import { getSiteContent } from "@/lib/catalog";
 import { PublicIcon } from "@/components/site/public-ui";
 import { contactInfo } from "@/lib/content-values";
 import { contactChannels } from "@/modules/support/contact-channels";
 export default async function ContactPage() {
-  const { content } = await getSiteData();
+  const content = await getSiteContent("shared");
   const contact = contactInfo(content);
   return (
     <PublicPage title="Liên hệ & Hỗ trợ">

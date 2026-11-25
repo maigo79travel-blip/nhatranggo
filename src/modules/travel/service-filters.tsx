@@ -4,54 +4,33 @@ import Form from "next/form";
 import Link from "next/link";
 import { FilterField } from "@/components/site/filter-field";
 import { PublicIcon } from "@/components/site/public-ui";
-import type { BookingDraft } from "./search";
+import { nextDate, type BookingDraft } from "./search";
 
-const serviceTypes = [
-  { value: "", label: "Tất cả", icon: "grid_view" },
-  { value: "hotel", label: "Khách sạn", icon: "hotel" },
-  { value: "tour", label: "Tour", icon: "explore" },
-  { value: "combo", label: "Combo", icon: "luggage" },
-  { value: "transfer", label: "Xe đưa đón", icon: "airport_shuttle" },
-];
+import { serviceRoutes, type ServiceType } from "./service-routes";
 
 export function ServiceFilters({
+  type,
   params,
+  resetHref,
   draft,
   destinations,
   today,
 }: {
+  type: ServiceType;
   params: Record<string, string>;
+  resetHref: string;
   draft: BookingDraft;
   destinations: { id: string; name: string }[];
   today: string;
 }) {
-  const selectedType = serviceTypes.some((type) => type.value === params.type)
-    ? params.type
-    : "";
   return (
     <Form
-      action="/dich-vu"
+      action={serviceRoutes[type]}
       scroll={false}
       className="catalog-filters"
       aria-label="Lọc dịch vụ"
     >
-      <fieldset className="catalog-type-options">
-        <legend className="sr-only">Loại dịch vụ</legend>
-        {serviceTypes.map((type) => (
-          <label key={type.value} className="catalog-type-option">
-            <input
-              className="catalog-type-input"
-              type="radio"
-              name="type"
-              value={type.value}
-              defaultChecked={selectedType === type.value}
-              onChange={(event) => event.currentTarget.form?.requestSubmit()}
-            />
-            <PublicIcon name={type.icon} className="text-xl" />
-            {type.label}
-          </label>
-        ))}
-      </fieldset>
+      {type === "combo" && <input type="hidden" name="type" value="combo" />}
 
       <div className="catalog-search-bar">
         <FilterField
@@ -109,18 +88,35 @@ export function ServiceFilters({
             min={today}
           />
         </FilterField>
-        <FilterField
-          label="Ngày trả phòng"
-          icon="event_available"
-          className="catalog-date-field"
-        >
-          <input
-            className="catalog-filter-control"
-            type="date"
-            name="returnDate"
-            defaultValue={draft.returnDate}
-          />
-        </FilterField>
+        {type === "hotel" && (
+          <FilterField
+            label="Ngày trả phòng"
+            icon="event_available"
+            className="catalog-date-field"
+          >
+            <input
+              className="catalog-filter-control"
+              type="date"
+              name="returnDate"
+              defaultValue={draft.returnDate}
+              min={draft.date ? nextDate(draft.date) : today}
+            />
+          </FilterField>
+        )}
+        {type === "hotel" && (
+          <FilterField label="Loại hình / Sao" icon="hotel_class">
+            <select
+              name="category"
+              className="catalog-filter-control"
+              defaultValue={params.category || ""}
+            >
+              <option value="">Tất cả</option>
+              <option value="5 sao">5 sao</option>
+              <option value="4 sao">4 sao</option>
+              <option value="resort">Resort</option>
+            </select>
+          </FilterField>
+        )}
         <FilterField
           label="Số khách"
           icon="group"
@@ -135,7 +131,7 @@ export function ServiceFilters({
             defaultValue={draft.guests ?? 2}
           />
         </FilterField>
-        <Link className="catalog-reset" href="/dich-vu" scroll={false}>
+        <Link className="catalog-reset" href={resetHref} scroll={false}>
           <PublicIcon name="restart_alt" className="text-xl" />
           Xóa bộ lọc
         </Link>

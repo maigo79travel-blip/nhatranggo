@@ -21,13 +21,13 @@ export function ToursDaily() {
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="font-body-sm text-body-sm text-outline hidden sm:inline">
+            <span className="font-body-sm text-body-sm text-on-surface-variant hidden sm:inline">
               <ContentText contentKey="tours.text-044" />
             </span>
             <ContentElement
               contentKey="tours.attributes-005"
               tag="select"
-              className="px-4 py-2.5 rounded-xl bg-surface-card text-on-surface font-label-lg text-label-lg shadow-sm outline-none cursor-pointer"
+              className="px-4 py-2.5 rounded-xl bg-surface text-on-surface font-label-lg text-label-lg shadow-sm outline-none cursor-pointer"
             >
               <option value="pop">
                 <ContentText contentKey="tours.text-045" />
@@ -48,7 +48,7 @@ export function ToursDaily() {
         <div className="card-grid">
           <CatalogCollection collectionId="tours-collection-2">
             <CatalogCard
-              className="bg-surface-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group"
+              className="bg-surface rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group"
               productId="tours-4"
               tag="article"
             >
@@ -74,15 +74,15 @@ export function ToursDaily() {
               </div>
               <div className="p-5 flex flex-col flex-1">
                 <div className="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant mb-2">
-                  <span className="flex items-center gap-1 text-secondary font-medium">
+                  <span className="flex items-center gap-1 text-primary font-medium">
                     <span className="material-symbols-outlined text-[16px]">
                       {"scuba_diving"}
                     </span>
                     <ContentText contentKey="field-005" />
                   </span>
-                  <div className="flex items-center gap-1 text-tertiary font-bold">
+                  <div className="flex items-center gap-1 text-promo-ink font-bold">
                     <span
-                      className="material-symbols-outlined text-[15px] text-gold-amber"
+                      className="material-symbols-outlined text-[15px] text-promo-highlight"
                       style={{ fontVariationSettings: "'FILL' 1" }}
                     >
                       {"star"}
@@ -99,9 +99,9 @@ export function ToursDaily() {
                 <p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-4">
                   <ProductValue id="tours-4" field="description" />
                 </p>
-                <div className="mt-auto pt-3 bg-surface-subtle -mx-5 -mb-5 p-5 rounded-b-2xl flex items-center justify-between">
+                <div className="mt-auto pt-3 bg-surface-muted -mx-5 -mb-5 p-5 rounded-b-2xl flex items-center justify-between">
                   <div>
-                    <span className="font-body-sm text-body-sm text-outline block">
+                    <span className="font-body-sm text-body-sm text-on-surface-variant block">
                       <ContentText contentKey="field-007" />
                     </span>
                     <ProductField
@@ -114,7 +114,7 @@ export function ToursDaily() {
                   <ContentElement
                     contentKey="field-002"
                     tag="a"
-                    className="px-4 py-2 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md shadow-sm transition-colors flex items-center gap-1 action-link"
+                    className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-label-md text-label-md shadow-sm transition-colors flex items-center gap-1 action-link"
 
                     rel="noopener"
                     target="_blank"
@@ -131,7 +131,7 @@ export function ToursDaily() {
             </CatalogCard>
 
             <CatalogCard
-              className="bg-surface-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group"
+              className="bg-surface rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group"
               productId="tours-5"
               tag="article"
             >
@@ -157,15 +157,15 @@ export function ToursDaily() {
               </div>
               <div className="p-5 flex flex-col flex-1">
                 <div className="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant mb-2">
-                  <span className="flex items-center gap-1 text-secondary font-medium">
+                  <span className="flex items-center gap-1 text-primary font-medium">
                     <span className="material-symbols-outlined text-[16px]">
                       {"temple_buddhist"}
                     </span>
                     <ContentText contentKey="field-005" />
                   </span>
-                  <div className="flex items-center gap-1 text-tertiary font-bold">
+                  <div className="flex items-center gap-1 text-promo-ink font-bold">
                     <span
-                      className="material-symbols-outlined text-[15px] text-gold-amber"
+                      className="material-symbols-outlined text-[15px] text-promo-highlight"
                       style={{ fontVariationSettings: "'FILL' 1" }}
                     >
                       {"star"}
@@ -182,22 +182,22 @@ export function ToursDaily() {
                 <p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-4">
                   <ProductValue id="tours-5" field="description" />
                 </p>
-                <div className="mt-auto pt-3 bg-surface-subtle -mx-5 -mb-5 p-5 rounded-b-2xl flex items-center justify-between">
+                <div className="mt-auto pt-3 bg-surface-muted -mx-5 -mb-5 p-5 rounded-b-2xl flex items-center justify-between">
                   <div>
-                    <span className="font-body-sm text-body-sm text-outline block">
+                    <span className="font-body-sm text-body-sm text-on-surface-variant block">
                       <ContentText contentKey="field-007" />
                     </span>
                     <ProductField
                       id="tours-5"
                       field="price"
                       tag="span"
-                      className="font-headline-sm text-headline-sm text-sale-crimson font-bold"
+                      className="font-headline-sm text-headline-sm text-sale-price font-bold"
                     ></ProductField>
                   </div>
                   <ContentElement
                     contentKey="field-002"
                     tag="a"
-                    className="px-4 py-2 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md shadow-sm transition-colors flex items-center gap-1 action-link"
+                    className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-label-md text-label-md shadow-sm transition-colors flex items-center gap-1 action-link"
 
                     rel="noopener"
                     target="_blank"
@@ -214,7 +214,7 @@ export function ToursDaily() {
             </CatalogCard>
 
             <CatalogCard
-              className="bg-surface-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group"
+              className="bg-surface rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group"
               productId="tours-6"
               tag="article"
             >
@@ -228,7 +228,7 @@ export function ToursDaily() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 ></ProductField>
-                <div className="absolute top-3 left-3 bg-ocean-deep text-on-primary font-label-sm text-label-sm px-2.5 py-1 rounded-md shadow-sm">
+                <div className="absolute top-3 left-3 bg-brand-deep text-on-primary font-label-sm text-label-sm px-2.5 py-1 rounded-md shadow-sm">
                   <ContentText contentKey="field-003" />
                 </div>
                 <div className="absolute bottom-3 left-3 bg-inverse-surface/80 backdrop-blur-md px-2 py-0.5 rounded text-on-primary text-body-sm font-body-sm flex items-center gap-1">
@@ -240,15 +240,15 @@ export function ToursDaily() {
               </div>
               <div className="p-5 flex flex-col flex-1">
                 <div className="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant mb-2">
-                  <span className="flex items-center gap-1 text-secondary font-medium">
+                  <span className="flex items-center gap-1 text-primary font-medium">
                     <span className="material-symbols-outlined text-[16px]">
                       {"filter_drama"}
                     </span>
                     <ContentText contentKey="field-005" />
                   </span>
-                  <div className="flex items-center gap-1 text-tertiary font-bold">
+                  <div className="flex items-center gap-1 text-promo-ink font-bold">
                     <span
-                      className="material-symbols-outlined text-[15px] text-gold-amber"
+                      className="material-symbols-outlined text-[15px] text-promo-highlight"
                       style={{ fontVariationSettings: "'FILL' 1" }}
                     >
                       {"star"}
@@ -265,9 +265,9 @@ export function ToursDaily() {
                 <p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-4">
                   <ProductValue id="tours-6" field="description" />
                 </p>
-                <div className="mt-auto pt-3 bg-surface-subtle -mx-5 -mb-5 p-5 rounded-b-2xl flex items-center justify-between">
+                <div className="mt-auto pt-3 bg-surface-muted -mx-5 -mb-5 p-5 rounded-b-2xl flex items-center justify-between">
                   <div>
-                    <span className="font-body-sm text-body-sm text-outline block">
+                    <span className="font-body-sm text-body-sm text-on-surface-variant block">
                       <ContentText contentKey="field-007" />
                     </span>
                     <ProductField
@@ -280,7 +280,7 @@ export function ToursDaily() {
                   <ContentElement
                     contentKey="field-002"
                     tag="a"
-                    className="px-4 py-2 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md shadow-sm transition-colors flex items-center gap-1 action-link"
+                    className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-label-md text-label-md shadow-sm transition-colors flex items-center gap-1 action-link"
 
                     rel="noopener"
                     target="_blank"
@@ -297,7 +297,7 @@ export function ToursDaily() {
             </CatalogCard>
 
             <CatalogCard
-              className="bg-surface-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group"
+              className="bg-surface rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group"
               productId="tours-7"
               tag="article"
             >
@@ -317,15 +317,15 @@ export function ToursDaily() {
               </div>
               <div className="p-5 flex flex-col flex-1">
                 <div className="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant mb-2">
-                  <span className="flex items-center gap-1 text-secondary font-medium">
+                  <span className="flex items-center gap-1 text-primary font-medium">
                     <span className="material-symbols-outlined text-[16px]">
                       {"waves"}
                     </span>
                     <ContentText contentKey="field-004" />
                   </span>
-                  <div className="flex items-center gap-1 text-tertiary font-bold">
+                  <div className="flex items-center gap-1 text-promo-ink font-bold">
                     <span
-                      className="material-symbols-outlined text-[15px] text-gold-amber"
+                      className="material-symbols-outlined text-[15px] text-promo-highlight"
                       style={{ fontVariationSettings: "'FILL' 1" }}
                     >
                       {"star"}
@@ -342,9 +342,9 @@ export function ToursDaily() {
                 <p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-4">
                   <ProductValue id="tours-7" field="description" />
                 </p>
-                <div className="mt-auto pt-3 bg-surface-subtle -mx-5 -mb-5 p-5 rounded-b-2xl flex items-center justify-between">
+                <div className="mt-auto pt-3 bg-surface-muted -mx-5 -mb-5 p-5 rounded-b-2xl flex items-center justify-between">
                   <div>
-                    <span className="font-body-sm text-body-sm text-outline block">
+                    <span className="font-body-sm text-body-sm text-on-surface-variant block">
                       <ContentText contentKey="field-006" />
                     </span>
                     <ProductField
@@ -357,7 +357,7 @@ export function ToursDaily() {
                   <ContentElement
                     contentKey="field-002"
                     tag="a"
-                    className="px-4 py-2 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md shadow-sm transition-colors flex items-center gap-1 action-link"
+                    className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-label-md text-label-md shadow-sm transition-colors flex items-center gap-1 action-link"
 
                     rel="noopener"
                     target="_blank"
@@ -374,7 +374,7 @@ export function ToursDaily() {
             </CatalogCard>
 
             <CatalogCard
-              className="bg-surface-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group"
+              className="bg-surface rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group"
               productId="tours-8"
               tag="article"
             >
@@ -388,21 +388,21 @@ export function ToursDaily() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 ></ProductField>
-                <div className="absolute top-3 left-3 bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-2.5 py-1 rounded-md shadow-sm font-semibold">
+                <div className="absolute top-3 left-3 bg-surface-brand text-on-surface-brand font-label-sm text-label-sm px-2.5 py-1 rounded-md shadow-sm font-semibold">
                   <ContentText contentKey="field-003" />
                 </div>
               </div>
               <div className="p-5 flex flex-col flex-1">
                 <div className="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant mb-2">
-                  <span className="flex items-center gap-1 text-secondary font-medium">
+                  <span className="flex items-center gap-1 text-primary font-medium">
                     <span className="material-symbols-outlined text-[16px]">
                       {"park"}
                     </span>
                     <ContentText contentKey="field-004" />
                   </span>
-                  <div className="flex items-center gap-1 text-tertiary font-bold">
+                  <div className="flex items-center gap-1 text-promo-ink font-bold">
                     <span
-                      className="material-symbols-outlined text-[15px] text-gold-amber"
+                      className="material-symbols-outlined text-[15px] text-promo-highlight"
                       style={{ fontVariationSettings: "'FILL' 1" }}
                     >
                       {"star"}
@@ -419,9 +419,9 @@ export function ToursDaily() {
                 <p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-4">
                   <ProductValue id="tours-8" field="description" />
                 </p>
-                <div className="mt-auto pt-3 bg-surface-subtle -mx-5 -mb-5 p-5 rounded-b-2xl flex items-center justify-between">
+                <div className="mt-auto pt-3 bg-surface-muted -mx-5 -mb-5 p-5 rounded-b-2xl flex items-center justify-between">
                   <div>
-                    <span className="font-body-sm text-body-sm text-outline block">
+                    <span className="font-body-sm text-body-sm text-on-surface-variant block">
                       <ContentText contentKey="field-006" />
                     </span>
                     <ProductField
@@ -434,7 +434,7 @@ export function ToursDaily() {
                   <ContentElement
                     contentKey="field-002"
                     tag="a"
-                    className="px-4 py-2 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md shadow-sm transition-colors flex items-center gap-1 action-link"
+                    className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-label-md text-label-md shadow-sm transition-colors flex items-center gap-1 action-link"
 
                     rel="noopener"
                     target="_blank"
@@ -451,7 +451,7 @@ export function ToursDaily() {
             </CatalogCard>
 
             <CatalogCard
-              className="bg-surface-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group"
+              className="bg-surface rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group"
               productId="tours-9"
               tag="article"
             >
@@ -465,21 +465,21 @@ export function ToursDaily() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 ></ProductField>
-                <div className="absolute top-3 left-3 bg-sale-crimson text-on-error font-label-sm text-label-sm px-2.5 py-1 rounded-md shadow-sm">
+                <div className="absolute top-3 left-3 bg-sale-badge text-on-sale font-label-sm text-label-sm px-2.5 py-1 rounded-md shadow-sm">
                   <ContentText contentKey="field-003" />
                 </div>
               </div>
               <div className="p-5 flex flex-col flex-1">
                 <div className="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant mb-2">
-                  <span className="flex items-center gap-1 text-secondary font-medium">
+                  <span className="flex items-center gap-1 text-primary font-medium">
                     <span className="material-symbols-outlined text-[16px]">
                       {"sports_bar"}
                     </span>
                     <ContentText contentKey="field-004" />
                   </span>
-                  <div className="flex items-center gap-1 text-tertiary font-bold">
+                  <div className="flex items-center gap-1 text-promo-ink font-bold">
                     <span
-                      className="material-symbols-outlined text-[15px] text-gold-amber"
+                      className="material-symbols-outlined text-[15px] text-promo-highlight"
                       style={{ fontVariationSettings: "'FILL' 1" }}
                     >
                       {"star"}
@@ -496,22 +496,22 @@ export function ToursDaily() {
                 <p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-4">
                   <ProductValue id="tours-9" field="description" />
                 </p>
-                <div className="mt-auto pt-3 bg-surface-subtle -mx-5 -mb-5 p-5 rounded-b-2xl flex items-center justify-between">
+                <div className="mt-auto pt-3 bg-surface-muted -mx-5 -mb-5 p-5 rounded-b-2xl flex items-center justify-between">
                   <div>
-                    <span className="font-body-sm text-body-sm text-outline block">
+                    <span className="font-body-sm text-body-sm text-on-surface-variant block">
                       <ContentText contentKey="field-006" />
                     </span>
                     <ProductField
                       id="tours-9"
                       field="price"
                       tag="span"
-                      className="font-headline-sm text-headline-sm text-sale-crimson font-bold"
+                      className="font-headline-sm text-headline-sm text-sale-price font-bold"
                     ></ProductField>
                   </div>
                   <ContentElement
                     contentKey="field-002"
                     tag="a"
-                    className="px-4 py-2 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md shadow-sm transition-colors flex items-center gap-1 action-link"
+                    className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-label-md text-label-md shadow-sm transition-colors flex items-center gap-1 action-link"
 
                     rel="noopener"
                     target="_blank"
@@ -529,10 +529,10 @@ export function ToursDaily() {
           </CatalogCollection>
         </div>
 
-        <div className="mt-12 p-8 rounded-2xl bg-gradient-to-r from-ocean-deep to-primary text-on-primary flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+        <div className="mt-12 p-8 rounded-2xl bg-gradient-to-r from-brand-deep to-primary text-on-primary flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-2xl bg-on-primary/10 backdrop-blur-md flex items-center justify-center shrink-0">
-              <span className="material-symbols-outlined text-[36px] text-gold-amber">
+              <span className="material-symbols-outlined text-[36px] text-promo-highlight">
                 {"directions_boat"}
               </span>
             </div>
@@ -540,7 +540,7 @@ export function ToursDaily() {
               <h4 className="font-headline-md text-headline-md font-bold">
                 <ContentText contentKey="tours.text-049" />
               </h4>
-              <p className="font-body-md text-body-md text-ocean-light mt-1">
+              <p className="font-body-md text-body-md text-surface-brand mt-1">
                 <ContentText contentKey="tours.text-050" />
               </p>
             </div>
@@ -549,7 +549,7 @@ export function ToursDaily() {
             <ContentElement
               contentKey="tours.attributes-006"
               tag="a"
-              className="px-6 py-3.5 rounded-full bg-gold-amber hover:bg-gold-amber/90 text-on-background font-label-lg text-label-lg shadow-md transition-all flex items-center gap-2 action-link"
+              className="px-6 py-3.5 rounded-full bg-promo-highlight hover:bg-promo-highlight/90 text-dialog-scrim font-label-lg text-label-lg shadow-md transition-all flex items-center gap-2 action-link"
             >
               <span className="material-symbols-outlined text-[20px]">
                 {"call"}

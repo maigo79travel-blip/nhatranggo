@@ -14,7 +14,6 @@ import { useSiteData } from "@/components/content";
 import { CatalogContext } from "./catalog-context";
 import { BookingDialogContent } from "./booking-dialog";
 import { ToastNotification } from "./toast-notification";
-import { TransferLogic } from "./transfer-logic";
 import { sortCatalogCards } from "./sort-cards";
 
 export function CatalogProvider({
@@ -41,13 +40,6 @@ export function CatalogProvider({
     { phone: string } | undefined;
 
   useEffect(() => {
-    document.body.dataset.hydrated = "true";
-    return () => {
-      delete document.body.dataset.hydrated;
-    };
-  }, []);
-
-  useEffect(() => {
     setSelected(null);
     setMessage("");
   }, [pathname]);
@@ -66,6 +58,7 @@ export function CatalogProvider({
   }, [selected]);
 
   useEffect(() => {
+    if (pathname !== "/tour-hang-ngay") return;
     const click = (event: MouseEvent) => {
       const el = (event.target as HTMLElement).closest<HTMLElement>("button,a");
       if (!el) return;
@@ -100,10 +93,7 @@ export function CatalogProvider({
 
       if (el.closest("[data-product-id]")) return;
 
-      if (
-        pathname !== "/khach-san" &&
-        /Giá thấp nhất|Đánh giá cao nhất|Ưu đãi tốt nhất/.test(text)
-      ) {
+      if (/Giá thấp nhất|Đánh giá cao nhất|Ưu đãi tốt nhất/.test(text)) {
         const cards = Array.from(
           document.querySelectorAll<HTMLElement>("[data-product-id]"),
         );
@@ -118,11 +108,7 @@ export function CatalogProvider({
         );
       }
 
-      if (
-        pathname !== "/" &&
-        pathname !== "/khach-san" &&
-        /Tìm kiếm|Tìm Kiếm|Tìm tour ngay/.test(text)
-      ) {
+      if (/Tìm kiếm|Tìm Kiếm|Tìm tour ngay/.test(text)) {
         event.preventDefault();
         const form = el.closest("form") || document.querySelector("form");
         const query =
@@ -179,18 +165,15 @@ export function CatalogProvider({
   };
 
   return (
-    <CatalogContext.Provider value={{ products, open: openProduct }}>
+    <CatalogContext.Provider value={{ open: openProduct }}>
       {children}
-      <ListingFilters products={products} />
-      {pathname === "/xe-dua-don" && (
-        <TransferLogic onBook={openProduct} onMessage={setMessage} />
-      )}
+      {pathname === "/tour-hang-ngay" && <ListingFilters products={products} />}
       <ToastNotification message={message} onClose={() => setMessage("")} />
       <dialog
         ref={dialog}
         aria-labelledby="catalog-dialog-title"
         onCancel={closeDialog}
-        className="w-[calc(100%-2rem)] max-w-lg rounded-2xl p-6 text-on-surface shadow-2xl backdrop:bg-on-background/50"
+        className="w-[calc(100%-2rem)] max-w-lg rounded-2xl p-6 text-on-surface shadow-2xl backdrop:bg-dialog-scrim/50"
       >
         <button
           aria-label="Đóng"

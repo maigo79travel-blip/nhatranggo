@@ -18,6 +18,7 @@ export type Product = {
   original_price?: number | null;
   collection_id?: string | null;
   template_id?: string | null;
+  featured?: boolean;
   active?: boolean;
   position?: number;
   destination_id?: string | null;
@@ -31,10 +32,20 @@ export type Fare = {
   price: number;
 };
 
+export type TransferRoute = {
+  code: string;
+  title: string;
+  category: "airport" | "local" | "intercity";
+  pickup: string;
+  dropoff: string;
+};
+
 export type SiteData = {
   products: Product[];
   content: Record<string, ContentEntry>;
   fares: Fare[];
+  transferRoutes: TransferRoute[];
+  hotelCapacities: Record<string, number>;
   destinations: { id: string; name: string; code: string }[];
   locale: Locale;
 };
@@ -64,6 +75,7 @@ export type AdminOverviewData = {
     services: number;
     active_services: number;
     bookings: number;
+    new_today: number;
     pending: number;
     content: number;
     completed: number;

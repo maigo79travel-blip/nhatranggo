@@ -4,13 +4,13 @@ Phạm vi đối chiếu: sự hiện diện và luồng sử dụng của modul
 
 | Nhóm module trong đề án | Khách hàng                                                                                   | Quản trị / dữ liệu                                                                                                              | Kết quả |
 | ----------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| Trang chủ               | `/`, thẻ dịch vụ, tìm nhanh, popup gửi booking                                               | Nội dung website: banner, ảnh, liên hệ, menu; Dịch vụ: nội dung/giá/trạng thái                                                  | Có      |
-| Đặt xe                  | `/xe-dua-don`, `/dich-vu?type=transfer`, chọn điểm đón/trả, báo giá, gửi ngày/giờ và yêu cầu | Địa phương/Điểm đến, Tuyến xe, Bảng giá xe, Booking, Đối tác/Tài xế                                                             | Có      |
-| Đặt phòng               | `/khach-san`, `/dich-vu?type=hotel`, chọn loại phòng và ngày nhận/trả                        | Dịch vụ, Loại phòng, Địa phương, Booking, Đối tác                                                                               | Có      |
-| Đặt tour                | `/tour-hang-ngay`, `/dich-vu?type=tour`, ngày khởi hành, số khách                            | Dịch vụ, Lịch khởi hành tour, Địa phương, Đối tác, Booking                                                                      | Có      |
+| Trang chủ               | `/`, thẻ dịch vụ, tìm nhanh, popup gửi booking                                               | Nội dung website: logo, banner, ảnh, liên hệ, menu; Dịch vụ: nội dung/giá/trạng thái và ưu tiên trang chủ                                                  | Có      |
+| Đặt xe                  | `/xe-dua-don`, chọn điểm đón/trả, báo giá, gửi ngày/giờ và yêu cầu | Địa phương/Điểm đến, Tuyến xe, Bảng giá xe, Booking, Đối tác/Tài xế                                                             | Có      |
+| Đặt phòng               | `/khach-san`, chọn loại phòng và ngày nhận/trả                        | Dịch vụ, Loại phòng, Địa phương, Booking, Đối tác                                                                               | Có      |
+| Đặt tour                | `/tour-hang-ngay`, ngày khởi hành, số khách                            | Dịch vụ, Lịch khởi hành tour, Địa phương, Đối tác, Booking                                                                      | Có      |
 | E-Visa; Fast-track      | `/e-visa`, `/fast-track`, ngày giờ đến, sân bay, yêu cầu tư vấn có mã                        | E-Visa & Fast-track: danh sách, chi tiết, trạng thái                                                                            | Có      |
-| Blog / Bài viết         | `/blog`, tìm theo từ khóa/chuyên mục; `/blog/[slug]`                                         | Blog & Tin tức, Chuyên mục; soạn Markdown có thanh công cụ và xem trước, ảnh bằng URL, nháp/đăng/ẩn/xóa, SEO                    | Có      |
-| Đơn hàng / Booking      | Mã booking và `/tra-cuu` theo mã + điện thoại; gửi hỗ trợ qua `/lien-he`                     | Danh sách chung, lọc, tạo thủ công, sửa khách, đối tác/tài xế, ghi chú, xác nhận/hoàn tất/hủy, lịch sử, xuất CSV đọc bằng Excel | Có      |
+| Blog / Bài viết         | `/blog`, tìm theo từ khóa/chuyên mục; `/blog/[slug]`                                         | Blog & Tin tức, Chuyên mục; soạn Markdown có thanh công cụ và xem trước, tải ảnh hoặc chèn bằng URL, nháp/đăng/ẩn/xóa, SEO                    | Có      |
+| Đơn hàng / Booking      | Mã booking và `/tra-cuu` theo mã + điện thoại; gửi hỗ trợ qua `/lien-he`                     | Danh sách chung, lọc, tạo thủ công, sửa khách, đối tác/tài xế, ghi chú, xác nhận/hoàn tất/hủy, lịch sử, xuất Excel theo bộ lọc | Có      |
 | Liên hệ & Hỗ trợ        | `/lien-he`, form và điện thoại/Zalo/WhatsApp/Telegram/email đã cấu hình                      | Liên hệ & Hỗ trợ; `site.contact` trong Nội dung website                                                                         | Có      |
 | Ngôn ngữ & thông tin    | Bộ chọn vi/en/ru/ko/zh, nội dung CMS/dịch vụ theo bản dịch; `/thong-tin/[slug]`              | Ngôn ngữ website, Giới thiệu & Chính sách; bài viết và trang có bản riêng theo ngôn ngữ                                         | Có      |
 
@@ -29,8 +29,8 @@ Phạm vi đối chiếu: sự hiện diện và luồng sử dụng của modul
 - Dịch vụ, phòng, lịch tour, tuyến, địa phương và đối tác dùng ẩn/lưu trữ để giữ liên kết. Bài viết/trang/chuyên mục có khóa ngoại bảo vệ các liên kết đang dùng.
 - Mật khẩu băm scrypt; không đưa hash vào API quản trị. Khi đổi quyền/khóa tài khoản, các phiên đăng nhập của tài khoản đó bị thu hồi. Không cho tự khóa/hạ quyền quản trị đang dùng hoặc làm mất quản trị cao nhất cuối cùng.
 - Nội dung ngôn ngữ, thông tin chính sách, sân bay, đối tác và lịch khởi hành thực tế cần quản trị nhập. Không sinh bài viết giả, không tự dịch hoặc tự công bố chính sách doanh nghiệp.
-- Editor bài viết dùng Markdown an toàn, không thực thi HTML/JavaScript nhập vào. Ảnh được chèn bằng đường dẫn hoặc URL; chưa có kho upload ảnh riêng.
-- Xuất danh sách hiện dùng CSV UTF-8 để mở trong Excel, chưa xuất định dạng `.xlsx`.
+- Editor bài viết dùng Markdown. Quản trị có thể chọn ảnh JPG, PNG hoặc WebP tối đa 3 MB, hoặc nhập URL. Ảnh tải lên được lưu trong PostgreSQL dưới dạng WebP và phục vụ từ `/api/media/`.
+- Danh sách đặt chỗ phân trang ở máy chủ. Bộ lọc theo mã/khách/số điện thoại, loại dịch vụ, trạng thái và ngày sử dụng được áp dụng cho cả file Excel `.xlsx`.
 
 ## Phần ngoài phạm vi đã loại bỏ
 

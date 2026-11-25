@@ -13,7 +13,8 @@ export type FieldDefinition = {
     | "checkbox"
     | "select"
     | "json"
-    | "markdown";
+    | "markdown"
+    | "image";
   required?: boolean;
   options?: { value: string; label: string }[];
   resource?: string;

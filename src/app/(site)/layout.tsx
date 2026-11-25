@@ -1,15 +1,15 @@
 import { db } from "@/lib/db";
 import type { Metadata } from "next";
-import { getSiteData } from "@/lib/catalog";
+import { getPublicLocale, getSiteContent } from "@/lib/catalog";
 import { SiteDataProvider } from "@/components/content";
 import { WebsiteShell } from "@/components/site/website-shell";
 import { contactInfo, resolveContent } from "@/lib/content-values";
 import brand from "@/config/brand.json";
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await getSiteData();
+  const content = await getSiteContent("shared");
   const meta = resolveContent(
-    data.content["site.metadata"]?.value,
-    contactInfo(data.content),
+    content["site.metadata"]?.value,
+    contactInfo(content),
   ) as Metadata | undefined;
   return {
     ...meta,
@@ -24,14 +24,15 @@ export default async function SiteLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const data = await getSiteData();
-  const pages = (
-    await db.query(
+  const locale = await getPublicLocale();
+  const [content, pages] = await Promise.all([
+    getSiteContent("shared"),
+    db.query(
       "SELECT title,slug FROM information_pages WHERE status='published' AND locale=$1 ORDER BY title",
-      [data.locale],
-    )
-  ).rows;
-  const informationLinks = pages.map((page) => (
+      [locale],
+    ),
+  ]);
+  const informationLinks = pages.rows.map((page) => (
     <li key={page.slug}>
       <a
         className="hover:text-primary transition-colors"
@@ -42,7 +43,7 @@ export default async function SiteLayout({
     </li>
   ));
   return (
-    <SiteDataProvider data={data}>
+    <SiteDataProvider data={{ content, locale }}>
       <WebsiteShell informationLinks={informationLinks}>
         {children}
       </WebsiteShell>

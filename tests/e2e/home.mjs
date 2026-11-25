@@ -56,12 +56,19 @@ try {
     "true",
   );
   // Search buttons, active state, destination matching and correct service type.
-  for (const type of ["hotel", "tour", "combo", "transfer"]) {
+  for (const [type, path] of [
+    ["hotel", "/khach-san"],
+    ["tour", "/tour-hang-ngay"],
+    ["combo", "/tour-hang-ngay"],
+    ["transfer", "/xe-dua-don"],
+  ]) {
     await home();
     await search.locator(`[data-service-type="${type}"]`).click();
     await expect(search.locator('[aria-pressed="true"]')).toHaveCount(1);
     await search.getByRole("button", { name: "Tìm kiếm", exact: true }).click();
-    await page.waitForURL("**/dich-vu?*");
+    await page.waitForURL(
+      (url) => url.pathname === path && url.searchParams.has("type"),
+    );
     assert.equal(new URL(page.url()).searchParams.get("type"), type);
     const serviceIds = await page
       .locator("[data-service-id]")
@@ -84,14 +91,14 @@ try {
   await search
     .getByLabel("Điểm đến hoặc tên dịch vụ", { exact: true })
     .press("Enter");
-  await page.waitForURL("**/dich-vu?*");
+  await page.waitForURL("**/khach-san?*");
   const regionIds = await page
     .locator("[data-service-id]")
     .evaluateAll((cards) => cards.map((card) => card.dataset.serviceId));
   assert.ok(regionIds.length > 0);
   await expect(
-    page.getByRole("radio", { name: "Khách sạn", exact: true }),
-  ).toBeChecked();
+    page.getByRole("heading", { name: "Tìm khách sạn & resort", exact: true }),
+  ).toBeVisible();
   await home();
   await search
     .getByLabel("Ngày nhận phòng", { exact: true })
@@ -109,7 +116,9 @@ try {
   const originalIds = await hotels
     .locator("[data-product-id]")
     .evaluateAll((cards) => cards.map((card) => card.dataset.productId));
-  assert.ok(originalIds.includes("hotels-1") && originalIds.includes("hotels-2"));
+  assert.ok(
+    originalIds.includes("hotels-1") && originalIds.includes("hotels-2"),
+  );
   const otherCount =
     (await page.locator("main [data-product-id]").count()) - originalIds.length;
   for (const [filter, present, absent] of [
@@ -199,15 +208,14 @@ try {
   await page
     .getByRole("link", { name: "Resort Bãi Dài Cam Ranh", exact: true })
     .click();
-  await page.waitForURL("**/dich-vu?*");
-  assert.equal(new URL(page.url()).searchParams.get("type"), "hotel");
+  await page.waitForURL("**/khach-san?*");
   assert.equal(new URL(page.url()).searchParams.get("q"), "Bãi Dài");
   await home();
   const cityLink = page.locator("main a").filter({
     has: page.getByRole("heading", { name: "Đà Lạt", exact: true }),
   });
   await cityLink.click();
-  await page.waitForURL("**/dich-vu?*");
+  await page.waitForURL("**/khach-san?*");
   assert.equal(new URL(page.url()).searchParams.get("q"), "Đà Lạt");
   // Search selections flow into a real booking and the database snapshot.
   await home();
@@ -220,7 +228,7 @@ try {
   await search.getByLabel("Ngày trả phòng", { exact: true }).fill("2099-12-03");
   await search.getByLabel("Số khách", { exact: true }).fill("3");
   await search.getByRole("button", { name: "Tìm kiếm", exact: true }).click();
-  await page.waitForURL("**/dich-vu?*");
+  await page.waitForURL("**/khach-san?*");
   await expect(page.locator("[data-service-id]")).toHaveCount(1);
   await page
     .getByRole("button", { name: "Gửi yêu cầu đặt chỗ", exact: true })
@@ -254,10 +262,10 @@ try {
     guests: 3,
     unit_price: 750000,
   });
-  // Category pills apply the current fields and keep client navigation/history.
+  // Category-specific filters retain booking fields and work with browser history.
   await page.goto(
     base +
-      "/dich-vu?type=hotel&q=" +
+      "/khach-san?q=" +
       tag +
       "&date=2099-12-01&returnDate=2099-12-03&guests=3",
   );
@@ -269,14 +277,17 @@ try {
     name: "Lọc dịch vụ",
     exact: true,
   });
-  await serviceFilter.getByRole("radio", { name: "Tour", exact: true }).check();
-  await page.waitForURL((url) => url.searchParams.get("type") === "tour");
-  await expect(page.locator("[data-service-id]")).toHaveAttribute(
-    "data-service-id",
-    tourId,
+  await serviceFilter
+    .getByLabel("Từ khóa", { exact: true })
+    .fill("zzzz-khong-co-ket-qua");
+  await serviceFilter
+    .getByRole("button", { name: "Lọc dịch vụ", exact: true })
+    .click();
+  await page.waitForURL(
+    (url) => url.searchParams.get("q") === "zzzz-khong-co-ket-qua",
   );
+  await expect(page.locator("[data-service-id]")).toHaveCount(0);
   for (const [name, value] of Object.entries({
-    q: tag,
     date: "2099-12-01",
     returnDate: "2099-12-03",
     guests: "3",
@@ -288,48 +299,47 @@ try {
   );
   await page.goBack();
   await expect(
-    serviceFilter.getByRole("radio", { name: "Khách sạn", exact: true }),
-  ).toBeChecked();
-  await expect(
     serviceFilter.getByLabel("Từ khóa", { exact: true }),
   ).toHaveValue(tag);
-  await serviceFilter
-    .getByLabel("Từ khóa", { exact: true })
-    .fill("zzzz-khong-co-ket-qua");
-  await serviceFilter
-    .getByRole("button", { name: "Lọc dịch vụ", exact: true })
-    .click();
-  await page.waitForURL(
-    (url) => url.searchParams.get("q") === "zzzz-khong-co-ket-qua",
+  await expect(page.locator("[data-service-id]")).toHaveAttribute(
+    "data-service-id",
+    hotelId,
   );
-  await expect(page.locator("[data-service-id]")).toHaveCount(0);
-  assert.equal(
-    await page.evaluate(() => window.__filterToken),
-    "client-filter",
-  );
-  await serviceFilter
-    .getByRole("link", { name: "Xóa bộ lọc", exact: true })
-    .click();
-  await page.waitForURL("**/dich-vu");
-  await expect(
-    serviceFilter.getByRole("radio", { name: "Tất cả", exact: true }),
-  ).toBeChecked();
-  await expect(
-    serviceFilter.getByLabel("Từ khóa", { exact: true }),
-  ).toHaveValue("");
-  await page.goto(base + "/dich-vu?type=hotel&q=" + tag + "&guests=5");
+
+  await page.goto(base + "/khach-san?q=" + tag + "&guests=5");
   await expect(page.locator("[data-service-id]")).toHaveCount(0);
   await expect(page.getByText(/Chưa có dịch vụ phù hợp/)).toBeVisible();
   await page.getByRole("link", { name: "Xóa bộ lọc", exact: true }).click();
-  await page.waitForURL("**/dich-vu");
-  assert.ok((await page.locator("[data-service-id]").count()) > 0);
-  await page.goto(base + "/dich-vu?type=tour&q=" + tag + "&date=2099-12-02");
+  await page.waitForURL("**/khach-san");
+  await expect(page.locator("main [data-product-id]").first()).toBeVisible();
+
+  await page.goto(base + "/tour-hang-ngay?q=" + tag + "&date=2099-12-02");
   await expect(page.locator("[data-service-id]")).toHaveCount(0);
-  await page.goto(base + "/dich-vu?type=tour&q=" + tag + "&date=2099-12-01");
-  await expect(page.locator("[data-service-id]")).toHaveCount(1);
-  await page.goto(base + "/dich-vu?q=zzzz-khong-co-ket-qua");
-  await expect(page.locator("[data-service-id]")).toHaveCount(0);
-  await expect(page.getByText(/Chưa có dịch vụ phù hợp/)).toBeVisible();
+  await page.goto(base + "/tour-hang-ngay?q=" + tag + "&date=2099-12-01");
+  await expect(page.locator("[data-service-id]")).toHaveAttribute(
+    "data-service-id",
+    tourId,
+  );
+
+  for (const [legacy, target] of [
+    ["/dich-vu", "/"],
+    ["/dich-vu?type=hotel&q=Bãi%20Dài", "/khach-san"],
+    ["/dich-vu?type=combo", "/tour-hang-ngay"],
+    ["/dich-vu?type=transfer", "/xe-dua-don"],
+  ]) {
+    const response = await page.request.get(base + legacy, { maxRedirects: 0 });
+    assert.equal(response.status(), 308);
+    const location = new URL(response.headers().location, base);
+    assert.equal(location.pathname, target);
+    assert.equal(
+      location.searchParams.get("q"),
+      new URL(legacy, base).searchParams.get("q"),
+    );
+    assert.equal(
+      location.searchParams.get("type"),
+      new URL(legacy, base).searchParams.get("type"),
+    );
+  }
   await fs.mkdir("test-results/home", { recursive: true });
   for (const width of [1920, 1440, 768, 390, 320]) {
     await page.setViewportSize({ width, height: 900 });
@@ -355,7 +365,7 @@ try {
   }
   assert.deepEqual(errors, []);
   console.log(
-    `PASS Home: 4 search types, Enter, date validation, 5 scoped hotel filters, ${cardIds.length} booking buttons, ${internal.length} internal links, destinations, CMS articles, booking prefill/persistence, category pills, filter state/history without reload, empty/reset, capacity/departure filters and 5 responsive widths`,
+    `PASS Home: 4 search types, Enter, date validation, 5 scoped hotel filters, ${cardIds.length} booking buttons, ${internal.length} internal links, destinations, CMS articles, booking prefill/persistence, category routes, legacy redirects, filter state/history without reload, empty/reset, capacity/departure filters and 5 responsive widths`,
   );
 } finally {
   if (browser) await browser.close();

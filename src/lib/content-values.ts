@@ -1,5 +1,13 @@
 import brand from "@/config/brand.json";
 import type { ContentEntry } from "./types";
+import { isPublicImageUrl } from "./content-attributes";
+
+export function contentImageUrl(value: unknown, fallback: string) {
+  const source = (value as { src?: unknown } | null)?.src;
+  return typeof source === "string" && isPublicImageUrl(source)
+    ? source
+    : fallback;
+}
 
 export function contactInfo(
   content: Record<string, ContentEntry>,

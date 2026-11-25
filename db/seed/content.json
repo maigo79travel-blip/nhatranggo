@@ -97,10 +97,10 @@
     "scope": "home",
     "kind": "attributes",
     "value": {
-      "data-alt": "Panoramic overhead view of Nha Trang crescent bay with azure sea water, golden sandy beach lined with green palm trees and luxury skyscrapers",
-      "backgroundImage": "url('/images/07eaa0892315c5ca.jpg')"
+      "data-alt": "Toàn cảnh bờ biển Nha Trang",
+      "backgroundImage": "url('/images/figma/home/destination-nha-trang.webp')"
     },
-    "label": "Panoramic overhead view of Nha Trang crescent bay with azure sea water, golden sandy beach lined with green palm trees and luxury skyscrapers · url('/"
+    "label": "Toàn cảnh bờ biển Nha Trang"
   },
   {
     "key": "home.attributes-012",
@@ -116,10 +116,10 @@
     "scope": "home",
     "kind": "attributes",
     "value": {
-      "data-alt": "Da Lat pine hills morning mist Xuan Huong Lake tranquil peaceful nature scenery Vietnam",
-      "backgroundImage": "url('/images/c394838ce599ce62.jpg')"
+      "data-alt": "Nhà thờ và thành phố Đà Lạt từ trên cao",
+      "backgroundImage": "url('/images/figma/home/destination-da-lat.webp')"
     },
-    "label": "Da Lat pine hills morning mist Xuan Huong Lake tranquil peaceful nature scenery Vietnam · url('/images/c394838ce599ce62.jpg')"
+    "label": "Nhà thờ và thành phố Đà Lạt từ trên cao"
   },
   {
     "key": "home.attributes-014",
@@ -135,10 +135,10 @@
     "scope": "home",
     "kind": "attributes",
     "value": {
-      "data-alt": "Da Nang Dragon Bridge over Han river and My Khe beach coastline luxury resorts",
-      "backgroundImage": "url('/images/391c9adc5fa131a2.jpg')"
+      "data-alt": "Cầu Vàng ở Đà Nẵng",
+      "backgroundImage": "url('/images/figma/home/destination-da-nang.webp')"
     },
-    "label": "Da Nang Dragon Bridge over Han river and My Khe beach coastline luxury resorts · url('/images/391c9adc5fa131a2.jpg')"
+    "label": "Cầu Vàng ở Đà Nẵng"
   },
   {
     "key": "home.attributes-016",
@@ -154,10 +154,10 @@
     "scope": "home",
     "kind": "attributes",
     "value": {
-      "data-alt": "Phu Quoc island tropical coast with traditional fishing boats floating on clear emerald sea water",
-      "backgroundImage": "url('/images/f1eb07f99dded4ba.jpg')"
+      "data-alt": "Khu phố ven biển Phú Quốc",
+      "backgroundImage": "url('/images/figma/home/destination-phu-quoc.webp')"
     },
-    "label": "Phu Quoc island tropical coast with traditional fishing boats floating on clear emerald sea water · url('/images/f1eb07f99dded4ba.jpg')"
+    "label": "Khu phố ven biển Phú Quốc"
   },
   {
     "key": "home.attributes-018",
@@ -173,10 +173,10 @@
     "scope": "home",
     "kind": "attributes",
     "value": {
-      "data-alt": "Sapa terraced rice fields in golden harvest season under misty Fansipan mountains",
-      "backgroundImage": "url('/images/d1b9b15bb6269830.jpg')"
+      "data-alt": "Mái ngói phố cổ Hội An",
+      "backgroundImage": "url('/images/figma/home/destination-hoi-an.webp')"
     },
-    "label": "Sapa terraced rice fields in golden harvest season under misty Fansipan mountains · url('/images/d1b9b15bb6269830.jpg')"
+    "label": "Mái ngói phố cổ Hội An"
   },
   {
     "key": "home.attributes-020",
@@ -397,22 +397,22 @@
     "key": "home.text-043",
     "scope": "home",
     "kind": "text",
-    "value": "Hơn 500+ khách sạn đang có sẵn trên toàn quốc",
-    "label": "Hơn 500+ khách sạn đang có sẵn trên toàn quốc"
+    "value": "Biển xanh – Trải nghiệm mới – Ưu đãi mỗi ngày",
+    "label": "Biển xanh – Trải nghiệm mới – Ưu đãi mỗi ngày"
   },
   {
     "key": "home.text-044",
     "scope": "home",
     "kind": "text",
-    "value": "\n        Khám phá kỳ nghỉ tuyệt vời ",
-    "label": "Khám phá kỳ nghỉ tuyệt vời"
+    "value": "Nha",
+    "label": "Nha"
   },
   {
     "key": "home.text-045",
     "scope": "home",
     "kind": "text",
-    "value": "giá tốt nhất",
-    "label": "giá tốt nhất"
+    "value": "Trang",
+    "label": "Trang"
   },
   {
     "key": "home.text-046",
@@ -425,22 +425,22 @@
     "key": "home.text-047",
     "scope": "home",
     "kind": "text",
-    "value": "Khách sạn & Resort",
-    "label": "Khách sạn & Resort"
+    "value": "Đặt phòng",
+    "label": "Đặt phòng"
   },
   {
     "key": "home.text-048",
     "scope": "home",
     "kind": "text",
-    "value": "Tour hằng ngày",
-    "label": "Tour hằng ngày"
+    "value": "Tour du lịch",
+    "label": "Tour du lịch"
   },
   {
     "key": "home.text-049",
     "scope": "home",
     "kind": "text",
-    "value": "Combo trọn gói",
-    "label": "Combo trọn gói"
+    "value": "Combo du lịch",
+    "label": "Combo du lịch"
   },
   {
     "key": "home.text-050",
@@ -453,8 +453,8 @@
     "key": "home.text-051",
     "scope": "home",
     "kind": "text",
-    "value": "Điểm đến / Khách sạn",
-    "label": "Điểm đến / Khách sạn"
+    "value": "Điểm đến",
+    "label": "Điểm đến"
   },
   {
     "key": "home.text-052",
@@ -509,8 +509,8 @@
     "key": "home.text-059",
     "scope": "home",
     "kind": "text",
-    "value": "Gợi ý hot:",
-    "label": "Gợi ý hot:"
+    "value": "Gợi ý tìm kiếm hot:",
+    "label": "Gợi ý tìm kiếm hot:"
   },
   {
     "key": "home.text-060",
@@ -544,57 +544,57 @@
     "key": "home.text-064",
     "scope": "home",
     "kind": "text",
-    "value": "500+",
-    "label": "500+"
+    "value": "Khách sạn",
+    "label": "Khách sạn"
   },
   {
     "key": "home.text-065",
     "scope": "home",
     "kind": "text",
-    "value": "Khách sạn toàn quốc",
-    "label": "Khách sạn toàn quốc"
+    "value": "Khách sạn và resort đa dạng",
+    "label": "Khách sạn và resort đa dạng"
   },
   {
     "key": "home.text-066",
     "scope": "home",
     "kind": "text",
-    "value": "2M+",
-    "label": "2M+"
+    "value": "Ưu đãi",
+    "label": "Ưu đãi"
   },
   {
     "key": "home.text-067",
     "scope": "home",
     "kind": "text",
-    "value": "Lượt đặt thành công",
-    "label": "Lượt đặt thành công"
+    "value": "Khám phá combo du lịch",
+    "label": "Khám phá combo du lịch"
   },
   {
     "key": "home.text-068",
     "scope": "home",
     "kind": "text",
-    "value": "98%",
-    "label": "98%"
+    "value": "Hỗ trợ 24/7",
+    "label": "Hỗ trợ 24/7"
   },
   {
     "key": "home.text-069",
     "scope": "home",
     "kind": "text",
-    "value": "Khách hàng hài lòng",
-    "label": "Khách hàng hài lòng"
+    "value": "Liên hệ hotline và Zalo",
+    "label": "Liên hệ hotline và Zalo"
   },
   {
     "key": "home.text-070",
     "scope": "home",
     "kind": "text",
-    "value": "24/7",
-    "label": "24/7"
+    "value": "Đặt chỗ",
+    "label": "Đặt chỗ"
   },
   {
     "key": "home.text-071",
     "scope": "home",
     "kind": "text",
-    "value": "Hỗ trợ hotline & Zalo",
-    "label": "Hỗ trợ hotline & Zalo"
+    "value": "Xác nhận trực tiếp",
+    "label": "Xác nhận trực tiếp"
   },
   {
     "key": "home.text-072",
@@ -656,8 +656,8 @@
     "key": "home.text-080",
     "scope": "home",
     "kind": "text",
-    "value": "\n            Khách sạn + tour + vé Vinpearl + vé máy bay\n          ",
-    "label": "Khách sạn + tour + vé Vinpearl + vé máy bay"
+    "value": "Ưu đãi nổi bật",
+    "label": "Ưu đãi nổi bật"
   },
   {
     "key": "home.text-081",
@@ -838,15 +838,15 @@
     "key": "home.text-106",
     "scope": "home",
     "kind": "text",
-    "value": "\n          Chọn vị trí bạn yêu thích\n        ",
-    "label": "Chọn vị trí bạn yêu thích"
+    "value": "Khám phá điểm đến",
+    "label": "Khám phá điểm đến"
   },
   {
     "key": "home.text-107",
     "scope": "home",
     "kind": "text",
-    "value": "Tất cả điểm đến",
-    "label": "Tất cả điểm đến"
+    "value": "Xem tất cả điểm đến",
+    "label": "Xem tất cả điểm đến"
   },
   {
     "key": "home.text-108",
@@ -866,8 +866,8 @@
     "key": "home.text-110",
     "scope": "home",
     "kind": "text",
-    "value": "Biển đẹp, trung tâm sôi động, nhiều lựa chọn nghỉ dưỡng",
-    "label": "Biển đẹp, trung tâm sôi động, nhiều lựa chọn nghỉ dưỡng"
+    "value": "Thiên đường biển xanh",
+    "label": "Thiên đường biển xanh"
   },
   {
     "key": "home.text-111",
@@ -887,8 +887,8 @@
     "key": "home.text-113",
     "scope": "home",
     "kind": "text",
-    "value": "Khí hậu mát mẻ, homestay thơ mộng",
-    "label": "Khí hậu mát mẻ, homestay thơ mộng"
+    "value": "Thành phố ngàn hoa",
+    "label": "Thành phố ngàn hoa"
   },
   {
     "key": "home.text-114",
@@ -908,8 +908,8 @@
     "key": "home.text-116",
     "scope": "home",
     "kind": "text",
-    "value": "Biển Mỹ Khê & trung tâm sầm uất",
-    "label": "Biển Mỹ Khê & trung tâm sầm uất"
+    "value": "Nhịp sống sôi động",
+    "label": "Nhịp sống sôi động"
   },
   {
     "key": "home.text-117",
@@ -929,8 +929,8 @@
     "key": "home.text-119",
     "scope": "home",
     "kind": "text",
-    "value": "Resort biển đảo phù hợp gia đình",
-    "label": "Resort biển đảo phù hợp gia đình"
+    "value": "Đảo ngọc nghỉ dưỡng",
+    "label": "Đảo ngọc nghỉ dưỡng"
   },
   {
     "key": "home.text-120",
@@ -943,15 +943,15 @@
     "key": "home.text-121",
     "scope": "home",
     "kind": "text",
-    "value": "Sapa",
-    "label": "Sapa"
+    "value": "Hội An",
+    "label": "Hội An"
   },
   {
     "key": "home.text-122",
     "scope": "home",
     "kind": "text",
-    "value": "Núi rừng, ruộng bậc thang kỳ vĩ",
-    "label": "Núi rừng, ruộng bậc thang kỳ vĩ"
+    "value": "Phố cổ lung linh",
+    "label": "Phố cổ lung linh"
   },
   {
     "key": "home.text-123",
@@ -1258,15 +1258,15 @@
     "key": "home.text-166",
     "scope": "home",
     "kind": "text",
-    "value": "\n          Bạn muốn hợp tác cùng {{brand.name}}?\n        ",
-    "label": "Bạn muốn hợp tác cùng {{brand.name}}?"
+    "value": "Nhận ưu đãi từ {{brand.name}}",
+    "label": "Nhận ưu đãi từ {{brand.name}}"
   },
   {
     "key": "home.text-167",
     "scope": "home",
     "kind": "text",
-    "value": "\n          Chúng tôi hỗ trợ kết nối hơn 500+ khách sạn, resort, đối tác tour lữ hành và nhà xe đến hàng triệu du khách trên cả nước. Để lại thông tin hoặc nhắn Zalo để chuyên viên liên hệ ngay.\n        ",
-    "label": "Chúng tôi hỗ trợ kết nối hơn 500+ khách sạn, resort, đối tác tour lữ hành và nhà xe đến hàng triệu du khách trên cả nước. Để lại thông tin hoặc nhắn Z"
+    "value": "Khám phá khách sạn, tour và combo cho kỳ nghỉ của bạn.",
+    "label": "Khám phá khách sạn, tour và combo cho kỳ nghỉ của bạn."
   },
   {
     "key": "home.text-168",
@@ -4820,8 +4820,8 @@
     "key": "footer.text-025",
     "scope": "footer",
     "kind": "text",
-    "value": "{{brand.name}}",
-    "label": "{{brand.name}}"
+    "value": "Nền tảng đặt phòng, tour du lịch và trải nghiệm hằng ngày tại Nha Trang.",
+    "label": "Nền tảng đặt phòng, tour du lịch và trải nghiệm hằng ngày tại Nha Trang."
   },
   {
     "key": "footer.text-026",

@@ -20,7 +20,8 @@
     "prestart": "node --env-file-if-exists=.env scripts/check-env.mjs",
     "test:production": "node --env-file=.env tests/e2e/production.mjs",
     "fonts:refresh": "node scripts/maintenance/fonts.mjs",
-    "test:deployment": "node tests/unit/deployment.mjs"
+    "test:deployment": "node tests/unit/deployment.mjs",
+    "test:theme": "node --test tests/unit/theme.mjs"
   },
   "dependencies": {
     "@vercel/functions": "^3.11.3",
@@ -29,6 +30,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "server-only": "^0.0.1",
+    "sharp": "^0.35.5",
+    "write-excel-file": "^4.1.1",
     "zod": "^4.0.0"
   },
   "devDependencies": {

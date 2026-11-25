@@ -40,10 +40,7 @@ export function EditorDrawer({
       onCancel={onClose}
     >
       <div className="ad-drawer-heading">
-        <div>
-          <span className="ad-eyebrow">QUẢN LÝ NỘI DUNG</span>
-          <h2>{title}</h2>
-        </div>
+        <h2>{title}</h2>
         <button
           type="button"
           className="ad-icon-button"
@@ -55,9 +52,7 @@ export function EditorDrawer({
       </div>
       <div className="ad-drawer-body">{children}</div>
       <div className="ad-drawer-bottom">
-        <Icon name="lock" />
-        <span>Chỉ cập nhật khi bạn lưu thay đổi.</span>
-        <button type="button" onClick={onClose}>
+        <button type="button" className="ad-button" onClick={onClose}>
           Đóng
         </button>
         {saveForm && (

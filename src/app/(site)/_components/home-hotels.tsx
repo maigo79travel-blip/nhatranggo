@@ -1,13 +1,11 @@
 "use client";
 import { useState } from "react";
-import { HomeLink } from "./home-link";
+import { HomeHeading, HomeSectionLink } from "./home-heading";
 import { ContentText, useSiteData } from "@/components/content";
-import {
-  matchesHotelFilter,
-  type HomeHotelFilter,
-} from "./hotel-filter";
+import { matchesHotelFilter, type HomeHotelFilter } from "./hotel-filter";
 import { PriceStack } from "@/components/price-stack";
 import { CatalogCard, ProductField } from "@/components/catalog";
+import { HomeCardRating } from "./home-card-rating";
 
 const filterOptions: HomeHotelFilter[] = [
   "all",
@@ -32,16 +30,12 @@ export function HomeHotels() {
     .slice(0, 6);
 
   return (
-    <section id="home-hotels" className="site-container py-10 w-full">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-        <div>
-          <h2 className="font-headline-lg text-headline-lg font-extrabold text-on-surface">
-            <ContentText contentKey="home.text-095" />
-          </h2>
-          <div className="w-12 h-1 rounded-full bg-primary mt-2" />
-        </div>
-
-        <div className="flex items-center gap-2 overflow-x-auto pb-1">
+    <section
+      id="home-hotels"
+      className="site-container w-full bg-white py-10 lg:py-[60px]"
+    >
+      <HomeHeading contentKey="home.text-095">
+        <div className="flex max-w-full flex-wrap items-center gap-2">
           {filterOptions.map((value, index) => (
             <button
               key={value}
@@ -49,10 +43,10 @@ export function HomeHotels() {
               data-hotel-filter={value}
               aria-pressed={filter === value}
               onClick={() => setFilter(value)}
-              className={`hotel-filter shrink-0 px-4 py-2 rounded-full font-label-md text-label-md font-bold transition-colors ${
+              className={`hotel-filter shrink-0 min-h-11 rounded-full px-4 text-sm font-bold transition-colors ${
                 filter === value
-                  ? "bg-primary text-on-primary shadow-sm"
-                  : "bg-surface-container-lowest border border-border-light text-on-surface hover:border-primary/50"
+                  ? "bg-gradient-to-r from-primary to-brand-deep text-on-primary"
+                  : "bg-surface-muted text-on-surface hover:bg-surface-tinted"
               }`}
             >
               <ContentText
@@ -60,31 +54,24 @@ export function HomeHotels() {
               />
             </button>
           ))}
-          <HomeLink
-            contentKey="home.attributes-007"
-            className="px-4 py-2 rounded-full text-secondary hover:text-ocean-deep font-label-md text-label-md font-bold flex items-center gap-1 whitespace-nowrap"
-            href="/khach-san"
-          >
-            <span>
-              <ContentText contentKey="home.text-101" />
-            </span>
-            <span className="material-symbols-outlined text-[16px]">
-              {"arrow_forward"}
-            </span>
-          </HomeLink>
+          <HomeSectionLink contentKey="home.attributes-007" href="/khach-san">
+            <ContentText contentKey="home.text-101" />
+          </HomeSectionLink>
         </div>
-      </div>
+      </HomeHeading>
 
       <p
         role="status"
-        className={products.length ? "sr-only" : "text-body-md text-outline mb-4"}
+        className={
+          products.length ? "sr-only" : "text-body-md text-on-surface-variant mb-4"
+        }
       >
         {products.length
           ? `${products.length} dịch vụ phù hợp`
           : "Chưa có khách sạn phù hợp với bộ lọc."}
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-x-3 gap-y-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-y-[30px]">
         {products.map((product) => {
           const discount = hotelDiscountLabel(
             product.price,
@@ -92,43 +79,40 @@ export function HomeHotels() {
           );
           const amenities = ["field-010", "field-011"]
             .map((key) => product.content?.[key]?.value)
-            .filter((val): val is string => typeof val === "string" && val.length > 0);
-          const shortLocation = product.location.split(",")[0]?.trim() || product.location;
+            .filter(
+              (val): val is string => typeof val === "string" && val.length > 0,
+            );
+          const shortLocation =
+            product.location.split(",")[0]?.trim() || product.location;
 
           return (
             <CatalogCard
               key={product.id}
-              className="bg-surface-container-lowest rounded-2xl border border-border-light overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
+              className="group flex min-w-0 flex-col overflow-hidden rounded-[22px] border border-border-default bg-white shadow-card transition-shadow hover:shadow-card-hover xl:min-h-[476px]"
               productId={product.id}
               tag="div"
             >
-              <div className="relative aspect-[16/10] w-full overflow-hidden">
+              <div className="relative aspect-[1.98] w-full overflow-hidden">
                 <ProductField
                   id={product.id}
                   field="image"
-                  tag="div"
-                  className="w-full h-full bg-cover bg-center hover:scale-105 transition-transform duration-500"
+                  tag="img"
+                  alt=""
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-300 motion-safe:group-hover:scale-105"
                 />
                 {discount && (
-                  <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-extrabold shadow-sm">
+                  <span className="absolute top-4 left-5 rounded-full bg-promo-highlight px-[18px] py-2 text-sm font-extrabold text-on-surface">
                     {discount}
                   </span>
                 )}
               </div>
 
-              <div className="p-5 flex-1 flex flex-col justify-between">
+              <div className="flex flex-1 flex-col justify-between p-5 lg:p-6">
                 <div>
                   <div className="flex items-center justify-between text-body-sm font-body-sm mb-2 gap-2">
-                    <span className="flex items-center gap-1 font-label-md text-label-md font-bold text-rating-star">
-                      <span
-                        className="material-symbols-outlined text-[16px]"
-                        style={{ fontVariationSettings: "'FILL' 1" }}
-                      >
-                        {"star"}
-                      </span>
-                      <span className="text-on-surface">{product.rating}</span>
-                    </span>
-                    <span className="inline-flex items-center gap-1 text-outline font-label-sm text-label-sm truncate">
+                    <HomeCardRating rating={product.rating} variant="hotel" />
+                    <span className="inline-flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm truncate">
                       <img
                         src="/images/figma/icons/pin.svg"
                         alt=""
@@ -145,7 +129,7 @@ export function HomeHotels() {
                     className="font-title-md text-lg font-extrabold text-on-surface line-clamp-1"
                   />
 
-                  <div className="flex flex-col gap-1.5 mt-3">
+                  <div className="mt-3 flex flex-col gap-1.5 lg:min-h-[50px]">
                     {amenities.length > 0 ? (
                       amenities.map((item, idx) => (
                         <div
@@ -153,7 +137,7 @@ export function HomeHotels() {
                           className="flex items-center gap-2 text-body-sm font-body-sm text-on-surface-variant"
                         >
                           <span className="material-symbols-outlined text-[16px] text-primary shrink-0">
-                            {"check_circle"}
+                            {"check"}
                           </span>
                           <span className="truncate">{item}</span>
                         </div>
@@ -166,15 +150,15 @@ export function HomeHotels() {
                   </div>
                 </div>
 
-                <div className="mt-5 pt-2 flex items-end justify-between price-actions gap-3">
+                <div className="price-actions mt-4 flex flex-wrap items-end justify-between gap-2">
                   <PriceStack productId={product.id}>
                     <ProductField
                       id={product.id}
                       field="price"
                       tag="span"
-                      className="font-title-md text-xl font-extrabold text-sale-crimson"
+                      className="text-[clamp(1.125rem,2.25vw,1.625rem)] font-extrabold leading-tight text-sale-price"
                     >
-                      <span className="font-body-sm text-xs text-outline font-normal ml-1">
+                      <span className="font-body-sm text-xs text-on-surface-variant font-normal ml-1">
                         /đêm
                       </span>
                     </ProductField>
@@ -182,7 +166,7 @@ export function HomeHotels() {
                   <a
                     href="#"
                     data-action="details"
-                    className="px-5 py-2.5 rounded-full bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md font-bold shadow-sm transition-colors action-link shrink-0"
+                    className="home-booking-button"
                   >
                     Đặt phòng
                   </a>
