@@ -20,7 +20,7 @@ export function PriceStack({
         product.original_price > product.price && (
           <span
             data-original-price
-            className="block whitespace-nowrap font-body-sm text-body-sm text-outline line-through"
+            className="block whitespace-nowrap font-body-sm text-body-sm text-on-surface-variant line-through"
           >
             {money(product.original_price)}
           </span>

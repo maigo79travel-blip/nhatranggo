@@ -87,7 +87,7 @@ export default async function ServicesPage({
         {products.length} dịch vụ phù hợp
       </p>
       {(draft.date || draft.guests) && (
-        <p className="text-sm text-outline leading-relaxed mb-6 flex items-start gap-2">
+        <p className="text-sm text-on-surface-variant leading-relaxed mb-6 flex items-start gap-2">
           <PublicIcon name="info" className="text-lg shrink-0 mt-0.5" />
           Ngày và số khách được chuyển sang yêu cầu đặt chỗ. Nhân viên sẽ kiểm
           tra tình trạng phòng và xác nhận với đối tác.

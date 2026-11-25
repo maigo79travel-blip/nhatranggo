@@ -243,7 +243,7 @@ export function ProductEditor({
         </label>
       </div>
       <details
-        className="border border-border-light rounded-xl p-4"
+        className="border border-border-subtle rounded-xl p-4"
         open={tab === "details"}
         hidden={tab !== "details"}
       >
@@ -254,7 +254,7 @@ export function ProductEditor({
         <div className="mt-4 space-y-4">
           {Object.entries(product.content || {}).map(([key, entry]) => (
             <label className="block text-body-sm" key={key}>
-              <span className="block text-outline mb-1 break-words">
+              <span className="block text-on-surface-variant mb-1 break-words">
                 {key} · {entry.label}
               </span>
               <textarea
@@ -335,7 +335,7 @@ export function ContentEditor({
         }
       }}
     >
-      <p className="text-body-sm text-outline break-all">
+      <p className="text-body-sm text-on-surface-variant break-all">
         {String(row.scope)} · {String(row.key)}
       </p>
       <Field

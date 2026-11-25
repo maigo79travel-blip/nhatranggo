@@ -6,10 +6,26 @@ import type { ReactNode } from "react";
 import brand from "@/config/brand.json";
 
 const socialLinks = [
-  { label: "Facebook", icon: "/images/figma/icons/social-facebook.svg" },
-  { label: "Instagram", icon: "/images/figma/icons/social-instagram.svg" },
-  { label: "YouTube", icon: "/images/figma/icons/social-youtube.svg" },
-  { label: "TikTok", icon: "/images/figma/icons/social-tiktok.svg" },
+  {
+    key: "facebook",
+    label: "Facebook",
+    icon: "/images/figma/icons/social-facebook.svg",
+  },
+  {
+    key: "instagram",
+    label: "Instagram",
+    icon: "/images/figma/icons/social-instagram.svg",
+  },
+  {
+    key: "youtube",
+    label: "YouTube",
+    icon: "/images/figma/icons/social-youtube.svg",
+  },
+  {
+    key: "tiktok",
+    label: "TikTok",
+    icon: "/images/figma/icons/social-tiktok.svg",
+  },
 ];
 export function SiteFooter({
   informationLinks,
@@ -19,14 +35,14 @@ export function SiteFooter({
   const contact = contactInfo(useSiteData().content);
   return (
     <footer
-      className="w-full bg-background border-t border-border-light text-on-surface pt-14 pb-10"
+      className="w-full bg-background text-on-surface pt-8 pb-24 md:pb-6"
       id="lien-he"
     >
       <div className="site-container">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-10">
+        <div className="grid grid-cols-1 gap-8 pb-10 md:grid-cols-2 lg:grid-cols-12">
           <div className="lg:col-span-4 flex flex-col gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 bg-surface-container-low flex items-center justify-center">
+              <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 bg-surface-muted flex items-center justify-center">
                 <img
                   src="/images/figma/logo-mark.png"
                   alt={brand.name}
@@ -37,7 +53,7 @@ export function SiteFooter({
                 <span className="font-headline-sm text-base font-extrabold text-on-surface tracking-tight uppercase">
                   <ContentText contentKey="footer.text-023" />
                 </span>
-                <span className="font-label-sm text-xs text-outline uppercase">
+                <span className="font-label-sm text-xs text-on-surface-variant uppercase">
                   <ContentText contentKey="footer.text-024" />
                 </span>
               </div>
@@ -46,23 +62,25 @@ export function SiteFooter({
               <ContentText contentKey="footer.text-025" />
             </p>
             <div className="flex items-center gap-3 pt-1">
-              {socialLinks.map((item) => (
-                <a
-                  key={item.label}
-                  href="#lien-he"
-                  aria-label={item.label}
-                  className="w-8 h-8 rounded-lg bg-surface-container-lowest border border-border-light flex items-center justify-center hover:border-primary transition-colors"
-                >
-                  <img src={item.icon} alt="" className="w-5 h-5" />
-                </a>
-              ))}
+              {socialLinks
+                .filter(({ key }) => /^https:\/\//i.test(contact[key] || ""))
+                .map((item) => (
+                  <a
+                    key={item.label}
+                    href={contact[item.key]}
+                    aria-label={item.label}
+                    className="grid h-11 w-11 place-items-center rounded-lg transition-colors hover:bg-surface-muted"
+                  >
+                    <img src={item.icon} alt="" className="w-5 h-5" />
+                  </a>
+                ))}
             </div>
           </div>
           <div className="lg:col-span-3 flex flex-col gap-3">
             <h4 className="font-title-md text-sm font-extrabold text-on-surface">
               <ContentText contentKey="footer.text-031" />
             </h4>
-            <ul className="flex flex-col gap-2.5 font-body-md text-sm text-outline">
+            <ul className="flex flex-col gap-2.5 font-body-md text-sm text-on-surface-variant">
               <li>
                 <ContentElement
                   contentKey="footer.attributes-004"
@@ -129,7 +147,7 @@ export function SiteFooter({
             <h4 className="font-title-md text-sm font-extrabold text-on-surface">
               <ContentText contentKey="footer.text-038" />
             </h4>
-            <ul className="flex flex-col gap-2.5 font-body-md text-sm text-outline">
+            <ul className="flex flex-col gap-2.5 font-body-md text-sm text-on-surface-variant">
               {informationLinks}
             </ul>
           </div>
@@ -137,7 +155,7 @@ export function SiteFooter({
             <h4 className="font-title-md text-sm font-extrabold text-on-surface">
               Liên hệ
             </h4>
-            <div className="flex flex-col gap-3 font-body-md text-sm text-outline">
+            <div className="flex flex-col gap-3 font-body-md text-sm text-on-surface-variant">
               <ContentElement
                 contentKey="footer.attributes-001"
                 tag="a"
@@ -178,7 +196,7 @@ export function SiteFooter({
             </div>
           </div>
         </div>
-        <div className="pt-6 border-t border-border-light flex items-center justify-between gap-4 font-body-sm text-sm text-on-surface">
+        <div className="font-body-sm text-sm text-on-surface">
           <p className="font-medium">
             <ContentText contentKey="footer.text-052" />
           </p>

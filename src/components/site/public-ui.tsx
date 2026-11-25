@@ -22,7 +22,7 @@ export function PublicEmptyState({ children }: { children: ReactNode }) {
     <div className="public-empty-state">
       <PublicIcon name="search_off" className="text-primary text-4xl" />
       <h2 className="font-bold text-lg">Chưa tìm thấy kết quả</h2>
-      <p className="text-outline">{children}</p>
+      <p className="text-on-surface-variant">{children}</p>
     </div>
   );
 }

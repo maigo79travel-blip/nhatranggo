@@ -38,7 +38,7 @@ export function useProduct(id?: string) {
   const scope = useContext(ScopeContext);
   return useSiteData().products.find((p) => p.id === (scope || id));
 }
-function useContent(key: string): unknown {
+export function useContent(key: string): unknown {
   const data = useSiteData();
   const scope = useContext(ScopeContext);
   const value = scope

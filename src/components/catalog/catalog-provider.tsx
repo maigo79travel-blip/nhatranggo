@@ -14,7 +14,6 @@ import { useSiteData } from "@/components/content";
 import { CatalogContext } from "./catalog-context";
 import { BookingDialogContent } from "./booking-dialog";
 import { ToastNotification } from "./toast-notification";
-import { TransferLogic } from "./transfer-logic";
 import { sortCatalogCards } from "./sort-cards";
 
 export function CatalogProvider({
@@ -182,15 +181,12 @@ export function CatalogProvider({
     <CatalogContext.Provider value={{ products, open: openProduct }}>
       {children}
       <ListingFilters products={products} />
-      {pathname === "/xe-dua-don" && (
-        <TransferLogic onBook={openProduct} onMessage={setMessage} />
-      )}
       <ToastNotification message={message} onClose={() => setMessage("")} />
       <dialog
         ref={dialog}
         aria-labelledby="catalog-dialog-title"
         onCancel={closeDialog}
-        className="w-[calc(100%-2rem)] max-w-lg rounded-2xl p-6 text-on-surface shadow-2xl backdrop:bg-on-background/50"
+        className="w-[calc(100%-2rem)] max-w-lg rounded-2xl p-6 text-on-surface shadow-2xl backdrop:bg-dialog-scrim/50"
       >
         <button
           aria-label="Đóng"

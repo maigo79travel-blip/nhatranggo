@@ -20,7 +20,8 @@
     "prestart": "node --env-file-if-exists=.env scripts/check-env.mjs",
     "test:production": "node --env-file=.env tests/e2e/production.mjs",
     "fonts:refresh": "node scripts/maintenance/fonts.mjs",
-    "test:deployment": "node tests/unit/deployment.mjs"
+    "test:deployment": "node tests/unit/deployment.mjs",
+    "test:theme": "node --test tests/unit/theme.mjs"
   },
   "dependencies": {
     "@vercel/functions": "^3.11.3",
