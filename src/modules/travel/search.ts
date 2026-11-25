@@ -1,3 +1,5 @@
+import type { Product } from "@/lib/types";
+
 export type BookingDraft = {
   date?: string;
   returnDate?: string;
@@ -12,6 +14,18 @@ export function normalizeSearch(value: string) {
     .toLowerCase()
     .replace(/\s+/g, " ")
     .trim();
+}
+export function productSearchBlob(product: Product) {
+  return normalizeSearch(
+    [
+      product.title,
+      product.location,
+      product.description,
+      ...Object.values(product.content || {})
+        .filter((entry) => entry.kind === "text")
+        .map((entry) => String(entry.value)),
+    ].join(" "),
+  );
 }
 export function matchesSearch(value: string, query: string) {
   const terms = query.split(/[,;]/).map(normalizeSearch).filter(Boolean);

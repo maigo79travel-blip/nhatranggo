@@ -104,7 +104,7 @@ button {
 
   .public-page {
     @apply min-h-screen bg-background text-on-surface;
-    padding-top: 116px;
+    padding-top: 76px;
   }
   .public-page-hero {
     @apply border-b border-border-light;
@@ -291,7 +291,7 @@ button {
     resize: vertical;
   }
   .public-primary-button {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-on-primary px-5 py-3 text-sm font-bold;
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-primary text-on-primary px-6 py-3 text-sm font-bold;
     min-height: 48px;
     white-space: normal;
     transition:
@@ -299,7 +299,7 @@ button {
       box-shadow 150ms;
   }
   .public-primary-button:hover {
-    @apply bg-on-primary-fixed-variant;
+    @apply bg-ocean-deep;
     box-shadow: 0 4px 12px rgb(var(--color-primary) / 0.16);
   }
   .public-primary-button:disabled {
@@ -311,8 +311,7 @@ button {
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
   }
   .public-service-card {
-    @apply flex flex-col min-w-0 overflow-hidden rounded-2xl border border-border-light bg-surface-container-lowest;
-    box-shadow: 0 4px 16px rgb(var(--color-primary) / 0.035);
+    @apply flex flex-col min-w-0 overflow-hidden rounded-2xl border border-border-light bg-surface-container-lowest shadow-card;
   }
   .public-card-image {
     @apply relative flex items-center justify-center overflow-hidden bg-ocean-light shrink-0;

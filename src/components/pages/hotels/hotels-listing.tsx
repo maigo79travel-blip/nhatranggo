@@ -1,1700 +1,664 @@
-import {
-  ContentText,
-  ContentElement,
-  ProductValue,
-  CatalogCollection,
-} from "@/components/content";
-import { PriceStack } from "@/components/price-stack";
+"use client";
+import { useMemo, useState } from "react";
+import Link from "next/link";
+import type { Product } from "@/lib/types";
+import { useSiteData } from "@/components/content";
+import { useCatalog } from "@/components/catalog/catalog-context";
 import { CatalogCard, ProductField } from "@/components/catalog";
+import { PriceStack } from "@/components/price-stack";
+import { normalizeSearch, productSearchBlob } from "@/modules/travel/search";
+import type { HotelSearchState } from "./hotels-hero";
 
-export function HotelsListing() {
+type SortMode = "recommended" | "price-asc" | "rating-desc" | "beach";
+
+interface FilterState {
+  maxPrice: number;
+  priceRanges: string[];
+  stars: string[];
+  areas: string[];
+  amenities: string[];
+  policies: string[];
+}
+
+type ArrayFilterKey = "priceRanges" | "stars" | "areas" | "amenities" | "policies";
+
+const MAX_SLIDER_PRICE = 8_000_000;
+const MIN_SLIDER_PRICE = 500_000;
+
+const emptyFilters: FilterState = {
+  maxPrice: MAX_SLIDER_PRICE,
+  priceRanges: [],
+  stars: [],
+  areas: [],
+  amenities: [],
+  policies: [],
+};
+
+const areaKeywords: Record<string, string[]> = {
+  "tran-phu": ["tran phu"],
+  "bai-dai": ["bai dai", "cam ranh"],
+  "hon-tre": ["hon tre", "vinpearl"],
+  "pho-tay": ["nguyen thien thuat", "loc tho"],
+  "an-vien": ["an vien"],
+};
+
+const filterGroups: {
+  key: ArrayFilterKey;
+  title: string;
+  options: { id: string; label: string }[];
+}[] = [
+  {
+    key: "priceRanges",
+    title: "Khoảng giá / đêm",
+    options: [
+      { id: "under-1m", label: "Dưới 1.000.000đ" },
+      { id: "1m-2m", label: "1.000.000đ - 2.000.000đ" },
+      { id: "2m-4m", label: "2.000.000đ - 4.000.000đ" },
+      { id: "over-4m", label: "Trên 4.000.000đ (Luxury)" },
+    ],
+  },
+  {
+    key: "stars",
+    title: "Hạng sao chuẩn quốc tế",
+    options: [
+      { id: "3", label: "3 Sao" },
+      { id: "4", label: "4 Sao" },
+      { id: "5", label: "5 Sao VIP" },
+    ],
+  },
+  {
+    key: "areas",
+    title: "Khu vực địa lý",
+    options: [
+      { id: "tran-phu", label: "Trục đường biển Trần Phú" },
+      { id: "bai-dai", label: "Bãi Dài Cam Ranh Resort" },
+      { id: "hon-tre", label: "Đảo Hòn Tre (Vinpearl)" },
+      { id: "pho-tay", label: "Trung tâm Phố Tây Nguyễn Thiện Thuật" },
+      { id: "an-vien", label: "Khu biệt thự ven biển An Viên" },
+    ],
+  },
+  {
+    key: "amenities",
+    title: "Tiện ích đặc quyền",
+    options: [
+      { id: "infinity-pool", label: "Hồ bơi vô cực tràn bờ" },
+      { id: "private-beach", label: "Bãi tắm riêng sát biển" },
+      { id: "buffet", label: "Miễn phí buffet sáng cao cấp" },
+      { id: "airport-shuttle", label: "Đưa đón sân bay miễn phí" },
+      { id: "water-park", label: "Công viên nước nội khu (Water Park)" },
+      { id: "spa", label: "Liệu trình Spa & Massage tặng kèm" },
+      { id: "kids-free", label: "Miễn phí 1–2 trẻ em dưới 6–12 tuổi" },
+    ],
+  },
+  {
+    key: "policies",
+    title: "Chính sách linh hoạt",
+    options: [
+      { id: "free-cancel", label: "Miễn phí hủy phòng trước 48h" },
+      { id: "zero-deposit", label: "Thanh toán linh hoạt / Giữ chỗ 0đ" },
+    ],
+  },
+];
+
+const sortOptions: { id: SortMode; label: string }[] = [
+  { id: "recommended", label: "Ưu đãi tốt nhất" },
+  { id: "price-asc", label: "Giá thấp nhất" },
+  { id: "rating-desc", label: "Đánh giá cao nhất" },
+  { id: "beach", label: "Gần biển nhất" },
+];
+
+function matchesFilters(
+  product: Product,
+  filters: FilterState,
+  search: HotelSearchState,
+) {
+  const text = productSearchBlob(product);
+
+  if (search.query.trim()) {
+    const q = normalizeSearch(search.query);
+    if (!q.includes("nha trang, khanh hoa") && !q.includes("nha trang - khanh hoa")) {
+      if (!text.includes(q)) return false;
+    }
+  }
+
+  if (search.category === "5-star" && !text.includes("5 sao")) return false;
+  if (search.category === "4-star" && !text.includes("4 sao")) return false;
+  if (search.category === "resort" && !text.includes("resort")) return false;
+
+  if (filters.maxPrice < MAX_SLIDER_PRICE && product.price > filters.maxPrice) {
+    return false;
+  }
+
+  if (filters.priceRanges.length > 0) {
+    const inPrice = filters.priceRanges.some((range) => {
+      if (range === "under-1m") return product.price < 1_000_000;
+      if (range === "1m-2m")
+        return product.price >= 1_000_000 && product.price <= 2_000_000;
+      if (range === "2m-4m")
+        return product.price > 2_000_000 && product.price <= 4_000_000;
+      return product.price > 4_000_000;
+    });
+    if (!inPrice) return false;
+  }
+
+  if (filters.stars.length > 0) {
+    const hasStar = filters.stars.some((star) => text.includes(`${star} sao`));
+    if (!hasStar) return false;
+  }
+
+  if (filters.areas.length > 0) {
+    const hasArea = filters.areas.some((area) =>
+      areaKeywords[area]?.some((kw) => text.includes(kw)),
+    );
+    if (!hasArea) return false;
+  }
+
+  if (filters.amenities.length > 0) {
+    const amenityMap: Record<string, string[]> = {
+      "infinity-pool": ["ho boi", "vo cuc", "be boi"],
+      "private-beach": ["bai cat", "bai tam", "bien", "beach"],
+      buffet: ["buffet", "bua sang"],
+      "airport-shuttle": ["san bay", "dua don", "xe bus"],
+      "water-park": ["water park", "cong vien nuoc"],
+      spa: ["spa", "massage"],
+      "kids-free": ["tre em", "cho be", "duoi 12"],
+    };
+    const hasAmenity = filters.amenities.some((item) =>
+      amenityMap[item]?.some((kw) => text.includes(kw)),
+    );
+    if (!hasAmenity) return false;
+  }
+
+  if (filters.policies.length > 0) {
+    const policyMap: Record<string, string[]> = {
+      "free-cancel": ["huy phong", "linh hoat"],
+      "zero-deposit": ["xac nhan", "zalo", "0d"],
+    };
+    const hasPolicy = filters.policies.some((item) =>
+      policyMap[item]?.some((kw) => text.includes(kw)),
+    );
+    if (!hasPolicy) return false;
+  }
+
+  return true;
+}
+
+function HotelCard({
+  product,
+  search,
+}: {
+  product: Product;
+  search: HotelSearchState;
+}) {
+  const catalog = useCatalog();
+  const contentValue = (key: string) => {
+    const val = product.content?.[key]?.value;
+    return typeof val === "string" ? val : "";
+  };
+
+  const promoTag = contentValue("field-003") || contentValue("field-004");
+  const starLabel = contentValue("field-007") || "Khách sạn & Resort";
+  const ratingDesc = contentValue("field-008") || "Rất Tuyệt Vời";
+  const reviewCount = contentValue("field-009") || "Đánh giá thực tế";
+  const amenities = ["field-010", "field-011", "field-012"]
+    .map(contentValue)
+    .filter(Boolean);
+  const policyText = contentValue("field-013");
+  const mealNote = contentValue("field-015") || product.description;
+  const ctaLabel = contentValue("field-016") || "Xem phòng & Đặt ngay";
+  const starCount = starLabel.includes("4") ? 4 : starLabel.includes("3") ? 3 : 5;
+
+  return (
+    <CatalogCard
+      productId={product.id}
+      tag="article"
+      className="bg-surface-container-lowest rounded-2xl border border-border-light shadow-card hover:shadow-card-hover transition-all duration-200 p-4 flex flex-col md:flex-row gap-5"
+    >
+      <div className="relative w-full md:w-[240px] aspect-[16/10] rounded-2xl overflow-hidden shrink-0">
+        {promoTag && (
+          <span className="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-full bg-sale-crimson text-white text-[11px] font-bold shadow-sm">
+            {promoTag}
+          </span>
+        )}
+        <ProductField
+          id={product.id}
+          field="image"
+          tag="div"
+          className="w-full h-full bg-cover bg-center hover:scale-105 transition-transform duration-500"
+        />
+        <span className="absolute bottom-2.5 left-2.5 z-10 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-on-surface/75 backdrop-blur-sm text-white text-[11px] font-medium">
+          <span className="material-symbols-outlined text-[13px]">photo_camera</span>
+          Ảnh thực tế
+        </span>
+      </div>
+
+      <div className="flex-1 min-w-0 flex flex-col justify-between gap-2">
+        <div>
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-1.5 text-xs mb-1">
+                <span className="inline-flex items-center text-rating-star" aria-hidden="true">
+                  {Array.from({ length: starCount }).map((_, idx) => (
+                    <span key={idx} className="material-symbols-outlined text-[14px]">
+                      star
+                    </span>
+                  ))}
+                </span>
+                <span className="font-bold text-primary">{starLabel}</span>
+              </div>
+
+              <ProductField
+                id={product.id}
+                field="title"
+                tag="h3"
+                className="font-headline-sm text-lg md:text-xl font-extrabold text-on-surface leading-snug"
+              />
+            </div>
+
+            <div className="shrink-0 flex items-center gap-2">
+              <div className="text-right hidden sm:block">
+                <div className="text-xs font-extrabold text-primary leading-tight">
+                  {ratingDesc}
+                </div>
+                <div className="text-[11px] text-outline">{reviewCount}</div>
+              </div>
+              <div className="bg-primary text-white rounded-xl px-2.5 py-1.5 font-extrabold text-sm leading-none shadow-sm">
+                {product.rating.toFixed(1)}
+              </div>
+            </div>
+          </div>
+
+          <p className="text-xs text-on-surface-variant mt-1">
+            {product.location}
+          </p>
+
+          {amenities.length > 0 ? (
+            <ul className="flex flex-wrap gap-x-3 gap-y-1.5 mt-2.5">
+              {amenities.map((item) => (
+                <li
+                  key={item}
+                  className="inline-flex items-center gap-1 text-xs font-medium text-on-surface"
+                >
+                  <span className="material-symbols-outlined text-[15px] text-secondary">
+                    check_circle
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-xs text-on-surface-variant mt-2.5 line-clamp-2">
+              {product.description}
+            </p>
+          )}
+        </div>
+
+        {policyText && (
+          <p className="text-xs text-outline pt-1">{policyText}</p>
+        )}
+      </div>
+
+      <div className="md:w-[220px] shrink-0 flex flex-col justify-end md:items-end md:text-right border-t md:border-t-0 md:border-l border-border-light/80 pt-3 md:pt-0 md:pl-5 gap-2">
+        <div className="flex md:flex-col items-baseline md:items-end gap-2 md:gap-0.5">
+          <PriceStack productId={product.id}>
+            <ProductField
+              id={product.id}
+              field="price"
+              tag="span"
+              className="text-2xl font-extrabold text-primary"
+            >
+              <span className="text-xs font-normal text-outline ml-1">
+                /đêm
+              </span>
+            </ProductField>
+          </PriceStack>
+        </div>
+
+        {mealNote && (
+          <p className="text-xs text-on-surface-variant line-clamp-1">
+            {mealNote}
+          </p>
+        )}
+
+        <button
+          type="button"
+          onClick={() =>
+            catalog.open(product, {
+              date: search.checkIn,
+              returnDate: search.checkOut,
+              guests: Number(search.guests) || 2,
+            })
+          }
+          className="w-full md:w-auto px-5 py-2.5 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-bold text-sm shadow-sm transition-colors mt-1"
+        >
+          {ctaLabel}
+        </button>
+      </div>
+    </CatalogCard>
+  );
+}
+
+export function HotelsListing({
+  search,
+  onResetSearch,
+}: {
+  search: HotelSearchState;
+  onResetSearch: () => void;
+}) {
+  const { products } = useSiteData();
+  const [draftFilters, setDraftFilters] = useState<FilterState>(emptyFilters);
+  const [appliedFilters, setAppliedFilters] = useState<FilterState>(emptyFilters);
+  const [sort, setSort] = useState<SortMode>("recommended");
+  const [sortOpen, setSortOpen] = useState(false);
+  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
+
+  const hotels = useMemo(() => {
+    const filtered = products.filter(
+      (p) =>
+        p.type === "hotel" &&
+        p.active &&
+        matchesFilters(p, appliedFilters, search),
+    );
+    return [...filtered].sort((a, b) => {
+      if (sort === "price-asc") return a.price - b.price;
+      if (sort === "rating-desc") return b.rating - a.rating;
+      if (sort === "beach") {
+        const aBeach = productSearchBlob(a).includes("bien") ? 0 : 1;
+        const bBeach = productSearchBlob(b).includes("bien") ? 0 : 1;
+        return aBeach - bBeach || b.rating - a.rating;
+      }
+      const aDiscount = a.original_price ? (a.original_price - a.price) / a.original_price : 0;
+      const bDiscount = b.original_price ? (b.original_price - b.price) / b.original_price : 0;
+      return bDiscount - aDiscount;
+    });
+  }, [products, appliedFilters, search, sort]);
+
+  const areaCounts = useMemo(() => {
+    const activeHotels = products.filter((p) => p.type === "hotel" && p.active);
+    const counts: Record<string, number> = {};
+    for (const [id, kws] of Object.entries(areaKeywords)) {
+      counts[id] = activeHotels.filter((h) => {
+        const blob = productSearchBlob(h);
+        return kws.some((kw) => blob.includes(kw));
+      }).length;
+    }
+    return counts;
+  }, [products]);
+
+  const toggleFilter = (group: ArrayFilterKey, id: string) => {
+    setDraftFilters((prev) => {
+      const exists = prev[group].includes(id);
+      return {
+        ...prev,
+        [group]: exists
+          ? prev[group].filter((item) => item !== id)
+          : [...prev[group], id],
+      };
+    });
+  };
+
+  const applyFilters = () => {
+    setAppliedFilters(draftFilters);
+    setMobileFilterOpen(false);
+  };
+
+  const resetFilters = () => {
+    setDraftFilters(emptyFilters);
+    setAppliedFilters(emptyFilters);
+    onResetSearch();
+    setMobileFilterOpen(false);
+  };
+
+  const filterFormContent = (
+    <div className="space-y-5">
+      <div className="flex items-center justify-between pb-2 border-b border-border-light">
+        <h2 className="font-title-md text-lg font-extrabold text-on-surface">
+          Bộ Lọc Tìm Kiếm
+        </h2>
+        <button
+          type="button"
+          onClick={resetFilters}
+          className="text-xs font-bold text-primary hover:underline"
+        >
+          Đặt lại
+        </button>
+      </div>
+
+      {filterGroups.map((group) => (
+        <div key={group.key} className="space-y-2.5">
+          <h3 className="font-bold text-sm text-on-surface">{group.title}</h3>
+
+          {group.key === "priceRanges" && (
+            <div className="space-y-1.5 pb-1">
+              <div className="flex items-center justify-between text-[11px] font-bold text-primary">
+                <span>500k</span>
+                <span>
+                  {draftFilters.maxPrice >= MAX_SLIDER_PRICE
+                    ? "8.000k+"
+                    : `≤ ${Math.round(draftFilters.maxPrice / 1000).toLocaleString("vi-VN")}k`}
+                </span>
+              </div>
+              <input
+                type="range"
+                min={MIN_SLIDER_PRICE}
+                max={MAX_SLIDER_PRICE}
+                step={250_000}
+                value={draftFilters.maxPrice}
+                aria-label="Mức giá tối đa mỗi đêm"
+                onChange={(e) =>
+                  setDraftFilters((prev) => ({
+                    ...prev,
+                    maxPrice: Number(e.target.value),
+                  }))
+                }
+                className="w-full accent-primary cursor-pointer"
+              />
+            </div>
+          )}
+
+          {group.key === "stars" ? (
+            <div className="flex flex-wrap gap-2">
+              {group.options.map((option) => {
+                const selected = draftFilters.stars.includes(option.id);
+                return (
+                  <button
+                    key={option.id}
+                    type="button"
+                    aria-pressed={selected}
+                    onClick={() => toggleFilter("stars", option.id)}
+                    className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${
+                      selected
+                        ? "bg-ocean-light border-primary text-primary"
+                        : "bg-surface-container-low border-border-light text-on-surface hover:border-primary"
+                    }`}
+                  >
+                    <span className="material-symbols-outlined text-[14px] text-rating-star">
+                      star
+                    </span>
+                    <span>{option.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {group.options.map((option) => (
+                <label
+                  key={option.id}
+                  className="flex items-start gap-2.5 text-xs text-on-surface-variant hover:text-on-surface cursor-pointer"
+                >
+                  <input
+                    type="checkbox"
+                    checked={draftFilters[group.key].includes(option.id)}
+                    onChange={() => toggleFilter(group.key, option.id)}
+                    className="mt-0.5 w-4 h-4 rounded border-outline-variant accent-primary shrink-0"
+                  />
+                  <span className="leading-snug flex-1 flex items-center justify-between gap-2">
+                    <span>{option.label}</span>
+                    {group.key === "areas" && (
+                      <span className="text-outline font-medium">
+                        ({areaCounts[option.id] ?? 0})
+                      </span>
+                    )}
+                  </span>
+                </label>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+
+      <div className="flex items-center gap-2.5 pt-2">
+        <button
+          type="button"
+          onClick={applyFilters}
+          className="flex-1 py-2.5 px-4 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-bold text-sm transition-colors"
+        >
+          Áp dụng
+        </button>
+        <button
+          type="button"
+          onClick={resetFilters}
+          className="flex-1 py-2.5 px-4 rounded-xl bg-surface-container-low border border-border-light hover:border-primary text-on-surface font-bold text-sm transition-colors"
+        >
+          Đặt lại
+        </button>
+      </div>
+
+      <div className="rounded-2xl bg-gradient-to-br from-primary to-ocean-deep text-white p-4 space-y-3 shadow-sm">
+        <div className="space-y-1">
+          <p className="text-sm font-extrabold leading-snug">
+            Cần phòng gấp giá đoàn?
+          </p>
+          <p className="text-xs text-white/85 leading-relaxed">
+            Hỗ trợ giữ phòng nhanh, báo giá tốt cho nhóm &amp; gia đình.
+          </p>
+        </div>
+        <Link
+          href="/lien-he"
+          className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white text-primary hover:bg-ocean-light font-extrabold text-xs transition-colors"
+        >
+          <span className="material-symbols-outlined text-[16px]">chat</span>
+          <span>Chat Zalo Ngay (24/7)</span>
+        </Link>
+      </div>
+    </div>
+  );
+
   return (
     <section className="site-container py-8 w-full">
-      <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-8 items-start">
-        <aside className="space-y-6">
-          <div className="bg-surface-container-lowest rounded-2xl p-5 shadow-sm space-y-6">
-            <div className="flex items-center justify-between pb-3">
-              <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-primary text-[20px]">
-                  {"tune"}
-                </span>
-                <h2 className="font-title-md text-title-md text-on-surface">
-                  <ContentText contentKey="hotels.text-078" />
-                </h2>
-              </div>
-              <button
-                className="font-label-sm text-label-sm text-primary hover:underline"
-                id="reset-filter-btn"
-                type="button"
-              >
-                <ContentText contentKey="hotels.text-079" />
-              </button>
-            </div>
-
-            <div className="space-y-3">
-              <h3 className="font-label-lg text-label-lg text-on-surface flex items-center justify-between">
-                <span>
-                  <ContentText contentKey="hotels.text-080" />
-                </span>
-                <span className="font-label-sm text-label-sm text-outline">
-                  <ContentText contentKey="hotels.text-081" />
-                </span>
-              </h3>
-              <div className="space-y-2 font-body-sm text-body-sm text-on-surface-variant">
-                <label className="flex items-center justify-between p-2 rounded-lg hover:bg-surface-subtle cursor-pointer transition-colors">
-                  <div className="flex items-center gap-2">
-                    <ContentElement
-                      contentKey="hotels.attributes-012"
-                      tag="input"
-                      className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"
-                      name="price-range"
-                      type="radio"
-                    />
-                    <span>
-                      <ContentText contentKey="hotels.text-082" />
-                    </span>
-                  </div>
-                  <span className="font-label-sm text-label-sm text-outline">
-                    <ContentText contentKey="hotels.text-083" />
-                  </span>
-                </label>
-                <label className="flex items-center justify-between p-2 rounded-lg bg-surface-subtle font-medium text-on-surface cursor-pointer">
-                  <div className="flex items-center gap-2">
-                    <ContentElement
-                      contentKey="hotels.attributes-013"
-                      tag="input"
-                      defaultChecked={true}
-                      className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"
-                      name="price-range"
-                      type="radio"
-                    />
-                    <span>
-                      <ContentText contentKey="hotels.text-084" />
-                    </span>
-                  </div>
-                  <span className="font-label-sm text-label-sm text-primary font-bold">
-                    <ContentText contentKey="hotels.text-085" />
-                  </span>
-                </label>
-                <label className="flex items-center justify-between p-2 rounded-lg hover:bg-surface-subtle cursor-pointer transition-colors">
-                  <div className="flex items-center gap-2">
-                    <ContentElement
-                      contentKey="hotels.attributes-014"
-                      tag="input"
-                      className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"
-                      name="price-range"
-                      type="radio"
-                    />
-                    <span>
-                      <ContentText contentKey="hotels.text-086" />
-                    </span>
-                  </div>
-                  <span className="font-label-sm text-label-sm text-outline">
-                    <ContentText contentKey="hotels.text-087" />
-                  </span>
-                </label>
-                <label className="flex items-center justify-between p-2 rounded-lg hover:bg-surface-subtle cursor-pointer transition-colors">
-                  <div className="flex items-center gap-2">
-                    <ContentElement
-                      contentKey="hotels.attributes-015"
-                      tag="input"
-                      className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"
-                      name="price-range"
-                      type="radio"
-                    />
-                    <span>
-                      <ContentText contentKey="hotels.text-088" />
-                    </span>
-                  </div>
-                  <span className="font-label-sm text-label-sm text-outline">
-                    <ContentText contentKey="hotels.text-089" />
-                  </span>
-                </label>
-              </div>
-              <div className="pt-2">
-                <ContentElement
-                  contentKey="hotels.attributes-016"
-                  tag="input"
-                  className="w-full accent-primary cursor-pointer"
-                  max="8000000"
-                  min="500000"
-                  step="100000"
-                  type="range"
-                />
-                <div className="flex items-center justify-between font-label-sm text-label-sm text-outline pt-1">
-                  <span>
-                    <ContentText contentKey="hotels.text-090" />
-                  </span>
-                  <span className="text-primary font-semibold">
-                    <ContentText contentKey="hotels.text-091" />
-                  </span>
-                  <span>
-                    <ContentText contentKey="hotels.text-092" />
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-3 pt-4">
-              <h3 className="font-label-lg text-label-lg text-on-surface">
-                <ContentText contentKey="hotels.text-093" />
-              </h3>
-              <div className="grid grid-cols-3 gap-2">
-                <label className="flex flex-col items-center justify-center p-2 rounded-xl bg-surface-subtle hover:bg-surface-container-low cursor-pointer transition-all has-[:checked]:bg-primary-fixed has-[:checked]:text-on-primary-fixed">
-                  <ContentElement
-                    contentKey="hotels.attributes-017"
-                    tag="input"
-                    className="sr-only"
-                    name="star-rating"
-                    type="checkbox"
-                  />
-                  <div className="flex text-gold-amber text-[14px]">
-                    <span
-                      className="material-symbols-outlined text-[16px]"
-                      style={{ fontVariationSettings: "'FILL' 1" }}
-                    >
-                      {"star"}
-                    </span>
-                    <span
-                      className="material-symbols-outlined text-[16px]"
-                      style={{ fontVariationSettings: "'FILL' 1" }}
-                    >
-                      {"star"}
-                    </span>
-                    <span
-                      className="material-symbols-outlined text-[16px]"
-                      style={{ fontVariationSettings: "'FILL' 1" }}
-                    >
-                      {"star"}
-                    </span>
-                  </div>
-                  <span className="font-label-sm text-label-sm mt-1">
-                    <ContentText contentKey="hotels.text-094" />
-                  </span>
-                </label>
-                <label className="flex flex-col items-center justify-center p-2 rounded-xl bg-surface-subtle hover:bg-surface-container-low cursor-pointer transition-all has-[:checked]:bg-primary-fixed has-[:checked]:text-on-primary-fixed">
-                  <ContentElement
-                    contentKey="hotels.attributes-018"
-                    tag="input"
-                    defaultChecked={true}
-                    className="sr-only"
-                    name="star-rating"
-                    type="checkbox"
-                  />
-                  <div className="flex text-gold-amber text-[14px]">
-                    <span
-                      className="material-symbols-outlined text-[16px]"
-                      style={{ fontVariationSettings: "'FILL' 1" }}
-                    >
-                      {"star"}
-                    </span>
-                    <span
-                      className="material-symbols-outlined text-[16px]"
-                      style={{ fontVariationSettings: "'FILL' 1" }}
-                    >
-                      {"star"}
-                    </span>
-                    <span
-                      className="material-symbols-outlined text-[16px]"
-                      style={{ fontVariationSettings: "'FILL' 1" }}
-                    >
-                      {"star"}
-                    </span>
-                    <span
-                      className="material-symbols-outlined text-[16px]"
-                      style={{ fontVariationSettings: "'FILL' 1" }}
-                    >
-                      {"star"}
-                    </span>
-                  </div>
-                  <span className="font-label-sm text-label-sm mt-1">
-                    <ContentText contentKey="hotels.text-095" />
-                  </span>
-                </label>
-                <label className="flex flex-col items-center justify-center p-2 rounded-xl bg-surface-subtle hover:bg-surface-container-low cursor-pointer transition-all has-[:checked]:bg-primary-fixed has-[:checked]:text-on-primary-fixed ring-2 ring-primary">
-                  <ContentElement
-                    contentKey="hotels.attributes-019"
-                    tag="input"
-                    defaultChecked={true}
-                    className="sr-only"
-                    name="star-rating"
-                    type="checkbox"
-                  />
-                  <div className="flex text-gold-amber text-[14px]">
-                    <span
-                      className="material-symbols-outlined text-[16px]"
-                      style={{ fontVariationSettings: "'FILL' 1" }}
-                    >
-                      {"star"}
-                    </span>
-                    <span
-                      className="material-symbols-outlined text-[16px]"
-                      style={{ fontVariationSettings: "'FILL' 1" }}
-                    >
-                      {"star"}
-                    </span>
-                    <span
-                      className="material-symbols-outlined text-[16px]"
-                      style={{ fontVariationSettings: "'FILL' 1" }}
-                    >
-                      {"star"}
-                    </span>
-                    <span
-                      className="material-symbols-outlined text-[16px]"
-                      style={{ fontVariationSettings: "'FILL' 1" }}
-                    >
-                      {"star"}
-                    </span>
-                    <span
-                      className="material-symbols-outlined text-[16px]"
-                      style={{ fontVariationSettings: "'FILL' 1" }}
-                    >
-                      {"star"}
-                    </span>
-                  </div>
-                  <span className="font-label-sm text-label-sm mt-1 font-bold">
-                    <ContentText contentKey="hotels.text-096" />
-                  </span>
-                </label>
-              </div>
-            </div>
-
-            <div className="space-y-3 pt-4">
-              <h3 className="font-label-lg text-label-lg text-on-surface">
-                <ContentText contentKey="hotels.text-097" />
-              </h3>
-              <div className="space-y-2 font-body-sm text-body-sm text-on-surface-variant">
-                <label className="flex items-center justify-between p-1.5 rounded-lg hover:bg-surface-subtle cursor-pointer">
-                  <div className="flex items-center gap-2">
-                    <ContentElement
-                      contentKey="hotels.attributes-020"
-                      tag="input"
-                      defaultChecked={true}
-                      className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"
-                      type="checkbox"
-                    />
-                    <span>
-                      <ContentText contentKey="hotels.text-098" />
-                    </span>
-                  </div>
-                  <span className="font-label-sm text-label-sm text-outline">
-                    <ContentText contentKey="hotels.text-099" />
-                  </span>
-                </label>
-                <label className="flex items-center justify-between p-1.5 rounded-lg hover:bg-surface-subtle cursor-pointer">
-                  <div className="flex items-center gap-2">
-                    <ContentElement
-                      contentKey="hotels.attributes-021"
-                      tag="input"
-                      defaultChecked={true}
-                      className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"
-                      type="checkbox"
-                    />
-                    <span>
-                      <ContentText contentKey="hotels.text-100" />
-                    </span>
-                  </div>
-                  <span className="font-label-sm text-label-sm text-outline">
-                    <ContentText contentKey="hotels.text-101" />
-                  </span>
-                </label>
-                <label className="flex items-center justify-between p-1.5 rounded-lg hover:bg-surface-subtle cursor-pointer">
-                  <div className="flex items-center gap-2">
-                    <ContentElement
-                      contentKey="hotels.attributes-022"
-                      tag="input"
-                      className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"
-                      type="checkbox"
-                    />
-                    <span>
-                      <ContentText contentKey="hotels.text-102" />
-                    </span>
-                  </div>
-                  <span className="font-label-sm text-label-sm text-outline">
-                    <ContentText contentKey="hotels.text-103" />
-                  </span>
-                </label>
-                <label className="flex items-center justify-between p-1.5 rounded-lg hover:bg-surface-subtle cursor-pointer">
-                  <div className="flex items-center gap-2">
-                    <ContentElement
-                      contentKey="hotels.attributes-023"
-                      tag="input"
-                      className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"
-                      type="checkbox"
-                    />
-                    <span>
-                      <ContentText contentKey="hotels.text-104" />
-                    </span>
-                  </div>
-                  <span className="font-label-sm text-label-sm text-outline">
-                    <ContentText contentKey="hotels.text-105" />
-                  </span>
-                </label>
-                <label className="flex items-center justify-between p-1.5 rounded-lg hover:bg-surface-subtle cursor-pointer">
-                  <div className="flex items-center gap-2">
-                    <ContentElement
-                      contentKey="hotels.attributes-024"
-                      tag="input"
-                      className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"
-                      type="checkbox"
-                    />
-                    <span>
-                      <ContentText contentKey="hotels.text-106" />
-                    </span>
-                  </div>
-                  <span className="font-label-sm text-label-sm text-outline">
-                    <ContentText contentKey="hotels.text-107" />
-                  </span>
-                </label>
-              </div>
-            </div>
-
-            <div className="space-y-3 pt-4">
-              <h3 className="font-label-lg text-label-lg text-on-surface">
-                <ContentText contentKey="hotels.text-108" />
-              </h3>
-              <div className="space-y-2 font-body-sm text-body-sm text-on-surface-variant">
-                <label className="flex items-center gap-2.5 p-1 rounded hover:bg-surface-subtle cursor-pointer">
-                  <ContentElement
-                    contentKey="hotels.attributes-025"
-                    tag="input"
-                    defaultChecked={true}
-                    className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"
-                    type="checkbox"
-                  />
-                  <span className="material-symbols-outlined text-[18px] text-primary">
-                    {"pool"}
-                  </span>
-                  <span>
-                    <ContentText contentKey="hotels.text-109" />
-                  </span>
-                </label>
-                <label className="flex items-center gap-2.5 p-1 rounded hover:bg-surface-subtle cursor-pointer">
-                  <ContentElement
-                    contentKey="hotels.attributes-026"
-                    tag="input"
-                    defaultChecked={true}
-                    className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"
-                    type="checkbox"
-                  />
-                  <span className="material-symbols-outlined text-[18px] text-secondary">
-                    {"beach_access"}
-                  </span>
-                  <span>
-                    <ContentText contentKey="hotels.text-110" />
-                  </span>
-                </label>
-                <label className="flex items-center gap-2.5 p-1 rounded hover:bg-surface-subtle cursor-pointer">
-                  <ContentElement
-                    contentKey="hotels.attributes-027"
-                    tag="input"
-                    defaultChecked={true}
-                    className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"
-                    type="checkbox"
-                  />
-                  <span className="material-symbols-outlined text-[18px] text-tertiary">
-                    {"restaurant"}
-                  </span>
-                  <span>
-                    <ContentText contentKey="hotels.text-111" />
-                  </span>
-                </label>
-                <label className="flex items-center gap-2.5 p-1 rounded hover:bg-surface-subtle cursor-pointer">
-                  <ContentElement
-                    contentKey="hotels.attributes-028"
-                    tag="input"
-                    className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"
-                    type="checkbox"
-                  />
-                  <span className="material-symbols-outlined text-[18px] text-primary">
-                    {"airport_shuttle"}
-                  </span>
-                  <span>
-                    <ContentText contentKey="hotels.text-112" />
-                  </span>
-                </label>
-                <label className="flex items-center gap-2.5 p-1 rounded hover:bg-surface-subtle cursor-pointer">
-                  <ContentElement
-                    contentKey="hotels.attributes-029"
-                    tag="input"
-                    className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"
-                    type="checkbox"
-                  />
-                  <span className="material-symbols-outlined text-[18px] text-lagoon-cyan">
-                    {"water_full"}
-                  </span>
-                  <span>
-                    <ContentText contentKey="hotels.text-113" />
-                  </span>
-                </label>
-                <label className="flex items-center gap-2.5 p-1 rounded hover:bg-surface-subtle cursor-pointer">
-                  <ContentElement
-                    contentKey="hotels.attributes-030"
-                    tag="input"
-                    className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"
-                    type="checkbox"
-                  />
-                  <span className="material-symbols-outlined text-[18px] text-secondary">
-                    {"spa"}
-                  </span>
-                  <span>
-                    <ContentText contentKey="hotels.text-114" />
-                  </span>
-                </label>
-                <label className="flex items-center gap-2.5 p-1 rounded hover:bg-surface-subtle cursor-pointer">
-                  <ContentElement
-                    contentKey="hotels.attributes-031"
-                    tag="input"
-                    className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"
-                    type="checkbox"
-                  />
-                  <span className="material-symbols-outlined text-[18px] text-gold-amber">
-                    {"child_care"}
-                  </span>
-                  <span>
-                    <ContentText contentKey="hotels.text-115" />
-                  </span>
-                </label>
-              </div>
-            </div>
-
-            <div className="space-y-3 pt-4">
-              <h3 className="font-label-lg text-label-lg text-on-surface">
-                <ContentText contentKey="hotels.text-116" />
-              </h3>
-              <div className="space-y-2 font-body-sm text-body-sm text-on-surface-variant">
-                <label className="flex items-center gap-2.5 p-1 rounded hover:bg-surface-subtle cursor-pointer">
-                  <ContentElement
-                    contentKey="hotels.attributes-032"
-                    tag="input"
-                    defaultChecked={true}
-                    className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"
-                    type="checkbox"
-                  />
-                  <span className="material-symbols-outlined text-[18px] text-secondary">
-                    {"event_available"}
-                  </span>
-                  <span>
-                    <ContentText contentKey="hotels.text-117" />
-                  </span>
-                </label>
-                <label className="flex items-center gap-2.5 p-1 rounded hover:bg-surface-subtle cursor-pointer">
-                  <ContentElement
-                    contentKey="hotels.attributes-033"
-                    tag="input"
-                    className="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"
-                    type="checkbox"
-                  />
-                  <span className="material-symbols-outlined text-[18px] text-primary">
-                    {"credit_score"}
-                  </span>
-                  <span>
-                    <ContentText contentKey="hotels.text-118" />
-                  </span>
-                </label>
-              </div>
-            </div>
-
-            <div className="p-4 rounded-xl bg-ocean-light/50 flex flex-col gap-2">
-              <div className="flex items-center gap-2 text-primary font-title-md text-title-md">
-                <span className="material-symbols-outlined text-[20px]">
-                  {"support_agent"}
-                </span>
-                <span>
-                  <ContentText contentKey="hotels.text-119" />
-                </span>
-              </div>
-              <p className="font-body-sm text-body-sm text-on-surface-variant">
-                <ContentText contentKey="hotels.text-120" />
-              </p>
-              <ContentElement
-                contentKey="hotels.attributes-034"
-                tag="a"
-                className="mt-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-ocean-deep transition-all shadow-sm action-link"
-
-                rel="noopener"
-                target="_blank"
-              >
-                <span className="material-symbols-outlined text-[16px]">
-                  {"chat"}
-                </span>
-                <span>
-                  <ContentText contentKey="hotels.text-121" />
-                </span>
-              </ContentElement>
-            </div>
-          </div>
-
-          <div className="bg-surface-container-lowest rounded-2xl p-3 shadow-sm overflow-hidden flex flex-col gap-2">
-            <ContentElement
-              contentKey="hotels.attributes-035"
-              tag="div"
-              className="relative w-full h-40 rounded-xl overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-primary/20 backdrop-blur-[1px] flex flex-col items-center justify-center text-center p-3">
-                <div className="w-10 h-10 rounded-full bg-surface-container-lowest text-primary flex items-center justify-center shadow-lg mb-1">
-                  <span className="material-symbols-outlined text-[24px]">
-                    {"pin_drop"}
-                  </span>
-                </div>
-                <span className="font-title-md text-title-md text-on-primary bg-on-background/70 px-3 py-1 rounded-full backdrop-blur-md">
-                  <ContentText contentKey="hotels.text-122" />
-                </span>
-              </div>
-            </ContentElement>
-            <p className="font-body-sm text-body-sm text-outline text-center">
-              <ContentText contentKey="hotels.text-123" />
-            </p>
-          </div>
+      <div className="grid grid-cols-1 lg:grid-cols-[290px_1fr] gap-8 items-start">
+        {/* Desktop Sidebar */}
+        <aside className="hidden lg:block bg-surface-container-lowest rounded-2xl border border-border-light shadow-card p-5">
+          {filterFormContent}
         </aside>
 
-        <div className="flex flex-col gap-6">
-          <div className="bg-surface-container-lowest p-4 rounded-2xl shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <span className="font-headline-sm text-headline-sm text-on-surface">
-                <ContentText contentKey="hotels.text-124" />
-              </span>
-              <span className="font-body-md text-body-md text-outline">
-                <ContentText contentKey="hotels.text-125" />
-              </span>
+        {/* Main Listing */}
+        <div className="space-y-5 min-w-0">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 className="text-xl sm:text-2xl font-extrabold text-on-surface">
+                {hotels.length} khách sạn &amp; resort
+              </h2>
+              <p className="text-xs text-outline mt-0.5">
+                tại Nha Trang - Cam Ranh
+              </p>
             </div>
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="font-label-sm text-label-sm text-outline uppercase hidden sm:inline">
-                <ContentText contentKey="hotels.text-126" />
-              </span>
-              <button
-                className="px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm transition-all"
-                type="button"
-              >
-                <ContentText contentKey="hotels.text-127" />
-              </button>
-              <button
-                className="px-3.5 py-1.5 rounded-full bg-surface-subtle hover:bg-surface-container text-on-surface-variant font-label-md text-label-md transition-all"
-                type="button"
-              >
-                <ContentText contentKey="hotels.text-128" />
-              </button>
-              <button
-                className="px-3.5 py-1.5 rounded-full bg-surface-subtle hover:bg-surface-container text-on-surface-variant font-label-md text-label-md transition-all"
-                type="button"
-              >
-                <ContentText contentKey="hotels.text-129" />
-              </button>
-              <button
-                className="px-3.5 py-1.5 rounded-full bg-surface-subtle hover:bg-surface-container text-on-surface-variant font-label-md text-label-md transition-all"
-                type="button"
-              >
-                <ContentText contentKey="hotels.text-130" />
-              </button>
-              <div className="ml-auto flex items-center gap-1 bg-surface-subtle p-1 rounded-xl">
-                <ContentElement
-                  contentKey="hotels.attributes-036"
-                  tag="button"
 
-                  className="p-1.5 rounded-lg bg-surface-container-lowest text-primary shadow-sm"
-                  type="button"
-                >
-                  <span className="material-symbols-outlined text-[18px]">
-                    {"view_list"}
-                  </span>
-                </ContentElement>
-                <ContentElement
-                  contentKey="hotels.attributes-037"
-                  tag="button"
+            <div className="flex items-center gap-2 relative">
+              <button
+                type="button"
+                onClick={() => setMobileFilterOpen(true)}
+                className="lg:hidden px-4 py-2 rounded-xl bg-surface-container-lowest border border-border-light text-on-surface font-bold text-sm"
+              >
+                Bộ lọc
+              </button>
 
-                  className="p-1.5 rounded-lg text-outline hover:text-on-surface"
+              <div className="relative">
+                <button
                   type="button"
+                  aria-expanded={sortOpen}
+                  onClick={() => setSortOpen((v) => !v)}
+                  className="px-4 py-2 rounded-xl bg-surface-container-lowest border border-border-light hover:border-primary text-on-surface font-bold text-sm inline-flex items-center gap-2"
                 >
-                  <span className="material-symbols-outlined text-[18px]">
-                    {"grid_view"}
+                  <span>
+                    {sortOptions.find((o) => o.id === sort)?.label || "Sắp xếp"}
                   </span>
-                </ContentElement>
+                  <img
+                    src="/images/figma/icons/chevron.svg"
+                    alt=""
+                    className="w-3.5 h-3.5"
+                  />
+                </button>
+
+                {sortOpen && (
+                  <div className="absolute right-0 mt-2 w-52 rounded-2xl bg-surface-container-lowest border border-border-light shadow-floating p-2 z-20 flex flex-col gap-1">
+                    {sortOptions.map((option) => (
+                      <button
+                        key={option.id}
+                        type="button"
+                        onClick={() => {
+                          setSort(option.id);
+                          setSortOpen(false);
+                        }}
+                        className={`text-left px-3 py-2 rounded-xl text-sm font-semibold transition-colors ${
+                          sort === option.id
+                            ? "bg-surface-container text-primary"
+                            : "text-on-surface hover:bg-surface-container-low"
+                        }`}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
 
-          <div className="card-grid-wide">
-            <CatalogCollection collectionId="hotels-collection-1">
-              <CatalogCard
-                className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row group"
-                productId="hotels-1"
-                tag="article"
-              >
-                <div className="md:w-5/12 relative h-64 md:h-auto overflow-hidden">
-                  <ProductField
-                    contentKey="field-001"
-                    id="hotels-1"
-                    field="image"
-                    tag="img"
-
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  ></ProductField>
-                  <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-                    <span className="px-2.5 py-1 rounded-md bg-sale-crimson text-on-error font-label-sm text-label-sm font-bold shadow-sm">
-                      <ContentText contentKey="field-004" />
-                    </span>
-                    <span className="px-2.5 py-1 rounded-md bg-gold-amber text-on-background font-label-sm text-label-sm font-bold shadow-sm">
-                      <ContentText contentKey="field-005" />
-                    </span>
-                  </div>
-
-                  <div className="absolute bottom-3 left-3 bg-inverse-surface/80 backdrop-blur-md text-inverse-on-surface px-2.5 py-1 rounded-lg font-label-sm text-label-sm flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px]">
-                      {"photo_camera"}
-                    </span>
-                    <span>
-                      <ContentText contentKey="field-006" />
-                    </span>
-                  </div>
-                </div>
-
-                <div className="md:w-7/12 p-5 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-1.5">
-                      <div className="flex items-center gap-1 text-gold-amber">
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span className="font-label-sm text-label-sm text-outline ml-1 font-semibold">
-                          <ContentText contentKey="field-007" />
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <div className="text-right">
-                          <p className="font-label-md text-label-md text-primary font-bold">
-                            <ContentText contentKey="field-008" />
-                          </p>
-                          <p className="font-label-sm text-label-sm text-outline">
-                            <ContentText contentKey="field-009" />
-                          </p>
-                        </div>
-                        <span className="w-9 h-9 rounded-xl bg-primary text-on-primary font-title-md text-title-md flex items-center justify-center font-bold">
-                          <ProductValue id="hotels-1" field="rating" />
-                        </span>
-                      </div>
-                    </div>
-
-                    <ProductField
-                      id="hotels-1"
-                      field="title"
-                      tag="h3"
-                      className="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors"
-                    ></ProductField>
-                    <p className="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        {"location_on"}
-                      </span>
-                      <span>
-                        <ProductValue id="hotels-1" field="location" />
-                      </span>
-                    </p>
-
-                    <div className="flex flex-wrap gap-1.5 mt-3">
-                      <span className="px-2.5 py-1 rounded-md bg-surface-subtle font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px] text-primary">
-                          {"pool"}
-                        </span>
-                        <ContentText contentKey="field-010" />
-                      </span>
-                      <span className="px-2.5 py-1 rounded-md bg-surface-subtle font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px] text-secondary">
-                          {"visibility"}
-                        </span>
-                        <ContentText contentKey="field-011" />
-                      </span>
-                      <span className="px-2.5 py-1 rounded-md bg-secondary/10 text-secondary font-label-sm text-label-sm font-semibold flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px]">
-                          {"restaurant"}
-                        </span>
-                        <ContentText contentKey="field-012" />
-                      </span>
-                    </div>
-
-                    <div className="mt-3 text-secondary font-label-sm text-label-sm flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[16px]">
-                        {"check_circle"}
-                      </span>
-                      <span>
-                        <ContentText contentKey="field-013" />
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="pt-4 mt-3 flex items-end justify-between price-actions flex-wrap gap-3">
-                    <PriceStack productId="hotels-1">
-                      <div className="flex items-baseline gap-1">
-                        <ProductField
-                          id="hotels-1"
-                          field="price"
-                          tag="span"
-                          className="font-headline-md text-headline-md text-sale-crimson font-extrabold"
-                        ></ProductField>
-                        <span className="font-body-sm text-body-sm text-outline">
-                          <ContentText contentKey="field-014" />
-                        </span>
-                      </div>
-                      <span className="font-label-sm text-label-sm text-outline block">
-                        <ContentText contentKey="field-015" />
-                      </span>
-                    </PriceStack>
-                    <div className="flex items-center gap-2">
-                      <ContentElement
-                        contentKey="field-003"
-                        tag="a"
-                        className="px-3 py-2.5 rounded-xl bg-surface-subtle hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors action-link"
-
-                        rel="noopener"
-                        target="_blank"
-                      >
-                        <span className="material-symbols-outlined text-[18px]">
-                          {"chat"}
-                        </span>
-                      </ContentElement>
-                      <button
-                        className="px-5 py-2.5 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-title-md text-title-md shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
-                        type="button"
-                      >
-                        <ContentText contentKey="field-016" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </CatalogCard>
-
-              <CatalogCard
-                className="bg-surface-container-lowest rounded-2xl border-2 border-primary/20 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row group"
-                productId="hotels-2"
-                tag="article"
-              >
-                <div className="md:w-5/12 relative h-64 md:h-auto overflow-hidden">
-                  <ProductField
-                    contentKey="field-001"
-                    id="hotels-2"
-                    field="image"
-                    tag="img"
-
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  ></ProductField>
-                  <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-                    <span className="px-2.5 py-1 rounded-md bg-secondary text-on-secondary font-label-sm text-label-sm font-bold shadow-sm">
-                      <ContentText contentKey="field-004" />
-                    </span>
-                    <span className="px-2.5 py-1 rounded-md bg-sale-crimson text-on-error font-label-sm text-label-sm font-bold shadow-sm">
-                      <ContentText contentKey="field-005" />
-                    </span>
-                  </div>
-
-                  <div className="absolute bottom-3 left-3 bg-inverse-surface/80 backdrop-blur-md text-inverse-on-surface px-2.5 py-1 rounded-lg font-label-sm text-label-sm flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px]">
-                      {"photo_camera"}
-                    </span>
-                    <span>
-                      <ContentText contentKey="field-006" />
-                    </span>
-                  </div>
-                </div>
-
-                <div className="md:w-7/12 p-5 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-1.5">
-                      <div className="flex items-center gap-1 text-gold-amber">
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span className="font-label-sm text-label-sm text-outline ml-1 font-semibold">
-                          <ContentText contentKey="field-007" />
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <div className="text-right">
-                          <p className="font-label-md text-label-md text-secondary font-bold">
-                            <ContentText contentKey="field-008" />
-                          </p>
-                          <p className="font-label-sm text-label-sm text-outline">
-                            <ContentText contentKey="field-009" />
-                          </p>
-                        </div>
-                        <span className="w-9 h-9 rounded-xl bg-secondary text-on-secondary font-title-md text-title-md flex items-center justify-center font-bold">
-                          <ProductValue id="hotels-2" field="rating" />
-                        </span>
-                      </div>
-                    </div>
-
-                    <ProductField
-                      id="hotels-2"
-                      field="title"
-                      tag="h3"
-                      className="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors"
-                    ></ProductField>
-                    <p className="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        {"location_on"}
-                      </span>
-                      <span>
-                        <ProductValue id="hotels-2" field="location" />
-                      </span>
-                    </p>
-
-                    <div className="flex flex-wrap gap-1.5 mt-3">
-                      <span className="px-2.5 py-1 rounded-md bg-gold-soft text-tertiary font-label-sm text-label-sm font-semibold flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px]">
-                          {"cookie"}
-                        </span>
-                        <ContentText contentKey="field-010" />
-                      </span>
-                      <span className="px-2.5 py-1 rounded-md bg-surface-subtle font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px] text-lagoon-cyan">
-                          {"qr_code_2"}
-                        </span>
-                        <ContentText contentKey="field-011" />
-                      </span>
-                      <span className="px-2.5 py-1 rounded-md bg-surface-subtle font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px] text-primary">
-                          {"beach_access"}
-                        </span>
-                        <ContentText contentKey="field-012" />
-                      </span>
-                    </div>
-
-                    <div className="mt-3 text-secondary font-label-sm text-label-sm flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[16px]">
-                        {"child_friendly"}
-                      </span>
-                      <span>
-                        <ContentText contentKey="field-013" />
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="pt-4 mt-3 flex items-end justify-between price-actions flex-wrap gap-3">
-                    <PriceStack productId="hotels-2">
-                      <div className="flex items-baseline gap-1">
-                        <ProductField
-                          id="hotels-2"
-                          field="price"
-                          tag="span"
-                          className="font-headline-md text-headline-md text-sale-crimson font-extrabold"
-                        ></ProductField>
-                        <span className="font-body-sm text-body-sm text-outline">
-                          <ContentText contentKey="field-014" />
-                        </span>
-                      </div>
-                      <span className="font-label-sm text-label-sm text-outline block">
-                        <ContentText contentKey="field-015" />
-                      </span>
-                    </PriceStack>
-                    <div className="flex items-center gap-2">
-                      <ContentElement
-                        contentKey="field-003"
-                        tag="a"
-                        className="px-3 py-2.5 rounded-xl bg-surface-subtle hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors action-link"
-
-                        rel="noopener"
-                        target="_blank"
-                      >
-                        <span className="material-symbols-outlined text-[18px]">
-                          {"chat"}
-                        </span>
-                      </ContentElement>
-                      <button
-                        className="px-5 py-2.5 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-title-md text-title-md shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
-                        type="button"
-                      >
-                        <ContentText contentKey="field-016" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </CatalogCard>
-
-              <CatalogCard
-                className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row group"
-                productId="hotels-3"
-                tag="article"
-              >
-                <div className="md:w-5/12 relative h-64 md:h-auto overflow-hidden">
-                  <ProductField
-                    contentKey="field-001"
-                    id="hotels-3"
-                    field="image"
-                    tag="img"
-
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  ></ProductField>
-                  <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-                    <span className="px-2.5 py-1 rounded-md bg-primary text-on-primary font-label-sm text-label-sm font-bold shadow-sm">
-                      <ContentText contentKey="field-004" />
-                    </span>
-                  </div>
-
-                  <div className="absolute bottom-3 left-3 bg-inverse-surface/80 backdrop-blur-md text-inverse-on-surface px-2.5 py-1 rounded-lg font-label-sm text-label-sm flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px]">
-                      {"photo_camera"}
-                    </span>
-                    <span>
-                      <ContentText contentKey="field-005" />
-                    </span>
-                  </div>
-                </div>
-                <div className="md:w-7/12 p-5 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-1.5">
-                      <div className="flex items-center gap-1 text-gold-amber">
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span className="font-label-sm text-label-sm text-outline ml-1 font-semibold">
-                          <ContentText contentKey="field-006" />
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <div className="text-right">
-                          <p className="font-label-md text-label-md text-secondary font-bold">
-                            <ContentText contentKey="field-007" />
-                          </p>
-                          <p className="font-label-sm text-label-sm text-outline">
-                            <ContentText contentKey="field-008" />
-                          </p>
-                        </div>
-                        <span className="w-9 h-9 rounded-xl bg-secondary text-on-secondary font-title-md text-title-md flex items-center justify-center font-bold">
-                          <ProductValue id="hotels-3" field="rating" />
-                        </span>
-                      </div>
-                    </div>
-                    <ProductField
-                      id="hotels-3"
-                      field="title"
-                      tag="h3"
-                      className="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors"
-                    ></ProductField>
-                    <p className="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        {"location_on"}
-                      </span>
-                      <span>
-                        <ProductValue id="hotels-3" field="location" />
-                      </span>
-                    </p>
-                    <div className="flex flex-wrap gap-1.5 mt-3">
-                      <span className="px-2.5 py-1 rounded-md bg-surface-subtle font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px] text-primary">
-                          {"pool"}
-                        </span>
-                        <ContentText contentKey="field-009" />
-                      </span>
-                      <span className="px-2.5 py-1 rounded-md bg-surface-subtle font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px] text-lagoon-cyan">
-                          {"theaters"}
-                        </span>
-                        <ContentText contentKey="field-010" />
-                      </span>
-                      <span className="px-2.5 py-1 rounded-md bg-surface-subtle font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px] text-secondary">
-                          {"museum"}
-                        </span>
-                        <ContentText contentKey="field-011" />
-                      </span>
-                    </div>
-                    <div className="mt-3 text-secondary font-label-sm text-label-sm flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[16px]">
-                        {"check_circle"}
-                      </span>
-                      <span>
-                        <ContentText contentKey="field-012" />
-                      </span>
-                    </div>
-                  </div>
-                  <div className="pt-4 mt-3 flex items-end justify-between price-actions flex-wrap gap-3">
-                    <PriceStack productId="hotels-3">
-                      <div className="flex items-baseline gap-1">
-                        <ProductField
-                          id="hotels-3"
-                          field="price"
-                          tag="span"
-                          className="font-headline-md text-headline-md text-sale-crimson font-extrabold"
-                        ></ProductField>
-                        <span className="font-body-sm text-body-sm text-outline">
-                          <ContentText contentKey="field-013" />
-                        </span>
-                      </div>
-                      <span className="font-label-sm text-label-sm text-outline block">
-                        <ContentText contentKey="field-014" />
-                      </span>
-                    </PriceStack>
-                    <div className="flex items-center gap-2">
-                      <ContentElement
-                        contentKey="field-003"
-                        tag="a"
-                        className="px-3 py-2.5 rounded-xl bg-surface-subtle hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors action-link"
-
-                        rel="noopener"
-                        target="_blank"
-                      >
-                        <span className="material-symbols-outlined text-[18px]">
-                          {"chat"}
-                        </span>
-                      </ContentElement>
-                      <button
-                        className="px-5 py-2.5 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-title-md text-title-md shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
-                        type="button"
-                      >
-                        <ContentText contentKey="field-015" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </CatalogCard>
-
-              <CatalogCard
-                className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row group"
-                productId="hotels-4"
-                tag="article"
-              >
-                <div className="md:w-5/12 relative h-64 md:h-auto overflow-hidden">
-                  <ProductField
-                    contentKey="field-001"
-                    id="hotels-4"
-                    field="image"
-                    tag="img"
-
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  ></ProductField>
-                  <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-                    <span className="px-2.5 py-1 rounded-md bg-tertiary-container text-on-tertiary-container font-label-sm text-label-sm font-bold shadow-sm">
-                      <ContentText contentKey="field-004" />
-                    </span>
-                  </div>
-
-                  <div className="absolute bottom-3 left-3 bg-inverse-surface/80 backdrop-blur-md text-inverse-on-surface px-2.5 py-1 rounded-lg font-label-sm text-label-sm flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px]">
-                      {"photo_camera"}
-                    </span>
-                    <span>
-                      <ContentText contentKey="field-005" />
-                    </span>
-                  </div>
-                </div>
-                <div className="md:w-7/12 p-5 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-1.5">
-                      <div className="flex items-center gap-1 text-gold-amber">
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span className="font-label-sm text-label-sm text-outline ml-1 font-semibold">
-                          <ContentText contentKey="field-006" />
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <div className="text-right">
-                          <p className="font-label-md text-label-md text-primary font-bold">
-                            <ContentText contentKey="field-007" />
-                          </p>
-                          <p className="font-label-sm text-label-sm text-outline">
-                            <ContentText contentKey="field-008" />
-                          </p>
-                        </div>
-                        <span className="w-9 h-9 rounded-xl bg-primary text-on-primary font-title-md text-title-md flex items-center justify-center font-bold">
-                          <ProductValue id="hotels-4" field="rating" />
-                        </span>
-                      </div>
-                    </div>
-                    <ProductField
-                      id="hotels-4"
-                      field="title"
-                      tag="h3"
-                      className="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors"
-                    ></ProductField>
-                    <p className="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        {"location_on"}
-                      </span>
-                      <span>
-                        <ProductValue id="hotels-4" field="location" />
-                      </span>
-                    </p>
-                    <div className="flex flex-wrap gap-1.5 mt-3">
-                      <span className="px-2.5 py-1 rounded-md bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px]">
-                          {"spa"}
-                        </span>
-                        <ContentText contentKey="field-009" />
-                      </span>
-                      <span className="px-2.5 py-1 rounded-md bg-surface-subtle font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px] text-primary">
-                          {"breakfast_dining"}
-                        </span>
-                        <ContentText contentKey="field-010" />
-                      </span>
-                      <span className="px-2.5 py-1 rounded-md bg-surface-subtle font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px] text-lagoon-cyan">
-                          {"deck"}
-                        </span>
-                        <ContentText contentKey="field-011" />
-                      </span>
-                    </div>
-                    <div className="mt-3 text-secondary font-label-sm text-label-sm flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[16px]">
-                        {"check_circle"}
-                      </span>
-                      <span>
-                        <ContentText contentKey="field-012" />
-                      </span>
-                    </div>
-                  </div>
-                  <div className="pt-4 mt-3 flex items-end justify-between price-actions flex-wrap gap-3">
-                    <PriceStack productId="hotels-4">
-                      <div className="flex items-baseline gap-1">
-                        <ProductField
-                          id="hotels-4"
-                          field="price"
-                          tag="span"
-                          className="font-headline-md text-headline-md text-sale-crimson font-extrabold"
-                        ></ProductField>
-                        <span className="font-body-sm text-body-sm text-outline">
-                          <ContentText contentKey="field-013" />
-                        </span>
-                      </div>
-                      <span className="font-label-sm text-label-sm text-outline block">
-                        <ContentText contentKey="field-014" />
-                      </span>
-                    </PriceStack>
-                    <div className="flex items-center gap-2">
-                      <ContentElement
-                        contentKey="field-003"
-                        tag="a"
-                        className="px-3 py-2.5 rounded-xl bg-surface-subtle hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors action-link"
-
-                        rel="noopener"
-                        target="_blank"
-                      >
-                        <span className="material-symbols-outlined text-[18px]">
-                          {"chat"}
-                        </span>
-                      </ContentElement>
-                      <button
-                        className="px-5 py-2.5 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-title-md text-title-md shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
-                        type="button"
-                      >
-                        <ContentText contentKey="field-015" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </CatalogCard>
-
-              <CatalogCard
-                className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row group"
-                productId="hotels-5"
-                tag="article"
-              >
-                <div className="md:w-5/12 relative h-64 md:h-auto overflow-hidden">
-                  <ProductField
-                    contentKey="field-001"
-                    id="hotels-5"
-                    field="image"
-                    tag="img"
-
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  ></ProductField>
-                  <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-                    <span className="px-2.5 py-1 rounded-md bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold shadow-sm">
-                      <ContentText contentKey="field-004" />
-                    </span>
-                  </div>
-
-                  <div className="absolute bottom-3 left-3 bg-inverse-surface/80 backdrop-blur-md text-inverse-on-surface px-2.5 py-1 rounded-lg font-label-sm text-label-sm flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px]">
-                      {"photo_camera"}
-                    </span>
-                    <span>
-                      <ContentText contentKey="field-005" />
-                    </span>
-                  </div>
-                </div>
-                <div className="md:w-7/12 p-5 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-1.5">
-                      <div className="flex items-center gap-1 text-gold-amber">
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span className="font-label-sm text-label-sm text-outline ml-1 font-semibold">
-                          <ContentText contentKey="field-006" />
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <div className="text-right">
-                          <p className="font-label-md text-label-md text-primary font-bold">
-                            <ContentText contentKey="field-007" />
-                          </p>
-                          <p className="font-label-sm text-label-sm text-outline">
-                            <ContentText contentKey="field-008" />
-                          </p>
-                        </div>
-                        <span className="w-9 h-9 rounded-xl bg-primary text-on-primary font-title-md text-title-md flex items-center justify-center font-bold">
-                          <ProductValue id="hotels-5" field="rating" />
-                        </span>
-                      </div>
-                    </div>
-                    <ProductField
-                      id="hotels-5"
-                      field="title"
-                      tag="h3"
-                      className="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors"
-                    ></ProductField>
-                    <p className="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        {"location_on"}
-                      </span>
-                      <span>
-                        <ProductValue id="hotels-5" field="location" />
-                      </span>
-                    </p>
-                    <div className="flex flex-wrap gap-1.5 mt-3">
-                      <span className="px-2.5 py-1 rounded-md bg-surface-subtle font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px] text-primary">
-                          {"beach_access"}
-                        </span>
-                        <ContentText contentKey="field-009" />
-                      </span>
-                      <span className="px-2.5 py-1 rounded-md bg-surface-subtle font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px] text-secondary">
-                          {"shopping_bag"}
-                        </span>
-                        <ContentText contentKey="field-010" />
-                      </span>
-                      <span className="px-2.5 py-1 rounded-md bg-surface-subtle font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px] text-tertiary">
-                          {"restaurant"}
-                        </span>
-                        <ContentText contentKey="field-011" />
-                      </span>
-                    </div>
-                    <div className="mt-3 text-secondary font-label-sm text-label-sm flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[16px]">
-                        {"check_circle"}
-                      </span>
-                      <span>
-                        <ContentText contentKey="field-012" />
-                      </span>
-                    </div>
-                  </div>
-                  <div className="pt-4 mt-3 flex items-end justify-between price-actions flex-wrap gap-3">
-                    <PriceStack productId="hotels-5">
-                      <div className="flex items-baseline gap-1">
-                        <ProductField
-                          id="hotels-5"
-                          field="price"
-                          tag="span"
-                          className="font-headline-md text-headline-md text-sale-crimson font-extrabold"
-                        ></ProductField>
-                        <span className="font-body-sm text-body-sm text-outline">
-                          <ContentText contentKey="field-013" />
-                        </span>
-                      </div>
-                      <span className="font-label-sm text-label-sm text-outline block">
-                        <ContentText contentKey="field-014" />
-                      </span>
-                    </PriceStack>
-                    <div className="flex items-center gap-2">
-                      <ContentElement
-                        contentKey="field-003"
-                        tag="a"
-                        className="px-3 py-2.5 rounded-xl bg-surface-subtle hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors action-link"
-
-                        rel="noopener"
-                        target="_blank"
-                      >
-                        <span className="material-symbols-outlined text-[18px]">
-                          {"chat"}
-                        </span>
-                      </ContentElement>
-                      <button
-                        className="px-5 py-2.5 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-title-md text-title-md shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
-                        type="button"
-                      >
-                        <ContentText contentKey="field-015" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </CatalogCard>
-
-              <CatalogCard
-                className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row group"
-                productId="hotels-6"
-                tag="article"
-              >
-                <div className="md:w-5/12 relative h-64 md:h-auto overflow-hidden">
-                  <ProductField
-                    contentKey="field-001"
-                    id="hotels-6"
-                    field="image"
-                    tag="img"
-
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  ></ProductField>
-                  <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-                    <span className="px-2.5 py-1 rounded-md bg-gold-amber text-on-background font-label-sm text-label-sm font-bold shadow-sm">
-                      <ContentText contentKey="field-004" />
-                    </span>
-                  </div>
-
-                  <div className="absolute bottom-3 left-3 bg-inverse-surface/80 backdrop-blur-md text-inverse-on-surface px-2.5 py-1 rounded-lg font-label-sm text-label-sm flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px]">
-                      {"photo_camera"}
-                    </span>
-                    <span>
-                      <ContentText contentKey="field-005" />
-                    </span>
-                  </div>
-                </div>
-                <div className="md:w-7/12 p-5 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-1.5">
-                      <div className="flex items-center gap-1 text-gold-amber">
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span
-                          className="material-symbols-outlined text-[16px]"
-                          style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                          {"star"}
-                        </span>
-                        <span className="font-label-sm text-label-sm text-outline ml-1 font-semibold">
-                          <ContentText contentKey="field-006" />
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <div className="text-right">
-                          <p className="font-label-md text-label-md text-primary font-bold">
-                            <ContentText contentKey="field-007" />
-                          </p>
-                          <p className="font-label-sm text-label-sm text-outline">
-                            <ContentText contentKey="field-008" />
-                          </p>
-                        </div>
-                        <span className="w-9 h-9 rounded-xl bg-primary text-on-primary font-title-md text-title-md flex items-center justify-center font-bold">
-                          <ProductValue id="hotels-6" field="rating" />
-                        </span>
-                      </div>
-                    </div>
-                    <ProductField
-                      id="hotels-6"
-                      field="title"
-                      tag="h3"
-                      className="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors"
-                    ></ProductField>
-                    <p className="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        {"location_on"}
-                      </span>
-                      <span>
-                        <ProductValue id="hotels-6" field="location" />
-                      </span>
-                    </p>
-                    <div className="flex flex-wrap gap-1.5 mt-3">
-                      <span className="px-2.5 py-1 rounded-md bg-surface-subtle font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px] text-primary">
-                          {"restaurant_menu"}
-                        </span>
-                        <ContentText contentKey="field-009" />
-                      </span>
-                      <span className="px-2.5 py-1 rounded-md bg-surface-subtle font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px] text-secondary">
-                          {"pool"}
-                        </span>
-                        <ContentText contentKey="field-010" />
-                      </span>
-                      <span className="px-2.5 py-1 rounded-md bg-surface-subtle font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px] text-tertiary">
-                          {"airport_shuttle"}
-                        </span>
-                        <ContentText contentKey="field-011" />
-                      </span>
-                    </div>
-                    <div className="mt-3 text-secondary font-label-sm text-label-sm flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[16px]">
-                        {"check_circle"}
-                      </span>
-                      <span>
-                        <ContentText contentKey="field-012" />
-                      </span>
-                    </div>
-                  </div>
-                  <div className="pt-4 mt-3 flex items-end justify-between price-actions flex-wrap gap-3">
-                    <PriceStack productId="hotels-6">
-                      <div className="flex items-baseline gap-1">
-                        <ProductField
-                          id="hotels-6"
-                          field="price"
-                          tag="span"
-                          className="font-headline-md text-headline-md text-sale-crimson font-extrabold"
-                        ></ProductField>
-                        <span className="font-body-sm text-body-sm text-outline">
-                          <ContentText contentKey="field-013" />
-                        </span>
-                      </div>
-                      <span className="font-label-sm text-label-sm text-outline block">
-                        <ContentText contentKey="field-014" />
-                      </span>
-                    </PriceStack>
-                    <div className="flex items-center gap-2">
-                      <ContentElement
-                        contentKey="field-003"
-                        tag="a"
-                        className="px-3 py-2.5 rounded-xl bg-surface-subtle hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors action-link"
-
-                        rel="noopener"
-                        target="_blank"
-                      >
-                        <span className="material-symbols-outlined text-[18px]">
-                          {"chat"}
-                        </span>
-                      </ContentElement>
-                      <button
-                        className="px-5 py-2.5 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-title-md text-title-md shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
-                        type="button"
-                      >
-                        <ContentText contentKey="field-015" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </CatalogCard>
-            </CatalogCollection>
+          <div className="space-y-4">
+            {hotels.map((hotel) => (
+              <HotelCard key={hotel.id} product={hotel} search={search} />
+            ))}
+            {hotels.length === 0 && (
+              <div className="bg-surface-container-lowest rounded-2xl border border-border-light p-10 text-center space-y-3">
+                <p className="font-bold text-on-surface">
+                  Không tìm thấy khách sạn phù hợp với bộ lọc hiện tại.
+                </p>
+                <button
+                  type="button"
+                  onClick={resetFilters}
+                  className="px-5 py-2.5 rounded-full bg-primary text-on-primary font-bold text-sm"
+                >
+                  Đặt lại bộ lọc
+                </button>
+              </div>
+            )}
           </div>
 
-          <ContentElement
-            contentKey="hotels.attributes-038"
-            tag="nav"
-
-            className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 pb-2"
-          >
-            <p className="font-body-sm text-body-sm text-on-surface-variant">
-              <ContentText contentKey="hotels.text-131" />
-              <span className="font-semibold text-on-surface">
-                <ContentText contentKey="hotels.text-132" />
-              </span>
-              <ContentText contentKey="hotels.text-133" />
-              <span className="font-semibold text-on-surface">
-                <ContentText contentKey="hotels.text-134" />
-              </span>
-              <ContentText contentKey="hotels.text-135" />
-            </p>
-            <div className="flex items-center gap-1">
-              <ContentElement
-                contentKey="hotels.attributes-039"
-                tag="button"
-
-                className="w-10 h-10 rounded-xl bg-surface-container-lowest hover:bg-surface-container flex items-center justify-center text-outline hover:text-on-surface disabled:opacity-40 transition-colors"
-                disabled={true}
-                type="button"
-              >
-                <span className="material-symbols-outlined text-[20px]">
-                  {"chevron_left"}
-                </span>
-              </ContentElement>
-              <button
-                className="w-10 h-10 rounded-xl bg-primary text-on-primary font-label-md text-label-md font-bold shadow-sm"
-                type="button"
-              >
-                <ContentText contentKey="hotels.text-136" />
-              </button>
-              <button
-                className="w-10 h-10 rounded-xl bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors"
-                type="button"
-              >
-                <ContentText contentKey="hotels.text-137" />
-              </button>
-              <button
-                className="w-10 h-10 rounded-xl bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors"
-                type="button"
-              >
-                <ContentText contentKey="hotels.text-138" />
-              </button>
-              <span className="px-2 text-outline font-label-md">
-                <ContentText contentKey="hotels.text-139" />
-              </span>
-              <button
-                className="w-10 h-10 rounded-xl bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors"
-                type="button"
-              >
-                <ContentText contentKey="hotels.text-140" />
-              </button>
-              <ContentElement
-                contentKey="hotels.attributes-040"
-                tag="button"
-
-                className="w-10 h-10 rounded-xl bg-surface-container-lowest hover:bg-surface-container flex items-center justify-center text-on-surface hover:text-primary transition-colors"
-                type="button"
-              >
-                <span className="material-symbols-outlined text-[20px]">
-                  {"chevron_right"}
-                </span>
-              </ContentElement>
-            </div>
-          </ContentElement>
+          <p className="text-xs text-outline pt-2">
+            Hiển thị 1 - {hotels.length} trên tổng số {hotels.length} khách sạn
+          </p>
         </div>
       </div>
+
+      {/* Mobile Filter Drawer */}
+      {mobileFilterOpen && (
+        <div className="fixed inset-0 z-50 bg-destination-scrim/50 flex justify-end lg:hidden">
+          <div className="w-full max-w-sm bg-surface-container-lowest h-full overflow-y-auto p-5">
+            <div className="flex justify-end mb-2">
+              <button
+                type="button"
+                onClick={() => setMobileFilterOpen(false)}
+                className="text-sm font-bold text-outline hover:text-on-surface"
+              >
+                Đóng ✕
+              </button>
+            </div>
+            {filterFormContent}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

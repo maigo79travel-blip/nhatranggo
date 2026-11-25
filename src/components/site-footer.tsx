@@ -3,6 +3,14 @@ import { useSiteData } from "@/components/content";
 import { contactInfo } from "@/lib/content-values";
 import { ContentText, ContentElement } from "@/components/content";
 import type { ReactNode } from "react";
+import brand from "@/config/brand.json";
+
+const socialLinks = [
+  { label: "Facebook", icon: "/images/figma/icons/social-facebook.svg" },
+  { label: "Instagram", icon: "/images/figma/icons/social-instagram.svg" },
+  { label: "YouTube", icon: "/images/figma/icons/social-youtube.svg" },
+  { label: "TikTok", icon: "/images/figma/icons/social-tiktok.svg" },
+];
 export function SiteFooter({
   informationLinks,
 }: {
@@ -21,7 +29,7 @@ export function SiteFooter({
               <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 bg-surface-container-low flex items-center justify-center">
                 <img
                   src="/images/figma/logo-mark.png"
-                  alt="NhaTrangGo"
+                  alt={brand.name}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -38,34 +46,16 @@ export function SiteFooter({
               <ContentText contentKey="footer.text-025" />
             </p>
             <div className="flex items-center gap-3 pt-1">
-              <a
-                href="#lien-he"
-                aria-label="Facebook"
-                className="w-8 h-8 rounded-lg bg-surface-container-lowest border border-border-light flex items-center justify-center hover:border-primary transition-colors"
-              >
-                <img src="/images/figma/social-facebook.svg" alt="" className="w-5 h-5" />
-              </a>
-              <a
-                href="#lien-he"
-                aria-label="Instagram"
-                className="w-8 h-8 rounded-lg bg-surface-container-lowest border border-border-light flex items-center justify-center hover:border-primary transition-colors"
-              >
-                <img src="/images/figma/social-instagram.svg" alt="" className="w-5 h-5" />
-              </a>
-              <a
-                href="#lien-he"
-                aria-label="YouTube"
-                className="w-8 h-8 rounded-lg bg-surface-container-lowest border border-border-light flex items-center justify-center hover:border-primary transition-colors"
-              >
-                <img src="/images/figma/social-youtube.svg" alt="" className="w-5 h-5" />
-              </a>
-              <a
-                href="#lien-he"
-                aria-label="TikTok"
-                className="w-8 h-8 rounded-lg bg-surface-container-lowest border border-border-light flex items-center justify-center hover:border-primary transition-colors"
-              >
-                <img src="/images/figma/social-tiktok.svg" alt="" className="w-5 h-5" />
-              </a>
+              {socialLinks.map((item) => (
+                <a
+                  key={item.label}
+                  href="#lien-he"
+                  aria-label={item.label}
+                  className="w-8 h-8 rounded-lg bg-surface-container-lowest border border-border-light flex items-center justify-center hover:border-primary transition-colors"
+                >
+                  <img src={item.icon} alt="" className="w-5 h-5" />
+                </a>
+              ))}
             </div>
           </div>
           <div className="lg:col-span-3 flex flex-col gap-3">
@@ -188,36 +178,10 @@ export function SiteFooter({
             </div>
           </div>
         </div>
-        <div className="pt-6 border-t border-border-light flex flex-col md:flex-row items-center justify-between gap-4 font-body-sm text-sm text-on-surface">
+        <div className="pt-6 border-t border-border-light flex items-center justify-between gap-4 font-body-sm text-sm text-on-surface">
           <p className="font-medium">
             <ContentText contentKey="footer.text-052" />
           </p>
-          <div className="flex items-center gap-5 text-sm text-outline">
-            <ContentElement
-              contentKey="footer.attributes-017"
-              tag="a"
-              className="hover:text-primary transition-colors"
-              data-path="dieu-khoan-su-dung"
-            >
-              <ContentText contentKey="footer.text-053" />
-            </ContentElement>
-            <ContentElement
-              contentKey="footer.attributes-018"
-              tag="a"
-              className="hover:text-primary transition-colors"
-              data-path="chinh-sach-bao-mat"
-            >
-              <ContentText contentKey="footer.text-054" />
-            </ContentElement>
-            <ContentElement
-              contentKey="footer.attributes-019"
-              tag="a"
-              className="hover:text-primary transition-colors"
-              data-path="lien-he"
-            >
-              <ContentText contentKey="footer.text-055" />
-            </ContentElement>
-          </div>
         </div>
       </div>
     </footer>

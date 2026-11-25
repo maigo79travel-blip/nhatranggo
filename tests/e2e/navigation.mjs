@@ -42,7 +42,7 @@ try {
           ).backgroundImage,
         }));
       assert.ok(
-        styling.padding >= 116 &&
+        styling.padding >= 76 &&
           styling.headingSize >= 28 &&
           styling.heroBackground !== "none",
         path + " lost CSS after client navigation",

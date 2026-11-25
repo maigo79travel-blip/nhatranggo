@@ -43,7 +43,7 @@ export async function HomeReviews() {
                   src={article.image}
                   alt=""
                   loading="lazy"
-                  className="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full aspect-[16/10] object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </a>
             )}
@@ -56,7 +56,11 @@ export async function HomeReviews() {
                   <span className="material-symbols-outlined text-[16px] text-primary" aria-hidden="true">
                     calendar_today
                   </span>
-                  <span>{article.category || "Cẩm nang Nha Trang"}</span>
+                  <span>
+                    {article.updated_at
+                      ? new Date(article.updated_at).toLocaleDateString("vi-VN")
+                      : article.category || "Nha Trang"}
+                  </span>
                 </span>
                 <a
                   className="text-on-surface hover:text-primary font-semibold inline-flex items-center"

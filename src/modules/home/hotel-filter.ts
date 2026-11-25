@@ -1,24 +1,21 @@
 import type { Product } from "@/lib/types";
-import { normalizeSearch } from "@/modules/travel/search";
+import { productSearchBlob } from "@/modules/travel/search";
+
 export type HomeHotelFilter =
-  "all" | "cam-ranh" | "nha-trang" | "beach" | "pool";
+  | "all"
+  | "near-beach"
+  | "family"
+  | "resort"
+  | "special-deal";
+
 export function matchesHotelFilter(product: Product, filter: HomeHotelFilter) {
   if (filter === "all") return true;
-  const text = normalizeSearch(
-    [
-      product.title,
-      product.location,
-      product.description,
-      ...Object.values(product.content || {})
-        .filter((entry) => entry.kind === "text")
-        .map((entry) => String(entry.value)),
-    ].join(" "),
-  );
+  const text = productSearchBlob(product);
   const terms: Record<Exclude<HomeHotelFilter, "all">, string[]> = {
-    "cam-ranh": ["cam ranh"],
-    "nha-trang": ["nha trang"],
-    beach: ["bien", "beach"],
-    pool: ["vo cuc", "infinity"],
+    "near-beach": ["bien", "bai dai", "tran phu", "beach"],
+    family: ["gia dinh", "tre em", "cho be", "duoi 12", "water park", "cinema", "can ho"],
+    resort: ["resort"],
+    "special-deal": ["mien phi", "tang", "giam", "uu dai"],
   };
   return terms[filter].some((term) => text.includes(term));
 }

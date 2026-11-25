@@ -14,14 +14,32 @@ function publicOrigin(request: Request) {
 }
 
 export function sameOrigin(request: Request) {
+  const expected = publicOrigin(request);
   const origin = request.headers.get("origin");
-  if (!origin || origin === publicOrigin(request)) return true;
-  if (process.env.VERCEL_ENV === "preview") {
-    return [process.env.VERCEL_URL, process.env.VERCEL_BRANCH_URL].some(
-      (host) => host && origin === `https://${host}`,
-    );
+  if (origin) {
+    if (origin === expected) return true;
+    if (process.env.VERCEL_ENV === "preview") {
+      return [process.env.VERCEL_URL, process.env.VERCEL_BRANCH_URL].some(
+        (host) => host && origin === `https://${host}`,
+      );
+    }
+    return false;
   }
-  return false;
+
+  // SEC-001: When Origin is omitted, reject browser cross-site fetches and mismatched Referers.
+  const fetchSite = request.headers.get("sec-fetch-site");
+  if (fetchSite && fetchSite !== "same-origin" && fetchSite !== "none") {
+    return false;
+  }
+  const referer = request.headers.get("referer");
+  if (referer) {
+    try {
+      return new URL(referer).origin === expected;
+    } catch {
+      return false;
+    }
+  }
+  return true;
 }
 
 export function secureCookies(request: Request) {
@@ -39,7 +57,9 @@ export async function rateLimit(
 ) {
   const address =
     process.env.VERCEL === "1" || process.env.TRUST_PROXY === "true"
-      ? request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local"
+      ? request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+        request.headers.get("x-real-ip")?.trim() ||
+        "local"
       : "direct";
   const key = createHash("sha256")
     .update(`${scope}:${address}:${identity}`)

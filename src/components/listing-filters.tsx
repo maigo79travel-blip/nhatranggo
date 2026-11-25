@@ -8,6 +8,7 @@ import { sortCatalogCards } from "./catalog/sort-cards";
 export function ListingFilters({ products }: { products: Product[] }) {
   const pathname = usePathname();
   useEffect(() => {
+    if (pathname === "/khach-san") return;
     const aside = document.querySelector("aside");
     const cards = () =>
       Array.from(document.querySelectorAll<HTMLElement>("[data-product-id]"));

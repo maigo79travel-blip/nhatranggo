@@ -37,7 +37,7 @@ export function HomeTransfers() {
             tag="div"
             className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700"
           ></ContentElement>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#001a29]/20 to-[#001a29]/90"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-destination-scrim/20 to-destination-scrim/90"></div>
           <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4 text-on-primary">
             <div>
               <div className="flex items-center gap-2 mb-1">
@@ -79,7 +79,7 @@ export function HomeTransfers() {
                 tag="div"
                 className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700"
               ></ContentElement>
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#001a29]/25 to-[#001a29]/90"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-destination-scrim/25 to-destination-scrim/90"></div>
               <div className="absolute bottom-4 left-4 right-4 text-on-primary">
                 <div className="flex items-center gap-1.5 mb-0.5">
                   <span className="material-symbols-outlined text-[18px] text-white shrink-0">

@@ -11,7 +11,7 @@ export function HomeHero() {
         >
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-r from-[#E3F7FF]/90 via-[#E3F7FF]/55 to-transparent"
+            className="absolute inset-0 bg-gradient-to-r from-hero-overlay/90 via-hero-overlay/55 to-transparent"
           />
           <div className="relative site-container py-10 md:py-14 pb-24 md:pb-28 w-full">
             <div className="max-w-2xl">
@@ -99,6 +99,16 @@ export function HomeHero() {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="mt-6 rounded-2xl bg-surface-container-low/80 border border-border-light px-4 py-2.5 flex items-center gap-2 text-xs sm:text-sm text-on-surface-variant">
+            <span className="material-symbols-outlined text-[16px] text-primary shrink-0" aria-hidden="true">
+              bolt
+            </span>
+            <p className="truncate">
+              Vừa đặt phòng tại <strong className="text-on-surface">Cam Lâm, Khánh Hòa</strong>: Khách hàng{" "}
+              <strong className="text-primary">0888••••••</strong> vừa giữ chỗ thành công 1 Phòng Deluxe Ocean View!
+            </p>
           </div>
         </div>
       </section>

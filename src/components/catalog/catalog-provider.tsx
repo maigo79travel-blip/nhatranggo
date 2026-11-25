@@ -100,7 +100,10 @@ export function CatalogProvider({
 
       if (el.closest("[data-product-id]")) return;
 
-      if (/Giá thấp nhất|Đánh giá cao nhất|Ưu đãi tốt nhất/.test(text)) {
+      if (
+        pathname !== "/khach-san" &&
+        /Giá thấp nhất|Đánh giá cao nhất|Ưu đãi tốt nhất/.test(text)
+      ) {
         const cards = Array.from(
           document.querySelectorAll<HTMLElement>("[data-product-id]"),
         );
@@ -115,7 +118,11 @@ export function CatalogProvider({
         );
       }
 
-      if (pathname !== "/" && /Tìm kiếm|Tìm Kiếm|Tìm tour ngay/.test(text)) {
+      if (
+        pathname !== "/" &&
+        pathname !== "/khach-san" &&
+        /Tìm kiếm|Tìm Kiếm|Tìm tour ngay/.test(text)
+      ) {
         event.preventDefault();
         const form = el.closest("form") || document.querySelector("form");
         const query =

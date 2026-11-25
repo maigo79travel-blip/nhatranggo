@@ -1,5 +1,7 @@
 "use client";
 import { useState, type FormEvent } from "react";
+import { ContentText } from "@/components/content";
+import brand from "@/config/brand.json";
 
 export function HomeFaq() {
   const [email, setEmail] = useState("");
@@ -14,9 +16,9 @@ export function HomeFaq() {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
-          name: "Đăng ký nhận ưu đãi",
+          name: brand.name,
           email: email.trim(),
-          message: "Đăng ký nhận ưu đãi độc quyền từ NhaTrangGo",
+          message: `Newsletter subscription (${brand.name})`,
         }),
       });
       if (!response.ok) throw new Error();
@@ -35,17 +37,20 @@ export function HomeFaq() {
       >
         <div className="relative z-10 w-full md:pl-[22%] max-w-4xl">
           <h2 className="font-headline-lg text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
-            Nhận ưu đãi độc quyền từ NhaTrangGo
+            <ContentText contentKey="home.text-166" />
           </h2>
           <p className="font-body-md text-sm sm:text-base text-white/95 mt-2">
-            Đăng ký để không bỏ lỡ các chương trình khuyến mãi, tour hot và bí kíp du lịch.
+            <ContentText contentKey="home.text-167" />
           </p>
           <form
             onSubmit={handleSubmit}
             className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 max-w-2xl"
           >
-            <label className="flex-1 min-w-0 bg-white rounded-full px-5 h-12 flex items-center gap-3 shadow-sm">
-              <span className="material-symbols-outlined text-[20px] text-outline shrink-0" aria-hidden="true">
+            <label className="flex-1 min-w-0 bg-surface-container-lowest rounded-full px-5 h-12 flex items-center gap-3 shadow-sm">
+              <span
+                className="material-symbols-outlined text-[20px] text-outline shrink-0"
+                aria-hidden="true"
+              >
                 mail
               </span>
               <input
@@ -61,14 +66,14 @@ export function HomeFaq() {
             <button
               type="submit"
               disabled={status === "busy"}
-              className="h-12 px-6 rounded-xl bg-primary hover:bg-ocean-deep text-white font-bold text-sm sm:text-base shadow-md transition-colors shrink-0 disabled:opacity-60"
+              className="h-12 px-6 rounded-full bg-primary hover:bg-ocean-deep text-on-primary font-bold text-sm sm:text-base shadow-md transition-colors shrink-0 disabled:opacity-60"
             >
               {status === "busy" ? "Đang gửi..." : "Đăng ký ngay"}
             </button>
           </form>
           {status === "done" && (
             <p role="status" className="mt-2.5 text-sm font-semibold text-white">
-              Đăng ký thành công! Chúng tôi sẽ gửi ưu đãi mới nhất đến email của bạn.
+              Đăng ký thành công!
             </p>
           )}
           {status === "error" && (

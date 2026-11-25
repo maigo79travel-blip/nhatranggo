@@ -11,6 +11,7 @@ import { LanguageSelector } from "@/modules/settings/language-selector";
 import { MobileNav } from "./catalog/mobile-nav";
 
 import { usePathname } from "next/navigation";
+import brand from "@/config/brand.json";
 function HeaderNavLink({
   children,
   href,
@@ -55,7 +56,7 @@ export function SiteHeader() {
           <div className="w-11 h-11 rounded-xl overflow-hidden shrink-0 bg-surface-container-low flex items-center justify-center">
             <img
               src="/images/figma/logo-mark.png"
-              alt="NhaTrangGo"
+              alt={brand.name}
               className="w-full h-full object-cover"
             />
           </div>

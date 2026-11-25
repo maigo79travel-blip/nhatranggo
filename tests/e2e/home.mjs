@@ -109,15 +109,15 @@ try {
   const originalIds = await hotels
     .locator("[data-product-id]")
     .evaluateAll((cards) => cards.map((card) => card.dataset.productId));
-  assert.ok(originalIds.includes("home-4") && originalIds.includes("home-5"));
+  assert.ok(originalIds.includes("hotels-1") && originalIds.includes("hotels-2"));
   const otherCount =
     (await page.locator("main [data-product-id]").count()) - originalIds.length;
   for (const [filter, present, absent] of [
-    ["cam-ranh", "home-5", "home-4"],
-    ["nha-trang", "home-4", "home-5"],
-    ["beach", "home-4", null],
-    ["pool", "home-4", "home-5"],
-    ["all", "home-4", null],
+    ["near-beach", "hotels-1", null],
+    ["family", "hotels-2", "hotels-1"],
+    ["resort", "hotels-2", "hotels-1"],
+    ["special-deal", "hotels-1", null],
+    ["all", "hotels-1", null],
   ]) {
     await hotels.locator(`[data-hotel-filter="${filter}"]`).click();
     await expect(

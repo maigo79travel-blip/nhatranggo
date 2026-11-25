@@ -13,7 +13,8 @@ const config: NextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           {
             key: "Content-Security-Policy",
-            value: "frame-ancestors 'none'; base-uri 'self'; object-src 'none'",
+            value:
+              "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; object-src 'none'",
           },
         ],
       },

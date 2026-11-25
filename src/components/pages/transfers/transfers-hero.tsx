@@ -9,7 +9,7 @@ export function TransfersHero() {
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-r from-[#E3F7FF]/95 via-[#E3F7FF]/75 to-background/60 pointer-events-none"
+        className="absolute inset-0 bg-gradient-to-r from-hero-overlay/95 via-hero-overlay/75 to-background/60 pointer-events-none"
       />
       <div className="site-container relative z-10">
         <div className="max-w-2xl pt-4 pb-10">
@@ -82,8 +82,8 @@ export function TransfersHero() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 py-6">
-            <div className="bg-surface-subtle rounded-2xl p-3.5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 py-6 items-end">
+            <div className="lg:col-span-3 bg-surface-subtle border border-border-light rounded-2xl p-3.5">
               <label
                 htmlFor="pickup-select"
                 className="block font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1.5"
@@ -101,7 +101,7 @@ export function TransfersHero() {
               </ContentElement>
             </div>
 
-            <div className="bg-surface-subtle rounded-2xl p-3.5">
+            <div className="lg:col-span-3 bg-surface-subtle border border-border-light rounded-2xl p-3.5">
               <label
                 htmlFor="dropoff-select"
                 className="block font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1.5"
@@ -119,27 +119,27 @@ export function TransfersHero() {
               </ContentElement>
             </div>
 
-            <div className="bg-surface-subtle rounded-2xl p-3.5">
+            <div className="lg:col-span-2 bg-surface-subtle border border-border-light rounded-2xl p-3.5">
               <span className="block font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1.5">
                 <ContentText contentKey="transfers.text-052" />
               </span>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-1.5">
                 <ContentElement
                   contentKey="transfers.attributes-006"
                   tag="input"
                   type="date"
-                  className="w-full bg-transparent font-body-md text-body-md text-on-surface focus:outline-none"
+                  className="w-full bg-transparent font-body-sm text-body-sm text-on-surface focus:outline-none"
                 />
                 <ContentElement
                   contentKey="transfers.attributes-007"
                   tag="input"
                   type="time"
-                  className="w-full bg-transparent font-body-md text-body-md text-on-surface focus:outline-none"
+                  className="w-full bg-transparent font-body-sm text-body-sm text-on-surface focus:outline-none"
                 />
               </div>
             </div>
 
-            <div className="bg-surface-subtle rounded-2xl p-3.5">
+            <div className="lg:col-span-2 bg-surface-subtle border border-border-light rounded-2xl p-3.5">
               <span className="block font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1.5">
                 <ContentText contentKey="transfers.text-053" />
               </span>
@@ -150,68 +150,64 @@ export function TransfersHero() {
                 className="w-full bg-transparent font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none"
               />
             </div>
+
+            <div className="lg:col-span-2">
+              <button
+                id="btn-search-fare"
+                type="button"
+                className="w-full min-h-[68px] px-4 py-3 rounded-2xl bg-primary hover:bg-ocean-deep text-on-primary font-label-lg text-label-lg font-bold shadow-sm transition-all flex items-center justify-center gap-1.5"
+              >
+                <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
+                  search
+                </span>
+                <span className="whitespace-normal text-center leading-tight">
+                  <ContentText contentKey="transfers.text-060" />
+                </span>
+              </button>
+            </div>
           </div>
 
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-border-light/40">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-              <div className="flex items-center gap-2">
-                <span className="font-label-lg text-label-lg text-on-surface-variant">
-                  <ContentText contentKey="transfers.text-054" />:
-                </span>
-                <span
-                  id="selected-vehicle-label"
-                  className="font-title-md text-title-md text-primary font-semibold"
-                >
-                  <ContentText contentKey="transfers.text-055" />
-                </span>
-              </div>
-              <div className="flex flex-wrap items-center gap-2">
-                <button
-                  aria-pressed={true}
-                  type="button"
-                  data-veh="4cho"
-                  data-name="Xe 4 chỗ Sedan (Vios, Accent, City)"
-                  className="vehicle-chip px-4 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md transition-all"
-                >
-                  <ContentText contentKey="transfers.text-056" />
-                </button>
-                <button
-                  aria-pressed={false}
-                  type="button"
-                  data-veh="7cho"
-                  data-name="Xe 7 chỗ MPV/SUV (Xpander, Innova, Fortuner)"
-                  className="vehicle-chip px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md transition-all"
-                >
-                  <ContentText contentKey="transfers.text-057" />
-                </button>
-                <button
-                  aria-pressed={false}
-                  type="button"
-                  data-veh="16cho"
-                  data-name="Xe 16 chỗ (Solati, Transit)"
-                  className="vehicle-chip px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md transition-all"
-                >
-                  <ContentText contentKey="transfers.text-058" />
-                </button>
-                <button
-                  aria-pressed={false}
-                  type="button"
-                  data-veh="limo9"
-                  data-name="Limousine 9 chỗ VIP"
-                  className="vehicle-chip px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md transition-all"
-                >
-                  <ContentText contentKey="transfers.text-059" />
-                </button>
-              </div>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 pb-6 border-b border-border-light/40">
+            <div className="flex items-center gap-2">
+              <span className="font-label-lg text-label-lg text-on-surface-variant">
+                <ContentText contentKey="transfers.text-054" />:
+              </span>
+              <span
+                id="selected-vehicle-label"
+                className="font-title-md text-title-md text-primary font-semibold"
+              >
+                <ContentText contentKey="transfers.text-055" />
+              </span>
             </div>
-
-            <button
-              id="btn-search-fare"
-              type="button"
-              className="px-7 py-3.5 rounded-xl bg-gradient-to-r from-primary to-ocean-deep hover:shadow-lg text-on-primary font-label-lg text-label-lg font-bold shadow-md transition-all shrink-0"
-            >
-              <ContentText contentKey="transfers.text-060" />
-            </button>
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                aria-pressed={true}
+                type="button"
+                data-veh="4cho"
+                data-name="Xe 4–5 chỗ (Sedan)"
+                className="vehicle-chip px-4 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md transition-all"
+              >
+                4–5 Chỗ
+              </button>
+              <button
+                aria-pressed={false}
+                type="button"
+                data-veh="7cho"
+                data-name="Xe 7 chỗ (MPV / SUV)"
+                className="vehicle-chip px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md transition-all"
+              >
+                7 Chỗ
+              </button>
+              <button
+                aria-pressed={false}
+                type="button"
+                data-veh="16cho"
+                data-name="Xe 16 chỗ (Solati / Transit)"
+                className="vehicle-chip px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md transition-all"
+              >
+                16 Chỗ
+              </button>
+            </div>
           </div>
 
           <div className="mt-6 flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-ocean-light/40 rounded-2xl p-5">
