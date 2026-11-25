@@ -11,7 +11,7 @@ export default function ErrorPage({ reset }: { reset: () => void }) {
         cloud_off
       </span>
       <h1 className="text-3xl font-bold">Chưa thể tải nội dung</h1>
-      <p className="text-on-surface-variant">Vui lòng thử lại sau ít phút.</p>
+      <p className="text-outline">Vui lòng thử lại sau ít phút.</p>
       <button type="button" className="public-primary-button" onClick={reset}>
         Thử lại
       </button>

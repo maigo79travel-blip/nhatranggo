@@ -1,15 +1,18 @@
 "use client";
-import { useRef, useState } from "react";
-import { ContentLink, ContentText } from "@/components/content";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { ContentText, ContentElement } from "@/components/content";
 import brand from "@/config/brand.json";
 
 const commitments = [
   {
     id: "price",
-    icon: "sell",
+    icon: "/images/figma/icons/commit-price.svg",
+    iconBg: "bg-surface-container",
     title: "Giá Minh Bạch – Không Phí Ẩn",
     summary:
       "Mức giá hiển thị là giá thanh toán cuối cùng, đã bao gồm 100% thuế VAT, phí dịch vụ và các khoản phụ thu (nếu có). Cam kết hoàn tiền chênh lệch nếu tìm thấy giá cùng dịch vụ thấp hơn.",
+    cta: "Xem chi tiết",
     detailTitle: "Chính sách Giá Minh Bạch – Không Phí Ẩn",
     detailPoints: [
       "Giá công bố đã bao gồm thuế VAT và phí dịch vụ khách sạn.",
@@ -19,17 +22,22 @@ const commitments = [
   },
   {
     id: "support",
-    icon: "headset_mic",
+    icon: "/images/figma/icons/commit-support.svg",
+    iconBg: "bg-surface-container",
     title: "Giữ Phòng & Chăm Sóc Zalo 24/7",
     summary:
       "Đội ngũ chuyên viên du lịch đồng hành 24/7, hỗ trợ đặt phòng, tư vấn hành trình và giải đáp mọi thắc mắc nhanh chóng, tận tâm.",
+    cta: "Liên hệ hỗ trợ",
+    href: "/lien-he",
   },
   {
     id: "flexible",
-    icon: "sync",
+    icon: "/images/figma/icons/commit-flexible.svg",
+    iconBg: "bg-gold-soft",
     title: "Đổi Ngày Linh Hoạt & Hoàn Tiền Nhanh",
     summary:
       "Hỗ trợ đổi ngày lưu trú linh hoạt, đảm bảo quyền lợi tối đa. Nếu cần, chúng tôi sẽ hoàn tiền nhanh theo chính sách trong 2–4 giờ làm việc.",
+    cta: "Xem chính sách",
     detailTitle: "Chính sách Đổi Ngày Linh Hoạt & Hoàn Tiền Nhanh",
     detailPoints: [
       "Hỗ trợ đổi ngày nhận/trả phòng miễn phí theo điều kiện từng gói phòng.",
@@ -39,148 +47,185 @@ const commitments = [
   },
 ];
 
-const credentials = [
-  ["shield-check", "hotels.text-150"],
-  ["pci-dss", "hotels.text-151"],
-] as const;
-
 export function HotelsFaq() {
-  const [activePolicy, setActivePolicy] = useState<
-    (typeof commitments)[number] | null
-  >(null);
-  const dialog = useRef<HTMLDialogElement>(null);
+  const [activeModal, setActiveModal] = useState<(typeof commitments)[number] | null>(
+    null,
+  );
+
+  useEffect(() => {
+    if (!activeModal) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActiveModal(null);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [activeModal]);
 
   return (
-    <section
-      className="site-container hotel-commitments"
-      aria-labelledby="hotel-commitments-title"
-    >
-      <div className="hotel-commitments-banner">
-        <div className="inline-flex rounded-full bg-surface px-5 py-2 text-xs font-bold uppercase text-primary sm:text-sm">
-          {brand.name} – dịch vụ du lịch
+    <section className="site-container py-10 w-full space-y-6">
+      <div className="bg-gradient-to-br from-primary to-ocean-deep rounded-3xl p-8 lg:p-12 shadow-floating text-center text-white">
+        <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-surface-container-lowest text-on-surface text-xs font-extrabold uppercase tracking-wider mb-4">
+          {brand.name} – DỊCH VỤ DU LỊCH
         </div>
-        <h2
-          id="hotel-commitments-title"
-          className="mt-5 text-[clamp(1.65rem,3.4vw,3rem)] font-extrabold leading-tight tracking-tight"
-        >
+
+        <h2 className="font-headline-lg text-2xl sm:text-4xl font-extrabold text-white">
           Cam Kết Chất Lượng Dịch Vụ Từ {brand.name}
         </h2>
-        <p className="mx-auto mt-4 max-w-[78ch] text-sm leading-relaxed sm:text-base">
-          Là đối tác chính thức hợp tác với các tập đoàn và chuỗi khách sạn lớn
-          tại Nha Trang - Cam Ranh, chúng tôi mang lại trải nghiệm du lịch tốt
-          nhất cho quý khách.
+        <p className="font-body-md text-sm sm:text-base text-white/90 mt-3 max-w-2xl mx-auto">
+          Là đối tác chính thức hợp tác với các tập đoàn và chuỗi khách sạn lớn tại
+          Nha Trang - Cam Ranh, chúng tôi mang lại trải nghiệm du lịch tốt nhất cho
+          quý khách.
         </p>
 
-        <div className="mt-6 grid gap-5 md:grid-cols-3 lg:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 text-left">
           {commitments.map((item) => (
-            <article key={item.id} className="hotel-commitment">
-              <div className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-surface-muted lg:h-[72px] lg:w-[72px]">
-                <span
-                  aria-hidden="true"
-                  className={`material-symbols-outlined text-[30px] ${item.id === "flexible" ? "text-error" : "text-primary"}`}
-                >
-                  {item.icon}
-                </span>
+            <div
+              key={item.id}
+              className="bg-surface-container-lowest rounded-3xl p-6 flex flex-col items-center text-center shadow-card"
+            >
+              <div
+                className={`w-12 h-12 rounded-full ${item.iconBg} flex items-center justify-center mb-4`}
+              >
+                <img src={item.icon} alt="" className="w-6 h-6" />
               </div>
-              <div className="grid flex-1 content-end gap-4">
-                <h3 className="text-lg font-extrabold sm:text-xl lg:text-[22px]">
-                  {item.detailTitle ? (
-                    <button
-                      type="button"
-                      className="rounded-lg whitespace-normal leading-snug hover:underline"
-                      onClick={() => {
-                        setActivePolicy(item);
-                        dialog.current?.showModal();
-                      }}
-                    >
-                      {item.title}
-                    </button>
-                  ) : (
-                    <ContentLink
-                      contentKey="hotels.attributes-042"
-                      href="/lien-he"
-                      target="_blank"
-                      rel="noopener"
-                      className="rounded-lg hover:underline"
-                    >
-                      {item.title}
-                    </ContentLink>
-                  )}
-                </h3>
-                <p className="text-sm leading-relaxed text-on-surface-variant sm:text-base">
-                  {item.summary}
-                </p>
+
+              <h3 className="font-headline-sm text-lg font-extrabold text-on-surface mb-2">
+                {item.title}
+              </h3>
+
+              <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed flex-1">
+                {item.summary}
+              </p>
+
+              <div className="mt-5">
+                {item.href ? (
+                  <Link
+                    href={item.href}
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-surface-container text-on-surface hover:bg-primary hover:text-on-primary text-xs font-bold transition-colors"
+                  >
+                    <span>{item.cta}</span>
+                    <img
+                      src="/images/figma/icons/arrow-right.svg"
+                      alt=""
+                      className="w-3.5 h-3.5"
+                    />
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setActiveModal(item)}
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-surface-container text-on-surface hover:bg-primary hover:text-on-primary text-xs font-bold transition-colors"
+                  >
+                    <span>{item.cta}</span>
+                    <img
+                      src="/images/figma/icons/arrow-right.svg"
+                      alt=""
+                      className="w-3.5 h-3.5"
+                    />
+                  </button>
+                )}
               </div>
-            </article>
+            </div>
           ))}
         </div>
       </div>
 
-      <div className="hotel-trust">
-        <ul className="flex flex-wrap gap-x-5 gap-y-3">
-          {credentials.map(([icon, key]) => (
-            <li
-              key={key}
-              className="flex items-center gap-2 text-sm font-semibold text-on-surface-variant"
-            >
-              <img
-                src={`/images/figma/icons/${icon}.svg`}
-                width={25}
-                height={25}
-                alt=""
-              />
-              <ContentText contentKey={key} />
-            </li>
-          ))}
-        </ul>
-        <div className="flex flex-wrap items-center gap-3 lg:shrink-0">
-          <div>
-            <p className="text-xs text-on-surface-variant">
+      {/* Desktop Trust & Hotline Bar */}
+      <div className="hidden md:flex bg-surface-container-lowest rounded-2xl border border-border-light px-6 py-4 items-center justify-between gap-4 shadow-sm">
+        <div className="flex flex-wrap items-center gap-6 text-xs font-semibold text-on-surface-variant">
+          <div className="flex items-center gap-2">
+            <img
+              src="/images/figma/icons/shield-check.svg"
+              alt=""
+              className="w-5 h-5"
+            />
+            <span>
+              <ContentText contentKey="hotels.text-150" />
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <img
+              src="/images/figma/icons/pci-dss.svg"
+              alt=""
+              className="w-5 h-5"
+            />
+            <span>
+              <ContentText contentKey="hotels.text-151" />
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4 shrink-0">
+          <div className="text-right">
+            <span className="text-[11px] text-outline block">
               <ContentText contentKey="hotels.text-152" />
-            </p>
-            <ContentLink
+            </span>
+            <ContentElement
               contentKey="hotels.attributes-041"
-              className="text-xl font-extrabold text-primary hover:underline"
+              tag="a"
+              className="text-lg font-extrabold text-primary hover:text-ocean-deep transition-colors"
             >
               <ContentText contentKey="hotels.text-153" />
-            </ContentLink>
+            </ContentElement>
           </div>
-          <ContentLink
+          <ContentElement
             contentKey="hotels.attributes-042"
-            target="_blank"
+            tag="a"
+            className="px-5 py-2.5 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-bold text-sm transition-colors action-link"
             rel="noopener"
-            className="hotel-button"
-            href="/lien-he"
+            target="_blank"
           >
             <ContentText contentKey="hotels.text-154" />
-          </ContentLink>
+          </ContentElement>
         </div>
       </div>
 
-      <dialog
-        ref={dialog}
-        className="hotel-policy-dialog"
-        aria-labelledby="hotel-policy-title"
-        onClose={() => setActivePolicy(null)}
-      >
-        {activePolicy && (
-          <>
-            <h3 id="hotel-policy-title" className="text-xl font-extrabold">
-              {activePolicy.detailTitle}
-            </h3>
-            <ul className="my-4 list-disc space-y-2 pl-5 text-sm text-on-surface-variant">
-              {activePolicy.detailPoints?.map((point) => (
-                <li key={point}>{point}</li>
+      {/* Commitment Detail Modal */}
+      {activeModal && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={activeModal.detailTitle}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setActiveModal(null);
+          }}
+          className="fixed inset-0 z-50 bg-destination-scrim/50 flex items-center justify-center p-4"
+        >
+          <div className="bg-surface-container-lowest rounded-3xl border border-border-light shadow-floating max-w-lg w-full p-6 space-y-4">
+            <div className="flex items-start justify-between gap-4">
+              <h3 className="text-xl font-extrabold text-on-surface">
+                {activeModal.detailTitle}
+              </h3>
+              <button
+                type="button"
+                onClick={() => setActiveModal(null)}
+                className="text-sm font-bold text-outline hover:text-on-surface"
+              >
+                ✕
+              </button>
+            </div>
+            <ul className="space-y-2.5 text-sm text-on-surface-variant">
+              {activeModal.detailPoints?.map((point, idx) => (
+                <li key={idx} className="flex items-start gap-2">
+                  <span className="material-symbols-outlined text-[18px] text-primary shrink-0">
+                    check_circle
+                  </span>
+                  <span>{point}</span>
+                </li>
               ))}
             </ul>
-            <form method="dialog" className="flex justify-end">
-              <button type="submit" className="hotel-button">
+            <div className="pt-2 flex justify-end">
+              <button
+                type="button"
+                onClick={() => setActiveModal(null)}
+                className="px-5 py-2.5 rounded-full bg-primary text-on-primary font-bold text-sm"
+              >
                 Đã hiểu
               </button>
-            </form>
-          </>
-        )}
-      </dialog>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

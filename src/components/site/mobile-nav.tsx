@@ -44,7 +44,7 @@ export function MobileNav() {
         aria-expanded={open}
         aria-controls="mobile-navigation"
         aria-label={open ? "Đóng menu" : "Mở menu"}
-        className="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border-subtle bg-surface-muted text-on-surface hover:border-primary transition-colors"
+        className="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border-light bg-surface-container-low text-on-surface hover:border-primary transition-colors"
       >
         <span aria-hidden="true" className="material-symbols-outlined">
           {open ? "close" : "menu"}
@@ -54,7 +54,7 @@ export function MobileNav() {
         <nav
           id="mobile-navigation"
           aria-label="Điều hướng trên điện thoại"
-          className="absolute right-0 mt-2 w-60 max-h-[calc(100dvh-6rem)] overflow-y-auto bg-surface border border-border-subtle rounded-2xl shadow-floating p-3 flex flex-col gap-1"
+          className="absolute right-0 mt-2 w-60 max-h-[calc(100dvh-6rem)] overflow-y-auto bg-surface-container-lowest border border-border-light rounded-2xl shadow-floating p-3 flex flex-col gap-1"
         >
           {items
             .filter((item) => /^(\/[^/]|\/$|https?:\/\/|#)/.test(item.href))
@@ -62,8 +62,8 @@ export function MobileNav() {
               <Link
                 className={`p-3 rounded-xl font-label-lg text-label-lg transition-colors ${
                   pathname === href
-                    ? "bg-surface-tinted text-primary font-bold"
-                    : "text-on-surface hover:bg-surface-muted"
+                    ? "bg-surface-container text-primary font-bold"
+                    : "text-on-surface hover:bg-surface-container-low"
                 }`}
                 key={href}
                 href={href}
@@ -75,7 +75,7 @@ export function MobileNav() {
             ))}
           {!items.some((item) => item.href === "/tra-cuu") && (
             <Link
-              className="p-3 rounded-xl text-on-surface hover:bg-surface-muted font-label-lg text-label-lg flex items-center gap-2 border-t border-border-subtle mt-1 pt-3"
+              className="p-3 rounded-xl text-on-surface hover:bg-surface-container-low font-label-lg text-label-lg flex items-center gap-2 border-t border-border-light mt-1 pt-3"
               href="/tra-cuu"
               onClick={() => setOpen(false)}
             >

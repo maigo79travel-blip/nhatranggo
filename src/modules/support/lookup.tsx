@@ -38,7 +38,7 @@ export function BookingLookup() {
           }}
         >
           <div className="public-form-heading">
-            <div className="inline-flex p-3 rounded-xl bg-surface-brand text-primary mb-4">
+            <div className="inline-flex p-3 rounded-xl bg-ocean-light text-primary mb-4">
               <PublicIcon name="manage_search" className="text-3xl" />
             </div>
             <h2 className="text-2xl font-bold">Thông tin đặt chỗ</h2>

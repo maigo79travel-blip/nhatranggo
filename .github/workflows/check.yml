@@ -31,7 +31,6 @@ jobs:
           NODE_ENV: production
           NPM_CONFIG_OMIT: dev
       - run: npm audit --omit=dev --audit-level=high
-      - run: npm run test:theme
       - run: npx playwright install --with-deps chromium
       - run: touch .env && npm run db:migrate && npm run db:seed && npm run admin:setup
       - run: npm run typecheck && npm run build

@@ -46,12 +46,11 @@ Admin có Dịch vụ, Loại phòng, Lịch khởi hành tour, Tuyến xe, Bả
 - Ngôn ngữ: vi/en/ru/ko/zh. Bài viết và trang thông tin có bản ghi riêng theo ngôn ngữ. Bản dịch CMS có dạng `{"value":"…"}`, bản dịch sản phẩm có `title`, `description`, `location`, `content`. Khi chưa nhập bản dịch CMS/dịch vụ, nội dung gốc vẫn được hiển thị. Quản trị chịu trách nhiệm nội dung và bản dịch được công bố.
 - Quản trị cao nhất có toàn quyền; nhân viên booking xử lý đơn, CRM, liên hệ; biên tập viên quản lý dịch vụ/nội dung. API kiểm tra quyền độc lập với menu.
 
-Nhận diện thương hiệu tại `src/config/brand.json`. Sửa màu tại `src/theme/colors.json`. Chọn sắc độ trong `ramps` và áp theo chức năng trong `roles`. Tailwind và CSS đọc cùng nguồn. [Hướng dẫn token màu](docs/design-system.md#màu-sắc). `db/seed` chỉ dùng để khởi tạo; runtime luôn đọc PostgreSQL. Migration cũ được giữ để nâng cấp database hiện có; module yêu thích và newsletter đã bỏ khỏi ứng dụng theo phạm vi đề án.
+Nhận diện thương hiệu tại `src/config/brand.json`. Sửa màu tại `src/theme/colors.json`; Tailwind và CSS dùng cùng biến màu. `db/seed` chỉ dùng để khởi tạo; runtime luôn đọc PostgreSQL. Migration cũ được giữ để nâng cấp database hiện có; module yêu thích và newsletter đã bỏ khỏi ứng dụng theo phạm vi đề án.
 
 ## Kiểm tra
 
 ```sh
-npm run test:theme
 npm run typecheck
 npm run build
 ```

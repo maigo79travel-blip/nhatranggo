@@ -2,8 +2,6 @@ import type { Product } from "@/lib/types";
 
 export type BookingDraft = {
   date?: string;
-  departureTime?: string;
-  notes?: string;
   returnDate?: string;
   guests?: number;
 };

@@ -5,11 +5,11 @@ module.exports = {
     colors,
     extend: {
       boxShadow: {
-        header: "0 2px 16px rgb(var(--color-shadow-brand) / 0.06)",
-        footer: "0 -1px 12px rgb(var(--color-shadow-brand) / 0.04)",
-        card: "0 8px 28px rgb(var(--color-shadow-brand) / 0.08)",
-        "card-hover": "0 14px 36px rgb(var(--color-shadow-brand) / 0.14)",
-        floating: "0 12px 32px rgb(var(--color-shadow-brand) / 0.12)",
+        header: "0 2px 16px rgb(var(--color-shadow-blue) / 0.06)",
+        footer: "0 -1px 12px rgb(var(--color-shadow-blue) / 0.04)",
+        card: "0 8px 28px rgb(var(--color-shadow-blue) / 0.08)",
+        "card-hover": "0 14px 36px rgb(var(--color-shadow-blue) / 0.14)",
+        floating: "0 12px 32px rgb(var(--color-shadow-blue) / 0.12)",
       },
       borderRadius: {
         DEFAULT: "0.25rem",

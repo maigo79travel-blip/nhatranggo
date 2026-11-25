@@ -12,7 +12,9 @@ const browser = await launchBrowser();
 const product = (await db.query("SELECT * FROM products WHERE id='hotels-1'"))
   .rows[0];
 const hero = (
-  await db.query("SELECT * FROM site_content WHERE key='home.text-044'")
+  await db.query(
+    "SELECT * FROM site_content WHERE scope='home' AND label LIKE '%Khám phá kỳ nghỉ%' LIMIT 1",
+  )
 ).rows[0];
 const fare = (
   await db.query(

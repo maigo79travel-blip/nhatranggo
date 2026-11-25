@@ -6,21 +6,16 @@ import { TransfersFleet } from "./_components/transfers-fleet";
 import { TransfersBenefits } from "./_components/transfers-benefits";
 import { TransfersProcess } from "./_components/transfers-process";
 
-import { TransfersVehicleSelection } from "./_components/transfers-vehicle-selection";
-import "./transfers.css";
-
 export const generateMetadata = () => pageMetadata("transfers");
 
 export default function TransfersPage() {
   return (
-    <SitePageFrame className="transfers-page">
-      <TransfersVehicleSelection>
-        <TransfersHero />
-        <TransfersFareTable />
-        <TransfersFleet />
-        <TransfersBenefits />
-        <TransfersProcess />
-      </TransfersVehicleSelection>
+    <SitePageFrame>
+      <TransfersHero />
+      <TransfersFareTable />
+      <TransfersFleet />
+      <TransfersBenefits />
+      <TransfersProcess />
     </SitePageFrame>
   );
 }

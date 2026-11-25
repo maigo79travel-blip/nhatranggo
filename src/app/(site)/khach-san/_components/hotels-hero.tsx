@@ -1,6 +1,6 @@
 "use client";
-
-import { useEffect, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useState, type FormEvent } from "react";
+import Link from "next/link";
 import { nextDate, vietnamToday } from "@/modules/travel/search";
 
 export interface HotelSearchState {
@@ -14,37 +14,8 @@ export interface HotelSearchState {
 const hotSuggestions = [
   { label: "Bãi Dài Cam Ranh All-inclusive", query: "Bãi Dài" },
   { label: "Đường Trần Phú có bãi tắm", query: "Trần Phú" },
-  { label: "Villa hồ bơi riêng", query: "Hồ bơi" },
+  { label: "Villa Hồ bơi riêng", query: "Hồ bơi" },
 ];
-
-function SearchField({
-  icon,
-  label,
-  children,
-  className = "",
-}: {
-  icon: string;
-  label: string;
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <label className={`hotel-search-field ${className}`}>
-      <img
-        src={`/images/figma/icons/${icon}.svg`}
-        alt=""
-        width={28}
-        height={28}
-      />
-      <span className="min-w-0 flex-1">
-        <span className="block text-xs text-on-surface-variant sm:text-[13px]">
-          {label}
-        </span>
-        {children}
-      </span>
-    </label>
-  );
-}
 
 export function HotelsHero({
   search,
@@ -53,145 +24,220 @@ export function HotelsHero({
   search: HotelSearchState;
   onSearch: (next: HotelSearchState) => void;
 }) {
-  const [draft, setDraft] = useState(search);
+  const [draft, setDraft] = useState<HotelSearchState>(search);
 
   useEffect(() => {
     setDraft(search);
   }, [search]);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     onSearch(draft);
-  }
+  };
+
+  const applyHotQuery = (q: string) => {
+    const next = { ...draft, query: q };
+    setDraft(next);
+    onSearch(next);
+  };
 
   return (
-    <section className="hotel-hero relative" aria-labelledby="hotel-title">
-      <div className="hotel-hero-picture" aria-hidden="true" />
-      <div className="site-container relative">
-        <h1
-          id="hotel-title"
-          className="hotel-hero-title font-extrabold tracking-tight"
-        >
-          Tìm &amp; Đặt Phòng
-          <span className="hotel-hero-accent mt-3 block uppercase">
+    <section className="relative w-full bg-background">
+      {/* Mobile Breadcrumb */}
+      <div className="md:hidden site-container pt-4 pb-2">
+        <div className="flex items-center gap-1.5 text-xs text-outline">
+          <Link href="/" className="hover:text-primary">
+            Trang chủ
+          </Link>
+          <span>›</span>
+          <span className="text-on-surface font-semibold">
             Khách sạn &amp; Resort
-            <br />
-            Giá tốt nhất
           </span>
-        </h1>
+        </div>
+      </div>
 
-        <form
-          className="hotel-search"
-          aria-label="Tìm khách sạn"
-          onSubmit={handleSubmit}
+      {/* Unified Responsive Hero */}
+      <div>
+        <div
+          className="relative w-full min-h-[200px] md:min-h-[340px] bg-cover bg-center flex items-center"
+          style={{ backgroundImage: "url('/images/figma/hotels-hero.png')" }}
         >
-          <div className="hotel-search-fields">
-            <SearchField
-              icon="pin"
-              label="Điểm đến"
-              className="col-span-full xl:col-span-1"
-            >
-              <input
-                className="hotel-search-control"
-                type="search"
-                value={draft.query}
-                onChange={(event) =>
-                  setDraft({ ...draft, query: event.target.value })
-                }
-                placeholder="Nha Trang, Khánh Hòa"
-              />
-            </SearchField>
-            <SearchField icon="calendar" label="Ngày nhận phòng">
-              <input
-                className="hotel-search-control"
-                type="date"
-                min={vietnamToday()}
-                value={draft.checkIn}
-                onChange={(event) => {
-                  const checkIn = event.target.value;
-                  setDraft({
-                    ...draft,
-                    checkIn,
-                    checkOut: draft.checkOut > checkIn ? draft.checkOut : "",
-                  });
-                }}
-              />
-            </SearchField>
-            <SearchField icon="calendar" label="Ngày trả phòng">
-              <input
-                className="hotel-search-control"
-                type="date"
-                min={nextDate(draft.checkIn || vietnamToday())}
-                value={draft.checkOut}
-                onChange={(event) =>
-                  setDraft({ ...draft, checkOut: event.target.value })
-                }
-              />
-            </SearchField>
-            <SearchField icon="users" label="Số khách">
-              <select
-                className="hotel-search-control"
-                value={draft.guests}
-                onChange={(event) =>
-                  setDraft({ ...draft, guests: event.target.value })
-                }
-              >
-                {Array.from({ length: 6 }, (_, index) => (
-                  <option key={index + 1} value={index + 1}>
-                    {index + 1} người
-                  </option>
-                ))}
-                <option value="7">7+ người</option>
-              </select>
-            </SearchField>
-            <SearchField icon="hotel-type" label="Loại hình / Sao">
-              <select
-                className="hotel-search-control"
-                value={draft.category}
-                onChange={(event) =>
-                  setDraft({ ...draft, category: event.target.value })
-                }
-              >
-                <option value="all">Tất cả khách sạn</option>
-                <option value="5-star">5 sao quốc tế</option>
-                <option value="4-star">4 sao cao cấp</option>
-                <option value="3-star">3 sao</option>
-                <option value="resort">Resort nghỉ dưỡng</option>
-              </select>
-            </SearchField>
-            <button
-              type="submit"
-              className="hotel-button col-span-full xl:col-span-1 xl:self-center"
-            >
-              <span
-                aria-hidden="true"
-                className="material-symbols-outlined text-lg"
-              >
-                search
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-r from-hero-overlay/95 via-hero-overlay/80 to-hero-overlay/25 md:to-transparent"
+          />
+          <div className="relative site-container py-8 pb-14 md:py-12 md:pb-20 w-full">
+            <h1 className="font-display tracking-tight leading-[1.15] max-w-2xl">
+              <span className="block text-xl md:text-3xl font-extrabold text-on-surface mb-1">
+                Tìm &amp; Đặt Phòng
               </span>
-              Tìm kiếm
-            </button>
+              <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-extrabold text-primary uppercase">
+                KHÁCH SẠN &amp; RESORT
+                <br />
+                GIÁ TỐT NHẤT
+              </span>
+            </h1>
           </div>
-          <div className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-on-surface-variant sm:text-sm">
-            <span>Gợi ý tìm kiếm hot</span>
-            {hotSuggestions.map((item) => (
-              <button
-                key={item.query}
-                className="min-h-8 whitespace-normal text-left font-bold text-primary hover:underline"
-                type="button"
-                onClick={(event) => {
-                  const form = event.currentTarget.form;
-                  if (!form?.reportValidity()) return;
-                  const next = { ...draft, query: item.query };
-                  setDraft(next);
-                  onSearch(next);
-                }}
-              >
-                {item.label}
-              </button>
-            ))}
+        </div>
+
+        <div className="relative z-10 site-container -mt-8 md:-mt-14 pb-6">
+          <div className="bg-surface-container-lowest rounded-2xl md:rounded-3xl shadow-floating border border-border-light p-3 md:p-4 lg:p-5">
+            <form
+              onSubmit={handleSubmit}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-center"
+            >
+              <label className="lg:col-span-3 min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-4 py-3 flex items-center gap-3 focus-within:border-primary transition-colors cursor-text">
+                <img
+                  src="/images/figma/icons/pin.svg"
+                  alt=""
+                  className="w-6 h-6 shrink-0"
+                />
+                <span className="min-w-0 flex-1">
+                  <span className="block text-xs text-outline">Điểm đến</span>
+                  <input
+                    type="text"
+                    value={draft.query}
+                    onChange={(e) =>
+                      setDraft({ ...draft, query: e.target.value })
+                    }
+                    placeholder="Nha Trang, Khánh Hòa"
+                    className="w-full min-w-0 bg-transparent text-sm font-bold text-on-surface focus:outline-none"
+                  />
+                </span>
+              </label>
+
+              <label className="hidden md:flex lg:col-span-2 min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-3.5 py-3 items-center gap-2.5 focus-within:border-primary transition-colors">
+                <img
+                  src="/images/figma/icons/calendar.svg"
+                  alt=""
+                  className="w-5 h-5 shrink-0"
+                />
+                <span className="min-w-0 flex-1">
+                  <span className="block text-xs text-outline">
+                    Ngày nhận phòng
+                  </span>
+                  <input
+                    type="date"
+                    aria-label="Tìm ngày nhận phòng"
+                    min={vietnamToday()}
+                    value={draft.checkIn}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setDraft({
+                        ...draft,
+                        checkIn: val,
+                        checkOut:
+                          draft.checkOut && draft.checkOut <= val
+                            ? nextDate(val)
+                            : draft.checkOut,
+                      });
+                    }}
+                    className="w-full min-w-0 bg-transparent text-xs font-bold text-on-surface focus:outline-none"
+                  />
+                </span>
+              </label>
+
+              <label className="hidden md:flex lg:col-span-2 min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-3.5 py-3 items-center gap-2.5 focus-within:border-primary transition-colors">
+                <img
+                  src="/images/figma/icons/calendar.svg"
+                  alt=""
+                  className="w-5 h-5 shrink-0"
+                />
+                <span className="min-w-0 flex-1">
+                  <span className="block text-xs text-outline">
+                    Ngày trả phòng
+                  </span>
+                  <input
+                    type="date"
+                    aria-label="Tìm ngày trả phòng"
+                    min={draft.checkIn ? nextDate(draft.checkIn) : vietnamToday()}
+                    value={draft.checkOut}
+                    onChange={(e) =>
+                      setDraft({ ...draft, checkOut: e.target.value })
+                    }
+                    className="w-full min-w-0 bg-transparent text-xs font-bold text-on-surface focus:outline-none"
+                  />
+                </span>
+              </label>
+
+              <label className="hidden md:flex lg:col-span-2 min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-3.5 py-3 items-center gap-2.5 focus-within:border-primary transition-colors">
+                <img
+                  src="/images/figma/icons/users.svg"
+                  alt=""
+                  className="w-5 h-5 shrink-0"
+                />
+                <span className="min-w-0 flex-1">
+                  <span className="block text-xs text-outline">Số khách</span>
+                  <select
+                    value={draft.guests}
+                    onChange={(e) =>
+                      setDraft({ ...draft, guests: e.target.value })
+                    }
+                    className="w-full min-w-0 bg-transparent text-sm font-bold text-on-surface focus:outline-none cursor-pointer"
+                  >
+                    <option value="1">1 người</option>
+                    <option value="2">2 người</option>
+                    <option value="4">4 người</option>
+                    <option value="6">6+ người</option>
+                  </select>
+                </span>
+              </label>
+
+              <label className="hidden md:flex lg:col-span-2 min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-3.5 py-3 items-center gap-2.5 focus-within:border-primary transition-colors">
+                <img
+                  src="/images/figma/icons/hotel-type.svg"
+                  alt=""
+                  className="w-5 h-5 shrink-0"
+                />
+                <span className="min-w-0 flex-1">
+                  <span className="block text-xs text-outline">
+                    Loại hình/ Sao
+                  </span>
+                  <select
+                    value={draft.category}
+                    onChange={(e) =>
+                      setDraft({ ...draft, category: e.target.value })
+                    }
+                    className="w-full min-w-0 bg-transparent text-sm font-bold text-on-surface focus:outline-none cursor-pointer"
+                  >
+                    <option value="all">Tất cả khách sạn</option>
+                    <option value="5-star">5 Sao Quốc Tế</option>
+                    <option value="resort">Resort nghỉ dưỡng</option>
+                    <option value="4-star">4 Sao Cao Cấp</option>
+                  </select>
+                </span>
+              </label>
+
+              <div className="lg:col-span-1 flex justify-end">
+                <button
+                  type="submit"
+                  className="w-full h-[54px] px-4 rounded-full bg-primary hover:bg-ocean-deep text-on-primary font-bold text-sm flex items-center justify-center gap-1.5 shadow-sm transition-colors"
+                >
+                  <img
+                    src="/images/figma/icons/search.svg"
+                    alt=""
+                    className="w-4 h-4 brightness-0 invert shrink-0"
+                  />
+                  <span>Tìm kiếm</span>
+                </button>
+              </div>
+            </form>
+
+            <div className="hidden md:flex flex-wrap items-center gap-2 mt-3 pt-2 text-xs text-outline">
+              <span>Gợi ý tìm kiếm hot:</span>
+              {hotSuggestions.map((item) => (
+                <button
+                  key={item.query}
+                  type="button"
+                  onClick={() => applyHotQuery(item.query)}
+                  className="font-bold text-on-surface hover:text-primary transition-colors"
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
           </div>
-        </form>
+        </div>
       </div>
     </section>
   );

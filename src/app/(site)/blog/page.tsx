@@ -77,7 +77,7 @@ export default async function BlogPage({
               </Link>
             )}
             <div className="public-card-content">
-              <span className="text-primary text-xs font-bold uppercase tracking-wider">
+              <span className="text-secondary text-xs font-bold uppercase tracking-wider">
                 {article.category || "Cẩm nang du lịch"}
               </span>
               <h2 className="font-bold text-xl leading-snug">
@@ -88,7 +88,7 @@ export default async function BlogPage({
                   {article.title}
                 </Link>
               </h2>
-              <p className="text-sm text-on-surface-variant leading-relaxed line-clamp-3">
+              <p className="text-sm text-outline leading-relaxed line-clamp-3">
                 {article.excerpt}
               </p>
               <Link

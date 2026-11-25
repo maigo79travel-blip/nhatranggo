@@ -17,16 +17,8 @@ export default function HotelsPage() {
   const [search, setSearch] = useState<HotelSearchState>(initialSearch);
 
   return (
-    <SitePageFrame className="hotels-page">
-      <HotelsHero
-        search={search}
-        onSearch={(next) => {
-          setSearch(next);
-          const results = document.getElementById("ket-qua-khach-san");
-          results?.focus({ preventScroll: true });
-          results?.scrollIntoView({ block: "start" });
-        }}
-      />
+    <SitePageFrame>
+      <HotelsHero search={search} onSearch={setSearch} />
       <HotelsListing
         search={search}
         onResetSearch={() => setSearch(initialSearch)}

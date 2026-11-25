@@ -1,375 +1,281 @@
-"use client";
-
-import { useState, type FormEvent, type ReactNode } from "react";
-import {
-  ContentLink,
-  ContentText,
-  useContent,
-  useSiteData,
-} from "@/components/content";
-import { useCatalog } from "@/components/catalog/catalog-context";
-import { money } from "@/lib/types";
 import { DestinationOptions } from "@/modules/travel/destination-options";
-import { vietnamToday } from "@/modules/travel/search";
-import {
-  defaultRoute,
-  transferRoutes,
-  transferVehicles,
-} from "./transfer-options";
-import { TransferIcon } from "./transfers-ui";
-import { useTransferVehicle } from "./transfers-vehicle-selection";
-
-const highlights = [
-  ["flight_land", "transfers.text-067"],
-  ["badge", "transfers.text-068"],
-  ["event_available", "transfers.text-069"],
-  ["schedule", "transfers.text-070"],
-] as const;
-
-function QuoteField({
-  id,
-  icon,
-  label,
-  children,
-}: {
-  id: string;
-  icon: string;
-  label: string;
-  children: ReactNode;
-}) {
-  return (
-    <div className="transfer-field">
-      <TransferIcon className="text-primary">{icon}</TransferIcon>
-      <div className="min-w-0 flex-1">
-        <label htmlFor={id} className="block text-xs text-on-surface-variant">
-          {label}
-        </label>
-        {children}
-      </div>
-    </div>
-  );
-}
+import { ContentText, ContentElement, FareValue } from "@/components/content";
 
 export function TransfersHero() {
-  const { vehicle, selectVehicle } = useTransferVehicle();
-  const { fares, products, destinations } = useSiteData();
-  const catalog = useCatalog();
-  const heroLabel = useContent("transfers.text-027");
-  const heroSubtitle = useContent("transfers.text-029");
-  const defaultLabel = "Dịch Vụ Xe Đưa Đón";
-  const defaultSubtitle = "& Xe Hợp Đồng Du Lịch Uy Tín";
-  const label = typeof heroLabel === "string" ? heroLabel.trim() : defaultLabel;
-  const subtitle =
-    typeof heroSubtitle === "string" ? heroSubtitle.trim() : defaultSubtitle;
-  const [pickup, setPickup] = useState<string>(defaultRoute.pickup);
-  const [dropoff, setDropoff] = useState<string>(defaultRoute.dropoff);
-  const [trip, setTrip] = useState("one-way");
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState("");
-  const route = `${pickup}_${dropoff}`;
-  const productId = `transfer-${route}-${vehicle}`;
-  const product = products.find((item) => item.id === productId);
-  const fare =
-    product &&
-    fares.find((item) => item.route === route && item.vehicle === vehicle);
-  const pickupName = destinations.find((item) => item.code === pickup)?.name;
-  const dropoffName = destinations.find((item) => item.code === dropoff)?.name;
-  const selectedVehicle = transferVehicles.find((item) => item.id === vehicle);
-
-  async function openBooking(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!product || !fare || busy) return;
-    const values = new FormData(event.currentTarget);
-    const date = String(values.get("date") || "");
-    const departureTime = String(values.get("departureTime") || "");
-    const flight = String(values.get("flight") || "").trim();
-    const notes = [
-      trip === "round-trip" && "Yêu cầu tư vấn chuyến khứ hồi",
-      flight && `Số hiệu chuyến bay: ${flight}`,
-    ]
-      .filter(Boolean)
-      .join("\n");
-    setBusy(true);
-    setError("");
-    try {
-      const params = new URLSearchParams({ pickup, dropoff, vehicle });
-      const response = await fetch(`/api/fares?${params}`);
-      if (!response.ok) {
-        const body = await response.json();
-        setError(body.error);
-        return;
-      }
-      const quote = await response.json();
-      catalog.open(
-        {
-          ...product,
-          title: `${pickupName} → ${dropoffName} · ${selectedVehicle?.label}`,
-          price: quote.price,
-        },
-        { date, departureTime, notes },
-      );
-    } catch {
-      setError("Không thể tải báo giá. Vui lòng thử lại hoặc nhắn Zalo.");
-    } finally {
-      setBusy(false);
-    }
-  }
-
   return (
     <section
-      className="transfer-hero relative"
-      aria-labelledby="transfer-title"
+      className="relative w-full bg-cover bg-center pb-16 pt-10 overflow-hidden"
+      style={{ backgroundImage: "url('/images/figma/transfers-hero.png')" }}
     >
-      <div className="transfer-hero-picture" aria-hidden="true" />
-      <div className="site-container relative">
-        <h1
-          id="transfer-title"
-          className="transfer-hero-heading tracking-tight font-extrabold"
-        >
-          <span className="block">
-            {label === defaultLabel ? "Dịch vụ xe đưa đón" : label}
-          </span>
-          <span className="transfer-accent mt-2 inline-block uppercase">
-            <ContentText contentKey="transfers.text-028" />
-            <br />
-            {subtitle === defaultSubtitle ? "& xe hợp đồng uy tín" : subtitle}
-          </span>
-        </h1>
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-r from-hero-overlay/95 via-hero-overlay/75 to-background/60 pointer-events-none"
+      />
+      <div className="site-container relative z-10">
+        <div className="max-w-2xl pt-4 pb-10">
+          <h1 className="font-display text-on-surface tracking-tight leading-[1.15]">
+            <span className="block text-2xl sm:text-3xl font-extrabold text-on-surface mb-1">
+              <ContentText contentKey="transfers.text-027" />
+            </span>
+            <span className="block text-3xl sm:text-5xl font-extrabold text-primary uppercase">
+              <ContentText contentKey="transfers.text-028" />
+              <ContentText contentKey="transfers.text-029" />
+            </span>
+          </h1>
+        </div>
 
-        <form
-          id="bao-gia-xe"
-          className="transfer-quote"
-          onChange={() => setError("")}
-          onSubmit={openBooking}
-          aria-label="Tra cứu giá xe"
-        >
-          <fieldset
-            className="grid min-w-0 gap-4 disabled:opacity-75"
-            disabled={busy}
-          >
-            <legend className="sr-only">Thông tin chuyến xe</legend>
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div
-                className="flex flex-wrap gap-2"
-                role="group"
-                aria-label="Dịch vụ xe"
-              >
-                {transferRoutes.map((option) => (
-                  <button
-                    key={option.id}
-                    type="button"
-                    className="transfer-pill transfer-pill-muted"
-                    aria-pressed={
-                      pickup === option.pickup && dropoff === option.dropoff
-                    }
-                    onClick={() => {
-                      setPickup(option.pickup);
-                      setDropoff(option.dropoff);
-                      setError("");
-                    }}
-                  >
-                    <TransferIcon className="text-lg">
-                      {option.icon}
-                    </TransferIcon>
-                    {option.label}
-                  </button>
-                ))}
-              </div>
-              <div
-                className="flex flex-wrap gap-x-4 gap-y-2 text-sm font-bold"
-                role="group"
-                aria-label="Kiểu hành trình"
-              >
-                <label className="inline-flex min-h-10 cursor-pointer items-center gap-2">
-                  <input
-                    type="radio"
-                    name="trip"
-                    value="one-way"
-                    className="h-4 w-4 accent-primary"
-                    checked={trip === "one-way"}
-                    onChange={() => setTrip("one-way")}
-                  />
-                  Một chiều (One-way)
-                </label>
-                <label className="inline-flex min-h-10 cursor-pointer items-center gap-2">
-                  <input
-                    type="radio"
-                    name="trip"
-                    value="round-trip"
-                    className="h-4 w-4 accent-primary"
-                    checked={trip === "round-trip"}
-                    onChange={() => setTrip("round-trip")}
-                  />
-                  Khứ hồi (Round-trip)
-                </label>
-              </div>
-            </div>
-
-            <div className="transfer-quote-fields">
-              <QuoteField
-                id="pickup-select"
-                icon="location_on"
-                label="Điểm đón"
-              >
-                <select
-                  id="pickup-select"
-                  className="transfer-control"
-                  value={pickup}
-                  onChange={(event) => setPickup(event.target.value)}
-                  required
-                >
-                  <DestinationOptions />
-                </select>
-              </QuoteField>
-              <QuoteField
-                id="dropoff-select"
-                icon="flag"
-                label="Điểm đến / Khách sạn"
-              >
-                <select
-                  id="dropoff-select"
-                  className="transfer-control"
-                  value={dropoff}
-                  onChange={(event) => setDropoff(event.target.value)}
-                  required
-                >
-                  <DestinationOptions />
-                </select>
-              </QuoteField>
-              <QuoteField
-                id="transfer-date"
-                icon="calendar_today"
-                label="Ngày & giờ đón"
-              >
-                <div className="grid grid-cols-[minmax(0,1.27fr)_minmax(0,1fr)] gap-1">
-                  <input
-                    className="transfer-control"
-                    id="transfer-date"
-                    aria-label="Ngày đón"
-                    name="date"
-                    type="date"
-                    min={vietnamToday()}
-                  />
-                  <input
-                    className="transfer-control"
-                    aria-label="Giờ đón"
-                    name="departureTime"
-                    type="time"
-                  />
-                </div>
-              </QuoteField>
-              <QuoteField
-                id="transfer-flight"
-                icon="flight_takeoff"
-                label="Số hiệu chuyến bay (tùy chọn)"
-              >
-                <input
-                  id="transfer-flight"
-                  name="flight"
-                  className="transfer-control placeholder:text-on-surface-variant"
-                  type="text"
-                  placeholder="VD: VN1340, VJ772…"
-                  maxLength={30}
-                />
-              </QuoteField>
+        <div className="w-full bg-surface-container-lowest rounded-3xl shadow-floating p-5 md:p-8 border border-border-light">
+          <div className="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-border-light/40">
+            <div className="flex flex-wrap items-center gap-2">
               <button
-                className="transfer-button"
-                id="btn-search-fare"
-                type="submit"
-                disabled={!fare}
+                aria-pressed={true}
+                type="button"
+                data-tab="tab-airport"
+                className="tab-btn px-4 py-2 rounded-full bg-primary text-on-primary font-label-lg text-label-lg shadow-sm transition-all"
               >
-                <TransferIcon className="text-lg">search</TransferIcon>
-                {busy ? "Đang tra cứu…" : "Tra cứu giá & Đặt xe ngay"}
+                <ContentText contentKey="transfers.text-034" />
+              </button>
+              <button
+                aria-pressed={false}
+                type="button"
+                data-tab="tab-intercity"
+                className="tab-btn px-4 py-2 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-lg text-label-lg transition-all"
+              >
+                <ContentText contentKey="transfers.text-035" />
+              </button>
+              <button
+                aria-pressed={false}
+                type="button"
+                data-tab="tab-daily"
+                className="tab-btn px-4 py-2 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-lg text-label-lg transition-all"
+              >
+                <ContentText contentKey="transfers.text-036" />
               </button>
             </div>
 
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
-              <span className="text-on-surface-variant">Dòng xe phục vụ</span>
-              <strong className="text-primary">{selectedVehicle?.model}</strong>
-              <div
-                className="flex flex-wrap gap-2"
-                role="group"
-                aria-label="Dòng xe"
-              >
-                {transferVehicles.map((item) => (
-                  <button
-                    className="transfer-pill transfer-pill-muted vehicle-chip"
-                    key={item.id}
-                    type="button"
-                    data-veh={item.id}
-                    aria-pressed={vehicle === item.id}
-                    onClick={() => {
-                      selectVehicle(item.id);
-                      setError("");
-                    }}
-                  >
-                    {item.chip}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </fieldset>
-
-          <div className="transfer-quote-result">
-            <div className="flex items-start gap-3">
-              <TransferIcon className="mt-1 text-lg text-primary">
-                sell
-              </TransferIcon>
-              <div>
-                <p className="text-sm font-bold">
-                  Tuyến đề xuất · {pickupName} → {dropoffName}
-                </p>
-                <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
-                  <ContentText contentKey="transfers.text-063" />
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-wrap items-center gap-4">
-              <div aria-live="polite">
-                <p className="text-xs font-semibold">
-                  {trip === "round-trip"
-                    ? "Giá một chiều · Lượt về sẽ được tư vấn"
-                    : "Giá trọn gói một chiều"}
-                </p>
-                <p
-                  id="route-price"
-                  className={
-                    fare && !error
-                      ? "text-2xl font-bold text-primary sm:text-[28px]"
-                      : "text-sm text-on-surface-variant"
-                  }
-                >
-                  {error ||
-                    (fare
-                      ? money(fare.price)
-                      : "Tuyến này cần liên hệ để báo giá.")}
-                </p>
-              </div>
-              <ContentLink
-                contentKey="transfers.attributes-009"
-                target="_blank"
-                rel="noopener"
-                className="transfer-button"
-              >
-                Đặt nhanh qua Zalo
-              </ContentLink>
+            <div className="flex flex-wrap items-center gap-5">
+              <label className="inline-flex items-center gap-2 cursor-pointer font-label-lg text-label-lg text-on-surface">
+                <ContentElement
+                  contentKey="transfers.attributes-002"
+                  tag="input"
+                  type="radio"
+                  name="trip_type"
+                  defaultChecked={true}
+                  className="accent-primary w-4 h-4"
+                />
+                <span>
+                  <ContentText contentKey="transfers.text-037" />
+                </span>
+              </label>
+              <label className="inline-flex items-center gap-2 cursor-pointer font-label-lg text-label-lg text-on-surface">
+                <ContentElement
+                  contentKey="transfers.attributes-003"
+                  tag="input"
+                  type="radio"
+                  name="trip_type"
+                  className="accent-primary w-4 h-4"
+                />
+                <span>
+                  <ContentText contentKey="transfers.text-038" />
+                </span>
+              </label>
             </div>
           </div>
-        </form>
 
-        <ul className="transfer-highlights">
-          {highlights.map(([icon, key]) => (
-            <li
-              key={key}
-              className="flex min-w-0 items-center gap-3 text-sm font-bold sm:text-base"
-            >
-              <TransferIcon className="transfer-feature-icon">
-                {icon}
-              </TransferIcon>
-              <ContentText contentKey={key} />
-            </li>
-          ))}
-        </ul>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 py-6 items-end">
+            <div className="lg:col-span-3 bg-surface-subtle border border-border-light rounded-2xl p-3.5">
+              <label
+                htmlFor="pickup-select"
+                className="block font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1.5"
+              >
+                <ContentText contentKey="transfers.text-039" />
+              </label>
+              <ContentElement
+                contentKey="transfers.attributes-004"
+                tag="select"
+                id="pickup-select"
+                defaultValue="CXR"
+                className="w-full bg-transparent font-title-md text-title-md text-on-surface focus:outline-none cursor-pointer"
+              >
+                <DestinationOptions />
+              </ContentElement>
+            </div>
+
+            <div className="lg:col-span-3 bg-surface-subtle border border-border-light rounded-2xl p-3.5">
+              <label
+                htmlFor="dropoff-select"
+                className="block font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1.5"
+              >
+                <ContentText contentKey="transfers.text-045" />
+              </label>
+              <ContentElement
+                contentKey="transfers.attributes-005"
+                tag="select"
+                id="dropoff-select"
+                defaultValue="NT_CENTER"
+                className="w-full bg-transparent font-title-md text-title-md text-on-surface focus:outline-none cursor-pointer"
+              >
+                <DestinationOptions />
+              </ContentElement>
+            </div>
+
+            <div className="lg:col-span-2 bg-surface-subtle border border-border-light rounded-2xl p-3.5">
+              <span className="block font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1.5">
+                <ContentText contentKey="transfers.text-052" />
+              </span>
+              <div className="grid grid-cols-2 gap-1.5">
+                <ContentElement
+                  contentKey="transfers.attributes-006"
+                  tag="input"
+                  type="date"
+                  className="w-full bg-transparent font-body-sm text-body-sm text-on-surface focus:outline-none"
+                />
+                <ContentElement
+                  contentKey="transfers.attributes-007"
+                  tag="input"
+                  type="time"
+                  className="w-full bg-transparent font-body-sm text-body-sm text-on-surface focus:outline-none"
+                />
+              </div>
+            </div>
+
+            <div className="lg:col-span-2 bg-surface-subtle border border-border-light rounded-2xl p-3.5">
+              <span className="block font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1.5">
+                <ContentText contentKey="transfers.text-053" />
+              </span>
+              <ContentElement
+                contentKey="transfers.attributes-008"
+                tag="input"
+                type="text"
+                className="w-full bg-transparent font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none"
+              />
+            </div>
+
+            <div className="lg:col-span-2">
+              <button
+                id="btn-search-fare"
+                type="button"
+                className="w-full min-h-[68px] px-4 py-3 rounded-2xl bg-primary hover:bg-ocean-deep text-on-primary font-label-lg text-label-lg font-bold shadow-sm transition-all flex items-center justify-center gap-1.5"
+              >
+                <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
+                  search
+                </span>
+                <span className="whitespace-normal text-center leading-tight">
+                  <ContentText contentKey="transfers.text-060" />
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 pb-6 border-b border-border-light/40">
+            <div className="flex items-center gap-2">
+              <span className="font-label-lg text-label-lg text-on-surface-variant">
+                <ContentText contentKey="transfers.text-054" />:
+              </span>
+              <span
+                id="selected-vehicle-label"
+                className="font-title-md text-title-md text-primary font-semibold"
+              >
+                <ContentText contentKey="transfers.text-055" />
+              </span>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                aria-pressed={true}
+                type="button"
+                data-veh="4cho"
+                data-name="Xe 4–5 chỗ (Sedan)"
+                className="vehicle-chip px-4 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md transition-all"
+              >
+                4–5 Chỗ
+              </button>
+              <button
+                aria-pressed={false}
+                type="button"
+                data-veh="7cho"
+                data-name="Xe 7 chỗ (MPV / SUV)"
+                className="vehicle-chip px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md transition-all"
+              >
+                7 Chỗ
+              </button>
+              <button
+                aria-pressed={false}
+                type="button"
+                data-veh="16cho"
+                data-name="Xe 16 chỗ (Solati / Transit)"
+                className="vehicle-chip px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md transition-all"
+              >
+                16 Chỗ
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-6 flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-ocean-light/40 rounded-2xl p-5">
+            <div>
+              <div className="font-title-md text-title-md text-on-surface">
+                <ContentText contentKey="transfers.text-061" />
+                <strong id="route-text" className="text-primary">
+                  <ContentText contentKey="transfers.text-062" />
+                </strong>
+              </div>
+              <p className="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                <ContentText contentKey="transfers.text-063" />
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-4 shrink-0">
+              <div className="text-left lg:text-right">
+                <div className="font-label-sm text-label-sm text-outline">
+                  <ContentText contentKey="transfers.text-064" />
+                </div>
+                <div
+                  id="route-price"
+                  className="font-headline-lg text-headline-lg font-bold text-primary"
+                >
+                  <FareValue route="CXR_NT_CENTER" vehicle="4cho" />
+                </div>
+              </div>
+              <ContentElement
+                contentKey="transfers.attributes-009"
+                tag="a"
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-secondary text-on-secondary font-label-lg text-label-lg font-bold shadow-sm hover:opacity-95 transition-all"
+              >
+                <span className="material-symbols-outlined text-[18px]">
+                  {"chat"}
+                </span>
+                <ContentText contentKey="transfers.text-066" />
+              </ContentElement>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+          <div className="flex items-center gap-2.5 text-on-surface-variant font-label-md text-label-md">
+            <span className="material-symbols-outlined text-primary text-[20px]">
+              {"flight_land"}
+            </span>
+            <ContentText contentKey="transfers.text-067" />
+          </div>
+          <div className="flex items-center gap-2.5 text-on-surface-variant font-label-md text-label-md">
+            <span className="material-symbols-outlined text-primary text-[20px]">
+              {"badge"}
+            </span>
+            <ContentText contentKey="transfers.text-068" />
+          </div>
+          <div className="flex items-center gap-2.5 text-on-surface-variant font-label-md text-label-md">
+            <span className="material-symbols-outlined text-primary text-[20px]">
+              {"event_available"}
+            </span>
+            <ContentText contentKey="transfers.text-069" />
+          </div>
+          <div className="flex items-center gap-2.5 text-on-surface-variant font-label-md text-label-md">
+            <span className="material-symbols-outlined text-primary text-[20px]">
+              {"nightlight_round"}
+            </span>
+            <ContentText contentKey="transfers.text-070" />
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -1,13 +1,6 @@
 "use client";
 import { useState } from "react";
-import { ContentText } from "@/components/content";
-import brand from "@/config/brand.json";
-import {
-  TransferCallout,
-  TransferHeading,
-  TransferIcon,
-  TransferZaloLink,
-} from "./transfers-ui";
+import { ContentText, ContentElement } from "@/components/content";
 
 type FaqCategory = "all" | "rental" | "airport" | "payment" | "other";
 
@@ -22,35 +15,30 @@ const faqTabs: { id: FaqCategory; label: string }[] = [
 const faqItems = [
   {
     id: 1,
-    icon: "flight_land",
     category: "airport" as FaqCategory,
     titleKey: "transfers.text-165",
     body: ["transfers.text-166", "transfers.text-167", "transfers.text-168"],
   },
   {
     id: 2,
-    icon: "directions_car",
     category: "airport" as FaqCategory,
     titleKey: "transfers.text-169",
     body: ["transfers.text-170", "transfers.text-171"],
   },
   {
     id: 3,
-    icon: "sell",
     category: "payment" as FaqCategory,
     titleKey: "transfers.text-172",
     body: ["transfers.text-173", "transfers.text-174", "transfers.text-175"],
   },
   {
     id: 4,
-    icon: "photo_camera",
     category: "rental" as FaqCategory,
     titleKey: "transfers.text-176",
     body: ["transfers.text-177"],
   },
   {
     id: 5,
-    icon: "credit_card",
     category: "other" as FaqCategory,
     titleKey: "transfers.text-178",
     body: ["transfers.text-179"],
@@ -64,20 +52,19 @@ export function TransfersProcess() {
     tab === "all" ? faqItems : faqItems.filter((item) => item.category === tab);
 
   return (
-    <section className="transfer-section">
-      <div className="site-container">
-        <TransferHeading
-          eyebrow="transfers.text-163"
-          titleKey="transfers.text-164"
-          accent="Khi Thuê Xe Đưa Đón"
-          centered
-        >
-          <p className="mt-3 text-sm text-on-surface-variant">
-            Câu hỏi phổ biến về dịch vụ đưa đón tại {brand.name}.
-          </p>
-        </TransferHeading>
+    <section className="w-full py-16 bg-background">
+      <div className="site-container max-w-4xl">
+        <div className="text-center mb-8">
+          <span className="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">
+            <ContentText contentKey="transfers.text-163" />
+          </span>
+          <h2 className="font-headline-lg text-headline-lg font-extrabold text-on-surface mt-1">
+            <ContentText contentKey="transfers.text-164" />
+          </h2>
+        </div>
+
         <div
-          className="my-7 flex flex-wrap justify-center gap-3 sm:my-8"
+          className="flex flex-wrap items-center justify-center gap-2 mb-8"
           role="group"
           aria-label="Phân loại câu hỏi"
         >
@@ -87,62 +74,76 @@ export function TransfersProcess() {
               type="button"
               aria-pressed={tab === item.id}
               onClick={() => setTab(item.id)}
-              className="transfer-pill transfer-pill-white"
+              className={`px-4 py-2 rounded-full text-sm font-bold transition-colors ${
+                tab === item.id
+                  ? "bg-primary text-on-primary shadow-sm"
+                  : "bg-surface-container-lowest border border-border-light text-on-surface hover:border-primary/50"
+              }`}
             >
               {item.label}
             </button>
           ))}
         </div>
 
-        <div className="grid gap-3">
-          {visible.map((item) => {
+        <div className="flex flex-col gap-3" id="faq-accordion">
+          {visible.map((item, idx) => {
             const expanded = openId === item.id;
-            const answer = `transfer-answer-${item.id}`;
             return (
               <div
                 key={item.id}
-                className={`rounded-[22px] ${expanded ? "" : "bg-surface"}`}
+                className="faq-item bg-surface-container-lowest rounded-2xl border border-border-light shadow-card overflow-hidden transition-all"
               >
-                <h3 className="text-base font-bold sm:text-xl">
-                  <button
-                    type="button"
-                    aria-controls={answer}
-                    aria-expanded={expanded}
-                    onClick={() => setOpenId(expanded ? null : item.id)}
-                    className="flex min-h-[72px] w-full items-center gap-4 rounded-[22px] px-4 py-3 text-left [white-space:normal] sm:px-6"
-                  >
-                    <TransferIcon className="transfer-feature-icon text-xl">
-                      {item.icon}
-                    </TransferIcon>
-                    <span className="flex-1">
-                      <ContentText contentKey={item.titleKey} />
-                    </span>
-                    <TransferIcon className="text-xl text-primary">
-                      {expanded ? "expand_less" : "expand_more"}
-                    </TransferIcon>
-                  </button>
-                </h3>
-                <p
-                  id={answer}
-                  hidden={!expanded}
-                  className="pb-5 pl-[72px] pr-5 text-sm leading-relaxed text-on-surface-variant sm:pl-[82px] sm:text-base"
+                <button
+                  aria-expanded={expanded}
+                  onClick={() => setOpenId(expanded ? null : item.id)}
+                  className="faq-toggle whitespace-normal w-full p-5 text-left flex items-center justify-between gap-4"
+                  type="button"
                 >
-                  {item.body.map((key) => (
-                    <ContentText contentKey={key} key={key} />
-                  ))}
-                </p>
+                  <span className="font-title-md text-base font-bold text-on-surface">
+                    {idx + 1}. <ContentText contentKey={item.titleKey} />
+                  </span>
+                  <span
+                    className={`material-symbols-outlined text-outline transition-transform duration-200 ${
+                      expanded ? "rotate-180 text-primary" : ""
+                    }`}
+                  >
+                    expand_more
+                  </span>
+                </button>
+                {expanded && (
+                  <div className="faq-content px-5 pb-5 text-on-surface-variant font-body-md text-sm border-t border-border-light/60 pt-4 leading-relaxed">
+                    {item.body.map((key) => (
+                      <span key={key} className="mr-1">
+                        <ContentText contentKey={key} />
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             );
           })}
         </div>
 
-        <TransferCallout
-          className="mt-8 sm:px-8"
-          title="Vẫn còn thắc mắc?"
-          actions={<TransferZaloLink>Tư vấn ngay qua Zalo</TransferZaloLink>}
-        >
-          Liên hệ ngay với đội ngũ {brand.name} để được hỗ trợ nhanh nhất.
-        </TransferCallout>
+        <div className="mt-8 rounded-2xl bg-gradient-to-r from-primary to-ocean-deep p-6 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-card">
+          <div>
+            <h3 className="text-lg font-extrabold">Vẫn còn thắc mắc?</h3>
+            <p className="text-sm text-white/90">
+              Liên hệ ngay với đội ngũ hỗ trợ để được tư vấn nhanh nhất.
+            </p>
+          </div>
+          <ContentElement
+            contentKey="transfers.attributes-009"
+            tag="a"
+            target="_blank"
+            rel="noopener"
+            className="px-5 py-2.5 rounded-full bg-surface-container-lowest text-on-surface hover:bg-ocean-light font-bold text-sm inline-flex items-center gap-1.5 shrink-0 transition-colors"
+          >
+            <span>Tư vấn ngay qua Zalo</span>
+            <span className="material-symbols-outlined text-[16px]">
+              arrow_forward
+            </span>
+          </ContentElement>
+        </div>
       </div>
     </section>
   );

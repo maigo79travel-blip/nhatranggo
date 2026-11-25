@@ -1,6 +1,78 @@
 ---
 name: NhaTrangGo Design System
-colorTokens: src/theme/colors.json
+colors:
+  tertiary-container: "#a36700"
+  secondary: "#0081E7"
+  primary: "#008FF0"
+  on-tertiary-container: "#fffbff"
+  surface-subtle: "#F1F7FE"
+  inverse-on-surface: "#eef0ff"
+  border-light: "#E2F0FF"
+  surface-variant: "#E6F3FF"
+  outline: "#7488A6"
+  on-primary-fixed-variant: "#0052CC"
+  tertiary-fixed: "#ffddb8"
+  on-surface-variant: "#587398"
+  on-tertiary: "#ffffff"
+  surface-container-low: "#F1F7FE"
+  surface-dim: "#C1DEFA"
+  on-error: "#ffffff"
+  on-secondary: "#ffffff"
+  on-primary-container: "#fdfcff"
+  surface: "#FAFDFF"
+  sale-crimson: "#FF2828"
+  on-tertiary-fixed-variant: "#062862"
+  on-primary: "#ffffff"
+  on-secondary-fixed-variant: "#0052CC"
+  tertiary: "#825100"
+  surface-bright: "#FAFDFF"
+  error: "#ba1a1a"
+  surface-container-lowest: "#ffffff"
+  inverse-primary: "#93CFFF"
+  primary-container: "#0088E8"
+  on-secondary-fixed: "#062862"
+  tertiary-fixed-dim: "#FFD03B"
+  secondary-container: "#DBF5FF"
+  gold-soft: "#FEF3C7"
+  gold-amber: "#FFD33B"
+  on-error-container: "#93000a"
+  inverse-surface: "#062862"
+  on-primary-fixed: "#062862"
+  on-background: "#062862"
+  on-secondary-container: "#0052CC"
+  surface-card: "#FFFFFF"
+  on-surface: "#062862"
+  outline-variant: "#C1DEFA"
+  secondary-fixed: "#E6F3FF"
+  ocean-light: "#DBF5FF"
+  background: "#FAFDFF"
+  error-container: "#ffdad6"
+  surface-container-high: "#EDF6FF"
+  on-tertiary-fixed: "#062862"
+  surface-tint: "#008FF0"
+  secondary-fixed-dim: "#93CFFF"
+  surface-container: "#EDF6FF"
+  surface-container-highest: "#C1DEFA"
+  primary-fixed: "#DBEAFE"
+  ocean-deep: "#0052CC"
+  lagoon-cyan: "#00B9F0"
+  primary-fixed-dim: "#93CFFF"
+  hero-overlay: "#E3F7FF"
+  rating-star: "#F5B600"
+  destination-scrim: "#001A29"
+  shadow-blue: "#0061D9"
+  white: "#ffffff"
+  black: "#000000"
+  admin-background: "#f5f7fb"
+  admin-sidebar: "#102a3c"
+  admin-sidebar-muted: "#95acbb"
+  admin-border: "#e5ebf1"
+  admin-muted: "#5f6d7e"
+  admin-heading: "#182c43"
+  admin-purple: "#7c62c9"
+  admin-success: "#13866f"
+  contact-hotline: "#059669"
+  contact-kakao: "#FFE812"
 typography:
   display:
     fontFamily: Plus Jakarta Sans
@@ -108,27 +180,15 @@ The system adopts an **Elevated Modern Coastal** style:
 - **Subtle Organic Softness:** Curated 16px–24px corner radii, delicate multi-tier card elevation, and luminous warm accents.
 - **High Information Clarity:** Structured travel metadata (ratings, itineraries, resort inclusions, countdown timers) formatted for instant comprehension without clutter.
 
-## Màu sắc
+## Colors
 
-[Frame NhaTrangGo · Tonal ramps](https://www.figma.com/design/P2QPQwAEQqKg6i9fGhqosz/BOOKING?node-id=314-859&m=dev) là nguồn của bốn dải Blue, Neutral, Amber và Red. Bảng màu thực thi nằm tại `src/theme/colors.json`:
+### Palette Strategy
 
-- `ramps` giữ nguyên 40 sắc độ từ Figma.
-- `primitives` chứa màu nền tảng ngoài Figma như trắng, đen, màu riêng của admin và màu nhận diện kênh liên hệ.
-- `roles` nhóm token theo chức năng như tương tác, nền, chữ, viền, lỗi và ưu đãi. Mỗi token tham chiếu đến một sắc độ hoặc màu nền tảng.
-
-| Cách dùng                           | Token                                         | Giá trị mặc định              |
-| ----------------------------------- | --------------------------------------------- | ----------------------------- |
-| Nút chính và hover                  | `primary`, `primary-hover`                    | Blue 600 và Blue 800          |
-| Viền khi dùng bàn phím              | `focus-ring`                                  | Blue 600                      |
-| Nền trang, nền thẻ và nền ô nhập    | `background`, `surface`, `surface-muted`      | Neutral 50, trắng, Neutral 50 |
-| Chữ chính và chữ phụ                | `on-surface`, `on-surface-variant`            | Neutral 900 và Neutral 600    |
-| Viền mảnh và viền ô nhập            | `border-subtle`, `border-default`             | Neutral 100 và Neutral 200    |
-| Lỗi và nền lỗi                      | `error`, `error-surface`                      | Red 700 và Red 50             |
-| Giá giảm, nhãn giảm giá và màu nhấn | `sale-price`, `sale-badge`, `promo-highlight` | Red 700, Red 700, Amber 400   |
-
-Trong TSX, dùng lớp theo vai trò như `bg-primary hover:bg-primary-hover text-on-primary`. Trong CSS, dùng `rgb(var(--color-primary))`. Cả hai lấy giá trị từ cùng adapter Tailwind. Dùng sắc độ trực tiếp như `blue-500` cho các chuyển sắc trang trí khi cần đúng thiết kế.
-
-Để đổi riêng nút chính, chỉnh `roles.interaction.primary`. Để thay một sắc độ dùng ở nhiều nơi, chỉnh mục tương ứng trong `ramps`. Một số token chia sẻ cùng sắc độ mặc định để có thể đổi từng vai trò độc lập về sau. Chạy `npm run test:theme` để kiểm tra độ tương phản của chữ và viền focus sau khi đổi màu. CI cũng chạy kiểm tra này.
+- **Primary (`#008FF0` - Ocean Blue):** The central brand color. Conveys ocean horizons, sky, and digital reliability. Used for primary CTAs, active states, key interactive indicators, and booking links.
+- **Secondary (`#0081E7` - Deep Ocean Blue):** Represents coastal nature, island lagoons, and premium resort tranquility. Employed for feature badges, tour highlights, and secondary focal elements.
+- **Tertiary (`#FFD33B` & `#F5B600` - Sunburst Gold & Amber):** Reserved for promotions, discount stickers, hotel star ratings (★), and highlight badges.
+- **Neutral (`#062862` - Deep Navy):** Deep navy provides high-contrast typography, avoiding harsh pure black while grounding the editorial presentation. Paired with soft slate tones (`#587398`, `#7488A6`) for secondary details.
+- **Surface & Backgrounds:** Crisp white (`#FFFFFF`) with cool off-white layers (`#FAFDFF`, `#F1F7FE`) to separate page sections seamlessly.
 
 ## Typography
 
@@ -208,8 +268,8 @@ Các trang Dịch vụ, Blog, E-Visa, Fast-track, Liên hệ, Tra cứu và nộ
 
 ### 5. Input Fields & Selectors
 
-- Nền: `surface` hoặc `surface-muted`.
-- Viền dùng `border-default`. Khi focus, dùng màu `focus-ring` cho viền và bóng viền.
+- Background: `#FFFFFF` or `#F8FAFC`.
+- Border: `1.5px` solid `#E2E8F0`. Focus state shifts to `2px` solid `#0284C7` with a soft blue halo (`ring-4 ring-sky-100`).
 - Integrated left-hand icons (calendar, pin-drop, user-group) in slate-400.
 
-Các màu thực thi lấy từ bảng token chung. Nhận diện dùng `src/config/brand.json`.
+Màu thực thi hiện tại lấy từ `src/theme/colors.json`: xanh chủ đạo `#008FF0`, xanh phụ `#0081E7`, nền sáng xanh `#FAFDFF`. Nhận diện dùng `src/config/brand.json`; không dùng tên thương hiệu viết trực tiếp trong component.

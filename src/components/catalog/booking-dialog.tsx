@@ -121,7 +121,7 @@ export function BookingDialogContent({
               <select
                 name="roomId"
                 required
-                className="w-full border border-border-default rounded-lg p-2"
+                className="w-full border border-outline-variant rounded-lg p-2"
               >
                 <option value="">Chọn loại phòng</option>
                 {details.rooms.map((room) => (
@@ -166,7 +166,6 @@ export function BookingDialogContent({
               <DialogField
                 label="Giờ đón"
                 name="departureTime"
-                defaultValue={initialValues.departureTime}
                 type="time"
                 required
               />
@@ -185,12 +184,11 @@ export function BookingDialogContent({
             Ghi chú (số phòng, điểm đón, giờ đón)
             <textarea
               name="notes"
-              defaultValue={initialValues.notes}
               maxLength={2000}
-              className="block w-full border border-border-default rounded-lg p-2 mt-1"
+              className="block w-full border border-outline-variant rounded-lg p-2 mt-1"
             />
           </label>
-          <p className="text-body-sm text-on-surface-variant">
+          <p className="text-body-sm text-outline">
             Đây là yêu cầu tư vấn. Nhân viên sẽ xác nhận chỗ trống và tổng giá
             trước khi thanh toán.
           </p>

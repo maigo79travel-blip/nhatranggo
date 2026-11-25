@@ -10,7 +10,7 @@ export function DialogField({
       {label}
       <input
         {...props}
-        className="block w-full border border-border-default rounded-lg p-2.5 mt-1 bg-white"
+        className="block w-full border border-outline-variant rounded-lg p-2.5 mt-1 bg-white"
       />
     </label>
   );

@@ -70,7 +70,7 @@ export function MarkdownEditor({
         hidden={preview}
       />
       {preview && (
-        <div className="border border-border-subtle rounded-xl p-4">
+        <div className="border border-border-light rounded-xl p-4">
           <Markdown value={value} />
         </div>
       )}
