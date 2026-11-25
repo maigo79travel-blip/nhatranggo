@@ -2,7 +2,7 @@ import "server-only";
 import { randomUUID } from "node:crypto";
 import { z } from "zod";
 import { db } from "@/lib/db";
-import { passwordHash } from "@/lib/admin-auth";
+import { passwordHash } from "./auth";
 import type { AdminUser } from "@/lib/types";
 import { resources } from "./resources";
 import { AppError } from "@/lib/errors";

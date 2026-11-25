@@ -1,11 +1,11 @@
 import { AppError } from "@/lib/errors";
 import { errorResponse, readJson } from "@/lib/http";
 import { rateLimit, sameOrigin } from "@/lib/request-security";
-import { bookingSchema } from "@/lib/validation";
+import { bookingSchema } from "@/modules/bookings/validation";
 import {
   createBooking,
   getBookingByIdAndPhone,
-} from "@/lib/services/booking-service";
+} from "@/modules/bookings/service";
 
 export async function POST(request: Request) {
   try {

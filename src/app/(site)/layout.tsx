@@ -2,7 +2,7 @@ import { db } from "@/lib/db";
 import type { Metadata } from "next";
 import { getSiteData } from "@/lib/catalog";
 import { SiteDataProvider } from "@/components/content";
-import { WebsiteShell } from "@/components/website-shell";
+import { WebsiteShell } from "@/components/site/website-shell";
 import { contactInfo, resolveContent } from "@/lib/content-values";
 import brand from "@/config/brand.json";
 export async function generateMetadata(): Promise<Metadata> {

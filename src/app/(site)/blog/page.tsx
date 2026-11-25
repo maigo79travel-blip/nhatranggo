@@ -1,10 +1,10 @@
 import { listArticles } from "@/modules/blog/service";
 import { db } from "@/lib/db";
-import { PublicPage } from "@/modules/settings/public-page";
+import { PublicPage } from "@/components/site/public-page";
 import Link from "next/link";
 import Form from "next/form";
-import { FilterField } from "@/modules/settings/filter-field";
-import { PublicEmptyState, PublicIcon } from "@/modules/settings/public-ui";
+import { FilterField } from "@/components/site/filter-field";
+import { PublicEmptyState, PublicIcon } from "@/components/site/public-ui";
 export default async function BlogPage({
   searchParams,
 }: {

@@ -5,7 +5,7 @@ import {
   verifyPassword,
   createSession,
   destroySession,
-} from "@/lib/admin-auth";
+} from "@/modules/admin/auth";
 import { sameOrigin, secureCookies, rateLimit } from "@/lib/request-security";
 import { readJson, errorResponse } from "@/lib/http";
 import { AppError } from "@/lib/errors";

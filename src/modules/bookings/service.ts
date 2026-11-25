@@ -1,98 +1,93 @@
+import brand from "@/config/brand.json";
 import "server-only";
 import { randomUUID } from "node:crypto";
-import { z } from "zod";
 import { db } from "@/lib/db";
+import type { z } from "zod";
+import type { bookingSchema } from "./validation";
+import type { Booking } from "@/lib/types";
 import { AppError } from "@/lib/errors";
-import { status, id, text } from "../admin/validation";
-export const bookingUpdateSchema = z.object({
-  id: z.uuid(),
-  status,
-  partner_id: id,
-  internal_notes: text,
-  confirmed_total: z.coerce
-    .number()
-    .int()
-    .min(0)
-    .max(1000000000000)
-    .nullable()
-    .default(null),
-  name: z.string().trim().min(2).max(120).optional(),
-  phone: z
-    .string()
-    .regex(/^(\+84|0)[0-9]{9,10}$/)
-    .optional(),
-});
-export async function updateBooking(
-  input: z.infer<typeof bookingUpdateSchema>,
-  actorId: string,
-) {
+import { publicProductWhere } from "@/modules/travel/product-visibility";
+type CreateBookingInput = z.infer<typeof bookingSchema>;
+export async function createBooking(input: CreateBookingInput) {
   const client = await db.connect();
   try {
     await client.query("BEGIN");
-    if (input.partner_id) {
-      const partner = await client.query(
-        "SELECT id FROM partners WHERE id=$1 AND active=true",
-        [input.partner_id],
-      );
-      if (!partner.rowCount) throw new AppError("Đối tác không hoạt động");
+    const product = (
+      await client.query(
+        `SELECT p.price,p.type FROM products p WHERE p.id=$1 AND ${publicProductWhere}`,
+        [input.productId],
+      )
+    ).rows[0];
+    if (!product) throw new AppError("Dịch vụ không tồn tại", 404);
+    let price = product.price;
+    if (product.type === "hotel" && !input.returnDate)
+      throw new AppError("Vui lòng chọn ngày trả phòng");
+    if (input.roomId) {
+      const room = (
+        await client.query(
+          "SELECT price,capacity FROM rooms WHERE id=$1 AND product_id=$2 AND active=true",
+          [input.roomId, input.productId],
+        )
+      ).rows[0];
+      if (!room || input.guests > room.capacity)
+        throw new AppError("Loại phòng không phù hợp số khách");
+      price = room.price;
     }
-    const result = await client.query(
-      "UPDATE bookings SET status=$2,partner_id=$3,internal_notes=$4,customer_name=COALESCE($5,customer_name),phone=COALESCE($6,phone),confirmed_total=$7,updated_at=now() WHERE id=$1 RETURNING *",
+    const scheduled = await client.query(
+      "SELECT date::text FROM departures WHERE product_id=$1 AND active=true",
+      [input.productId],
+    );
+    if (
+      product.type === "tour" &&
+      scheduled.rowCount &&
+      !scheduled.rows.some((r) => r.date === input.date)
+    )
+      throw new AppError("Tour chưa có lịch khởi hành ngày đã chọn");
+    const bookingId = randomUUID();
+    await client.query(
+      "INSERT INTO bookings(id,product_id,customer_name,phone,departure_date,guests,unit_price,notes,return_date,departure_time,room_id) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",
       [
-        input.id,
-        input.status,
-        input.partner_id,
-        input.internal_notes,
-        input.name ?? null,
-        input.phone ?? null,
-        input.confirmed_total,
+        bookingId,
+        input.productId,
+        input.name,
+        input.phone,
+        input.date,
+        input.guests,
+        price,
+        input.notes,
+        input.returnDate ?? null,
+        input.departureTime ?? null,
+        input.roomId ?? null,
       ],
     );
-    if (!result.rowCount) throw new AppError("Không tìm thấy yêu cầu", 404);
-    await client.query(
-      "INSERT INTO booking_history(id,booking_id,actor_id,status,notes) VALUES($1,$2,$3,$4,$5)",
-      [randomUUID(), input.id, actorId, input.status, input.internal_notes],
-    );
-    const booking = result.rows[0];
     await client.query(
       "INSERT INTO customers(id,name,phone) VALUES($1,$2,$3) ON CONFLICT(phone) DO UPDATE SET name=EXCLUDED.name",
-      [randomUUID(), booking.customer_name, booking.phone],
+      [randomUUID(), input.name, input.phone],
+    );
+    await client.query(
+      "INSERT INTO booking_history(id,booking_id,status,notes) VALUES($1,$2,'pending','Khách gửi yêu cầu')",
+      [randomUUID(), bookingId],
     );
     await client.query("COMMIT");
-    return result.rows[0];
-  } catch (e) {
+    return {
+      id: bookingId,
+      status: "pending",
+      message: `Đã nhận yêu cầu. ${brand.name} sẽ kiểm tra với đối tác và liên hệ xác nhận tình trạng chỗ, tổng giá.`,
+    };
+  } catch (error) {
     await client.query("ROLLBACK");
-    throw e;
+    throw error;
   } finally {
     client.release();
   }
 }
-export async function exportBookings() {
+export async function getBookingByIdAndPhone(
+  id: string,
+  phone: string,
+): Promise<Booking | null> {
   const { rows } = await db.query(
-    "SELECT b.id,b.customer_name,b.phone,p.title,b.departure_date::text,b.return_date::text,b.guests,b.unit_price,b.confirmed_total,b.status,b.internal_notes FROM bookings b JOIN products p ON p.id=b.product_id ORDER BY b.created_at DESC LIMIT 10000",
+    "SELECT b.id,b.status,b.departure_date::text AS departure_date,b.return_date::text AS return_date,b.departure_time,b.guests,b.unit_price,b.notes,p.title FROM bookings b JOIN products p ON p.id=b.product_id WHERE b.id=$1 AND b.phone=$2",
+    [id, phone],
   );
-  const headers = [
-    "id",
-    "customer_name",
-    "phone",
-    "title",
-    "departure_date",
-    "return_date",
-    "guests",
-    "unit_price",
-    "confirmed_total",
-    "status",
-    "internal_notes",
-  ];
-  const cell = (v: unknown) => {
-    let value = String(v ?? "");
-    if (/^[=+@\-\t\r]/.test(value)) value = "'" + value;
-    return '"' + value.replaceAll('"', '""') + '"';
-  };
-  return (
-    "\uFEFF" +
-    [headers, ...rows.map((row) => headers.map((key) => row[key]))]
-      .map((row) => row.map(cell).join(","))
-      .join("\r\n")
-  );
+  return rows[0] || null;
 }

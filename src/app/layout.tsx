@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { parseLocale } from "@/modules/settings/locale";
+import { parseLocale } from "@/lib/locale";
 import "./globals.css";
 import "./fonts.css";
 export const dynamic = "force-dynamic";

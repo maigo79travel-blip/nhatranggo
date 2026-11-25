@@ -1,14 +1,13 @@
 import { z } from "zod";
+import { localeSchema, localeOptions } from "@/lib/locale";
 import type { ResourceDefinition } from "../admin/types";
 import {
   title,
   text,
   slug,
-  locale,
   publication,
-  localeOptions,
   publicationOptions,
-} from "../admin/validation";
+} from "@/lib/validation";
 export const settingsResources: Record<string, ResourceDefinition> = {
   pages: {
     table: "information_pages",
@@ -16,7 +15,13 @@ export const settingsResources: Record<string, ResourceDefinition> = {
     icon: "description",
     roles: ["editor"],
     columns: ["title", "slug", "locale", "status"],
-    schema: z.object({ title, slug, locale, body: text, status: publication }),
+    schema: z.object({
+      title,
+      slug,
+      locale: localeSchema,
+      body: text,
+      status: publication,
+    }),
     fields: [
       { name: "title", label: "Tiêu đề", required: true },
       { name: "slug", label: "Đường dẫn", required: true },
@@ -44,7 +49,7 @@ export const settingsResources: Record<string, ResourceDefinition> = {
     schema: z.object({
       entity: z.enum(["content", "product"]),
       entity_key: title,
-      locale: z.enum(["en", "ru", "ko", "zh"]),
+      locale: localeSchema.exclude(["vi"]),
       value: z.record(z.string(), z.unknown()),
     }),
     fields: [

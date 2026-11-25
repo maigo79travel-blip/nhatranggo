@@ -1,7 +1,7 @@
 import "server-only";
 import { db } from "@/lib/db";
 import { cookies } from "next/headers";
-import { parseLocale } from "../settings/locale";
+import { parseLocale } from "@/lib/locale";
 export async function listArticles(category = "", query = "") {
   const locale = parseLocale((await cookies()).get("site_locale")?.value);
   return (

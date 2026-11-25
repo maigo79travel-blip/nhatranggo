@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { localeSchema, localeOptions } from "@/lib/locale";
 import type { ResourceDefinition } from "../admin/types";
 import {
   title,
@@ -6,11 +7,9 @@ import {
   slug,
   id,
   url,
-  locale,
   publication,
-  localeOptions,
   publicationOptions,
-} from "../admin/validation";
+} from "@/lib/validation";
 export const blogResources: Record<string, ResourceDefinition> = {
   categories: {
     table: "article_categories",
@@ -35,7 +34,7 @@ export const blogResources: Record<string, ResourceDefinition> = {
     schema: z.object({
       title,
       slug,
-      locale,
+      locale: localeSchema,
       category_id: id,
       excerpt: text,
       body: text,

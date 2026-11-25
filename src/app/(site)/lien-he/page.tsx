@@ -1,7 +1,7 @@
 import { PublicForm } from "@/modules/support/public-form";
-import { PublicPage } from "@/modules/settings/public-page";
+import { PublicPage } from "@/components/site/public-page";
 import { getSiteData } from "@/lib/catalog";
-import { PublicIcon } from "@/modules/settings/public-ui";
+import { PublicIcon } from "@/components/site/public-ui";
 import { contactInfo } from "@/lib/content-values";
 import { contactChannels } from "@/modules/support/contact-channels";
 export default async function ContactPage() {

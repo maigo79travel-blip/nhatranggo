@@ -2,7 +2,7 @@ import "server-only";
 import { randomUUID } from "node:crypto";
 import { db } from "@/lib/db";
 import { z } from "zod";
-import { title, text, phone } from "../admin/validation";
+import { title, text, phone } from "@/lib/validation";
 const contactSchema = z.object({
   name: title,
   phone: z.string().max(30).default(""),

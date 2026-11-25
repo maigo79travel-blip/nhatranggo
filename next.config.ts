@@ -1,4 +1,18 @@
 import type { NextConfig } from "next";
+
+const isDevelopment = process.env.NODE_ENV === "development";
+const contentSecurityPolicy = [
+  "default-src 'self'",
+  "img-src 'self' data: https:",
+  "style-src 'self' 'unsafe-inline'",
+  `script-src 'self' 'unsafe-inline'${isDevelopment ? " 'unsafe-eval'" : ""}`,
+  "font-src 'self' data:",
+  "connect-src 'self' https:",
+  "frame-ancestors 'none'",
+  "base-uri 'self'",
+  "object-src 'none'",
+].join("; ");
+
 const config: NextConfig = {
   ...(process.env.VERCEL ? {} : { output: "standalone" as const }),
   poweredByHeader: false,
@@ -13,8 +27,7 @@ const config: NextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           {
             key: "Content-Security-Policy",
-            value:
-              "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; object-src 'none'",
+            value: contentSecurityPolicy,
           },
         ],
       },

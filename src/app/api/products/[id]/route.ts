@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { publicProductWhere } from "@/lib/services/product-visibility";
+import { publicProductWhere } from "@/modules/travel/product-visibility";
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ id: string }> },

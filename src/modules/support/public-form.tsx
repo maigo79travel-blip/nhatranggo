@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { DialogField } from "@/components/catalog/dialog-field";
-import { PublicIcon } from "@/modules/settings/public-ui";
+import { PublicIcon } from "@/components/site/public-ui";
 import { SupportGuide } from "./support-guide";
 export function PublicForm({
   kind,

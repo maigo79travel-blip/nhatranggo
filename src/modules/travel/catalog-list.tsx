@@ -2,7 +2,7 @@
 import { useCatalog } from "@/components/catalog/catalog-context";
 import type { BookingDraft } from "./search";
 import { money, type Product } from "@/lib/types";
-import { PublicIcon } from "@/modules/settings/public-ui";
+import { PublicIcon } from "@/components/site/public-ui";
 export function ServiceCards({
   products,
   initialValues,

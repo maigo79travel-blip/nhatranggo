@@ -1,4 +1,4 @@
-import { getFareQuote } from "@/lib/services/fare-service";
+import { getFareQuote } from "@/modules/travel/fare-service";
 
 export async function GET(request: Request) {
   const p = new URL(request.url).searchParams;

@@ -1,5 +1,5 @@
 import { BookingLookup } from "@/modules/support/lookup";
-import { PublicPage } from "@/modules/settings/public-page";
+import { PublicPage } from "@/components/site/public-page";
 export default function LookupPage() {
   return (
     <PublicPage title="Tra cứu booking">

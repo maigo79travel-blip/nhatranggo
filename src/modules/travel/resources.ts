@@ -1,6 +1,6 @@
 import { z } from "zod";
 import type { ResourceDefinition } from "../admin/types";
-import { title, text, url, money, date } from "../admin/validation";
+import { title, text, url, money, date } from "@/lib/validation";
 export const travelResources: Record<string, ResourceDefinition> = {
   destinations: {
     table: "destinations",

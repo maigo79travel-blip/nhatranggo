@@ -1,3 +1,5 @@
+import type { Locale } from "./locale";
+
 export type ContentEntry = {
   kind: "text" | "attributes" | "settings";
   label: string;
@@ -34,7 +36,7 @@ export type SiteData = {
   content: Record<string, ContentEntry>;
   fares: Fare[];
   destinations: { id: string; name: string; code: string }[];
-  locale: "vi" | "en" | "ru" | "ko" | "zh";
+  locale: Locale;
 };
 
 export type Booking = {

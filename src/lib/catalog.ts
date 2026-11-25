@@ -2,9 +2,9 @@ import "server-only";
 import { cache } from "react";
 import { cookies } from "next/headers";
 import { db } from "./db";
-import { parseLocale } from "@/modules/settings/locale";
+import { parseLocale } from "@/lib/locale";
 import type { SiteData, ContentEntry, Fare, Product } from "./types";
-import { publicProductWhere } from "./services/product-visibility";
+import { publicProductWhere } from "@/modules/travel/product-visibility";
 export const getSiteData = cache(async (): Promise<SiteData> => {
   const locale = parseLocale((await cookies()).get("site_locale")?.value);
   const [products, entries, fares, destinations] = await Promise.all([

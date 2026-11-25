@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { getPublishedPage } from "@/modules/blog/service";
 import { Markdown } from "@/modules/blog/markdown";
-import { PublicPage } from "@/modules/settings/public-page";
+import { PublicPage } from "@/components/site/public-page";
 export default async function InformationPage({
   params,
 }: {

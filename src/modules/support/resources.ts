@@ -1,6 +1,6 @@
 import { z } from "zod";
 import type { ResourceDefinition } from "../admin/types";
-import { title, text, phone, status } from "../admin/validation";
+import { title, text, phone, status } from "@/lib/validation";
 export const supportResources: Record<string, ResourceDefinition> = {
   requests: {
     table: "service_requests",

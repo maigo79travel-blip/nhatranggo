@@ -233,7 +233,7 @@ The design system embraces refined rounded curves that mirror ocean waves and va
 
 ## Components
 
-Các trang Dịch vụ, Blog, E-Visa, Fast-track, Liên hệ, Tra cứu và nội dung chi tiết dùng chung `PublicPage`, các component trong `src/modules/settings/public-ui.tsx` và nhóm class `.public-*` tại `src/app/globals.css`. CSS được tải từ root layout để giữ giao diện khi chuyển trang. Form hỗ trợ và tra cứu dùng chung `SupportGuide`; không dùng class `.ad-*` hoặc component phụ thuộc stylesheet admin. Khung nội dung không giới hạn chiều rộng tối đa và giữ gutter responsive; thẻ ảnh giữ tỷ lệ 16:10 và bộ lọc tự xuống cột trên mobile. Cụm liên hệ dùng thanh nổi ngang trên điện thoại và cụm dọc từ 768px; giữ đủ sáu kênh từ Maigo local. Bộ lọc Dịch vụ dùng pill chọn loại, thanh tìm kiếm và nhóm ngày/số khách; Blog dùng cùng thanh và `FilterField`.
+Các trang Dịch vụ, Blog, E-Visa, Fast-track, Liên hệ, Tra cứu và nội dung chi tiết dùng chung `PublicPage`, các component trong `src/components/site/public-ui.tsx` và nhóm class `.public-*` tại `src/app/globals.css`. Trang chủ, Khách sạn, Tour và Xe đưa đón dùng chung `SitePageFrame`. CSS được tải từ root layout để giữ giao diện khi chuyển trang. Form hỗ trợ và tra cứu dùng chung `SupportGuide`; không dùng class `.ad-*` hoặc component phụ thuộc stylesheet admin. Khung nội dung không giới hạn chiều rộng tối đa và giữ gutter responsive; thẻ ảnh giữ tỷ lệ 16:10 và bộ lọc tự xuống cột trên mobile. Cụm liên hệ dùng thanh nổi ngang trên điện thoại và cụm dọc từ 768px; giữ đủ sáu kênh từ Maigo local. Bộ lọc Dịch vụ dùng pill chọn loại, thanh tìm kiếm và nhóm ngày/số khách; Blog dùng cùng thanh và `FilterField`.
 
 ### 1. Buttons
 

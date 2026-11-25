@@ -2,8 +2,8 @@
 
 import Form from "next/form";
 import Link from "next/link";
-import { FilterField } from "@/modules/settings/filter-field";
-import { PublicIcon } from "@/modules/settings/public-ui";
+import { FilterField } from "@/components/site/filter-field";
+import { PublicIcon } from "@/components/site/public-ui";
 import type { BookingDraft } from "./search";
 
 const serviceTypes = [

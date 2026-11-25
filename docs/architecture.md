@@ -6,20 +6,26 @@
 src/
   app/
     (site)/              Trang công khai và layout website
+      _components/       Giao diện và bộ lọc riêng của trang chủ
+      khach-san/         Route khách sạn và _components riêng
+      tour-hang-ngay/    Route tour và _components riêng
+      xe-dua-don/        Route đưa đón và _components riêng
     admin/               Điểm vào trang quản trị
     api/                 HTTP: kiểm tra quyền, parse input, gọi nghiệp vụ
     layout.tsx           HTML, ngôn ngữ, font và CSS toàn ứng dụng
   modules/
-    admin/               Registry CRUD, quyền, validation chung và màn hình CRUD
+    admin/               Xác thực, phân quyền và nghiệp vụ CRUD quản trị
+      ui/                Màn hình, form, CSS và client API quản trị
     blog/                Bài viết/chuyên mục, truy vấn công khai, editor Markdown
     bookings/            Cập nhật đơn, lịch sử, tạo thủ công, xuất danh sách
     crm/                 Khách hàng, đối tác, tài xế
-    home/                Tìm nhanh, bộ lọc và liên kết trang chủ
     settings/            Tài khoản, ngôn ngữ, trang thông tin
     support/             E-Visa/Fast-track, liên hệ, tra cứu
     travel/              Địa phương, tuyến, phòng, lịch tour, thẻ danh mục
-  components/            Giao diện chia sẻ và các bố cục trang hiện có
-  lib/                   Pool DB, session, lỗi/HTTP, giới hạn yêu cầu, resolver CMS và dịch vụ dùng chung
+  components/            Giao diện tái sử dụng giữa nhiều trang
+    site/                Header, footer, điều hướng, khung trang và bộ lọc dùng chung
+    catalog/             Thẻ danh mục và hộp thoại đặt dịch vụ
+  lib/                   Pool DB, locale, validation dùng chung, lỗi/HTTP và resolver CMS
   config/                Nhận diện NhaTrangGo dùng chung
   theme/                 Bảng màu duy nhất và adapter Tailwind
 
@@ -31,16 +37,19 @@ scripts/
   seed-content.mjs       Seed CMS không ghi đè nội dung đã sửa
   setup-admin.mjs        Tạo quản trị ban đầu
 
-tests/e2e/               Kiểm thử giao diện/API với database thực
+tests/
+  e2e/                   Kiểm thử giao diện/API với database kiểm thử
+  unit/                  Kiểm tra adapter kết nối database
 docs/                    Thiết kế, kiến trúc, đối chiếu module
 public/                  Ảnh và font tĩnh
 ```
 
-Các thư mục `(site)` không thay đổi URL. Quản trị không dùng layout/header/footer của website; trang đăng nhập không tải danh mục công khai. `src/lib/services` vẫn chứa dịch vụ đã có; dịch vụ mới đặt cùng module để tránh đợt di chuyển hàng loạt không cần thiết.
+Các thư mục `(site)` và `_components` giúp nhóm route và mã nội bộ mà vẫn giữ URL. Component dành riêng cho một trang đặt cạnh `page.tsx`. Component dùng ở nhiều trang đặt trong `components/`. Trang quản trị có giao diện riêng và trang đăng nhập chỉ tải dữ liệu cần cho xác thực.
 
 ## Ranh giới và mở rộng
 
 - Server code chứa `server-only`. Component client không nhập pool DB hay hàm xác thực server.
+- Service đặt trong module sở hữu nghiệp vụ. Tạo và tra cứu booking nằm trong `modules/bookings/service.ts`, cập nhật và xuất đơn nằm trong `modules/bookings/admin-service.ts`. Quản trị và giao diện công khai dùng chung schema locale từ `lib/locale.ts`.
 - Module CRUD khai báo schema, field, cột danh sách và quyền; service chỉ sử dụng bảng/cột trong registry, không nhận tên SQL từ client.
 - Những thao tác có nghiệp vụ riêng (booking, session, bảng giá đồng bộ sản phẩm) dùng service/transaction riêng, không ép vào CRUD tổng quát.
 - Module mới thêm vào registry sẽ có menu quản trị theo quyền. Trang công khai vẫn khai báo route và truy vấn rõ ràng, không tự sinh route tùy ý từ database.
@@ -60,4 +69,4 @@ Không commit `.env`, `.local`, `node_modules`, `.next`, `test-results` hoặc t
 - `publicProductWhere` giữ cùng quy tắc hiển thị tại danh mục, chi tiết và tạo booking. `bookingSchema` dùng cho yêu cầu công khai và tạo đơn quản trị.
 - `AppError`, `readJson`, `errorResponse`, kiểm tra Origin/cookie và rate limiter tách khỏi module admin để các module công khai không phụ thuộc vào lớp CRUD quản trị.
 
-Cấu trúc giữ các route và nghiệp vụ riêng khi hành vi khác nhau; không ép mọi component thành abstraction chỉ để giảm số dòng. TypeScript bật kiểm tra biến/tham số không dùng và Knip kiểm tra export/type thừa.
+TypeScript kiểm tra biến và tham số không dùng. CI chạy typecheck, build và kiểm thử các luồng chính trên PostgreSQL riêng.

@@ -1,9 +1,9 @@
 import { AppError } from "@/lib/errors";
 import { z } from "zod";
-import { adminUser } from "@/lib/admin-auth";
+import { adminUser } from "@/modules/admin/auth";
 import { sameOrigin } from "@/lib/request-security";
-import { productSchema, contentSchema } from "@/lib/admin-validation";
-import { bookingSchema } from "@/lib/validation";
+import { productSchema, contentSchema } from "@/modules/admin/content-validation";
+import { bookingSchema } from "@/modules/bookings/validation";
 import { db } from "@/lib/db";
 import {
   getAdminOverview,
@@ -13,8 +13,8 @@ import {
   updateAdminContent,
   updateAdminFare,
   changeAdminPassword,
-} from "@/lib/services/admin-service";
-import { createBooking } from "@/lib/services/booking-service";
+} from "@/modules/admin/core-resources";
+import { createBooking } from "@/modules/bookings/service";
 import { resources } from "@/modules/admin/resources";
 import { canAccess } from "@/modules/admin/permissions";
 import { listRecords, saveRecord, removeRecord } from "@/modules/admin/service";
@@ -23,7 +23,7 @@ import {
   bookingUpdateSchema,
   updateBooking,
   exportBookings,
-} from "@/modules/bookings/service";
+} from "@/modules/bookings/admin-service";
 type Context = { params: Promise<{ resource: string }> };
 async function handle(request: Request, context: Context) {
   try {

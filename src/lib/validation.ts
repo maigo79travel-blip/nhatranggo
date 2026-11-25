@@ -1,37 +1,34 @@
 import { z } from "zod";
-export const bookingSchema = z
-  .object({
-    productId: z.string().min(1).max(100),
-    name: z.string().trim().min(2, "Vui lòng nhập họ tên").max(120),
-    phone: z
-      .string()
-      .trim()
-      .regex(/^(\+84|0)[0-9]{9,10}$/, "Số điện thoại không hợp lệ"),
-    date: z
-      .string()
-      .regex(/^\d{4}-\d{2}-\d{2}$/)
-      .refine((value) => {
-        const date = new Date(value + "T00:00:00+07:00");
-        return (
-          !Number.isNaN(date.getTime()) &&
-          date.toLocaleDateString("sv-SE", { timeZone: "Asia/Ho_Chi_Minh" }) ===
-            value &&
-          value >=
-            new Date().toLocaleDateString("sv-SE", {
-              timeZone: "Asia/Ho_Chi_Minh",
-            })
-        );
-      }, "Ngày đi phải từ hôm nay"),
-    returnDate: z.iso.date().optional(),
-    departureTime: z
-      .string()
-      .regex(/^([01]\d|2[0-3]):[0-5]\d$/)
-      .optional(),
-    roomId: z.uuid().optional(),
-    guests: z.coerce.number().int().min(1).max(100),
-    notes: z.string().trim().max(2000).default(""),
-  })
+export const title = z.string().trim().min(1).max(300);
+export const text = z.string().max(20000).default("");
+export const slug = z
+  .string()
+  .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
+  .max(160);
+export const phone = z
+  .string()
+  .trim()
+  .regex(/^[+0-9 ().-]{7,30}$/);
+export const id = z.uuid().nullable().default(null);
+export const url = z
+  .string()
+  .max(2000)
   .refine(
-    (v) => !v.returnDate || v.returnDate > v.date,
-    "Ngày trả phòng phải sau ngày nhận phòng",
-  );
+    (v) => !v || /^(\/[^/]|https?:\/\/)/.test(v),
+    "Đường dẫn ảnh không hợp lệ",
+  )
+  .default("");
+export const money = z.coerce.number().int().min(0).max(2000000000);
+export const date = z.iso.date();
+export const publication = z.enum(["draft", "published", "hidden"]);
+export const status = z.enum([
+  "pending",
+  "confirmed",
+  "completed",
+  "cancelled",
+]);
+export const publicationOptions = [
+  { value: "draft", label: "Bản nháp" },
+  { value: "published", label: "Đã đăng" },
+  { value: "hidden", label: "Đã ẩn" },
+];

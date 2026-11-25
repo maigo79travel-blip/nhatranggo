@@ -1,7 +1,7 @@
 import { getSiteData } from "@/lib/catalog";
 import { db } from "@/lib/db";
-import { PublicPage } from "@/modules/settings/public-page";
-import { PublicEmptyState, PublicIcon } from "@/modules/settings/public-ui";
+import { PublicPage } from "@/components/site/public-page";
+import { PublicEmptyState, PublicIcon } from "@/components/site/public-ui";
 import { ServiceCards } from "@/modules/travel/catalog-list";
 import { ServiceFilters } from "@/modules/travel/service-filters";
 import {

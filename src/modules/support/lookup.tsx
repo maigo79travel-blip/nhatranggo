@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { DialogField } from "@/components/catalog/dialog-field";
 import Link from "next/link";
-import { PublicIcon } from "@/modules/settings/public-ui";
+import { PublicIcon } from "@/components/site/public-ui";
 import { SupportGuide } from "./support-guide";
 export function BookingLookup() {
   const [data, setData] = useState<Record<string, unknown> | null>(null);

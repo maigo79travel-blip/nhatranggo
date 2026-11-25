@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useSiteData } from "@/components/content";
 import { contactInfo } from "@/lib/content-values";
-import { PublicIcon } from "@/modules/settings/public-ui";
+import { PublicIcon } from "@/components/site/public-ui";
 import { contactChannels } from "./contact-channels";
 import { contactCopy } from "./contact-copy";
 

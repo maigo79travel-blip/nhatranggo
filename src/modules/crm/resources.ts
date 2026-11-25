@@ -1,6 +1,6 @@
 import { z } from "zod";
 import type { ResourceDefinition } from "../admin/types";
-import { title, text, phone } from "../admin/validation";
+import { title, text, phone } from "@/lib/validation";
 export const crmResources: Record<string, ResourceDefinition> = {
   customers: {
     table: "customers",
