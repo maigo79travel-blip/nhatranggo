@@ -61,7 +61,11 @@ export function HomeSearch() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center"
         >
           <input type="hidden" name="type" value={type} />
-          <label className="lg:col-span-3 min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-3.5 py-2.5 flex items-center gap-3 focus-within:border-primary transition-colors cursor-text">
+          <label
+            className={`min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-3.5 py-2.5 flex items-center gap-3 focus-within:border-primary transition-colors cursor-text ${
+              hotel ? "lg:col-span-3" : "lg:col-span-4"
+            }`}
+          >
             <span
               className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary shrink-0"
               aria-hidden="true"
@@ -193,12 +197,13 @@ export function HomeSearch() {
                 Loại hình/ Sao
               </span>
               <select
+                name="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 aria-label="Loại hình hoặc hạng sao"
                 className="w-full min-w-0 bg-transparent text-xs font-bold text-on-surface focus:outline-none cursor-pointer"
               >
-                <option value="">Tất cả khách sạn</option>
+                <option value="">Tất cả</option>
                 <option value="5 sao">5 Sao Quốc Tế</option>
                 <option value="resort">Resort nghỉ dưỡng</option>
                 <option value="4 sao">4 Sao Cao Cấp</option>

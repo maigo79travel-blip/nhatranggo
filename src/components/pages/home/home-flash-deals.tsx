@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { HomeLink } from "@/modules/home/home-link";
 import {
   ContentText,
@@ -334,8 +335,7 @@ export function HomeFlashDeals() {
           </span>
         </HomeLink>
 
-        <HomeLink
-          contentKey="home.attributes-008"
+        <Link
           href="/tour-hang-ngay"
           className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-secondary to-lagoon-cyan p-6 text-white flex items-center justify-between gap-4 shadow-card hover:shadow-card-hover transition-all group"
         >
@@ -351,7 +351,7 @@ export function HomeFlashDeals() {
           <span className="w-10 h-10 rounded-full bg-white text-on-surface flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
             <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
           </span>
-        </HomeLink>
+        </Link>
       </div>
     </section>
   );

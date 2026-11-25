@@ -86,7 +86,7 @@ export function MobileNav() {
             </Link>
           )}
           <div className="sm:hidden px-3 pt-2">
-            <LanguageSelector />
+            <LanguageSelector id="mobile-site-language" />
           </div>
         </nav>
       )}

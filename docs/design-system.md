@@ -272,4 +272,4 @@ Các trang Dịch vụ, Blog, E-Visa, Fast-track, Liên hệ, Tra cứu và nộ
 - Border: `1.5px` solid `#E2E8F0`. Focus state shifts to `2px` solid `#0284C7` with a soft blue halo (`ring-4 ring-sky-100`).
 - Integrated left-hand icons (calendar, pin-drop, user-group) in slate-400.
 
-Màu thực thi hiện tại lấy từ `src/theme/colors.json`: xanh chủ đạo `#0077CC`, xanh phụ `#006AB8`, nền sáng xanh `#F7FBFF`. Nhận diện dùng `src/config/brand.json`; không dùng tên thương hiệu viết trực tiếp trong component.
+Màu thực thi hiện tại lấy từ `src/theme/colors.json`: xanh chủ đạo `#008FF0`, xanh phụ `#0081E7`, nền sáng xanh `#FAFDFF`. Nhận diện dùng `src/config/brand.json`; không dùng tên thương hiệu viết trực tiếp trong component.

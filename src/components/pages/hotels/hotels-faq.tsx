@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ContentText, ContentElement } from "@/components/content";
 import brand from "@/config/brand.json";
@@ -51,6 +51,15 @@ export function HotelsFaq() {
   const [activeModal, setActiveModal] = useState<(typeof commitments)[number] | null>(
     null,
   );
+
+  useEffect(() => {
+    if (!activeModal) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActiveModal(null);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [activeModal]);
 
   return (
     <section className="site-container py-10 w-full space-y-6">
@@ -177,6 +186,9 @@ export function HotelsFaq() {
           role="dialog"
           aria-modal="true"
           aria-label={activeModal.detailTitle}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setActiveModal(null);
+          }}
           className="fixed inset-0 z-50 bg-destination-scrim/50 flex items-center justify-center p-4"
         >
           <div className="bg-surface-container-lowest rounded-3xl border border-border-light shadow-floating max-w-lg w-full p-6 space-y-4">

@@ -1,34 +1,7 @@
-"use client";
-import { useState, type FormEvent } from "react";
+import Link from "next/link";
 import { ContentText } from "@/components/content";
-import brand from "@/config/brand.json";
 
 export function HomeFaq() {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "busy" | "done" | "error">("idle");
-
-  const handleSubmit = async (event: FormEvent) => {
-    event.preventDefault();
-    if (!email.trim()) return;
-    setStatus("busy");
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          name: brand.name,
-          email: email.trim(),
-          message: `Newsletter subscription (${brand.name})`,
-        }),
-      });
-      if (!response.ok) throw new Error();
-      setStatus("done");
-      setEmail("");
-    } catch {
-      setStatus("error");
-    }
-  };
-
   return (
     <section className="site-container py-10 w-full mb-8">
       <div
@@ -42,45 +15,20 @@ export function HomeFaq() {
           <p className="font-body-md text-sm sm:text-base text-white/95 mt-2">
             <ContentText contentKey="home.text-167" />
           </p>
-          <form
-            onSubmit={handleSubmit}
-            className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 max-w-2xl"
-          >
-            <label className="flex-1 min-w-0 bg-surface-container-lowest rounded-full px-5 h-12 flex items-center gap-3 shadow-sm">
-              <span
-                className="material-symbols-outlined text-[20px] text-outline shrink-0"
-                aria-hidden="true"
-              >
-                mail
-              </span>
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Nhập email của bạn..."
-                aria-label="Nhập email của bạn"
-                className="w-full min-w-0 bg-transparent text-on-surface placeholder:text-outline text-sm sm:text-base font-medium focus:outline-none"
-              />
-            </label>
-            <button
-              type="submit"
-              disabled={status === "busy"}
-              className="h-12 px-6 rounded-full bg-primary hover:bg-ocean-deep text-on-primary font-bold text-sm sm:text-base shadow-md transition-colors shrink-0 disabled:opacity-60"
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <Link
+              href="/khach-san"
+              className="h-12 px-6 rounded-full bg-primary hover:bg-ocean-deep text-on-primary font-bold text-sm sm:text-base shadow-md transition-colors inline-flex items-center justify-center"
             >
-              {status === "busy" ? "Đang gửi..." : "Đăng ký ngay"}
-            </button>
-          </form>
-          {status === "done" && (
-            <p role="status" className="mt-2.5 text-sm font-semibold text-white">
-              Đăng ký thành công!
-            </p>
-          )}
-          {status === "error" && (
-            <p role="alert" className="mt-2.5 text-sm font-semibold text-gold-amber">
-              Chưa gửi được đăng ký, vui lòng thử lại sau.
-            </p>
-          )}
+              Khám phá ưu đãi hôm nay
+            </Link>
+            <Link
+              href="/lien-he"
+              className="h-12 px-6 rounded-full bg-surface-container-lowest text-on-surface hover:bg-ocean-light font-bold text-sm sm:text-base shadow-md transition-colors inline-flex items-center justify-center"
+            >
+              Liên hệ tư vấn 24/7
+            </Link>
+          </div>
         </div>
       </div>
     </section>

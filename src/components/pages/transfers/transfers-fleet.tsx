@@ -1,3 +1,4 @@
+"use client";
 import { ContentText, ContentElement, FareValue } from "@/components/content";
 
 const fleetVehicles = [
@@ -96,15 +97,19 @@ export function TransfersFleet() {
                       <FareValue route="CXR_NT_CENTER" vehicle={item.vehicle} />
                     </span>
                   </div>
-                  <ContentElement
-                    contentKey={item.ctaAttr}
-                    tag="a"
-                    className="px-4 py-2 rounded-full bg-surface-container hover:bg-primary hover:text-on-primary font-label-md text-label-md font-bold text-on-surface transition-all action-link"
-                    rel="noopener"
-                    target="_blank"
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const chip = document.querySelector<HTMLButtonElement>(
+                        `.vehicle-chip[data-veh="${item.vehicle}"]`,
+                      );
+                      chip?.click();
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                    className="px-4 py-2 rounded-full bg-surface-container hover:bg-primary hover:text-on-primary font-label-md text-label-md font-bold text-on-surface transition-all"
                   >
                     <ContentText contentKey={item.ctaText} />
-                  </ContentElement>
+                  </button>
                 </div>
               </div>
             </div>

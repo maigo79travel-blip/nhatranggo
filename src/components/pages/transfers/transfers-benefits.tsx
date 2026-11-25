@@ -15,7 +15,8 @@ export function TransfersBenefits() {
             <ContentText contentKey="transfers.text-148" />
           </p>
         </div>
-        <div className="card-grid-compact">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-6 items-stretch">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div className="bg-surface-container-lowest p-6 rounded-2xl border border-border-light shadow-card flex flex-col gap-4">
             <div className="w-12 h-12 rounded-xl bg-ocean-light text-primary flex items-center justify-center">
               <span className="material-symbols-outlined text-[26px]">
@@ -80,6 +81,30 @@ export function TransfersBenefits() {
                   <ContentText contentKey="transfers.text-157" />
                 </strong>
                 <ContentText contentKey="transfers.text-158" />
+              </p>
+            </div>
+          </div>
+          </div>
+
+          <div className="relative rounded-2xl overflow-hidden border border-border-light shadow-card min-h-[280px] flex items-end">
+            <img
+              src="/images/figma/transfers-hero.png"
+              alt="Đón khách tại sân bay Cam Ranh"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-gradient-to-t from-destination-scrim/85 via-destination-scrim/30 to-transparent"
+            />
+            <div className="relative z-10 p-6 text-white space-y-1.5">
+              <span className="inline-block px-3 py-1 rounded-full bg-primary text-white text-xs font-bold">
+                Đón đúng giờ 100%
+              </span>
+              <h3 className="text-lg font-extrabold leading-snug">
+                Tài xế cầm bảng tên sẵn sàng tại sảnh sân bay Cam Ranh
+              </h3>
+              <p className="text-xs text-white/85">
+                Theo dõi mã chuyến bay trực tiếp, miễn phí thời gian chờ khi máy bay delay.
               </p>
             </div>
           </div>
