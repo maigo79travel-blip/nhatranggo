@@ -9,95 +9,13 @@ import { CatalogCard, ProductField } from "@/components/catalog";
 
 export function HomeFlashDeals() {
   return (
-    <section id="combo" className="site-container py-12 w-full">
-      <div className="rounded-3xl bg-surface-container-lowest border border-border-light p-6 md:p-8 shadow-card relative overflow-hidden">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
-          <div className="min-w-0">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm uppercase font-bold tracking-wider mb-3">
-              <span className="material-symbols-outlined text-[16px]">
-                {"local_fire_department"}
-              </span>
-              <span>
-                <ContentText contentKey="home.text-079" />
-              </span>
-            </div>
-            <h2 className="font-headline-lg text-headline-lg font-extrabold tracking-tight text-on-surface">
-              <ContentText contentKey="home.text-080" />
-            </h2>
-            <div className="w-7 h-1 rounded-full bg-primary mt-2 mb-2" />
-            <p className="font-body-md text-body-md text-on-surface-variant">
-              <ContentText contentKey="home.text-081" />
-            </p>
-          </div>
-
-          <div className="bg-surface-container-low border border-border-light rounded-2xl p-3.5 flex flex-col items-center sm:items-start shrink-0">
-            <div className="flex items-center gap-1.5 font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold mb-2">
-              <span className="material-symbols-outlined text-[16px] text-primary">
-                {"timer"}
-              </span>
-              <span>
-                <ContentText contentKey="home.text-082" />
-              </span>
-            </div>
-            <div
-              className="flex items-center gap-2 text-center"
-              id="countdown-timer"
-            >
-              <div className="bg-surface-container-lowest border border-border-light text-on-surface px-3 py-1.5 rounded-xl">
-                <span
-                  className="font-headline-sm text-headline-sm font-extrabold text-primary block"
-                  id="cd-days"
-                >
-                  <ContentText contentKey="home.text-083" />
-                </span>
-                <span className="font-label-sm text-label-sm text-outline uppercase">
-                  <ContentText contentKey="home.text-084" />
-                </span>
-              </div>
-              <span className="font-headline-sm text-headline-sm text-outline">
-                <ContentText contentKey="home.text-085" />
-              </span>
-              <div className="bg-surface-container-lowest border border-border-light text-on-surface px-3 py-1.5 rounded-xl">
-                <span
-                  className="font-headline-sm text-headline-sm font-extrabold text-primary block"
-                  id="cd-hours"
-                >
-                  <ContentText contentKey="home.text-086" />
-                </span>
-                <span className="font-label-sm text-label-sm text-outline uppercase">
-                  <ContentText contentKey="home.text-087" />
-                </span>
-              </div>
-              <span className="font-headline-sm text-headline-sm text-outline">
-                <ContentText contentKey="home.text-088" />
-              </span>
-              <div className="bg-surface-container-lowest border border-border-light text-on-surface px-3 py-1.5 rounded-xl">
-                <span
-                  className="font-headline-sm text-headline-sm font-extrabold text-primary block"
-                  id="cd-mins"
-                >
-                  <ContentText contentKey="home.text-089" />
-                </span>
-                <span className="font-label-sm text-label-sm text-outline uppercase">
-                  <ContentText contentKey="home.text-090" />
-                </span>
-              </div>
-              <span className="font-headline-sm text-headline-sm text-outline">
-                <ContentText contentKey="home.text-091" />
-              </span>
-              <div className="bg-surface-container-lowest border border-border-light text-on-surface px-3 py-1.5 rounded-xl">
-                <span
-                  className="font-headline-sm text-headline-sm font-extrabold text-sale-crimson block"
-                  id="cd-secs"
-                >
-                  <ContentText contentKey="home.text-092" />
-                </span>
-                <span className="font-label-sm text-label-sm text-outline uppercase">
-                  <ContentText contentKey="home.text-093" />
-                </span>
-              </div>
-            </div>
-          </div>
+    <section id="combo" className="site-container py-12 w-full space-y-8">
+      <div>
+        <div className="mb-8">
+          <h2 className="font-headline-lg text-headline-lg font-extrabold tracking-tight text-on-surface">
+            <ContentText contentKey="home.text-080" />
+          </h2>
+          <div className="w-12 h-1 rounded-full bg-primary mt-2" />
         </div>
 
         <div className="card-grid relative z-10">

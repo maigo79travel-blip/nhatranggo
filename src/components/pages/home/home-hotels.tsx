@@ -155,7 +155,7 @@ export function HomeHotels() {
                   </div>
                 </div>
               </div>
-              <div className="mt-4 pt-3 bg-surface-container-low rounded-xl p-3">
+              <div className="mt-4 pt-2 flex items-end justify-between price-actions flex-wrap gap-3">
                 <div className="flex items-center justify-between font-label-sm text-label-sm text-outline mb-1">
                   <span>
                     <ContentText contentKey="field-008" />
@@ -263,7 +263,7 @@ export function HomeHotels() {
                   </div>
                 </div>
               </div>
-              <div className="mt-4 pt-3 bg-surface-container-low rounded-xl p-3">
+              <div className="mt-4 pt-2 flex items-end justify-between price-actions flex-wrap gap-3">
                 <div className="flex items-center justify-between font-label-sm text-label-sm text-outline mb-1">
                   <span>
                     <ContentText contentKey="field-008" />
@@ -371,7 +371,7 @@ export function HomeHotels() {
                   </div>
                 </div>
               </div>
-              <div className="mt-4 pt-3 bg-surface-container-low rounded-xl p-3">
+              <div className="mt-4 pt-2 flex items-end justify-between price-actions flex-wrap gap-3">
                 <div className="flex items-center justify-between font-label-sm text-label-sm text-outline mb-1">
                   <span>
                     <ContentText contentKey="field-008" />
@@ -479,7 +479,7 @@ export function HomeHotels() {
                   </div>
                 </div>
               </div>
-              <div className="mt-4 pt-3 bg-surface-container-low rounded-xl p-3">
+              <div className="mt-4 pt-2 flex items-end justify-between price-actions flex-wrap gap-3">
                 <div className="flex items-center justify-between font-label-sm text-label-sm text-outline mb-1">
                   <span>
                     <ContentText contentKey="field-008" />
@@ -587,7 +587,7 @@ export function HomeHotels() {
                   </div>
                 </div>
               </div>
-              <div className="mt-4 pt-3 bg-surface-container-low rounded-xl p-3">
+              <div className="mt-4 pt-2 flex items-end justify-between price-actions flex-wrap gap-3">
                 <div className="flex items-center justify-between font-label-sm text-label-sm text-outline mb-1">
                   <span>
                     <ContentText contentKey="field-008" />
@@ -695,7 +695,7 @@ export function HomeHotels() {
                   </div>
                 </div>
               </div>
-              <div className="mt-4 pt-3 bg-surface-container-low rounded-xl p-3">
+              <div className="mt-4 pt-2 flex items-end justify-between price-actions flex-wrap gap-3">
                 <div className="flex items-center justify-between font-label-sm text-label-sm text-outline mb-1">
                   <span>
                     <ContentText contentKey="field-008" />
@@ -803,7 +803,7 @@ export function HomeHotels() {
                   </div>
                 </div>
               </div>
-              <div className="mt-4 pt-3 bg-surface-container-low rounded-xl p-3">
+              <div className="mt-4 pt-2 flex items-end justify-between price-actions flex-wrap gap-3">
                 <div className="flex items-center justify-between font-label-sm text-label-sm text-outline mb-1">
                   <span>
                     <ContentText contentKey="field-008" />
@@ -911,7 +911,7 @@ export function HomeHotels() {
                   </div>
                 </div>
               </div>
-              <div className="mt-4 pt-3 bg-surface-container-low rounded-xl p-3">
+              <div className="mt-4 pt-2 flex items-end justify-between price-actions flex-wrap gap-3">
                 <div className="flex items-center justify-between font-label-sm text-label-sm text-outline mb-1">
                   <span>
                     <ContentText contentKey="field-008" />

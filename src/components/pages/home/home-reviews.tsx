@@ -51,9 +51,6 @@ export async function HomeReviews() {
               <h3 className="text-title-md font-extrabold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
                 <a href={"/blog/" + article.slug}>{article.title}</a>
               </h3>
-              <p className="text-body-sm text-on-surface-variant line-clamp-2">
-                {article.excerpt}
-              </p>
               <div className="mt-auto pt-3 flex items-center justify-between text-outline text-sm">
                 <span className="inline-flex items-center gap-1.5">
                   <span className="material-symbols-outlined text-[16px] text-primary" aria-hidden="true">
@@ -86,24 +83,6 @@ export async function HomeReviews() {
           </a>
         </p>
       )}
-      <div className="mt-8 p-6 bg-surface-container-low rounded-2xl">
-        <h3 className="text-title-md font-bold mb-3">
-          <ContentText contentKey="home.text-159" />
-        </h3>
-        <div className="flex flex-wrap gap-2">
-          {[37, 38, 39, 40].map((key, index) => (
-            <HomeLink
-              key={key}
-              contentKey={"home.attributes-" + String(key).padStart(3, "0")}
-              href="/blog"
-              queryKey={"home.text-" + (161 + index)}
-              className="px-3 py-2 rounded-lg bg-surface-container-lowest text-primary text-body-md"
-            >
-              <ContentText contentKey={"home.text-" + (161 + index)} />
-            </HomeLink>
-          ))}
-        </div>
-      </div>
     </section>
   );
 }

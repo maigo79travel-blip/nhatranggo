@@ -12,64 +12,16 @@ export function TransfersHero() {
         className="absolute inset-0 bg-gradient-to-r from-[#E3F7FF]/95 via-[#E3F7FF]/75 to-background/60 pointer-events-none"
       />
       <div className="site-container relative z-10">
-        <div className="flex flex-wrap items-center gap-3 mb-5">
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary/10 text-primary font-label-md text-label-md font-semibold">
-            <span className="material-symbols-outlined text-[16px]">
-              {"directions_car"}
-            </span>
-            <ContentText contentKey="transfers.text-025" />
-          </span>
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gold-soft text-tertiary font-label-md text-label-md font-semibold">
-            <span className="material-symbols-outlined text-[16px]">
-              {"verified_user"}
-            </span>
-            <ContentText contentKey="transfers.text-026" />
-          </span>
-        </div>
-
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
-          <div className="min-w-0">
-            <h1 className="font-display text-display text-on-surface tracking-tight leading-tight">
+        <div className="max-w-2xl pt-4 pb-10">
+          <h1 className="font-display text-on-surface tracking-tight leading-[1.15]">
+            <span className="block text-2xl sm:text-3xl font-extrabold text-on-surface mb-1">
               <ContentText contentKey="transfers.text-027" />
-              <span className="text-primary">
-                <ContentText contentKey="transfers.text-028" />
-              </span>
+            </span>
+            <span className="block text-3xl sm:text-5xl font-extrabold text-primary uppercase">
+              <ContentText contentKey="transfers.text-028" />
               <ContentText contentKey="transfers.text-029" />
-            </h1>
-          </div>
-          <div className="flex flex-col sm:flex-row lg:flex-col items-start sm:items-center lg:items-end gap-3 shrink-0">
-            <ContentElement
-              contentKey="transfers.attributes-001"
-              tag="a"
-              className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-surface-container-lowest shadow-md hover:shadow-lg transition-all"
-            >
-              <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
-                <span className="material-symbols-outlined text-[22px]">
-                  {"call"}
-                </span>
-              </div>
-              <div>
-                <div className="font-label-sm text-label-sm text-outline">
-                  <ContentText contentKey="transfers.text-031" />
-                </div>
-                <div className="font-title-md text-title-md font-bold text-primary">
-                  <ContentText contentKey="transfers.text-032" />
-                </div>
-              </div>
-            </ContentElement>
-            <ContentElement
-              contentKey="transfers.attributes-009"
-              tag="a"
-              target="_blank"
-              rel="noopener"
-              className="inline-flex items-center gap-2 text-secondary font-label-md text-label-md hover:underline"
-            >
-              <span className="material-symbols-outlined text-[18px]">
-                {"chat"}
-              </span>
-              <ContentText contentKey="transfers.text-033" />
-            </ContentElement>
-          </div>
+            </span>
+          </h1>
         </div>
 
         <div className="w-full bg-surface-container-lowest rounded-3xl shadow-floating p-5 md:p-8 border border-border-light">

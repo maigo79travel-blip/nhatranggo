@@ -76,11 +76,8 @@ export function HomeTours() {
                   tag="h3"
                   className="font-title-md text-lg font-extrabold text-on-surface group-hover:text-primary transition-colors leading-snug line-clamp-2"
                 ></ProductField>
-                <p className="font-body-sm text-body-sm text-on-surface-variant mt-2 line-clamp-2">
-                  <ProductValue id="home-12" field="description" />
-                </p>
               </div>
-              <div className="mt-5 pt-3 border-t border-border-light/80 flex items-end justify-between price-actions flex-wrap gap-3">
+              <div className="mt-5 flex items-end justify-between price-actions flex-wrap gap-3">
                 <div>
                   <span className="block font-label-sm text-label-sm text-outline">
                     <ContentText contentKey="field-010" />
@@ -148,11 +145,8 @@ export function HomeTours() {
                   tag="h3"
                   className="font-title-md text-lg font-extrabold text-on-surface group-hover:text-primary transition-colors leading-snug line-clamp-2"
                 ></ProductField>
-                <p className="font-body-sm text-body-sm text-on-surface-variant mt-2 line-clamp-2">
-                  <ProductValue id="home-13" field="description" />
-                </p>
               </div>
-              <div className="mt-5 pt-3 border-t border-border-light/80 flex items-end justify-between price-actions flex-wrap gap-3">
+              <div className="mt-5 flex items-end justify-between price-actions flex-wrap gap-3">
                 <div>
                   <span className="block font-label-sm text-label-sm text-outline">
                     <ContentText contentKey="field-010" />

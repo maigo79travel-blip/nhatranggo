@@ -1,102 +1,81 @@
-import { ContentText, ContentElement } from "@/components/content";
+"use client";
+import { useState, type FormEvent } from "react";
 
 export function HomeFaq() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "busy" | "done" | "error">("idle");
+
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    if (!email.trim()) return;
+    setStatus("busy");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          name: "Đăng ký nhận ưu đãi",
+          email: email.trim(),
+          message: "Đăng ký nhận ưu đãi độc quyền từ NhaTrangGo",
+        }),
+      });
+      if (!response.ok) throw new Error();
+      setStatus("done");
+      setEmail("");
+    } catch {
+      setStatus("error");
+    }
+  };
+
   return (
     <section className="site-container py-10 w-full mb-8">
       <div
-        className="rounded-3xl bg-cover bg-center p-8 md:p-12 shadow-floating text-on-primary grid lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] items-center gap-8 relative overflow-hidden"
+        className="rounded-3xl bg-cover bg-center px-6 py-8 md:px-12 md:py-10 shadow-floating text-on-primary relative overflow-hidden min-h-[226px] flex items-center"
         style={{ backgroundImage: "url('/images/figma/newsletter-bg.png')" }}
       >
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-ocean-deep/75 via-primary/65 to-ocean-deep/80"
-        />
-        <div className="text-center lg:text-left relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-lowest/20 backdrop-blur-md font-label-sm text-label-sm uppercase tracking-wider text-ocean-light mb-3">
-            <span className="material-symbols-outlined text-[16px] text-gold-amber">
-              {"handshake"}
-            </span>
-            <span>
-              <ContentText contentKey="home.text-165" />
-            </span>
-          </div>
-          <h2 className="font-headline-lg text-headline-lg font-extrabold tracking-tight text-on-primary">
-            <ContentText contentKey="home.text-166" />
+        <div className="relative z-10 w-full md:pl-[22%] max-w-4xl">
+          <h2 className="font-headline-lg text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+            Nhận ưu đãi độc quyền từ NhaTrangGo
           </h2>
-          <p className="font-body-lg text-body-lg text-ocean-light/95 mt-2 leading-relaxed">
-            <ContentText contentKey="home.text-167" />
+          <p className="font-body-md text-sm sm:text-base text-white/95 mt-2">
+            Đăng ký để không bỏ lỡ các chương trình khuyến mãi, tour hot và bí kíp du lịch.
           </p>
-          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mt-6">
-            <ContentElement
-              contentKey="home.attributes-041"
-              tag="a"
-              className="px-6 py-3.5 rounded-xl bg-surface-container-lowest text-on-surface hover:bg-ocean-light font-title-md text-title-md font-bold shadow-lg transition-all duration-200 flex items-center gap-2 action-link"
-              rel="noopener"
-              target="_blank"
+          <form
+            onSubmit={handleSubmit}
+            className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 max-w-2xl"
+          >
+            <label className="flex-1 min-w-0 bg-white rounded-full px-5 h-12 flex items-center gap-3 shadow-sm">
+              <span className="material-symbols-outlined text-[20px] text-outline shrink-0" aria-hidden="true">
+                mail
+              </span>
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Nhập email của bạn..."
+                aria-label="Nhập email của bạn"
+                className="w-full min-w-0 bg-transparent text-on-surface placeholder:text-outline text-sm sm:text-base font-medium focus:outline-none"
+              />
+            </label>
+            <button
+              type="submit"
+              disabled={status === "busy"}
+              className="h-12 px-6 rounded-xl bg-primary hover:bg-ocean-deep text-white font-bold text-sm sm:text-base shadow-md transition-colors shrink-0 disabled:opacity-60"
             >
-              <span className="material-symbols-outlined text-[20px] text-primary">
-                {"chat"}
-              </span>
-              <span>
-                <ContentText contentKey="home.text-168" />
-              </span>
-            </ContentElement>
-            <ContentElement
-              contentKey="home.attributes-042"
-              tag="a"
-              className="px-6 py-3.5 rounded-xl bg-surface-container-lowest/20 hover:bg-surface-container-lowest/30 backdrop-blur-md text-on-primary font-title-md text-title-md font-bold transition-all flex items-center gap-2 action-link"
-            >
-              <span className="material-symbols-outlined text-[20px]">
-                {"call"}
-              </span>
-              <span>
-                <ContentText contentKey="home.text-169" />
-              </span>
-            </ContentElement>
-          </div>
-        </div>
-
-        <div className="bg-surface-container-lowest/15 backdrop-blur-xl p-6 rounded-2xl w-full min-w-0 relative z-10 text-on-primary">
-          <div className="font-label-lg text-label-lg font-bold uppercase tracking-wider text-gold-amber mb-3 flex items-center gap-1.5">
-            <span className="material-symbols-outlined text-[18px]">
-              {"verified"}
-            </span>
-            <ContentText contentKey="home.text-170" />
-          </div>
-          <ul className="flex flex-col gap-3 font-body-sm text-body-sm text-ocean-light">
-            <li className="flex items-start gap-2">
-              <span className="material-symbols-outlined text-[18px] text-gold-amber shrink-0">
-                {"check_circle"}
-              </span>
-              <span>
-                <ContentText contentKey="home.text-171" />
-              </span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="material-symbols-outlined text-[18px] text-gold-amber shrink-0">
-                {"check_circle"}
-              </span>
-              <span>
-                <ContentText contentKey="home.text-172" />
-              </span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="material-symbols-outlined text-[18px] text-gold-amber shrink-0">
-                {"check_circle"}
-              </span>
-              <span>
-                <ContentText contentKey="home.text-173" />
-              </span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="material-symbols-outlined text-[18px] text-gold-amber shrink-0">
-                {"check_circle"}
-              </span>
-              <span>
-                <ContentText contentKey="home.text-174" />
-              </span>
-            </li>
-          </ul>
+              {status === "busy" ? "Đang gửi..." : "Đăng ký ngay"}
+            </button>
+          </form>
+          {status === "done" && (
+            <p role="status" className="mt-2.5 text-sm font-semibold text-white">
+              Đăng ký thành công! Chúng tôi sẽ gửi ưu đãi mới nhất đến email của bạn.
+            </p>
+          )}
+          {status === "error" && (
+            <p role="alert" className="mt-2.5 text-sm font-semibold text-gold-amber">
+              Chưa gửi được đăng ký, vui lòng thử lại sau.
+            </p>
+          )}
         </div>
       </div>
     </section>
