@@ -103,7 +103,7 @@ button {
   }
 
   .public-page {
-    @apply min-h-screen bg-surface-subtle text-on-surface;
+    @apply min-h-screen bg-background text-on-surface;
     padding-top: 116px;
   }
   .public-page-hero {

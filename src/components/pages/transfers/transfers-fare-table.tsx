@@ -26,7 +26,7 @@ export function TransfersFareTable() {
           </div>
         </div>
 
-        <div className="w-full bg-surface-container-lowest rounded-3xl shadow-md overflow-hidden">
+        <div className="w-full bg-surface-container-lowest rounded-3xl border border-border-light shadow-card overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
@@ -107,7 +107,7 @@ export function TransfersFareTable() {
                     <ContentElement
                       contentKey="transfers.attributes-010"
                       tag="a"
-                      className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-lg bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md transition-all shadow-sm action-link"
+                      className="inline-flex items-center gap-1 px-4 py-2 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md font-bold transition-all shadow-sm action-link"
 
                       rel="noopener"
                       target="_blank"
@@ -149,7 +149,7 @@ export function TransfersFareTable() {
                     <ContentElement
                       contentKey="transfers.attributes-011"
                       tag="a"
-                      className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-lg bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md transition-all shadow-sm action-link"
+                      className="inline-flex items-center gap-1 px-4 py-2 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md font-bold transition-all shadow-sm action-link"
 
                       rel="noopener"
                       target="_blank"
@@ -191,7 +191,7 @@ export function TransfersFareTable() {
                     <ContentElement
                       contentKey="transfers.attributes-012"
                       tag="a"
-                      className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-lg bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md transition-all shadow-sm action-link"
+                      className="inline-flex items-center gap-1 px-4 py-2 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md font-bold transition-all shadow-sm action-link"
 
                       rel="noopener"
                       target="_blank"
@@ -233,7 +233,7 @@ export function TransfersFareTable() {
                     <ContentElement
                       contentKey="transfers.attributes-013"
                       tag="a"
-                      className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-lg bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md transition-all shadow-sm action-link"
+                      className="inline-flex items-center gap-1 px-4 py-2 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md font-bold transition-all shadow-sm action-link"
 
                       rel="noopener"
                       target="_blank"
@@ -275,7 +275,7 @@ export function TransfersFareTable() {
                     <ContentElement
                       contentKey="transfers.attributes-014"
                       tag="a"
-                      className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-lg bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md transition-all shadow-sm action-link"
+                      className="inline-flex items-center gap-1 px-4 py-2 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md font-bold transition-all shadow-sm action-link"
 
                       rel="noopener"
                       target="_blank"

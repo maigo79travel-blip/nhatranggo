@@ -2,76 +2,78 @@ import { ContentText } from "@/components/content";
 import { HomeLink } from "@/modules/home/home-link";
 import { listArticles } from "@/modules/blog/service";
 export async function HomeReviews() {
-  const articles = (await listArticles()).slice(0, 4);
+  const articles = (await listArticles()).slice(0, 3);
   return (
     <section id="cam-nang" className="site-container py-12 w-full">
       <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
         <div>
-          <p className="text-label-sm font-bold text-secondary uppercase tracking-widest mb-2">
-            <ContentText contentKey="home.text-136" />
-          </p>
-          <h2 className="text-headline-lg font-bold">
+          <h2 className="text-headline-lg font-extrabold text-on-surface">
             <ContentText contentKey="home.text-137" />
           </h2>
+          <div className="w-7 h-1 rounded-full bg-primary mt-2" />
         </div>
         <HomeLink
           contentKey="home.attributes-028"
           href="/blog"
-          className="text-primary font-semibold"
+          className="text-secondary hover:text-ocean-deep font-bold flex items-center gap-1.5"
         >
           <ContentText contentKey="home.text-138" />
           <span
-            className="material-symbols-outlined align-middle ml-1"
+            className="material-symbols-outlined text-[18px]"
             aria-hidden="true"
           >
             arrow_forward
           </span>
         </HomeLink>
       </div>
-      <div className="card-grid-compact">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {articles.map((article) => (
           <article
             key={article.id}
-            className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col"
+            className="bg-surface-container-lowest border border-border-light rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col group"
           >
             {article.image && (
               <a
                 href={"/blog/" + article.slug}
                 tabIndex={-1}
                 aria-hidden="true"
+                className="overflow-hidden block"
               >
                 <img
                   src={article.image}
                   alt=""
                   loading="lazy"
-                  className="w-full h-44 object-cover"
+                  className="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </a>
             )}
             <div className="p-5 flex-1 flex flex-col gap-3">
-              {article.category && (
-                <p className="text-label-sm text-secondary">
-                  {article.category}
-                </p>
-              )}
-              <h3 className="text-title-md font-bold">
+              <h3 className="text-title-md font-extrabold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
                 <a href={"/blog/" + article.slug}>{article.title}</a>
               </h3>
-              <p className="text-body-md text-on-surface-variant line-clamp-3">
+              <p className="text-body-sm text-on-surface-variant line-clamp-2">
                 {article.excerpt}
               </p>
-              <a
-                className="text-primary font-semibold mt-auto pt-3"
-                href={"/blog/" + article.slug}
-              >
-                Đọc tiếp<span className="sr-only">: {article.title}</span>
-                <span
-                  className="material-symbols-outlined align-middle"
-                  aria-hidden="true"
-                >
-                  chevron_right
+              <div className="mt-auto pt-3 flex items-center justify-between text-outline text-sm">
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-[16px] text-primary" aria-hidden="true">
+                    calendar_today
+                  </span>
+                  <span>{article.category || "Cẩm nang Nha Trang"}</span>
                 </span>
-              </a>
+                <a
+                  className="text-on-surface hover:text-primary font-semibold inline-flex items-center"
+                  href={"/blog/" + article.slug}
+                >
+                  <span className="sr-only">Đọc tiếp: {article.title}</span>
+                  <span
+                    className="material-symbols-outlined text-[20px]"
+                    aria-hidden="true"
+                  >
+                    arrow_forward
+                  </span>
+                </a>
+              </div>
             </div>
           </article>
         ))}

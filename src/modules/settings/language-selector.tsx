@@ -15,7 +15,7 @@ export function LanguageSelector() {
       </label>
       <select
         id="site-language"
-        className="rounded bg-primary text-on-primary p-1 max-w-24"
+        className="rounded-full border border-border-light bg-surface-container-low text-on-surface font-label-md text-label-md px-2.5 py-1.5 max-w-28 cursor-pointer focus:border-primary focus:outline-none"
         value={locale}
         disabled={busy}
         onChange={async (event) => {

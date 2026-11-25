@@ -6,7 +6,7 @@ import { TransfersProcess } from "./transfers/transfers-process";
 
 export default function TransfersPage() {
   return (
-    <main className="w-full pt-[116px] min-h-screen bg-background">
+    <main className="w-full pt-[76px] min-h-screen bg-background">
       <div className="flex flex-col w-full">
         <TransfersHero />
         <TransfersFareTable />

@@ -6,19 +6,14 @@ export function HomeTransfers() {
     <section className="site-container py-12 w-full">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
-          <div className="flex items-center gap-2 font-label-sm text-label-sm font-bold text-secondary uppercase tracking-widest mb-1.5">
-            <span className="w-6 h-0.5 bg-secondary rounded-full"></span>
-            <span>
-              <ContentText contentKey="home.text-105" />
-            </span>
-          </div>
-          <h2 className="font-headline-lg text-headline-lg font-bold text-on-surface">
+          <h2 className="font-headline-lg text-headline-lg font-extrabold text-on-surface">
             <ContentText contentKey="home.text-106" />
           </h2>
+          <div className="w-7 h-1 rounded-full bg-primary mt-2" />
         </div>
         <HomeLink
           contentKey="home.attributes-009"
-          className="text-primary hover:text-ocean-deep font-label-lg text-label-lg flex items-center gap-1 group"
+          className="text-secondary hover:text-ocean-deep font-label-lg text-label-lg font-bold flex items-center gap-1.5 group"
           href="/dich-vu?type=hotel"
         >
           <span>

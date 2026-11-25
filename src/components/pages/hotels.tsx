@@ -5,7 +5,7 @@ import { HotelsFaq } from "./hotels/hotels-faq";
 
 export default function HotelsPage() {
   return (
-    <main className="w-full pt-[116px] min-h-screen bg-background">
+    <main className="w-full pt-[76px] min-h-screen bg-background">
       <div className="flex flex-col w-full">
         <HotelsHero />
         <HotelsListing />

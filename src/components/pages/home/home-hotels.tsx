@@ -25,15 +25,10 @@ export function HomeHotels() {
     <section id="home-hotels" className="site-container py-10 w-full">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
-          <div className="flex items-center gap-2 font-label-sm text-label-sm font-bold text-secondary uppercase tracking-widest mb-1.5">
-            <span className="w-6 h-0.5 bg-secondary rounded-full"></span>
-            <span>
-              <ContentText contentKey="home.text-094" />
-            </span>
-          </div>
-          <h2 className="font-headline-lg text-headline-lg font-bold text-on-surface">
+          <h2 className="font-headline-lg text-headline-lg font-extrabold text-on-surface">
             <ContentText contentKey="home.text-095" />
           </h2>
+          <div className="w-7 h-1 rounded-full bg-primary mt-2" />
         </div>
 
         <div className="flex items-center gap-2 overflow-x-auto pb-1">
@@ -52,7 +47,11 @@ export function HomeHotels() {
               data-hotel-filter={value}
               aria-pressed={filter === value}
               onClick={() => setFilter(value)}
-              className={`hotel-filter shrink-0 px-4 py-2 rounded-full font-label-md text-label-md transition-colors ${filter === value ? "bg-primary text-on-primary shadow-sm" : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"}`}
+              className={`hotel-filter shrink-0 px-4 py-2 rounded-full font-label-md text-label-md font-bold transition-colors ${
+                filter === value
+                  ? "bg-primary text-on-primary shadow-sm"
+                  : "bg-surface-container-lowest border border-border-light text-on-surface hover:border-primary/50"
+              }`}
             >
               <ContentText
                 contentKey={"home.text-" + String(96 + index).padStart(3, "0")}
@@ -61,7 +60,7 @@ export function HomeHotels() {
           ))}
           <HomeLink
             contentKey="home.attributes-007"
-            className="px-4 py-2 rounded-full text-primary hover:text-ocean-deep font-label-md text-label-md flex items-center gap-1 whitespace-nowrap"
+            className="px-4 py-2 rounded-full text-secondary hover:text-ocean-deep font-label-md text-label-md font-bold flex items-center gap-1 whitespace-nowrap"
             href="/khach-san"
           >
             <span>
@@ -79,13 +78,13 @@ export function HomeHotels() {
           ? `${products.length} dịch vụ phù hợp`
           : "Chưa có khách sạn phù hợp với bộ lọc."}
       </p>
-      <div className="card-grid-compact">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <CatalogCollection
           collectionId="home-collection-2"
           productIds={products.map((p) => p.id)}
         >
           <CatalogCard
-            className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
+            className="bg-surface-container-lowest rounded-2xl border border-border-light overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
             productId="home-4"
             tag="div"
           >
@@ -97,7 +96,7 @@ export function HomeHotels() {
                 tag="div"
                 className="w-full h-full bg-cover bg-center hover:scale-105 transition-transform duration-500"
               ></ProductField>
-              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-bold shadow-sm">
+              <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-extrabold shadow-sm">
                 <ContentText contentKey="field-003" />
               </span>
             </div>
@@ -181,7 +180,7 @@ export function HomeHotels() {
                   <ContentElement
                     contentKey="field-002"
                     tag="a"
-                    className="px-3 py-2 rounded-lg bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md shadow-sm transition-colors action-link"
+                    className="px-4 py-2 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md font-bold shadow-sm transition-colors action-link"
 
                     data-action="details"
                   >
@@ -193,7 +192,7 @@ export function HomeHotels() {
           </CatalogCard>
 
           <CatalogCard
-            className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
+            className="bg-surface-container-lowest rounded-2xl border border-border-light overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
             productId="home-5"
             tag="div"
           >
@@ -205,7 +204,7 @@ export function HomeHotels() {
                 tag="div"
                 className="w-full h-full bg-cover bg-center hover:scale-105 transition-transform duration-500"
               ></ProductField>
-              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-bold shadow-sm">
+              <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-extrabold shadow-sm">
                 <ContentText contentKey="field-003" />
               </span>
             </div>
@@ -289,7 +288,7 @@ export function HomeHotels() {
                   <ContentElement
                     contentKey="field-002"
                     tag="a"
-                    className="px-3 py-2 rounded-lg bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md shadow-sm transition-colors action-link"
+                    className="px-4 py-2 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md font-bold shadow-sm transition-colors action-link"
 
                     data-action="details"
                   >
@@ -301,7 +300,7 @@ export function HomeHotels() {
           </CatalogCard>
 
           <CatalogCard
-            className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
+            className="bg-surface-container-lowest rounded-2xl border border-border-light overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
             productId="home-6"
             tag="div"
           >
@@ -313,7 +312,7 @@ export function HomeHotels() {
                 tag="div"
                 className="w-full h-full bg-cover bg-center hover:scale-105 transition-transform duration-500"
               ></ProductField>
-              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-bold shadow-sm">
+              <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-extrabold shadow-sm">
                 <ContentText contentKey="field-003" />
               </span>
             </div>
@@ -397,7 +396,7 @@ export function HomeHotels() {
                   <ContentElement
                     contentKey="field-002"
                     tag="a"
-                    className="px-3 py-2 rounded-lg bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md shadow-sm transition-colors action-link"
+                    className="px-4 py-2 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md font-bold shadow-sm transition-colors action-link"
 
                     data-action="details"
                   >
@@ -409,7 +408,7 @@ export function HomeHotels() {
           </CatalogCard>
 
           <CatalogCard
-            className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
+            className="bg-surface-container-lowest rounded-2xl border border-border-light overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
             productId="home-7"
             tag="div"
           >
@@ -421,7 +420,7 @@ export function HomeHotels() {
                 tag="div"
                 className="w-full h-full bg-cover bg-center hover:scale-105 transition-transform duration-500"
               ></ProductField>
-              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-bold shadow-sm">
+              <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-extrabold shadow-sm">
                 <ContentText contentKey="field-003" />
               </span>
             </div>
@@ -505,7 +504,7 @@ export function HomeHotels() {
                   <ContentElement
                     contentKey="field-002"
                     tag="a"
-                    className="px-3 py-2 rounded-lg bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md shadow-sm transition-colors action-link"
+                    className="px-4 py-2 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md font-bold shadow-sm transition-colors action-link"
 
                     data-action="details"
                   >
@@ -517,7 +516,7 @@ export function HomeHotels() {
           </CatalogCard>
 
           <CatalogCard
-            className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
+            className="bg-surface-container-lowest rounded-2xl border border-border-light overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
             productId="home-8"
             tag="div"
           >
@@ -529,7 +528,7 @@ export function HomeHotels() {
                 tag="div"
                 className="w-full h-full bg-cover bg-center hover:scale-105 transition-transform duration-500"
               ></ProductField>
-              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-bold shadow-sm">
+              <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-extrabold shadow-sm">
                 <ContentText contentKey="field-003" />
               </span>
             </div>
@@ -613,7 +612,7 @@ export function HomeHotels() {
                   <ContentElement
                     contentKey="field-002"
                     tag="a"
-                    className="px-3 py-2 rounded-lg bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md shadow-sm transition-colors action-link"
+                    className="px-4 py-2 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md font-bold shadow-sm transition-colors action-link"
 
                     data-action="details"
                   >
@@ -625,7 +624,7 @@ export function HomeHotels() {
           </CatalogCard>
 
           <CatalogCard
-            className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
+            className="bg-surface-container-lowest rounded-2xl border border-border-light overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
             productId="home-9"
             tag="div"
           >
@@ -637,7 +636,7 @@ export function HomeHotels() {
                 tag="div"
                 className="w-full h-full bg-cover bg-center hover:scale-105 transition-transform duration-500"
               ></ProductField>
-              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-bold shadow-sm">
+              <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-extrabold shadow-sm">
                 <ContentText contentKey="field-003" />
               </span>
             </div>
@@ -721,7 +720,7 @@ export function HomeHotels() {
                   <ContentElement
                     contentKey="field-002"
                     tag="a"
-                    className="px-3 py-2 rounded-lg bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md shadow-sm transition-colors action-link"
+                    className="px-4 py-2 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md font-bold shadow-sm transition-colors action-link"
 
                     data-action="details"
                   >
@@ -733,7 +732,7 @@ export function HomeHotels() {
           </CatalogCard>
 
           <CatalogCard
-            className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
+            className="bg-surface-container-lowest rounded-2xl border border-border-light overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
             productId="home-10"
             tag="div"
           >
@@ -745,7 +744,7 @@ export function HomeHotels() {
                 tag="div"
                 className="w-full h-full bg-cover bg-center hover:scale-105 transition-transform duration-500"
               ></ProductField>
-              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-bold shadow-sm">
+              <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-extrabold shadow-sm">
                 <ContentText contentKey="field-003" />
               </span>
             </div>
@@ -829,7 +828,7 @@ export function HomeHotels() {
                   <ContentElement
                     contentKey="field-002"
                     tag="a"
-                    className="px-3 py-2 rounded-lg bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md shadow-sm transition-colors action-link"
+                    className="px-4 py-2 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md font-bold shadow-sm transition-colors action-link"
 
                     data-action="details"
                   >
@@ -841,7 +840,7 @@ export function HomeHotels() {
           </CatalogCard>
 
           <CatalogCard
-            className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
+            className="bg-surface-container-lowest rounded-2xl border border-border-light overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
             productId="home-11"
             tag="div"
           >
@@ -853,7 +852,7 @@ export function HomeHotels() {
                 tag="div"
                 className="w-full h-full bg-cover bg-center hover:scale-105 transition-transform duration-500"
               ></ProductField>
-              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-bold shadow-sm">
+              <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-gold-amber text-on-tertiary-fixed font-label-sm text-label-sm font-extrabold shadow-sm">
                 <ContentText contentKey="field-003" />
               </span>
             </div>
@@ -937,7 +936,7 @@ export function HomeHotels() {
                   <ContentElement
                     contentKey="field-002"
                     tag="a"
-                    className="px-3 py-2 rounded-lg bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md shadow-sm transition-colors action-link"
+                    className="px-4 py-2 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-md text-label-md font-bold shadow-sm transition-colors action-link"
 
                     data-action="details"
                   >

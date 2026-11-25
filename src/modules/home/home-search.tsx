@@ -30,7 +30,11 @@ export function HomeSearch() {
             data-service-type={tab.type}
             aria-pressed={type === tab.type}
             onClick={() => setType(tab.type)}
-            className={`search-tab-btn flex shrink-0 items-center gap-2 px-5 py-2.5 rounded-full font-label-lg text-label-lg transition-colors ${type === tab.type ? "bg-primary text-on-primary shadow-sm" : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"}`}
+            className={`search-tab-btn flex shrink-0 items-center gap-2 px-4 py-2.5 rounded-xl font-label-lg text-label-lg font-bold transition-colors ${
+              type === tab.type
+                ? "bg-primary text-on-primary shadow-sm"
+                : "bg-surface-container-low text-on-surface hover:bg-surface-container"
+            }`}
           >
             <span
               className="material-symbols-outlined text-[19px]"
@@ -45,15 +49,15 @@ export function HomeSearch() {
       <form
         action="/dich-vu"
         method="GET"
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 pt-2 items-end"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 pt-2 items-center"
       >
         <input type="hidden" name="type" value={type} />
-        <label className="lg:col-span-4 min-w-0 bg-surface-container-low rounded-xl p-3 block">
-          <span className="block text-label-sm text-outline mb-1">
+        <label className="lg:col-span-4 min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-4 py-3 block focus-within:border-primary transition-colors">
+          <span className="block text-label-sm text-outline mb-0.5">
             <ContentText contentKey="home.text-051" />
           </span>
           <input
-            className="w-full min-w-0 bg-transparent text-title-md"
+            className="w-full min-w-0 bg-transparent text-title-md font-bold text-on-surface focus:outline-none"
             name="q"
             aria-label="Điểm đến hoặc tên dịch vụ"
             placeholder={attributes?.placeholder || "Điểm đến hoặc tên dịch vụ"}
@@ -61,13 +65,13 @@ export function HomeSearch() {
           />
         </label>
         <label
-          className={`min-w-0 bg-surface-container-low rounded-xl p-3 block ${hotel ? "lg:col-span-2" : "lg:col-span-3"}`}
+          className={`min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-4 py-3 block focus-within:border-primary transition-colors ${hotel ? "lg:col-span-2" : "lg:col-span-3"}`}
         >
-          <span className="block text-label-sm text-outline mb-1">
+          <span className="block text-label-sm text-outline mb-0.5">
             {hotel ? "Ngày nhận phòng" : "Ngày sử dụng"}
           </span>
           <input
-            className="w-full min-w-0 bg-transparent text-body-md"
+            className="w-full min-w-0 bg-transparent text-body-md font-bold text-on-surface focus:outline-none"
             name="date"
             type="date"
             min={vietnamToday()}
@@ -81,12 +85,12 @@ export function HomeSearch() {
           />
         </label>
         {hotel && (
-          <label className="lg:col-span-2 min-w-0 bg-surface-container-low rounded-xl p-3 block">
-            <span className="block text-label-sm text-outline mb-1">
+          <label className="lg:col-span-2 min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-4 py-3 block focus-within:border-primary transition-colors">
+            <span className="block text-label-sm text-outline mb-0.5">
               Ngày trả phòng
             </span>
             <input
-              className="w-full min-w-0 bg-transparent text-body-md"
+              className="w-full min-w-0 bg-transparent text-body-md font-bold text-on-surface focus:outline-none"
               name="returnDate"
               type="date"
               min={date ? nextDate(date) : vietnamToday()}
@@ -97,13 +101,13 @@ export function HomeSearch() {
           </label>
         )}
         <label
-          className={`min-w-0 bg-surface-container-low rounded-xl p-3 block ${hotel ? "lg:col-span-2" : "lg:col-span-3"}`}
+          className={`min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-4 py-3 block focus-within:border-primary transition-colors ${hotel ? "lg:col-span-2" : "lg:col-span-3"}`}
         >
-          <span className="block text-label-sm text-outline mb-1">
+          <span className="block text-label-sm text-outline mb-0.5">
             Số khách
           </span>
           <input
-            className="w-full min-w-0 bg-transparent text-title-md"
+            className="w-full min-w-0 bg-transparent text-title-md font-bold text-on-surface focus:outline-none"
             name="guests"
             type="number"
             min={1}
@@ -113,7 +117,7 @@ export function HomeSearch() {
           />
         </label>
         <button
-          className="lg:col-span-2 w-full min-h-[58px] rounded-xl bg-gradient-to-r from-gold-amber to-tertiary-fixed-dim text-on-tertiary-fixed text-title-md flex items-center justify-center gap-2 shadow-lg"
+          className="lg:col-span-2 w-full min-h-[54px] rounded-xl bg-primary hover:bg-ocean-deep text-on-primary text-title-md font-bold flex items-center justify-center gap-2 shadow-sm transition-colors"
           type="submit"
         >
           <span className="material-symbols-outlined" aria-hidden="true">

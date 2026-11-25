@@ -16,7 +16,7 @@ export function TransfersBenefits() {
           </p>
         </div>
         <div className="card-grid-compact">
-          <div className="bg-surface-container-lowest p-6 rounded-2xl shadow-sm flex flex-col gap-4">
+          <div className="bg-surface-container-lowest p-6 rounded-2xl border border-border-light shadow-card flex flex-col gap-4">
             <div className="w-12 h-12 rounded-xl bg-ocean-light text-primary flex items-center justify-center">
               <span className="material-symbols-outlined text-[26px]">
                 {"flight_takeoff"}
@@ -32,7 +32,7 @@ export function TransfersBenefits() {
             </div>
           </div>
 
-          <div className="bg-surface-container-lowest p-6 rounded-2xl shadow-sm flex flex-col gap-4">
+          <div className="bg-surface-container-lowest p-6 rounded-2xl border border-border-light shadow-card flex flex-col gap-4">
             <div className="w-12 h-12 rounded-xl bg-secondary/15 text-secondary flex items-center justify-center">
               <span className="material-symbols-outlined text-[26px]">
                 {"event_busy"}
@@ -48,7 +48,7 @@ export function TransfersBenefits() {
             </div>
           </div>
 
-          <div className="bg-surface-container-lowest p-6 rounded-2xl shadow-sm flex flex-col gap-4">
+          <div className="bg-surface-container-lowest p-6 rounded-2xl border border-border-light shadow-card flex flex-col gap-4">
             <div className="w-12 h-12 rounded-xl bg-tertiary-fixed text-tertiary flex items-center justify-center">
               <span className="material-symbols-outlined text-[26px]">
                 {"sentiment_satisfied"}
@@ -64,7 +64,7 @@ export function TransfersBenefits() {
             </div>
           </div>
 
-          <div className="bg-surface-container-lowest p-6 rounded-2xl shadow-sm flex flex-col gap-4">
+          <div className="bg-surface-container-lowest p-6 rounded-2xl border border-border-light shadow-card flex flex-col gap-4">
             <div className="w-12 h-12 rounded-xl bg-error-container text-sale-crimson flex items-center justify-center">
               <span className="material-symbols-outlined text-[26px]">
                 {"phone_in_talk"}

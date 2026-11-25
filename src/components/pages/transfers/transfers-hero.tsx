@@ -3,8 +3,14 @@ import { ContentText, ContentElement, FareValue } from "@/components/content";
 
 export function TransfersHero() {
   return (
-    <section className="relative w-full bg-gradient-to-b from-ocean-light/50 via-surface to-background pb-16 pt-8 overflow-hidden">
-      <div className="absolute -top-36 left-1/2 -translate-x-1/2 w-[850px] h-[400px] bg-gradient-to-tr from-lagoon-cyan/20 to-primary/15 blur-3xl pointer-events-none rounded-full"></div>
+    <section
+      className="relative w-full bg-cover bg-center pb-16 pt-10 overflow-hidden"
+      style={{ backgroundImage: "url('/images/figma/transfers-hero.png')" }}
+    >
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-r from-[#E3F7FF]/95 via-[#E3F7FF]/75 to-background/60 pointer-events-none"
+      />
       <div className="site-container relative z-10">
         <div className="flex flex-wrap items-center gap-3 mb-5">
           <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary/10 text-primary font-label-md text-label-md font-semibold">
@@ -66,7 +72,7 @@ export function TransfersHero() {
           </div>
         </div>
 
-        <div className="w-full bg-surface-container-lowest rounded-3xl shadow-2xl p-5 md:p-8 border border-border-light/50">
+        <div className="w-full bg-surface-container-lowest rounded-3xl shadow-floating p-5 md:p-8 border border-border-light">
           <div className="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-border-light/40">
             <div className="flex flex-wrap items-center gap-2">
               <button
