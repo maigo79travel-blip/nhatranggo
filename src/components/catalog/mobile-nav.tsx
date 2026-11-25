@@ -73,16 +73,18 @@ export function MobileNav() {
                 {label}
               </Link>
             ))}
-          <Link
-            className="p-3 rounded-xl text-on-surface hover:bg-surface-container-low font-label-lg text-label-lg flex items-center gap-2 border-t border-border-light mt-1 pt-3"
-            href="/tra-cuu"
-            onClick={() => setOpen(false)}
-          >
-            <span className="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">
-              search
-            </span>
-            <span>Tra cứu</span>
-          </Link>
+          {!items.some((item) => item.href === "/tra-cuu") && (
+            <Link
+              className="p-3 rounded-xl text-on-surface hover:bg-surface-container-low font-label-lg text-label-lg flex items-center gap-2 border-t border-border-light mt-1 pt-3"
+              href="/tra-cuu"
+              onClick={() => setOpen(false)}
+            >
+              <span className="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">
+                search
+              </span>
+              <span>Tra cứu</span>
+            </Link>
+          )}
           <div className="sm:hidden px-3 pt-2">
             <LanguageSelector />
           </div>

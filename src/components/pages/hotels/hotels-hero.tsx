@@ -43,22 +43,35 @@ export function HotelsHero({
 
   return (
     <section className="relative w-full bg-background">
-      {/* Desktop Hero */}
-      <div className="hidden md:block">
+      {/* Mobile Breadcrumb */}
+      <div className="md:hidden site-container pt-4 pb-2">
+        <div className="flex items-center gap-1.5 text-xs text-outline">
+          <Link href="/" className="hover:text-primary">
+            Trang chủ
+          </Link>
+          <span>›</span>
+          <span className="text-on-surface font-semibold">
+            Khách sạn &amp; Resort
+          </span>
+        </div>
+      </div>
+
+      {/* Unified Responsive Hero */}
+      <div>
         <div
-          className="relative w-full min-h-[340px] bg-cover bg-center flex items-center"
+          className="relative w-full min-h-[200px] md:min-h-[340px] bg-cover bg-center flex items-center"
           style={{ backgroundImage: "url('/images/figma/hotels-hero.png')" }}
         >
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-r from-hero-overlay/95 via-hero-overlay/75 to-transparent"
+            className="absolute inset-0 bg-gradient-to-r from-hero-overlay/95 via-hero-overlay/80 to-hero-overlay/25 md:to-transparent"
           />
-          <div className="relative site-container py-12 pb-20 w-full">
+          <div className="relative site-container py-8 pb-14 md:py-12 md:pb-20 w-full">
             <h1 className="font-display tracking-tight leading-[1.15] max-w-2xl">
-              <span className="block text-3xl font-extrabold text-on-surface mb-1">
+              <span className="block text-xl md:text-3xl font-extrabold text-on-surface mb-1">
                 Tìm &amp; Đặt Phòng
               </span>
-              <span className="block text-4xl lg:text-[42px] font-extrabold text-primary uppercase">
+              <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-extrabold text-primary uppercase">
                 KHÁCH SẠN &amp; RESORT
                 <br />
                 GIÁ TỐT NHẤT
@@ -67,8 +80,8 @@ export function HotelsHero({
           </div>
         </div>
 
-        <div className="relative z-10 site-container -mt-14 pb-6">
-          <div className="bg-surface-container-lowest rounded-3xl shadow-floating border border-border-light p-4 lg:p-5">
+        <div className="relative z-10 site-container -mt-8 md:-mt-14 pb-6">
+          <div className="bg-surface-container-lowest rounded-2xl md:rounded-3xl shadow-floating border border-border-light p-3 md:p-4 lg:p-5">
             <form
               onSubmit={handleSubmit}
               className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-center"
@@ -93,7 +106,7 @@ export function HotelsHero({
                 </span>
               </label>
 
-              <label className="lg:col-span-2 min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-3.5 py-3 flex items-center gap-2.5 focus-within:border-primary transition-colors">
+              <label className="hidden md:flex lg:col-span-2 min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-3.5 py-3 items-center gap-2.5 focus-within:border-primary transition-colors">
                 <img
                   src="/images/figma/icons/calendar.svg"
                   alt=""
@@ -105,6 +118,7 @@ export function HotelsHero({
                   </span>
                   <input
                     type="date"
+                    aria-label="Tìm ngày nhận phòng"
                     min={vietnamToday()}
                     value={draft.checkIn}
                     onChange={(e) => {
@@ -123,7 +137,7 @@ export function HotelsHero({
                 </span>
               </label>
 
-              <label className="lg:col-span-2 min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-3.5 py-3 flex items-center gap-2.5 focus-within:border-primary transition-colors">
+              <label className="hidden md:flex lg:col-span-2 min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-3.5 py-3 items-center gap-2.5 focus-within:border-primary transition-colors">
                 <img
                   src="/images/figma/icons/calendar.svg"
                   alt=""
@@ -135,6 +149,7 @@ export function HotelsHero({
                   </span>
                   <input
                     type="date"
+                    aria-label="Tìm ngày trả phòng"
                     min={draft.checkIn ? nextDate(draft.checkIn) : vietnamToday()}
                     value={draft.checkOut}
                     onChange={(e) =>
@@ -145,7 +160,7 @@ export function HotelsHero({
                 </span>
               </label>
 
-              <label className="lg:col-span-2 min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-3.5 py-3 flex items-center gap-2.5 focus-within:border-primary transition-colors">
+              <label className="hidden md:flex lg:col-span-2 min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-3.5 py-3 items-center gap-2.5 focus-within:border-primary transition-colors">
                 <img
                   src="/images/figma/icons/users.svg"
                   alt=""
@@ -168,7 +183,7 @@ export function HotelsHero({
                 </span>
               </label>
 
-              <label className="lg:col-span-2 min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-3.5 py-3 flex items-center gap-2.5 focus-within:border-primary transition-colors">
+              <label className="hidden md:flex lg:col-span-2 min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-3.5 py-3 items-center gap-2.5 focus-within:border-primary transition-colors">
                 <img
                   src="/images/figma/icons/hotel-type.svg"
                   alt=""
@@ -208,7 +223,7 @@ export function HotelsHero({
               </div>
             </form>
 
-            <div className="flex flex-wrap items-center gap-2 mt-3 pt-2 text-xs text-outline">
+            <div className="hidden md:flex flex-wrap items-center gap-2 mt-3 pt-2 text-xs text-outline">
               <span>Gợi ý tìm kiếm hot:</span>
               {hotSuggestions.map((item) => (
                 <button
@@ -223,50 +238,6 @@ export function HotelsHero({
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Mobile Hero */}
-      <div className="md:hidden site-container pt-4 pb-4 space-y-4">
-        <div className="flex items-center gap-1.5 text-xs text-outline">
-          <Link href="/" className="hover:text-primary">
-            Trang chủ
-          </Link>
-          <span>›</span>
-          <span className="text-on-surface font-semibold">
-            Khách sạn &amp; Resort
-          </span>
-        </div>
-
-        <h1 className="text-2xl font-extrabold text-on-surface leading-tight">
-          Tìm &amp; Đặt Phòng Khách Sạn, Resort Giá Tốt Nhất
-        </h1>
-
-        <div className="rounded-2xl overflow-hidden h-40">
-          <img
-            src="/images/figma/hotels-hero.png"
-            alt="Khách sạn & Resort Nha Trang"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        <form
-          onSubmit={handleSubmit}
-          className="bg-surface-container-lowest rounded-2xl border border-border-light shadow-card p-2.5 flex items-center gap-2"
-        >
-          <input
-            type="text"
-            value={draft.query}
-            onChange={(e) => setDraft({ ...draft, query: e.target.value })}
-            placeholder="Nha Trang – Khánh Hòa"
-            className="flex-1 min-w-0 px-3 py-2 text-sm font-bold text-on-surface bg-transparent focus:outline-none"
-          />
-          <button
-            type="submit"
-            className="px-4 py-2.5 rounded-xl bg-primary text-on-primary font-bold text-sm shrink-0"
-          >
-            Tìm Kiếm
-          </button>
-        </form>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { ContentText, useSiteData } from "@/components/content";
+import { HomeLink } from "@/modules/home/home-link";
 import { nextDate, vietnamToday } from "@/modules/travel/search";
 
 const tabs = [
@@ -8,12 +9,6 @@ const tabs = [
   { type: "tour", icon: "kayaking", key: "home.text-048" },
   { type: "combo", icon: "flight_takeoff", key: "home.text-049" },
   { type: "transfer", icon: "directions_car", key: "header.text-028" },
-];
-
-const hotSuggestions = [
-  "Bãi Dài Cam Ranh All-inclusive",
-  "Đường Trần Phú có bãi tắm",
-  "Villa Hồ bơi riêng",
 ];
 
 export function HomeSearch() {
@@ -113,6 +108,7 @@ export function HomeSearch() {
                 className="w-full min-w-0 bg-transparent text-xs font-bold text-on-surface focus:outline-none"
                 name="date"
                 type="date"
+                aria-label={hotel ? "Ngày nhận phòng" : "Ngày sử dụng"}
                 min={vietnamToday()}
                 value={date}
                 onChange={(event) => {
@@ -143,6 +139,7 @@ export function HomeSearch() {
                   className="w-full min-w-0 bg-transparent text-xs font-bold text-on-surface focus:outline-none"
                   name="returnDate"
                   type="date"
+                  aria-label="Ngày trả phòng"
                   min={date ? nextDate(date) : vietnamToday()}
                   value={returnDate}
                   required={Boolean(date)}
@@ -173,6 +170,7 @@ export function HomeSearch() {
                 className="w-full min-w-0 bg-transparent text-sm font-bold text-on-surface focus:outline-none"
                 name="guests"
                 type="number"
+                aria-label="Số khách"
                 min={1}
                 max={100}
                 defaultValue={2}
@@ -220,17 +218,37 @@ export function HomeSearch() {
         </form>
 
         <div className="flex flex-wrap items-center gap-2 mt-3 pt-2.5 border-t border-border-light/60 text-xs text-outline">
-          <span>Gợi ý tìm kiếm hot:</span>
-          {hotSuggestions.map((label) => (
-            <button
-              key={label}
-              type="button"
-              onClick={() => setQuery(label)}
-              className="font-bold text-on-surface hover:text-primary transition-colors"
-            >
-              {label}
-            </button>
-          ))}
+          <span>
+            <ContentText contentKey="home.text-059" />
+          </span>
+          <HomeLink
+            contentKey="home.attributes-003"
+            className="font-bold text-on-surface hover:text-primary transition-colors action-link"
+            href="/dich-vu?type=hotel&q=B%C3%A3i%20D%C3%A0i"
+          >
+            <ContentText contentKey="home.text-060" />
+          </HomeLink>
+          <HomeLink
+            contentKey="home.attributes-004"
+            className="font-bold text-on-surface hover:text-primary transition-colors action-link"
+            href="/dich-vu?type=tour&q=3%20%C4%90%E1%BA%A3o"
+          >
+            <ContentText contentKey="home.text-061" />
+          </HomeLink>
+          <HomeLink
+            contentKey="home.attributes-005"
+            className="font-bold text-on-surface hover:text-primary transition-colors action-link"
+            href="/dich-vu?type=tour&q=VinWonders"
+          >
+            <ContentText contentKey="home.text-062" />
+          </HomeLink>
+          <HomeLink
+            contentKey="home.attributes-006"
+            className="font-bold text-on-surface hover:text-primary transition-colors action-link"
+            href="/dich-vu?type=combo&q=Ph%C3%BA%20Qu%E1%BB%91c"
+          >
+            <ContentText contentKey="home.text-063" />
+          </HomeLink>
         </div>
       </div>
     </div>

@@ -347,8 +347,8 @@ try {
       "aria-pressed",
       "true",
     );
-    await hotels.locator('[data-hotel-filter="cam-ranh"]').click();
-    await expect(hotels.locator('[data-product-id="home-4"]')).toHaveCount(0);
+    await hotels.locator('[data-hotel-filter="family"]').click();
+    await expect(hotels.locator('[data-product-id="hotels-1"]')).toHaveCount(0);
     await page.evaluate(() => window.scrollTo(0, 0));
     if (width === 1440 || width === 390)
       await page.screenshot({ path: `test-results/home/after-${width}.png` });

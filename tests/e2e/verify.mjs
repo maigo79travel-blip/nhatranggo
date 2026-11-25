@@ -85,9 +85,9 @@ try {
     "Booking UI, persistence, lookup privacy, date validation passed",
   );
   await page.goto(base + "/xe-dua-don");
-  await page.locator("#route-price").filter({ hasText: "250.000đ" }).waitFor();
-  await page.locator('.vehicle-chip[data-veh="7cho"]').click();
   await page.locator("#route-price").filter({ hasText: "300.000đ" }).waitFor();
+  await page.locator('.vehicle-chip[data-veh="7cho"]').click();
+  await page.locator("#route-price").filter({ hasText: "350.000đ" }).waitFor();
   response = await fetch(
     `${base}/api/fares?pickup=CXR&dropoff=DALAT&vehicle=4cho`,
   );
