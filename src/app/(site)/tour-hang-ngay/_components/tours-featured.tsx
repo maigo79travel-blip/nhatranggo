@@ -9,11 +9,11 @@ import { CatalogCard, ProductField } from "@/components/catalog";
 
 export function ToursFeatured() {
   return (
-    <section className="w-full py-16 bg-surface-container-low">
+    <section className="w-full py-16 bg-surface-muted">
       <div className="site-container">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
           <div>
-            <div className="flex items-center gap-2 text-sale-crimson font-label-lg text-label-lg uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-sale-price font-label-lg text-label-lg uppercase tracking-wider">
               <span
                 className="material-symbols-outlined text-[20px]"
                 style={{ fontVariationSettings: "'FILL' 1" }}
@@ -36,7 +36,7 @@ export function ToursFeatured() {
         <div className="card-grid gap-8">
           <CatalogCollection collectionId="tours-collection-1">
             <CatalogCard
-              className="bg-surface-card rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group"
+              className="bg-surface rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group"
               productId="tours-1"
               tag="article"
             >
@@ -50,7 +50,7 @@ export function ToursFeatured() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 ></ProductField>
-                <div className="absolute top-4 left-4 bg-sale-crimson text-on-error font-label-sm text-label-sm px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
+                <div className="absolute top-4 left-4 bg-sale-badge text-on-sale font-label-sm text-label-sm px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
                   <span className="material-symbols-outlined text-[14px]">
                     {"local_fire_department"}
                   </span>
@@ -73,15 +73,15 @@ export function ToursFeatured() {
               </div>
               <div className="p-6 flex flex-col flex-1">
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-secondary font-label-md text-label-md uppercase tracking-wider flex items-center gap-1">
+                  <span className="text-primary font-label-md text-label-md uppercase tracking-wider flex items-center gap-1">
                     <span className="material-symbols-outlined text-[16px]">
                       {"pin_drop"}
                     </span>
                     <ContentText contentKey="field-007" />
                   </span>
-                  <div className="flex items-center gap-1 text-tertiary font-bold text-label-md">
+                  <div className="flex items-center gap-1 text-promo-ink font-bold text-label-md">
                     <span
-                      className="material-symbols-outlined text-[16px] text-gold-amber"
+                      className="material-symbols-outlined text-[16px] text-promo-highlight"
                       style={{ fontVariationSettings: "'FILL' 1" }}
                     >
                       {"star"}
@@ -89,7 +89,7 @@ export function ToursFeatured() {
                     <span>
                       <ProductValue id="tours-1" field="rating" />
                     </span>
-                    <span className="text-outline font-normal">
+                    <span className="text-on-surface-variant font-normal">
                       <ContentText contentKey="field-008" />
                     </span>
                   </div>
@@ -102,32 +102,32 @@ export function ToursFeatured() {
                 ></ProductField>
 
                 <ul className="flex flex-wrap gap-2 mb-6">
-                  <li className="bg-surface-container px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px] text-secondary">
+                  <li className="bg-surface-tinted px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[14px] text-primary">
                       {"bathtub"}
                     </span>
                     <ContentText contentKey="field-009" />
                   </li>
-                  <li className="bg-surface-container px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+                  <li className="bg-surface-tinted px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
                     <span className="material-symbols-outlined text-[14px] text-primary">
                       {"scuba_diving"}
                     </span>
                     <ContentText contentKey="field-010" />
                   </li>
-                  <li className="bg-surface-container px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px] text-tertiary">
+                  <li className="bg-surface-tinted px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[14px] text-promo-ink">
                       {"restaurant"}
                     </span>
                     <ContentText contentKey="field-011" />
                   </li>
-                  <li className="bg-surface-container px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px] text-secondary">
+                  <li className="bg-surface-tinted px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[14px] text-primary">
                       {"airport_shuttle"}
                     </span>
                     <ContentText contentKey="field-012" />
                   </li>
                 </ul>
-                <div className="mt-auto pt-4 border-t-0 bg-surface-subtle -mx-6 -mb-6 p-6 rounded-b-2xl flex flex-col gap-3">
+                <div className="mt-auto pt-4 border-t-0 bg-surface-muted -mx-6 -mb-6 p-6 rounded-b-2xl flex flex-col gap-3">
                   <div className="flex items-baseline justify-between">
                     <PriceStack productId="tours-1">
                       <div className="flex items-baseline gap-1">
@@ -135,20 +135,20 @@ export function ToursFeatured() {
                           id="tours-1"
                           field="price"
                           tag="span"
-                          className="font-headline-md text-headline-md text-sale-crimson font-bold"
+                          className="font-headline-md text-headline-md text-sale-price font-bold"
                         ></ProductField>
                         <span className="font-body-sm text-body-sm text-on-surface-variant">
                           <ContentText contentKey="field-013" />
                         </span>
                       </div>
                     </PriceStack>
-                    <span className="px-2 py-0.5 rounded text-sale-crimson bg-error-container font-label-sm text-label-sm">
+                    <span className="px-2 py-0.5 rounded text-sale-price bg-sale-surface font-label-sm text-label-sm">
                       <ContentText contentKey="field-014" />
                     </span>
                   </div>
                   <div className="grid grid-cols-2 gap-2 mt-1">
                     <button
-                      className="w-full py-2.5 rounded-xl bg-surface-container hover:bg-surface-variant text-on-surface font-label-lg text-label-lg transition-colors flex items-center justify-center gap-1"
+                      className="w-full py-2.5 rounded-xl bg-surface-tinted hover:bg-surface-tinted text-on-surface font-label-lg text-label-lg transition-colors flex items-center justify-center gap-1"
                       type="button"
                     >
                       <span className="material-symbols-outlined text-[18px]">
@@ -161,7 +161,7 @@ export function ToursFeatured() {
                     <ContentElement
                       contentKey="field-003"
                       tag="a"
-                      className="w-full py-2.5 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-lg text-label-lg shadow-sm hover:shadow transition-all flex items-center justify-center gap-1"
+                      className="w-full py-2.5 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-label-lg text-label-lg shadow-sm hover:shadow transition-all flex items-center justify-center gap-1"
 
                       rel="noopener"
                       target="_blank"
@@ -179,7 +179,7 @@ export function ToursFeatured() {
             </CatalogCard>
 
             <CatalogCard
-              className="bg-surface-card rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group"
+              className="bg-surface rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group"
               productId="tours-2"
               tag="article"
             >
@@ -193,7 +193,7 @@ export function ToursFeatured() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 ></ProductField>
-                <div className="absolute top-4 left-4 bg-tertiary text-on-tertiary font-label-sm text-label-sm px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
+                <div className="absolute top-4 left-4 bg-promo-ink text-on-promo font-label-sm text-label-sm px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
                   <span className="material-symbols-outlined text-[14px]">
                     {"diamond"}
                   </span>
@@ -209,22 +209,22 @@ export function ToursFeatured() {
                     </span>
                     <ContentText contentKey="field-005" />
                   </span>
-                  <span className="bg-tertiary-container/90 backdrop-blur-md px-2.5 py-1 rounded-lg flex items-center gap-1 font-semibold text-on-tertiary-container">
+                  <span className="bg-promo-strong backdrop-blur-md px-2.5 py-1 rounded-lg flex items-center gap-1 font-semibold text-on-promo">
                     <ContentText contentKey="field-006" />
                   </span>
                 </div>
               </div>
               <div className="p-6 flex flex-col flex-1">
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-secondary font-label-md text-label-md uppercase tracking-wider flex items-center gap-1">
+                  <span className="text-primary font-label-md text-label-md uppercase tracking-wider flex items-center gap-1">
                     <span className="material-symbols-outlined text-[16px]">
                       {"sailing"}
                     </span>
                     <ContentText contentKey="field-007" />
                   </span>
-                  <div className="flex items-center gap-1 text-tertiary font-bold text-label-md">
+                  <div className="flex items-center gap-1 text-promo-ink font-bold text-label-md">
                     <span
-                      className="material-symbols-outlined text-[16px] text-gold-amber"
+                      className="material-symbols-outlined text-[16px] text-promo-highlight"
                       style={{ fontVariationSettings: "'FILL' 1" }}
                     >
                       {"star"}
@@ -232,7 +232,7 @@ export function ToursFeatured() {
                     <span>
                       <ProductValue id="tours-2" field="rating" />
                     </span>
-                    <span className="text-outline font-normal">
+                    <span className="text-on-surface-variant font-normal">
                       <ContentText contentKey="field-008" />
                     </span>
                   </div>
@@ -245,32 +245,32 @@ export function ToursFeatured() {
                 ></ProductField>
 
                 <ul className="flex flex-wrap gap-2 mb-6">
-                  <li className="bg-surface-container px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px] text-secondary">
+                  <li className="bg-surface-tinted px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[14px] text-primary">
                       {"set_meal"}
                     </span>
                     <ContentText contentKey="field-009" />
                   </li>
-                  <li className="bg-surface-container px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+                  <li className="bg-surface-tinted px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
                     <span className="material-symbols-outlined text-[14px] text-primary">
                       {"music_note"}
                     </span>
                     <ContentText contentKey="field-010" />
                   </li>
-                  <li className="bg-surface-container px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px] text-tertiary">
+                  <li className="bg-surface-tinted px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[14px] text-promo-ink">
                       {"wine_bar"}
                     </span>
                     <ContentText contentKey="field-011" />
                   </li>
-                  <li className="bg-surface-container px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px] text-secondary">
+                  <li className="bg-surface-tinted px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[14px] text-primary">
                       {"photo_camera"}
                     </span>
                     <ContentText contentKey="field-012" />
                   </li>
                 </ul>
-                <div className="mt-auto pt-4 bg-surface-subtle -mx-6 -mb-6 p-6 rounded-b-2xl flex flex-col gap-3">
+                <div className="mt-auto pt-4 bg-surface-muted -mx-6 -mb-6 p-6 rounded-b-2xl flex flex-col gap-3">
                   <div className="flex items-baseline justify-between">
                     <PriceStack productId="tours-2">
                       <div className="flex items-baseline gap-1">
@@ -285,13 +285,13 @@ export function ToursFeatured() {
                         </span>
                       </div>
                     </PriceStack>
-                    <span className="px-2 py-0.5 rounded text-secondary bg-secondary-container font-label-sm text-label-sm font-semibold">
+                    <span className="px-2 py-0.5 rounded text-primary bg-surface-brand font-label-sm text-label-sm font-semibold">
                       <ContentText contentKey="field-014" />
                     </span>
                   </div>
                   <div className="grid grid-cols-2 gap-2 mt-1">
                     <button
-                      className="w-full py-2.5 rounded-xl bg-surface-container hover:bg-surface-variant text-on-surface font-label-lg text-label-lg transition-colors flex items-center justify-center gap-1"
+                      className="w-full py-2.5 rounded-xl bg-surface-tinted hover:bg-surface-tinted text-on-surface font-label-lg text-label-lg transition-colors flex items-center justify-center gap-1"
                       type="button"
                     >
                       <span className="material-symbols-outlined text-[18px]">
@@ -304,7 +304,7 @@ export function ToursFeatured() {
                     <ContentElement
                       contentKey="field-003"
                       tag="a"
-                      className="w-full py-2.5 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-lg text-label-lg shadow-sm hover:shadow transition-all flex items-center justify-center gap-1"
+                      className="w-full py-2.5 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-label-lg text-label-lg shadow-sm hover:shadow transition-all flex items-center justify-center gap-1"
 
                       rel="noopener"
                       target="_blank"
@@ -322,7 +322,7 @@ export function ToursFeatured() {
             </CatalogCard>
 
             <CatalogCard
-              className="bg-surface-card rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group"
+              className="bg-surface rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group"
               productId="tours-3"
               tag="article"
             >
@@ -359,15 +359,15 @@ export function ToursFeatured() {
               </div>
               <div className="p-6 flex flex-col flex-1">
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-secondary font-label-md text-label-md uppercase tracking-wider flex items-center gap-1">
+                  <span className="text-primary font-label-md text-label-md uppercase tracking-wider flex items-center gap-1">
                     <span className="material-symbols-outlined text-[16px]">
                       {"landscape"}
                     </span>
                     <ContentText contentKey="field-007" />
                   </span>
-                  <div className="flex items-center gap-1 text-tertiary font-bold text-label-md">
+                  <div className="flex items-center gap-1 text-promo-ink font-bold text-label-md">
                     <span
-                      className="material-symbols-outlined text-[16px] text-gold-amber"
+                      className="material-symbols-outlined text-[16px] text-promo-highlight"
                       style={{ fontVariationSettings: "'FILL' 1" }}
                     >
                       {"star"}
@@ -375,7 +375,7 @@ export function ToursFeatured() {
                     <span>
                       <ProductValue id="tours-3" field="rating" />
                     </span>
-                    <span className="text-outline font-normal">
+                    <span className="text-on-surface-variant font-normal">
                       <ContentText contentKey="field-008" />
                     </span>
                   </div>
@@ -388,32 +388,32 @@ export function ToursFeatured() {
                 ></ProductField>
 
                 <ul className="flex flex-wrap gap-2 mb-6">
-                  <li className="bg-surface-container px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px] text-secondary">
+                  <li className="bg-surface-tinted px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[14px] text-primary">
                       {"water_drop"}
                     </span>
                     <ContentText contentKey="field-009" />
                   </li>
-                  <li className="bg-surface-container px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+                  <li className="bg-surface-tinted px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
                     <span className="material-symbols-outlined text-[14px] text-primary">
                       {"eco"}
                     </span>
                     <ContentText contentKey="field-010" />
                   </li>
-                  <li className="bg-surface-container px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px] text-tertiary">
+                  <li className="bg-surface-tinted px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[14px] text-promo-ink">
                       {"cruelty_free"}
                     </span>
                     <ContentText contentKey="field-011" />
                   </li>
-                  <li className="bg-surface-container px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px] text-secondary">
+                  <li className="bg-surface-tinted px-2.5 py-1 rounded-md text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[14px] text-primary">
                       {"restaurant_menu"}
                     </span>
                     <ContentText contentKey="field-012" />
                   </li>
                 </ul>
-                <div className="mt-auto pt-4 bg-surface-subtle -mx-6 -mb-6 p-6 rounded-b-2xl flex flex-col gap-3">
+                <div className="mt-auto pt-4 bg-surface-muted -mx-6 -mb-6 p-6 rounded-b-2xl flex flex-col gap-3">
                   <div className="flex items-baseline justify-between">
                     <PriceStack productId="tours-3">
                       <div className="flex items-baseline gap-1">
@@ -421,20 +421,20 @@ export function ToursFeatured() {
                           id="tours-3"
                           field="price"
                           tag="span"
-                          className="font-headline-md text-headline-md text-sale-crimson font-bold"
+                          className="font-headline-md text-headline-md text-sale-price font-bold"
                         ></ProductField>
                         <span className="font-body-sm text-body-sm text-on-surface-variant">
                           <ContentText contentKey="field-013" />
                         </span>
                       </div>
                     </PriceStack>
-                    <span className="px-2 py-0.5 rounded text-sale-crimson bg-error-container font-label-sm text-label-sm">
+                    <span className="px-2 py-0.5 rounded text-sale-price bg-sale-surface font-label-sm text-label-sm">
                       <ContentText contentKey="field-014" />
                     </span>
                   </div>
                   <div className="grid grid-cols-2 gap-2 mt-1">
                     <button
-                      className="w-full py-2.5 rounded-xl bg-surface-container hover:bg-surface-variant text-on-surface font-label-lg text-label-lg transition-colors flex items-center justify-center gap-1"
+                      className="w-full py-2.5 rounded-xl bg-surface-tinted hover:bg-surface-tinted text-on-surface font-label-lg text-label-lg transition-colors flex items-center justify-center gap-1"
                       type="button"
                     >
                       <span className="material-symbols-outlined text-[18px]">
@@ -447,7 +447,7 @@ export function ToursFeatured() {
                     <ContentElement
                       contentKey="field-003"
                       tag="a"
-                      className="w-full py-2.5 rounded-xl bg-primary hover:bg-ocean-deep text-on-primary font-label-lg text-label-lg shadow-sm hover:shadow transition-all flex items-center justify-center gap-1"
+                      className="w-full py-2.5 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-label-lg text-label-lg shadow-sm hover:shadow transition-all flex items-center justify-center gap-1"
 
                       rel="noopener"
                       target="_blank"

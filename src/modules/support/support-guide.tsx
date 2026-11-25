@@ -43,7 +43,7 @@ export function SupportGuide({ lookup = false }: { lookup?: boolean }) {
       <div className="public-support-heading">
         <PublicIcon name={lookup ? "travel_explore" : "support_agent"} />
       </div>
-      <p className="text-secondary text-xs font-bold uppercase tracking-widest">
+      <p className="text-primary text-xs font-bold uppercase tracking-widest">
         {brand.name} đồng hành
       </p>
       <h2 className="text-2xl font-bold">
@@ -56,7 +56,7 @@ export function SupportGuide({ lookup = false }: { lookup?: boolean }) {
           <li key={icon} className="flex gap-3">
             <PublicIcon
               name={icon}
-              className="text-secondary mt-0.5 shrink-0"
+              className="text-primary mt-0.5 shrink-0"
             />
             <div>
               <h3 className="font-bold text-sm">{title}</h3>

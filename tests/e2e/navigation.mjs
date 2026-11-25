@@ -81,6 +81,13 @@ try {
   await check(hrefs.filter((href) => href !== "/").at(-1));
   await page.locator('header a[data-path="trang-chu"]').click();
   await check("/");
+  const contact = page.locator("header").getByRole("link", {
+    name: "Liên hệ",
+    exact: true,
+  });
+  await contact.click();
+  await check("/lien-he");
+  await expect(contact).toHaveAttribute("aria-current", "page");
   await page
     .locator("header")
     .getByRole("link", { name: "Tra cứu", exact: true })

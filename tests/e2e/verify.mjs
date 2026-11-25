@@ -41,6 +41,14 @@ try {
   }
   await page.goto(base + "/khach-san");
   await page.locator("body[data-hydrated=true]").waitFor();
+  const hotelSearch = page.getByRole("form", { name: "Tìm khách sạn" });
+  await hotelSearch.getByLabel("Điểm đến").fill("The Empyrean");
+  await hotelSearch.getByLabel("Ngày nhận phòng").fill("2099-12-01");
+  await hotelSearch.getByLabel("Ngày trả phòng").fill("2099-12-03");
+  await hotelSearch.getByLabel("Số khách").selectOption("3");
+  await hotelSearch
+    .getByRole("button", { name: "Tìm kiếm", exact: true })
+    .click();
   await page
     .locator("[data-product-id]")
     .first()
@@ -49,8 +57,16 @@ try {
   await page.getByRole("dialog").waitFor({ state: "visible" });
   await page.getByLabel("Họ và tên", { exact: true }).fill("Kiểm thử tự động");
   await page.getByLabel("Số điện thoại", { exact: true }).fill("0901234567");
-  await page.getByLabel("Ngày nhận phòng", { exact: true }).fill("2099-12-01");
-  await page.getByLabel("Ngày trả phòng", { exact: true }).fill("2099-12-03");
+  const hotelBooking = page.getByRole("dialog");
+  assert.equal(
+    await hotelBooking.getByLabel("Ngày nhận phòng").inputValue(),
+    "2099-12-01",
+  );
+  assert.equal(
+    await hotelBooking.getByLabel("Ngày trả phòng").inputValue(),
+    "2099-12-03",
+  );
+  assert.equal(await hotelBooking.getByLabel("Số khách").inputValue(), "3");
   await page
     .getByRole("dialog")
     .getByRole("button", { name: "Gửi yêu cầu đặt chỗ", exact: true })
@@ -88,6 +104,17 @@ try {
   await page.locator("#route-price").filter({ hasText: "300.000đ" }).waitFor();
   await page.locator('.vehicle-chip[data-veh="7cho"]').click();
   await page.locator("#route-price").filter({ hasText: "350.000đ" }).waitFor();
+  const airportFare = page
+    .locator("tbody tr")
+    .filter({ hasText: "Resort Bãi Dài" });
+  await airportFare.getByRole("button", { name: /Đặt xe/ }).click();
+  const transferDialog = page.getByRole("dialog");
+  await transferDialog.waitFor({ state: "visible" });
+  assert.match(await transferDialog.locator("h3").textContent(), /Bãi Dài/);
+  assert.match(await transferDialog.textContent(), /150\.000đ/);
+  await transferDialog
+    .getByRole("button", { name: "Đóng", exact: true })
+    .click();
   response = await fetch(
     `${base}/api/fares?pickup=CXR&dropoff=DALAT&vehicle=4cho`,
   );

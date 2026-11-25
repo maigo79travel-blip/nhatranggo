@@ -1,32 +1,69 @@
 "use client";
-import { useState } from "react";
+
+import { useState, type ReactNode } from "react";
 import { ContentText, useSiteData } from "@/components/content";
-import { HomeLink } from "./home-link";
 import { nextDate, vietnamToday } from "@/modules/travel/search";
+import { HomeLink } from "./home-link";
 
 const tabs = [
   { type: "hotel", icon: "hotel", key: "home.text-047" },
-  { type: "tour", icon: "kayaking", key: "home.text-048" },
-  { type: "combo", icon: "flight_takeoff", key: "home.text-049" },
+  { type: "tour", icon: "map", key: "home.text-048" },
+  { type: "combo", icon: "luggage", key: "home.text-049" },
   { type: "transfer", icon: "directions_car", key: "header.text-028" },
 ];
 
+const inputClass =
+  "block w-full min-w-0 bg-transparent text-sm font-bold text-on-surface focus:outline-none";
+
+function SearchField({
+  icon,
+  label,
+  children,
+  wide = false,
+}: {
+  icon: string;
+  label: ReactNode;
+  children: ReactNode;
+  wide?: boolean;
+}) {
+  return (
+    <label
+      className={`flex min-h-[64px] min-w-0 items-center gap-2.5 rounded-2xl bg-surface-muted px-3 py-2.5 focus-within:ring-2 focus-within:ring-focus-ring xl:min-h-[73px] ${wide ? "min-[380px]:col-span-2 xl:col-span-1" : ""}`}
+    >
+      <span
+        className={`material-symbols-outlined shrink-0 text-[25px] text-primary xl:text-[28px] ${wide ? "" : "min-[380px]:max-sm:hidden"}`}
+        aria-hidden="true"
+      >
+        {icon}
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="mb-0.5 block text-xs font-medium text-on-surface">
+          {label}
+        </span>
+        {children}
+      </span>
+    </label>
+  );
+}
+
 export function HomeSearch() {
   const [type, setType] = useState("hotel");
-  const [query, setQuery] = useState("");
   const [date, setDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
-  const [category, setCategory] = useState("");
   const { content } = useSiteData();
   const attributes = content["home.attributes-002"]?.value as
-    | { placeholder?: string; defaultValue?: string }
-    | undefined;
+    { placeholder?: string } | undefined;
   const hotel = type === "hotel";
+  const departureLabel = hotel ? "Ngày nhận phòng" : "Ngày sử dụng";
+  const today = vietnamToday();
 
   return (
-    <div data-home-search className="flex flex-col">
+    <div
+      data-home-search
+      className="drop-shadow-[0_8px_14px_rgb(var(--color-shadow-brand)_/_0.12)]"
+    >
       <div
-        className="inline-flex items-center gap-2 bg-surface-container-lowest rounded-2xl shadow-card border border-border-light/70 px-3 py-2.5 mb-3 w-fit max-w-full overflow-x-auto"
+        className="grid w-full max-w-full grid-cols-2 gap-2 rounded-t-[24px] bg-surface p-3 sm:flex sm:w-fit sm:flex-wrap sm:rounded-t-[30px] sm:px-5 sm:pt-5 sm:pb-4"
         role="group"
         aria-label="Loại dịch vụ tìm kiếm"
       >
@@ -37,14 +74,14 @@ export function HomeSearch() {
             data-service-type={tab.type}
             aria-pressed={type === tab.type}
             onClick={() => setType(tab.type)}
-            className={`search-tab-btn flex shrink-0 items-center gap-2 px-4 py-2 rounded-xl font-label-lg text-label-lg font-bold transition-colors ${
+            className={`search-tab-btn flex min-h-11 min-w-0 items-center justify-center gap-1.5 rounded-full px-2.5 text-xs font-bold transition-colors sm:gap-2 sm:px-4 sm:text-sm lg:text-base ${
               type === tab.type
-                ? "bg-primary text-on-primary shadow-sm"
-                : "bg-surface-container-low text-on-surface hover:bg-surface-container"
+                ? "bg-gradient-to-r from-primary to-brand-deep text-on-primary"
+                : "bg-surface-muted text-on-surface hover:bg-surface-tinted"
             }`}
           >
             <span
-              className="material-symbols-outlined text-[19px]"
+              className="material-symbols-outlined shrink-0 text-[21px] sm:text-[24px]"
               aria-hidden="true"
             >
               {tab.icon}
@@ -54,202 +91,133 @@ export function HomeSearch() {
         ))}
       </div>
 
-      <div className="w-full bg-surface-container-lowest rounded-2xl shadow-floating border border-border-light/80 p-4 md:p-5">
+      <div className="w-full rounded-b-[24px] bg-surface p-3 sm:rounded-b-[30px] sm:rounded-tr-[30px] sm:px-5 sm:py-4">
         <form
           action="/dich-vu"
           method="GET"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center"
+          className={`grid grid-cols-1 items-center gap-3 min-[380px]:grid-cols-2 xl:gap-4 ${
+            hotel
+              ? "xl:grid-cols-[minmax(0,1.45fr)_repeat(3,minmax(0,1fr))_minmax(0,1.25fr)_auto]"
+              : "xl:grid-cols-[minmax(0,1.6fr)_repeat(3,minmax(0,1fr))_auto]"
+          }`}
         >
           <input type="hidden" name="type" value={type} />
-          <label
-            className={`min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-3.5 py-2.5 flex items-center gap-3 focus-within:border-primary transition-colors cursor-text ${
-              hotel ? "lg:col-span-3" : "lg:col-span-4"
-            }`}
+          <SearchField
+            icon="location_on"
+            label={<ContentText contentKey="home.text-051" />}
+            wide
           >
-            <span
-              className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary shrink-0"
-              aria-hidden="true"
-            >
-              <span className="material-symbols-outlined text-[20px]">
-                location_on
-              </span>
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block text-label-sm text-outline mb-0.5">
-                <ContentText contentKey="home.text-051" />
-              </span>
-              <input
-                className="w-full min-w-0 bg-transparent text-sm font-bold text-on-surface focus:outline-none"
-                name="q"
-                aria-label="Điểm đến hoặc tên dịch vụ"
-                placeholder={
-                  attributes?.placeholder || "Điểm đến hoặc tên dịch vụ"
-                }
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-              />
-            </span>
-          </label>
+            <input
+              className={inputClass}
+              name="q"
+              aria-label="Điểm đến hoặc tên dịch vụ"
+              placeholder={
+                attributes?.placeholder || "Điểm đến hoặc tên dịch vụ"
+              }
+            />
+          </SearchField>
 
-          <label
-            className={`min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-3.5 py-2.5 flex items-center gap-2.5 focus-within:border-primary transition-colors ${
-              hotel ? "lg:col-span-2" : "lg:col-span-3"
-            }`}
-          >
-            <span
-              className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-primary shrink-0"
-              aria-hidden="true"
-            >
-              <span className="material-symbols-outlined text-[18px]">
-                calendar_today
-              </span>
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block text-label-sm text-outline mb-0.5">
-                {hotel ? "Ngày nhận phòng" : "Ngày sử dụng"}
-              </span>
-              <input
-                className="w-full min-w-0 bg-transparent text-xs font-bold text-on-surface focus:outline-none"
-                name="date"
-                type="date"
-                aria-label={hotel ? "Ngày nhận phòng" : "Ngày sử dụng"}
-                min={vietnamToday()}
-                value={date}
-                onChange={(event) => {
-                  const value = event.target.value;
-                  setDate(value);
-                  if (returnDate && returnDate <= value)
-                    setReturnDate(nextDate(value));
-                }}
-              />
-            </span>
-          </label>
+          <SearchField icon="calendar_today" label={departureLabel}>
+            <input
+              className={inputClass}
+              name="date"
+              type="date"
+              aria-label={departureLabel}
+              min={today}
+              value={date}
+              onChange={(event) => {
+                const value = event.target.value;
+                setDate(value);
+                if (returnDate && returnDate <= value)
+                  setReturnDate(nextDate(value));
+              }}
+            />
+          </SearchField>
 
           {hotel && (
-            <label className="lg:col-span-2 min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-3.5 py-2.5 flex items-center gap-2.5 focus-within:border-primary transition-colors">
-              <span
-                className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-primary shrink-0"
-                aria-hidden="true"
-              >
-                <span className="material-symbols-outlined text-[18px]">
-                  calendar_today
-                </span>
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className="block text-label-sm text-outline mb-0.5">
-                  Ngày trả phòng
-                </span>
-                <input
-                  className="w-full min-w-0 bg-transparent text-xs font-bold text-on-surface focus:outline-none"
-                  name="returnDate"
-                  type="date"
-                  aria-label="Ngày trả phòng"
-                  min={date ? nextDate(date) : vietnamToday()}
-                  value={returnDate}
-                  required={Boolean(date)}
-                  onChange={(event) => setReturnDate(event.target.value)}
-                />
-              </span>
-            </label>
+            <SearchField icon="calendar_today" label="Ngày trả phòng">
+              <input
+                className={inputClass}
+                name="returnDate"
+                type="date"
+                aria-label="Ngày trả phòng"
+                min={date ? nextDate(date) : today}
+                value={returnDate}
+                required={Boolean(date)}
+                onChange={(event) => setReturnDate(event.target.value)}
+              />
+            </SearchField>
           )}
 
-          <label
-            className={`min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-3.5 py-2.5 flex items-center gap-2.5 focus-within:border-primary transition-colors ${
-              hotel ? "lg:col-span-2" : "lg:col-span-2"
-            }`}
-          >
-            <span
-              className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-primary shrink-0"
-              aria-hidden="true"
-            >
-              <span className="material-symbols-outlined text-[18px]">
-                group
-              </span>
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block text-label-sm text-outline mb-0.5">
-                Số khách
-              </span>
-              <input
-                className="w-full min-w-0 bg-transparent text-sm font-bold text-on-surface focus:outline-none"
-                name="guests"
-                type="number"
-                aria-label="Số khách"
-                min={1}
-                max={100}
-                defaultValue={2}
-                required
-              />
-            </span>
-          </label>
+          <SearchField icon="group" label="Số khách">
+            <input
+              className={inputClass}
+              name="guests"
+              type="number"
+              aria-label="Số khách"
+              min={1}
+              max={100}
+              defaultValue={2}
+              required
+            />
+          </SearchField>
 
-          <label className="lg:col-span-2 min-w-0 bg-surface-container-low border border-border-light rounded-2xl px-3.5 py-2.5 flex items-center gap-2.5 focus-within:border-primary transition-colors">
-            <span
-              className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-primary shrink-0"
-              aria-hidden="true"
+          <SearchField icon="hotel_class" label="Loại hình/ Sao">
+            <select
+              name="category"
+              defaultValue=""
+              aria-label="Loại hình hoặc hạng sao"
+              className={`${inputClass} cursor-pointer`}
             >
-              <span className="material-symbols-outlined text-[18px]">
-                hotel_class
-              </span>
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block text-label-sm text-outline mb-0.5">
-                Loại hình/ Sao
-              </span>
-              <select
-                name="category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                aria-label="Loại hình hoặc hạng sao"
-                className="w-full min-w-0 bg-transparent text-xs font-bold text-on-surface focus:outline-none cursor-pointer"
-              >
-                <option value="">Tất cả</option>
-                <option value="5 sao">5 Sao Quốc Tế</option>
-                <option value="resort">Resort nghỉ dưỡng</option>
-                <option value="4 sao">4 Sao Cao Cấp</option>
-              </select>
-            </span>
-          </label>
+              <option value="">Tất cả</option>
+              <option value="5 sao">5 Sao Quốc Tế</option>
+              <option value="resort">Resort nghỉ dưỡng</option>
+              <option value="4 sao">4 Sao Cao Cấp</option>
+            </select>
+          </SearchField>
 
           <button
-            className="lg:col-span-1 w-full min-h-[54px] px-3 rounded-full bg-primary hover:bg-ocean-deep text-on-primary text-sm font-bold flex items-center justify-center gap-1.5 shadow-sm transition-colors"
+            className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 text-sm font-bold text-on-primary transition-colors hover:bg-primary-hover min-[380px]:col-span-2 xl:col-span-1"
             type="submit"
           >
-            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
+            <span
+              className="material-symbols-outlined text-[18px]"
+              aria-hidden="true"
+            >
               search
             </span>
             <ContentText contentKey="home.text-058" />
           </button>
         </form>
 
-        <div className="flex flex-wrap items-center gap-2 mt-3 pt-2.5 border-t border-border-light/60 text-xs text-outline">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 pt-2.5 text-xs text-on-surface-variant">
           <span>
             <ContentText contentKey="home.text-059" />
           </span>
           <HomeLink
             contentKey="home.attributes-003"
-            className="font-bold text-on-surface hover:text-primary transition-colors action-link"
+            className="font-bold text-brand-deep hover:underline transition-colors action-link"
             href="/dich-vu?type=hotel&q=B%C3%A3i%20D%C3%A0i"
           >
             <ContentText contentKey="home.text-060" />
           </HomeLink>
           <HomeLink
             contentKey="home.attributes-004"
-            className="font-bold text-on-surface hover:text-primary transition-colors action-link"
+            className="font-bold text-brand-deep hover:underline transition-colors action-link"
             href="/dich-vu?type=tour&q=3%20%C4%90%E1%BA%A3o"
           >
             <ContentText contentKey="home.text-061" />
           </HomeLink>
           <HomeLink
             contentKey="home.attributes-005"
-            className="font-bold text-on-surface hover:text-primary transition-colors action-link"
+            className="font-bold text-brand-deep hover:underline transition-colors action-link"
             href="/dich-vu?type=tour&q=VinWonders"
           >
             <ContentText contentKey="home.text-062" />
           </HomeLink>
           <HomeLink
             contentKey="home.attributes-006"
-            className="font-bold text-on-surface hover:text-primary transition-colors action-link"
+            className="font-bold text-brand-deep hover:underline transition-colors action-link"
             href="/dich-vu?type=combo&q=Ph%C3%BA%20Qu%E1%BB%91c"
           >
             <ContentText contentKey="home.text-063" />

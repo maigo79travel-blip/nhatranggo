@@ -46,7 +46,7 @@ export function ServiceCards({
           <div className="public-card-content">
             {p.rating > 0 && (
               <p className="flex items-center gap-1.5 text-sm text-on-surface-variant">
-                <PublicIcon name="star" className="text-tertiary text-lg" />
+                <PublicIcon name="star" className="text-promo-ink text-lg" />
                 <span className="font-bold">{p.rating}</span>
                 <span>Đánh giá</span>
               </p>
@@ -54,7 +54,7 @@ export function ServiceCards({
             <h2 className="text-xl font-bold leading-snug line-clamp-2">
               {p.title}
             </h2>
-            <p className="flex gap-1.5 text-sm text-outline leading-relaxed">
+            <p className="flex gap-1.5 text-sm text-on-surface-variant leading-relaxed">
               <PublicIcon
                 name="location_on"
                 className="text-lg shrink-0 mt-0.5"
@@ -63,12 +63,12 @@ export function ServiceCards({
             </p>
             <div className="public-card-bottom">
               <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                <span className="text-sm text-outline">Giá từ</span>
+                <span className="text-sm text-on-surface-variant">Giá từ</span>
                 <p className="text-primary font-extrabold text-xl">
                   {money(p.price)}
                 </p>
                 {!!p.original_price && p.original_price > p.price && (
-                  <del className="text-sm text-outline">
+                  <del className="text-sm text-on-surface-variant">
                     {money(p.original_price)}
                   </del>
                 )}

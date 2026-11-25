@@ -88,7 +88,7 @@ export function OverviewPanel({
         <strong className="text-headline-md text-primary">
           {money(data?.stats.revenue || 0)}
         </strong>
-        <p className="text-body-sm text-outline">
+        <p className="text-body-sm text-on-surface-variant">
           Tổng theo giá trị nhân viên nhập khi xác nhận đơn.
         </p>
       </div>
