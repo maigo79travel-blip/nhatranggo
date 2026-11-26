@@ -38,15 +38,13 @@ function QuoteField({
   children: ReactNode;
 }) {
   return (
-    <div className="transfer-field">
+    <label htmlFor={id} className="transfer-field cursor-pointer">
       <TransferIcon className="text-primary">{icon}</TransferIcon>
       <div className="min-w-0 flex-1">
-        <label htmlFor={id} className="block text-xs text-on-surface-variant">
-          {label}
-        </label>
+        <span className="block text-xs text-on-surface-variant">{label}</span>
         {children}
       </div>
-    </div>
+    </label>
   );
 }
 
@@ -286,14 +284,14 @@ export function TransfersHero() {
               <QuoteField
                 id="transfer-flight"
                 icon="flight_takeoff"
-                label="Số hiệu chuyến bay (tùy chọn)"
+                label="Số hiệu chuyến bay"
               >
                 <input
                   id="transfer-flight"
                   name="flight"
                   className="transfer-control placeholder:text-on-surface-variant"
                   type="text"
-                  placeholder="VD: VN1340, VJ772…"
+                  placeholder="VN1340, VJ772…"
                   maxLength={30}
                 />
               </QuoteField>

@@ -23,14 +23,6 @@ export const transferVehicles = [
     icon: "airport_shuttle",
     model: "Xe 16 chỗ (Solati / Transit)",
   },
-  {
-    id: "limo9",
-    label: "Limousine 9 chỗ VIP",
-    chip: "Limousine 9 chỗ VIP",
-    detail: "Ghế massage",
-    icon: "workspace_premium",
-    model: "Dcar Limousine 9 chỗ VIP",
-  },
 ] as const;
 
 export type TransferVehicle = (typeof transferVehicles)[number]["id"];

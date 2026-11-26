@@ -4,6 +4,7 @@ import Form from "next/form";
 import { serviceRoutes } from "@/modules/travel/service-routes";
 import { useState, type ReactNode } from "react";
 import { ContentText, useSiteData } from "@/components/content";
+import { CustomSelect } from "@/components/ui/custom-select";
 import { nextDate, vietnamToday } from "@/modules/travel/search";
 import { HomeLink } from "./home-link";
 
@@ -165,17 +166,18 @@ export function HomeSearch() {
 
           {hotel && (
             <SearchField icon="hotel_class" label="Loại hình/ Sao">
-              <select
+              <CustomSelect
                 name="category"
                 defaultValue=""
-                aria-label="Loại hình hoặc hạng sao"
-                className={`${inputClass} cursor-pointer`}
-              >
-                <option value="">Tất cả</option>
-                <option value="5 sao">5 Sao Quốc Tế</option>
-                <option value="resort">Resort nghỉ dưỡng</option>
-                <option value="4 sao">4 Sao Cao Cấp</option>
-              </select>
+                ariaLabel="Loại hình hoặc hạng sao"
+                buttonClassName={`${inputClass} cursor-pointer`}
+                options={[
+                  { value: "", label: "Tất cả" },
+                  { value: "5 sao", label: "5 Sao Quốc Tế" },
+                  { value: "resort", label: "Resort nghỉ dưỡng" },
+                  { value: "4 sao", label: "4 Sao Cao Cấp" },
+                ]}
+              />
             </SearchField>
           )}
 

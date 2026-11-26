@@ -38,11 +38,13 @@ export function HomeSectionLink({
     <HomeLink
       contentKey={contentKey}
       href={href}
-      className="inline-flex min-h-11 shrink-0 items-center gap-2 text-sm font-bold text-primary hover:underline lg:text-base"
+      className="group inline-flex min-h-11 shrink-0 items-center gap-2 text-sm font-bold text-primary lg:text-base"
     >
-      {children}
+      <span className="underline-offset-4 group-hover:underline">
+        {children}
+      </span>
       <span
-        className="material-symbols-outlined text-[22px]"
+        className="material-symbols-outlined text-[22px] transition-transform group-hover:translate-x-0.5"
         aria-hidden="true"
       >
         arrow_forward

@@ -1,8 +1,54 @@
+"use client";
+
+import { useState, type FormEvent } from "react";
 import { ContentText, ContentElement } from "@/components/content";
+import { CustomSelect } from "@/components/ui/custom-select";
+import { vietnamToday } from "@/modules/travel/search";
+
+const departureOptions = [
+  { value: "nt", label: "TP. Nha Trang (Khách sạn trung tâm)" },
+  { value: "cr", label: "Khu vực Bãi Dài / Cam Ranh" },
+  { value: "dl", label: "Khởi hành đi Đà Lạt" },
+  { value: "pr", label: "Khởi hành đi Vĩnh Hy / Ninh Thuận" },
+] as const;
+
+const guestOptions = [
+  { value: "2", label: "2 Người lớn (Cặp đôi/Gia đình nhỏ)" },
+  { value: "1", label: "1 Khách (Đi ghép đoàn)" },
+  { value: "4", label: "Nhóm 4 – 8 khách" },
+  { value: "10", label: "Đoàn riêng trên 10 khách" },
+] as const;
+
+const departureTerms: Record<string, string[]> = {
+  nt: [],
+  cr: ["cam ranh", "bãi dài", "nha trang", "đảo"],
+  dl: ["đà lạt"],
+  pr: ["vĩnh hy", "hang rái", "ninh thuận"],
+};
 
 export function ToursHero() {
+  const [departure, setDeparture] = useState("nt");
+  const [date, setDate] = useState("");
+  const [guests, setGuests] = useState("2");
+
+  const handleSearch = (event: FormEvent) => {
+    event.preventDefault();
+    const terms = departureTerms[departure] ?? [];
+    document
+      .querySelectorAll<HTMLElement>("[data-product-id]")
+      .forEach((card) => {
+        const text = card.textContent?.toLowerCase() ?? "";
+        const match =
+          terms.length === 0 || terms.some((term) => text.includes(term));
+        card.dataset.filterHidden = String(!match);
+      });
+    document
+      .getElementById("tours-daily-results")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
-    <section className="relative w-full overflow-hidden bg-surface pb-12 pt-6">
+    <section className="relative w-full overflow-x-clip bg-surface pb-12 pt-6">
       <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-surface-brand/50 blur-3xl pointer-events-none"></div>
       <div className="absolute -left-20 top-1/2 h-80 w-80 rounded-full bg-surface-tinted/30 blur-3xl pointer-events-none"></div>
       <div className="site-container relative z-10">
@@ -102,7 +148,7 @@ export function ToursHero() {
         </div>
 
         <div
-          className="flex items-center gap-2 overflow-x-auto pb-4 -mx-2 px-2"
+          className="no-scrollbar flex flex-wrap items-center gap-2 overflow-x-auto pb-2 -mx-2 px-2"
           id="categoryFilterBar"
         >
           <button
@@ -164,7 +210,10 @@ export function ToursHero() {
         </div>
 
         <div className="mt-4 bg-surface rounded-2xl shadow-xl p-4 lg:p-5">
-          <form className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 items-center">
+          <form
+            onSubmit={handleSearch}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 items-center"
+          >
             <div className="lg:col-span-3 bg-surface-muted p-3 rounded-xl flex items-center gap-3">
               <div className="w-10 h-10 rounded-lg bg-surface-brand flex items-center justify-center text-primary shrink-0">
                 <span className="material-symbols-outlined text-[22px]">
@@ -172,27 +221,16 @@ export function ToursHero() {
                 </span>
               </div>
               <div className="flex flex-col flex-1 min-w-0">
-                <label className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
+                <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
                   <ContentText contentKey="tours.text-024" />
-                </label>
-                <ContentElement
-                  contentKey="tours.attributes-002"
-                  tag="select"
-                  className="bg-transparent font-title-md text-title-md text-on-surface outline-none cursor-pointer truncate"
-                >
-                  <option value="nt">
-                    <ContentText contentKey="tours.text-025" />
-                  </option>
-                  <option value="cr">
-                    <ContentText contentKey="tours.text-026" />
-                  </option>
-                  <option value="dl">
-                    <ContentText contentKey="tours.text-027" />
-                  </option>
-                  <option value="pr">
-                    <ContentText contentKey="tours.text-028" />
-                  </option>
-                </ContentElement>
+                </span>
+                <CustomSelect
+                  ariaLabel="Điểm khởi hành"
+                  value={departure}
+                  onChange={setDeparture}
+                  options={departureOptions}
+                  buttonClassName="bg-transparent font-title-md text-title-md text-on-surface outline-none cursor-pointer"
+                />
               </div>
             </div>
 
@@ -203,14 +241,19 @@ export function ToursHero() {
                 </span>
               </div>
               <div className="flex flex-col flex-1 min-w-0">
-                <label className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
+                <label
+                  htmlFor="tour-departure-date"
+                  className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
                   <ContentText contentKey="tours.text-029" />
                 </label>
-                <ContentElement
-                  contentKey="tours.attributes-003"
-                  tag="input"
-                  className="bg-transparent font-title-md text-title-md text-on-surface outline-none cursor-pointer"
+                <input
+                  id="tour-departure-date"
+                  className="bg-transparent font-title-md text-title-md text-on-surface outline-none cursor-pointer w-full min-w-0"
                   type="date"
+                  min={vietnamToday()}
+                  value={date}
+                  onChange={(event) => setDate(event.target.value)}
                 />
               </div>
             </div>
@@ -222,34 +265,23 @@ export function ToursHero() {
                 </span>
               </div>
               <div className="flex flex-col flex-1 min-w-0">
-                <label className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
+                <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
                   <ContentText contentKey="tours.text-030" />
-                </label>
-                <ContentElement
-                  contentKey="tours.attributes-004"
-                  tag="select"
-                  className="bg-transparent font-title-md text-title-md text-on-surface outline-none cursor-pointer truncate"
-                >
-                  <option value="2">
-                    <ContentText contentKey="tours.text-031" />
-                  </option>
-                  <option value="1">
-                    <ContentText contentKey="tours.text-032" />
-                  </option>
-                  <option value="4">
-                    <ContentText contentKey="tours.text-033" />
-                  </option>
-                  <option value="10">
-                    <ContentText contentKey="tours.text-034" />
-                  </option>
-                </ContentElement>
+                </span>
+                <CustomSelect
+                  ariaLabel="Số lượng khách"
+                  value={guests}
+                  onChange={setGuests}
+                  options={guestOptions}
+                  buttonClassName="bg-transparent font-title-md text-title-md text-on-surface outline-none cursor-pointer"
+                />
               </div>
             </div>
 
             <div className="lg:col-span-3">
               <button
                 className="w-full h-14 rounded-xl bg-gradient-to-r from-primary to-brand-deep hover:from-brand-deep hover:to-primary text-on-primary font-label-lg text-label-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2"
-                type="button"
+                type="submit"
               >
                 <span className="material-symbols-outlined text-[22px]">
                   {"search"}

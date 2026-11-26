@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useSiteData } from "@/components/content";
 import { contactInfo, contentImageUrl } from "@/lib/content-values";
 import { ContentText, ContentElement } from "@/components/content";
@@ -27,6 +28,23 @@ const socialLinks = [
     icon: "/images/figma/icons/social-tiktok.svg",
   },
 ];
+
+const serviceLinks = [
+  { href: "/khach-san", textKey: "footer.text-032", fallback: "Khách sạn" },
+  {
+    href: "/tour-hang-ngay",
+    textKey: "footer.text-033",
+    fallback: "Tour du lịch",
+  },
+  { href: "/xe-dua-don", textKey: "footer.text-034", fallback: "Xe đưa đón" },
+  { href: "/#combo", textKey: "footer.text-035", fallback: "Combo du lịch" },
+  {
+    href: "/tour-hang-ngay?type=combo",
+    textKey: "footer.text-036",
+    fallback: "Ưu đãi & khuyến mãi",
+  },
+] as const;
+
 export function SiteFooter({
   informationLinks,
 }: {
@@ -36,14 +54,14 @@ export function SiteFooter({
   const contact = contactInfo(content);
   return (
     <footer
-      className="w-full bg-background text-on-surface pt-8 pb-24 md:pb-6"
+      className="w-full bg-background text-on-surface pt-10 pb-24 md:pb-8"
       id="lien-he"
     >
       <div className="site-container">
         <div className="grid grid-cols-1 gap-8 pb-10 md:grid-cols-2 lg:grid-cols-12">
           <div className="lg:col-span-4 flex flex-col gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 bg-surface-muted flex items-center justify-center">
+            <div className="flex items-center gap-4">
+              <div className="h-[60px] w-[60px] rounded-xl overflow-hidden shrink-0 bg-surface-muted flex items-center justify-center">
                 <img
                   src={contentImageUrl(
                     content["site.logo"]?.value,
@@ -53,119 +71,89 @@ export function SiteFooter({
                   className="w-full h-full object-contain"
                 />
               </div>
-              <div className="flex flex-col leading-tight">
-                <span className="font-headline-sm text-base font-extrabold text-on-surface tracking-tight uppercase">
+              <div className="flex flex-col leading-[20px]">
+                <span className="text-sm font-extrabold text-on-surface tracking-tight uppercase">
                   <ContentText contentKey="footer.text-023" />
                 </span>
-                <span className="font-label-sm text-xs text-on-surface-variant uppercase">
+                <span className="text-sm font-normal text-on-surface-variant uppercase">
                   <ContentText contentKey="footer.text-024" />
                 </span>
               </div>
             </div>
-            <p className="font-body-md text-body-md text-on-surface leading-relaxed max-w-xs">
+            <p className="text-sm font-medium text-on-surface leading-[20px] max-w-[270px]">
               <ContentText contentKey="footer.text-025" />
             </p>
-            <div className="flex items-center gap-3 pt-1">
-              {socialLinks
-                .filter(({ key }) => /^https:\/\//i.test(contact[key] || ""))
-                .map((item) => (
+            <div className="flex items-center gap-4 pt-1">
+              {socialLinks.map((item) => {
+                const url = contact[item.key] || "";
+                const external = /^https:\/\//i.test(url);
+                return external ? (
                   <a
                     key={item.label}
-                    href={contact[item.key]}
+                    href={url}
+                    target="_blank"
+                    rel="noopener"
                     aria-label={item.label}
-                    className="grid h-11 w-11 place-items-center rounded-lg transition-colors hover:bg-surface-muted"
+                    className="grid h-8 w-8 place-items-center rounded-[8px] bg-white p-1 shadow-sm transition-transform hover:-translate-y-0.5"
                   >
-                    <img src={item.icon} alt="" className="w-5 h-5" />
+                    <img src={item.icon} alt="" className="h-[22px] w-[22px]" />
                   </a>
-                ))}
+                ) : (
+                  <Link
+                    key={item.label}
+                    href="/lien-he"
+                    aria-label={item.label}
+                    className="grid h-8 w-8 place-items-center rounded-[8px] bg-white p-1 shadow-sm transition-transform hover:-translate-y-0.5"
+                  >
+                    <img src={item.icon} alt="" className="h-[22px] w-[22px]" />
+                  </Link>
+                );
+              })}
             </div>
           </div>
+
           <div className="lg:col-span-3 flex flex-col gap-3">
-            <h4 className="font-title-md text-sm font-extrabold text-on-surface">
+            <h4 className="text-sm font-extrabold leading-[20px] text-on-surface">
               <ContentText contentKey="footer.text-031" />
             </h4>
-            <ul className="flex flex-col gap-2.5 font-body-md text-sm text-on-surface-variant">
-              <li>
-                <ContentElement
-                  contentKey="footer.attributes-004"
-                  tag="a"
-                  className="hover:text-primary transition-colors"
-                  data-path="khach-san"
-                >
-                  <ContentText contentKey="footer.text-032" />
-                </ContentElement>
-              </li>
-              <li>
-                <ContentElement
-                  contentKey="footer.attributes-005"
-                  tag="a"
-                  className="hover:text-primary transition-colors"
-                  data-path="khach-san"
-                >
-                  <ContentText contentKey="footer.text-033" />
-                </ContentElement>
-              </li>
-              <li>
-                <ContentElement
-                  contentKey="footer.attributes-006"
-                  tag="a"
-                  className="hover:text-primary transition-colors"
-                  data-path="tour-hang-ngay"
-                >
-                  <ContentText contentKey="footer.text-034" />
-                </ContentElement>
-              </li>
-              <li>
-                <ContentElement
-                  contentKey="footer.attributes-007"
-                  tag="a"
-                  className="hover:text-primary transition-colors"
-                  data-path="combo-tron-goi"
-                >
-                  <ContentText contentKey="footer.text-035" />
-                </ContentElement>
-              </li>
-              <li>
-                <ContentElement
-                  contentKey="footer.attributes-008"
-                  tag="a"
-                  className="hover:text-primary transition-colors"
-                  data-path="dich-vu-ve"
-                >
-                  <ContentText contentKey="footer.text-036" />
-                </ContentElement>
-              </li>
-              <li>
-                <ContentElement
-                  contentKey="footer.attributes-009"
-                  tag="a"
-                  className="hover:text-primary transition-colors"
-                  data-path="dich-vu-ve"
-                >
-                  <ContentText contentKey="footer.text-037" />
-                </ContentElement>
-              </li>
+            <ul className="flex flex-col gap-2.5 text-sm font-medium leading-[20px] text-on-surface-variant">
+              {serviceLinks.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="hover:text-primary transition-colors"
+                  >
+                    {content[item.textKey]?.value ? (
+                      <ContentText contentKey={item.textKey} />
+                    ) : (
+                      item.fallback
+                    )}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
+
           <div className="lg:col-span-2 flex flex-col gap-3">
-            <h4 className="font-title-md text-sm font-extrabold text-on-surface">
+            <h4 className="text-sm font-extrabold leading-[20px] text-on-surface">
               <ContentText contentKey="footer.text-038" />
             </h4>
-            <ul className="flex flex-col gap-2.5 font-body-md text-sm text-on-surface-variant">
+            <ul className="flex flex-col gap-2.5 text-sm font-medium leading-[20px] text-on-surface-variant">
               {informationLinks}
             </ul>
           </div>
+
           <div className="lg:col-span-3 flex flex-col gap-3">
-            <h4 className="font-title-md text-sm font-extrabold text-on-surface">
+            <h4 className="text-sm font-extrabold leading-[20px] text-on-surface">
               Liên hệ
             </h4>
-            <div className="flex flex-col gap-3 font-body-md text-sm text-on-surface-variant">
+            <div className="flex flex-col gap-3 text-sm font-medium leading-[20px] text-on-surface-variant">
               <ContentElement
                 contentKey="footer.attributes-001"
                 tag="a"
                 className="hover:text-primary transition-colors flex items-center gap-2.5"
               >
-                <span className="material-symbols-outlined text-[18px] text-primary">
+                <span className="material-symbols-outlined text-[20px] text-primary">
                   {"call"}
                 </span>
                 <span>
@@ -181,7 +169,7 @@ export function SiteFooter({
                   tag="a"
                   className="hover:text-primary transition-colors flex items-center gap-2.5"
                 >
-                  <span className="material-symbols-outlined text-[18px] text-primary">
+                  <span className="material-symbols-outlined text-[20px] text-primary">
                     {"mail"}
                   </span>
                   <span>
@@ -190,7 +178,7 @@ export function SiteFooter({
                 </ContentElement>
               )}
               <div className="flex items-start gap-2.5">
-                <span className="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">
+                <span className="material-symbols-outlined text-[20px] text-primary shrink-0 mt-0.5">
                   {"location_on"}
                 </span>
                 <span>
@@ -200,8 +188,9 @@ export function SiteFooter({
             </div>
           </div>
         </div>
-        <div className="font-body-sm text-sm text-on-surface">
-          <p className="font-medium">
+
+        <div className="border-t border-border-subtle/70 pt-5 text-sm font-medium text-on-surface">
+          <p>
             <ContentText contentKey="footer.text-052" />
           </p>
         </div>

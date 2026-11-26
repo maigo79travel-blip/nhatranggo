@@ -659,7 +659,6 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
                       ["4cho", "Xe 4 chỗ"],
                       ["7cho", "Xe 7 chỗ"],
                       ["16cho", "Xe 16 chỗ"],
-                      ["limo9", "Limousine 9 chỗ"],
                     ]}
                   />
                 )}
@@ -825,9 +824,7 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
                 <Icon name="route" />
                 <h2>{routeLabel(selected.route)}</h2>
                 <Badge tone="blue">
-                  {selected.vehicle === "limo9"
-                    ? "Limousine 9 chỗ"
-                    : String(selected.vehicle).replace("cho", " chỗ")}
+                  {String(selected.vehicle).replace("cho", " chỗ")}
                 </Badge>
               </div>
               <Field

@@ -108,7 +108,7 @@ export function BookingDialogContent({
           {success}
         </div>
       ) : (
-        <form className="space-y-3" onSubmit={handleSubmit}>
+        <form className="space-y-2.5" onSubmit={handleSubmit}>
           <DialogField
             label="Họ và tên"
             name="name"
@@ -180,20 +180,23 @@ export function BookingDialogContent({
                 required
               />
             )}
-            <DialogField
-              label="Số khách"
-              name="guests"
-              type="number"
-              defaultValue={initialValues.guests ?? 2}
-              required
-              min="1"
-              max="100"
-            />
+            <div className={product.type === "hotel" ? "col-span-2" : ""}>
+              <DialogField
+                label="Số khách"
+                name="guests"
+                type="number"
+                defaultValue={initialValues.guests ?? 2}
+                required
+                min="1"
+                max="100"
+              />
+            </div>
           </div>
           <label className="block text-body-sm">
             Ghi chú (số phòng, điểm đón, giờ đón)
             <textarea
               name="notes"
+              rows={2}
               defaultValue={initialValues.notes}
               maxLength={2000}
               className="block w-full border border-border-default rounded-lg p-2 mt-1"

@@ -33,19 +33,6 @@ const fleetVehicles = [
     ],
   },
   {
-    vehicle: "limo9",
-    imgAttr: "transfers.attributes-019",
-    badge: "transfers.text-126",
-    title: "transfers.text-127",
-    models: "transfers.text-128",
-    specs: [
-      "transfers.text-129",
-      "transfers.text-130",
-      "transfers.text-131",
-      "transfers.text-132",
-    ],
-  },
-  {
     vehicle: "16cho",
     imgAttr: "transfers.attributes-021",
     badge: "transfers.text-136",
@@ -77,75 +64,68 @@ export function TransfersFleet() {
           </p>
         </TransferHeading>
 
-        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-10 lg:grid-cols-4">
-          {fleetVehicles.map((item) => {
-            const vip = item.vehicle === "limo9";
-            return (
-              <article
-                key={item.vehicle}
-                className={`flex flex-col overflow-hidden rounded-[20px] border bg-surface ${vip ? "border-promo-highlight" : "border-brand-light"}`}
-              >
-                <div className="relative aspect-[1.75] overflow-hidden bg-surface-tinted">
-                  <ContentElement
-                    contentKey={item.imgAttr}
-                    tag="img"
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                  <span
-                    className={`absolute left-3 top-3 rounded-full px-3 py-1 text-xs font-bold sm:text-sm ${vip ? "bg-promo-highlight text-on-surface" : "bg-surface text-primary"}`}
-                  >
-                    <ContentText contentKey={item.badge} />
-                  </span>
-                </div>
+        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-10 lg:grid-cols-3">
+          {fleetVehicles.map((item) => (
+            <article
+              key={item.vehicle}
+              className="flex flex-col overflow-hidden rounded-[20px] border border-brand-light bg-surface"
+            >
+              <div className="relative aspect-[1.75] overflow-hidden bg-surface-tinted">
+                <ContentElement
+                  contentKey={item.imgAttr}
+                  tag="img"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+                <span className="absolute left-3 top-3 rounded-full bg-surface px-3 py-1 text-xs font-bold text-primary sm:text-sm">
+                  <ContentText contentKey={item.badge} />
+                </span>
+              </div>
 
-                <div className="flex flex-1 flex-col p-[18px]">
-                  <h3 className="text-lg font-bold">
-                    <ContentText contentKey={item.title} />
-                  </h3>
-                  <p className="mt-2 text-sm text-on-surface-variant">
-                    <ContentText contentKey={item.models} />
-                  </p>
-                  <ul className="my-4 grid grid-cols-2 gap-2 text-xs">
-                    {item.specs.map((specKey) => (
-                      <li key={specKey} className="flex items-start gap-1">
-                        <TransferIcon className="text-sm text-primary">
-                          check
-                        </TransferIcon>
-                        <ContentText contentKey={specKey} />
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-auto flex flex-wrap items-end justify-between gap-2">
-                    <div>
-                      <span className="block text-sm text-on-surface-variant">
-                        Giá tuyến sân bay
-                      </span>
-                      <span
-                        className={`text-xl font-bold ${vip ? "text-sale-price" : "text-primary"}`}
-                      >
-                        <FareValue
-                          route={`${defaultRoute.pickup}_${defaultRoute.dropoff}`}
-                          vehicle={item.vehicle}
-                        />
-                      </span>
-                    </div>
-                    <a
-                      href={quoteAnchor}
-                      onClick={() => selectVehicle(item.vehicle)}
-                      className={`transfer-pill px-3 ${vip ? "transfer-pill-amber" : "transfer-pill-muted"}`}
-                    >
-                      Chọn xe này
-                      <span className="sr-only">
-                        {" "}
-                        — <ContentText contentKey={item.title} />
-                      </span>
-                    </a>
+              <div className="flex flex-1 flex-col p-[18px]">
+                <h3 className="text-lg font-bold">
+                  <ContentText contentKey={item.title} />
+                </h3>
+                <p className="mt-2 text-sm text-on-surface-variant">
+                  <ContentText contentKey={item.models} />
+                </p>
+                <ul className="my-4 grid grid-cols-2 gap-2 text-xs">
+                  {item.specs.map((specKey) => (
+                    <li key={specKey} className="flex items-start gap-1">
+                      <TransferIcon className="text-sm text-primary">
+                        check
+                      </TransferIcon>
+                      <ContentText contentKey={specKey} />
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-auto flex flex-wrap items-end justify-between gap-2">
+                  <div>
+                    <span className="block text-sm text-on-surface-variant">
+                      Giá tuyến sân bay
+                    </span>
+                    <span className="text-xl font-bold text-primary">
+                      <FareValue
+                        route={`${defaultRoute.pickup}_${defaultRoute.dropoff}`}
+                        vehicle={item.vehicle}
+                      />
+                    </span>
                   </div>
+                  <a
+                    href={quoteAnchor}
+                    onClick={() => selectVehicle(item.vehicle)}
+                    className="transfer-pill transfer-pill-muted px-3"
+                  >
+                    Chọn xe này
+                    <span className="sr-only">
+                      {" "}
+                      — <ContentText contentKey={item.title} />
+                    </span>
+                  </a>
                 </div>
-              </article>
-            );
-          })}
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

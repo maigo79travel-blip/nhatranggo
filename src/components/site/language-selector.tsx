@@ -3,29 +3,32 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSiteData } from "@/components/content";
 import { localeOptions } from "@/lib/locale";
+import { CustomSelect } from "@/components/ui/custom-select";
+
 export function LanguageSelector({ id = "site-language" }: { id?: string }) {
   const { locale } = useSiteData();
   const router = useRouter();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+
   return (
-    <div>
-      <label className="sr-only" htmlFor={id}>
-        Ngôn ngữ / Language
-      </label>
-      <select
+    <div className="relative">
+      <CustomSelect
         id={id}
-        className="rounded-full border border-border-subtle bg-surface-muted text-on-surface font-label-md text-label-md px-2.5 py-1.5 max-w-28 cursor-pointer focus:border-focus-ring focus:outline-none"
+        ariaLabel="Ngôn ngữ / Language"
+        options={localeOptions}
         value={locale}
         disabled={busy}
-        onChange={async (event) => {
+        align="right"
+        buttonClassName="h-10 rounded-full border border-border-subtle bg-surface-muted px-3.5 text-on-surface font-label-md text-label-md hover:border-primary/40 focus:border-focus-ring focus:outline-none"
+        onChange={async (nextLocale) => {
           setBusy(true);
           setError("");
           try {
             const result = await fetch("/api/locale", {
               method: "POST",
               headers: { "content-type": "application/json" },
-              body: JSON.stringify({ locale: event.target.value }),
+              body: JSON.stringify({ locale: nextLocale }),
             });
             if (!result.ok) throw Error("Không đổi được ngôn ngữ");
             router.refresh();
@@ -35,14 +38,12 @@ export function LanguageSelector({ id = "site-language" }: { id?: string }) {
             setBusy(false);
           }
         }}
-      >
-        {localeOptions.map((v) => (
-          <option key={v.value} value={v.value}>
-            {v.label}
-          </option>
-        ))}
-      </select>
-      {error && <span role="alert">{error}</span>}
+      />
+      {error && (
+        <span role="alert" className="mt-1 block text-xs text-error">
+          {error}
+        </span>
+      )}
     </div>
   );
 }

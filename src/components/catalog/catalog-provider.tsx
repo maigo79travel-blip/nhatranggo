@@ -69,6 +69,7 @@ export function CatalogProvider({
           b.setAttribute("aria-pressed", String(b === el));
           b.classList.toggle("bg-primary", b === el);
           b.classList.toggle("text-on-primary", b === el);
+          b.classList.toggle("bg-surface-tinted", b !== el);
         });
         const category = el.dataset.category || "all";
         const categoryTerms: Record<string, string[]> = {
@@ -108,7 +109,7 @@ export function CatalogProvider({
         );
       }
 
-      if (/Tìm kiếm|Tìm Kiếm|Tìm tour ngay/.test(text)) {
+      if (/Tìm kiếm|Tìm Kiếm/.test(text)) {
         event.preventDefault();
         const form = el.closest("form") || document.querySelector("form");
         const query =
@@ -173,18 +174,21 @@ export function CatalogProvider({
         ref={dialog}
         aria-labelledby="catalog-dialog-title"
         onCancel={closeDialog}
-        className="w-[calc(100%-2rem)] max-w-lg rounded-2xl p-6 text-on-surface shadow-2xl backdrop:bg-dialog-scrim/50"
+        className="max-h-[90dvh] w-[calc(100%-2rem)] max-w-lg overflow-y-auto rounded-2xl p-5 text-on-surface shadow-2xl backdrop:bg-dialog-scrim/50 sm:p-6"
       >
-        <button
-          aria-label="Đóng"
-          className="float-right min-h-11 min-w-11 text-2xl"
-          onClick={closeDialog}
-        >
-          ×
-        </button>
-        <h2 id="catalog-dialog-title" className="text-headline-md mb-4">
-          Yêu cầu đặt chỗ
-        </h2>
+        <div className="mb-3 flex items-center justify-between gap-3">
+          <h2 id="catalog-dialog-title" className="text-headline-md">
+            Yêu cầu đặt chỗ
+          </h2>
+          <button
+            type="button"
+            aria-label="Đóng"
+            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-2xl text-on-surface-variant transition-colors hover:bg-surface-muted hover:text-on-surface"
+            onClick={closeDialog}
+          >
+            ×
+          </button>
+        </div>
         {selected && (
           <BookingDialogContent
             key={selected.id}

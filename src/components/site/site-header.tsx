@@ -30,8 +30,8 @@ function HeaderNavLink({
       <span>{children}</span>
       <span
         aria-hidden="true"
-        className={`mt-1 h-[4px] rounded-full transition-all duration-200 ${
-          active ? "w-12 bg-primary" : "w-1.5 bg-primary group-hover:w-6"
+        className={`mt-1 h-[4px] rounded-full bg-primary transition-all duration-200 ${
+          active ? "w-12 opacity-100" : "w-0 opacity-0 group-hover:w-6 group-hover:opacity-100"
         }`}
       />
     </Link>
@@ -97,7 +97,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2.5 shrink-0">
           <Link
             href="/tra-cuu"
-            className="hidden md:inline-flex items-center gap-1 px-3 py-2 rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-tinted font-label-md text-label-md transition-colors action-link"
+            className="hidden h-10 md:inline-flex items-center gap-1 px-3 rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-tinted font-label-md text-label-md transition-colors action-link"
           >
             <span
               className="material-symbols-outlined text-[16px]"
@@ -113,7 +113,7 @@ export function SiteHeader() {
           <Link
             href="/lien-he"
             aria-current={activeHref === "/lien-he" ? "page" : undefined}
-            className="hidden min-h-11 items-center justify-center rounded-full border border-brand-light px-5 font-label-lg text-label-lg font-bold text-on-surface transition-colors hover:border-primary hover:bg-surface-muted sm:inline-flex"
+            className="hidden h-10 items-center justify-center rounded-full border border-brand-light px-5 font-label-lg text-label-lg font-bold text-on-surface transition-colors hover:border-primary hover:bg-surface-muted sm:inline-flex"
           >
             {contactLink?.label || "Liên hệ"}
           </Link>

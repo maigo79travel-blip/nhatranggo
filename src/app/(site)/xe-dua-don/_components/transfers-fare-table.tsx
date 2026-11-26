@@ -127,14 +127,7 @@ export function TransfersFareTable() {
                         </div>
                       </td>
                       {offers.map(({ vehicle, product }) => (
-                        <td
-                          key={vehicle.id}
-                          className={
-                            vehicle.id === "limo9" && product
-                              ? "font-bold text-sale-price"
-                              : "font-bold"
-                          }
-                        >
+                        <td key={vehicle.id} className="font-bold">
                           {product ? money(product.price) : "—"}
                         </td>
                       ))}
@@ -167,9 +160,12 @@ export function TransfersFareTable() {
               Giá bao gồm cầu đường và phí vào cổng sân bay. Đón/tiễn từ 21:00
               đến 06:00 phụ thu 50.000đ/xe/chiều.
             </p>
-            <p className="font-semibold text-primary">
+            <Link
+              href="/lien-he"
+              className="font-semibold text-primary hover:underline"
+            >
               Cập nhật bảng giá {brand.name}
-            </p>
+            </Link>
           </div>
         </div>
       </div>

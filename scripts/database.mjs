@@ -37,7 +37,6 @@ try {
           "4cho",
           "7cho",
           "16cho",
-          "limo9",
         ].entries()) {
           await client.query(
             "INSERT INTO transfer_fares(route,vehicle,price) VALUES($1,$2,$3) ON CONFLICT DO NOTHING",
@@ -69,7 +68,7 @@ try {
         [Object.keys(fares)],
       );
       await client.query("COMMIT");
-      console.log(`Seeded ${products.length} cards and 32 transfer fares`);
+      console.log(`Seeded ${products.length} cards and 24 transfer fares`);
       await import("./seed-content.mjs");
     } catch (e) {
       await client.query("ROLLBACK");

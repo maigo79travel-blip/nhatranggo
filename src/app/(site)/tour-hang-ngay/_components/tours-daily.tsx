@@ -1,14 +1,15 @@
 import {
-  ContentText,
   ContentElement,
+  ContentText,
   ProductValue,
   CatalogCollection,
 } from "@/components/content";
 import { CatalogCard, ProductField } from "@/components/catalog";
+import { ToursSortSelect } from "./tours-sort-select";
 
 export function ToursDaily() {
   return (
-    <section className="w-full py-16 bg-surface">
+    <section id="tours-daily-results" className="w-full py-16 bg-surface">
       <div className="site-container">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
@@ -24,24 +25,7 @@ export function ToursDaily() {
             <span className="font-body-sm text-body-sm text-on-surface-variant hidden sm:inline">
               <ContentText contentKey="tours.text-044" />
             </span>
-            <ContentElement
-              contentKey="tours.attributes-005"
-              tag="select"
-              className="px-4 py-2.5 rounded-xl bg-surface text-on-surface font-label-lg text-label-lg shadow-sm outline-none cursor-pointer"
-            >
-              <option value="pop">
-                <ContentText contentKey="tours.text-045" />
-              </option>
-              <option value="price-asc">
-                <ContentText contentKey="tours.text-046" />
-              </option>
-              <option value="price-desc">
-                <ContentText contentKey="tours.text-047" />
-              </option>
-              <option value="rating">
-                <ContentText contentKey="tours.text-048" />
-              </option>
-            </ContentElement>
+            <ToursSortSelect />
           </div>
         </div>
 

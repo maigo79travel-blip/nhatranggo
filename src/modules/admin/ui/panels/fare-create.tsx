@@ -52,7 +52,7 @@ export function FareCreate({ onSaved }: { onSaved: () => void }) {
       <label className="block">
         Loại xe
         <select className="ad-input" name="vehicle">
-          {["4cho", "7cho", "16cho", "limo9"].map((v) => (
+          {["4cho", "7cho", "16cho"].map((v) => (
             <option value={v} key={v}>
               {v}
             </option>

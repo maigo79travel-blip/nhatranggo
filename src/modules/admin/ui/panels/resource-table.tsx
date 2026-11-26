@@ -192,9 +192,7 @@ export function ResourceTable({
                       </td>
                       <td>
                         <span className="ad-scope">
-                          {row.vehicle === "limo9"
-                            ? "Limousine 9 chỗ"
-                            : `Xe ${String(row.vehicle).replace("cho", " chỗ")}`}
+                          {`Xe ${String(row.vehicle).replace("cho", " chỗ")}`}
                         </span>
                       </td>
                       <td>

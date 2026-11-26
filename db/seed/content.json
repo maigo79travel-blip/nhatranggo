@@ -3232,25 +3232,6 @@
     "label": "https://zalo.me/0846477222?text=Toi_muon_thue_xe_7_cho"
   },
   {
-    "key": "transfers.attributes-019",
-    "scope": "transfers",
-    "kind": "attributes",
-    "value": {
-      "data-alt": "Luxury Dcar Limousine luxury black van VIP interior view, leather massage captain chairs with ambient starlight ceiling lighting, executive transport in Vietnam, cinematic warm lighting",
-      "src": "/images/36ff63e7cca371b1.jpg"
-    },
-    "label": "Luxury Dcar Limousine luxury black van VIP interior view, leather massage captain chairs with ambient starlight ceiling lighting, executive transport "
-  },
-  {
-    "key": "transfers.attributes-020",
-    "scope": "transfers",
-    "kind": "attributes",
-    "value": {
-      "href": "{{contact.zalo}}?text=Toi_muon_thue_xe_Limousine_9_cho_VIP"
-    },
-    "label": "https://zalo.me/0846477222?text=Toi_muon_thue_xe_Limousine_9_cho_VIP"
-  },
-  {
     "key": "transfers.attributes-021",
     "scope": "transfers",
     "kind": "attributes",
@@ -3326,8 +3307,8 @@
     "key": "transfers.text-030",
     "scope": "transfers",
     "kind": "text",
-    "value": "\n            Xe đời mới 4 - 7 - 16 - 29 - 45 chỗ & Limousine VIP thương gia. Đón trả tận nơi tại Nha Trang, Bãi Dài, Đà Lạt, Phú Yên. Tài xế chuẩn phong cách dịch vụ, đúng giờ, chủ động kiểm tra giờ hạ cánh miễn phí.\n          ",
-    "label": "Xe đời mới 4 - 7 - 16 - 29 - 45 chỗ & Limousine VIP thương gia. Đón trả tận nơi tại Nha Trang, Bãi Dài, Đà Lạt, Phú Yên. Tài xế chuẩn phong cách dịch "
+    "value": "\n            Xe đời mới 4 - 7 - 16 - 29 - 45 chỗ. Đón trả tận nơi tại Nha Trang, Bãi Dài, Đà Lạt, Phú Yên. Tài xế chuẩn phong cách dịch vụ, đúng giờ, chủ động kiểm tra giờ hạ cánh miễn phí.\n          ",
+    "label": "Xe đời mới 4 - 7 - 16 - 29 - 45 chỗ. Đón trả tận nơi tại Nha Trang, Bãi Dài, Đà Lạt, Phú Yên. Tài xế chuẩn phong cách dịch "
   },
   {
     "key": "transfers.text-031",
@@ -3526,13 +3507,6 @@
     "label": "16 Chỗ"
   },
   {
-    "key": "transfers.text-059",
-    "scope": "transfers",
-    "kind": "text",
-    "value": "Limousine 9 Chỗ VIP",
-    "label": "Limousine 9 Chỗ VIP"
-  },
-  {
     "key": "transfers.text-060",
     "scope": "transfers",
     "kind": "text",
@@ -3685,20 +3659,6 @@
     "kind": "text",
     "value": "Transit 12-15 khách",
     "label": "Transit 12-15 khách"
-  },
-  {
-    "key": "transfers.text-082",
-    "scope": "transfers",
-    "kind": "text",
-    "value": "Limousine 9 Chỗ VIP",
-    "label": "Limousine 9 Chỗ VIP"
-  },
-  {
-    "key": "transfers.text-083",
-    "scope": "transfers",
-    "kind": "text",
-    "value": "Ghế massage",
-    "label": "Ghế massage"
   },
   {
     "key": "transfers.text-084",
@@ -3993,76 +3953,6 @@
     "kind": "text",
     "value": "\n                Chọn xe này\n              ",
     "label": "Chọn xe này"
-  },
-  {
-    "key": "transfers.text-126",
-    "scope": "transfers",
-    "kind": "text",
-    "value": " VIP Thương Gia\n            ",
-    "label": "VIP Thương Gia"
-  },
-  {
-    "key": "transfers.text-127",
-    "scope": "transfers",
-    "kind": "text",
-    "value": "Dcar Limousine 9 Chỗ VIP",
-    "label": "Dcar Limousine 9 Chỗ VIP"
-  },
-  {
-    "key": "transfers.text-128",
-    "scope": "transfers",
-    "kind": "text",
-    "value": "Transit / Solati Dcar President độ VIP",
-    "label": "Transit / Solati Dcar President độ VIP"
-  },
-  {
-    "key": "transfers.text-129",
-    "scope": "transfers",
-    "kind": "text",
-    "value": "Ghế massage ngả lưng",
-    "label": "Ghế massage ngả lưng"
-  },
-  {
-    "key": "transfers.text-130",
-    "scope": "transfers",
-    "kind": "text",
-    "value": "TV Led & Cổng sạc",
-    "label": "TV Led & Cổng sạc"
-  },
-  {
-    "key": "transfers.text-131",
-    "scope": "transfers",
-    "kind": "text",
-    "value": "Nước & Khăn miễn phí",
-    "label": "Nước & Khăn miễn phí"
-  },
-  {
-    "key": "transfers.text-132",
-    "scope": "transfers",
-    "kind": "text",
-    "value": "Cốp để 6-8 vali",
-    "label": "Cốp để 6-8 vali"
-  },
-  {
-    "key": "transfers.text-133",
-    "scope": "transfers",
-    "kind": "text",
-    "value": "Chỉ từ",
-    "label": "Chỉ từ"
-  },
-  {
-    "key": "transfers.text-134",
-    "scope": "transfers",
-    "kind": "text",
-    "value": "600.000đ",
-    "label": "600.000đ"
-  },
-  {
-    "key": "transfers.text-135",
-    "scope": "transfers",
-    "kind": "text",
-    "value": "\n                Chọn Limousine\n              ",
-    "label": "Chọn Limousine"
   },
   {
     "key": "transfers.text-136",
@@ -4862,43 +4752,43 @@
     "key": "footer.text-031",
     "scope": "footer",
     "kind": "text",
-    "value": "Dịch vụ nổi bật",
-    "label": "Dịch vụ nổi bật"
+    "value": "Dịch vụ",
+    "label": "Dịch vụ"
   },
   {
     "key": "footer.text-032",
     "scope": "footer",
     "kind": "text",
-    "value": "Khách sạn Nha Trang",
-    "label": "Khách sạn Nha Trang"
+    "value": "Khách sạn",
+    "label": "Khách sạn"
   },
   {
     "key": "footer.text-033",
     "scope": "footer",
     "kind": "text",
-    "value": "Resort Phú Quốc & Cam Ranh",
-    "label": "Resort Phú Quốc & Cam Ranh"
+    "value": "Tour du lịch",
+    "label": "Tour du lịch"
   },
   {
     "key": "footer.text-034",
     "scope": "footer",
     "kind": "text",
-    "value": "Tour 3 đảo Nha Trang VIP",
-    "label": "Tour 3 đảo Nha Trang VIP"
+    "value": "Xe đưa đón",
+    "label": "Xe đưa đón"
   },
   {
     "key": "footer.text-035",
     "scope": "footer",
     "kind": "text",
-    "value": "Combo Bay & Nghỉ dưỡng",
-    "label": "Combo Bay & Nghỉ dưỡng"
+    "value": "Combo du lịch",
+    "label": "Combo du lịch"
   },
   {
     "key": "footer.text-036",
     "scope": "footer",
     "kind": "text",
-    "value": "Vé VinWonders & Cáp treo",
-    "label": "Vé VinWonders & Cáp treo"
+    "value": "Ưu đãi & khuyến mãi",
+    "label": "Ưu đãi & khuyến mãi"
   },
   {
     "key": "footer.text-037",
@@ -4911,8 +4801,8 @@
     "key": "footer.text-038",
     "scope": "footer",
     "kind": "text",
-    "value": "Chính sách & Quy định",
-    "label": "Chính sách & Quy định"
+    "value": "Về chúng tôi",
+    "label": "Về chúng tôi"
   },
   {
     "key": "footer.text-039",

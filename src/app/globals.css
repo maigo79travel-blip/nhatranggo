@@ -437,6 +437,13 @@ button {
 [data-filter-hidden="true"] {
   display: none !important;
 }
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 @media (max-width: 640px) {
   h1.text-display {
     font-size: 32px;

@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSiteData } from "@/components/content";
+import { CustomSelect } from "@/components/ui/custom-select";
 import { productSearchBlob } from "@/modules/travel/search";
 import { HotelCard } from "./hotel-card";
 import { HotelFilterPanel } from "./hotel-filter-panel";
@@ -163,21 +164,20 @@ export function HotelsListing({
               </span>
               Bộ lọc
             </button>
-            <select
-              aria-label="Sắp xếp khách sạn"
-              className="hotel-sort"
+            <CustomSelect
+              ariaLabel="Sắp xếp khách sạn"
+              align="right"
+              buttonClassName="hotel-sort cursor-pointer"
               value={sort}
-              onChange={(event) => {
-                setSort(event.target.value as SortMode);
+              onChange={(nextSort) => {
+                setSort(nextSort as SortMode);
                 setPage(1);
               }}
-            >
-              {sortOptions.map((item) => (
-                <option value={item.id} key={item.id}>
-                  {item.label}
-                </option>
-              ))}
-            </select>
+              options={sortOptions.map((item) => ({
+                value: item.id,
+                label: item.label,
+              }))}
+            />
           </div>
         </div>
 
