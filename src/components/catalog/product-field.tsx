@@ -1,6 +1,7 @@
 "use client";
 import { createElement, type ReactNode } from "react";
 import { money } from "@/lib/types";
+import { isPublicImageUrl } from "@/lib/content-attributes";
 import { useProduct, useContentAttributes } from "@/components/content";
 
 export function ProductField({
@@ -22,13 +23,14 @@ export function ProductField({
   if (!p) return null;
 
   if (field === "image") {
+    if (!isPublicImageUrl(p.image)) return null;
     return tag === "img"
       ? createElement("img", { ...props, src: p.image })
       : createElement(tag, {
           ...props,
           style: {
             ...(props.style as object),
-            backgroundImage: `url('${p.image}')`,
+            backgroundImage: `url(${JSON.stringify(p.image)})`,
           },
         });
   }

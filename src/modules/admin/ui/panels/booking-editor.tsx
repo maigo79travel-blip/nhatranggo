@@ -65,12 +65,26 @@ export function BookingEditor({
           ["Loại dịch vụ", typeLabels[String(row.product_type)]],
           ["Ngày sử dụng", dateLabel(row.departure_date)],
           ...(row.return_date
-            ? [["Ngày trả phòng", dateLabel(row.return_date)]]
+            ? [
+                [
+                  row.return_time ? "Ngày đón lượt về" : "Ngày trả phòng",
+                  dateLabel(row.return_date),
+                ],
+              ]
             : []),
           ...(row.departure_time
             ? [["Giờ đón", String(row.departure_time).slice(0, 5)]]
             : []),
           ...(row.room_title ? [["Loại phòng", row.room_title]] : []),
+          ...(row.return_time
+            ? [["Giờ đón lượt về", String(row.return_time).slice(0, 5)]]
+            : []),
+          ...(row.flight_number
+            ? [["Số hiệu chuyến bay", row.flight_number]]
+            : []),
+          ...(row.return_unit_price != null
+            ? [["Giá tham khảo lượt về", money(Number(row.return_unit_price))]]
+            : []),
           ["Số khách", row.guests],
           ["Giá tham khảo đã ghi nhận", money(Number(row.unit_price))],
           ["Ghi chú", row.notes],

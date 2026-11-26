@@ -11,7 +11,7 @@ const dateFormat = new Intl.DateTimeFormat("vi-VN", {
 });
 
 export async function HomeArticles() {
-  const articles = (await listArticles()).slice(0, 3);
+  const articles = await listArticles("", "", 3);
   return (
     <section
       id="cam-nang"

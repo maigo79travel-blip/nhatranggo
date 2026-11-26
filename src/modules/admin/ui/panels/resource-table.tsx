@@ -2,14 +2,7 @@
 import { money } from "@/lib/types";
 import { Icon } from "../primitives/admin-icon";
 import { Badge, Status } from "../primitives/admin-badge";
-import {
-  typeLabels,
-  scopeLabels,
-  collectionLabel,
-  dateLabel,
-  rowKey,
-  type Row,
-} from "../api";
+import { typeLabels, scopeLabels, dateLabel, rowKey, type Row } from "../api";
 
 export function ResourceTable({
   section,
@@ -22,11 +15,11 @@ export function ResourceTable({
   rows: Row[];
   loading: boolean;
   onEdit: (r: Row) => void;
-  routeLabel?: (v: unknown) => string;
+  routeLabel?: (v: unknown, row?: Row) => string;
 }) {
   const headings =
     section === "products"
-      ? ["Dịch vụ", "Loại", "Giá bán", "Trạng thái", "Vị trí"]
+      ? ["Dịch vụ", "Giá bán", "Trạng thái", "Trang chủ"]
       : section === "content"
         ? ["Nội dung", "Trang", "Loại nội dung", "Cập nhật"]
         : section === "fares"
@@ -101,11 +94,6 @@ export function ResourceTable({
                         </div>
                       </td>
                       <td>
-                        <span className="ad-type">
-                          {typeLabels[String(row.type)] || String(row.type)}
-                        </span>
-                      </td>
-                      <td>
                         {row.original_price &&
                         Number(row.original_price) > Number(row.price) ? (
                           <small className="ad-old-price">
@@ -122,7 +110,7 @@ export function ResourceTable({
                         </Badge>
                       </td>
                       <td className="ad-cell-muted">
-                        {collectionLabel(row.collection_id)}
+                        {row.featured ? "Ưu tiên" : "—"}
                       </td>
                     </>
                   ) : section === "content" ? (
@@ -146,7 +134,10 @@ export function ResourceTable({
                               className="ad-row-title"
                               onClick={() => onEdit(row)}
                             >
-                              {String(row.label).replace(/\s+/g, " ")}
+                              {String(row.display_label ?? row.label).replace(
+                                /\s+/g,
+                                " ",
+                              )}
                             </button>
                             <small>
                               {row.kind === "text"
@@ -186,7 +177,7 @@ export function ResourceTable({
                             className="ad-row-title"
                             onClick={() => onEdit(row)}
                           >
-                            {routeLabel(row.route)}
+                            {routeLabel(row.route, row)}
                           </button>
                         </div>
                       </td>
@@ -229,7 +220,7 @@ export function ResourceTable({
                     <button
                       type="button"
                       className="ad-icon-button ad-edit-button"
-                      aria-label={`Chỉnh sửa ${String(row.title || row.label || row.email || routeLabel(row.route))}`}
+                      aria-label={`Chỉnh sửa ${String(row.title || row.display_label || row.label || row.email || routeLabel(row.route, row))}`}
                       onClick={() => onEdit(row)}
                     >
                       <Icon name="edit_square" />

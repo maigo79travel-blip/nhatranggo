@@ -3,9 +3,11 @@ import type { ReactNode } from "react";
 import { PublicIcon } from "./public-ui";
 export function PublicPage({
   title,
+  intro,
   children,
 }: {
   title: string;
+  intro?: string;
   children: ReactNode;
 }) {
   return (
@@ -18,6 +20,9 @@ export function PublicPage({
             <span aria-current="page">{title}</span>
           </nav>
           <h1>{title}</h1>
+          {intro && (
+            <p className="mt-3 max-w-3xl text-on-surface-variant">{intro}</p>
+          )}
         </div>
       </div>
       <div className="public-container public-page-body">{children}</div>

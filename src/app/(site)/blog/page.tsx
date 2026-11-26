@@ -1,3 +1,4 @@
+import { getPublicPageCopy } from "@/lib/public-page-copy";
 import { listArticles } from "@/modules/blog/service";
 import { db } from "@/lib/db";
 import { PublicPage } from "@/components/site/public-page";
@@ -12,14 +13,15 @@ export default async function BlogPage({
   searchParams: Promise<{ category?: string; q?: string }>;
 }) {
   const params = await searchParams;
-  const [articles, categories] = await Promise.all([
+  const [articles, categories, copy] = await Promise.all([
     listArticles(params.category, params.q),
     db.query(
       "SELECT title,slug FROM article_categories WHERE active=true ORDER BY title",
     ),
+    getPublicPageCopy("blog", "Blog & Tin tức"),
   ]);
   return (
-    <PublicPage title="Blog & Tin tức">
+    <PublicPage {...copy}>
       <Form
         key={JSON.stringify(params)}
         action="/blog"

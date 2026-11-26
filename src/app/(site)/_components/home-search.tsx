@@ -6,6 +6,7 @@ import { useState, type ReactNode } from "react";
 import { ContentText, useSiteData } from "@/components/content";
 import { CustomSelect } from "@/components/ui/custom-select";
 import { nextDate, vietnamToday } from "@/modules/travel/search";
+import type { HomeSuggestion } from "./home-navigation";
 import { HomeLink } from "./home-link";
 
 const tabs = [
@@ -49,7 +50,7 @@ function SearchField({
   );
 }
 
-export function HomeSearch() {
+export function HomeSearch({ suggestions }: { suggestions: HomeSuggestion[] }) {
   const [type, setType] = useState<(typeof tabs)[number]["type"]>("hotel");
   const [date, setDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
@@ -112,6 +113,7 @@ export function HomeSearch() {
             <input
               className={inputClass}
               name="q"
+              maxLength={150}
               aria-label="Điểm đến hoặc tên dịch vụ"
               placeholder={
                 attributes?.placeholder || "Điểm đến hoặc tên dịch vụ"
@@ -130,7 +132,8 @@ export function HomeSearch() {
               onChange={(event) => {
                 const value = event.target.value;
                 setDate(value);
-                if (returnDate && returnDate <= value)
+                if (!value) setReturnDate("");
+                else if (returnDate && returnDate <= value)
                   setReturnDate(nextDate(value));
               }}
             />
@@ -195,39 +198,23 @@ export function HomeSearch() {
           </button>
         </Form>
 
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 pt-2.5 text-xs text-on-surface-variant">
-          <span>
-            <ContentText contentKey="home.text-059" />
-          </span>
-          <HomeLink
-            contentKey="home.attributes-003"
-            className="font-bold text-brand-deep hover:underline transition-colors action-link"
-            href="/khach-san?q=B%C3%A3i%20D%C3%A0i"
-          >
-            <ContentText contentKey="home.text-060" />
-          </HomeLink>
-          <HomeLink
-            contentKey="home.attributes-004"
-            className="font-bold text-brand-deep hover:underline transition-colors action-link"
-            href="/tour-hang-ngay?q=3%20%C4%90%E1%BA%A3o"
-          >
-            <ContentText contentKey="home.text-061" />
-          </HomeLink>
-          <HomeLink
-            contentKey="home.attributes-005"
-            className="font-bold text-brand-deep hover:underline transition-colors action-link"
-            href="/tour-hang-ngay?q=VinWonders"
-          >
-            <ContentText contentKey="home.text-062" />
-          </HomeLink>
-          <HomeLink
-            contentKey="home.attributes-006"
-            className="font-bold text-brand-deep hover:underline transition-colors action-link"
-            href="/tour-hang-ngay?type=combo&q=Ph%C3%BA%20Qu%E1%BB%91c"
-          >
-            <ContentText contentKey="home.text-063" />
-          </HomeLink>
-        </div>
+        {!!suggestions.length && (
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 pt-2.5 text-xs text-on-surface-variant">
+            <span>
+              <ContentText contentKey="home.text-059" />
+            </span>
+            {suggestions.map(({ contentKey, href, title }) => (
+              <HomeLink
+                key={contentKey}
+                contentKey={contentKey}
+                href={href}
+                className="font-bold text-brand-deep hover:underline transition-colors action-link"
+              >
+                <ContentText contentKey={title} />
+              </HomeLink>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

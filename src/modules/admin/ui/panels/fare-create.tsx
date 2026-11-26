@@ -67,7 +67,7 @@ export function FareCreate({ onSaved }: { onSaved: () => void }) {
           buttonClassName="ad-input cursor-pointer"
           options={["4cho", "7cho", "16cho"].map((v) => ({
             value: v,
-            label: v,
+            label: `Xe ${v.replace("cho", " chỗ")}`,
           }))}
         />
       </div>

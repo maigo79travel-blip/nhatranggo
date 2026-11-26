@@ -38,7 +38,14 @@ export function resolveServiceHref(href: string, fallback: string) {
 }
 
 export function hasServiceSearch(params: ServiceSearchParams) {
-  return ["q", "destination", "date", "returnDate", "guests", "category"].some(
-    (key) => typeof params[key] === "string" && params[key].trim() !== "",
-  );
+  return [
+    "q",
+    "destination",
+    "date",
+    "returnDate",
+    "guests",
+    "category",
+    "sort",
+    "page",
+  ].some((key) => typeof params[key] === "string" && params[key].trim() !== "");
 }

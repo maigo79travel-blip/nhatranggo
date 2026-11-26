@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { AppError } from "@/lib/errors";
 import { errorResponse } from "@/lib/http";
 import { publicProductWhere } from "@/modules/travel/product-visibility";
+import { getTransferFareForProduct } from "@/modules/travel/fare-service";
 import { vietnamToday } from "@/modules/travel/search";
 
 export async function GET(
@@ -40,7 +41,15 @@ export async function GET(
             )
           ).rows
         : [];
-    return Response.json({ rooms, departures });
+    const quote =
+      product.type === "transfer" ? await getTransferFareForProduct(id) : null;
+    if (product.type === "transfer" && !quote)
+      throw new AppError("Tuyến xe không còn nhận yêu cầu", 404);
+    return Response.json({
+      rooms,
+      departures,
+      ...(quote ? { maxGuests: quote.maxGuests } : {}),
+    });
   } catch (error) {
     return errorResponse(error);
   }

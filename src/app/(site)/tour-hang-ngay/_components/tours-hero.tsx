@@ -1,50 +1,34 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { ContentText, ContentElement } from "@/components/content";
+import { ContentText, ContentElement, useSiteData } from "@/components/content";
 import { CustomSelect } from "@/components/ui/custom-select";
 import { vietnamToday } from "@/modules/travel/search";
 
-const departureOptions = [
-  { value: "nt", label: "TP. Nha Trang (Khách sạn trung tâm)" },
-  { value: "cr", label: "Khu vực Bãi Dài / Cam Ranh" },
-  { value: "dl", label: "Khởi hành đi Đà Lạt" },
-  { value: "pr", label: "Khởi hành đi Vĩnh Hy / Ninh Thuận" },
-] as const;
-
-const guestOptions = [
-  { value: "2", label: "2 Người lớn (Cặp đôi/Gia đình nhỏ)" },
-  { value: "1", label: "1 Khách (Đi ghép đoàn)" },
-  { value: "4", label: "Nhóm 4 – 8 khách" },
-  { value: "10", label: "Đoàn riêng trên 10 khách" },
-] as const;
-
-const departureTerms: Record<string, string[]> = {
-  nt: [],
-  cr: ["cam ranh", "bãi dài", "nha trang", "đảo"],
-  dl: ["đà lạt"],
-  pr: ["vĩnh hy", "hang rái", "ninh thuận"],
-};
+import { useRouter } from "next/navigation";
+import { serviceRoutes } from "@/modules/travel/service-routes";
 
 export function ToursHero() {
-  const [departure, setDeparture] = useState("nt");
+  const router = useRouter();
+  const { products, destinations } = useSiteData();
+  const [destination, setDestination] = useState("");
   const [date, setDate] = useState("");
   const [guests, setGuests] = useState("2");
-
-  const handleSearch = (event: FormEvent) => {
+  const linkedDestinations = new Set(
+    products.map((product) => product.destination_id),
+  );
+  const departureOptions = [
+    { value: "", label: "Tất cả điểm đến" },
+    ...destinations
+      .filter((item) => linkedDestinations.has(item.id))
+      .map((item) => ({ value: item.id, label: item.name })),
+  ];
+  const handleSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const terms = departureTerms[departure] ?? [];
-    document
-      .querySelectorAll<HTMLElement>("[data-product-id]")
-      .forEach((card) => {
-        const text = card.textContent?.toLowerCase() ?? "";
-        const match =
-          terms.length === 0 || terms.some((term) => text.includes(term));
-        card.dataset.filterHidden = String(!match);
-      });
-    document
-      .getElementById("tours-daily-results")
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const params = new URLSearchParams({ guests });
+    if (destination) params.set("destination", destination);
+    if (date) params.set("date", date);
+    router.push(`${serviceRoutes.tour}?${params}`);
   };
 
   return (
@@ -93,58 +77,11 @@ export function ToursHero() {
             </h1>
           </div>
 
-          <div className="flex items-center gap-4 bg-surface-muted p-3 rounded-2xl shadow-sm shrink-0">
-            <div className="w-12 h-12 rounded-xl bg-promo-surface flex items-center justify-center text-promo-ink">
-              <span
-                className="material-symbols-outlined text-[28px]"
-                style={{ fontVariationSettings: "'FILL' 1" }}
-              >
-                {"workspace_premium"}
-              </span>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1">
-                <span className="font-headline-sm text-headline-sm text-on-surface font-bold">
-                  <ContentText contentKey="tours.text-015" />
-                </span>
-                <div className="flex text-promo-highlight">
-                  <span
-                    className="material-symbols-outlined text-[18px]"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                  >
-                    {"star"}
-                  </span>
-                  <span
-                    className="material-symbols-outlined text-[18px]"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                  >
-                    {"star"}
-                  </span>
-                  <span
-                    className="material-symbols-outlined text-[18px]"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                  >
-                    {"star"}
-                  </span>
-                  <span
-                    className="material-symbols-outlined text-[18px]"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                  >
-                    {"star"}
-                  </span>
-                  <span
-                    className="material-symbols-outlined text-[18px]"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                  >
-                    {"star"}
-                  </span>
-                </div>
-              </div>
-              <span className="font-body-sm text-body-sm text-on-surface-variant">
-                <ContentText contentKey="tours.text-016" />
-              </span>
-            </div>
-          </div>
+          {products.length > 0 && (
+            <p className="rounded-2xl bg-surface-muted px-4 py-3 text-sm font-semibold text-on-surface-variant">
+              {products.length} tour đang nhận yêu cầu
+            </p>
+          )}
         </div>
 
         <div
@@ -154,6 +91,7 @@ export function ToursHero() {
           <button
             className="tour-cat-btn px-4 py-2.5 rounded-full font-label-lg text-label-lg bg-primary text-on-primary shadow-sm hover:shadow transition-all shrink-0"
             data-category="all"
+            onClick={() => router.push(serviceRoutes.tour)}
             aria-pressed={true}
             type="button"
           >
@@ -162,6 +100,9 @@ export function ToursHero() {
           <button
             className="tour-cat-btn px-4 py-2.5 rounded-full font-label-lg text-label-lg bg-surface-tinted text-on-surface hover:bg-surface-brand hover:text-primary transition-all shrink-0"
             data-category="dao-nha-trang"
+            onClick={() =>
+              router.push(serviceRoutes.tour + "?category=dao-nha-trang")
+            }
             aria-pressed={false}
             type="button"
           >
@@ -170,6 +111,9 @@ export function ToursHero() {
           <button
             className="tour-cat-btn px-4 py-2.5 rounded-full font-label-lg text-label-lg bg-surface-tinted text-on-surface hover:bg-surface-brand hover:text-primary transition-all shrink-0"
             data-category="du-thuyen"
+            onClick={() =>
+              router.push(serviceRoutes.tour + "?category=du-thuyen")
+            }
             aria-pressed={false}
             type="button"
           >
@@ -178,6 +122,9 @@ export function ToursHero() {
           <button
             className="tour-cat-btn px-4 py-2.5 rounded-full font-label-lg text-label-lg bg-surface-tinted text-on-surface hover:bg-surface-brand hover:text-primary transition-all shrink-0"
             data-category="lan-bien"
+            onClick={() =>
+              router.push(serviceRoutes.tour + "?category=lan-bien")
+            }
             aria-pressed={false}
             type="button"
           >
@@ -186,6 +133,9 @@ export function ToursHero() {
           <button
             className="tour-cat-btn px-4 py-2.5 rounded-full font-label-lg text-label-lg bg-surface-tinted text-on-surface hover:bg-surface-brand hover:text-primary transition-all shrink-0"
             data-category="vinh-hy"
+            onClick={() =>
+              router.push(serviceRoutes.tour + "?category=vinh-hy")
+            }
             aria-pressed={false}
             type="button"
           >
@@ -194,6 +144,7 @@ export function ToursHero() {
           <button
             className="tour-cat-btn px-4 py-2.5 rounded-full font-label-lg text-label-lg bg-surface-tinted text-on-surface hover:bg-surface-brand hover:text-primary transition-all shrink-0"
             data-category="city"
+            onClick={() => router.push(serviceRoutes.tour + "?category=city")}
             aria-pressed={false}
             type="button"
           >
@@ -202,6 +153,7 @@ export function ToursHero() {
           <button
             className="tour-cat-btn px-4 py-2.5 rounded-full font-label-lg text-label-lg bg-surface-tinted text-on-surface hover:bg-surface-brand hover:text-primary transition-all shrink-0"
             data-category="da-lat"
+            onClick={() => router.push(serviceRoutes.tour + "?category=da-lat")}
             aria-pressed={false}
             type="button"
           >
@@ -222,12 +174,12 @@ export function ToursHero() {
               </div>
               <div className="flex flex-col flex-1 min-w-0">
                 <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
-                  <ContentText contentKey="tours.text-024" />
+                  Điểm đến
                 </span>
                 <CustomSelect
-                  ariaLabel="Điểm khởi hành"
-                  value={departure}
-                  onChange={setDeparture}
+                  ariaLabel="Điểm đến"
+                  value={destination}
+                  onChange={setDestination}
                   options={departureOptions}
                   buttonClassName="bg-transparent font-title-md text-title-md text-on-surface outline-none cursor-pointer"
                 />
@@ -268,12 +220,15 @@ export function ToursHero() {
                 <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
                   <ContentText contentKey="tours.text-030" />
                 </span>
-                <CustomSelect
-                  ariaLabel="Số lượng khách"
+                <input
+                  aria-label="Số lượng khách"
+                  type="number"
+                  min={1}
+                  max={100}
+                  required
                   value={guests}
-                  onChange={setGuests}
-                  options={guestOptions}
-                  buttonClassName="bg-transparent font-title-md text-title-md text-on-surface outline-none cursor-pointer"
+                  onChange={(event) => setGuests(event.target.value)}
+                  className="min-w-0 w-full bg-transparent font-title-md text-title-md text-on-surface outline-none"
                 />
               </div>
             </div>

@@ -6,14 +6,22 @@ import { useSiteData } from "@/components/content";
 import { useCatalog } from "@/components/catalog/catalog-context";
 import brand from "@/config/brand.json";
 import { money } from "@/lib/types";
-import { transferRoutes, transferVehicles } from "./transfer-options";
+import { transferRoutes, transferVehicleOptions } from "./transfer-options";
+import { useTransferVehicle } from "./transfers-vehicle-selection";
 import { TransferHeading, TransferIcon } from "./transfers-ui";
 
 type RouteCategory = (typeof transferRoutes)[number]["id"];
 
 export function TransfersFareTable() {
   const [routeTab, setRouteTab] = useState<RouteCategory>("airport");
-  const { products, fares, transferRoutes: routes } = useSiteData();
+  const {
+    products,
+    fares,
+    transferRoutes: routes,
+    transferVehicleTypes,
+  } = useSiteData();
+  const { vehicle: selectedVehicle } = useTransferVehicle();
+  const vehicles = transferVehicleOptions(transferVehicleTypes);
   const catalog = useCatalog();
   const fareByProduct = new Map(
     fares.map((fare) => [`transfer-${fare.route}-${fare.vehicle}`, fare.price]),
@@ -72,14 +80,14 @@ export function TransfersFareTable() {
                   <th scope="col" className="w-[45%] rounded-l-2xl text-left">
                     Lộ trình / Tuyến đường phổ biến
                   </th>
-                  {transferVehicles.map((vehicle) => (
+                  {vehicles.map((vehicle) => (
                     <th scope="col" key={vehicle.id}>
                       <TransferIcon className="mb-1 block text-lg">
                         {vehicle.icon}
                       </TransferIcon>
                       <span className="block">{vehicle.label}</span>
                       <span className="mt-1 block text-xs font-normal">
-                        {vehicle.detail}
+                        Tối đa {vehicle.maxGuests} khách
                       </span>
                     </th>
                   ))}
@@ -91,13 +99,13 @@ export function TransfersFareTable() {
               <tbody>
                 {!visibleRows.length && (
                   <tr>
-                    <td colSpan={transferVehicles.length + 2}>
+                    <td colSpan={vehicles.length + 2}>
                       Chưa có tuyến xe trong nhóm này.
                     </td>
                   </tr>
                 )}
                 {visibleRows.map((row) => {
-                  const offers = transferVehicles.map((vehicle) => {
+                  const offers = vehicles.map((vehicle) => {
                     const id = `transfer-${row.code}-${vehicle.id}`;
                     const price = fareByProduct.get(id);
                     const product = productById.get(id);
@@ -109,7 +117,9 @@ export function TransfersFareTable() {
                           : null,
                     };
                   });
-                  const offer = offers.find((option) => option.product);
+                  const offer = offers.find(
+                    (option) => option.vehicle.id === selectedVehicle,
+                  );
                   const booking = offer?.product
                     ? {
                         ...offer.product,
@@ -136,7 +146,11 @@ export function TransfersFareTable() {
                           <button
                             className="transfer-button"
                             type="button"
-                            onClick={() => catalog.open(booking)}
+                            onClick={() =>
+                              catalog.open(booking, {
+                                maxGuests: offer?.vehicle.maxGuests,
+                              })
+                            }
                           >
                             Đặt xe{" "}
                             <TransferIcon className="text-base">
@@ -157,8 +171,8 @@ export function TransfersFareTable() {
           </div>
           <div className="mt-4 flex flex-wrap justify-between gap-2 rounded-2xl bg-surface-muted px-5 py-4 text-sm text-on-surface-variant">
             <p>
-              Giá bao gồm cầu đường và phí vào cổng sân bay. Đón/tiễn từ 21:00
-              đến 06:00 phụ thu 50.000đ/xe/chiều.
+              Bảng giá hiển thị theo từng chiều. Chọn dòng xe ở phần tra cứu để
+              đặt đúng loại xe.
             </p>
             <Link
               href="/lien-he"

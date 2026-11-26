@@ -9,20 +9,11 @@ import {
 import { usePathname } from "next/navigation";
 import type { BookingDraft } from "@/modules/travel/search";
 import type { Product } from "@/lib/types";
-import { ListingFilters } from "@/components/listing-filters";
-import { useSiteData } from "@/components/content";
 import { CatalogContext } from "./catalog-context";
 import { BookingDialogContent } from "./booking-dialog";
 import { ToastNotification } from "./toast-notification";
-import { sortCatalogCards } from "./sort-cards";
 
-export function CatalogProvider({
-  products,
-  children,
-}: {
-  products: Product[];
-  children: ReactNode;
-}) {
+export function CatalogProvider({ children }: { children: ReactNode }) {
   const [selected, setSelected] = useState<Product | null>(null);
   const [initialValues, setInitialValues] = useState<BookingDraft>({});
   const openProduct = useCallback(
@@ -35,10 +26,6 @@ export function CatalogProvider({
   const [message, setMessage] = useState("");
   const dialog = useRef<HTMLDialogElement>(null);
   const pathname = usePathname();
-  const { content } = useSiteData();
-  const contact = content["site.contact"]?.value as
-    { phone: string } | undefined;
-
   useEffect(() => {
     setSelected(null);
     setMessage("");
@@ -57,110 +44,6 @@ export function CatalogProvider({
     }
   }, [selected]);
 
-  useEffect(() => {
-    if (pathname !== "/tour-hang-ngay") return;
-    const click = (event: MouseEvent) => {
-      const el = (event.target as HTMLElement).closest<HTMLElement>("button,a");
-      if (!el) return;
-      const text = el.textContent?.trim() || "";
-
-      if (el.matches(".tour-cat-btn")) {
-        document.querySelectorAll(".tour-cat-btn").forEach((b) => {
-          b.setAttribute("aria-pressed", String(b === el));
-          b.classList.toggle("bg-primary", b === el);
-          b.classList.toggle("text-on-primary", b === el);
-          b.classList.toggle("bg-surface-tinted", b !== el);
-        });
-        const category = el.dataset.category || "all";
-        const categoryTerms: Record<string, string[]> = {
-          "dao-nha-trang": ["đảo", "hòn mun", "hòn tằm"],
-          "du-thuyen": ["du thuyền"],
-          "lan-bien": ["lặn", "scuba", "seawalker"],
-          "vinh-hy": ["vĩnh hy"],
-          city: ["city", "tháp bà"],
-          "da-lat": ["đà lạt"],
-        };
-        document
-          .querySelectorAll<HTMLElement>("[data-product-id]")
-          .forEach((card) => {
-            const match =
-              category === "all" ||
-              (categoryTerms[category] || []).some((term) =>
-                card.textContent?.toLowerCase().includes(term),
-              );
-            card.dataset.filterHidden = String(!match);
-          });
-      }
-
-      if (el.closest("[data-product-id]")) return;
-
-      if (/Giá thấp nhất|Đánh giá cao nhất|Ưu đãi tốt nhất/.test(text)) {
-        const cards = Array.from(
-          document.querySelectorAll<HTMLElement>("[data-product-id]"),
-        );
-        sortCatalogCards(
-          cards,
-          products,
-          text.includes("Giá")
-            ? "price"
-            : text.includes("Đánh giá")
-              ? "rating"
-              : "recommended",
-        );
-      }
-
-      if (/Tìm kiếm|Tìm Kiếm/.test(text)) {
-        event.preventDefault();
-        const form = el.closest("form") || document.querySelector("form");
-        const query =
-          form?.querySelector<HTMLInputElement>("input[type=text]")?.value ||
-          "";
-        const q = query.toLowerCase();
-        let count = 0;
-        document
-          .querySelectorAll<HTMLElement>("[data-product-id]")
-          .forEach((card) => {
-            const product = products.find(
-              (p) => p.id === card.dataset.productId,
-            );
-            const visible =
-              !q ||
-              q.includes("khánh hòa") ||
-              q.includes("nha trang") ||
-              `${product?.title} ${product?.location}`
-                .toLowerCase()
-                .includes(q);
-            card.dataset.filterHidden = String(!visible);
-            if (visible) count++;
-          });
-        setMessage(`Tìm thấy ${count} dịch vụ phù hợp.`);
-      }
-
-      if (el.matches(".faq-toggle")) {
-        const item = el.closest(".faq-item");
-        const content = item?.querySelector(".faq-content");
-        content?.classList.toggle("hidden");
-        el.setAttribute(
-          "aria-expanded",
-          String(!content?.classList.contains("hidden")),
-        );
-      }
-
-      if (el.matches("a[data-action=details]")) {
-        event.preventDefault();
-        const card = el.closest("article");
-        if (!card && contact?.phone) {
-          setMessage(`Liên hệ ${contact.phone} để được tư vấn dịch vụ này.`);
-        }
-      }
-    };
-
-    document.addEventListener("click", click);
-    return () => {
-      document.removeEventListener("click", click);
-    };
-  }, [pathname, products, contact?.phone]);
-
   const closeDialog = () => {
     setSelected(null);
   };
@@ -168,7 +51,6 @@ export function CatalogProvider({
   return (
     <CatalogContext.Provider value={{ open: openProduct }}>
       {children}
-      {pathname === "/tour-hang-ngay" && <ListingFilters products={products} />}
       <ToastNotification message={message} onClose={() => setMessage("")} />
       <dialog
         ref={dialog}

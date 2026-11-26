@@ -21,6 +21,7 @@ import {
 import { createBooking } from "@/modules/bookings/service";
 import { resources } from "@/modules/admin/resources";
 import { canAccess } from "@/modules/admin/permissions";
+import { contentScopes, type ContentScope } from "@/modules/admin/routes";
 import { listRecords, saveRecord, removeRecord } from "@/modules/admin/service";
 import { errorResponse, readJson } from "@/lib/http";
 import {
@@ -113,8 +114,31 @@ async function handle(request: Request, context: Context) {
         return Response.json({ data: rows });
       }
       const data = Object.hasOwn(resources, resource)
-        ? await listRecords(resource)
-        : await getAdminResourceList(resource);
+        ? await listRecords(
+            resource,
+            resource === "requests"
+              ? z
+                  .enum(["evisa", "fast-track"])
+                  .optional()
+                  .parse(searchParams.get("kind") ?? undefined)
+              : undefined,
+          )
+        : await getAdminResourceList(resource, {
+            type:
+              resource === "products"
+                ? z
+                    .enum(["hotel", "tour", "combo"])
+                    .optional()
+                    .parse(searchParams.get("type") ?? undefined)
+                : undefined,
+            scope:
+              resource === "content"
+                ? z
+                    .enum(Object.keys(contentScopes) as ContentScope[])
+                    .optional()
+                    .parse(searchParams.get("scope") ?? undefined)
+                : undefined,
+          });
       if (!data) throw new AppError("Không tìm thấy module", 404);
       return Response.json({ data });
     }

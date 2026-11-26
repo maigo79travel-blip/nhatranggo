@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Icon } from "../primitives/admin-icon";
 import { Status } from "../primitives/admin-badge";
 import { Empty } from "../primitives/admin-empty";
@@ -7,27 +8,30 @@ import { money, type AdminOverviewData } from "@/lib/types";
 import { typeLabels, dateLabel } from "../api";
 
 const quickActions = [
-  { id: "products", icon: "luggage", title: "Quản lý dịch vụ" },
-  { id: "content", icon: "edit_note", title: "Chỉnh sửa nội dung" },
-  { id: "fares", icon: "airport_shuttle", title: "Cập nhật giá xe" },
+  { href: "/admin/khach-san", icon: "hotel", title: "Quản lý khách sạn" },
+  {
+    href: "/admin/noi-dung/trang-chu",
+    icon: "edit_note",
+    title: "Sửa trang chủ",
+  },
+  {
+    href: "/admin/xe-dua-don",
+    icon: "airport_shuttle",
+    title: "Cập nhật giá xe",
+  },
 ];
 
 export function OverviewPanel({
   data,
   loading,
-  syncedAt,
-  canNavigate,
-  navigate,
+  canManageBookings,
+  canManageProducts,
 }: {
   data: AdminOverviewData | null;
   loading: boolean;
-  syncedAt: string;
-  canNavigate: (section: string) => boolean;
-  navigate: (section: string) => void;
+  canManageBookings: boolean;
+  canManageProducts: boolean;
 }) {
-  const canManageBookings = canNavigate("bookings");
-  const canManageProducts = canNavigate("products");
-  const actions = quickActions.filter((action) => canNavigate(action.id));
   const stats = data?.stats;
   const total =
     data?.categories.reduce((sum, item) => sum + item.count, 0) ?? 0;
@@ -46,13 +50,9 @@ export function OverviewPanel({
                 </dd>
               )}
               <dd className="ad-stat-meta">
-                <button
-                  type="button"
-                  className="ad-text-button"
-                  onClick={() => navigate("bookings")}
-                >
+                <Link className="ad-text-button" href="/admin/dat-cho">
                   Mở danh sách đặt chỗ <Icon name="arrow_forward" />
-                </button>
+                </Link>
               </dd>
             </div>
             <div className="ad-stat-card">
@@ -91,13 +91,9 @@ export function OverviewPanel({
           <section className="ad-panel">
             <div className="ad-panel-heading ad-panel-heading-between">
               <h2>Yêu cầu đặt chỗ gần đây</h2>
-              <button
-                type="button"
-                className="ad-text-button"
-                onClick={() => navigate("bookings")}
-              >
+              <Link className="ad-text-button" href="/admin/dat-cho">
                 Xem tất cả <Icon name="arrow_forward" />
-              </button>
+              </Link>
             </div>
             {data?.bookings.length ? (
               <div
@@ -144,13 +140,9 @@ export function OverviewPanel({
           <section className="ad-panel">
             <div className="ad-panel-heading ad-panel-heading-between">
               <h2>Danh mục dịch vụ</h2>
-              <button
-                type="button"
-                className="ad-text-button"
-                onClick={() => navigate("products")}
-              >
+              <Link className="ad-text-button" href="/admin/khach-san">
                 Xem danh mục <Icon name="arrow_forward" />
-              </button>
+              </Link>
             </div>
             {total > 0 ? (
               <ul
@@ -177,22 +169,18 @@ export function OverviewPanel({
             )}
           </section>
         )}
-        {actions.length > 0 && (
+        {canManageProducts && (
           <section className="ad-panel">
             <div className="ad-panel-heading">
               <h2>Truy cập nhanh</h2>
             </div>
             <div className="ad-quick-list">
-              {actions.map((action) => (
-                <button
-                  type="button"
-                  key={action.id}
-                  onClick={() => navigate(action.id)}
-                >
+              {quickActions.map((action) => (
+                <Link key={action.href} href={action.href}>
                   <Icon name={action.icon} />
                   <span>{action.title}</span>
                   <Icon name="chevron_right" />
-                </button>
+                </Link>
               ))}
             </div>
           </section>
@@ -232,10 +220,6 @@ export function OverviewPanel({
           </section>
         )}
       </div>
-
-      {syncedAt && (
-        <p className="ad-sync-line">Đồng bộ gần nhất lúc {syncedAt}</p>
-      )}
     </div>
   );
 }

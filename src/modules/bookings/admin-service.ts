@@ -126,12 +126,16 @@ const exportColumns = [
   { key: "phone", header: "Điện thoại", width: 18 },
   { key: "title", header: "Dịch vụ", width: 48 },
   { key: "departure_date", header: "Ngày sử dụng", width: 16 },
-  { key: "return_date", header: "Ngày trả phòng", width: 16 },
+  { key: "return_date", header: "Ngày trả phòng / lượt về", width: 23 },
   { key: "guests", header: "Số khách", width: 12 },
   { key: "unit_price", header: "Giá tham khảo (VNĐ)", width: 23 },
   { key: "confirmed_total", header: "Tổng xác nhận (VNĐ)", width: 24 },
   { key: "status", header: "Trạng thái", width: 19 },
   { key: "internal_notes", header: "Ghi chú nội bộ", width: 48 },
+  { key: "departure_time", header: "Giờ đón", width: 12 },
+  { key: "return_time", header: "Giờ đón lượt về", width: 17 },
+  { key: "return_unit_price", header: "Giá lượt về (VNĐ)", width: 21 },
+  { key: "flight_number", header: "Chuyến bay", width: 17 },
 ] as const;
 
 export async function exportBookings(
@@ -140,7 +144,7 @@ export async function exportBookings(
 ) {
   const { selection, params } = bookingSelection(filters);
   const { rows } = await db.query(
-    `SELECT b.id,b.customer_name,b.phone,p.title,b.departure_date::text,b.return_date::text,b.guests,b.unit_price,b.confirmed_total,b.status,b.internal_notes
+    `SELECT b.id,b.customer_name,b.phone,p.title,b.departure_date::text,b.return_date::text,b.departure_time::text,b.return_time::text,b.return_unit_price,b.flight_number,b.guests,b.unit_price,b.confirmed_total,b.status,b.internal_notes
        ${selection} ORDER BY b.created_at DESC,b.id DESC LIMIT 10001`,
     params,
   );

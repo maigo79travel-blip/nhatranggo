@@ -6,6 +6,7 @@ import { CustomSelect } from "@/components/ui/custom-select";
 import { api, inputClass, type Row } from "./api";
 import { ImageField } from "./primitives/admin-image";
 import { Icon } from "./primitives/admin-icon";
+import type { ProductSection } from "../routes";
 export function Field({
   label,
   ...props
@@ -30,10 +31,12 @@ export function Save({ busy }: { busy: boolean }) {
 }
 export function ProductEditor({
   product,
+  fixedType,
   busy,
   onSave,
 }: {
   product: Product;
+  fixedType?: ProductSection;
   busy: boolean;
   onSave: (p: unknown) => Promise<void>;
 }) {
@@ -87,7 +90,7 @@ export function ProductEditor({
           void onSave({
             ...product,
             title: f.get("title"),
-            type: f.get("type"),
+            type: fixedType ?? f.get("type"),
             price: Number(f.get("price")),
             original_price: f.get("original_price")
               ? Number(f.get("original_price"))
@@ -138,20 +141,22 @@ export function ProductEditor({
           required
         />
         <div className="grid sm:grid-cols-2 gap-3">
-          <div className="block text-body-sm">
-            <span className="mb-1 block">Loại</span>
-            <CustomSelect
-              name="type"
-              ariaLabel="Loại"
-              defaultValue={product.type}
-              buttonClassName={`${inputClass} cursor-pointer`}
-              options={[
-                { value: "hotel", label: "Khách sạn" },
-                { value: "tour", label: "Tour" },
-                { value: "combo", label: "Combo" },
-              ]}
-            />
-          </div>
+          {!fixedType && (
+            <div className="block text-body-sm">
+              <span className="mb-1 block">Loại</span>
+              <CustomSelect
+                name="type"
+                ariaLabel="Loại"
+                defaultValue={product.type}
+                buttonClassName={`${inputClass} cursor-pointer`}
+                options={[
+                  { value: "hotel", label: "Khách sạn" },
+                  { value: "tour", label: "Tour" },
+                  { value: "combo", label: "Combo" },
+                ]}
+              />
+            </div>
+          )}
           <Field
             label="Thứ tự"
             name="position"
@@ -401,6 +406,16 @@ export function ContentEditor({
   const [rawMode, setRawMode] = useState(
     !isNavigation && !flat && row.kind !== "text",
   );
+  function setAttribute(key: string, text: string) {
+    setValue((previous: unknown) => {
+      const attributes = { ...(previous as Record<string, string>) };
+      if (key === "backgroundImage" && !text) delete attributes[key];
+      else
+        attributes[key] =
+          key === "backgroundImage" ? `url(${JSON.stringify(text)})` : text;
+      return attributes;
+    });
+  }
   const labels: Record<string, string> = {
     href: "Liên kết",
     src: "Đường dẫn ảnh",
@@ -415,6 +430,10 @@ export function ContentEditor({
     zalo: "Liên kết Zalo",
     whatsapp: "Liên kết WhatsApp",
     telegram: "Liên kết Telegram",
+    facebook: "Liên kết Facebook / Messenger",
+    kakao: "ID KakaoTalk",
+    international: "Số quốc tế hiển thị",
+    website: "Đường dẫn website",
     description: "Mô tả",
     "aria-label": "Nhãn hỗ trợ truy cập",
     "data-alt": "Mô tả hình ảnh",
@@ -427,10 +446,8 @@ export function ContentEditor({
       onSubmit={(e) => {
         e.preventDefault();
         try {
-          const f = new FormData(e.currentTarget);
           void onSave({
             ...row,
-            label: String(f.get("label")),
             value: rawMode ? JSON.parse(raw) : value,
           });
           setError("");
@@ -439,15 +456,9 @@ export function ContentEditor({
         }
       }}
     >
-      <p className="text-body-sm text-on-surface-variant break-all">
-        {String(row.scope)} · {String(row.key)}
-      </p>
-      <Field
-        label="Nhãn quản lý"
-        name="label"
-        defaultValue={String(row.label)}
-        required
-      />
+      <h3 className="text-title-md font-bold break-words">
+        {String(row.display_label ?? row.label).trim()}
+      </h3>
       {isNavigation ? (
         <NavigationFields
           items={Array.isArray(value) ? value : []}
@@ -507,17 +518,16 @@ export function ContentEditor({
             <div className="ad-product-basic">
               {Object.entries(value as Record<string, string>).map(
                 ([key, text]) =>
-                  key === "src" ? (
+                  key === "src" || key === "backgroundImage" ? (
                     <ImageField
                       key={key}
                       label={labels[key]}
-                      initialValue={text}
-                      onChange={(url) =>
-                        setValue((previous: unknown) => ({
-                          ...(previous as object),
-                          [key]: url,
-                        }))
+                      initialValue={
+                        key === "src"
+                          ? text
+                          : text.replace(/^url\(["']?(.*?)["']?\)$/, "$1")
                       }
+                      onChange={(url) => setAttribute(key, url)}
                     />
                   ) : (
                     <Field
@@ -553,6 +563,10 @@ export function ContentEditor({
           {error}
         </p>
       )}
+      <details className="ad-field-key">
+        <summary>Mã trường nội dung</summary>
+        <code>{String(row.key)}</code>
+      </details>
       <Save busy={busy} />
     </form>
   );
@@ -560,7 +574,7 @@ export function ContentEditor({
 export function AccountEditor({
   onMessage,
 }: {
-  onMessage: (m: string) => void;
+  onMessage: (message: string, error?: boolean) => void;
 }) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
@@ -576,13 +590,12 @@ export function AccountEditor({
           onMessage("Đã đổi mật khẩu. Vui lòng đăng nhập lại.");
           router.refresh();
         } catch (error) {
-          onMessage((error as Error).message);
+          onMessage((error as Error).message, true);
         } finally {
           setBusy(false);
         }
       }}
     >
-      <h2 className="text-headline-sm">Đổi mật khẩu quản trị</h2>
       <Field
         label="Mật khẩu hiện tại"
         name="currentPassword"

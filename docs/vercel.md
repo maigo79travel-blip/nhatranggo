@@ -31,7 +31,7 @@ node --env-file=.env.supabase scripts/database.mjs seed
 node --env-file=.env.supabase scripts/setup-admin.mjs
 ```
 
-Nếu đã có dữ liệu, chỉ chạy migration, không khởi tạo lại dữ liệu để thay thế database vận hành. Chạy migration trước khi deploy phiên bản dùng các cột mới. Các migration 013–014 bổ sung nhóm tuyến, trạng thái mức giá và chỉ mục đọc danh mục. Migration 009 bật RLS và thu hồi quyền trực tiếp của `anon`/`authenticated` trên các bảng ứng dụng. Website dùng kết nối server với tài khoản sở hữu bảng; không dùng Supabase Data API hay Supabase Auth.
+Nếu đã có dữ liệu, chỉ chạy migration, không khởi tạo lại dữ liệu để thay thế database vận hành. Chạy migration trước khi deploy phiên bản dùng các cột mới. Các migration 013–014 bổ sung nhóm tuyến, trạng thái mức giá và chỉ mục đọc danh mục. Bản hiện tại cần chạy qua migration 020 để tra cứu sức chứa và lưu thông tin chuyến xe khứ hồi. API sức khỏe kiểm tra mốc schema này trước khi báo sẵn sàng. Migration 009 bật RLS và thu hồi quyền trực tiếp của `anon`/`authenticated` trên các bảng ứng dụng. Website dùng kết nối server với tài khoản sở hữu bảng; không dùng Supabase Data API hay Supabase Auth.
 
 ## Vercel
 

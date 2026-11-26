@@ -34,7 +34,10 @@ export function BookingDialogContent({
   onError: (msg: string) => void;
   submitBooking?: SubmitBooking;
 }) {
+  const roundTrip =
+    product.type === "transfer" && initialValues.returnPrice != null;
   const [date, setDate] = useState(initialValues.date || "");
+  const [roomId, setRoomId] = useState("");
   const [busy, setBusy] = useState(false);
   const [success, setSuccess] = useState("");
   const [details, setDetails] = useState<{
@@ -47,30 +50,41 @@ export function BookingDialogContent({
       image: string;
     }[];
     departures: { date: string; notes: string }[];
+    maxGuests?: number;
   }>({ rooms: [], departures: [] });
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(initialValues.maxGuests == null);
+  const [detailError, setDetailError] = useState("");
+  const room = details.rooms.find((item) => item.id === roomId);
+  const maxGuests =
+    initialValues.maxGuests ?? details.maxGuests ?? room?.capacity;
+  const referencePrice =
+    (room?.price ?? product.price) + (initialValues.returnPrice ?? 0);
   useEffect(() => {
-    let live = true;
+    if (initialValues.maxGuests != null) return;
+    const controller = new AbortController();
+    setDetailError("");
     setLoading(true);
-    void fetch("/api/products/" + encodeURIComponent(product.id))
+    void fetch("/api/products/" + encodeURIComponent(product.id), {
+      signal: controller.signal,
+    })
       .then(async (result) => {
         const body = await result.json();
         if (!result.ok) throw Error(body.error);
-        if (live) setDetails(body);
+        if (!controller.signal.aborted) setDetails(body);
       })
       .catch((error) => {
-        if (live) onError(error.message);
+        if (controller.signal.aborted) return;
+        setDetailError(error.message);
       })
       .finally(() => {
-        if (live) setLoading(false);
+        if (!controller.signal.aborted) setLoading(false);
       });
-    return () => {
-      live = false;
-    };
-  }, [product.id, onError]);
+    return () => controller.abort();
+  }, [product.id, initialValues.maxGuests]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (busy || loading || detailError) return;
     setBusy(true);
     try {
       const values = Object.fromEntries(
@@ -93,14 +107,21 @@ export function BookingDialogContent({
     <>
       <h3 className="text-title-md mb-2">{product.title}</h3>
       <p className="text-primary font-bold mb-3">
-        Giá tham khảo: {money(product.price)} /{" "}
-        {product.type === "hotel"
-          ? "phòng/đêm"
-          : product.type === "transfer"
-            ? "chuyến"
-            : "người"}
+        Giá tham khảo: {money(referencePrice)} /{" "}
+        {roundTrip
+          ? "khứ hồi"
+          : product.type === "hotel"
+            ? "phòng/đêm"
+            : product.type === "transfer"
+              ? "chuyến"
+              : "người"}
       </p>
 
+      {detailError && (
+        <p role="alert" className="text-error">
+          {detailError}. Hãy đóng và mở lại yêu cầu.
+        </p>
+      )}
       {success ? (
         <div
           role="status"
@@ -134,7 +155,8 @@ export function BookingDialogContent({
                 required
                 searchable={details.rooms.length > 5}
                 searchPlaceholder="Tìm loại phòng…"
-                defaultValue=""
+                value={roomId}
+                onChange={setRoomId}
                 placeholder="Chọn loại phòng"
                 buttonClassName="w-full rounded-lg border border-border-default bg-white p-2 text-sm text-on-surface"
                 options={[
@@ -193,10 +215,38 @@ export function BookingDialogContent({
                 defaultValue={initialValues.guests ?? 2}
                 required
                 min="1"
-                max="100"
+                max={maxGuests ?? 100}
               />
             </div>
           </div>
+          {roundTrip && (
+            <div className="grid grid-cols-2 gap-3">
+              <DialogField
+                label="Ngày đón lượt về"
+                type="date"
+                name="returnDate"
+                min={date}
+                defaultValue={initialValues.returnDate}
+                required
+              />
+              <DialogField
+                label="Giờ đón lượt về"
+                type="time"
+                name="returnTime"
+                defaultValue={initialValues.returnTime}
+                required
+              />
+            </div>
+          )}
+          {product.type === "transfer" && (
+            <DialogField
+              label="Số hiệu chuyến bay"
+              name="flightNumber"
+              maxLength={30}
+              pattern="[A-Za-z0-9 \-]*"
+              defaultValue={initialValues.flightNumber}
+            />
+          )}
           <label className="block text-body-sm">
             Ghi chú (số phòng, điểm đón, giờ đón)
             <textarea
@@ -213,7 +263,7 @@ export function BookingDialogContent({
               : "Đơn mới sẽ ở trạng thái chờ xác nhận."}
           </p>
           <button
-            disabled={busy || loading}
+            disabled={busy || loading || Boolean(detailError)}
             className="w-full py-3 rounded-xl bg-primary text-white font-bold disabled:opacity-50"
           >
             {busy

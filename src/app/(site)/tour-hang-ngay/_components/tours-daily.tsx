@@ -71,7 +71,7 @@ export function ToursDaily() {
                     >
                       {"star"}
                     </span>
-                    <ContentText contentKey="field-006" />
+                    <ProductField id="tours-4" field="rating" tag="span" />
                   </div>
                 </div>
                 <ProductField
@@ -95,13 +95,9 @@ export function ToursDaily() {
                       className="font-headline-sm text-headline-sm text-primary font-bold"
                     ></ProductField>
                   </div>
-                  <ContentElement
-                    contentKey="field-002"
-                    tag="a"
+                  <button
+                    type="button"
                     className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-label-md text-label-md shadow-sm transition-colors flex items-center gap-1 action-link"
-
-                    rel="noopener"
-                    target="_blank"
                   >
                     <span>
                       <ContentText contentKey="field-008" />
@@ -109,7 +105,7 @@ export function ToursDaily() {
                     <span className="material-symbols-outlined text-[16px]">
                       {"arrow_forward"}
                     </span>
-                  </ContentElement>
+                  </button>
                 </div>
               </div>
             </CatalogCard>
@@ -154,7 +150,7 @@ export function ToursDaily() {
                     >
                       {"star"}
                     </span>
-                    <ContentText contentKey="field-006" />
+                    <ProductField id="tours-5" field="rating" tag="span" />
                   </div>
                 </div>
                 <ProductField
@@ -178,13 +174,9 @@ export function ToursDaily() {
                       className="font-headline-sm text-headline-sm text-sale-price font-bold"
                     ></ProductField>
                   </div>
-                  <ContentElement
-                    contentKey="field-002"
-                    tag="a"
+                  <button
+                    type="button"
                     className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-label-md text-label-md shadow-sm transition-colors flex items-center gap-1 action-link"
-
-                    rel="noopener"
-                    target="_blank"
                   >
                     <span>
                       <ContentText contentKey="field-008" />
@@ -192,7 +184,7 @@ export function ToursDaily() {
                     <span className="material-symbols-outlined text-[16px]">
                       {"arrow_forward"}
                     </span>
-                  </ContentElement>
+                  </button>
                 </div>
               </div>
             </CatalogCard>
@@ -237,7 +229,7 @@ export function ToursDaily() {
                     >
                       {"star"}
                     </span>
-                    <ContentText contentKey="field-006" />
+                    <ProductField id="tours-6" field="rating" tag="span" />
                   </div>
                 </div>
                 <ProductField
@@ -261,13 +253,9 @@ export function ToursDaily() {
                       className="font-headline-sm text-headline-sm text-primary font-bold"
                     ></ProductField>
                   </div>
-                  <ContentElement
-                    contentKey="field-002"
-                    tag="a"
+                  <button
+                    type="button"
                     className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-label-md text-label-md shadow-sm transition-colors flex items-center gap-1 action-link"
-
-                    rel="noopener"
-                    target="_blank"
                   >
                     <span>
                       <ContentText contentKey="field-008" />
@@ -275,7 +263,7 @@ export function ToursDaily() {
                     <span className="material-symbols-outlined text-[16px]">
                       {"arrow_forward"}
                     </span>
-                  </ContentElement>
+                  </button>
                 </div>
               </div>
             </CatalogCard>
@@ -314,7 +302,7 @@ export function ToursDaily() {
                     >
                       {"star"}
                     </span>
-                    <ContentText contentKey="field-005" />
+                    <ProductField id="tours-7" field="rating" tag="span" />
                   </div>
                 </div>
                 <ProductField
@@ -338,13 +326,9 @@ export function ToursDaily() {
                       className="font-headline-sm text-headline-sm text-primary font-bold"
                     ></ProductField>
                   </div>
-                  <ContentElement
-                    contentKey="field-002"
-                    tag="a"
+                  <button
+                    type="button"
                     className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-label-md text-label-md shadow-sm transition-colors flex items-center gap-1 action-link"
-
-                    rel="noopener"
-                    target="_blank"
                   >
                     <span>
                       <ContentText contentKey="field-007" />
@@ -352,7 +336,7 @@ export function ToursDaily() {
                     <span className="material-symbols-outlined text-[16px]">
                       {"arrow_forward"}
                     </span>
-                  </ContentElement>
+                  </button>
                 </div>
               </div>
             </CatalogCard>
@@ -391,7 +375,7 @@ export function ToursDaily() {
                     >
                       {"star"}
                     </span>
-                    <ContentText contentKey="field-005" />
+                    <ProductField id="tours-8" field="rating" tag="span" />
                   </div>
                 </div>
                 <ProductField
@@ -415,13 +399,9 @@ export function ToursDaily() {
                       className="font-headline-sm text-headline-sm text-primary font-bold"
                     ></ProductField>
                   </div>
-                  <ContentElement
-                    contentKey="field-002"
-                    tag="a"
+                  <button
+                    type="button"
                     className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-label-md text-label-md shadow-sm transition-colors flex items-center gap-1 action-link"
-
-                    rel="noopener"
-                    target="_blank"
                   >
                     <span>
                       <ContentText contentKey="field-007" />
@@ -429,7 +409,7 @@ export function ToursDaily() {
                     <span className="material-symbols-outlined text-[16px]">
                       {"arrow_forward"}
                     </span>
-                  </ContentElement>
+                  </button>
                 </div>
               </div>
             </CatalogCard>
@@ -468,7 +448,7 @@ export function ToursDaily() {
                     >
                       {"star"}
                     </span>
-                    <ContentText contentKey="field-005" />
+                    <ProductField id="tours-9" field="rating" tag="span" />
                   </div>
                 </div>
                 <ProductField
@@ -492,13 +472,9 @@ export function ToursDaily() {
                       className="font-headline-sm text-headline-sm text-sale-price font-bold"
                     ></ProductField>
                   </div>
-                  <ContentElement
-                    contentKey="field-002"
-                    tag="a"
+                  <button
+                    type="button"
                     className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-label-md text-label-md shadow-sm transition-colors flex items-center gap-1 action-link"
-
-                    rel="noopener"
-                    target="_blank"
                   >
                     <span>
                       <ContentText contentKey="field-007" />
@@ -506,7 +482,7 @@ export function ToursDaily() {
                     <span className="material-symbols-outlined text-[16px]">
                       {"arrow_forward"}
                     </span>
-                  </ContentElement>
+                  </button>
                 </div>
               </div>
             </CatalogCard>

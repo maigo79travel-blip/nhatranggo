@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { normalizeSearch } from "@/modules/travel/search";
 import { resources } from "../resources";
 import { api, dateLabel, type Row } from "./api";
 import { EditorDrawer } from "./primitives/editor-drawer";
@@ -11,6 +11,8 @@ import { ImageField } from "./primitives/admin-image";
 import { MarkdownEditor } from "@/modules/blog/markdown-editor";
 import { CustomSelect } from "@/components/ui/custom-select";
 import type { FieldDefinition } from "../types";
+import type { RequestSection } from "../routes";
+import { TranslationFields } from "./panels/translation-fields";
 function inputValue(field: FieldDefinition, value: unknown) {
   if (field.type === "json") return JSON.stringify(value ?? {}, null, 2);
   if (field.type === "datetime-local" && value)
@@ -21,9 +23,26 @@ function inputValue(field: FieldDefinition, value: unknown) {
   if (field.type === "date" && value) return String(value).slice(0, 10);
   return String(value ?? "");
 }
-export function ModulePanel({ resource }: { resource: string }) {
+export function ModulePanel({
+  resource,
+  request,
+}: {
+  resource: string;
+  request?: RequestSection;
+}) {
   const definition = resources[resource];
-  const router = useRouter();
+  const fields = definition.fields.filter(
+    (field) => !request || field.name !== "kind",
+  );
+  const columns = definition.columns.filter(
+    (column) => !request || column !== "kind",
+  );
+  const moduleLabel =
+    request === "evisa"
+      ? "yêu cầu E-Visa"
+      : request === "fast-track"
+        ? "yêu cầu Fast-track"
+        : definition.label;
   const [rows, setRows] = useState<Row[]>([]);
   const [selected, setSelected] = useState<Row | null>(null);
   const [options, setOptions] = useState<Record<string, Row[]>>({});
@@ -34,12 +53,13 @@ export function ModulePanel({ resource }: { resource: string }) {
   const [loading, setLoading] = useState(true);
   const [history, setHistory] = useState<Row[] | null>(null);
   const [loadingHistory, setLoadingHistory] = useState(false);
+  const [revision, setRevision] = useState(0);
+  const [failed, setFailed] = useState(false);
   useEffect(() => {
-    let live = true;
+    const controller = new AbortController();
     setLoading(true);
+    setFailed(false);
     setMessage("");
-    setSelected(null);
-    setQuery("");
     void (async () => {
       try {
         const refs = [
@@ -48,24 +68,30 @@ export function ModulePanel({ resource }: { resource: string }) {
           ),
         ];
         const result = await Promise.all([
-          api(resource),
-          ...refs.map((ref) => api(ref)),
+          api(
+            resource + (request ? "?kind=" + request : ""),
+            "GET",
+            undefined,
+            controller.signal,
+          ),
+          ...refs.map((ref) => api(ref, "GET", undefined, controller.signal)),
         ]);
-        if (!live) return;
+        if (controller.signal.aborted) return;
         setRows(result[0].data);
         setOptions(
           Object.fromEntries(refs.map((ref, i) => [ref, result[i + 1].data])),
         );
       } catch (e) {
-        if (live) setMessage((e as Error).message);
+        if (!controller.signal.aborted) {
+          setFailed(true);
+          setMessage((e as Error).message);
+        }
       } finally {
-        if (live) setLoading(false);
+        if (!controller.signal.aborted) setLoading(false);
       }
     })();
-    return () => {
-      live = false;
-    };
-  }, [resource, definition]);
+    return () => controller.abort();
+  }, [resource, definition, request, revision]);
   const displayCell = (column: string, value: unknown) => {
     if (typeof value === "boolean") return value ? "Hiển thị" : "Đã ẩn";
     if (column === "updated_at" || column === "created_at")
@@ -90,14 +116,14 @@ export function ModulePanel({ resource }: { resource: string }) {
           ["false", "Đã ẩn"],
         ]
       : (statusField?.options ?? []).map(({ value, label }) => [value, label]);
-  const search = query.trim().toLowerCase();
+  const search = normalizeSearch(query);
   const filtered = rows.filter(
     (row) =>
       (stateFilter === "all" ||
         String(row[statusField?.name ?? ""]) === stateFilter) &&
       (!search ||
-        definition.columns.some((column) =>
-          displayCell(column, row[column]).toLowerCase().includes(search),
+        [...columns, "id", "phone", "email"].some((column) =>
+          normalizeSearch(displayCell(column, row[column])).includes(search),
         )),
   );
   const [page, setPage] = useState(1);
@@ -131,20 +157,35 @@ export function ModulePanel({ resource }: { resource: string }) {
         )}
         <button
           type="button"
-          className="ad-button ad-button-primary"
-          disabled={busy || loading}
-          onClick={() => {
-            setHistory(null);
-            setSelected({});
-            setMessage("");
-          }}
+          className="ad-icon-button"
+          aria-label="Tải lại dữ liệu"
+          title="Tải lại dữ liệu"
+          disabled={loading || busy}
+          onClick={() => setRevision((value) => value + 1)}
         >
-          <Icon name="add" />
-          {resource === "articles" ? "Viết bài mới" : "Thêm mới"}
+          <Icon name="refresh" />
         </button>
+        {resource !== "contacts" && (
+          <button
+            type="button"
+            className="ad-button ad-button-primary"
+            disabled={busy || loading || failed}
+            onClick={() => {
+              setHistory(null);
+              setSelected({});
+              setMessage("");
+            }}
+          >
+            <Icon name="add" />
+            {resource === "articles" ? "Viết bài mới" : "Thêm mới"}
+          </button>
+        )}
       </div>
-      {message && (
-        <p role="status" className="ad-module-message text-error break-words">
+      {message && !selected && (
+        <p
+          role={failed ? "alert" : "status"}
+          className={`ad-module-message break-words ${failed ? "text-error" : ""}`}
+        >
           {message}
         </p>
       )}
@@ -163,7 +204,7 @@ export function ModulePanel({ resource }: { resource: string }) {
             <table className="ad-table ad-table-module">
               <thead>
                 <tr>
-                  {definition.columns.map((column) => (
+                  {columns.map((column) => (
                     <th scope="col" key={column}>
                       {definition.fields.find((f) => f.name === column)
                         ?.label ||
@@ -184,11 +225,12 @@ export function ModulePanel({ resource }: { resource: string }) {
                   .slice((actualPage - 1) * 15, actualPage * 15)
                   .map((row) => (
                     <tr key={String(row.id)}>
-                      {definition.columns.map((column) => (
+                      {columns.map((column) => (
                         <td key={column}>{displayCell(column, row[column])}</td>
                       ))}
                       <td>
                         <button
+                          type="button"
                           className="ad-text-button"
                           onClick={() => {
                             setSelected(row);
@@ -196,7 +238,7 @@ export function ModulePanel({ resource }: { resource: string }) {
                             setMessage("");
                           }}
                         >
-                          Sửa
+                          {request || resource === "contacts" ? "Xử lý" : "Sửa"}
                         </button>
                       </td>
                     </tr>
@@ -237,13 +279,18 @@ export function ModulePanel({ resource }: { resource: string }) {
       )}
       <EditorDrawer
         open={Boolean(selected)}
-        title={definition.label}
+        title={
+          selected?.id ? `Chỉnh sửa ${moduleLabel}` : `Thêm ${moduleLabel}`
+        }
         onClose={() => setSelected(null)}
+        saveForm="admin-module-form"
+        busy={busy}
       >
         {selected && (
           <form
             key={String(selected.id || "new")}
-            className="space-y-4"
+            id="admin-module-form"
+            className="ad-editor space-y-4"
             onSubmit={async (e) => {
               e.preventDefault();
               setBusy(true);
@@ -252,8 +299,9 @@ export function ModulePanel({ resource }: { resource: string }) {
                 const form = new FormData(e.currentTarget);
                 const value: Row = {
                   ...(selected.id ? { id: selected.id } : {}),
+                  ...(request ? { kind: request } : {}),
                 };
-                for (const f of definition.fields) {
+                for (const f of fields) {
                   const raw = form.get(f.name);
                   if (f.type === "checkbox") value[f.name] = raw === "on";
                   else if (f.type === "json")
@@ -277,7 +325,6 @@ export function ModulePanel({ resource }: { resource: string }) {
                     ? previous.map((row) => (row.id === data.id ? data : row))
                     : [data, ...previous],
                 );
-                router.refresh();
                 setSelected(null);
                 setMessage("Đã lưu thay đổi");
               } catch (err) {
@@ -287,142 +334,168 @@ export function ModulePanel({ resource }: { resource: string }) {
               }
             }}
           >
-            {definition.fields.map((field) =>
-              field.type === "markdown" ? (
-                <MarkdownEditor
-                  key={field.name}
-                  name={field.name}
-                  label={field.label}
-                  initialValue={String(selected[field.name] || "")}
-                />
-              ) : field.type === "image" ? (
-                <ImageField
-                  key={field.name}
-                  name={field.name}
-                  label={field.label}
-                  initialValue={inputValue(field, selected[field.name])}
-                />
-              ) : (
-                <div key={field.name} className="block text-body-md">
-                  <span className="mb-1 block">{field.label}</span>
-                  {field.type === "checkbox" ? (
-                    <input
-                      className="ml-3"
-                      type="checkbox"
-                      name={field.name}
-                      defaultChecked={selected[field.name] !== false}
-                    />
-                  ) : field.type === "select" ? (
-                    <CustomSelect
-                      name={field.name}
-                      ariaLabel={field.label}
-                      searchable={Boolean(field.resource)}
-                      searchPlaceholder={`Tìm ${field.label.toLowerCase()}…`}
-                      required={field.required}
-                      defaultValue={String(
-                        selected[field.name] ?? field.options?.[0]?.value ?? "",
-                      )}
-                      buttonClassName="ad-input cursor-pointer"
-                      options={[
-                        ...(field.resource
-                          ? [{ value: "", label: "Chọn…" }]
-                          : []),
-                        ...(field.options ?? []).map((option) => ({
-                          value: String(option.value),
-                          label: option.label,
-                        })),
-                        ...(options[field.resource || ""] || [])
-                          .filter(
-                            (row) =>
-                              !["rooms", "departures"].includes(resource) ||
-                              field.name !== "product_id" ||
-                              row.type ===
-                                (resource === "rooms" ? "hotel" : "tour"),
-                          )
-                          .map((row) => ({
-                            value: String(row.id),
-                            label: String(row.title || row.name || row.id),
+            {resource === "translations" ? (
+              <TranslationFields row={selected} />
+            ) : (
+              fields.map((field) =>
+                field.type === "markdown" ? (
+                  <MarkdownEditor
+                    key={field.name}
+                    name={field.name}
+                    label={field.label}
+                    initialValue={String(selected[field.name] || "")}
+                  />
+                ) : field.type === "image" ? (
+                  <ImageField
+                    key={field.name}
+                    name={field.name}
+                    label={field.label}
+                    initialValue={inputValue(field, selected[field.name])}
+                  />
+                ) : (
+                  <div key={field.name} className="ad-field">
+                    {field.type === "select" ? (
+                      <span>{field.label}</span>
+                    ) : (
+                      <label htmlFor={`ad-module-${field.name}`}>
+                        {field.label}
+                      </label>
+                    )}
+                    {field.type === "checkbox" ? (
+                      <input
+                        className="ml-3"
+                        id={`ad-module-${field.name}`}
+                        type="checkbox"
+                        name={field.name}
+                        defaultChecked={selected[field.name] !== false}
+                      />
+                    ) : field.type === "select" ? (
+                      <CustomSelect
+                        id={`ad-module-${field.name}`}
+                        name={field.name}
+                        ariaLabel={field.label}
+                        searchable={Boolean(field.resource)}
+                        searchPlaceholder={`Tìm ${field.label.toLowerCase()}…`}
+                        required={field.required}
+                        defaultValue={String(
+                          selected[field.name] ??
+                            field.options?.[0]?.value ??
+                            "",
+                        )}
+                        buttonClassName="ad-input cursor-pointer"
+                        options={[
+                          ...(field.resource
+                            ? [{ value: "", label: "Chọn…" }]
+                            : []),
+                          ...(field.options ?? []).map((option) => ({
+                            value: String(option.value),
+                            label: option.label,
                           })),
-                      ]}
-                    />
-                  ) : ["textarea", "json"].includes(field.type || "") ? (
-                    <textarea
-                      className="ad-input min-h-28"
-                      name={field.name}
-                      required={field.required}
-                      defaultValue={inputValue(field, selected[field.name])}
-                    />
-                  ) : (
-                    <input
-                      className="ad-input"
-                      name={field.name}
-                      type={field.type || "text"}
-                      required={field.required}
-                      min={field.type === "number" ? 0 : undefined}
-                      step={field.step}
-                      defaultValue={inputValue(field, selected[field.name])}
-                    />
-                  )}
-                </div>
-              ),
+                          ...(options[field.resource || ""] || [])
+                            .filter(
+                              (row) =>
+                                !["rooms", "departures"].includes(resource) ||
+                                field.name !== "product_id" ||
+                                row.type ===
+                                  (resource === "rooms" ? "hotel" : "tour"),
+                            )
+                            .map((row) => ({
+                              value: String(row.id),
+                              label: String(row.title || row.name || row.id),
+                            })),
+                        ]}
+                      />
+                    ) : ["textarea", "json"].includes(field.type || "") ? (
+                      <textarea
+                        id={`ad-module-${field.name}`}
+                        className="ad-input min-h-28"
+                        name={field.name}
+                        required={field.required}
+                        readOnly={
+                          resource === "contacts" && field.name === "message"
+                        }
+                        defaultValue={inputValue(field, selected[field.name])}
+                      />
+                    ) : (
+                      <input
+                        id={`ad-module-${field.name}`}
+                        className="ad-input"
+                        name={field.name}
+                        type={field.type || "text"}
+                        required={field.required}
+                        readOnly={
+                          resource === "contacts" && field.name !== "status"
+                        }
+                        min={field.type === "number" ? 0 : undefined}
+                        step={field.step}
+                        defaultValue={inputValue(field, selected[field.name])}
+                      />
+                    )}
+                  </div>
+                ),
+              )
             )}
+            {resource === "contacts" && selected.email ? (
+              <a
+                className="ad-button"
+                href={"mailto:" + encodeURIComponent(String(selected.email))}
+              >
+                <Icon name="mail" /> Soạn email trả lời
+              </a>
+            ) : null}
             {message && (
               <p role="alert" className="text-error">
                 {message}
               </p>
             )}
-            <button
-              disabled={busy}
-              className="ad-button ad-button-primary"
-              type="submit"
-            >
-              {busy ? "Đang lưu…" : "Lưu thay đổi"}
-            </button>
             {Boolean(selected.id) && (
               <>
-                {resource !== "requests" && (
-                  <button
-                    type="button"
-                    className="ad-button"
-                    disabled={busy}
-                    onClick={async () => {
-                      if (
-                        !window.confirm(
-                          definition.archive
-                            ? "Ẩn bản ghi này?"
-                            : "Xóa bản ghi này?",
+                {resource !== "requests" &&
+                  resource !== "contacts" &&
+                  (!definition.archive || selected.active !== false) && (
+                    <button
+                      type="button"
+                      className="ad-button"
+                      disabled={busy}
+                      onClick={async () => {
+                        if (
+                          !window.confirm(
+                            definition.archive
+                              ? "Ẩn bản ghi này?"
+                              : "Xóa bản ghi này?",
+                          )
                         )
-                      )
-                        return;
-                      setBusy(true);
-                      try {
-                        await api(resource, "DELETE", { id: selected.id });
-                        setRows((previous) =>
-                          definition.archive
-                            ? previous.map((row) =>
-                                row.id === selected.id
-                                  ? { ...row, active: false }
-                                  : row,
-                              )
-                            : previous.filter((row) => row.id !== selected.id),
-                        );
-                        router.refresh();
-                        setSelected(null);
-                        setMessage(
-                          definition.archive
-                            ? "Đã ngừng hiển thị bản ghi"
-                            : "Đã xóa bản ghi",
-                        );
-                      } catch (e) {
-                        setMessage((e as Error).message);
-                      } finally {
-                        setBusy(false);
-                      }
-                    }}
-                  >
-                    {definition.archive ? "Ẩn / Ngừng hoạt động" : "Xóa"}
-                  </button>
-                )}
+                          return;
+                        setBusy(true);
+                        try {
+                          await api(resource, "DELETE", { id: selected.id });
+                          setRows((previous) =>
+                            definition.archive
+                              ? previous.map((row) =>
+                                  row.id === selected.id
+                                    ? { ...row, active: false }
+                                    : row,
+                                )
+                              : previous.filter(
+                                  (row) => row.id !== selected.id,
+                                ),
+                          );
+                          setSelected(null);
+                          setMessage(
+                            definition.archive
+                              ? "Đã ngừng hiển thị bản ghi"
+                              : "Đã xóa bản ghi",
+                          );
+                        } catch (e) {
+                          setMessage((e as Error).message);
+                        } finally {
+                          setBusy(false);
+                        }
+                      }}
+                    >
+                      {definition.archive ? "Ẩn / Ngừng hoạt động" : "Xóa"}
+                    </button>
+                  )}
                 {resource === "customers" && (
                   <button
                     type="button"

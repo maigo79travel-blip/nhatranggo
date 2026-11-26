@@ -30,7 +30,7 @@ export function HomeSectionLink({
   href,
   children,
 }: {
-  contentKey: string;
+  contentKey?: string;
   href: string;
   children: ReactNode;
 }) {

@@ -43,6 +43,7 @@ export function ServiceFilters({
             className="catalog-filter-control"
             type="search"
             name="q"
+            maxLength={150}
             defaultValue={params.q}
             placeholder="Bạn muốn đi đâu?"
           />
@@ -107,22 +108,49 @@ export function ServiceFilters({
             />
           </FilterField>
         )}
-        {type === "hotel" && (
-          <FilterField label="Loại hình / Sao" icon="hotel_class">
+        {(type === "tour" || type === "hotel") && (
+          <FilterField label="Loại dịch vụ" icon="filter_list">
             <CustomSelect
               name="category"
-              ariaLabel="Loại hình / Sao"
+              ariaLabel={type === "tour" ? "Loại tour" : "Loại hình / Sao"}
               defaultValue={params.category || ""}
               buttonClassName="catalog-filter-control cursor-pointer"
-              options={[
-                { value: "", label: "Tất cả" },
-                { value: "5 sao", label: "5 sao" },
-                { value: "4 sao", label: "4 sao" },
-                { value: "resort", label: "Resort" },
-              ]}
+              options={
+                type === "tour"
+                  ? [
+                      { value: "", label: "Tất cả tour" },
+                      { value: "dao-nha-trang", label: "Đảo Nha Trang" },
+                      { value: "du-thuyen", label: "Du thuyền" },
+                      { value: "lan-bien", label: "Lặn biển" },
+                      { value: "vinh-hy", label: "Vĩnh Hy" },
+                      { value: "city", label: "City tour" },
+                      { value: "da-lat", label: "Đà Lạt" },
+                    ]
+                  : [
+                      { value: "", label: "Tất cả" },
+                      { value: "3 sao", label: "3 sao" },
+                      { value: "4 sao", label: "4 sao" },
+                      { value: "5 sao", label: "5 sao" },
+                      { value: "resort", label: "Resort" },
+                    ]
+              }
             />
           </FilterField>
         )}
+        <FilterField label="Sắp xếp" icon="sort">
+          <CustomSelect
+            name="sort"
+            ariaLabel="Sắp xếp dịch vụ"
+            defaultValue={params.sort || ""}
+            buttonClassName="catalog-filter-control cursor-pointer"
+            options={[
+              { value: "", label: "Đề xuất" },
+              { value: "price", label: "Giá thấp nhất" },
+              { value: "price-desc", label: "Giá cao nhất" },
+              { value: "rating", label: "Đánh giá cao nhất" },
+            ]}
+          />
+        </FilterField>
         <FilterField
           label="Số khách"
           icon="group"

@@ -22,6 +22,9 @@ const fare = (
     "SELECT * FROM transfer_fares WHERE route='CXR_NT_CENTER' AND vehicle='7cho'",
   )
 ).rows[0];
+const editableTitle = (
+  await db.query("SELECT * FROM site_content WHERE key='evisa.title'")
+).rows[0];
 const archiveKey = { route: "CXR_BAI_DAI", vehicle: "4cho" };
 const archiveId = `transfer-${archiveKey.route}-${archiveKey.vehicle}`;
 const originalArchive = (
@@ -53,15 +56,17 @@ try {
   page.setDefaultTimeout(10000);
   page.on("pageerror", (e) => errors.push(e.message));
   site.on("pageerror", (e) => errors.push(e.message));
-  await page.goto(base + "/admin");
+  await page.goto(base + "/admin/khach-san");
+  assert.equal(new URL(page.url()).pathname, "/admin/dang-nhap");
+  assert.equal(
+    new URL(page.url()).searchParams.get("next"),
+    "/admin/khach-san",
+  );
   await page.getByLabel("Tên đăng nhập").fill(username);
   await page.getByLabel("Mật khẩu", { exact: true }).fill(password);
   await page.getByRole("button", { name: "Đăng nhập", exact: true }).click();
-  await page.getByRole("heading", { name: "Tổng quan", exact: true }).waitFor();
-  await page
-    .getByRole("navigation", { name: "Điều hướng quản trị" })
-    .getByRole("button", { name: "Dịch vụ", exact: true })
-    .click();
+  await page.waitForURL("**/admin/khach-san");
+  await page.getByRole("heading", { name: "Khách sạn", exact: true }).waitFor();
   await page.getByLabel("Tìm dữ liệu").fill("hotels-1");
   await page.locator(".ad-row-title").first().click();
   await page
@@ -86,8 +91,10 @@ try {
     "Admin UI product title, price and original price are reflected on the public page",
   );
   await page
-    .getByRole("button", { name: "Nội dung website", exact: true })
+    .getByRole("link", { name: "Nội dung website", exact: true })
     .click();
+  await page.getByRole("link", { name: "Trang chủ", exact: true }).click();
+  await page.waitForURL("**/admin/noi-dung/trang-chu");
   await page.getByLabel("Tìm dữ liệu").fill(hero.key);
   await page.locator(".ad-row-title").first().click();
   await page
@@ -107,6 +114,33 @@ try {
     .filter({ hasText: "Kỳ nghỉ được quản lý qua PostgreSQL" })
     .waitFor();
   console.log("Admin page content edit is reflected in the hero");
+  const contactSettings = await page.request.get(
+    base + "/api/admin/content?scope=contact",
+  );
+  const contact = (await contactSettings.json()).data.find(
+    (item) => item.key === "site.contact",
+  );
+  assert.ok(contact);
+  const saveContact = await page.request.patch(base + "/api/admin/content", {
+    data: contact,
+  });
+  assert.equal(saveContact.status(), 200);
+  await page.goto(base + "/admin/noi-dung/e-visa");
+  await page
+    .getByRole("button", { name: "Tiêu đề trang", exact: true })
+    .click();
+  await page
+    .getByLabel("Nội dung", { exact: true })
+    .fill("Dịch vụ thị thực điện tử");
+  await page.getByRole("button", { name: "Lưu thay đổi", exact: true }).click();
+  await page.getByRole("dialog").waitFor({ state: "hidden" });
+  await site.goto(base + "/e-visa");
+  await site
+    .getByRole("heading", { level: 1, name: "Dịch vụ thị thực điện tử" })
+    .waitFor();
+  console.log(
+    "Admin updates public E-Visa copy and saves configured contact channels",
+  );
   const updateHotelHeading = await page.request.patch(
     base + "/api/admin/content",
     {
@@ -249,6 +283,12 @@ try {
     "UPDATE products SET title=$2,price=$3,original_price=$4 WHERE id=$1",
     [product.id, product.title, product.price, product.original_price],
   );
+  if (editableTitle) {
+    await db.query("UPDATE site_content SET value=$2 WHERE key=$1", [
+      editableTitle.key,
+      JSON.stringify(editableTitle.value),
+    ]);
+  }
   await db.query("UPDATE site_content SET value=$2 WHERE key=$1", [
     hero.key,
     JSON.stringify(hero.value),

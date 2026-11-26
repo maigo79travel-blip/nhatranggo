@@ -7,6 +7,7 @@ import type { bookingSchema } from "./validation";
 import type { Booking } from "@/lib/types";
 import { AppError } from "@/lib/errors";
 import { publicProductWhere } from "@/modules/travel/product-visibility";
+import { getTransferFareForProduct } from "@/modules/travel/fare-service";
 type CreateBookingInput = z.infer<typeof bookingSchema>;
 export async function createBooking(
   input: CreateBookingInput,
@@ -23,8 +24,49 @@ export async function createBooking(
     ).rows[0];
     if (!product) throw new AppError("Dịch vụ không tồn tại", 404);
     let price = product.price;
-    if (product.type === "hotel" && !input.returnDate)
-      throw new AppError("Vui lòng chọn ngày trả phòng");
+    let returnPrice: number | null = null;
+    if (
+      product.type === "hotel" &&
+      (!input.returnDate || input.returnDate <= input.date)
+    )
+      throw new AppError("Ngày trả phòng phải sau ngày nhận phòng");
+    if (
+      product.type !== "transfer" &&
+      (input.departureTime || input.returnTime || input.flightNumber)
+    )
+      throw new AppError("Thông tin chuyến xe không phù hợp với dịch vụ");
+    if (
+      product.type !== "hotel" &&
+      product.type !== "transfer" &&
+      input.returnDate
+    )
+      throw new AppError("Dịch vụ này không có ngày sử dụng lượt về");
+    if (product.type === "transfer") {
+      if (!input.departureTime) throw new AppError("Vui lòng chọn giờ đón");
+      const roundTrip = Boolean(input.returnDate || input.returnTime);
+      if (
+        roundTrip &&
+        (!input.returnDate ||
+          !input.returnTime ||
+          `${input.returnDate}T${input.returnTime}` <=
+            `${input.date}T${input.departureTime}`)
+      )
+        throw new AppError("Thời điểm lượt về phải sau giờ đón lượt đi");
+      const offer = await getTransferFareForProduct(
+        input.productId,
+        roundTrip,
+        client,
+      );
+      if (!offer) throw new AppError("Tuyến xe không còn nhận yêu cầu", 404);
+      if (input.guests > offer.maxGuests)
+        throw new AppError(`Xe đã chọn chở tối đa ${offer.maxGuests} khách`);
+      if (roundTrip && offer.returnPrice == null)
+        throw new AppError(
+          "Chưa có giá niêm yết cho lượt về. Vui lòng liên hệ.",
+        );
+      price = offer.price;
+      returnPrice = offer.returnPrice;
+    }
     if (input.roomId) {
       if (product.type !== "hotel")
         throw new AppError("Loại phòng không phù hợp với dịch vụ");
@@ -37,6 +79,13 @@ export async function createBooking(
       if (!room || input.guests > room.capacity)
         throw new AppError("Loại phòng không phù hợp số khách");
       price = room.price;
+    }
+    if (product.type === "hotel" && !input.roomId) {
+      const rooms = await client.query(
+        "SELECT 1 FROM rooms WHERE product_id=$1 AND active LIMIT 1",
+        [input.productId],
+      );
+      if (rooms.rowCount) throw new AppError("Vui lòng chọn loại phòng");
     }
     if (product.type === "tour") {
       const {
@@ -51,7 +100,7 @@ export async function createBooking(
     }
     const bookingId = randomUUID();
     await client.query(
-      "INSERT INTO bookings(id,product_id,customer_name,phone,departure_date,guests,unit_price,notes,return_date,departure_time,room_id) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",
+      "INSERT INTO bookings(id,product_id,customer_name,phone,departure_date,guests,unit_price,notes,return_date,departure_time,room_id,return_time,return_unit_price,flight_number) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)",
       [
         bookingId,
         input.productId,
@@ -64,6 +113,9 @@ export async function createBooking(
         input.returnDate ?? null,
         input.departureTime ?? null,
         input.roomId ?? null,
+        input.returnTime ?? null,
+        returnPrice,
+        input.flightNumber || null,
       ],
     );
     await client.query(
@@ -97,7 +149,7 @@ export async function getBookingByIdAndPhone(
   phone: string,
 ): Promise<Booking | null> {
   const { rows } = await db.query(
-    "SELECT b.id,b.status,b.departure_date::text AS departure_date,b.return_date::text AS return_date,b.departure_time,b.guests,b.unit_price,b.notes,p.title FROM bookings b JOIN products p ON p.id=b.product_id WHERE b.id=$1 AND b.phone=$2",
+    "SELECT b.id,b.status,b.departure_date::text AS departure_date,b.return_date::text AS return_date,b.departure_time,b.return_time,b.return_unit_price,b.flight_number,b.guests,b.unit_price,b.notes,p.title FROM bookings b JOIN products p ON p.id=b.product_id WHERE b.id=$1 AND b.phone=$2",
     [id, phone],
   );
   return rows[0] || null;

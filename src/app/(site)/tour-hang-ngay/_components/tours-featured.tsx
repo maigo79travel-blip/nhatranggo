@@ -1,10 +1,9 @@
 import {
   ContentText,
-  ContentElement,
   ProductValue,
   CatalogCollection,
 } from "@/components/content";
-import { PriceStack } from "@/components/price-stack";
+import { PriceStack, ProductDiscount } from "@/components/price-stack";
 import { CatalogCard, ProductField } from "@/components/catalog";
 
 export function ToursFeatured() {
@@ -54,18 +53,10 @@ export function ToursFeatured() {
                   <span className="material-symbols-outlined text-[14px]">
                     {"local_fire_department"}
                   </span>
-                  <span>
-                    <ContentText contentKey="field-004" />
-                  </span>
+                  <span>Nổi bật</span>
                 </div>
 
                 <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-on-primary text-body-sm font-body-sm">
-                  <span className="bg-inverse-surface/80 backdrop-blur-md px-2.5 py-1 rounded-lg flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px]">
-                      {"schedule"}
-                    </span>
-                    <ContentText contentKey="field-005" />
-                  </span>
                   <span className="bg-primary/80 backdrop-blur-md px-2.5 py-1 rounded-lg flex items-center gap-1 font-semibold">
                     <ContentText contentKey="field-006" />
                   </span>
@@ -88,9 +79,6 @@ export function ToursFeatured() {
                     </span>
                     <span>
                       <ProductValue id="tours-1" field="rating" />
-                    </span>
-                    <span className="text-on-surface-variant font-normal">
-                      <ContentText contentKey="field-008" />
                     </span>
                   </div>
                 </div>
@@ -142,9 +130,10 @@ export function ToursFeatured() {
                         </span>
                       </div>
                     </PriceStack>
-                    <span className="px-2 py-0.5 rounded text-sale-price bg-sale-surface font-label-sm text-label-sm">
-                      <ContentText contentKey="field-014" />
-                    </span>
+                    <ProductDiscount
+                      productId="tours-1"
+                      className="rounded bg-sale-surface px-2 py-0.5 text-sm font-semibold text-sale-price"
+                    />
                   </div>
                   <div className="grid grid-cols-2 gap-2 mt-1">
                     <button
@@ -158,13 +147,9 @@ export function ToursFeatured() {
                         <ContentText contentKey="field-015" />
                       </span>
                     </button>
-                    <ContentElement
-                      contentKey="field-003"
-                      tag="a"
+                    <button
+                      type="button"
                       className="w-full py-2.5 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-label-lg text-label-lg shadow-sm hover:shadow transition-all flex items-center justify-center gap-1"
-
-                      rel="noopener"
-                      target="_blank"
                     >
                       <span className="material-symbols-outlined text-[18px]">
                         {"bolt"}
@@ -172,7 +157,7 @@ export function ToursFeatured() {
                       <span>
                         <ContentText contentKey="field-016" />
                       </span>
-                    </ContentElement>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -232,9 +217,6 @@ export function ToursFeatured() {
                     <span>
                       <ProductValue id="tours-2" field="rating" />
                     </span>
-                    <span className="text-on-surface-variant font-normal">
-                      <ContentText contentKey="field-008" />
-                    </span>
                   </div>
                 </div>
                 <ProductField
@@ -285,9 +267,10 @@ export function ToursFeatured() {
                         </span>
                       </div>
                     </PriceStack>
-                    <span className="px-2 py-0.5 rounded text-primary bg-surface-brand font-label-sm text-label-sm font-semibold">
-                      <ContentText contentKey="field-014" />
-                    </span>
+                    <ProductDiscount
+                      productId="tours-2"
+                      className="rounded bg-sale-surface px-2 py-0.5 text-sm font-semibold text-sale-price"
+                    />
                   </div>
                   <div className="grid grid-cols-2 gap-2 mt-1">
                     <button
@@ -301,13 +284,9 @@ export function ToursFeatured() {
                         <ContentText contentKey="field-015" />
                       </span>
                     </button>
-                    <ContentElement
-                      contentKey="field-003"
-                      tag="a"
+                    <button
+                      type="button"
                       className="w-full py-2.5 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-label-lg text-label-lg shadow-sm hover:shadow transition-all flex items-center justify-center gap-1"
-
-                      rel="noopener"
-                      target="_blank"
                     >
                       <span className="material-symbols-outlined text-[18px]">
                         {"bolt"}
@@ -315,7 +294,7 @@ export function ToursFeatured() {
                       <span>
                         <ContentText contentKey="field-016" />
                       </span>
-                    </ContentElement>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -346,12 +325,6 @@ export function ToursFeatured() {
                 </div>
 
                 <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-on-primary text-body-sm font-body-sm">
-                  <span className="bg-inverse-surface/80 backdrop-blur-md px-2.5 py-1 rounded-lg flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px]">
-                      {"schedule"}
-                    </span>
-                    <ContentText contentKey="field-005" />
-                  </span>
                   <span className="bg-secondary/80 backdrop-blur-md px-2.5 py-1 rounded-lg flex items-center gap-1 font-semibold">
                     <ContentText contentKey="field-006" />
                   </span>
@@ -374,9 +347,6 @@ export function ToursFeatured() {
                     </span>
                     <span>
                       <ProductValue id="tours-3" field="rating" />
-                    </span>
-                    <span className="text-on-surface-variant font-normal">
-                      <ContentText contentKey="field-008" />
                     </span>
                   </div>
                 </div>
@@ -428,9 +398,10 @@ export function ToursFeatured() {
                         </span>
                       </div>
                     </PriceStack>
-                    <span className="px-2 py-0.5 rounded text-sale-price bg-sale-surface font-label-sm text-label-sm">
-                      <ContentText contentKey="field-014" />
-                    </span>
+                    <ProductDiscount
+                      productId="tours-3"
+                      className="rounded bg-sale-surface px-2 py-0.5 text-sm font-semibold text-sale-price"
+                    />
                   </div>
                   <div className="grid grid-cols-2 gap-2 mt-1">
                     <button
@@ -444,13 +415,9 @@ export function ToursFeatured() {
                         <ContentText contentKey="field-015" />
                       </span>
                     </button>
-                    <ContentElement
-                      contentKey="field-003"
-                      tag="a"
+                    <button
+                      type="button"
                       className="w-full py-2.5 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-label-lg text-label-lg shadow-sm hover:shadow transition-all flex items-center justify-center gap-1"
-
-                      rel="noopener"
-                      target="_blank"
                     >
                       <span className="material-symbols-outlined text-[18px]">
                         {"bolt"}
@@ -458,7 +425,7 @@ export function ToursFeatured() {
                       <span>
                         <ContentText contentKey="field-016" />
                       </span>
-                    </ContentElement>
+                    </button>
                   </div>
                 </div>
               </div>

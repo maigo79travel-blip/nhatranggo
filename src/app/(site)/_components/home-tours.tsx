@@ -6,9 +6,7 @@ import { CatalogCard, ProductField } from "@/components/catalog";
 import { HomeCardRating } from "./home-card-rating";
 
 export function HomeTours() {
-  const tours = useSiteData()
-    .products.filter((p) => p.type === "tour" && p.active)
-    .slice(0, 3);
+  const tours = useSiteData().products.filter((p) => p.type === "tour");
 
   return (
     <section className="site-container w-full py-10 lg:py-[60px]">
@@ -21,13 +19,9 @@ export function HomeTours() {
         </HomeSectionLink>
       </HomeHeading>
 
+      {!tours.length && <p>Chưa có tour đang nhận yêu cầu.</p>}
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
         {tours.map((tour) => {
-          const bookingsNote =
-            (typeof tour.content?.["field-005"]?.value === "string" &&
-              tour.content["field-005"].value) ||
-            "Khởi hành hàng ngày";
-
           return (
             <CatalogCard
               key={tour.id}
@@ -35,7 +29,7 @@ export function HomeTours() {
               productId={tour.id}
               tag="div"
             >
-              <div className="relative aspect-[2.66] w-full overflow-hidden">
+              <div className="relative aspect-[2.66] w-full overflow-hidden bg-surface-muted">
                 <ProductField
                   id={tour.id}
                   field="image"
@@ -49,10 +43,11 @@ export function HomeTours() {
                 <div>
                   <div className="mb-2 flex flex-wrap items-center gap-x-2.5 gap-y-1">
                     <HomeCardRating rating={tour.rating} variant="tour" />
-                    <span className="text-sm font-semibold leading-snug text-on-surface sm:text-base">
-                      <span aria-hidden="true">• </span>
-                      {bookingsNote}
-                    </span>
+                    {tour.location && (
+                      <span className="text-sm font-semibold leading-snug text-on-surface sm:text-base">
+                        {tour.location}
+                      </span>
+                    )}
                   </div>
                   <ProductField
                     id={tour.id}
@@ -70,13 +65,9 @@ export function HomeTours() {
                       className="text-[clamp(1.125rem,2.25vw,1.625rem)] font-extrabold leading-tight text-sale-price"
                     />
                   </PriceStack>
-                  <a
-                    href="#"
-                    data-action="details"
-                    className="home-booking-button"
-                  >
+                  <button type="button" className="home-booking-button">
                     Đặt tour
-                  </a>
+                  </button>
                 </div>
               </div>
             </CatalogCard>

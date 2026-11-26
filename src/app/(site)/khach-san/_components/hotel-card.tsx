@@ -3,7 +3,7 @@
 import type { Product } from "@/lib/types";
 import { ProductField } from "@/components/catalog";
 import { useCatalog } from "@/components/catalog/catalog-context";
-import { PriceStack } from "@/components/price-stack";
+import { PriceStack, ProductDiscount } from "@/components/price-stack";
 import { bookingDraft } from "@/modules/travel/search";
 import type { HotelSearchState } from "./hotels-hero";
 
@@ -26,12 +26,9 @@ export function HotelCard({
   const shift = secondBadge ? 1 : 0;
   const tags = (homeCard ? [3, 4] : secondBadge ? [4, 5] : [4])
     .map(contentValue)
-    .filter(Boolean);
-  const photoCount = homeCard ? "" : contentValue(5 + shift);
+    .filter((tag) => tag && !tag.includes("%"));
   const starLabel = homeCard ? "" : contentValue(6 + shift);
   const stars = Number(starLabel.match(/^([1-5])\b/)?.[1]);
-  const ratingDesc = homeCard ? "" : contentValue(7 + shift);
-  const reviewCount = homeCard ? "" : contentValue(8 + shift);
   const amenities = (homeCard ? [5, 6, 7] : [9 + shift, 10 + shift, 11 + shift])
     .map(contentValue)
     .filter(Boolean);
@@ -54,8 +51,12 @@ export function HotelCard({
           loading="lazy"
           className="absolute inset-0 h-full w-full object-cover"
         />
-        {tags.length > 0 && (
+        {(tags.length > 0 || sale) && (
           <div className="absolute inset-x-4 top-4 flex flex-wrap gap-1.5">
+            <ProductDiscount
+              productId={product.id}
+              className="hotel-photo-tag bg-promo-highlight text-on-surface"
+            />
             {tags.map((tag, index) => (
               <span
                 key={tag}
@@ -65,17 +66,6 @@ export function HotelCard({
               </span>
             ))}
           </div>
-        )}
-        {photoCount && (
-          <span className="hotel-photo-tag absolute bottom-4 left-4 inline-flex items-center gap-1.5 bg-inverse-surface text-on-primary">
-            <span
-              aria-hidden="true"
-              className="material-symbols-outlined text-[16px]"
-            >
-              photo_camera
-            </span>
-            {photoCount}
-          </span>
         )}
       </div>
 
@@ -92,12 +82,6 @@ export function HotelCard({
             </div>
           )}
           <div className="ml-auto flex items-center gap-2 text-right">
-            <div className="text-xs text-on-surface-variant">
-              {ratingDesc && (
-                <p className="font-bold text-primary">{ratingDesc}</p>
-              )}
-              {reviewCount && <p>{reviewCount}</p>}
-            </div>
             <span
               className="grid min-h-10 min-w-10 place-items-center rounded-xl bg-primary px-1.5 text-base font-extrabold text-on-primary"
               aria-label={`Điểm đánh giá ${product.rating.toFixed(1)} trên 5`}
@@ -139,11 +123,11 @@ export function HotelCard({
               </li>
             ))}
           </ul>
-        ) : (
+        ) : product.description ? (
           <p className="line-clamp-2 text-sm text-on-surface-variant">
             {product.description}
           </p>
-        )}
+        ) : null}
         {policy && <p className="text-sm text-on-surface-variant">{policy}</p>}
 
         <div className="mt-auto grid justify-items-start gap-1.5 pt-1">
