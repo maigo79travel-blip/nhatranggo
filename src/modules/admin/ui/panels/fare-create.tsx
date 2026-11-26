@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { CustomSelect } from "@/components/ui/custom-select";
 import { api, type Row } from "../api";
 export function FareCreate({ onSaved }: { onSaved: () => void }) {
   const [routes, setRoutes] = useState<Row[]>([]);
@@ -38,27 +39,38 @@ export function FareCreate({ onSaved }: { onSaved: () => void }) {
         }
       }}
     >
-      <label className="block">
-        Tuyến xe
-        <select className="ad-input" name="route" required>
-          <option value="">Chọn tuyến đã tạo</option>
-          {routes.map((r) => (
-            <option value={String(r.code)} key={String(r.id)}>
-              {String(r.title)}
-            </option>
-          ))}
-        </select>
-      </label>
-      <label className="block">
-        Loại xe
-        <select className="ad-input" name="vehicle">
-          {["4cho", "7cho", "16cho", "limo9"].map((v) => (
-            <option value={v} key={v}>
-              {v}
-            </option>
-          ))}
-        </select>
-      </label>
+      <div className="block">
+        <span className="mb-1 block">Tuyến xe</span>
+        <CustomSelect
+          name="route"
+          ariaLabel="Tuyến xe"
+          required
+          searchable
+          searchPlaceholder="Tìm tuyến xe…"
+          defaultValue=""
+          buttonClassName="ad-input cursor-pointer"
+          options={[
+            { value: "", label: "Chọn tuyến đã tạo" },
+            ...routes.map((r) => ({
+              value: String(r.code),
+              label: String(r.title),
+            })),
+          ]}
+        />
+      </div>
+      <div className="block">
+        <span className="mb-1 block">Loại xe</span>
+        <CustomSelect
+          name="vehicle"
+          ariaLabel="Loại xe"
+          defaultValue="4cho"
+          buttonClassName="ad-input cursor-pointer"
+          options={["4cho", "7cho", "16cho"].map((v) => ({
+            value: v,
+            label: `Xe ${v.replace("cho", " chỗ")}`,
+          }))}
+        />
+      </div>
       <label className="block">
         Giá tham khảo / chuyến
         <input

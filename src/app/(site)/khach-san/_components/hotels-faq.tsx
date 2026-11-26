@@ -7,14 +7,12 @@ const commitments = [
   {
     id: "price",
     icon: "sell",
-    title: "Giá Minh Bạch – Không Phí Ẩn",
+    title: "Giá phòng và phụ phí",
     summary:
-      "Mức giá hiển thị là giá thanh toán cuối cùng, đã bao gồm 100% thuế VAT, phí dịch vụ và các khoản phụ thu (nếu có). Cam kết hoàn tiền chênh lệch nếu tìm thấy giá cùng dịch vụ thấp hơn.",
-    detailTitle: "Chính sách Giá Minh Bạch – Không Phí Ẩn",
+      "Giá trên website là giá tham khảo. Nhân viên sẽ xác nhận tổng chi phí theo hạng phòng và ngày lưu trú.",
+    detailTitle: "Chính sách Giá phòng và phụ phí",
     detailPoints: [
-      "Giá công bố đã bao gồm thuế VAT và phí dịch vụ khách sạn.",
-      "Không thu thêm phụ phí đặt phòng ngoài báo giá xác nhận.",
-      "Cam kết đối chiếu hoàn chênh lệch khi có báo giá hợp lệ cùng hạng phòng và ngày lưu trú.",
+      "Kiểm tra các khoản thuế, phí và phụ thu trong báo giá xác nhận.",
     ],
   },
   {
@@ -27,22 +25,15 @@ const commitments = [
   {
     id: "flexible",
     icon: "sync",
-    title: "Đổi Ngày Linh Hoạt & Hoàn Tiền Nhanh",
+    title: "Đổi ngày và hủy phòng",
     summary:
-      "Hỗ trợ đổi ngày lưu trú linh hoạt, đảm bảo quyền lợi tối đa. Nếu cần, chúng tôi sẽ hoàn tiền nhanh theo chính sách trong 2–4 giờ làm việc.",
-    detailTitle: "Chính sách Đổi Ngày Linh Hoạt & Hoàn Tiền Nhanh",
+      "Điều kiện đổi ngày, hủy phòng và hoàn tiền phụ thuộc gói phòng đã chọn.",
+    detailTitle: "Chính sách Đổi ngày và hủy phòng",
     detailPoints: [
-      "Hỗ trợ đổi ngày nhận/trả phòng miễn phí theo điều kiện từng gói phòng.",
-      "Miễn phí hủy phòng trước 48 giờ đối với các hạng phòng áp dụng chính sách linh hoạt.",
-      "Xử lý hoàn tiền nhanh trong 2–4 giờ làm việc qua chuyển khoản.",
+      "Xem điều kiện được xác nhận cho đơn trước khi yêu cầu thay đổi.",
     ],
   },
 ];
-
-const credentials = [
-  ["shield-check", "hotels.text-150"],
-  ["pci-dss", "hotels.text-151"],
-] as const;
 
 export function HotelsFaq() {
   const [activePolicy, setActivePolicy] = useState<
@@ -63,12 +54,10 @@ export function HotelsFaq() {
           id="hotel-commitments-title"
           className="mt-5 text-[clamp(1.65rem,3.4vw,3rem)] font-extrabold leading-tight tracking-tight"
         >
-          Cam Kết Chất Lượng Dịch Vụ Từ {brand.name}
+          Thông tin trước khi đặt phòng
         </h2>
         <p className="mx-auto mt-4 max-w-[78ch] text-sm leading-relaxed sm:text-base">
-          Là đối tác chính thức hợp tác với các tập đoàn và chuỗi khách sạn lớn
-          tại Nha Trang - Cam Ranh, chúng tôi mang lại trải nghiệm du lịch tốt
-          nhất cho quý khách.
+          Xem cách xác nhận giá, tình trạng phòng và điều kiện đổi ngày.
         </p>
 
         <div className="mt-6 grid gap-5 md:grid-cols-3 lg:gap-6">
@@ -117,22 +106,6 @@ export function HotelsFaq() {
       </div>
 
       <div className="hotel-trust">
-        <ul className="flex flex-wrap gap-x-5 gap-y-3">
-          {credentials.map(([icon, key]) => (
-            <li
-              key={key}
-              className="flex items-center gap-2 text-sm font-semibold text-on-surface-variant"
-            >
-              <img
-                src={`/images/figma/icons/${icon}.svg`}
-                width={25}
-                height={25}
-                alt=""
-              />
-              <ContentText contentKey={key} />
-            </li>
-          ))}
-        </ul>
         <div className="flex flex-wrap items-center gap-3 lg:shrink-0">
           <div>
             <p className="text-xs text-on-surface-variant">

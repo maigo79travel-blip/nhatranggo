@@ -8,13 +8,13 @@ import {
   useSiteData,
 } from "@/components/content";
 import { useCatalog } from "@/components/catalog/catalog-context";
+import { CustomSelect } from "@/components/ui/custom-select";
 import { money } from "@/lib/types";
-import { DestinationOptions } from "@/modules/travel/destination-options";
 import { vietnamToday } from "@/modules/travel/search";
 import {
   defaultRoute,
   transferRoutes,
-  transferVehicles,
+  transferVehicleOptions,
 } from "./transfer-options";
 import { TransferIcon } from "./transfers-ui";
 import { useTransferVehicle } from "./transfers-vehicle-selection";
@@ -38,15 +38,13 @@ function QuoteField({
   children: ReactNode;
 }) {
   return (
-    <div className="transfer-field">
+    <label htmlFor={id} className="transfer-field cursor-pointer">
       <TransferIcon className="text-primary">{icon}</TransferIcon>
       <div className="min-w-0 flex-1">
-        <label htmlFor={id} className="block text-xs text-on-surface-variant">
-          {label}
-        </label>
+        <span className="block text-xs text-on-surface-variant">{label}</span>
         {children}
       </div>
-    </div>
+    </label>
   );
 }
 
@@ -57,6 +55,7 @@ export function TransfersHero() {
     products,
     destinations,
     transferRoutes: routes,
+    transferVehicleTypes,
   } = useSiteData();
   const catalog = useCatalog();
   const heroLabel = useContent("transfers.text-027");
@@ -88,6 +87,10 @@ export function TransfersHero() {
   const [trip, setTrip] = useState("one-way");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const destinationOptions = destinations.map((d) => ({
+    value: d.code,
+    label: d.name,
+  }));
   const route = `${pickup}_${dropoff}`;
   const productId = `transfer-${route}-${vehicle}`;
   const product = products.find((item) => item.id === productId);
@@ -96,25 +99,43 @@ export function TransfersHero() {
     fares.find((item) => item.route === route && item.vehicle === vehicle);
   const pickupName = destinations.find((item) => item.code === pickup)?.name;
   const dropoffName = destinations.find((item) => item.code === dropoff)?.name;
-  const selectedVehicle = transferVehicles.find((item) => item.id === vehicle);
+  const vehicles = transferVehicleOptions(transferVehicleTypes);
+  const selectedVehicle = vehicles.find((item) => item.id === vehicle);
+  const roundTrip = trip === "round-trip";
+  const reverseRoute = roundTrip
+    ? routes.find((item) => item.pickup === dropoff && item.dropoff === pickup)
+    : undefined;
+  const returnFare =
+    reverseRoute &&
+    fares.find(
+      (item) => item.route === reverseRoute.code && item.vehicle === vehicle,
+    );
+  const price =
+    fare && (!roundTrip || returnFare)
+      ? fare.price + (returnFare?.price ?? 0)
+      : null;
 
   async function openBooking(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!product || !fare || busy) return;
+    if (!product || price == null || busy) return;
     const values = new FormData(event.currentTarget);
     const date = String(values.get("date") || "");
     const departureTime = String(values.get("departureTime") || "");
-    const flight = String(values.get("flight") || "").trim();
-    const notes = [
-      trip === "round-trip" && "Yêu cầu tư vấn chuyến khứ hồi",
-      flight && `Số hiệu chuyến bay: ${flight}`,
-    ]
-      .filter(Boolean)
-      .join("\n");
+    const flightNumber = String(values.get("flight") || "").trim();
+    const returnDate = roundTrip ? String(values.get("returnDate") || "") : "";
+    const returnTime = roundTrip ? String(values.get("returnTime") || "") : "";
+    if (
+      roundTrip &&
+      `${returnDate}T${returnTime}` <= `${date}T${departureTime}`
+    ) {
+      setError("Thời điểm lượt về phải sau giờ đón lượt đi.");
+      return;
+    }
     setBusy(true);
     setError("");
     try {
       const params = new URLSearchParams({ pickup, dropoff, vehicle });
+      if (roundTrip) params.set("roundTrip", "true");
       const response = await fetch(`/api/fares?${params}`);
       if (!response.ok) {
         const body = await response.json();
@@ -128,7 +149,15 @@ export function TransfersHero() {
           title: `${pickupName} → ${dropoffName} · ${selectedVehicle?.label}`,
           price: quote.price,
         },
-        { date, departureTime, notes },
+        {
+          date,
+          departureTime,
+          flightNumber,
+          returnDate: returnDate || undefined,
+          returnTime: returnTime || undefined,
+          returnPrice: quote.returnPrice ?? undefined,
+          maxGuests: quote.maxGuests,
+        },
       );
     } catch {
       setError("Không thể tải báo giá. Vui lòng thử lại hoặc nhắn Zalo.");
@@ -231,36 +260,46 @@ export function TransfersHero() {
             </div>
 
             <div className="transfer-quote-fields">
-              <QuoteField
-                id="pickup-select"
-                icon="location_on"
-                label="Điểm đón"
-              >
-                <select
-                  id="pickup-select"
-                  className="transfer-control"
-                  value={pickup}
-                  onChange={(event) => setPickup(event.target.value)}
-                  required
-                >
-                  <DestinationOptions />
-                </select>
-              </QuoteField>
-              <QuoteField
-                id="dropoff-select"
-                icon="flag"
-                label="Điểm đến / Khách sạn"
-              >
-                <select
-                  id="dropoff-select"
-                  className="transfer-control"
-                  value={dropoff}
-                  onChange={(event) => setDropoff(event.target.value)}
-                  required
-                >
-                  <DestinationOptions />
-                </select>
-              </QuoteField>
+              <div className="transfer-field">
+                <TransferIcon className="text-primary">
+                  location_on
+                </TransferIcon>
+                <div className="min-w-0 flex-1">
+                  <span className="block text-xs text-on-surface-variant">
+                    Điểm đón
+                  </span>
+                  <CustomSelect
+                    id="pickup-select"
+                    ariaLabel="Điểm đón"
+                    searchable
+                    required
+                    searchPlaceholder="Tìm điểm đón…"
+                    buttonClassName="transfer-control cursor-pointer"
+                    value={pickup}
+                    onChange={setPickup}
+                    options={destinationOptions}
+                  />
+                </div>
+              </div>
+              <div className="transfer-field">
+                <TransferIcon className="text-primary">flag</TransferIcon>
+                <div className="min-w-0 flex-1">
+                  <span className="block text-xs text-on-surface-variant">
+                    Điểm đến / Khách sạn
+                  </span>
+                  <CustomSelect
+                    id="dropoff-select"
+                    ariaLabel="Điểm đến / Khách sạn"
+                    searchable
+                    required
+                    searchPlaceholder="Tìm điểm đến…"
+                    buttonClassName="transfer-control cursor-pointer"
+                    value={dropoff}
+                    onChange={setDropoff}
+                    options={destinationOptions}
+                  />
+                </div>
+              </div>
               <QuoteField
                 id="transfer-date"
                 icon="calendar_today"
@@ -274,39 +313,74 @@ export function TransfersHero() {
                     name="date"
                     type="date"
                     min={vietnamToday()}
+                    required
                   />
                   <input
                     className="transfer-control"
                     aria-label="Giờ đón"
                     name="departureTime"
                     type="time"
+                    required
                   />
                 </div>
               </QuoteField>
               <QuoteField
                 id="transfer-flight"
                 icon="flight_takeoff"
-                label="Số hiệu chuyến bay (tùy chọn)"
+                label="Số hiệu chuyến bay"
               >
                 <input
                   id="transfer-flight"
                   name="flight"
                   className="transfer-control placeholder:text-on-surface-variant"
                   type="text"
-                  placeholder="VD: VN1340, VJ772…"
+                  placeholder="VN1340, VJ772…"
                   maxLength={30}
+                  pattern="[A-Za-z0-9 \-]*"
                 />
               </QuoteField>
               <button
                 className="transfer-button"
                 id="btn-search-fare"
                 type="submit"
-                disabled={!fare}
+                disabled={price == null || busy}
               >
                 <TransferIcon className="text-lg">search</TransferIcon>
                 {busy ? "Đang tra cứu…" : "Tra cứu giá & Đặt xe ngay"}
               </button>
             </div>
+
+            {roundTrip && (
+              <div className="grid grid-cols-2 gap-3">
+                <QuoteField
+                  id="transfer-return-date"
+                  icon="event_available"
+                  label="Ngày đón lượt về"
+                >
+                  <input
+                    id="transfer-return-date"
+                    className="transfer-control"
+                    name="returnDate"
+                    type="date"
+                    min={vietnamToday()}
+                    required
+                  />
+                </QuoteField>
+                <QuoteField
+                  id="transfer-return-time"
+                  icon="schedule"
+                  label="Giờ đón lượt về"
+                >
+                  <input
+                    id="transfer-return-time"
+                    className="transfer-control"
+                    name="returnTime"
+                    type="time"
+                    required
+                  />
+                </QuoteField>
+              </div>
+            )}
 
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
               <span className="text-on-surface-variant">Dòng xe phục vụ</span>
@@ -316,7 +390,7 @@ export function TransfersHero() {
                 role="group"
                 aria-label="Dòng xe"
               >
-                {transferVehicles.map((item) => (
+                {vehicles.map((item) => (
                   <button
                     className="transfer-pill transfer-pill-muted vehicle-chip"
                     key={item.id}
@@ -352,22 +426,24 @@ export function TransfersHero() {
             <div className="flex flex-wrap items-center gap-4">
               <div aria-live="polite">
                 <p className="text-xs font-semibold">
-                  {trip === "round-trip"
-                    ? "Giá một chiều · Lượt về sẽ được tư vấn"
-                    : "Giá trọn gói một chiều"}
+                  {roundTrip
+                    ? "Giá tham khảo khứ hồi"
+                    : "Giá tham khảo một chiều"}
                 </p>
                 <p
                   id="route-price"
                   className={
-                    fare && !error
+                    price != null && !error
                       ? "text-2xl font-bold text-primary sm:text-[28px]"
                       : "text-sm text-on-surface-variant"
                   }
                 >
                   {error ||
-                    (fare
-                      ? money(fare.price)
-                      : "Tuyến này cần liên hệ để báo giá.")}
+                    (price != null
+                      ? money(price)
+                      : roundTrip && fare
+                        ? "Chưa có giá lượt về. Vui lòng liên hệ."
+                        : "Tuyến này cần liên hệ để báo giá.")}
                 </p>
               </div>
               <ContentLink

@@ -5,6 +5,7 @@ export function HomeCardRating({
   rating: number;
   variant: "hotel" | "tour";
 }) {
+  if (rating <= 0) return null;
   const style =
     variant === "hotel"
       ? "home-hotel-rating text-xl font-bold text-promo-highlight"

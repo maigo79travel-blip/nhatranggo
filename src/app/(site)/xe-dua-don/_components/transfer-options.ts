@@ -1,39 +1,39 @@
+import type { TransferVehicleType } from "@/lib/types";
+
 export const transferVehicles = [
   {
     id: "4cho",
-    label: "Xe 4 chỗ",
-    chip: "4 chỗ",
-    detail: "Sedan 3 khách",
     icon: "directions_car",
-    model: "Xe 4 chỗ Sedan (Vios, Accent, City)",
+    model: "Sedan (Vios, Accent, City)",
   },
   {
     id: "7cho",
-    label: "Xe 7 chỗ",
-    chip: "7 chỗ",
-    detail: "SUV 5 khách",
     icon: "directions_car",
-    model: "Xe 7 chỗ (MPV / SUV)",
+    model: "MPV / SUV",
   },
   {
     id: "16cho",
-    label: "Xe 16 chỗ",
-    chip: "16 chỗ",
-    detail: "Transit 12–15 khách",
     icon: "airport_shuttle",
-    model: "Xe 16 chỗ (Solati / Transit)",
-  },
-  {
-    id: "limo9",
-    label: "Limousine 9 chỗ VIP",
-    chip: "Limousine 9 chỗ VIP",
-    detail: "Ghế massage",
-    icon: "workspace_premium",
-    model: "Dcar Limousine 9 chỗ VIP",
+    model: "Solati / Transit",
   },
 ] as const;
 
 export type TransferVehicle = (typeof transferVehicles)[number]["id"];
+
+export function transferVehicleOptions(types: TransferVehicleType[]) {
+  return transferVehicles.flatMap((vehicle) => {
+    const type = types.find((item) => item.code === vehicle.id);
+    if (!type) return [];
+    return [
+      {
+        ...vehicle,
+        label: `Xe ${type.seats} chỗ`,
+        chip: `${type.seats} chỗ`,
+        maxGuests: type.passenger_capacity,
+      },
+    ];
+  });
+}
 
 export const transferRoutes = [
   {

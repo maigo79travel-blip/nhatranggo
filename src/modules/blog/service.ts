@@ -2,12 +2,12 @@ import "server-only";
 import { db } from "@/lib/db";
 import { cookies } from "next/headers";
 import { parseLocale } from "@/lib/locale";
-export async function listArticles(category = "", query = "") {
+export async function listArticles(category = "", query = "", limit = 100) {
   const locale = parseLocale((await cookies()).get("site_locale")?.value);
   return (
     await db.query(
-      "SELECT a.id,a.title,a.slug,a.excerpt,a.image,a.updated_at,c.title AS category FROM articles a LEFT JOIN article_categories c ON c.id=a.category_id WHERE a.status='published' AND a.locale=$1 AND ($2='' OR c.slug=$2) AND ($3='' OR a.title ILIKE '%'||$3||'%' OR a.excerpt ILIKE '%'||$3||'%') ORDER BY a.updated_at DESC LIMIT 100",
-      [locale, category, query],
+      "SELECT a.id,a.title,a.slug,a.excerpt,a.image,a.updated_at,c.title AS category FROM articles a LEFT JOIN article_categories c ON c.id=a.category_id WHERE a.status='published' AND a.locale=$1 AND ($2='' OR c.slug=$2) AND ($3='' OR a.title ILIKE '%'||$3||'%' OR a.excerpt ILIKE '%'||$3||'%') ORDER BY a.updated_at DESC,a.id LIMIT $4",
+      [locale, category, query, limit],
     )
   ).rows;
 }

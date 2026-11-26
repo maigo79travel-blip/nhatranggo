@@ -9,6 +9,8 @@ const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 const tag = "homeqa-" + Date.now(),
   hotelId = tag + "-hotel",
   tourId = tag + "-tour",
+  comboId = tag + "-combo",
+  hiddenComboId = tag + "-hidden-combo",
   articleId = randomUUID(),
   draftId = randomUUID(),
   roomId = randomUUID();
@@ -18,6 +20,10 @@ try {
   await db.query(
     "INSERT INTO products(id,type,title,price,location,active) VALUES($1,'hotel',$2,500000,'Cam Ranh',true),($3,'tour',$4,200000,'Nha Trang',true)",
     [hotelId, tag + " hotel", tourId, tag + " tour"],
+  );
+  await db.query(
+    "INSERT INTO products(id,type,title,price,location,active,featured) VALUES($1,'combo',$1,700000,'Nha Trang',true,true),($2,'combo',$2,500000,'Nha Trang',false,true)",
+    [comboId, hiddenComboId],
   );
   await db.query(
     "INSERT INTO rooms(id,product_id,title,price,capacity) VALUES($1,$2,'Phòng bốn khách',750000,4)",
@@ -128,7 +134,31 @@ try {
     ["special-deal", "hotels-1", null],
     ["all", "hotels-1", null],
   ]) {
-    await hotels.locator(`[data-hotel-filter="${filter}"]`).click();
+    const trigger = hotels.locator(`[data-hotel-filter="${filter}"]`);
+    if (filter !== "all") {
+      const [filtered] = await Promise.all([
+        page.waitForResponse(
+          (response) =>
+            new URL(response.url()).searchParams.get("homeFilter") === filter,
+        ),
+        trigger.click(),
+      ]);
+      assert.equal(filtered.status(), 200);
+      const { data } = await filtered.json();
+      assert.ok(data.length <= 6);
+      assert.ok(
+        data.every((product) => product.type === "hotel" && product.active),
+      );
+      if (filter === "special-deal")
+        assert.ok(
+          data.every((product) => product.original_price > product.price),
+        );
+    } else {
+      await trigger.click();
+    }
+    await expect(
+      hotels.locator(`[data-product-id="${present}"]`),
+    ).toBeVisible();
     await expect(
       hotels.locator(`[data-hotel-filter="${filter}"]`),
     ).toHaveAttribute("aria-pressed", "true");
@@ -151,13 +181,24 @@ try {
       .evaluateAll((cards) => cards.map((card) => card.dataset.productId)),
     originalIds,
   );
+  const combos = page.locator("#combo");
+  await expect(combos.locator(`[data-product-id="${comboId}"]`)).toBeVisible();
+  await expect(
+    combos.locator(`[data-product-id="${hiddenComboId}"]`),
+  ).toHaveCount(0);
+  const wrongFilter = await page.request.get(
+    base + "/api/products?type=tour&homeFilter=family",
+  );
+  assert.equal(wrongFilter.status(), 400);
   // Every service-card action on Home must open its own booking dialog.
   const cardIds = await page
     .locator("main [data-product-id]")
     .evaluateAll((cards) => cards.map((card) => card.dataset.productId));
   for (const id of cardIds) {
     const card = page.locator(`[data-product-id="${id}"]`);
-    const action = card.getByRole("link", { name: /Đặt (phòng|tour|combo)/i });
+    const action = card.getByRole("button", {
+      name: /Đặt (phòng|tour|combo)/i,
+    });
     await expect(action).toHaveCount(1);
     await action.click();
     await expect(
@@ -215,8 +256,9 @@ try {
     has: page.getByRole("heading", { name: "Đà Lạt", exact: true }),
   });
   await cityLink.click();
-  await page.waitForURL("**/khach-san?*");
-  assert.equal(new URL(page.url()).searchParams.get("q"), "Đà Lạt");
+  await page.waitForURL((url) => url.searchParams.get("q") === "Đà Lạt");
+  assert.equal(new URL(page.url()).pathname, "/tour-hang-ngay");
+  await expect(page.locator("[data-service-id]").first()).toBeVisible();
   // Search selections flow into a real booking and the database snapshot.
   await home();
   await search
@@ -245,7 +287,8 @@ try {
     .getByLabel("Họ và tên", { exact: true })
     .fill("Kiểm tra nút Home");
   await dialog.getByLabel("Số điện thoại", { exact: true }).fill(phone);
-  await dialog.getByLabel("Loại phòng").selectOption(roomId);
+  await dialog.getByLabel("Loại phòng").click();
+  await dialog.getByRole("option").nth(1).click();
   await dialog
     .getByRole("button", { name: "Gửi yêu cầu đặt chỗ", exact: true })
     .click();
@@ -379,7 +422,7 @@ try {
   await db.query("DELETE FROM rooms WHERE product_id=$1", [hotelId]);
   await db.query("DELETE FROM departures WHERE product_id=$1", [tourId]);
   await db.query("DELETE FROM products WHERE id=ANY($1::text[])", [
-    [hotelId, tourId],
+    [hotelId, tourId, comboId, hiddenComboId],
   ]);
   await db.query("DELETE FROM customers WHERE phone=$1", [phone]);
   await db.query("DELETE FROM articles WHERE id=ANY($1::uuid[])", [

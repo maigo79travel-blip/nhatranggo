@@ -40,11 +40,18 @@ export type TransferRoute = {
   dropoff: string;
 };
 
+export type TransferVehicleType = {
+  code: string;
+  seats: number;
+  passenger_capacity: number;
+};
+
 export type SiteData = {
   products: Product[];
   content: Record<string, ContentEntry>;
   fares: Fare[];
   transferRoutes: TransferRoute[];
+  transferVehicleTypes: TransferVehicleType[];
   hotelCapacities: Record<string, number>;
   destinations: { id: string; name: string; code: string }[];
   locale: Locale;

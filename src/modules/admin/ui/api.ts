@@ -1,3 +1,5 @@
+import { scopedContent } from "../routes";
+
 export type Row = Record<string, unknown>;
 export const inputClass = "ad-input";
 export async function api(
@@ -30,23 +32,12 @@ export const typeLabels: Record<string, string> = {
   transfer: "Xe đưa đón",
 };
 export const scopeLabels: Record<string, string> = {
-  home: "Trang chủ",
-  hotels: "Khách sạn",
-  tours: "Tour du lịch",
-  transfers: "Xe đưa đón",
+  ...Object.fromEntries(
+    scopedContent.map(([key, scope]) => [key, scope.label]),
+  ),
   header: "Đầu trang",
   footer: "Chân trang",
   site: "Toàn website",
-};
-export const collectionLabel = (value: unknown) => {
-  const key = String(value || "");
-  return key.startsWith("home")
-    ? "Trang chủ"
-    : key.startsWith("hotels")
-      ? "Danh sách khách sạn"
-      : key.startsWith("tours")
-        ? "Danh sách tour"
-        : "—";
 };
 export const dateLabel = (value: unknown) =>
   value
@@ -57,3 +48,9 @@ export const dateLabel = (value: unknown) =>
         timeZone: "Asia/Ho_Chi_Minh",
       }).format(new Date(String(value)))
     : "—";
+
+export const roleLabels = {
+  super_admin: "Quản trị viên",
+  editor: "Biên tập viên",
+  booking: "Nhân viên đặt chỗ",
+};

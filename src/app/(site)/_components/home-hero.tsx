@@ -1,4 +1,5 @@
 import { ContentText } from "@/components/content";
+import type { HomeSuggestion } from "./home-navigation";
 import { HomeSearch } from "./home-search";
 
 const benefits = [
@@ -8,7 +9,13 @@ const benefits = [
   { icon: "verified_user", title: "home.text-070", detail: "home.text-071" },
 ];
 
-export function HomeHero({ image }: { image: string }) {
+export function HomeHero({
+  image,
+  suggestions,
+}: {
+  image: string;
+  suggestions: HomeSuggestion[];
+}) {
   return (
     <section className="relative isolate w-full bg-surface-muted">
       <div
@@ -41,7 +48,7 @@ export function HomeHero({ image }: { image: string }) {
           />
         </div>
 
-        <HomeSearch />
+        <HomeSearch suggestions={suggestions} />
 
         <ul className="grid grid-cols-2 gap-x-4 gap-y-6 py-10 lg:grid-cols-4 lg:gap-x-8 xl:mt-[50px] xl:min-h-[162px] xl:items-center xl:py-6">
           {benefits.map(({ icon, title, detail }) => (

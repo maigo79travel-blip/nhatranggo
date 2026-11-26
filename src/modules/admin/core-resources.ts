@@ -7,6 +7,8 @@ import { isNavigationHref } from "@/lib/navigation";
 import { passwordHash, verifyPassword } from "./auth";
 import type { AdminOverviewData, AdminUser } from "@/lib/types";
 import type { productSchema, contentSchema } from "./content-validation";
+import type { ContentScope, ProductSection } from "./routes";
+import { homeContentFields } from "./home-content-fields";
 
 export async function getAdminOverview(
   includeBookings: boolean,
@@ -63,14 +65,43 @@ const RESOURCE_QUERIES: Record<string, string> = {
   products: "SELECT * FROM products ORDER BY position,id",
   content: "SELECT * FROM site_content ORDER BY scope,key",
   fares:
-    "SELECT route,vehicle,price FROM transfer_fares WHERE active ORDER BY route,vehicle",
+    "SELECT f.route,f.vehicle,f.price,r.title AS route_title FROM transfer_fares f LEFT JOIN transfer_routes r ON r.code=f.route WHERE f.active ORDER BY r.title,f.route,f.vehicle",
   bookings:
     "SELECT b.*,b.departure_date::text AS departure_date,p.title FROM bookings b JOIN products p ON p.id=b.product_id ORDER BY b.created_at DESC LIMIT 500",
 };
 
 export async function getAdminResourceList(
   resource: string,
+  filters: { scope?: ContentScope; type?: ProductSection } = {},
 ): Promise<Record<string, unknown>[] | null> {
+  if (resource === "products" && filters.type)
+    return (
+      await db.query(
+        "SELECT * FROM products WHERE type=$1 ORDER BY position,id",
+        [filters.type],
+      )
+    ).rows;
+  if (resource === "content" && filters.scope) {
+    const scope = filters.scope;
+    const result = await db.query(
+      `SELECT * FROM site_content
+       WHERE ((scope=ANY($1::text[]) AND key<>'site.contact')
+          OR ($2='contact' AND key='site.contact'))
+          AND ($3::text[] IS NULL OR key=ANY($3::text[]))
+       ORDER BY CASE WHEN key LIKE '%.text-%' OR key LIKE '%.attributes-%' THEN 1 ELSE 0 END,scope,key`,
+      [
+        scope === "shared" ? ["site", "header", "footer"] : [scope],
+        scope,
+        scope === "home" ? Object.keys(homeContentFields) : null,
+      ],
+    );
+    return scope === "home"
+      ? result.rows.map((row) => ({
+          ...row,
+          display_label: homeContentFields[row.key],
+        }))
+      : result.rows;
+  }
   if (!Object.hasOwn(RESOURCE_QUERIES, resource)) return null;
   const query = RESOURCE_QUERIES[resource];
   const result = await db.query(query);
@@ -129,24 +160,35 @@ export async function updateAdminContent(
     throw new AppError("Không được đổi loại trường nội dung");
   }
 
+  if (/^(evisa|fast-track|contact|lookup|blog)\.title$/.test(key)) {
+    z.string()
+      .trim()
+      .min(1, "Tiêu đề không được bỏ trống")
+      .max(200)
+      .parse(p.value);
+  }
+  if (/^(evisa|fast-track|contact|lookup|blog)\.intro$/.test(key)) {
+    z.string().max(2000).parse(p.value);
+  }
+
   if (key === "site.contact") {
+    const optionalChannel = z
+      .union([
+        z.url().refine((url) => url.startsWith("https://")),
+        z.literal(""),
+      ])
+      .optional();
     z.object({
       phone: z.string().min(1).max(80),
       telephone: z.string().regex(/^[+0-9]+$/),
-      zalo: z.url().refine((url) => url.startsWith("https://")),
-      email: z.email(),
-      whatsapp: z
-        .union([
-          z.url().refine((url) => url.startsWith("https://")),
-          z.literal(""),
-        ])
-        .optional(),
-      telegram: z
-        .union([
-          z.url().refine((url) => url.startsWith("https://")),
-          z.literal(""),
-        ])
-        .optional(),
+      email: z.union([z.email(), z.literal("")]).optional(),
+      zalo: optionalChannel,
+      whatsapp: optionalChannel,
+      telegram: optionalChannel,
+      facebook: optionalChannel,
+      kakao: z.string().max(80).optional(),
+      international: z.string().max(80).optional(),
+      website: z.string().max(2000).refine(isNavigationHref).optional(),
     }).parse(p.value);
   }
   if (key === "site.mobile-navigation" || key === "site.navigation") {

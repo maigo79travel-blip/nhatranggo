@@ -80,8 +80,20 @@ export function BookingLookup() {
               }[String(data.status)] || String(data.status)}
             </span>
             <p>Ngày sử dụng: {String(data.departure_date)}</p>
+            {!!data.departure_time && (
+              <p>Giờ đón: {String(data.departure_time).slice(0, 5)}</p>
+            )}
             {!!data.return_date && (
-              <p>Ngày trả phòng: {String(data.return_date)}</p>
+              <p>
+                {data.return_time ? "Lượt về" : "Ngày trả phòng"}:{" "}
+                {String(data.return_date)}
+                {data.return_time
+                  ? ` · ${String(data.return_time).slice(0, 5)}`
+                  : ""}
+              </p>
+            )}
+            {!!data.flight_number && (
+              <p>Số hiệu chuyến bay: {String(data.flight_number)}</p>
             )}
             <p>Số khách: {String(data.guests)}</p>
             <Link

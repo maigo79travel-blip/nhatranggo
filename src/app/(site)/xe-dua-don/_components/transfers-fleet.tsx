@@ -1,7 +1,12 @@
 "use client";
 
-import { ContentText, ContentElement, FareValue } from "@/components/content";
-import { defaultRoute, quoteAnchor } from "./transfer-options";
+import { ContentText, ContentElement, useSiteData } from "@/components/content";
+import {
+  defaultRoute,
+  quoteAnchor,
+  transferVehicleOptions,
+} from "./transfer-options";
+import { money } from "@/lib/types";
 import { TransferHeading, TransferIcon } from "./transfers-ui";
 import { useTransferVehicle } from "./transfers-vehicle-selection";
 
@@ -12,12 +17,7 @@ const fleetVehicles = [
     badge: "transfers.text-106",
     title: "transfers.text-107",
     models: "transfers.text-108",
-    specs: [
-      "transfers.text-109",
-      "transfers.text-110",
-      "transfers.text-111",
-      "transfers.text-112",
-    ],
+    specs: ["transfers.text-111", "transfers.text-112"],
   },
   {
     vehicle: "7cho",
@@ -25,25 +25,7 @@ const fleetVehicles = [
     badge: "transfers.text-116",
     title: "transfers.text-117",
     models: "transfers.text-118",
-    specs: [
-      "transfers.text-119",
-      "transfers.text-120",
-      "transfers.text-121",
-      "transfers.text-122",
-    ],
-  },
-  {
-    vehicle: "limo9",
-    imgAttr: "transfers.attributes-019",
-    badge: "transfers.text-126",
-    title: "transfers.text-127",
-    models: "transfers.text-128",
-    specs: [
-      "transfers.text-129",
-      "transfers.text-130",
-      "transfers.text-131",
-      "transfers.text-132",
-    ],
+    specs: ["transfers.text-121", "transfers.text-122"],
   },
   {
     vehicle: "16cho",
@@ -51,17 +33,17 @@ const fleetVehicles = [
     badge: "transfers.text-136",
     title: "transfers.text-137",
     models: "transfers.text-138",
-    specs: [
-      "transfers.text-139",
-      "transfers.text-140",
-      "transfers.text-141",
-      "transfers.text-142",
-    ],
+    specs: ["transfers.text-140", "transfers.text-141", "transfers.text-142"],
   },
 ] as const;
 
 export function TransfersFleet() {
   const { selectVehicle } = useTransferVehicle();
+  const { fares, transferRoutes, transferVehicleTypes } = useSiteData();
+  const vehicles = transferVehicleOptions(transferVehicleTypes);
+  const airportRoute = transferRoutes.find(
+    (route) => route.category === defaultRoute.id,
+  );
   return (
     <section className="transfer-section transfer-fleet">
       <div className="site-container">
@@ -77,13 +59,21 @@ export function TransfersFleet() {
           </p>
         </TransferHeading>
 
-        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-10 lg:grid-cols-4">
+        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-10 lg:grid-cols-3">
           {fleetVehicles.map((item) => {
-            const vip = item.vehicle === "limo9";
+            const vehicle = vehicles.find(
+              (option) => option.id === item.vehicle,
+            );
+            if (!vehicle) return null;
+            const price = fares.find(
+              (fare) =>
+                fare.route === airportRoute?.code &&
+                fare.vehicle === vehicle.id,
+            )?.price;
             return (
               <article
                 key={item.vehicle}
-                className={`flex flex-col overflow-hidden rounded-[20px] border bg-surface ${vip ? "border-promo-highlight" : "border-brand-light"}`}
+                className="flex flex-col overflow-hidden rounded-[20px] border border-brand-light bg-surface"
               >
                 <div className="relative aspect-[1.75] overflow-hidden bg-surface-tinted">
                   <ContentElement
@@ -92,9 +82,7 @@ export function TransfersFleet() {
                     className="h-full w-full object-cover"
                     loading="lazy"
                   />
-                  <span
-                    className={`absolute left-3 top-3 rounded-full px-3 py-1 text-xs font-bold sm:text-sm ${vip ? "bg-promo-highlight text-on-surface" : "bg-surface text-primary"}`}
-                  >
+                  <span className="absolute left-3 top-3 rounded-full bg-surface px-3 py-1 text-xs font-bold text-primary sm:text-sm">
                     <ContentText contentKey={item.badge} />
                   </span>
                 </div>
@@ -107,6 +95,7 @@ export function TransfersFleet() {
                     <ContentText contentKey={item.models} />
                   </p>
                   <ul className="my-4 grid grid-cols-2 gap-2 text-xs">
+                    <li>Tối đa {vehicle.maxGuests} khách</li>
                     {item.specs.map((specKey) => (
                       <li key={specKey} className="flex items-start gap-1">
                         <TransferIcon className="text-sm text-primary">
@@ -118,22 +107,25 @@ export function TransfersFleet() {
                   </ul>
                   <div className="mt-auto flex flex-wrap items-end justify-between gap-2">
                     <div>
-                      <span className="block text-sm text-on-surface-variant">
-                        Giá tuyến sân bay
-                      </span>
-                      <span
-                        className={`text-xl font-bold ${vip ? "text-sale-price" : "text-primary"}`}
-                      >
-                        <FareValue
-                          route={`${defaultRoute.pickup}_${defaultRoute.dropoff}`}
-                          vehicle={item.vehicle}
-                        />
-                      </span>
+                      {price != null ? (
+                        <>
+                          <span className="block text-sm text-on-surface-variant">
+                            {airportRoute?.title}
+                          </span>
+                          <span className="text-xl font-bold text-primary">
+                            {money(price)}
+                          </span>
+                        </>
+                      ) : (
+                        <span className="text-sm text-on-surface-variant">
+                          Liên hệ để báo giá
+                        </span>
+                      )}
                     </div>
                     <a
                       href={quoteAnchor}
                       onClick={() => selectVehicle(item.vehicle)}
-                      className={`transfer-pill px-3 ${vip ? "transfer-pill-amber" : "transfer-pill-muted"}`}
+                      className="transfer-pill transfer-pill-muted px-3"
                     >
                       Chọn xe này
                       <span className="sr-only">

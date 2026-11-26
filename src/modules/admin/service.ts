@@ -6,14 +6,23 @@ import { passwordHash } from "./auth";
 import type { AdminUser } from "@/lib/types";
 import { resources } from "./resources";
 import { AppError } from "@/lib/errors";
-export async function listRecords(resource: string) {
+import type { RequestSection } from "./routes";
+export async function listRecords(resource: string, kind?: RequestSection) {
   const definition = resources[resource];
   if (!definition) throw new AppError("Không tìm thấy module", 404);
   const columns =
     resource === "users" ? "id,username,role,active,created_at" : "*";
+  const scoped = resource === "requests" && kind !== undefined;
+  const order =
+    resource === "articles"
+      ? "updated_at DESC,id"
+      : resource === "requests" || resource === "contacts"
+        ? "created_at DESC,id"
+        : "id";
   return (
     await db.query(
-      `SELECT ${columns} FROM ${definition.table} ORDER BY ${resource === "articles" ? "updated_at DESC" : "id"} LIMIT 2000`,
+      `SELECT ${columns} FROM ${definition.table}${scoped ? " WHERE kind=$1" : ""} ORDER BY ${order} LIMIT 2000`,
+      scoped ? [kind] : [],
     )
   ).rows;
 }

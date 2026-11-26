@@ -12,7 +12,7 @@ export function CatalogScope({
 }) {
   return (
     <SiteDataProvider data={data}>
-      <CatalogProvider products={data.products}>{children}</CatalogProvider>
+      <CatalogProvider>{children}</CatalogProvider>
     </SiteDataProvider>
   );
 }

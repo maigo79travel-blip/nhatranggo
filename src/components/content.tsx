@@ -30,6 +30,7 @@ const DataContext = createContext<
   content: {},
   fares: [],
   transferRoutes: [],
+  transferVehicleTypes: [],
   hotelCapacities: {},
   destinations: [],
   locale: "vi",

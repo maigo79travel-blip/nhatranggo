@@ -11,15 +11,26 @@ const quoteQuery = z.object({
   pickup: code,
   dropoff: code,
   vehicle: vehicleCode.default("4cho"),
+  roundTrip: z.literal("true").optional(),
 });
 
 export async function GET(request: Request) {
   try {
-    const { pickup, dropoff, vehicle } = quoteQuery.parse(
+    const { pickup, dropoff, vehicle, roundTrip } = quoteQuery.parse(
       Object.fromEntries(new URL(request.url).searchParams),
     );
-    const quote = await getFareQuote(pickup, dropoff, vehicle);
+    const quote = await getFareQuote(
+      pickup,
+      dropoff,
+      vehicle,
+      Boolean(roundTrip),
+    );
     if (!quote) throw new AppError("Tuyến này cần liên hệ để báo giá.", 404);
+    if (roundTrip && quote.returnPrice == null)
+      throw new AppError(
+        "Chưa có giá niêm yết cho lượt về. Vui lòng liên hệ.",
+        404,
+      );
     return Response.json(quote);
   } catch (error) {
     return errorResponse(error);

@@ -1,5 +1,6 @@
 "use client";
 import { Icon } from "./admin-icon";
+import { CustomSelect } from "@/components/ui/custom-select";
 
 export function Filter({
   label,
@@ -13,19 +14,18 @@ export function Filter({
   options: string[][];
 }) {
   return (
-    <label className="ad-filter">
+    <div className="ad-filter">
       <Icon name="filter_list" />
-      <select
-        aria-label={label}
+      <CustomSelect
+        ariaLabel={label}
         value={value}
-        onChange={(e) => onChange(e.target.value)}
-      >
-        {options.map(([id, optLabel]) => (
-          <option key={id} value={id}>
-            {optLabel}
-          </option>
-        ))}
-      </select>
-    </label>
+        onChange={onChange}
+        buttonClassName="cursor-pointer bg-transparent text-sm font-medium text-on-surface"
+        options={options.map(([id, optLabel]) => ({
+          value: id,
+          label: optLabel,
+        }))}
+      />
+    </div>
   );
 }

@@ -17,6 +17,7 @@ export function ServiceCards({
         <article
           key={p.id}
           data-service-id={p.id}
+          data-product-id={p.id}
           className="public-service-card"
         >
           <div className="public-card-image">

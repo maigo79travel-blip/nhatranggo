@@ -1,3 +1,4 @@
+import { getPublicPageCopy } from "@/lib/public-page-copy";
 import { listArticles } from "@/modules/blog/service";
 import { db } from "@/lib/db";
 import { PublicPage } from "@/components/site/public-page";
@@ -5,20 +6,22 @@ import Link from "next/link";
 import Form from "next/form";
 import { FilterField } from "@/components/site/filter-field";
 import { PublicEmptyState, PublicIcon } from "@/components/site/public-ui";
+import { CustomSelect } from "@/components/ui/custom-select";
 export default async function BlogPage({
   searchParams,
 }: {
   searchParams: Promise<{ category?: string; q?: string }>;
 }) {
   const params = await searchParams;
-  const [articles, categories] = await Promise.all([
+  const [articles, categories, copy] = await Promise.all([
     listArticles(params.category, params.q),
     db.query(
       "SELECT title,slug FROM article_categories WHERE active=true ORDER BY title",
     ),
+    getPublicPageCopy("blog", "Blog & Tin tức"),
   ]);
   return (
-    <PublicPage title="Blog & Tin tức">
+    <PublicPage {...copy}>
       <Form
         key={JSON.stringify(params)}
         action="/blog"
@@ -42,18 +45,20 @@ export default async function BlogPage({
           icon="category"
           className="catalog-destination-field"
         >
-          <select
-            className="catalog-filter-control"
+          <CustomSelect
             name="category"
+            ariaLabel="Chuyên mục"
+            searchable={categories.rows.length > 5}
             defaultValue={params.category || ""}
-          >
-            <option value="">Tất cả</option>
-            {categories.rows.map((c) => (
-              <option key={c.slug} value={c.slug}>
-                {c.title}
-              </option>
-            ))}
-          </select>
+            buttonClassName="catalog-filter-control cursor-pointer"
+            options={[
+              { value: "", label: "Tất cả" },
+              ...categories.rows.map((c) => ({
+                value: String(c.slug),
+                label: String(c.title),
+              })),
+            ]}
+          />
         </FilterField>
         <button
           type="submit"

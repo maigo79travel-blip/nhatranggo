@@ -37,7 +37,10 @@ export function EditorDrawer({
       ref={ref}
       aria-label={title}
       className={`admin-ui ad-drawer ${compact ? "ad-drawer-compact" : ""}`}
-      onCancel={onClose}
+      onCancel={(event) => {
+        event.preventDefault();
+        if (!busy) onClose();
+      }}
     >
       <div className="ad-drawer-heading">
         <h2>{title}</h2>
@@ -45,6 +48,7 @@ export function EditorDrawer({
           type="button"
           className="ad-icon-button"
           aria-label="Đóng bảng chỉnh sửa"
+          disabled={busy}
           onClick={onClose}
         >
           <Icon name="close" />
@@ -52,7 +56,12 @@ export function EditorDrawer({
       </div>
       <div className="ad-drawer-body">{children}</div>
       <div className="ad-drawer-bottom">
-        <button type="button" className="ad-button" onClick={onClose}>
+        <button
+          type="button"
+          className="ad-button"
+          disabled={busy}
+          onClick={onClose}
+        >
           Đóng
         </button>
         {saveForm && (

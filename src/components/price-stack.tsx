@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import type { ReactNode } from "react";
 import { useProduct } from "./content";
 import { money } from "@/lib/types";
@@ -28,4 +28,22 @@ export function PriceStack({
       <div>{children}</div>
     </div>
   );
+}
+
+export function ProductDiscount({
+  productId,
+  className,
+}: {
+  productId: string;
+  className?: string;
+}) {
+  const product = useProduct(productId);
+  if (!product?.original_price || product.original_price <= product.price)
+    return null;
+  const percent = Math.round(
+    (1 - product.price / product.original_price) * 100,
+  );
+  return percent > 0 ? (
+    <span className={className}>Giảm {percent}%</span>
+  ) : null;
 }

@@ -468,6 +468,13 @@ try {
       password: "ModuleQA!" + stamp,
     });
     assert.equal((await context.get("/api/admin/users")).status(), 403);
+    const blocked = await context.get("/admin/phan-quyen");
+    assert.ok((await blocked.text()).includes("Không tìm thấy trang"));
+    const permitted = await context.get(
+      "/admin/" + (role === "booking" ? "dat-cho" : "bai-viet"),
+    );
+    assert.equal(permitted.status(), 200);
+
     assert.equal(
       (
         await context.get(
@@ -537,33 +544,177 @@ try {
   await ui.goto(baseURL + "/admin");
   await ui.getByRole("heading", { name: "Tổng quan", exact: true }).waitFor();
   const nav = ui.getByRole("navigation", { name: "Điều hướng quản trị" });
-  for (const label of [
-    "Blog & Tin tức",
-    "Loại phòng",
-    "Lịch khởi hành tour",
-    "E-Visa & Fast-track",
-    "Khách hàng",
-    "Đối tác & Tài xế",
-    "Liên hệ & Hỗ trợ",
-    "Giới thiệu & Chính sách",
-    "Ngôn ngữ website",
-    "Tài khoản & Phân quyền",
+  // Sidebar links stay in the App Router and retain the page on refresh.
+  const documentRequests = [];
+  ui.on("request", (req) => {
+    if (req.isNavigationRequest() && req.frame() === ui.mainFrame()) {
+      documentRequests.push(req.url());
+    }
+  });
+  await nav.getByRole("link", { name: "Khách sạn", exact: true }).click();
+  await ui.waitForURL("**/admin/khach-san");
+  await expect(
+    nav.getByRole("link", { name: "Khách sạn", exact: true }),
+  ).toHaveAttribute("aria-current", "page");
+  await expect(
+    ui.getByRole("button", { name: "Thêm khách sạn", exact: true }),
+  ).toBeVisible();
+  await ui
+    .getByRole("navigation", { name: "Mục liên quan" })
+    .getByRole("link", { name: "Loại phòng" })
+    .click();
+  await ui.waitForURL("**/admin/khach-san/loai-phong");
+  await expect(ui.getByRole("heading", { level: 1 })).toHaveText("Loại phòng");
+  await ui.goBack();
+  await expect(ui.getByRole("heading", { level: 1 })).toHaveText("Khách sạn");
+  await ui.goForward();
+  await expect(ui.getByRole("heading", { level: 1 })).toHaveText("Loại phòng");
+  assert.deepEqual(documentRequests, []);
+  await ui.reload();
+  await expect(ui.getByRole("heading", { level: 1 })).toHaveText("Loại phòng");
+
+  await ui.goto(baseURL + "/admin/combo");
+  await ui.getByRole("button", { name: "Thêm combo", exact: true }).click();
+  const draft = ui.getByRole("dialog", { name: "Thêm combo", exact: true });
+  await draft
+    .getByLabel("Tên combo", { exact: true })
+    .fill("Combo nháp " + tag);
+  const [createCombo] = await Promise.all([
+    ui.waitForResponse(
+      (response) =>
+        response.url().endsWith("/api/admin/products") &&
+        response.request().method() === "POST",
+    ),
+    draft.getByRole("button", { name: "Tạo bản nháp", exact: true }).click(),
+  ]);
+  assert.equal(createCombo.status(), 201);
+  const newCombo = (await createCombo.json()).data;
+  (created.products ??= []).push(newCombo.id);
+  assert.equal(newCombo.type, "combo");
+  assert.equal(newCombo.active, false);
+  await expect(
+    ui.getByRole("dialog", { name: "Chỉnh sửa dịch vụ", exact: true }),
+  ).toBeVisible();
+  await ui.keyboard.press("Escape");
+
+  for (const [path, label] of [
+    ["bai-viet", "Blog & Tin tức"],
+    ["tour/lich-khoi-hanh", "Lịch khởi hành tour"],
+    ["xe-dua-don/tuyen-xe", "Tuyến xe"],
+    ["e-visa", "E-Visa"],
+    ["fast-track", "Fast-track"],
+    ["khach-hang", "Khách hàng"],
+    ["doi-tac", "Đối tác & Tài xế"],
+    ["lien-he", "Liên hệ & Hỗ trợ"],
+    ["trang-thong-tin", "Giới thiệu & Chính sách"],
+    ["ban-dich", "Ngôn ngữ website"],
+    ["phan-quyen", "Tài khoản & Phân quyền"],
   ]) {
-    await nav.getByRole("button", { name: label, exact: true }).click();
+    await ui.goto(baseURL + "/admin/" + path);
     await expect(ui.getByRole("heading", { level: 1 })).toHaveText(label);
-    await expect(
-      ui.getByRole("button", {
-        name: label === "Blog & Tin tức" ? "Viết bài mới" : "Thêm mới",
-        exact: true,
-      }),
-    ).toBeVisible();
+    if (path !== "lien-he")
+      await expect(
+        ui.getByRole("button", {
+          name: path === "bai-viet" ? "Viết bài mới" : "Thêm mới",
+          exact: true,
+        }),
+      ).toBeEnabled();
   }
-  await nav.getByRole("button", { name: /^Đặt chỗ/ }).click();
+  for (const [kind, path] of [
+    ["evisa", "e-visa"],
+    ["fast-track", "fast-track"],
+  ]) {
+    const records = await call(
+      admin,
+      "GET",
+      "/api/admin/requests?kind=" + kind,
+    );
+    assert.ok(records.data.some((row) => created.requests.includes(row.id)));
+    assert.ok(records.data.every((row) => row.kind === kind));
+    await ui.goto(baseURL + "/admin/" + path);
+    const requestRow = ui.getByRole("row").filter({ hasText: tag });
+    await expect(requestRow).toHaveCount(1);
+    await requestRow.getByRole("button", { name: "Xử lý" }).click();
+    await expect(ui.getByRole("dialog")).toBeVisible();
+    await expect(
+      ui.getByRole("dialog").getByLabel("Dịch vụ", { exact: true }),
+    ).toHaveCount(0);
+    await ui.keyboard.press("Escape");
+  }
+  await ui.goto(baseURL + "/admin/ban-dich");
+  const createTranslation = ui.getByRole("button", {
+    name: "Thêm mới",
+    exact: true,
+  });
+  await createTranslation.click();
+  const translationForm = ui.getByRole("dialog");
+  await translationForm
+    .getByLabel("Cần dịch", { exact: true })
+    .selectOption("product");
+  await translationForm.getByLabel("Mục cần dịch").click();
+  await translationForm
+    .getByRole("option", { name: product.title, exact: true })
+    .click();
+  await translationForm
+    .getByLabel("Ngôn ngữ", { exact: true })
+    .selectOption("ru");
+  const translatedTitle = "Bản dịch thử " + tag;
+  await translationForm
+    .getByLabel("Tên dịch vụ", { exact: true })
+    .fill(translatedTitle);
+  const [savedTranslation] = await Promise.all([
+    ui.waitForResponse(
+      (response) =>
+        response.url().endsWith("/api/admin/translations") &&
+        response.request().method() === "POST",
+    ),
+    translationForm
+      .getByRole("button", { name: "Lưu thay đổi", exact: true })
+      .click(),
+  ]);
+  assert.equal(savedTranslation.status(), 201);
+  (created.translations ??= []).push((await savedTranslation.json()).data.id);
+  await expect(translationForm).toHaveCount(0);
+  const locale = await request.newContext({ baseURL });
+  try {
+    await call(locale, "POST", "/api/locale", { locale: "ru" });
+    assert.ok(
+      (
+        await (
+          await locale.get("/khach-san?destination=" + destination.id)
+        ).text()
+      ).includes(translatedTitle),
+    );
+  } finally {
+    await locale.dispose();
+  }
+
+  await ui.setViewportSize({ width: 390, height: 844 });
+  await ui.getByRole("button", { name: "Mở menu quản trị" }).click();
+  await expect(ui.getByRole("dialog", { name: "Menu quản trị" })).toBeVisible();
+  await ui.keyboard.press("Escape");
+  await expect(
+    ui.getByRole("button", { name: "Mở menu quản trị" }),
+  ).toBeFocused();
+  await ui.getByRole("button", { name: "Mở menu quản trị" }).click();
+  await nav.getByRole("link", { name: "Bảng giá xe", exact: true }).click();
+  await expect(ui.getByRole("heading", { level: 1 })).toHaveText("Bảng giá xe");
+  await expect(
+    ui.getByRole("button", { name: "Mở menu quản trị" }),
+  ).toHaveAttribute("aria-expanded", "false");
+  assert.equal(
+    await ui.evaluate(() => document.documentElement.scrollWidth > innerWidth),
+    false,
+  );
+  await ui.setViewportSize({ width: 1440, height: 1000 });
+
+  await nav.getByRole("link", { name: "Đặt chỗ", exact: true }).click();
   await ui
     .getByRole("button", { name: "Tạo đơn thủ công", exact: true })
     .click();
   const manual = ui.getByRole("dialog");
-  await manual.getByLabel("Dịch vụ", { exact: true }).selectOption(tour.id);
+  await manual.getByLabel("Dịch vụ", { exact: true }).click();
+  await manual.getByRole("option", { name: tour.title }).click();
   await manual.getByLabel("Họ và tên").fill(`Thủ công ${tag}`);
   await manual.getByLabel("Số điện thoại").fill(phone);
   await manual.getByLabel("Ngày sử dụng").fill("2099-12-01");
@@ -587,9 +738,7 @@ try {
   console.log(
     "PASS admin manual booking, dated filters, XLSX and uploaded WebP",
   );
-  await nav
-    .getByRole("button", { name: "Blog & Tin tức", exact: true })
-    .click();
+  await nav.getByRole("link", { name: "Blog & Tin tức", exact: true }).click();
   await expect(
     ui.getByRole("columnheader", { name: "Cập nhật", exact: true }),
   ).toBeVisible();

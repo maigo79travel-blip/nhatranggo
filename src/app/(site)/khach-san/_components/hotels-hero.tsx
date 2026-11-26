@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { useContent } from "@/components/content";
+import { CustomSelect } from "@/components/ui/custom-select";
 import { nextDate, vietnamToday } from "@/modules/travel/search";
 
 export interface HotelSearchState {
@@ -140,35 +141,34 @@ export function HotelsHero({
               />
             </SearchField>
             <SearchField icon="users" label="Số khách">
-              <select
-                className="hotel-search-control"
+              <CustomSelect
+                ariaLabel="Số khách"
+                buttonClassName="hotel-search-control cursor-pointer"
                 value={draft.guests}
-                onChange={(event) =>
-                  setDraft({ ...draft, guests: event.target.value })
-                }
-              >
-                {Array.from({ length: 6 }, (_, index) => (
-                  <option key={index + 1} value={index + 1}>
-                    {index + 1} người
-                  </option>
-                ))}
-                <option value="7">7+ người</option>
-              </select>
+                onChange={(guests) => setDraft({ ...draft, guests })}
+                options={[
+                  ...Array.from({ length: 6 }, (_, index) => ({
+                    value: String(index + 1),
+                    label: `${index + 1} người`,
+                  })),
+                  { value: "7", label: "7+ người" },
+                ]}
+              />
             </SearchField>
             <SearchField icon="hotel-type" label="Loại hình / Sao">
-              <select
-                className="hotel-search-control"
+              <CustomSelect
+                ariaLabel="Loại hình / Sao"
+                buttonClassName="hotel-search-control cursor-pointer"
                 value={draft.category}
-                onChange={(event) =>
-                  setDraft({ ...draft, category: event.target.value })
-                }
-              >
-                <option value="all">Tất cả khách sạn</option>
-                <option value="5-star">5 sao quốc tế</option>
-                <option value="4-star">4 sao cao cấp</option>
-                <option value="3-star">3 sao</option>
-                <option value="resort">Resort nghỉ dưỡng</option>
-              </select>
+                onChange={(category) => setDraft({ ...draft, category })}
+                options={[
+                  { value: "all", label: "Tất cả khách sạn" },
+                  { value: "5-star", label: "5 sao quốc tế" },
+                  { value: "4-star", label: "4 sao cao cấp" },
+                  { value: "3-star", label: "3 sao" },
+                  { value: "resort", label: "Resort nghỉ dưỡng" },
+                ]}
+              />
             </SearchField>
             <button
               type="submit"
