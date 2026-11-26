@@ -45,7 +45,8 @@ try {
   await hotelSearch.getByLabel("Điểm đến").fill("The Empyrean");
   await hotelSearch.getByLabel("Ngày nhận phòng").fill("2099-12-01");
   await hotelSearch.getByLabel("Ngày trả phòng").fill("2099-12-03");
-  await hotelSearch.getByLabel("Số khách").selectOption("3");
+  await hotelSearch.getByLabel("Số khách").click();
+  await hotelSearch.getByRole("option", { name: "3 người" }).click();
   await hotelSearch
     .getByRole("button", { name: "Tìm kiếm", exact: true })
     .click();
