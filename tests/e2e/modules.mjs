@@ -563,7 +563,8 @@ try {
     .getByRole("button", { name: "Tạo đơn thủ công", exact: true })
     .click();
   const manual = ui.getByRole("dialog");
-  await manual.getByLabel("Dịch vụ", { exact: true }).selectOption(tour.id);
+  await manual.getByLabel("Dịch vụ", { exact: true }).click();
+  await manual.getByRole("option", { name: tour.title }).click();
   await manual.getByLabel("Họ và tên").fill(`Thủ công ${tag}`);
   await manual.getByLabel("Số điện thoại").fill(phone);
   await manual.getByLabel("Ngày sử dụng").fill("2099-12-01");

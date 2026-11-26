@@ -245,7 +245,8 @@ try {
     .getByLabel("Họ và tên", { exact: true })
     .fill("Kiểm tra nút Home");
   await dialog.getByLabel("Số điện thoại", { exact: true }).fill(phone);
-  await dialog.getByLabel("Loại phòng").selectOption(roomId);
+  await dialog.getByLabel("Loại phòng").click();
+  await dialog.getByRole("option").nth(1).click();
   await dialog
     .getByRole("button", { name: "Gửi yêu cầu đặt chỗ", exact: true })
     .click();

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Form from "next/form";
 import { FilterField } from "@/components/site/filter-field";
 import { PublicEmptyState, PublicIcon } from "@/components/site/public-ui";
+import { CustomSelect } from "@/components/ui/custom-select";
 export default async function BlogPage({
   searchParams,
 }: {
@@ -42,18 +43,20 @@ export default async function BlogPage({
           icon="category"
           className="catalog-destination-field"
         >
-          <select
-            className="catalog-filter-control"
+          <CustomSelect
             name="category"
+            ariaLabel="Chuyên mục"
+            searchable={categories.rows.length > 5}
             defaultValue={params.category || ""}
-          >
-            <option value="">Tất cả</option>
-            {categories.rows.map((c) => (
-              <option key={c.slug} value={c.slug}>
-                {c.title}
-              </option>
-            ))}
-          </select>
+            buttonClassName="catalog-filter-control cursor-pointer"
+            options={[
+              { value: "", label: "Tất cả" },
+              ...categories.rows.map((c) => ({
+                value: String(c.slug),
+                label: String(c.title),
+              })),
+            ]}
+          />
         </FilterField>
         <button
           type="submit"

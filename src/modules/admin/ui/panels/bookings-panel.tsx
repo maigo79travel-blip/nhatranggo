@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { CustomSelect } from "@/components/ui/custom-select";
 import { api, type Row } from "../api";
 import { Empty } from "../primitives/admin-empty";
 import { Icon } from "../primitives/admin-icon";
@@ -96,26 +97,38 @@ export function BookingsPanel({
             placeholder="Mã đơn, khách, số điện thoại…"
           />
         </label>
-        <label className="ad-field">
-          Loại dịch vụ
-          <select className="ad-input" name="type">
-            <option value="">Tất cả loại</option>
-            <option value="transfer">Xe đưa đón</option>
-            <option value="hotel">Khách sạn</option>
-            <option value="tour">Tour du lịch</option>
-            <option value="combo">Combo</option>
-          </select>
-        </label>
-        <label className="ad-field">
-          Trạng thái đặt chỗ
-          <select className="ad-input" name="status">
-            <option value="">Tất cả trạng thái</option>
-            <option value="pending">Chờ xác nhận</option>
-            <option value="confirmed">Đã xác nhận</option>
-            <option value="completed">Hoàn tất</option>
-            <option value="cancelled">Đã hủy</option>
-          </select>
-        </label>
+        <div className="ad-field">
+          <span>Loại dịch vụ</span>
+          <CustomSelect
+            name="type"
+            ariaLabel="Loại dịch vụ"
+            defaultValue=""
+            buttonClassName="ad-input cursor-pointer"
+            options={[
+              { value: "", label: "Tất cả loại" },
+              { value: "transfer", label: "Xe đưa đón" },
+              { value: "hotel", label: "Khách sạn" },
+              { value: "tour", label: "Tour du lịch" },
+              { value: "combo", label: "Combo" },
+            ]}
+          />
+        </div>
+        <div className="ad-field">
+          <span>Trạng thái đặt chỗ</span>
+          <CustomSelect
+            name="status"
+            ariaLabel="Trạng thái đặt chỗ"
+            defaultValue=""
+            buttonClassName="ad-input cursor-pointer"
+            options={[
+              { value: "", label: "Tất cả trạng thái" },
+              { value: "pending", label: "Chờ xác nhận" },
+              { value: "confirmed", label: "Đã xác nhận" },
+              { value: "completed", label: "Hoàn tất" },
+              { value: "cancelled", label: "Đã hủy" },
+            ]}
+          />
+        </div>
         <label className="ad-field">
           Ngày dùng từ
           <input className="ad-input" type="date" name="from" />

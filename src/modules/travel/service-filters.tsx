@@ -4,6 +4,7 @@ import Form from "next/form";
 import Link from "next/link";
 import { FilterField } from "@/components/site/filter-field";
 import { PublicIcon } from "@/components/site/public-ui";
+import { CustomSelect } from "@/components/ui/custom-select";
 import { nextDate, type BookingDraft } from "./search";
 
 import { serviceRoutes, type ServiceType } from "./service-routes";
@@ -51,18 +52,21 @@ export function ServiceFilters({
           icon="location_on"
           className="catalog-destination-field"
         >
-          <select
-            className="catalog-filter-control"
+          <CustomSelect
             name="destination"
+            ariaLabel="Địa phương"
+            searchable
+            searchPlaceholder="Tìm địa phương…"
             defaultValue={params.destination || ""}
-          >
-            <option value="">Tất cả điểm đến</option>
-            {destinations.map((destination) => (
-              <option key={destination.id} value={destination.id}>
-                {destination.name}
-              </option>
-            ))}
-          </select>
+            buttonClassName="catalog-filter-control cursor-pointer"
+            options={[
+              { value: "", label: "Tất cả điểm đến" },
+              ...destinations.map((destination) => ({
+                value: destination.id,
+                label: destination.name,
+              })),
+            ]}
+          />
         </FilterField>
         <button
           className="public-primary-button catalog-search-submit"
@@ -105,16 +109,18 @@ export function ServiceFilters({
         )}
         {type === "hotel" && (
           <FilterField label="Loại hình / Sao" icon="hotel_class">
-            <select
+            <CustomSelect
               name="category"
-              className="catalog-filter-control"
+              ariaLabel="Loại hình / Sao"
               defaultValue={params.category || ""}
-            >
-              <option value="">Tất cả</option>
-              <option value="5 sao">5 sao</option>
-              <option value="4 sao">4 sao</option>
-              <option value="resort">Resort</option>
-            </select>
+              buttonClassName="catalog-filter-control cursor-pointer"
+              options={[
+                { value: "", label: "Tất cả" },
+                { value: "5 sao", label: "5 sao" },
+                { value: "4 sao", label: "4 sao" },
+                { value: "resort", label: "Resort" },
+              ]}
+            />
           </FilterField>
         )}
         <FilterField

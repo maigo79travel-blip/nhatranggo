@@ -11,6 +11,7 @@ import {
   Save,
 } from "./editors";
 import { useSiteData } from "@/components/content";
+import { CustomSelect } from "@/components/ui/custom-select";
 import type { Product, AdminUser, AdminOverviewData } from "@/lib/types";
 import "./admin.css";
 import { resources } from "../resources";
@@ -950,27 +951,40 @@ export function AdminWorkspace({ user }: { user: AdminUser | null }) {
             }
           }}
         >
-          <label className="ad-field">
-            Mẫu bố cục
-            <select className="ad-input" name="cloneId" defaultValue="">
-              <option value="">Tạo dịch vụ mới (không cần mẫu)</option>
-              {baseRows
-                .filter((r) => r.template_id)
-                .map((row) => (
-                  <option key={String(row.id)} value={String(row.id)}>
-                    {String(row.title)}
-                  </option>
-                ))}
-            </select>
-          </label>
-          <label className="ad-field">
-            Loại dịch vụ
-            <select className="ad-input" name="type">
-              <option value="hotel">Khách sạn</option>
-              <option value="tour">Tour</option>
-              <option value="combo">Combo</option>
-            </select>
-          </label>
+          <div className="ad-field">
+            <span>Mẫu bố cục</span>
+            <CustomSelect
+              name="cloneId"
+              ariaLabel="Mẫu bố cục"
+              searchable
+              searchPlaceholder="Tìm mẫu bố cục…"
+              defaultValue=""
+              buttonClassName="ad-input cursor-pointer"
+              options={[
+                { value: "", label: "Tạo dịch vụ mới (không cần mẫu)" },
+                ...baseRows
+                  .filter((r) => r.template_id)
+                  .map((row) => ({
+                    value: String(row.id),
+                    label: String(row.title),
+                  })),
+              ]}
+            />
+          </div>
+          <div className="ad-field">
+            <span>Loại dịch vụ</span>
+            <CustomSelect
+              name="type"
+              ariaLabel="Loại dịch vụ"
+              defaultValue="hotel"
+              buttonClassName="ad-input cursor-pointer"
+              options={[
+                { value: "hotel", label: "Khách sạn" },
+                { value: "tour", label: "Tour" },
+                { value: "combo", label: "Combo" },
+              ]}
+            />
+          </div>
           <Field
             label="Tên dịch vụ mới"
             name="title"

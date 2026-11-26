@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Product } from "@/lib/types";
+import { CustomSelect } from "@/components/ui/custom-select";
 import { api, inputClass, type Row } from "./api";
 import { ImageField } from "./primitives/admin-image";
 import { Icon } from "./primitives/admin-icon";
@@ -137,18 +138,20 @@ export function ProductEditor({
           required
         />
         <div className="grid sm:grid-cols-2 gap-3">
-          <label className="block text-body-sm">
-            Loại
-            <select
-              className={inputClass}
+          <div className="block text-body-sm">
+            <span className="mb-1 block">Loại</span>
+            <CustomSelect
               name="type"
+              ariaLabel="Loại"
               defaultValue={product.type}
-            >
-              <option value="hotel">Khách sạn</option>
-              <option value="tour">Tour</option>
-              <option value="combo">Combo</option>
-            </select>
-          </label>
+              buttonClassName={`${inputClass} cursor-pointer`}
+              options={[
+                { value: "hotel", label: "Khách sạn" },
+                { value: "tour", label: "Tour" },
+                { value: "combo", label: "Combo" },
+              ]}
+            />
+          </div>
           <Field
             label="Thứ tự"
             name="position"
@@ -177,36 +180,42 @@ export function ProductEditor({
           name="image"
           initialValue={product.image}
         />
-        <label className="block">
-          Địa phương
-          <select
+        <div className="block">
+          <span className="mb-1 block">Địa phương</span>
+          <CustomSelect
             name="destination_id"
-            className="ad-input"
+            ariaLabel="Địa phương"
+            searchable
+            searchPlaceholder="Tìm địa phương…"
             defaultValue={product.destination_id || ""}
-          >
-            <option value="">Chưa phân loại</option>
-            {references.destinations.map((d) => (
-              <option key={String(d.id)} value={String(d.id)}>
-                {String(d.name)}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label className="block">
-          Đối tác cung cấp
-          <select
+            buttonClassName="ad-input cursor-pointer"
+            options={[
+              { value: "", label: "Chưa phân loại" },
+              ...references.destinations.map((d) => ({
+                value: String(d.id),
+                label: String(d.name),
+              })),
+            ]}
+          />
+        </div>
+        <div className="block">
+          <span className="mb-1 block">Đối tác cung cấp</span>
+          <CustomSelect
             name="partner_id"
-            className="ad-input"
+            ariaLabel="Đối tác cung cấp"
+            searchable
+            searchPlaceholder="Tìm đối tác…"
             defaultValue={product.partner_id || ""}
-          >
-            <option value="">Chưa phân công</option>
-            {references.partners.map((d) => (
-              <option key={String(d.id)} value={String(d.id)}>
-                {String(d.name)}
-              </option>
-            ))}
-          </select>
-        </label>
+            buttonClassName="ad-input cursor-pointer"
+            options={[
+              { value: "", label: "Chưa phân công" },
+              ...references.partners.map((d) => ({
+                value: String(d.id),
+                label: String(d.name),
+              })),
+            ]}
+          />
+        </div>
         <Field
           label="Địa điểm"
           name="location"

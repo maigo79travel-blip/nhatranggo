@@ -2,6 +2,7 @@
 import { useEffect, useId, useState } from "react";
 import { api } from "../api";
 import { BookingDialogContent } from "@/components/catalog/booking-dialog";
+import { CustomSelect } from "@/components/ui/custom-select";
 import type { Product } from "@/lib/types";
 export function ManualBooking({ onSaved }: { onSaved: (id: string) => void }) {
   const serviceId = useId();
@@ -29,29 +30,31 @@ export function ManualBooking({ onSaved }: { onSaved: (id: string) => void }) {
   return (
     <div className="space-y-4">
       <div>
-        <label className="ad-field" htmlFor={serviceId}>
-          Dịch vụ
-        </label>
-        <select
+        <span className="ad-field">Dịch vụ</span>
+        <CustomSelect
           id={serviceId}
-          className="ad-input"
+          ariaLabel="Dịch vụ"
+          searchable
+          searchPlaceholder="Tìm dịch vụ…"
           disabled={loading || !products.length}
           value={id}
-          onChange={(e) => setId(e.target.value)}
-        >
-          <option value="">
-            {loading
-              ? "Đang tải dịch vụ…"
-              : products.length
-                ? "Chọn dịch vụ"
-                : "Không có dịch vụ đang mở"}
-          </option>
-          {products.map((p) => (
-            <option value={p.id} key={p.id}>
-              {p.title}
-            </option>
-          ))}
-        </select>
+          onChange={setId}
+          buttonClassName="ad-input cursor-pointer"
+          options={[
+            {
+              value: "",
+              label: loading
+                ? "Đang tải dịch vụ…"
+                : products.length
+                  ? "Chọn dịch vụ"
+                  : "Không có dịch vụ đang mở",
+            },
+            ...products.map((p) => ({
+              value: p.id,
+              label: p.title,
+            })),
+          ]}
+        />
       </div>
       {error && (
         <p role="alert" className="text-error">

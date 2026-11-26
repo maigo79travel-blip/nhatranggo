@@ -8,8 +8,8 @@ import {
   useSiteData,
 } from "@/components/content";
 import { useCatalog } from "@/components/catalog/catalog-context";
+import { CustomSelect } from "@/components/ui/custom-select";
 import { money } from "@/lib/types";
-import { DestinationOptions } from "@/modules/travel/destination-options";
 import { vietnamToday } from "@/modules/travel/search";
 import {
   defaultRoute,
@@ -86,6 +86,10 @@ export function TransfersHero() {
   const [trip, setTrip] = useState("one-way");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const destinationOptions = destinations.map((d) => ({
+    value: d.code,
+    label: d.name,
+  }));
   const route = `${pickup}_${dropoff}`;
   const productId = `transfer-${route}-${vehicle}`;
   const product = products.find((item) => item.id === productId);
@@ -229,36 +233,44 @@ export function TransfersHero() {
             </div>
 
             <div className="transfer-quote-fields">
-              <QuoteField
-                id="pickup-select"
-                icon="location_on"
-                label="Điểm đón"
-              >
-                <select
-                  id="pickup-select"
-                  className="transfer-control"
-                  value={pickup}
-                  onChange={(event) => setPickup(event.target.value)}
-                  required
-                >
-                  <DestinationOptions />
-                </select>
-              </QuoteField>
-              <QuoteField
-                id="dropoff-select"
-                icon="flag"
-                label="Điểm đến / Khách sạn"
-              >
-                <select
-                  id="dropoff-select"
-                  className="transfer-control"
-                  value={dropoff}
-                  onChange={(event) => setDropoff(event.target.value)}
-                  required
-                >
-                  <DestinationOptions />
-                </select>
-              </QuoteField>
+              <div className="transfer-field">
+                <TransferIcon className="text-primary">location_on</TransferIcon>
+                <div className="min-w-0 flex-1">
+                  <span className="block text-xs text-on-surface-variant">
+                    Điểm đón
+                  </span>
+                  <CustomSelect
+                    id="pickup-select"
+                    ariaLabel="Điểm đón"
+                    searchable
+                    required
+                    searchPlaceholder="Tìm điểm đón…"
+                    buttonClassName="transfer-control cursor-pointer"
+                    value={pickup}
+                    onChange={setPickup}
+                    options={destinationOptions}
+                  />
+                </div>
+              </div>
+              <div className="transfer-field">
+                <TransferIcon className="text-primary">flag</TransferIcon>
+                <div className="min-w-0 flex-1">
+                  <span className="block text-xs text-on-surface-variant">
+                    Điểm đến / Khách sạn
+                  </span>
+                  <CustomSelect
+                    id="dropoff-select"
+                    ariaLabel="Điểm đến / Khách sạn"
+                    searchable
+                    required
+                    searchPlaceholder="Tìm điểm đến…"
+                    buttonClassName="transfer-control cursor-pointer"
+                    value={dropoff}
+                    onChange={setDropoff}
+                    options={destinationOptions}
+                  />
+                </div>
+              </div>
               <QuoteField
                 id="transfer-date"
                 icon="calendar_today"

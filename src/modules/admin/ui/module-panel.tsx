@@ -9,6 +9,7 @@ import { Empty } from "./primitives/admin-empty";
 import { Filter } from "./primitives/admin-filter";
 import { ImageField } from "./primitives/admin-image";
 import { MarkdownEditor } from "@/modules/blog/markdown-editor";
+import { CustomSelect } from "@/components/ui/custom-select";
 import type { FieldDefinition } from "../types";
 function inputValue(field: FieldDefinition, value: unknown) {
   if (field.type === "json") return JSON.stringify(value ?? {}, null, 2);
@@ -302,8 +303,8 @@ export function ModulePanel({ resource }: { resource: string }) {
                   initialValue={inputValue(field, selected[field.name])}
                 />
               ) : (
-                <label key={field.name} className="block text-body-md">
-                  {field.label}
+                <div key={field.name} className="block text-body-md">
+                  <span className="mb-1 block">{field.label}</span>
                   {field.type === "checkbox" ? (
                     <input
                       className="ml-3"
@@ -312,34 +313,38 @@ export function ModulePanel({ resource }: { resource: string }) {
                       defaultChecked={selected[field.name] !== false}
                     />
                   ) : field.type === "select" ? (
-                    <select
-                      className="ad-input"
+                    <CustomSelect
                       name={field.name}
+                      ariaLabel={field.label}
+                      searchable={Boolean(field.resource)}
+                      searchPlaceholder={`Tìm ${field.label.toLowerCase()}…`}
+                      required={field.required}
                       defaultValue={String(
                         selected[field.name] ?? field.options?.[0]?.value ?? "",
                       )}
-                      required={field.required}
-                    >
-                      {field.resource && <option value="">Chọn…</option>}
-                      {field.options?.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                      {(options[field.resource || ""] || [])
-                        .filter(
-                          (row) =>
-                            !["rooms", "departures"].includes(resource) ||
-                            field.name !== "product_id" ||
-                            row.type ===
-                              (resource === "rooms" ? "hotel" : "tour"),
-                        )
-                        .map((row) => (
-                          <option key={String(row.id)} value={String(row.id)}>
-                            {String(row.title || row.name || row.id)}
-                          </option>
-                        ))}
-                    </select>
+                      buttonClassName="ad-input cursor-pointer"
+                      options={[
+                        ...(field.resource
+                          ? [{ value: "", label: "Chọn…" }]
+                          : []),
+                        ...(field.options ?? []).map((option) => ({
+                          value: String(option.value),
+                          label: option.label,
+                        })),
+                        ...(options[field.resource || ""] || [])
+                          .filter(
+                            (row) =>
+                              !["rooms", "departures"].includes(resource) ||
+                              field.name !== "product_id" ||
+                              row.type ===
+                                (resource === "rooms" ? "hotel" : "tour"),
+                          )
+                          .map((row) => ({
+                            value: String(row.id),
+                            label: String(row.title || row.name || row.id),
+                          })),
+                      ]}
+                    />
                   ) : ["textarea", "json"].includes(field.type || "") ? (
                     <textarea
                       className="ad-input min-h-28"
@@ -358,7 +363,7 @@ export function ModulePanel({ resource }: { resource: string }) {
                       defaultValue={inputValue(field, selected[field.name])}
                     />
                   )}
-                </label>
+                </div>
               ),
             )}
             {message && (

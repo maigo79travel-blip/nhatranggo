@@ -4,6 +4,7 @@ import type { BookingDraft } from "@/modules/travel/search";
 import { nextDate } from "@/modules/travel/search";
 import type { Product } from "@/lib/types";
 import { money } from "@/lib/types";
+import { CustomSelect } from "@/components/ui/custom-select";
 import { DialogField } from "./dialog-field";
 
 type SubmitBooking = (values: Record<string, FormDataEntryValue>) => Promise<{
@@ -125,22 +126,26 @@ export function BookingDialogContent({
             pattern="(0|\+84)[0-9]{9,10}"
           />
           {product.type === "hotel" && !!details.rooms.length && (
-            <label className="block">
-              Loại phòng
-              <select
+            <div className="block">
+              <span className="mb-1 block text-body-sm">Loại phòng</span>
+              <CustomSelect
                 name="roomId"
+                ariaLabel="Loại phòng"
                 required
-                className="w-full border border-border-default rounded-lg p-2"
-              >
-                <option value="">Chọn loại phòng</option>
-                {details.rooms.map((room) => (
-                  <option value={room.id} key={room.id}>
-                    {room.title} · {money(room.price)} / đêm · tối đa{" "}
-                    {room.capacity} khách
-                  </option>
-                ))}
-              </select>
-            </label>
+                searchable={details.rooms.length > 5}
+                searchPlaceholder="Tìm loại phòng…"
+                defaultValue=""
+                placeholder="Chọn loại phòng"
+                buttonClassName="w-full rounded-lg border border-border-default bg-white p-2 text-sm text-on-surface"
+                options={[
+                  { value: "", label: "Chọn loại phòng" },
+                  ...details.rooms.map((room) => ({
+                    value: room.id,
+                    label: `${room.title} · ${money(room.price)} / đêm · tối đa ${room.capacity} khách`,
+                  })),
+                ]}
+              />
+            </div>
           )}
           {!!details.departures.length && (
             <p className="text-body-md">
