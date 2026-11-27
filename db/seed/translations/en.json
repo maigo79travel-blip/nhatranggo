@@ -1,0 +1,1996 @@
+{
+  "content": {
+    "home.text-043": "Blue Sea – New Experiences – Daily Deals",
+    "home.text-044": "Nha",
+    "home.text-045": "Trang",
+    "home.text-046": "Hotels • 5-Star Resorts • Daily Island Tours • All-In-One Saver Combos",
+    "home.text-047": "Hotels",
+    "home.text-048": "Tours",
+    "home.text-049": "Combos",
+    "home.text-050": "Tickets & Shows",
+    "home.text-051": "Destination",
+    "home.text-052": "Check-in - Check-out",
+    "home.text-053": "11/11/2026",
+    "home.text-054": "1 night",
+    "home.text-055": "12/11/2026",
+    "home.text-056": "Rooms & Guests",
+    "home.text-057": "1 Room, 2 Guests",
+    "home.text-058": "Search",
+    "home.text-059": "Popular searches:",
+    "home.text-060": "Bai Dai Cam Ranh Resort",
+    "home.text-061": "VIP 3-Island Nha Trang Tour",
+    "home.text-062": "VinWonders Hon Tre",
+    "home.text-063": "Phu Quoc 3D2N Combo",
+    "home.text-064": "Hotels",
+    "home.text-065": "Diverse hotels & resorts",
+    "home.text-066": "Deals",
+    "home.text-067": "Explore travel combos",
+    "home.text-068": "24/7 Support",
+    "home.text-069": "Hotline & Zalo support",
+    "home.text-070": "Booking",
+    "home.text-071": "Direct confirmation",
+    "home.text-072": "Just booked in",
+    "home.text-073": "Cam Lam, Khanh Hoa",
+    "home.text-074": ": Guest",
+    "home.text-075": "0888xxx***",
+    "home.text-076": "just reserved",
+    "home.text-077": "1 Deluxe Ocean View room",
+    "home.text-078": "!",
+    "home.text-079": "Special All-Inclusive Deals",
+    "home.text-080": "Featured Deals",
+    "home.text-081": "Complete travel packages, optimizing itinerary and budget for families, couples, or groups.",
+    "home.text-082": "Deal ends in:",
+    "home.text-083": "02",
+    "home.text-084": "Days",
+    "home.text-085": ":",
+    "home.text-086": "14",
+    "home.text-087": "Hours",
+    "home.text-088": ":",
+    "home.text-089": "38",
+    "home.text-090": "Mins",
+    "home.text-091": ":",
+    "home.text-092": "45",
+    "home.text-093": "Secs",
+    "home.text-094": "Exclusive {{brand.name}} Deals",
+    "home.text-095": "Best-Value Hotels",
+    "home.text-096": "All",
+    "home.text-097": "Cam Ranh",
+    "home.text-098": "Nha Trang",
+    "home.text-099": "Beachfront",
+    "home.text-100": "Infinity Pool",
+    "home.text-101": "View all",
+    "home.text-102": "Explore bays & cruises",
+    "home.text-103": "Best-Value Daily Tours",
+    "home.text-104": "View all tours",
+    "home.text-105": "Explore by destination",
+    "home.text-106": "Explore Destinations",
+    "home.text-107": "View all destinations",
+    "home.text-108": "Top #1 Favorite",
+    "home.text-109": "Nha Trang",
+    "home.text-110": "Blue sea paradise",
+    "home.text-111": "1,024 hotels & resorts",
+    "home.text-112": "Da Lat",
+    "home.text-113": "City of thousand flowers",
+    "home.text-114": "1,186 hotels",
+    "home.text-115": "Da Nang",
+    "home.text-116": "Vibrant coastal city",
+    "home.text-117": "1,356 hotels",
+    "home.text-118": "Phu Quoc",
+    "home.text-119": "Pearl island retreat",
+    "home.text-120": "921 hotels",
+    "home.text-121": "Hoi An",
+    "home.text-122": "Lantern-lit ancient town",
+    "home.text-123": "612 hotels",
+    "home.text-124": "Ha Long",
+    "home.text-125": "Bay wonder & 5-star cruises",
+    "home.text-126": "679 hotels",
+    "home.text-127": "Hoi An",
+    "home.text-128": "Heritage old town & local culture",
+    "home.text-129": "785 hotels",
+    "home.text-130": "Vung Tau",
+    "home.text-131": "Near HCMC, weekend getaway",
+    "home.text-132": "524 hotels",
+    "home.text-133": "Quy Nhon",
+    "home.text-134": "Pristine beaches, great seafood",
+    "home.text-135": "332 hotels",
+    "home.text-136": "Pocket Travel Handbook",
+    "home.text-137": "Latest Articles",
+    "home.text-138": "View all articles",
+    "home.text-139": "202 views",
+    "home.text-140": "26/10/2026",
+    "home.text-141": "The Anam Cam Ranh Review: Luxury Beachfront Resort at Bai Dai",
+    "home.text-142": "Discover The Anam Cam Ranh — nostalgic Indochine architecture, beachfront infinity pools, and international 5-star service.",
+    "home.text-143": "Read more",
+    "home.text-144": "427 views",
+    "home.text-145": "24/09/2026",
+    "home.text-146": "Best Time to Visit Nha Trang? Weather & Practical Tips",
+    "home.text-147": "When should you visit Nha Trang? Four-season weather updates, calmest sea months, and tips for booking great room rates.",
+    "home.text-148": "Read more",
+    "home.text-149": "433 views",
+    "home.text-150": "23/09/2026",
+    "home.text-151": "The Anam Cam Ranh Review: 5-Star Coastal Retreat at Bai Dai",
+    "home.text-152": "An ideal resort for honeymoons and families with lush greenery, a private beach, and diverse dining.",
+    "home.text-153": "Read more",
+    "home.text-154": "401 views",
+    "home.text-155": "22/09/2026",
+    "home.text-156": "Vinh Hy Bay – Hang Rai – Sheep Field Tour from Nha Trang",
+    "home.text-157": "One of Vietnam's most scenic coastal routes: ancient coral reefs at Hang Rai, sheep meadow photos, and fresh Vinh Hy seafood.",
+    "home.text-158": "Read more",
+    "home.text-159": "Most-Read Topics",
+    "home.text-160": "Save useful travel tips for your upcoming trip",
+    "home.text-161": "Phu Quoc with kids guide",
+    "home.text-162": "Self-guided Da Lat handbook",
+    "home.text-163": "Tran Phu sea-view room deals",
+    "home.text-164": "Hon Mun snorkeling guide",
+    "home.text-165": "Grow together",
+    "home.text-166": "Get deals from {{brand.name}}",
+    "home.text-167": "Explore hotels, tours, and combos for your vacation.",
+    "home.text-168": "Partner via Zalo ({{contact.phone}})",
+    "home.text-169": "Call Hotline directly",
+    "home.text-170": "{{brand.name}} Service Commitment",
+    "home.text-171": "100% transparent room rates, no hidden fees",
+    "home.text-172": "Instant room availability check & reservation hold",
+    "home.text-173": "Local consultants with deep destination expertise",
+    "home.text-174": "Flexible payment: VNPAY, MoMo, Visa/MC",
+    "hotels.text-043": "Home",
+    "hotels.text-044": "Hotels & Resorts",
+    "hotels.text-045": "1,200+ Partner Hotels & Luxury Resorts",
+    "hotels.text-046": "Find & Book Hotels and Resorts at Best Rates",
+    "hotels.text-047": "Direct agency rates lower than international OTAs, fast room holds via Zalo, complimentary breakfast, and room upgrades subject to availability.",
+    "hotels.text-048": "Partner guarantee",
+    "hotels.text-049": "100% Instant Confirmation",
+    "hotels.text-050": "Destination",
+    "hotels.text-051": "Nha Trang - Khanh Hoa",
+    "hotels.text-052": "Bai Dai Cam Ranh",
+    "hotels.text-053": "Phu Quoc (Kien Giang)",
+    "hotels.text-054": "Da Nang & Hoi An",
+    "hotels.text-055": "Da Lat (Lam Dong)",
+    "hotels.text-056": "Vung Tau & Ho Tram",
+    "hotels.text-057": "Quy Nhon - Binh Dinh",
+    "hotels.text-058": "Check-in",
+    "hotels.text-059": "Check-out",
+    "hotels.text-060": "Guests & Rooms",
+    "hotels.text-061": "2 Adults, 1 Room",
+    "hotels.text-062": "2 Adults, 1 Child",
+    "hotels.text-063": "4 Adults, 2 Rooms",
+    "hotels.text-064": "Family 6 Guests, Villa",
+    "hotels.text-065": "Corporate Group (>10 Guests)",
+    "hotels.text-066": "Type / Star Rating",
+    "hotels.text-067": "All hotels",
+    "hotels.text-068": "5-Star Beachfront Resort",
+    "hotels.text-069": "Private Pool Villa",
+    "hotels.text-070": "4-Star City Hotel",
+    "hotels.text-071": "Luxury Sea-View Apartment",
+    "hotels.text-072": "Search",
+    "hotels.text-073": "Popular searches:",
+    "hotels.text-074": "Bai Dai Cam Ranh All-inclusive",
+    "hotels.text-075": "Tran Phu beachfront",
+    "hotels.text-076": "Private Pool Villa",
+    "hotels.text-077": "5-Star Hotel under 1.5M VND",
+    "hotels.text-078": "Search Filters",
+    "hotels.text-079": "Reset",
+    "hotels.text-080": "Price range / night",
+    "hotels.text-081": "VND",
+    "hotels.text-082": "Under 1,000,000 VND",
+    "hotels.text-083": "(18)",
+    "hotels.text-084": "1,000,000 - 2,000,000 VND",
+    "hotels.text-085": "(54)",
+    "hotels.text-086": "2,000,000 - 4,000,000 VND",
+    "hotels.text-087": "(42)",
+    "hotels.text-088": "Over 4,000,000 VND (Luxury)",
+    "hotels.text-089": "(14)",
+    "hotels.text-090": "500k",
+    "hotels.text-091": "Max 3,500k/night",
+    "hotels.text-092": "8,000k+",
+    "hotels.text-093": "International Star Rating",
+    "hotels.text-094": "3 Stars",
+    "hotels.text-095": "4 Stars",
+    "hotels.text-096": "5 Stars VIP",
+    "hotels.text-097": "Area",
+    "hotels.text-098": "Tran Phu Coastal Road",
+    "hotels.text-099": "(64)",
+    "hotels.text-100": "Bai Dai Cam Ranh Resorts",
+    "hotels.text-101": "(38)",
+    "hotels.text-102": "Hon Tre Island (Vinpearl)",
+    "hotels.text-103": "(9)",
+    "hotels.text-104": "Nguyen Thien Thuat Center",
+    "hotels.text-105": "(22)",
+    "hotels.text-106": "An Vien Coastal Villa Area",
+    "hotels.text-107": "(11)",
+    "hotels.text-108": "Signature Amenities",
+    "hotels.text-109": "Infinity pool",
+    "hotels.text-110": "Private beachfront",
+    "hotels.text-111": "Complimentary buffet breakfast",
+    "hotels.text-112": "Free airport transfer",
+    "hotels.text-113": "On-site Water Park",
+    "hotels.text-114": "Complimentary Spa & Massage",
+    "hotels.text-115": "Free for 1-2 kids (6-12 yrs)",
+    "hotels.text-116": "Flexible Policy",
+    "hotels.text-117": "Free cancellation 48h prior",
+    "hotels.text-118": "Flexible payment / 0 VND hold",
+    "hotels.text-119": "Need urgent group rates?",
+    "hotels.text-120": "Contact our direct support team for exclusive wholesale voucher quotes in Nha Trang & Cam Ranh.",
+    "hotels.text-121": "Chat on Zalo Now (24/7)",
+    "hotels.text-122": "View 128 Hotels on Map",
+    "hotels.text-123": "Explore prime locations near beaches & dining",
+    "hotels.text-124": "128 hotels & resorts",
+    "hotels.text-125": "in Nha Trang - Cam Ranh",
+    "hotels.text-126": "Sort by:",
+    "hotels.text-127": "Best deals",
+    "hotels.text-128": "Lowest price",
+    "hotels.text-129": "Highest rated",
+    "hotels.text-130": "Closest to beach",
+    "hotels.text-131": "Showing",
+    "hotels.text-132": "1 - 6",
+    "hotels.text-133": "of",
+    "hotels.text-134": "128",
+    "hotels.text-135": "hotels",
+    "hotels.text-136": "1",
+    "hotels.text-137": "2",
+    "hotels.text-138": "3",
+    "hotels.text-139": "...",
+    "hotels.text-140": "12",
+    "hotels.text-141": "Total Peace of Mind When Booking",
+    "hotels.text-142": "Service Quality Commitment from {{brand.name}}",
+    "hotels.text-143": "As a Tier-1 strategic partner of international hotel groups in Nha Trang - Cam Ranh, we deliver superior benefits for every stay.",
+    "hotels.text-144": "Transparent Pricing - No Hidden Fees",
+    "hotels.text-145": "Displayed rates are final total prices including 100% VAT, service charges, and resort buffet breakfast. Price-match refund if you find a lower public rate.",
+    "hotels.text-146": "Room Hold & 24/7 Zalo Care",
+    "hotels.text-147": "Our local travel specialists at 38 Nguyen Thai Hoc, Nha Trang support you before, during, and after your trip—including early check-in and free view upgrades.",
+    "hotels.text-148": "Flexible Date Changes & Fast Refunds",
+    "hotels.text-149": "Flexible stay date changes for weather, business schedules, or personal health. Transparent cancellation and refund processing within 2-4 business hours.",
+    "hotels.text-150": "Official Partner of Vinpearl, Accor, Melia",
+    "hotels.text-151": "PCI-DSS Certified Payment Security",
+    "hotels.text-152": "Need help choosing a hotel:",
+    "hotels.text-153": "{{contact.phone}}",
+    "hotels.text-154": "Request Quote via Zalo",
+    "tours.text-008": "Home",
+    "tours.text-009": "/",
+    "tours.text-010": "Daily Tours",
+    "tours.text-011": "PROFESSIONAL ISLAND TOURS & EXPERIENCES IN NHA TRANG",
+    "tours.text-012": "Daily Group & Private Tours -",
+    "tours.text-013": "5-Star Experience",
+    "tours.text-014": "Explore Nha Trang Bay, Hon Mun coral paradise, romantic sunset cruises, and South Central coastal routes with modern speedboats and attentive local guides.",
+    "tours.text-015": "4.96",
+    "tours.text-016": "From 18,500+ verified guest reviews",
+    "tours.text-017": "All (28)",
+    "tours.text-018": "VIP Nha Trang Island Tour",
+    "tours.text-019": "Sunset Cruise",
+    "tours.text-020": "Hon Mun Snorkeling & Diving",
+    "tours.text-021": "Vinh Hy - Hang Rai Tour",
+    "tours.text-022": "City & Culture Tour",
+    "tours.text-023": "Da Lat Day Tour",
+    "tours.text-024": "Departure point",
+    "tours.text-025": "Nha Trang City (Central hotels)",
+    "tours.text-026": "Bai Dai / Cam Ranh Resorts",
+    "tours.text-027": "Da Lat City (Lam Dong)",
+    "tours.text-028": "Phan Rang - Ninh Thuan",
+    "tours.text-029": "Departure date",
+    "tours.text-030": "Number of guests",
+    "tours.text-031": "2 Adults (Couple / Small family)",
+    "tours.text-032": "1 Guest (Solo join-in tour)",
+    "tours.text-033": "4-6 Guests (Friends / Family)",
+    "tours.text-034": "Large Group (> 10 guests - Private speedboat)",
+    "tours.text-035": "Find tours now",
+    "tours.text-036": "Free cancellation 24h prior",
+    "tours.text-037": "2024 composite speedboats",
+    "tours.text-038": "Support checking insurance terms for each tour",
+    "tours.text-039": "Featured & Best-Selling Bay Tours",
+    "tours.text-040": "Most Popular Experiences This Week",
+    "tours.text-041": "Guaranteed daily departures even from 1 guest, with consistent international-standard service.",
+    "tours.text-042": "Diverse Discovery Experiences",
+    "tours.text-043": "Daily Departure Tour List",
+    "tours.text-044": "Sort by:",
+    "tours.text-045": "Most popular & booked",
+    "tours.text-046": "Price: low to high",
+    "tours.text-047": "Price: high to low",
+    "tours.text-048": "Highest 5-star rating",
+    "tours.text-049": "Need a Private Speedboat or Custom Group Tour?",
+    "tours.text-050": "Modern 12 to 45-seat composite speedboats with flexible departure times tailored for families and corporate groups.",
+    "tours.text-051": "Hotline: {{contact.phone}}",
+    "tours.text-052": "Get Zalo Quote Now",
+    "tours.text-053": "Book Your Tour in 3 Minutes",
+    "tours.text-054": "Simple Process & Quality Guarantee",
+    "tours.text-055": "Payment, date-change, and cancellation terms are confirmed during consultation.",
+    "tours.text-056": "1",
+    "tours.text-057": "Choose Tour & Date",
+    "tours.text-058": "Select your preferred itinerary and date, and enter your hotel details for door-to-door pickup.",
+    "tours.text-059": "2",
+    "tours.text-060": "Instant Zalo Confirmation",
+    "tours.text-061": "Operations sends your tour confirmation via Zalo within 5 minutes with vehicle plate and driver/guide name.",
+    "tours.text-062": "3",
+    "tours.text-063": "On-Time Hotel Pickup",
+    "tours.text-064": "Modern tourist vehicle and guide pick you up right at your hotel lobby with attentive luggage assistance.",
+    "tours.text-065": "4",
+    "tours.text-066": "Enjoy & Pay Flexibly",
+    "tours.text-067": "Enjoy complete 5-star service and pay flexibly in cash or bank transfer after your trip.",
+    "tours.text-068": "5-Star Local Guides",
+    "tours.text-069": "Deeply knowledgeable about island culture, enthusiastic, and skilled at capturing great photos of your trip.",
+    "tours.text-070": "Maximum Travel Insurance",
+    "tours.text-071": "Our staff will confirm the insurance coverage applicable to your selected tour.",
+    "tours.text-072": "Free Cancellation 24H Prior",
+    "tours.text-073": "Contact us for rescheduling support if departure conditions change.",
+    "tours.text-074": "Frequently Asked Questions on Nha Trang Island Tours",
+    "tours.text-075": "Can children or seniors join the 3-island speedboat tour?",
+    "tours.text-076": "Absolutely! {{brand.name}} uses modern covered composite speedboats that glide smoothly across sheltered Nha Trang Bay. At Hon Tam, electric buggies take seniors and young children directly to the hot mud bath and restaurant.",
+    "tours.text-077": "Can I go coral diving or snorkeling if I cannot swim?",
+    "tours.text-078": "Yes! For scuba diving or Seawalker underwater walking, a certified 1-on-1 instructor guides you safely underwater. Life jackets, masks, and snorkels are also provided.",
+    "tours.text-079": "What happens if it rains or the sea is rough?",
+    "tours.text-080": "Your safety is {{brand.name}}'s #1 priority. If port authorities suspend boats due to weather, we notify you early and refund 100% of any deposit or help switch to a suitable city tour.",
+    "transfers.text-025": "Modern 2023 - 2024 Fleet",
+    "transfers.text-026": "All-Inclusive Listed Rates - No Hidden Fees",
+    "transfers.text-027": "Airport & Private Transfer",
+    "transfers.text-028": "Cam Ranh Airport",
+    "transfers.text-029": "& Trusted Private Car Charter",
+    "transfers.text-030": "Modern 4, 7, 16, 29, and 45-seat vehicles. Door-to-door pickup in Nha Trang, Bai Dai, Da Lat, Phu Yen. Professional drivers, punctual service, and free flight tracking.",
+    "transfers.text-031": "24/7 Dispatch Hotline",
+    "transfers.text-032": "{{contact.phone}}",
+    "transfers.text-033": "Instant Zalo reply in 60 seconds",
+    "transfers.text-034": "Cam Ranh Airport Transfer",
+    "transfers.text-035": "Intercity Car (Da Lat - Phu Yen)",
+    "transfers.text-036": "Daily Car Rental / City Tour",
+    "transfers.text-037": "One-way",
+    "transfers.text-038": "Round-trip - Save an extra 10%",
+    "transfers.text-039": "Pickup point",
+    "transfers.text-040": "Cam Ranh Airport (Domestic / International)",
+    "transfers.text-041": "Nha Trang Center (Tran Phu / Tourist Quarter)",
+    "transfers.text-042": "Bai Dai Resorts (Cam Lam)",
+    "transfers.text-043": "Da Lat City (Lam Dong)",
+    "transfers.text-044": "Custom address / Other hotel...",
+    "transfers.text-045": "Drop-off / Hotel",
+    "transfers.text-046": "Nha Trang Center (Tran Phu, Hung Vuong)",
+    "transfers.text-047": "Bai Dai Resorts (Movenpick, Alma, Anam...)",
+    "transfers.text-048": "Cam Ranh International Airport (CXR)",
+    "transfers.text-049": "Doc Let Beach / Ninh Hoa Resort",
+    "transfers.text-050": "Da Lat City (Hotel / Villa)",
+    "transfers.text-051": "Tuy Hoa - Phu Yen",
+    "transfers.text-052": "Pickup Date & Time",
+    "transfers.text-053": "Flight Number (Optional)",
+    "transfers.text-054": "Vehicle Type",
+    "transfers.text-055": "4-Seat Sedan (Vios, Accent, City)",
+    "transfers.text-056": "4 Seats",
+    "transfers.text-057": "7 Seats",
+    "transfers.text-058": "16 Seats",
+    "transfers.text-060": "Check Price & Book Car Now",
+    "transfers.text-061": "Suggested route:",
+    "transfers.text-062": "Cam Ranh Airport ⇄ Nha Trang Center (Tran Phu)",
+    "transfers.text-063": "Includes name-sign meet & greet, airport & highway tolls, bottled water, cold towels, and free flight adjustment.",
+    "transfers.text-064": "All-inclusive one-way fare",
+    "transfers.text-065": "250,000 VND",
+    "transfers.text-066": "Quick book via Zalo",
+    "transfers.text-067": "Automatic flight tracking",
+    "transfers.text-068": "Name-sign airport greeting",
+    "transfers.text-069": "Free cancellation 2 hours prior",
+    "transfers.text-070": "No night surcharge (before 22:00)",
+    "transfers.text-071": "Transparent & Accurate",
+    "transfers.text-072": "Listed Airport & Intercity Transfer Rates",
+    "transfers.text-073": "All rates below are all-inclusive listed prices for 2025. Guaranteed zero unexpected extra charges.",
+    "transfers.text-074": "Includes VAT & Road Tolls",
+    "transfers.text-075": "Popular Routes & Transfers",
+    "transfers.text-076": "4-Seat Car",
+    "transfers.text-077": "Sedan 3 pax",
+    "transfers.text-078": "7-Seat Car",
+    "transfers.text-079": "SUV 5 pax",
+    "transfers.text-080": "16-Seat Van",
+    "transfers.text-081": "Transit 12-15 pax",
+    "transfers.text-084": "Action",
+    "transfers.text-085": "Cam Ranh Airport ⇄ Nha Trang City Center",
+    "transfers.text-086": "Distance 35km • Travel time: 35-40 mins (Cu Hin Pass)",
+    "transfers.text-087": "Book car",
+    "transfers.text-088": "Cam Ranh Airport ⇄ Bai Dai Resorts (Cam Lam)",
+    "transfers.text-089": "Distance 7 - 12km (Movenpick, Alma, Radisson Blu, The Anam...)",
+    "transfers.text-090": "Book car",
+    "transfers.text-091": "Nha Trang ⇄ Da Lat City (Misty Khanh Le Pass)",
+    "transfers.text-092": "Distance 135km • Travel time: 3.0 - 3.5 hours",
+    "transfers.text-093": "Book car",
+    "transfers.text-094": "Nha Trang ⇄ Tuy Hoa (Phu Yen) / Ca Pass",
+    "transfers.text-095": "Distance 120km • Optional stop at Mui Dien - Vung Ro",
+    "transfers.text-096": "Book car",
+    "transfers.text-097": "Nha Trang ⇄ Phan Rang - Thap Cham / Ninh Thuan",
+    "transfers.text-098": "Distance 105km • Binh Hung - Vinh Hy coastal scenic route",
+    "transfers.text-099": "Book car",
+    "transfers.text-100": "Note:",
+    "transfers.text-101": "Rates include fuel, road tolls, airport parking fees, and driver service. No night surcharge before 22:00.",
+    "transfers.text-102": "Valid through 31/12/2025",
+    "transfers.text-103": "5-star vehicle quality",
+    "transfers.text-104": "Modern Premium Tourist Fleet",
+    "transfers.text-105": "View vehicle types, maximum capacity, and reference fares by route.",
+    "transfers.text-106": "Standard Sedan",
+    "transfers.text-107": "Comfortable 4-Seat Car",
+    "transfers.text-108": "Toyota Vios, Hyundai Accent, Honda City",
+    "transfers.text-109": "Up to 3 passengers",
+    "transfers.text-110": "2 Large suitcases + 2 backpacks",
+    "transfers.text-111": "Strong air conditioning",
+    "transfers.text-112": "Plush leather seats",
+    "transfers.text-113": "From only",
+    "transfers.text-114": "250,000 VND",
+    "transfers.text-115": "Select this car",
+    "transfers.text-116": "Family & Friends",
+    "transfers.text-117": "Spacious 7-Seat SUV/MPV",
+    "transfers.text-118": "Mitsubishi Xpander, Toyota Innova, Fortuner",
+    "transfers.text-119": "Up to 5-6 passengers",
+    "transfers.text-120": "4 Medium suitcases + backpacks",
+    "transfers.text-121": "Roomy cabin",
+    "transfers.text-122": "Phone charging ports",
+    "transfers.text-123": "From only",
+    "transfers.text-124": "300,000 VND",
+    "transfers.text-125": "Select this car",
+    "transfers.text-136": "Tour Groups / Corporate",
+    "transfers.text-137": "16-Seat Tourist Van",
+    "transfers.text-138": "New-gen Ford Transit & Hyundai Solati",
+    "transfers.text-139": "Up to 12-15 passengers",
+    "transfers.text-140": "Large luggage compartment",
+    "transfers.text-141": "Tour guide microphone",
+    "transfers.text-142": "Safety stability system",
+    "transfers.text-143": "From only",
+    "transfers.text-144": "550,000 VND",
+    "transfers.text-145": "Select this car",
+    "transfers.text-146": "Worry-free journey",
+    "transfers.text-147": "Superior Benefits When Booking with {{brand.name}}",
+    "transfers.text-148": "We deliver professional service standards, putting passenger safety and satisfaction first.",
+    "transfers.text-149": "Automatic flight tracking",
+    "transfers.text-150": "Whether your flight is delayed or lands early, your driver adjusts pickup time at the terminal with zero waiting fees.",
+    "transfers.text-151": "Free cancellation 2 hours prior",
+    "transfers.text-152": "Maximum flexibility for sudden plan changes. Notify our hotline or Zalo 2 hours before pickup for a 100% free change or cancellation.",
+    "transfers.text-153": "Courteous & Route-Savvy Drivers",
+    "transfers.text-154": "Neatly dressed local drivers, warm hospitality, hands-on luggage help, and great local food recommendations.",
+    "transfers.text-155": "24/7 Instant Dispatch Center",
+    "transfers.text-156": "No automated bots. Live dispatchers assist 24/7 via Zalo & Hotline:",
+    "transfers.text-157": "{{contact.phone}}",
+    "transfers.text-158": "resolved within 30 seconds.",
+    "transfers.text-159": "Need urgent pickup at Cam Ranh Airport within 15 minutes?",
+    "transfers.text-160": "Our fleet stands ready at Cam Ranh Airport parking and Nha Trang center, ready to dispatch the moment you land!",
+    "transfers.text-161": "Call {{contact.phone}} Now",
+    "transfers.text-162": "Message Zalo for Quote",
+    "transfers.text-163": "Quick answers",
+    "transfers.text-164": "Frequently Asked Questions on Airport & Car Transfers",
+    "transfers.text-165": "1. How do I recognize my pickup driver at Cam Ranh Airport?",
+    "transfers.text-166": "30 minutes before landing, dispatch sends your driver details (name, phone, license plate) via Zalo/SMS. Exiting arrivals, your driver holds",
+    "transfers.text-167": "a welcome board with your name clearly printed",
+    "transfers.text-168": "right at the lobby. If crowded, call the driver or hotline {{contact.phone}} for immediate assistance.",
+    "transfers.text-169": "2. Will I be charged extra waiting fees if my flight is delayed?",
+    "transfers.text-170": "Zero extra waiting fees!",
+    "transfers.text-171": "{{brand.name}} operations tracks your flight radar in real time. Even if delayed 1-3 hours, your driver adjusts to the new landing time and waits for you.",
+    "transfers.text-172": "3. What taxes and fees are included in the listed transfer prices?",
+    "transfers.text-173": "{{brand.name}}'s listed rates are",
+    "transfers.text-174": "all-inclusive",
+    "transfers.text-175": ": covering fuel, driver service, Cam Ranh Airport entry fees, and highway tolls. No tipping or hidden fees apply (except unscheduled detours).",
+    "transfers.text-176": "4. Can we stop for photos along the way from Nha Trang to Da Lat or Phu Yen?",
+    "transfers.text-177": "Yes! Because it is a Private Car charter, you control the pace. Along Khanh Le Pass (Da Lat) or Ca Pass - Vung Ro Bay (Phu Yen), the driver happily stops for 15-20 minute scenic photos or coffee breaks at no extra charge.",
+    "transfers.text-178": "5. What payment methods are accepted for transfer services?",
+    "transfers.text-179": "You can pay flexibly:",
+    "transfers.text-180": "Pay cash directly to the driver",
+    "transfers.text-181": "after completing the trip, or transfer via VietQR / MoMo / VNPay to {{brand.name}}'s company account.",
+    "header.text-014": "24/7 Hotline:",
+    "header.text-015": "{{contact.phone}}",
+    "header.text-016": "Partner via Zalo",
+    "header.text-017": "Favorites",
+    "header.text-018": "VI",
+    "header.text-019": "|",
+    "header.text-020": "EN",
+    "header.text-021": "{{brand.wordmarkPrimary}}",
+    "header.text-022": "{{brand.wordmarkSecondary}}",
+    "header.text-023": "TRAVEL & EXPERIENCES",
+    "header.text-024": "Home",
+    "header.text-025": "Hotels",
+    "header.text-026": "Daily Tours",
+    "header.text-027": "Combos",
+    "header.text-028": "Transfers",
+    "header.text-029": "Travel Guide",
+    "header.text-030": "Contact",
+    "header.text-031": "Zalo Support",
+    "footer.text-023": "{{brand.name}}",
+    "footer.text-024": "Online Travel Platform",
+    "footer.text-025": "Hotel booking, tours, and daily experiences platform in Nha Trang.",
+    "footer.text-026": "38 Ground Floor, Block A - Nguyen Thai Hoc, Van Thanh Ward, Nha Trang City, Khanh Hoa Province",
+    "footer.text-027": "Support hotline:",
+    "footer.text-028": "{{contact.phone}}",
+    "footer.text-029": "{{contact.email}}",
+    "footer.text-030": "{{brand.name}}",
+    "footer.text-031": "Services",
+    "footer.text-032": "Hotels",
+    "footer.text-033": "Tours",
+    "footer.text-034": "Transfers",
+    "footer.text-035": "Travel Combos",
+    "footer.text-036": "Deals & Promotions",
+    "footer.text-037": "Airport Transfers",
+    "footer.text-038": "About Us",
+    "footer.text-039": "Payment Policy",
+    "footer.text-040": "Cancellation & Rescheduling",
+    "footer.text-041": "Privacy Policy",
+    "footer.text-042": "Terms & Conditions",
+    "footer.text-043": "OTA Operating Rules",
+    "footer.text-044": "Dispute Resolution",
+    "footer.text-045": "Payment Methods",
+    "footer.text-046": "VNPAY",
+    "footer.text-047": "MOMO",
+    "footer.text-048": "ZALOPAY",
+    "footer.text-049": "VISA/MC",
+    "footer.text-050": "Subscribe for VIP Deals",
+    "footer.text-051": "Send",
+    "footer.text-052": "© {{brand.name}}. All rights reserved.",
+    "footer.text-053": "Terms",
+    "footer.text-054": "Privacy",
+    "footer.text-055": "Contact",
+    "evisa.title": "E-Visa",
+    "fast-track.title": "Airport Fast-Track",
+    "contact.title": "Contact & Support",
+    "lookup.title": "Booking Lookup",
+    "blog.title": "Blog & News"
+  },
+  "products": {
+    "hotels-1": {
+      "title": "The Empyrean Hotel Nha Trang",
+      "location": "2 Tran Phu, Loc Tho Ward, Nha Trang (100m from 2/4 Square)",
+      "description": "Save 25% on today's Flash Deal at The Empyrean Hotel Nha Trang, featuring a 40th-floor infinity pool, full bay views, complimentary buffet breakfast, and free 48h cancellation.",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "Save 25%",
+          "value": "Save 25%"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "Today's Flash Deal",
+          "value": "Today's Flash Deal"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "32 photos",
+          "value": "32 photos"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "5-Star International",
+          "value": "5-Star International"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "Wonderful",
+          "value": "Wonderful"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "1,250 reviews",
+          "value": "1,250 reviews"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "40th-floor infinity pool",
+          "value": "40th-floor infinity pool"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "Panoramic Nha Trang Bay view",
+          "value": "Panoramic Nha Trang Bay view"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "Free buffet breakfast for 2",
+          "value": "Free buffet breakfast for 2"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "Free cancellation 48h prior • Instant Zalo confirmation",
+          "value": "Free cancellation 48h prior • Instant Zalo confirmation"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "/night",
+          "value": "/night"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "Includes taxes, fees & breakfast",
+          "value": "Includes taxes, fees & breakfast"
+        },
+        "field-016": {
+          "kind": "text",
+          "label": "View Rooms & Book Now",
+          "value": "View Rooms & Book Now"
+        }
+      }
+    },
+    "hotels-2": {
+      "title": "Movenpick Resort Cam Ranh",
+      "location": "Bai Dai, Cam Hai Dong, Cam Ranh (10 mins from Cam Ranh Airport)",
+      "description": "Accor international 5-star beachfront resort with complimentary Chocolate Hour, 6,000m² Water Park, 800m private white-sand beach, and shuttle bus to Nha Trang center.",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "Accor International Brand",
+          "value": "Accor International Brand"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "Save 30% Summer Deal",
+          "value": "Save 30% Summer Deal"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "48 photos",
+          "value": "48 photos"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "5-Star Resort",
+          "value": "5-Star Resort"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "Excellent",
+          "value": "Excellent"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "890 reviews",
+          "value": "890 reviews"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "Complimentary Chocolate Hour",
+          "value": "Complimentary Chocolate Hour"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "6,000m² Water Park",
+          "value": "6,000m² Water Park"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "800m private white-sand beach",
+          "value": "800m private white-sand beach"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "Free kids Water Park tickets • Nha Trang shuttle bus",
+          "value": "Free kids Water Park tickets • Nha Trang shuttle bus"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "/night",
+          "value": "/night"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "Seaview Deluxe Room • 5-star breakfast",
+          "value": "Seaview Deluxe Room • 5-star breakfast"
+        },
+        "field-016": {
+          "kind": "text",
+          "label": "View Rooms & Book Now",
+          "value": "View Rooms & Book Now"
+        }
+      }
+    },
+    "hotels-3": {
+      "title": "Alma Resort Cam Ranh",
+      "location": "Nguyen Tat Thanh, Bai Dai, Cam Ranh, Khanh Hoa",
+      "description": "Top family 5-star ultra-luxury resort featuring 12 beachfront infinity pools, free Alma Cinema, kids science museum, and a 300,000 VND dining voucher when booking 7 days early.",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "Top Family Resort",
+          "value": "Top Family Resort"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "55 photos",
+          "value": "55 photos"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "5-Star Ultra Luxury",
+          "value": "5-Star Ultra Luxury"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Excellent",
+          "value": "Excellent"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "1,040 reviews",
+          "value": "1,040 reviews"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "12 ocean-view infinity pools",
+          "value": "12 ocean-view infinity pools"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "Free Alma Cinema",
+          "value": "Free Alma Cinema"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "Children's science museum",
+          "value": "Children's science museum"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "Free 300,000 VND dining voucher (7-day advance booking)",
+          "value": "Free 300,000 VND dining voucher (7-day advance booking)"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/night",
+          "value": "/night"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "1-Bedroom Suite • International breakfast",
+          "value": "1-Bedroom Suite • International breakfast"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "View Rooms & Book Now",
+          "value": "View Rooms & Book Now"
+        }
+      }
+    },
+    "hotels-4": {
+      "title": "Fusion Resort Cam Ranh - All Spa Inclusive",
+      "location": "Bai Dai, Cam Hai Dong, Cam Ranh, Khanh Hoa",
+      "description": "All-spa-inclusive 5-star luxury resort with daily spa treatments per guest, Anywhere Anytime breakfast, private pool villas, and flexible date changes 5 days prior.",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "All Spa Inclusive",
+          "value": "All Spa Inclusive"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "40 photos",
+          "value": "40 photos"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "5-Star Luxury",
+          "value": "5-Star Luxury"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Exceptional",
+          "value": "Exceptional"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "650 reviews",
+          "value": "650 reviews"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "Complimentary daily spa per guest",
+          "value": "Complimentary daily spa per guest"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "Breakfast Anywhere Anytime",
+          "value": "Breakfast Anywhere Anytime"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "Secluded private pool villas",
+          "value": "Secluded private pool villas"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "Free flexible date change 5 days prior",
+          "value": "Free flexible date change 5 days prior"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/night",
+          "value": "/night"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "Chic Suite Private Pool • Spa Included",
+          "value": "Chic Suite Private Pool • Spa Included"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "View Rooms & Book Now",
+          "value": "View Rooms & Book Now"
+        }
+      }
+    },
+    "hotels-5": {
+      "title": "Diamond Bay Hotel Nha Trang",
+      "location": "20 Tran Phu, Loc Tho Ward, Nha Trang (Across from Nha Trang Center)",
+      "description": "Central beachfront 4-star superior hotel directly facing the beach, connected to Nha Trang Center shopping mall, with daily buffet breakfast and easy walking access to the night market.",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "Coastal City Center",
+          "value": "Coastal City Center"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "28 photos",
+          "value": "28 photos"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "4-Star Superior",
+          "value": "4-Star Superior"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Very Good",
+          "value": "Very Good"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "740 reviews",
+          "value": "740 reviews"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "Direct beachfront view",
+          "value": "Direct beachfront view"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "Connected to shopping & dining mall",
+          "value": "Connected to shopping & dining mall"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "Daily buffet breakfast included",
+          "value": "Daily buffet breakfast included"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "Easy walk to beach and night market",
+          "value": "Easy walk to beach and night market"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/night",
+          "value": "/night"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "Deluxe City Room • Breakfast for 2",
+          "value": "Deluxe City Room • Breakfast for 2"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "View Rooms & Book Now",
+          "value": "View Rooms & Book Now"
+        }
+      }
+    },
+    "hotels-6": {
+      "title": "Duyen Ha Resort Cam Ranh",
+      "location": "Lot D9B, Northern Cam Ranh Peninsula, Khanh Hoa",
+      "description": "Family-friendly 5-star resort with 6 Asian-European restaurants, a 2,500m² tropical garden pool, scheduled airport shuttle, and free stay for 1 child under 12.",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "Family Combo Deal",
+          "value": "Family Combo Deal"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "36 photos",
+          "value": "36 photos"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "5-Star Resort",
+          "value": "5-Star Resort"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Wonderful",
+          "value": "Wonderful"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "510 reviews",
+          "value": "510 reviews"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "6 Asian-European restaurants",
+          "value": "6 Asian-European restaurants"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "2,500m² tropical garden pool",
+          "value": "2,500m² tropical garden pool"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "Scheduled airport shuttle",
+          "value": "Scheduled airport shuttle"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "Free surcharge for 1 child under 12",
+          "value": "Free surcharge for 1 child under 12"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/night",
+          "value": "/night"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "Deluxe Garden View • Buffet breakfast",
+          "value": "Deluxe Garden View • Buffet breakfast"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "View Rooms & Book Now",
+          "value": "View Rooms & Book Now"
+        }
+      }
+    },
+    "tours-1": {
+      "title": "VIP 3-Island Nha Trang Tour: Hon Mun - Fishing Village - Hon Tam Mud Bath",
+      "location": "Nha Trang, Khanh Hoa",
+      "description": "Best-selling daily speedboat tour featuring 5-star Hon Tam mud bath, Hon Mun coral snorkeling, floating seafood lunch, and door-to-door hotel transfer.",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "#1 Best Seller • Save 15%",
+          "value": "#1 Best Seller • Save 15%"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "08:00 - 16:00 Daily",
+          "value": "08:00 - 16:00 Daily"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "High-Speed Boat",
+          "value": "High-Speed Boat"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Nha Trang • Coral Bay",
+          "value": "Nha Trang • Coral Bay"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "(3.4k bookings)",
+          "value": "(3.4k bookings)"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "5* Hon Tam mud bath",
+          "value": "5* Hon Tam mud bath"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "Hon Mun coral reefs",
+          "value": "Hon Mun coral reefs"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "Floating seafood lunch",
+          "value": "Floating seafood lunch"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "Door-to-door transfer",
+          "value": "Door-to-door transfer"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/guest",
+          "value": "/guest"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "-15% TODAY",
+          "value": "-15% TODAY"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "View itinerary",
+          "value": "View itinerary"
+        },
+        "field-016": {
+          "kind": "text",
+          "label": "Book tour now",
+          "value": "Book tour now"
+        }
+      }
+    },
+    "tours-2": {
+      "title": "Nha Trang Bay Sunset Cruise & Lobster BBQ Dinner",
+      "location": "Nha Trang, Khanh Hoa",
+      "description": "Luxury 5-star evening cruise on Nha Trang Bay with lobster and US beef set dinner, live violin & guitar music, free cocktails & canapes, and a private photographer.",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "5-Star Luxury Experience",
+          "value": "5-Star Luxury Experience"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "16:30 - 21:00 Daily",
+          "value": "16:30 - 21:00 Daily"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "Sealife / Emperor Cruises",
+          "value": "Sealife / Emperor Cruises"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Nha Trang Bay Twilight",
+          "value": "Nha Trang Bay Twilight"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "(1.8k reviews)",
+          "value": "(1.8k reviews)"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "Lobster & US Beef set menu",
+          "value": "Lobster & US Beef set menu"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "Live Violin & Guitar music",
+          "value": "Live Violin & Guitar music"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "Free cocktails & canapes",
+          "value": "Free cocktails & canapes"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "Private photographer",
+          "value": "Private photographer"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/guest",
+          "value": "/guest"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "FREE WINE",
+          "value": "FREE WINE"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "View itinerary",
+          "value": "View itinerary"
+        },
+        "field-016": {
+          "kind": "text",
+          "label": "Book tour now",
+          "value": "Book tour now"
+        }
+      }
+    },
+    "tours-3": {
+      "title": "Vinh Hy Bay - Hang Rai - Vineyard - Sheep Field Coastal Tour",
+      "location": "Nha Trang, Khanh Hoa",
+      "description": "Scenic coastal Limousine/Dcar tour to Hang Rai sea waterfall, fresh vineyard grape picking, Suoi Tien sheep field check-in, and floating bay seafood lunch.",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "Most Scenic Coastal Route",
+          "value": "Most Scenic Coastal Route"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "07:30 - 17:00 Daily",
+          "value": "07:30 - 17:00 Daily"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "Limousine / Dcar Van",
+          "value": "Limousine / Dcar Van"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Ninh Thuan • Vinh Hy",
+          "value": "Ninh Thuan • Vinh Hy"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "(2.1k reviews)",
+          "value": "(2.1k reviews)"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "Hang Rai sea waterfall",
+          "value": "Hang Rai sea waterfall"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "Fresh vineyard grape picking",
+          "value": "Fresh vineyard grape picking"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "Suoi Tien Sheep Field photos",
+          "value": "Suoi Tien Sheep Field photos"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "All-inclusive bay raft lunch",
+          "value": "All-inclusive bay raft lunch"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/guest",
+          "value": "/guest"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "-12% ALL-IN",
+          "value": "-12% ALL-IN"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "View itinerary",
+          "value": "View itinerary"
+        },
+        "field-016": {
+          "kind": "text",
+          "label": "Book tour now",
+          "value": "Book tour now"
+        }
+      }
+    },
+    "tours-4": {
+      "title": "Hon Mun Scuba Diving & Seawalker Underwater Walking Tour",
+      "location": "Nha Trang, Khanh Hoa",
+      "description": "No swimming skills required to explore vibrant coral reefs. PADI-certified instructors guide you 1-on-1 with premium diving gear and specialized insurance.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "1-on-1 pro instructor",
+          "value": "1-on-1 pro instructor"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "Free underwater photos & video",
+          "value": "Free underwater photos & video"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "Hon Mun Marine Reserve",
+          "value": "Hon Mun Marine Reserve"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "4.9 (980)",
+          "value": "4.9 (980)"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "All-inclusive",
+          "value": "All-inclusive"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "Book now",
+          "value": "Book now"
+        }
+      }
+    },
+    "tours-5": {
+      "title": "Nha Trang City Tour: Ponagar Tower - Oceanography Institute - Long Son Pagoda",
+      "location": "Nha Trang, Khanh Hoa",
+      "description": "Discover Nha Trang's cultural heritage in a half-day or full-day tour with modern A/C vehicle, attraction tickets, and specialty Nha Trang grilled pork rolls lunch.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "Ideal for families",
+          "value": "Ideal for families"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "Group or private car",
+          "value": "Group or private car"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "Cultural heritage sites",
+          "value": "Cultural heritage sites"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "4.8 (1.2k)",
+          "value": "4.8 (1.2k)"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "All-inclusive",
+          "value": "All-inclusive"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "Book now",
+          "value": "Book now"
+        }
+      }
+    },
+    "tours-6": {
+      "title": "Da Lat Cloud-Hunting Day Tour from Nha Trang (Morning to Evening)",
+      "location": "Nha Trang, Khanh Hoa",
+      "description": "Cross the majestic Khanh Le Omega Pass, catch morning clouds at Cau Dat tea hills, visit hydrangea gardens, and enjoy famous Leguda vegetable hotpot.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "Departs from Nha Trang",
+          "value": "Departs from Nha Trang"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "Scenic Khanh Le cloud pass",
+          "value": "Scenic Khanh Le cloud pass"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "Da Lat flower highlands",
+          "value": "Da Lat flower highlands"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "4.9 (1.5k)",
+          "value": "4.9 (1.5k)"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "All-inclusive",
+          "value": "All-inclusive"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "Book now",
+          "value": "Book now"
+        }
+      }
+    },
+    "tours-7": {
+      "title": "Diep Son Island Underwater Sandbar & Doc Let Beach Tour",
+      "location": "Nha Trang, Khanh Hoa",
+      "description": "Walk across the unique white sandbar in the middle of the sea, swim at pristine Doc Let Beach, and enjoy freshly grilled seafood on the island.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "Walkway across the sea",
+          "value": "Walkway across the sea"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "Van Phong Bay",
+          "value": "Van Phong Bay"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "4.8 (850)",
+          "value": "4.8 (850)"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "All-inclusive",
+          "value": "All-inclusive"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Book now",
+          "value": "Book now"
+        }
+      }
+    },
+    "tours-8": {
+      "title": "Nha Phu Bay Eco-Tour: Orchid Island & Monkey Island Kingdom",
+      "location": "Nha Trang, Khanh Hoa",
+      "description": "Meet over 1,200 wild monkeys, enjoy animal shows, stroll through the giant butterfly garden, and walk the colorful conical-hat lane at Orchid Island.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "Vibrant eco-park",
+          "value": "Vibrant eco-park"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "Nha Phu Lagoon",
+          "value": "Nha Phu Lagoon"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "4.7 (720)",
+          "value": "4.7 (720)"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "All-inclusive",
+          "value": "All-inclusive"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Book now",
+          "value": "Book now"
+        }
+      }
+    },
+    "tours-9": {
+      "title": "Robinson Island Experience: Floating Wine Bar, SUP & Kayak Race",
+      "location": "Nha Trang, Khanh Hoa",
+      "description": "Relax on a secluded white-sand beach, join the seaside dance party, floating cocktail bar, kayaking, and free coral snorkeling.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "Floating sea bar party",
+          "value": "Floating sea bar party"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "Robinson Island",
+          "value": "Robinson Island"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "4.9 (1.1k)",
+          "value": "4.9 (1.1k)"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "All-inclusive",
+          "value": "All-inclusive"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Book now",
+          "value": "Book now"
+        }
+      }
+    },
+    "home-1": {
+      "title": "4D3N Phu Quoc 5-Star Resort Combo",
+      "location": "Nha Trang, Khanh Hoa",
+      "description": "03 nights at a luxury 4-5 star beachfront resort + round-trip flights + coral snorkeling tour.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "All-In-One Package",
+          "value": "All-In-One Package"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "4 days 3 nights",
+          "value": "4 days 3 nights"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "Daily departures",
+          "value": "Daily departures"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "From only",
+          "value": "From only"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Book combo",
+          "value": "Book combo"
+        }
+      }
+    },
+    "home-2": {
+      "title": "3D2N Phu Quoc Bai Dai Combo",
+      "location": "Nha Trang, Khanh Hoa",
+      "description": "4-5 star beachfront resort stay with sunset infinity pool + Hon Thom cable car tickets.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "Super Hot Combo",
+          "value": "Super Hot Combo"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "3 days 2 nights",
+          "value": "3 days 2 nights"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "Daily departures",
+          "value": "Daily departures"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "From only",
+          "value": "From only"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Book combo",
+          "value": "Book combo"
+        }
+      }
+    },
+    "home-3": {
+      "title": "4D3N Blue Sea Nha Trang Combo",
+      "location": "Nha Trang, Khanh Hoa",
+      "description": "03 nights at a central 4-5 star Nha Trang hotel + VIP 3-Island speedboat tour + Hon Tam mud bath.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "Best Seller",
+          "value": "Best Seller"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "4 days 3 nights",
+          "value": "4 days 3 nights"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "Daily departures",
+          "value": "Daily departures"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "From only",
+          "value": "From only"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Book combo",
+          "value": "Book combo"
+        }
+      }
+    },
+    "home-4": {
+      "title": "Empyrean Hotel Nha Trang",
+      "location": "02 Nguyen Thi Minh Khai, Loc Tho, Nha Trang",
+      "description": "Save 20% with infinity pool overlooking Nha Trang Bay, right across 2/4 Square, steps from Tran Phu Beach & Night Market.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "Save 20%",
+          "value": "Save 20%"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "2 rooms left",
+          "value": "2 rooms left"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "Infinity pool with full Nha Trang Bay view",
+          "value": "Infinity pool with full Nha Trang Bay view"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "Opposite central 2/4 Square",
+          "value": "Opposite central 2/4 Square"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Steps from Tran Phu Beach & Night Market",
+          "value": "Steps from Tran Phu Beach & Night Market"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "Deal ends:",
+          "value": "Deal ends:"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 30/05/2026",
+          "value": "23:59, 30/05/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/night",
+          "value": "/night"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "Book room",
+          "value": "Book room"
+        }
+      }
+    },
+    "home-5": {
+      "title": "Movenpick Resort Cam Ranh",
+      "location": "Bai Dai, Cam Hai Dong, Cam Lam, Khanh Hoa",
+      "description": "Save 24% with free cancellation, daily Swiss Chocolate Hour, thrilling Water Park, and lively Swiss Village.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "Save 24%",
+          "value": "Save 24%"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "Free cancellation",
+          "value": "Free cancellation"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "Daily complimentary Swiss Chocolate Hour",
+          "value": "Daily complimentary Swiss Chocolate Hour"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "Adventure Water Park",
+          "value": "Adventure Water Park"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Lively Swiss Village entertainment",
+          "value": "Lively Swiss Village entertainment"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "Deal ends:",
+          "value": "Deal ends:"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 31/05/2026",
+          "value": "23:59, 31/05/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/night",
+          "value": "/night"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "Book room",
+          "value": "Book room"
+        }
+      }
+    },
+    "home-6": {
+      "title": "ALMA Resort Cam Ranh",
+      "location": "Northern Cam Ranh Peninsula, Cam Lam, Khanh Hoa",
+      "description": "Save 18% near Bai Dai Beach with 6,000m² Splash Water Park, 12 beachfront infinity pools, and free Alma Cinema.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "Save 18%",
+          "value": "Save 18%"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "Near Bai Dai Beach",
+          "value": "Near Bai Dai Beach"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "6,000m² Splash Water Park",
+          "value": "6,000m² Splash Water Park"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "12 cascading beachfront infinity pools",
+          "value": "12 cascading beachfront infinity pools"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Free Alma Cinema",
+          "value": "Free Alma Cinema"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "Deal ends:",
+          "value": "Deal ends:"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 02/06/2026",
+          "value": "23:59, 02/06/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/night",
+          "value": "/night"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "Book room",
+          "value": "Book room"
+        }
+      }
+    },
+    "home-7": {
+      "title": "Fusion Resort Cam Ranh",
+      "location": "Nguyen Tat Thanh, Bai Dai, Cam Ranh",
+      "description": "Save 22% with daily all-inclusive spa treatments, exclusive Anytime Anywhere breakfast, and secluded ocean-view pool villas.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "Save 22%",
+          "value": "Save 22%"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "Spa Included",
+          "value": "Spa Included"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "Daily all-inclusive spa treatments",
+          "value": "Daily all-inclusive spa treatments"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "Exclusive breakfast anytime anywhere",
+          "value": "Exclusive breakfast anytime anywhere"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Secluded ocean-view private pool villas",
+          "value": "Secluded ocean-view private pool villas"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "Deal ends:",
+          "value": "Deal ends:"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 05/06/2026",
+          "value": "23:59, 05/06/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/night",
+          "value": "/night"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "Book room",
+          "value": "Book room"
+        }
+      }
+    },
+    "home-8": {
+      "title": "Duyen Ha Resort Cam Ranh",
+      "location": "Bai Dai, Cam Hai Dong, Cam Lam",
+      "description": "Save 20% at Bai Dai private white-sand beach with tropical outdoor pools and 06 premium Asian-European restaurants & bars.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "Save 20%",
+          "value": "Save 20%"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "2 rooms left",
+          "value": "2 rooms left"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "Private white-sand Bai Dai beach",
+          "value": "Private white-sand Bai Dai beach"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "Tropical-style outdoor swimming pool",
+          "value": "Tropical-style outdoor swimming pool"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "06 premium Asian-European restaurants & bars",
+          "value": "06 premium Asian-European restaurants & bars"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "Deal ends:",
+          "value": "Deal ends:"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 30/05/2026",
+          "value": "23:59, 30/05/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/night",
+          "value": "/night"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "Book room",
+          "value": "Book room"
+        }
+      }
+    },
+    "home-9": {
+      "title": "CostaBella Resort Nha Trang",
+      "location": "Phuoc Ha, Phuoc Dong, Nha Trang",
+      "description": "Save 24% with free cancellation, serene private beach, fun Aqua Park, and panoramic mountain-view outdoor pool.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "Save 24%",
+          "value": "Save 24%"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "Free cancellation",
+          "value": "Free cancellation"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "Serene private beach",
+          "value": "Serene private beach"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "Fun Aqua Water Park",
+          "value": "Fun Aqua Water Park"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Outdoor pool with panoramic mountain view",
+          "value": "Outdoor pool with panoramic mountain view"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "Deal ends:",
+          "value": "Deal ends:"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 31/05/2026",
+          "value": "23:59, 31/05/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/night",
+          "value": "/night"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "Book room",
+          "value": "Book room"
+        }
+      }
+    },
+    "home-10": {
+      "title": "Swandor Resort Cam Ranh",
+      "location": "Nguyen Tat Thanh, Bai Dai, Cam Lam",
+      "description": "Save 18% right on pristine Bai Dai Beach with 24h Ultra All-Inclusive dining and expansive outdoor swimming pools.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "Save 18%",
+          "value": "Save 18%"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "Near Bai Dai Beach",
+          "value": "Near Bai Dai Beach"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "Pristine Bai Dai beachfront",
+          "value": "Pristine Bai Dai beachfront"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "24h Ultra All-Inclusive dining",
+          "value": "24h Ultra All-Inclusive dining"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Expansive outdoor swimming pool complex",
+          "value": "Expansive outdoor swimming pool complex"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "Deal ends:",
+          "value": "Deal ends:"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 02/06/2026",
+          "value": "23:59, 02/06/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/night",
+          "value": "/night"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "Book room",
+          "value": "Book room"
+        }
+      }
+    },
+    "home-11": {
+      "title": "Diamond Bay Hotel Nha Trang",
+      "location": "20 Tran Phu, Loc Tho, Nha Trang",
+      "description": "Save 24% with free cancellation, direct Tran Phu sea views, rooftop infinity pool, and rich Asian-European breakfast buffet.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "Save 24%",
+          "value": "Save 24%"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "Free cancellation",
+          "value": "Free cancellation"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "Spectacular direct Tran Phu sea view",
+          "value": "Spectacular direct Tran Phu sea view"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "Rooftop outdoor infinity pool",
+          "value": "Rooftop outdoor infinity pool"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "Rich Asian-European breakfast buffet",
+          "value": "Rich Asian-European breakfast buffet"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "Deal ends:",
+          "value": "Deal ends:"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 31/05/2026",
+          "value": "23:59, 31/05/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/night",
+          "value": "/night"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "Book room",
+          "value": "Book room"
+        }
+      }
+    },
+    "home-12": {
+      "title": "Nha Trang Bay Sunset Cruise & BBQ Dinner",
+      "location": "Nha Trang, Khanh Hoa",
+      "description": "Sail across romantic Nha Trang Bay at sunset, savoring a premium seafood buffet, cocktails, and live acoustic music.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "5-Star Experience",
+          "value": "5-Star Experience"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "Daily departures",
+          "value": "Daily departures"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "•",
+          "value": "•"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "1.2k+ bookings",
+          "value": "1.2k+ bookings"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "•",
+          "value": "•"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "Full day",
+          "value": "Full day"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "Door-to-door pickup in central Nha Trang",
+          "value": "Door-to-door pickup in central Nha Trang"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "All-in from",
+          "value": "All-in from"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "Book tour",
+          "value": "Book tour"
+        }
+      }
+    },
+    "home-13": {
+      "title": "VIP 3-Island Nha Trang Tour: Hon Mun – Fishing Village – Hon Tam",
+      "location": "Nha Trang, Khanh Hoa",
+      "description": "Modern speedboat, coral snorkeling at Hon Mun reserve, Fishing Village seafood lunch, and all-inclusive hot mud bath at Hon Tam.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "Best Seller",
+          "value": "Best Seller"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "Daily departures",
+          "value": "Daily departures"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "•",
+          "value": "•"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "1.2k+ bookings",
+          "value": "1.2k+ bookings"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "•",
+          "value": "•"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "Full day",
+          "value": "Full day"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "Pickup at central Nha Trang hotels",
+          "value": "Pickup at central Nha Trang hotels"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "All-in from",
+          "value": "All-in from"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "Book tour",
+          "value": "Book tour"
+        }
+      }
+    }
+  },
+  "information_pages": [
+    {
+      "slug": "gioi-thieu",
+      "title": "About Us",
+      "body": "NhaTrangGo is an online booking platform for hotels, island tours, and Cam Ranh – Nha Trang airport transfers with transparent pricing and 24/7 support."
+    },
+    {
+      "slug": "dieu-khoan-su-dung",
+      "title": "Terms of Use",
+      "body": "Please carefully verify your itinerary details, pickup/drop-off times, and booking confirmation from our consultant before making payment."
+    },
+    {
+      "slug": "chinh-sach-bao-mat",
+      "title": "Privacy Policy",
+      "body": "NhaTrangGo is committed to protecting your personal information, phone number, and travel itinerary, using them strictly for booking confirmation and trip support."
+    },
+    {
+      "slug": "ho-tro-khach-hang",
+      "title": "Customer Support",
+      "body": "The NhaTrangGo operations team provides 24/7 online support via Hotline 0878.458.885, Zalo, Telegram, and WhatsApp for hotel, tour, and transfer bookings."
+    }
+  ]
+}

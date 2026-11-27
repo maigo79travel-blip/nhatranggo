@@ -6,6 +6,7 @@ import type { z } from "zod";
 import type { bookingSchema } from "./validation";
 import type { Booking } from "@/lib/types";
 import { AppError } from "@/lib/errors";
+import { getCurrentMessages } from "@/lib/i18n";
 import { publicProductWhere } from "@/modules/travel/product-visibility";
 import { getTransferFareForProduct } from "@/modules/travel/fare-service";
 type CreateBookingInput = z.infer<typeof bookingSchema>;
@@ -13,6 +14,7 @@ export async function createBooking(
   input: CreateBookingInput,
   actorId?: string,
 ) {
+  const t = await getCurrentMessages();
   const client = await db.connect();
   try {
     await client.query("BEGIN");
@@ -22,27 +24,27 @@ export async function createBooking(
         [input.productId],
       )
     ).rows[0];
-    if (!product) throw new AppError("Dịch vụ không tồn tại", 404);
+    if (!product) throw new AppError(t.errors.productNotFound, 404);
     let price = product.price;
     let returnPrice: number | null = null;
     if (
       product.type === "hotel" &&
       (!input.returnDate || input.returnDate <= input.date)
     )
-      throw new AppError("Ngày trả phòng phải sau ngày nhận phòng");
+      throw new AppError(t.errors.checkOutAfterCheckIn);
     if (
       product.type !== "transfer" &&
       (input.departureTime || input.returnTime || input.flightNumber)
     )
-      throw new AppError("Thông tin chuyến xe không phù hợp với dịch vụ");
+      throw new AppError(t.errors.transferDetailsInvalid);
     if (
       product.type !== "hotel" &&
       product.type !== "transfer" &&
       input.returnDate
     )
-      throw new AppError("Dịch vụ này không có ngày sử dụng lượt về");
+      throw new AppError(t.errors.noReturnDate);
     if (product.type === "transfer") {
-      if (!input.departureTime) throw new AppError("Vui lòng chọn giờ đón");
+      if (!input.departureTime) throw new AppError(t.errors.pickupTimeRequired);
       const roundTrip = Boolean(input.returnDate || input.returnTime);
       if (
         roundTrip &&
@@ -51,25 +53,28 @@ export async function createBooking(
           `${input.returnDate}T${input.returnTime}` <=
             `${input.date}T${input.departureTime}`)
       )
-        throw new AppError("Thời điểm lượt về phải sau giờ đón lượt đi");
+        throw new AppError(t.transfers.returnAfterDepartureError);
       const offer = await getTransferFareForProduct(
         input.productId,
         roundTrip,
         client,
       );
-      if (!offer) throw new AppError("Tuyến xe không còn nhận yêu cầu", 404);
+      if (!offer) throw new AppError(t.errors.transferUnavailable, 404);
       if (input.guests > offer.maxGuests)
-        throw new AppError(`Xe đã chọn chở tối đa ${offer.maxGuests} khách`);
-      if (roundTrip && offer.returnPrice == null)
         throw new AppError(
-          "Chưa có giá niêm yết cho lượt về. Vui lòng liên hệ.",
+          t.transfers.maxGuestsTemplate.replace(
+            "{count}",
+            String(offer.maxGuests),
+          ),
         );
+      if (roundTrip && offer.returnPrice == null)
+        throw new AppError(t.transfers.missingReturnFare);
       price = offer.price;
       returnPrice = offer.returnPrice;
     }
     if (input.roomId) {
       if (product.type !== "hotel")
-        throw new AppError("Loại phòng không phù hợp với dịch vụ");
+        throw new AppError(t.errors.roomTypeInvalid);
       const room = (
         await client.query(
           "SELECT price,capacity FROM rooms WHERE id=$1 AND product_id=$2 AND active=true FOR SHARE",
@@ -77,7 +82,7 @@ export async function createBooking(
         )
       ).rows[0];
       if (!room || input.guests > room.capacity)
-        throw new AppError("Loại phòng không phù hợp số khách");
+        throw new AppError(t.errors.roomCapacityExceeded);
       price = room.price;
     }
     if (product.type === "hotel" && !input.roomId) {
@@ -85,7 +90,7 @@ export async function createBooking(
         "SELECT 1 FROM rooms WHERE product_id=$1 AND active LIMIT 1",
         [input.productId],
       );
-      if (rooms.rowCount) throw new AppError("Vui lòng chọn loại phòng");
+      if (rooms.rowCount) throw new AppError(t.errors.roomRequired);
     }
     if (product.type === "tour") {
       const {
@@ -95,8 +100,7 @@ export async function createBooking(
             AND NOT EXISTS(SELECT 1 FROM departures WHERE product_id=$1 AND active AND date=$2::date) AS blocked`,
         [input.productId, input.date],
       );
-      if (schedule.blocked)
-        throw new AppError("Tour chưa có lịch khởi hành ngày đã chọn");
+      if (schedule.blocked) throw new AppError(t.errors.tourNoDeparture);
     }
     const bookingId = randomUUID();
     await client.query(
@@ -135,7 +139,7 @@ export async function createBooking(
     return {
       id: bookingId,
       status: "pending",
-      message: `Đã nhận yêu cầu. ${brand.name} sẽ kiểm tra với đối tác và liên hệ xác nhận tình trạng chỗ, tổng giá.`,
+      message: t.errors.bookingReceivedTemplate.replace("{brand}", brand.name),
     };
   } catch (error) {
     await client.query("ROLLBACK");

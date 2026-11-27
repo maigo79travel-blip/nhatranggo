@@ -401,24 +401,73 @@ try {
     (await workbook.body()).subarray(0, 4).toString("hex"),
     "504b0304",
   );
-  for (const kind of ["evisa", "fast-track"]) {
-    const result = await call(
-      anonymous,
-      "POST",
-      "/api/requests",
-      {
-        kind,
-        name: tag,
-        phone,
-        email: "qa@example.test",
-        airport: "Cam Ranh",
-        arrival_at: "2099-12-01T10:00:00+07:00",
-        nationality: "VN",
-      },
-      201,
-    );
-    (created.requests ??= []).push(result.id);
-  }
+  const requestData = {
+    name: tag,
+    phone,
+    email: "qa@example.test",
+    airport: "Cam Ranh",
+    arrival_at: "2099-12-01T10:00:00+07:00",
+    nationality: "VN",
+  };
+  const visa = await call(
+    anonymous,
+    "POST",
+    "/api/requests",
+    { ...requestData, kind: "evisa" },
+    201,
+  );
+  created.requests = [visa.id];
+  await call(
+    anonymous,
+    "POST",
+    "/api/requests",
+    { ...requestData, kind: "fast-track" },
+    400,
+  );
+  const retiredPage = await anonymous.get("/fast-track", { maxRedirects: 0 });
+  assert.equal(retiredPage.status(), 308);
+  assert.equal(retiredPage.headers().location, "/e-visa");
+  const retired = (
+    await db.query(
+      "INSERT INTO service_requests(id,kind,name,phone,email,airport,arrival_at,nationality) VALUES(gen_random_uuid(),'fast-track',$1,$2,$3,$4,$5,$6) RETURNING id",
+      [
+        requestData.name,
+        requestData.phone,
+        requestData.email,
+        requestData.airport,
+        requestData.arrival_at,
+        requestData.nationality,
+      ],
+    )
+  ).rows[0];
+  created.requests.push(retired.id);
+  await call(
+    admin,
+    "PATCH",
+    "/api/admin/requests",
+    {
+      ...requestData,
+      id: retired.id,
+      kind: "evisa",
+      status: "pending",
+    },
+    404,
+  );
+  await call(
+    admin,
+    "GET",
+    "/api/admin/requests?kind=fast-track",
+    undefined,
+    400,
+  );
+  assert.equal(
+    (
+      await db.query("SELECT kind FROM service_requests WHERE id=$1", [
+        retired.id,
+      ])
+    ).rows[0].kind,
+    "fast-track",
+  );
   const contact = await call(
     anonymous,
     "POST",
@@ -602,7 +651,6 @@ try {
     ["tour/lich-khoi-hanh", "Lịch khởi hành tour"],
     ["xe-dua-don/tuyen-xe", "Tuyến xe"],
     ["e-visa", "E-Visa"],
-    ["fast-track", "Fast-track"],
     ["khach-hang", "Khách hàng"],
     ["doi-tac", "Đối tác & Tài xế"],
     ["lien-he", "Liên hệ & Hỗ trợ"],
@@ -620,27 +668,25 @@ try {
         }),
       ).toBeEnabled();
   }
-  for (const [kind, path] of [
-    ["evisa", "e-visa"],
-    ["fast-track", "fast-track"],
-  ]) {
-    const records = await call(
-      admin,
-      "GET",
-      "/api/admin/requests?kind=" + kind,
-    );
-    assert.ok(records.data.some((row) => created.requests.includes(row.id)));
-    assert.ok(records.data.every((row) => row.kind === kind));
-    await ui.goto(baseURL + "/admin/" + path);
-    const requestRow = ui.getByRole("row").filter({ hasText: tag });
-    await expect(requestRow).toHaveCount(1);
-    await requestRow.getByRole("button", { name: "Xử lý" }).click();
-    await expect(ui.getByRole("dialog")).toBeVisible();
-    await expect(
-      ui.getByRole("dialog").getByLabel("Dịch vụ", { exact: true }),
-    ).toHaveCount(0);
-    await ui.keyboard.press("Escape");
-  }
+  await expect(
+    nav.getByRole("link", { name: "Fast-track", exact: true }),
+  ).toHaveCount(0);
+  assert.equal(
+    (await ui.request.get(baseURL + "/admin/fast-track")).status(),
+    404,
+  );
+  const records = await call(admin, "GET", "/api/admin/requests");
+  assert.ok(records.data.some((row) => row.id === visa.id));
+  assert.ok(records.data.every((row) => row.kind === "evisa"));
+  await ui.goto(baseURL + "/admin/e-visa");
+  const requestRow = ui.getByRole("row").filter({ hasText: tag });
+  await expect(requestRow).toHaveCount(1);
+  await requestRow.getByRole("button", { name: "Xử lý" }).click();
+  await expect(ui.getByRole("dialog")).toBeVisible();
+  await expect(
+    ui.getByRole("dialog").getByLabel("Dịch vụ", { exact: true }),
+  ).toHaveCount(0);
+  await ui.keyboard.press("Escape");
   await ui.goto(baseURL + "/admin/ban-dich");
   const createTranslation = ui.getByRole("button", {
     name: "Thêm mới",
@@ -767,7 +813,6 @@ try {
       "/khach-san?q=Bãi%20Dài",
       "/blog",
       "/e-visa",
-      "/fast-track",
       "/lien-he",
       "/tra-cuu",
       "/blog/" + article.slug,
@@ -831,14 +876,59 @@ try {
       );
       if (width === 1440 || width === 390) {
         await ui.screenshot({
-          path: `test-results/modules/${path.slice(1).replaceAll("/", "-")}-${width}.png`,
+          path: `test-results/modules/${path.slice(1).replace(/[^a-zA-Z0-9_-]+/g, "-")}-${width}.png`,
           animations: "disabled",
         });
       }
     }
   }
+  await ui.goto(baseURL + "/blog?q=legacy-filter&category=legacy-category");
+  await expect(
+    ui.getByRole("heading", { name: "Bài viết mới nhất" }),
+  ).toBeVisible();
+  await expect(ui.locator("main form")).toHaveCount(0);
+  await ui
+    .getByRole("link", { name: "Đọc tiếp: " + article.title, exact: true })
+    .click();
+  await expect(ui.locator("h1")).toHaveText(article.title);
+  await ui
+    .getByRole("navigation", { name: "Đường dẫn" })
+    .getByRole("link", { name: "Blog" })
+    .click();
+  await expect(ui).toHaveURL(/\/blog$/);
   await ui.goto(baseURL + "/e-visa");
   await ui.screenshot({ path: "test-results/modules/e-visa-mobile.png" });
+  await ui
+    .getByRole("link", { name: "Gửi yêu cầu tư vấn", exact: true })
+    .click();
+  await expect(ui).toHaveURL(/#yeu-cau-e-visa$/);
+  const visaForm = ui.locator("#yeu-cau-e-visa form");
+  await visaForm.getByLabel("Họ và tên").fill(tag + " visa");
+  await visaForm.getByLabel("Điện thoại").fill(phone);
+  await visaForm.getByLabel("Email").fill("visa-qa@example.test");
+  await visaForm
+    .getByLabel("Ngày giờ đến (giờ Việt Nam)")
+    .fill("2099-12-01T10:00");
+  await visaForm.getByLabel("Sân bay đến").fill("Cam Ranh");
+  await visaForm.getByLabel("Quốc tịch").fill("Hàn Quốc");
+  const [visaResponse] = await Promise.all([
+    ui.waitForResponse(
+      (response) =>
+        response.url().endsWith("/api/requests") &&
+        response.request().method() === "POST",
+    ),
+    visaForm.getByRole("button", { name: "Gửi yêu cầu", exact: true }).click(),
+  ]);
+  assert.equal(visaResponse.status(), 201);
+  const visaRequest = await visaResponse.json();
+  created.requests.push(visaRequest.id);
+  await expect(visaForm.getByRole("status")).toContainText(visaRequest.id);
+  const storedVisa = (
+    await db.query("SELECT kind,airport FROM service_requests WHERE id=$1", [
+      visaRequest.id,
+    ])
+  ).rows[0];
+  assert.deepEqual(storedVisa, { kind: "evisa", airport: "Cam Ranh" });
   await ui.goto(baseURL + "/tra-cuu");
   await ui.getByLabel("Mã booking", { exact: true }).fill(booking.id);
   await ui.getByLabel("Số điện thoại đã đặt", { exact: true }).fill(phone);
@@ -859,7 +949,7 @@ try {
   assert.deepEqual(failedStyles, []);
   assert.deepEqual(errors, []);
   console.log(
-    "PASS module UI: admin menus/editor, 40 responsive public route cases, uncapped page widths, CSS/fonts, styled controls and public booking status",
+    "PASS module UI: admin menus/editor, 35 responsive public route cases, uncapped page widths, CSS/fonts, styled controls and public booking status",
   );
 } finally {
   if (browser) await browser.close();

@@ -11,7 +11,7 @@ const contactSchema = z.object({
   message: z.string().trim().min(10).max(10000),
 });
 const requestSchema = z.object({
-  kind: z.enum(["evisa", "fast-track"]),
+  kind: z.literal("evisa"),
   name: title,
   phone,
   email: z.email().max(254),

@@ -1,0 +1,1996 @@
+{
+  "content": {
+    "home.text-043": "碧海蓝天 – 全新体验 – 每日特惠",
+    "home.text-044": "芽",
+    "home.text-045": "庄",
+    "home.text-046": "酒店 • 五星级度假村 • 每日海岛游 • 超值全包套餐",
+    "home.text-047": "酒店预订",
+    "home.text-048": "旅游线路",
+    "home.text-049": "旅游套餐",
+    "home.text-050": "门票与演出",
+    "home.text-051": "目的地",
+    "home.text-052": "入住 - 退房",
+    "home.text-053": "11/11/2026",
+    "home.text-054": "1晚",
+    "home.text-055": "12/11/2026",
+    "home.text-056": "房间与人数",
+    "home.text-057": "1间房, 2位客人",
+    "home.text-058": "搜索",
+    "home.text-059": "热门搜索：",
+    "home.text-060": "金兰长滩度假村",
+    "home.text-061": "芽庄VIP三岛游",
+    "home.text-062": "珍珠岛乐园 VinWonders",
+    "home.text-063": "富国岛3天2晚套餐",
+    "home.text-064": "酒店",
+    "home.text-065": "精选酒店与度假村",
+    "home.text-066": "优惠",
+    "home.text-067": "探索超值旅游套餐",
+    "home.text-068": "24/7 客服",
+    "home.text-069": "热线与 Zalo 咨询",
+    "home.text-070": "预订",
+    "home.text-071": "实时直接确认",
+    "home.text-072": "刚刚预订于",
+    "home.text-073": "庆和省柑林",
+    "home.text-074": "：客人",
+    "home.text-075": "0888xxx***",
+    "home.text-076": "刚刚成功预订",
+    "home.text-077": "1间豪华海景房",
+    "home.text-078": "！",
+    "home.text-079": "专属全包特惠",
+    "home.text-080": "精选特惠套餐",
+    "home.text-081": "专为家庭、情侣或好友团体打造的省心全包行程，优化时间与预算。",
+    "home.text-082": "优惠倒计时：",
+    "home.text-083": "02",
+    "home.text-084": "天",
+    "home.text-085": ":",
+    "home.text-086": "14",
+    "home.text-087": "时",
+    "home.text-088": ":",
+    "home.text-089": "38",
+    "home.text-090": "分",
+    "home.text-091": ":",
+    "home.text-092": "45",
+    "home.text-093": "秒",
+    "home.text-094": "{{brand.name}} 独家优惠",
+    "home.text-095": "超值精选酒店",
+    "home.text-096": "全部",
+    "home.text-097": "金兰",
+    "home.text-098": "芽庄",
+    "home.text-099": "海滨直达",
+    "home.text-100": "无边泳池",
+    "home.text-101": "查看全部",
+    "home.text-102": "探索海湾与游船",
+    "home.text-103": "超值每日精选游",
+    "home.text-104": "查看全部线路",
+    "home.text-105": "按目的地探索",
+    "home.text-106": "热门目的地",
+    "home.text-107": "查看全部目的地",
+    "home.text-108": "人气 #1 推荐",
+    "home.text-109": "芽庄",
+    "home.text-110": "碧海蓝天度假天堂",
+    "home.text-111": "1,024 家酒店与度假村",
+    "home.text-112": "大叻",
+    "home.text-113": "千花之城",
+    "home.text-114": "1,186 家酒店",
+    "home.text-115": "岘港",
+    "home.text-116": "活力海滨都市",
+    "home.text-117": "1,356 家酒店",
+    "home.text-118": "富国岛",
+    "home.text-119": "珍珠岛度假胜地",
+    "home.text-120": "921 家酒店",
+    "home.text-121": "会安",
+    "home.text-122": "灯火璀璨古城",
+    "home.text-123": "612 家酒店",
+    "home.text-124": "下龙湾",
+    "home.text-125": "海上奇观与五星游轮",
+    "home.text-126": "679 家酒店",
+    "home.text-127": "会安",
+    "home.text-128": "世界遗产古城与民俗文化",
+    "home.text-129": "785 家酒店",
+    "home.text-130": "头顿",
+    "home.text-131": "胡志明近郊周末度假",
+    "home.text-132": "524 家酒店",
+    "home.text-133": "归仁",
+    "home.text-134": "原生态海滩与平价海鲜",
+    "home.text-135": "332 家酒店",
+    "home.text-136": "实用旅行攻略",
+    "home.text-137": "最新攻略文章",
+    "home.text-138": "查看全部文章",
+    "home.text-139": "202 次阅读",
+    "home.text-140": "26/10/2026",
+    "home.text-141": "金兰安缦度假村评测：长滩海滨奢华体验",
+    "home.text-142": "探索金兰 The Anam 度假村——复古印度支那建筑、海滨无边泳池与国际五星级服务。",
+    "home.text-143": "阅读全文",
+    "home.text-144": "427 次阅读",
+    "home.text-145": "24/09/2026",
+    "home.text-146": "芽庄几月去旅游最好？四季天气与实用攻略",
+    "home.text-147": "什么时候去芽庄最合适？更新四季气候特点、海况最佳月份及特价房预订技巧。",
+    "home.text-148": "阅读全文",
+    "home.text-149": "433 次阅读",
+    "home.text-150": "23/09/2026",
+    "home.text-151": "金兰 The Anam 评测：长滩五星级海滨度假村",
+    "home.text-152": "蜜月与家庭出游的理想之选，拥有葱郁园林、私人海滩与丰富美食。",
+    "home.text-153": "阅读全文",
+    "home.text-154": "401 次阅读",
+    "home.text-155": "22/09/2026",
+    "home.text-156": "芽庄出发：永熙湾 - 杭莱 - 绵羊牧场一日游攻略",
+    "home.text-157": "越南最美沿海公路之一：欣赏杭莱古珊瑚礁、打卡绵羊草原、品尝永熙鲜活海鲜。",
+    "home.text-158": "阅读全文",
+    "home.text-159": "热门阅读专题",
+    "home.text-160": "收藏实用经验，让下一趟旅程更轻松",
+    "home.text-161": "富国岛亲子游攻略",
+    "home.text-162": "大叻自由行指南",
+    "home.text-163": "陈富路海景房特惠攻略",
+    "home.text-164": "黑岛浮潜潜水攻略",
+    "home.text-165": "携手共赢发展",
+    "home.text-166": "领取 {{brand.name}} 专属优惠",
+    "home.text-167": "探索精选酒店、海岛游与度假套餐，开启美好假期。",
+    "home.text-168": "Zalo 商务合作 ({{contact.phone}})",
+    "home.text-169": "直接拨打客服热线",
+    "home.text-170": "{{brand.name}} 服务承诺",
+    "home.text-171": "房价 100% 透明，绝无隐藏费用",
+    "home.text-172": "实时查询空房并即时保留名额",
+    "home.text-173": "熟悉当地资源的专业顾问团队",
+    "home.text-174": "灵活支付：VNPAY、MoMo、Visa/MC",
+    "hotels.text-043": "首页",
+    "hotels.text-044": "酒店与度假村",
+    "hotels.text-045": "超过 1,200+ 合作酒店与度假村",
+    "hotels.text-046": "搜索并预订高性价比酒店与度假村",
+    "hotels.text-047": "直签代理价优于国际平台，Zalo 快速锁房，赠送早餐及视房态免费升级房型。",
+    "hotels.text-048": "官方合作保障",
+    "hotels.text-049": "100% 即时确认",
+    "hotels.text-050": "目的地",
+    "hotels.text-051": "芽庄 - 庆和",
+    "hotels.text-052": "金兰长滩",
+    "hotels.text-053": "富国岛（坚江）",
+    "hotels.text-054": "岘港与会安",
+    "hotels.text-055": "大叻（林同）",
+    "hotels.text-056": "头顿与湖Tram",
+    "hotels.text-057": "归仁 - 平定",
+    "hotels.text-058": "入住日期",
+    "hotels.text-059": "退房日期",
+    "hotels.text-060": "人数与房型",
+    "hotels.text-061": "2位成人, 1间房",
+    "hotels.text-062": "2位成人, 1位儿童",
+    "hotels.text-063": "4位成人, 2间房",
+    "hotels.text-064": "家庭6人, 独栋别墅",
+    "hotels.text-065": "公司团队（>10人）",
+    "hotels.text-066": "酒店类型 / 星级",
+    "hotels.text-067": "全部酒店",
+    "hotels.text-068": "五星级海滨度假村",
+    "hotels.text-069": "私人泳池别墅",
+    "hotels.text-070": "四星级市区酒店",
+    "hotels.text-071": "豪华海景公寓",
+    "hotels.text-072": "搜索",
+    "hotels.text-073": "热门搜索：",
+    "hotels.text-074": "金兰长滩一价全包",
+    "hotels.text-075": "陈富路海滨酒店",
+    "hotels.text-076": "私人泳池别墅",
+    "hotels.text-077": "150万 VND 以下五星酒店",
+    "hotels.text-078": "筛选条件",
+    "hotels.text-079": "重置",
+    "hotels.text-080": "每晚价格区间",
+    "hotels.text-081": "VND",
+    "hotels.text-082": "1,000,000 VND 以下",
+    "hotels.text-083": "(18)",
+    "hotels.text-084": "1,000,000 - 2,000,000 VND",
+    "hotels.text-085": "(54)",
+    "hotels.text-086": "2,000,000 - 4,000,000 VND",
+    "hotels.text-087": "(42)",
+    "hotels.text-088": "4,000,000 VND 以上（奢华）",
+    "hotels.text-089": "(14)",
+    "hotels.text-090": "500k",
+    "hotels.text-091": "最高 3,500k/晚",
+    "hotels.text-092": "8,000k+",
+    "hotels.text-093": "国际星级标准",
+    "hotels.text-094": "3 星级",
+    "hotels.text-095": "4 星级",
+    "hotels.text-096": "5 星级 VIP",
+    "hotels.text-097": "地理位置",
+    "hotels.text-098": "陈富海滨大道",
+    "hotels.text-099": "(64)",
+    "hotels.text-100": "金兰长滩度假区",
+    "hotels.text-101": "(38)",
+    "hotels.text-102": "竹岛（珍珠岛 Vinpearl）",
+    "hotels.text-103": "(9)",
+    "hotels.text-104": "阮善述市中心区",
+    "hotels.text-105": "(22)",
+    "hotels.text-106": "安园海滨别墅区",
+    "hotels.text-107": "(11)",
+    "hotels.text-108": "特色设施",
+    "hotels.text-109": "无边际泳池",
+    "hotels.text-110": "私人海滩",
+    "hotels.text-111": "免费高级自助早餐",
+    "hotels.text-112": "免费机场接送",
+    "hotels.text-113": "度假村内水上乐园",
+    "hotels.text-114": "赠送 Spa 与按摩疗程",
+    "hotels.text-115": "1-2名 6-12岁儿童免费",
+    "hotels.text-116": "灵活政策",
+    "hotels.text-117": "提前48小时免费取消",
+    "hotels.text-118": "灵活支付 / 0元留房",
+    "hotels.text-119": "急需团队特价房？",
+    "hotels.text-120": "联系专属客服获取芽庄及金兰独家团队批发报价。",
+    "hotels.text-121": "立即 Zalo 咨询 (24/7)",
+    "hotels.text-122": "在地图上查看 128 家酒店",
+    "hotels.text-123": "探索靠近海滩与美食的黄金地段",
+    "hotels.text-124": "128 家酒店与度假村",
+    "hotels.text-125": "位于芽庄 - 金兰",
+    "hotels.text-126": "排序：",
+    "hotels.text-127": "最优特惠",
+    "hotels.text-128": "价格最低",
+    "hotels.text-129": "评分最高",
+    "hotels.text-130": "离海最近",
+    "hotels.text-131": "显示",
+    "hotels.text-132": "1 - 6",
+    "hotels.text-133": "共",
+    "hotels.text-134": "128",
+    "hotels.text-135": "家酒店",
+    "hotels.text-136": "1",
+    "hotels.text-137": "2",
+    "hotels.text-138": "3",
+    "hotels.text-139": "...",
+    "hotels.text-140": "12",
+    "hotels.text-141": "预订服务全程无忧",
+    "hotels.text-142": "{{brand.name}} 服务品质承诺",
+    "hotels.text-143": "作为芽庄-金兰国际酒店集团的一级战略合作伙伴，我们为宾客提供卓越的专属礼遇。",
+    "hotels.text-144": "价格透明 - 绝无隐藏费用",
+    "hotels.text-145": "页面展示价格为最终含税总价，已包含 100% 增值税、服务费及度假村自助早餐。若发现更低公开价格，承诺退还差价。",
+    "hotels.text-146": "快速留房与 24/7 Zalo 管家",
+    "hotels.text-147": "位于芽庄阮太学38号的本地专家团队全程服务，协助提前入住及免费升级海景房。",
+    "hotels.text-148": "灵活改期与极速退款",
+    "hotels.text-149": "因天气、商务行程或健康原因支持灵活改期，退改流程透明，2-4个工作小时内极速退款。",
+    "hotels.text-150": "Vinpearl、Accor、Melia 官方代理",
+    "hotels.text-151": "PCI-DSS 认证支付安全",
+    "hotels.text-152": "选房咨询专线：",
+    "hotels.text-153": "{{contact.phone}}",
+    "hotels.text-154": "通过 Zalo 询价",
+    "tours.text-008": "首页",
+    "tours.text-009": "/",
+    "tours.text-010": "每日精品游",
+    "tours.text-011": "芽庄专业海岛游与深度体验",
+    "tours.text-012": "每日发团拼团与包船游 -",
+    "tours.text-013": "五星级品质体验",
+    "tours.text-014": "搭乘新款快艇，由贴心当地导游带领，畅游芽庄湾、黑岛珊瑚天堂、浪漫日落游轮及南中部海岸风光。",
+    "tours.text-015": "4.96",
+    "tours.text-016": "来自 18,500+ 位真实游客评价",
+    "tours.text-017": "全部 (28)",
+    "tours.text-018": "芽庄 VIP 三岛游",
+    "tours.text-019": "日落晚宴游轮",
+    "tours.text-020": "黑岛浮潜与深潜",
+    "tours.text-021": "永熙湾 - 杭莱游",
+    "tours.text-022": "芽庄市区文化游",
+    "tours.text-023": "大叻一日游",
+    "tours.text-024": "出发地点",
+    "tours.text-025": "芽庄市区（中心区酒店）",
+    "tours.text-026": "长滩 / 金兰度假村",
+    "tours.text-027": "大叻市（林同）",
+    "tours.text-028": "潘郎 - 宁顺",
+    "tours.text-029": "出发日期",
+    "tours.text-030": "出行人数",
+    "tours.text-031": "2位成人（情侣 / 小家庭）",
+    "tours.text-032": "1位客人（单人拼团）",
+    "tours.text-033": "4-6位客人（好友 / 家庭）",
+    "tours.text-034": "大型团队（> 10人 - 独立快艇）",
+    "tours.text-035": "立即搜索线路",
+    "tours.text-036": "提前24小时免费取消",
+    "tours.text-037": "2024款新型快艇",
+    "tours.text-038": "协助核实各行程的保险条款",
+    "tours.text-039": "热门海湾畅销线路",
+    "tours.text-040": "本周最受欢迎体验",
+    "tours.text-041": "1人起即可保证每日发团，全程统一国际标准服务品质。",
+    "tours.text-042": "丰富多样的探索体验",
+    "tours.text-043": "每日发团线路列表",
+    "tours.text-044": "排序：",
+    "tours.text-045": "最受欢迎与预订最多",
+    "tours.text-046": "价格从低到高",
+    "tours.text-047": "价格从高到低",
+    "tours.text-048": "五星好评最高",
+    "tours.text-049": "需要包租私人快艇或定制团队专属行程？",
+    "tours.text-050": "拥有12至45座新款玻璃钢快艇，发船时间灵活，满足家庭与企业团建需求。",
+    "tours.text-051": "热线：{{contact.phone}}",
+    "tours.text-052": "立即 Zalo 报价",
+    "tours.text-053": "3分钟极速预订行程",
+    "tours.text-054": "流程简单 & 品质保障",
+    "tours.text-055": "付款、改期及取消条件将在行程咨询时确认说明。",
+    "tours.text-056": "1",
+    "tours.text-057": "选择线路与日期",
+    "tours.text-058": "选择心仪行程与出发日期，填写酒店信息即可享受上门接送。",
+    "tours.text-059": "2",
+    "tours.text-060": "Zalo 即时确认",
+    "tours.text-061": "调度中心将在5分钟内通过 Zalo 发送确认单，附带车牌号与导游联系方式。",
+    "tours.text-062": "3",
+    "tours.text-063": "酒店准时接送",
+    "tours.text-064": "新款旅游车与导游准时在酒店大堂迎接，贴心协助搬运行李。",
+    "tours.text-065": "4",
+    "tours.text-066": "畅游体验与灵活付款",
+    "tours.text-067": "尽享五星服务，行程结束后可灵活选择现金或银行转账付款。",
+    "tours.text-068": "五星级当地导游",
+    "tours.text-069": "熟知海岛文化、热情周到，还能为您拍摄精彩旅行大片。",
+    "tours.text-070": "高额旅游保险",
+    "tours.text-071": "客服人员将为您核实所选行程适用的保险保障内容。",
+    "tours.text-072": "提前24小时免费取消",
+    "tours.text-073": "如出发条件有变，请联系我们协助调整行程日期。",
+    "tours.text-074": "芽庄海岛游常见问题",
+    "tours.text-075": "儿童或老人可以参加三岛快艇游吗？",
+    "tours.text-076": "完全可以！{{brand.name}} 采用带顶篷的新款快艇，在风平浪静的芽庄湾平稳航行。蚕岛上配有电瓶车直达热矿泥浴区和餐厅。",
+    "tours.text-077": "不会游泳可以参加珊瑚潜水吗？",
+    "tours.text-078": "当然可以！水肺深潜与海底漫步均由持证教练1对1全程保护下水，同时免费提供救生衣、面镜与呼吸管。",
+    "tours.text-079": "如果遇到下雨或风浪大怎么处理？",
+    "tours.text-080": "您的安全是 {{brand.name}} 的首要原则。如海事部门因风浪停航，我们将提前通知并100%退还定金，或协助改换市区游线路。",
+    "transfers.text-025": "2023 - 2024 年新款车队",
+    "transfers.text-026": "一口价全包 - 绝无隐藏费用",
+    "transfers.text-027": "专车接送服务",
+    "transfers.text-028": "金兰机场",
+    "transfers.text-029": "& 值得信赖的旅游包车",
+    "transfers.text-030": "新款 4、7、16、29、45 座专车。芽庄、长滩、大叻、富安上门接送。专业司机准时守信，免费实时追踪航班。",
+    "transfers.text-031": "24/7 调度热线",
+    "transfers.text-032": "{{contact.phone}}",
+    "transfers.text-033": "Zalo 60秒内极速回复",
+    "transfers.text-034": "金兰机场接送",
+    "transfers.text-035": "跨城专车（大叻 - 富安）",
+    "transfers.text-036": "包天用车 / 市区游",
+    "transfers.text-037": "单程 (One-way)",
+    "transfers.text-038": "往返 (Round-trip) - 再省 10%",
+    "transfers.text-039": "上车地点",
+    "transfers.text-040": "金兰机场（国内 / 国际航站楼）",
+    "transfers.text-041": "芽庄市中心（陈富路 / 西街）",
+    "transfers.text-042": "长滩度假区（柑林）",
+    "transfers.text-043": "大叻市（林同）",
+    "transfers.text-044": "自定义地址 / 其他酒店...",
+    "transfers.text-045": "目的地 / 酒店",
+    "transfers.text-046": "芽庄市中心（陈富路、雄王路）",
+    "transfers.text-047": "长滩度假村（瑞享、Alma、Anam...）",
+    "transfers.text-048": "金兰国际机场 (CXR)",
+    "transfers.text-049": "Doc Let 海滩 / 宁和度假区",
+    "transfers.text-050": "大叻市区（酒店 / 别墅）",
+    "transfers.text-051": "绥和 - 富安",
+    "transfers.text-052": "接送日期与时间",
+    "transfers.text-053": "航班号（选填）",
+    "transfers.text-054": "选择车型",
+    "transfers.text-055": "4座轿车 (Vios, Accent, City)",
+    "transfers.text-056": "4 座",
+    "transfers.text-057": "7 座",
+    "transfers.text-058": "16 座",
+    "transfers.text-060": "查询价格并立即订车",
+    "transfers.text-061": "推荐线路：",
+    "transfers.text-062": "金兰机场 ⇄ 芽庄市中心（陈富路）",
+    "transfers.text-063": "含司机举牌接机、机场停车及高速费、瓶装水、冰毛巾及航班延误免费改期。",
+    "transfers.text-064": "单程全包一口价",
+    "transfers.text-065": "250,000 VND",
+    "transfers.text-066": "Zalo 快速订车",
+    "transfers.text-067": "自动追踪航班动态",
+    "transfers.text-068": "专人举牌迎宾接机",
+    "transfers.text-069": "提前2小时免费取消",
+    "transfers.text-070": "夜间无附加费（22点前）",
+    "transfers.text-071": "透明与精准",
+    "transfers.text-072": "机场接送及跨城专车官方价目表",
+    "transfers.text-073": "以下价格均为 2025 年全包一口价，承诺绝不产生任何额外收费。",
+    "transfers.text-074": "已含税费与过路费",
+    "transfers.text-075": "热门接送线路",
+    "transfers.text-076": "4座轿车",
+    "transfers.text-077": "轿车 3位乘客",
+    "transfers.text-078": "7座商务",
+    "transfers.text-079": "SUV 5位乘客",
+    "transfers.text-080": "16座中巴",
+    "transfers.text-081": "Transit 12-15人",
+    "transfers.text-084": "预订",
+    "transfers.text-085": "金兰机场 ⇄ 芽庄市中心",
+    "transfers.text-086": "距离 35km • 车程：35-40分钟（Cu Hin 山道）",
+    "transfers.text-087": "立即订车",
+    "transfers.text-088": "金兰机场 ⇄ 长滩度假区（柑林）",
+    "transfers.text-089": "距离 7 - 12km（瑞享、Alma、丽笙、The Anam...）",
+    "transfers.text-090": "立即订车",
+    "transfers.text-091": "芽庄 ⇄ 大叻市区（云雾庆黎山口）",
+    "transfers.text-092": "距离 135km • 车程：3.0 - 3.5小时",
+    "transfers.text-093": "立即订车",
+    "transfers.text-094": "芽庄 ⇄ 绥和（富安）/ 大岭山口",
+    "transfers.text-095": "距离 120km • 可按需停靠大领角与永罗湾",
+    "transfers.text-096": "立即订车",
+    "transfers.text-097": "芽庄 ⇄ 潘郎 - 占婆塔 / 宁顺",
+    "transfers.text-098": "距离 105km • 平兴 - 永熙最美海岸线",
+    "transfers.text-099": "立即订车",
+    "transfers.text-100": "备注：",
+    "transfers.text-101": "价格已包含油费、过路费、机场停车费及司机服务费。22:00前无夜间加价。",
+    "transfers.text-102": "有效期至 2025/12/31",
+    "transfers.text-103": "五星级车况品质",
+    "transfers.text-104": "新款高端旅游车队",
+    "transfers.text-105": "按路线查看车型、最大载客人数及参考价格。",
+    "transfers.text-106": "标准轿车",
+    "transfers.text-107": "舒适 4 座轿车",
+    "transfers.text-108": "Toyota Vios, Hyundai Accent, Honda City",
+    "transfers.text-109": "最多 3 位乘客",
+    "transfers.text-110": "2个大行李箱 + 2个背包",
+    "transfers.text-111": "强力冷气空调",
+    "transfers.text-112": "舒适真皮座椅",
+    "transfers.text-113": "低至",
+    "transfers.text-114": "250,000 VND",
+    "transfers.text-115": "选择此车型",
+    "transfers.text-116": "家庭与好友",
+    "transfers.text-117": "宽敞 7 座 SUV/MPV",
+    "transfers.text-118": "Mitsubishi Xpander, Toyota Innova, Fortuner",
+    "transfers.text-119": "最多 5-6 位乘客",
+    "transfers.text-120": "4个中号行李箱 + 背包",
+    "transfers.text-121": "宽敞车厢空间",
+    "transfers.text-122": "配备手机充电口",
+    "transfers.text-123": "低至",
+    "transfers.text-124": "300,000 VND",
+    "transfers.text-125": "选择此车型",
+    "transfers.text-136": "团队 / 企业",
+    "transfers.text-137": "16 座旅游中巴",
+    "transfers.text-138": "新款 Ford Transit & Hyundai Solati",
+    "transfers.text-139": "最多 12-15 位乘客",
+    "transfers.text-140": "超大行李舱",
+    "transfers.text-141": "配备导游麦克风",
+    "transfers.text-142": "车身稳定安全系统",
+    "transfers.text-143": "低至",
+    "transfers.text-144": "550,000 VND",
+    "transfers.text-145": "选择此车型",
+    "transfers.text-146": "安心出行体验",
+    "transfers.text-147": "在 {{brand.name}} 订车的卓越优势",
+    "transfers.text-148": "我们秉持专业服务标准，将乘客的安全与满意放在首位。",
+    "transfers.text-149": "航班动态自动追踪",
+    "transfers.text-150": "无论航班延误还是提前降落，司机都会主动调整接机时间，绝不收取等候费。",
+    "transfers.text-151": "提前2小时免费取消",
+    "transfers.text-152": "灵活应对突发计划变更，接送前2小时通过热线或 Zalo 通知即可100%免费取消或改期。",
+    "transfers.text-153": "礼貌熟路的本地司机",
+    "transfers.text-154": "穿着整洁、热情周到，主动协助搬运行李，并乐于推荐地道平价美食。",
+    "transfers.text-155": "24/7 实时调度中心",
+    "transfers.text-156": "拒绝冰冷机器人，人工调度员 24/7 通过 Zalo 与热线在线服务：",
+    "transfers.text-157": "{{contact.phone}}",
+    "transfers.text-158": "30秒内快速响应解决。",
+    "transfers.text-159": "急需15分钟内在金兰机场派车接机？",
+    "transfers.text-160": "车队全天候驻守金兰机场停车场及芽庄市中心，落地即可立即派车！",
+    "transfers.text-161": "立即致电 {{contact.phone}}",
+    "transfers.text-162": "Zalo 咨询报价",
+    "transfers.text-163": "常见问题解答",
+    "transfers.text-164": "接送专车常见问答",
+    "transfers.text-165": "1. 如何在金兰机场找到接机司机？",
+    "transfers.text-166": "航班降落前30分钟，调度中心将通过 Zalo/短信发送司机姓名、电话和车牌号。走出到达大厅时，司机会手持",
+    "transfers.text-167": "印有您姓名的接机牌",
+    "transfers.text-168": "在出口等候。若人多拥挤，请直接致电司机或热线 {{contact.phone}}。",
+    "transfers.text-169": "2. 如果航班延误，会被加收等候费吗？",
+    "transfers.text-170": "完全不会产生任何额外费用！",
+    "transfers.text-171": "{{brand.name}} 调度中心实时追踪您的航班雷达动态，即使延误 1-3 小时，司机也会调整时间安全接驾。",
+    "transfers.text-172": "3. 网站上的包车价格包含了哪些税费？",
+    "transfers.text-173": "{{brand.name}} 的公开报价均为",
+    "transfers.text-174": "全包一口价",
+    "transfers.text-175": "：已含油费、司机服务费、金兰机场入场费及沿途过路费，无需额外小费或隐藏费用。",
+    "transfers.text-176": "4. 从芽庄包车去大叻或富安途中可以停车拍照吗？",
+    "transfers.text-177": "可以！独立包车由您自由掌控节奏。途径庆黎山口或永罗湾观景点时，司机可免费停靠 15-20 分钟供您拍照休息。",
+    "transfers.text-178": "5. 用车费用支持哪些付款方式？",
+    "transfers.text-179": "您可灵活选择支付方式：",
+    "transfers.text-180": "行程结束后直接现金支付给司机",
+    "transfers.text-181": "，或通过 VietQR / MoMo / VNPay 转账至 {{brand.name}} 对公账户。",
+    "header.text-014": "24/7 热线：",
+    "header.text-015": "{{contact.phone}}",
+    "header.text-016": "Zalo 商务合作",
+    "header.text-017": "我的收藏",
+    "header.text-018": "VI",
+    "header.text-019": "|",
+    "header.text-020": "EN",
+    "header.text-021": "{{brand.wordmarkPrimary}}",
+    "header.text-022": "{{brand.wordmarkSecondary}}",
+    "header.text-023": "旅游与体验",
+    "header.text-024": "首页",
+    "header.text-025": "酒店",
+    "header.text-026": "每日游",
+    "header.text-027": "超值套餐",
+    "header.text-028": "专车接送",
+    "header.text-029": "旅游攻略",
+    "header.text-030": "联系我们",
+    "header.text-031": "Zalo 咨询",
+    "footer.text-023": "{{brand.name}}",
+    "footer.text-024": "在线旅游服务平台",
+    "footer.text-025": "芽庄酒店预订、海岛游及每日当地体验综合平台。",
+    "footer.text-026": "庆和省芽庄市万胜坊阮太学A栋底层38号",
+    "footer.text-027": "客服热线：",
+    "footer.text-028": "{{contact.phone}}",
+    "footer.text-029": "{{contact.email}}",
+    "footer.text-030": "{{brand.name}}",
+    "footer.text-031": "服务项目",
+    "footer.text-032": "酒店预订",
+    "footer.text-033": "旅游线路",
+    "footer.text-034": "专车接送",
+    "footer.text-035": "旅游套餐",
+    "footer.text-036": "优惠与促销",
+    "footer.text-037": "机场接送专车",
+    "footer.text-038": "关于我们",
+    "footer.text-039": "支付政策",
+    "footer.text-040": "退改签政策",
+    "footer.text-041": "隐私保护政策",
+    "footer.text-042": "使用条款与条件",
+    "footer.text-043": "OTA 平台运营规范",
+    "footer.text-044": "投诉处理流程",
+    "footer.text-045": "支付方式",
+    "footer.text-046": "VNPAY",
+    "footer.text-047": "MOMO",
+    "footer.text-048": "ZALOPAY",
+    "footer.text-049": "VISA/MC",
+    "footer.text-050": "订阅 VIP 专属优惠",
+    "footer.text-051": "发送",
+    "footer.text-052": "© {{brand.name}}. 保留所有权利。",
+    "footer.text-053": "条款",
+    "footer.text-054": "隐私",
+    "footer.text-055": "联系",
+    "evisa.title": "电子签证 E-Visa",
+    "fast-track.title": "机场快速通道 Fast-track",
+    "contact.title": "联系与支持",
+    "lookup.title": "订单查询",
+    "blog.title": "博客与资讯"
+  },
+  "products": {
+    "hotels-1": {
+      "title": "芽庄帝皇酒店 (The Empyrean Nha Trang)",
+      "location": "芽庄市禄寿坊陈富路2号（距4/2广场仅100米）",
+      "description": "今日闪购立省25%！拥有40层高空无边泳池、芽庄湾全景视野、双人免费自助早餐及48小时前免费取消。",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "立省 25%",
+          "value": "立省 25%"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "今日闪购特惠",
+          "value": "今日闪购特惠"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "32 张照片",
+          "value": "32 张照片"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "国际五星级",
+          "value": "国际五星级"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "极赞",
+          "value": "极赞"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "1,250 条评价",
+          "value": "1,250 条评价"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "40层高空无边泳池",
+          "value": "40层高空无边泳池"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "饱览芽庄湾全景",
+          "value": "饱览芽庄湾全景"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "含双人免费自助早餐",
+          "value": "含双人免费自助早餐"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "48小时前免费取消 • Zalo 即时确认",
+          "value": "48小时前免费取消 • Zalo 即时确认"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "/晚",
+          "value": "/晚"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "已含税费及早餐",
+          "value": "已含税费及早餐"
+        },
+        "field-016": {
+          "kind": "text",
+          "label": "查看房型并预订",
+          "value": "查看房型并预订"
+        }
+      }
+    },
+    "hotels-2": {
+      "title": "金兰瑞享度假村 (Mövenpick Resort Cam Ranh)",
+      "location": "金兰长滩柑海东（距金兰机场10分钟）",
+      "description": "雅高集团国际五星海滨度假村：每日免费巧克力时光、6,000m²水上乐园、800米私人白沙滩及芽庄市区接驳巴士。",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "雅高国际品牌",
+          "value": "雅高国际品牌"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "夏季特惠立减30%",
+          "value": "夏季特惠立减30%"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "48 张照片",
+          "value": "48 张照片"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "五星级度假村",
+          "value": "五星级度假村"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "极佳",
+          "value": "极佳"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "890 条评价",
+          "value": "890 条评价"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "免费瑞士巧克力时光",
+          "value": "免费瑞士巧克力时光"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "6,000m² 大型水上乐园",
+          "value": "6,000m² 大型水上乐园"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "800米私属细白沙滩",
+          "value": "800米私属细白沙滩"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "赠送儿童水上乐园门票 • 芽庄市区班车",
+          "value": "赠送儿童水上乐园门票 • 芽庄市区班车"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "/晚",
+          "value": "/晚"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "海景豪华房 • 五星级早餐",
+          "value": "海景豪华房 • 五星级早餐"
+        },
+        "field-016": {
+          "kind": "text",
+          "label": "查看房型并预订",
+          "value": "查看房型并预订"
+        }
+      }
+    },
+    "hotels-3": {
+      "title": "金兰阿尔玛度假村 (Alma Resort Cam Ranh)",
+      "location": "庆和省金兰长滩阮必成路",
+      "description": "顶级亲子五星奢华度假村：12座海景无边泳池、免费阿尔玛影院、儿童科学博物馆及提前7天预订赠30万越南盾餐饮券。",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "人气亲子度假村",
+          "value": "人气亲子度假村"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "55 张照片",
+          "value": "55 张照片"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "超奢华五星级",
+          "value": "超奢华五星级"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "极佳",
+          "value": "极佳"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "1,040 条评价",
+          "value": "1,040 条评价"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "12座海景无边际泳池",
+          "value": "12座海景无边际泳池"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "免费阿尔玛私人影院",
+          "value": "免费阿尔玛私人影院"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "儿童趣味科学博物馆",
+          "value": "儿童趣味科学博物馆"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "提前7天预订赠 300,000 VND 餐饮代金券",
+          "value": "提前7天预订赠 300,000 VND 餐饮代金券"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/晚",
+          "value": "/晚"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "一卧套房 • 国际自助早餐",
+          "value": "一卧套房 • 国际自助早餐"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "查看房型并预订",
+          "value": "查看房型并预订"
+        }
+      }
+    },
+    "hotels-4": {
+      "title": "金兰融合度假村 (Fusion Resort - 全包 Spa)",
+      "location": "庆和省金兰柑海东长滩",
+      "description": "每日含全包 Spa 护理的五星奢华度假村：独栋私人泳池别墅、随时随地享用早餐及提前5天免费灵活改期。",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "全包每日 Spa 护理",
+          "value": "全包每日 Spa 护理"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "40 张照片",
+          "value": "40 张照片"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "奢华五星级",
+          "value": "奢华五星级"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "非凡卓越",
+          "value": "非凡卓越"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "650 条评价",
+          "value": "650 条评价"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "每位客人每日免费享受 Spa",
+          "value": "每位客人每日免费享受 Spa"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "随时随地享用早餐",
+          "value": "随时随地享用早餐"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "私密独栋泳池别墅",
+          "value": "私密独栋泳池别墅"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "提前5天免费灵活改期",
+          "value": "提前5天免费灵活改期"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/晚",
+          "value": "/晚"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "时尚私人泳池套房 • 含 Spa",
+          "value": "时尚私人泳池套房 • 含 Spa"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "查看房型并预订",
+          "value": "查看房型并预订"
+        }
+      }
+    },
+    "hotels-5": {
+      "title": "芽庄钻石湾酒店 (Diamond Bay Hotel)",
+      "location": "芽庄市禄寿坊陈富路20号（芽庄中心商场对面）",
+      "description": "市中心海滨四星精品酒店，正对大海并与芽庄中心商场相连，含每日自助早餐，步行即达海滩与夜市。",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "海滨城市核心地段",
+          "value": "海滨城市核心地段"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "28 张照片",
+          "value": "28 张照片"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "四星级优选",
+          "value": "四星级优选"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "非常好",
+          "value": "非常好"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "740 条评价",
+          "value": "740 条评价"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "正对海滨浴场海景",
+          "value": "正对海滨浴场海景"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "连通购物餐饮中心",
+          "value": "连通购物餐饮中心"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "含每日自助早餐",
+          "value": "含每日自助早餐"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "步行可达海滩与芽庄夜市",
+          "value": "步行可达海滩与芽庄夜市"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/晚",
+          "value": "/晚"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "豪华城景房 • 含双人早餐",
+          "value": "豪华城景房 • 含双人早餐"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "查看房型并预订",
+          "value": "查看房型并预订"
+        }
+      }
+    },
+    "hotels-6": {
+      "title": "金兰缘河度假村 (Duyen Ha Resort)",
+      "location": "庆和省金兰北半岛 D9B 地块",
+      "description": "高性价比亲子五星度假村：6家亚欧风味餐厅、2,500m²热带园林泳池、定时机场班车及1名12岁以下儿童免费入住。",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "亲子家庭特惠套餐",
+          "value": "亲子家庭特惠套餐"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "36 张照片",
+          "value": "36 张照片"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "五星级度假村",
+          "value": "五星级度假村"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "极赞",
+          "value": "极赞"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "510 条评价",
+          "value": "510 条评价"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "6家亚欧美食餐厅",
+          "value": "6家亚欧美食餐厅"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "热带花园内 2,500m² 大泳池",
+          "value": "热带花园内 2,500m² 大泳池"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "按时刻表提供机场接送",
+          "value": "按时刻表提供机场接送"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "免收1名12岁以下儿童附加费",
+          "value": "免收1名12岁以下儿童附加费"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/晚",
+          "value": "/晚"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "豪华园景房 • 自助早餐",
+          "value": "豪华园景房 • 自助早餐"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "查看房型并预订",
+          "value": "查看房型并预订"
+        }
+      }
+    },
+    "tours-1": {
+      "title": "芽庄 VIP 三岛游：黑岛 - 渔村 - 蚕岛矿泥浴",
+      "location": "芽庄, 庆和",
+      "description": "最畅销快艇跳岛一日游：五星级蚕岛矿泥浴、黑岛珊瑚浮潜、水上渔排海鲜午餐及酒店专车上门接送。",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "销量 #1 • 立省 15%",
+          "value": "销量 #1 • 立省 15%"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "08:00 - 16:00 每日发团",
+          "value": "08:00 - 16:00 每日发团"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "高速快艇",
+          "value": "高速快艇"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "芽庄 • 珊瑚湾",
+          "value": "芽庄 • 珊瑚湾"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "(3.4k 人次预订)",
+          "value": "(3.4k 人次预订)"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "蚕岛五星矿泥浴",
+          "value": "蚕岛五星矿泥浴"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "黑岛珊瑚礁浮潜",
+          "value": "黑岛珊瑚礁浮潜"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "渔排海鲜午餐",
+          "value": "渔排海鲜午餐"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "酒店上门接送",
+          "value": "酒店上门接送"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/位",
+          "value": "/位"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "今日 -15%",
+          "value": "今日 -15%"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "查看行程",
+          "value": "查看行程"
+        },
+        "field-016": {
+          "kind": "text",
+          "label": "立即预订",
+          "value": "立即预订"
+        }
+      }
+    },
+    "tours-2": {
+      "title": "芽庄湾日落游轮 & 龙虾 BBQ 晚宴",
+      "location": "芽庄, 庆和",
+      "description": "奢华五星级芽庄湾日落夜游：龙虾配美国牛排套餐、现场小提琴与吉他演奏、免费鸡尾酒小食及专属摄影师跟拍。",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "五星级尊享体验",
+          "value": "五星级尊享体验"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "16:30 - 21:00 每日发团",
+          "value": "16:30 - 21:00 每日发团"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "Sealife / Emperor 游轮",
+          "value": "Sealife / Emperor 游轮"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "芽庄湾日落",
+          "value": "芽庄湾日落"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "(1.8k 条评价)",
+          "value": "(1.8k 条评价)"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "龙虾配美牛套餐",
+          "value": "龙虾配美牛套餐"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "小提琴与吉他现场演奏",
+          "value": "小提琴与吉他现场演奏"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "免费鸡尾酒与精致茶点",
+          "value": "免费鸡尾酒与精致茶点"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "专属摄影师跟拍",
+          "value": "专属摄影师跟拍"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/位",
+          "value": "/位"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "赠送红酒",
+          "value": "赠送红酒"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "查看行程",
+          "value": "查看行程"
+        },
+        "field-016": {
+          "kind": "text",
+          "label": "立即预订",
+          "value": "立即预订"
+        }
+      }
+    },
+    "tours-3": {
+      "title": "永熙湾 - 杭莱 - 葡萄园 - 绵羊牧场海岸线一日游",
+      "location": "芽庄, 庆和",
+      "description": "乘坐豪华 Dcar 商务车畅游最美海岸线：杭莱海上瀑布、葡萄园现摘品尝、苏伊仙绵羊牧场打卡及海湾渔排午餐。",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "最美海岸线风光",
+          "value": "最美海岸线风光"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "07:30 - 17:00 每日发团",
+          "value": "07:30 - 17:00 每日发团"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "豪华商务车 Dcar",
+          "value": "豪华商务车 Dcar"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "宁顺 • 永熙湾",
+          "value": "宁顺 • 永熙湾"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "(2.1k 条评价)",
+          "value": "(2.1k 条评价)"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "杭莱海上瀑布",
+          "value": "杭莱海上瀑布"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "葡萄架现摘新鲜葡萄",
+          "value": "葡萄架现摘新鲜葡萄"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "打卡苏伊仙绵羊牧场",
+          "value": "打卡苏伊仙绵羊牧场"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "含海湾渔排丰盛午餐",
+          "value": "含海湾渔排丰盛午餐"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/位",
+          "value": "/位"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "全包 -12%",
+          "value": "全包 -12%"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "查看行程",
+          "value": "查看行程"
+        },
+        "field-016": {
+          "kind": "text",
+          "label": "立即预订",
+          "value": "立即预订"
+        }
+      }
+    },
+    "tours-4": {
+      "title": "黑岛水肺深潜 & 海底漫步 (Seawalker) 体验",
+      "location": "芽庄, 庆和",
+      "description": "不会游泳也能潜入海底观赏绚丽珊瑚！PADI 国际认证教练 1对1 贴心指导，含高端潜水装备与专业保险。",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "专业教练 1对1 陪同",
+          "value": "专业教练 1对1 陪同"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "赠送水下拍照与视频",
+          "value": "赠送水下拍照与视频"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "黑岛海洋保护区",
+          "value": "黑岛海洋保护区"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "4.9 (980)",
+          "value": "4.9 (980)"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "一价全包",
+          "value": "一价全包"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "立即预订",
+          "value": "立即预订"
+        }
+      }
+    },
+    "tours-5": {
+      "title": "芽庄市区文化游：婆那加占婆塔 - 海洋研究所 - 龙山寺",
+      "location": "芽庄, 庆和",
+      "description": "半日或一日深度体验沉香之都人文历史：新款空调专车、景点门票及地道芽庄烤肉卷午餐全包。",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "家庭出游优选",
+          "value": "家庭出游优选"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "拼团或独立包车",
+          "value": "拼团或独立包车"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "历史文化名胜",
+          "value": "历史文化名胜"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "4.8 (1.2k)",
+          "value": "4.8 (1.2k)"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "一价全包",
+          "value": "一价全包"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "立即预订",
+          "value": "立即预订"
+        }
+      }
+    },
+    "tours-6": {
+      "title": "芽庄出发大叻追云一日游（早出晚归）",
+      "location": "芽庄, 庆和",
+      "description": "翻越壮丽的庆黎山口，打卡求达茶山云海、绣球花海，品尝大叻著名的 Leguda 蔬菜火锅。",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "芽庄市区出发",
+          "value": "芽庄市区出发"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "壮美庆黎云海山口",
+          "value": "壮美庆黎云海山口"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "大叻高原花海",
+          "value": "大叻高原花海"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "4.9 (1.5k)",
+          "value": "4.9 (1.5k)"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "一价全包",
+          "value": "一价全包"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "立即预订",
+          "value": "立即预订"
+        }
+      }
+    },
+    "tours-7": {
+      "title": "叠山岛海中漫步沙洲 & Doc Let 海滩一日游",
+      "location": "芽庄, 庆和",
+      "description": "漫步在碧海中央独特的洁白沙洲小道，畅游原生态 Doc Let 海滩并在岛上渔排享用现烤海鲜。",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "海中奇观沙洲步道",
+          "value": "海中奇观沙洲步道"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "云峰湾",
+          "value": "云峰湾"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "4.8 (850)",
+          "value": "4.8 (850)"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "一价全包",
+          "value": "一价全包"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "立即预订",
+          "value": "立即预订"
+        }
+      }
+    },
+    "tours-8": {
+      "title": "芽夫湾生态游：兰花岛与猴岛自然王国",
+      "location": "芽庄, 庆和",
+      "description": "与 1,200 多只野生猴子互动、观看趣味动物表演、漫步巨型蝴蝶园与兰花岛斗笠彩伞长廊。",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "趣味生态乐园",
+          "value": "趣味生态乐园"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "芽夫湾",
+          "value": "芽夫湾"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "4.7 (720)",
+          "value": "4.7 (720)"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "一价全包",
+          "value": "一价全包"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "立即预订",
+          "value": "立即预订"
+        }
+      }
+    },
+    "tours-9": {
+      "title": "鲁滨逊岛活力体验：海上漂浮酒吧、浆板与皮划艇竞赛",
+      "location": "芽庄, 庆和",
+      "description": "在纯净白沙滩放松身心，参加海滩热舞派对、海上漂浮鸡尾酒吧、皮划艇及自由浮潜赏珊瑚。",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "海上漂浮酒吧派对",
+          "value": "海上漂浮酒吧派对"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "鲁滨逊岛",
+          "value": "鲁滨逊岛"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "4.9 (1.1k)",
+          "value": "4.9 (1.1k)"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "一价全包",
+          "value": "一价全包"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "立即预订",
+          "value": "立即预订"
+        }
+      }
+    },
+    "home-1": {
+      "title": "富国岛 4天3晚五星度假村套餐",
+      "location": "芽庄, 庆和",
+      "description": "3晚4-5星级奢华海滨度假村住宿 + 往返机票 + 珊瑚浮潜海岛游。",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "一价全包套餐",
+          "value": "一价全包套餐"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "4天3晚",
+          "value": "4天3晚"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "每日发团",
+          "value": "每日发团"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "低至",
+          "value": "低至"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "预订套餐",
+          "value": "预订套餐"
+        }
+      }
+    },
+    "home-2": {
+      "title": "富国岛长滩 3天2晚套餐",
+      "location": "芽庄, 庆和",
+      "description": "4-5星级海滨度假村日落无边泳池住宿 + 香岛跨海缆车门票。",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "超火特惠套餐",
+          "value": "超火特惠套餐"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "3天2晚",
+          "value": "3天2晚"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "每日发团",
+          "value": "每日发团"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "低至",
+          "value": "低至"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "预订套餐",
+          "value": "预订套餐"
+        }
+      }
+    },
+    "home-3": {
+      "title": "芽庄碧海 4天3晚度假套餐",
+      "location": "芽庄, 庆和",
+      "description": "3晚芽庄市中心4-5星酒店 + VIP 三岛快艇游 + 蚕岛矿泥浴。",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "热销爆款",
+          "value": "热销爆款"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "4天3晚",
+          "value": "4天3晚"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "每日发团",
+          "value": "每日发团"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "低至",
+          "value": "低至"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "预订套餐",
+          "value": "预订套餐"
+        }
+      }
+    },
+    "home-4": {
+      "title": "芽庄帝皇酒店 (Empyrean)",
+      "location": "芽庄市禄寿坊阮氏明开路02号",
+      "description": "立省20%，俯瞰芽庄湾的无边泳池，正对4/2中心广场，紧邻陈富海滩与夜市。",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "立省 20%",
+          "value": "立省 20%"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "仅剩 2 间",
+          "value": "仅剩 2 间"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "无边泳池尽览芽庄湾全景",
+          "value": "无边泳池尽览芽庄湾全景"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "正对市中心 4/2 广场",
+          "value": "正对市中心 4/2 广场"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "紧邻陈富海滩与夜市",
+          "value": "紧邻陈富海滩与夜市"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "优惠截止：",
+          "value": "优惠截止："
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 30/05/2026",
+          "value": "23:59, 30/05/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/晚",
+          "value": "/晚"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "立即订房",
+          "value": "立即订房"
+        }
+      }
+    },
+    "home-5": {
+      "title": "金兰瑞享度假村 (Movenpick)",
+      "location": "庆和省柑林柑海东长滩",
+      "description": "立省24%，免费取消，每日免费瑞士巧克力时光、刺激水上乐园及瑞士风情小镇。",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "立省 24%",
+          "value": "立省 24%"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "免费取消",
+          "value": "免费取消"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "每日免费瑞士巧克力时光",
+          "value": "每日免费瑞士巧克力时光"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "冒险水上乐园 Water Park",
+          "value": "冒险水上乐园 Water Park"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "热闹的瑞士风情小镇娱乐区",
+          "value": "热闹的瑞士风情小镇娱乐区"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "优惠截止：",
+          "value": "优惠截止："
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 31/05/2026",
+          "value": "23:59, 31/05/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/晚",
+          "value": "/晚"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "立即订房",
+          "value": "立即订房"
+        }
+      }
+    },
+    "home-6": {
+      "title": "金兰阿尔玛度假村 (ALMA)",
+      "location": "庆和省柑林金兰北半岛",
+      "description": "立省18%，紧邻长滩海滨，6,000m²水上乐园、12座海景无边泳池及免费电影院。",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "立省 18%",
+          "value": "立省 18%"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "紧邻长滩海滨",
+          "value": "紧邻长滩海滨"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "6,000m² Splash 水上乐园",
+          "value": "6,000m² Splash 水上乐园"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "12座临海无边际泳池群",
+          "value": "12座临海无边际泳池群"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "免费阿尔玛影院 Alma Cinema",
+          "value": "免费阿尔玛影院 Alma Cinema"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "优惠截止：",
+          "value": "优惠截止："
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 02/06/2026",
+          "value": "23:59, 02/06/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/晚",
+          "value": "/晚"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "立即订房",
+          "value": "立即订房"
+        }
+      }
+    },
+    "home-7": {
+      "title": "金兰融合度假村 (Fusion)",
+      "location": "金兰长滩阮必成路",
+      "description": "立省22%，每日免费全包 Spa 护理、随时随地享用早餐及私密海景泳池别墅。",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "立省 22%",
+          "value": "立省 22%"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "含每日 Spa",
+          "value": "含每日 Spa"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "每日免费全包 Spa 护理",
+          "value": "每日免费全包 Spa 护理"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "专属随时随地早餐礼遇",
+          "value": "专属随时随地早餐礼遇"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "独栋海景私人泳池别墅",
+          "value": "独栋海景私人泳池别墅"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "优惠截止：",
+          "value": "优惠截止："
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 05/06/2026",
+          "value": "23:59, 05/06/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/晚",
+          "value": "/晚"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "立即订房",
+          "value": "立即订房"
+        }
+      }
+    },
+    "home-8": {
+      "title": "金兰缘河度假村 (Duyen Ha)",
+      "location": "柑林柑海东长滩",
+      "description": "立省20%，长滩私人白沙滩、热带风情户外泳池及6家高端亚欧美食餐厅与酒吧。",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "立省 20%",
+          "value": "立省 20%"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "仅剩 2 间",
+          "value": "仅剩 2 间"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "长滩私属洁白沙滩",
+          "value": "长滩私属洁白沙滩"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "热带风情户外泳池",
+          "value": "热带风情户外泳池"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "6家高端亚欧餐厅与酒吧",
+          "value": "6家高端亚欧餐厅与酒吧"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "优惠截止：",
+          "value": "优惠截止："
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 30/05/2026",
+          "value": "23:59, 30/05/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/晚",
+          "value": "/晚"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "立即订房",
+          "value": "立即订房"
+        }
+      }
+    },
+    "home-9": {
+      "title": "芽庄 CostaBella 度假村",
+      "location": "芽庄市福同福夏",
+      "description": "立省24%，免费取消，静谧私人海滩、Aqua Park 水上乐园及山景全景泳池。",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "立省 24%",
+          "value": "立省 24%"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "免费取消",
+          "value": "免费取消"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "静谧私属海滩",
+          "value": "静谧私属海滩"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "Aqua Park 趣味水上乐园",
+          "value": "Aqua Park 趣味水上乐园"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "山景全景户外泳池",
+          "value": "山景全景户外泳池"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "优惠截止：",
+          "value": "优惠截止："
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 31/05/2026",
+          "value": "23:59, 31/05/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/晚",
+          "value": "/晚"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "立即订房",
+          "value": "立即订房"
+        }
+      }
+    },
+    "home-10": {
+      "title": "金兰斯万多尔度假村 (Swandor)",
+      "location": "柑林长滩阮必成路",
+      "description": "立省18%，直面原生态长滩，享 24 小时超值全包餐饮及大型户外泳池群。",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "立省 18%",
+          "value": "立省 18%"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "紧邻长滩海滨",
+          "value": "紧邻长滩海滨"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "原生态绝美长滩直达",
+          "value": "原生态绝美长滩直达"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "24小时 Ultra All-Inclusive 全包餐饮",
+          "value": "24小时 Ultra All-Inclusive 全包餐饮"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "大型户外泳池综合区",
+          "value": "大型户外泳池综合区"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "优惠截止：",
+          "value": "优惠截止："
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 02/06/2026",
+          "value": "23:59, 02/06/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/晚",
+          "value": "/晚"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "立即订房",
+          "value": "立即订房"
+        }
+      }
+    },
+    "home-11": {
+      "title": "芽庄钻石湾酒店 (Diamond Bay)",
+      "location": "芽庄市禄寿坊陈富路20号",
+      "description": "立省24%，免费取消，陈富路正海景、顶层户外无边泳池及丰富亚欧自助早餐。",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "立省 24%",
+          "value": "立省 24%"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "免费取消",
+          "value": "免费取消"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "震撼陈富路正海景视野",
+          "value": "震撼陈富路正海景视野"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "顶层高空户外无边泳池",
+          "value": "顶层高空户外无边泳池"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "丰富亚欧风味自助早餐",
+          "value": "丰富亚欧风味自助早餐"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "优惠截止：",
+          "value": "优惠截止："
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 31/05/2026",
+          "value": "23:59, 31/05/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/晚",
+          "value": "/晚"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "立即订房",
+          "value": "立即订房"
+        }
+      }
+    },
+    "home-12": {
+      "title": "芽庄湾日落游轮 & BBQ 晚宴",
+      "location": "芽庄, 庆和",
+      "description": "泛舟浪漫芽庄湾欣赏日落，享用高级海鲜自助、鸡尾酒与悠扬现场音乐。",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "五星级体验",
+          "value": "五星级体验"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "每日发团",
+          "value": "每日发团"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "•",
+          "value": "•"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "1.2k+ 人次预订",
+          "value": "1.2k+ 人次预订"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "•",
+          "value": "•"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "当日游",
+          "value": "当日游"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "芽庄市中心酒店上门接送",
+          "value": "芽庄市中心酒店上门接送"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "全包价低至",
+          "value": "全包价低至"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "预订线路",
+          "value": "预订线路"
+        }
+      }
+    },
+    "home-13": {
+      "title": "芽庄 VIP 三岛游：黑岛 – 渔村 – 蚕岛",
+      "location": "芽庄, 庆和",
+      "description": "新款高速快艇、黑岛保护区浮潜赏珊瑚、渔村海鲜午餐及蚕岛度假村矿泥浴全包。",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "热销爆款",
+          "value": "热销爆款"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "每日发团",
+          "value": "每日发团"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "•",
+          "value": "•"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "1.2k+ 人次预订",
+          "value": "1.2k+ 人次预订"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "•",
+          "value": "•"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "当日游",
+          "value": "当日游"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "芽庄市中心酒店接送",
+          "value": "芽庄市中心酒店接送"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "全包价低至",
+          "value": "全包价低至"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "预订线路",
+          "value": "预订线路"
+        }
+      }
+    }
+  },
+  "information_pages": [
+    {
+      "slug": "gioi-thieu",
+      "title": "关于我们",
+      "body": "NhaTrangGo 是专注于芽庄与金兰湾酒店预订、海岛游及机场接送的在线旅游平台，价格透明并提供 24/7 全天候支持。"
+    },
+    {
+      "slug": "dieu-khoan-su-dung",
+      "title": "使用条款",
+      "body": "请在付款前仔细核对行程详情、接送时间及旅游顾问发送的预订确认单。"
+    },
+    {
+      "slug": "chinh-sach-bao-mat",
+      "title": "隐私政策",
+      "body": "NhaTrangGo 承诺严格保护您的个人信息、联系电话与出行安排，仅用于订单确认与行程服务。"
+    },
+    {
+      "slug": "ho-tro-khach-hang",
+      "title": "客户支持",
+      "body": "NhaTrangGo 运营团队通过热线 0878.458.885、Zalo、Telegram 与 WhatsApp 提供 24/7 在线预订咨询与支持。"
+    }
+  ]
+}

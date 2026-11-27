@@ -63,7 +63,8 @@ export async function getAdminOverview(
 
 const RESOURCE_QUERIES: Record<string, string> = {
   products: "SELECT * FROM products ORDER BY position,id",
-  content: "SELECT * FROM site_content ORDER BY scope,key",
+  content:
+    "SELECT * FROM site_content WHERE scope<>'fast-track' ORDER BY scope,key",
   fares:
     "SELECT f.route,f.vehicle,f.price,r.title AS route_title FROM transfer_fares f LEFT JOIN transfer_routes r ON r.code=f.route WHERE f.active ORDER BY r.title,f.route,f.vehicle",
   bookings:
@@ -152,7 +153,7 @@ export async function updateAdminContent(
   p: z.infer<typeof contentSchema>,
 ) {
   const existing = await db.query(
-    "SELECT kind FROM site_content WHERE key=$1",
+    "SELECT kind FROM site_content WHERE key=$1 AND scope<>'fast-track'",
     [key],
   );
   if (!existing.rows[0]) throw new AppError("Không tìm thấy nội dung", 404);
@@ -160,14 +161,14 @@ export async function updateAdminContent(
     throw new AppError("Không được đổi loại trường nội dung");
   }
 
-  if (/^(evisa|fast-track|contact|lookup|blog)\.title$/.test(key)) {
+  if (/^(evisa|contact|lookup|blog)\.title$/.test(key)) {
     z.string()
       .trim()
       .min(1, "Tiêu đề không được bỏ trống")
       .max(200)
       .parse(p.value);
   }
-  if (/^(evisa|fast-track|contact|lookup|blog)\.intro$/.test(key)) {
+  if (/^(evisa|contact|lookup|blog)\.intro$/.test(key)) {
     z.string().max(2000).parse(p.value);
   }
 

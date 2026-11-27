@@ -202,6 +202,18 @@ try {
   await page.locator('.tour-cat-btn[data-category="du-thuyen"]').click();
   await page.waitForURL("**/tour-hang-ngay?category=du-thuyen");
   assert.ok((await page.locator("[data-service-id]:visible").count()) > 0);
+  await expect(
+    page.locator('.tour-cat-btn[data-category="du-thuyen"]'),
+  ).toHaveAttribute("aria-current", "page");
+  await page.getByRole("button", { name: "Sắp xếp tour", exact: true }).click();
+  await page
+    .getByRole("option", { name: "Giá thấp nhất", exact: true })
+    .click();
+  await page.waitForURL(
+    (url) =>
+      url.searchParams.get("category") === "du-thuyen" &&
+      url.searchParams.get("sort") === "price",
+  );
   await page.getByRole("link", { name: "Xóa bộ lọc" }).click();
   await expect(
     page.locator('.tour-cat-btn[data-category="all"]'),
@@ -226,7 +238,7 @@ try {
   await tourForm.locator('button[type="submit"]').click();
   const searchResult = page.locator(`[data-service-id="${tourId}"]`);
   await searchResult
-    .getByRole("button", { name: "Gửi yêu cầu đặt chỗ" })
+    .getByRole("button", { name: "Đặt tour", exact: true })
     .click();
   const tourDialog = page.getByRole("dialog");
   await expect(

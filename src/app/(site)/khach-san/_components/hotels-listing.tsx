@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useSiteData } from "@/components/content";
+import { useSiteData, useT } from "@/components/content";
 import { CustomSelect } from "@/components/ui/custom-select";
 import { productSearchBlob } from "@/modules/travel/search";
 import { HotelCard } from "./hotel-card";
@@ -33,6 +33,14 @@ export function HotelsListing({
   onResetSearch: () => void;
 }) {
   const { products, hotelCapacities } = useSiteData();
+  const t = useT();
+  const sortLabelMap: Record<SortMode, string> = {
+    recommended: t.hotels.sort.recommended,
+    deals: t.hotels.sort.deals,
+    "price-asc": t.hotels.sort.priceAsc,
+    "rating-desc": t.hotels.sort.ratingDesc,
+    beach: t.hotels.sort.beach,
+  };
   const [filters, setFilters] = useState<FilterState>(emptyFilters);
   const [sort, setSort] = useState<SortMode>("recommended");
   const [page, setPage] = useState(1);
@@ -127,11 +135,11 @@ export function HotelsListing({
   return (
     <section
       className="site-container hotel-listing"
-      aria-label="Danh sách khách sạn"
+      aria-label={t.hotels.listingAria}
     >
       <aside
         className="hotel-sidebar hidden lg:block"
-        aria-label="Bộ lọc khách sạn"
+        aria-label={t.hotels.filterAria}
       >
         <HotelFilterPanel {...filterProps} />
       </aside>
@@ -144,10 +152,10 @@ export function HotelsListing({
               aria-live="polite"
               className="text-xl font-extrabold sm:text-2xl"
             >
-              {hotels.length} khách sạn &amp; resort
+              {hotels.length} {t.hotels.resultsSuffix}
             </h2>
             <p className="mt-2 text-sm text-on-surface-variant">
-              tại Nha Trang – Cam Ranh
+              {t.hotels.resultsRegion}
             </p>
           </div>
           <div className="flex min-w-0 flex-wrap items-center gap-2">
@@ -162,10 +170,10 @@ export function HotelsListing({
               >
                 tune
               </span>
-              Bộ lọc
+              {t.hotels.filterMobileBtn}
             </button>
             <CustomSelect
-              ariaLabel="Sắp xếp khách sạn"
+              ariaLabel={t.hotels.sortLabel}
               align="right"
               buttonClassName="hotel-sort cursor-pointer"
               value={sort}
@@ -175,7 +183,7 @@ export function HotelsListing({
               }}
               options={sortOptions.map((item) => ({
                 value: item.id,
-                label: item.label,
+                label: sortLabelMap[item.id] ?? item.label,
               }))}
             />
           </div>
@@ -187,13 +195,13 @@ export function HotelsListing({
           ))}
           {visibleHotels.length === 0 && (
             <div className="grid justify-items-center gap-4 rounded-[18px] border border-brand-light bg-surface p-8 text-center">
-              <p className="font-semibold">Không tìm thấy khách sạn phù hợp.</p>
+              <p className="font-semibold">{t.hotels.noMatchingHotels}</p>
               <button
                 type="button"
                 onClick={resetFilters}
                 className="hotel-button"
               >
-                Đặt lại bộ lọc
+                {t.hotels.resetFiltersBtn}
               </button>
             </div>
           )}
@@ -202,18 +210,18 @@ export function HotelsListing({
         {hotels.length > 0 && (
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
             <p className="text-sm text-on-surface-variant">
-              Hiển thị {start + 1}–{start + visibleHotels.length} trên tổng số{" "}
-              {hotels.length} khách sạn
+              {t.hotels.showingPrefix} {start + 1}–{start + visibleHotels.length}{" "}
+              {t.hotels.ofTotal} {hotels.length} {t.hotels.hotelsNoun}
             </p>
             {pageCount > 1 && (
               <nav
                 className="flex items-center gap-2"
-                aria-label="Phân trang khách sạn"
+                aria-label={t.hotels.paginationAria}
               >
                 <button
                   type="button"
                   className="hotel-button hotel-button-secondary"
-                  aria-label="Trang trước"
+                  aria-label={t.common.prevPage}
                   disabled={currentPage === 1}
                   onClick={() => changePage(currentPage - 1)}
                 >
@@ -230,7 +238,7 @@ export function HotelsListing({
                 <button
                   type="button"
                   className="hotel-button hotel-button-secondary"
-                  aria-label="Trang sau"
+                  aria-label={t.common.nextPage}
                   disabled={currentPage === pageCount}
                   onClick={() => changePage(currentPage + 1)}
                 >
@@ -249,18 +257,21 @@ export function HotelsListing({
 
       <dialog
         ref={drawer}
-        aria-label="Bộ lọc khách sạn"
+        aria-label={t.hotels.filterAria}
         className="hotel-filter-drawer lg:hidden"
       >
         <form method="dialog" className="mb-3 flex justify-end">
           <button type="submit" className="hotel-button hotel-button-secondary">
-            Đóng
+            {t.common.close}
           </button>
         </form>
         <HotelFilterPanel {...filterProps} />
         <form method="dialog" className="sticky bottom-0 mt-4 bg-surface py-3">
           <button className="hotel-button w-full" type="submit">
-            Xem {hotels.length} kết quả
+            {t.hotels.viewResultsTemplate.replace(
+              "{count}",
+              String(hotels.length),
+            )}
           </button>
         </form>
       </dialog>

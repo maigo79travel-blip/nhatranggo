@@ -1,8 +1,7 @@
 import "server-only";
 import { cache } from "react";
-import { cookies } from "next/headers";
 import { db } from "./db";
-import { parseLocale } from "./locale";
+import { getPublicLocale } from "./i18n";
 import type {
   SiteData,
   ContentEntry,
@@ -21,9 +20,7 @@ import {
   listPublicProducts,
 } from "@/modules/travel/public-products";
 
-export const getPublicLocale = cache(async () =>
-  parseLocale((await cookies()).get("site_locale")?.value),
-);
+export { getPublicLocale };
 
 export const getSiteContent = cache(async (scope: string) => {
   const locale = await getPublicLocale();
@@ -70,6 +67,7 @@ export const getSiteData = cache(
         : listPublicProducts({
             locale,
             types: pageProductTypes[scope],
+            featuredFirst: scope === "tours",
           }),
       getSiteContent(scope),
       transfersPage

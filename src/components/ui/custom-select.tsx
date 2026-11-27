@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { useSiteData } from "@/components/content";
 
 export interface CustomSelectOption {
   value: string;
@@ -27,8 +28,8 @@ export function CustomSelect({
   disabled = false,
   required = false,
   searchable = false,
-  searchPlaceholder = "Tìm kiếm…",
-  emptyText = "Không tìm thấy kết quả",
+  searchPlaceholder,
+  emptyText,
   buttonClassName = "",
   menuClassName = "",
   align = "left",
@@ -50,6 +51,11 @@ export function CustomSelect({
   menuClassName?: string;
   align?: "left" | "right";
 }) {
+  const { messages } = useSiteData();
+  const resolvedSearchPlaceholder =
+    searchPlaceholder ?? messages?.common.searchPlaceholder ?? "Tìm kiếm...";
+  const resolvedEmptyText =
+    emptyText ?? messages?.common.emptySelect ?? "Không tìm thấy kết quả";
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState(
     defaultValue ?? options[0]?.value ?? "",
@@ -171,8 +177,8 @@ export function CustomSelect({
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 onClick={(event) => event.stopPropagation()}
-                placeholder={searchPlaceholder}
-                aria-label={searchPlaceholder}
+                placeholder={resolvedSearchPlaceholder}
+                aria-label={resolvedSearchPlaceholder}
                 className="w-full min-w-0 bg-transparent text-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none"
               />
             </div>
@@ -185,7 +191,7 @@ export function CustomSelect({
           >
             {filteredOptions.length === 0 ? (
               <li className="px-3 py-2 text-sm text-on-surface-variant">
-                {emptyText}
+                {resolvedEmptyText}
               </li>
             ) : (
               filteredOptions.map((option) => {

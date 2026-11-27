@@ -1,4 +1,5 @@
 "use client";
+import { navigationItems } from "@/lib/navigation";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Product } from "@/lib/types";
@@ -394,10 +395,12 @@ export function ContentEditor({
   onSave: (p: unknown) => Promise<void>;
 }) {
   const [error, setError] = useState("");
-  const [value, setValue] = useState(row.value);
-  const [raw, setRaw] = useState(JSON.stringify(row.value, null, 2));
   const isNavigation =
     row.key === "site.navigation" || row.key === "site.mobile-navigation";
+  const [value, setValue] = useState(() =>
+    isNavigation ? navigationItems(row.value) : row.value,
+  );
+  const [raw, setRaw] = useState(JSON.stringify(row.value, null, 2));
   const flat =
     value != null &&
     typeof value === "object" &&

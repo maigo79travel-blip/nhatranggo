@@ -7,12 +7,13 @@ export type ContactChannel = {
 
 export function contactChannels(
   contact: Record<string, string>,
+  hotlinePrefix = "Gọi hotline",
 ): ContactChannel[] {
   const phone = (contact.telephone || "").replace(/[^\d+]/g, "");
   const entries: ContactChannel[] = [
     {
       key: "telephone",
-      label: "Gọi hotline " + (contact.phone || phone),
+      label: `${hotlinePrefix} ${contact.phone || phone}`,
       href: phone ? "tel:" + phone : "",
     },
     {

@@ -1,3 +1,6 @@
+"use client";
+import { useT } from "@/components/content";
+
 export function HomeCardRating({
   rating,
   variant,
@@ -5,6 +8,7 @@ export function HomeCardRating({
   rating: number;
   variant: "hotel" | "tour";
 }) {
+  const t = useT();
   if (rating <= 0) return null;
   const style =
     variant === "hotel"
@@ -13,7 +17,7 @@ export function HomeCardRating({
 
   return (
     <span className={`shrink-0 whitespace-nowrap leading-[1.4] ${style}`}>
-      <span className="sr-only">Điểm đánh giá </span>
+      <span className="sr-only">{t.hotels.ratingAriaPrefix} </span>
       <span aria-hidden="true">★ </span>
       {rating.toFixed(1)}
     </span>

@@ -1,6 +1,6 @@
 import { useId } from "react";
-import { ContentLink } from "@/components/content";
-import { money } from "@/lib/types";
+import { ContentLink, useSiteData, useT } from "@/components/content";
+import { formatMoney } from "@/lib/i18n/format";
 import {
   filterGroups,
   MAX_SLIDER_PRICE,
@@ -23,6 +23,38 @@ export function HotelFilterPanel({
   onReset: () => void;
 }) {
   const priceId = useId();
+  const { locale } = useSiteData();
+  const t = useT();
+  const groupTitles: Record<string, string> = {
+    priceRanges: t.hotels.filterGroups.priceRanges,
+    stars: t.hotels.filterGroups.stars,
+    areas: t.hotels.filterGroups.areas,
+    amenities: t.hotels.filterGroups.amenities,
+    policies: t.hotels.filterGroups.policies,
+  };
+  const optionLabels: Record<string, string> = {
+    "under-1m": t.hotels.priceOptions.under1m,
+    "1m-2m": t.hotels.priceOptions["1m-2m"],
+    "2m-4m": t.hotels.priceOptions["2m-4m"],
+    "over-4m": t.hotels.priceOptions.over4m,
+    "3": t.hotels.starOptions["3"],
+    "4": t.hotels.starOptions["4"],
+    "5": t.hotels.starOptions["5"],
+    "tran-phu": t.hotels.areaOptions["tran-phu"],
+    "bai-dai": t.hotels.areaOptions["bai-dai"],
+    "hon-tre": t.hotels.areaOptions["hon-tre"],
+    "pho-tay": t.hotels.areaOptions["pho-tay"],
+    "an-vien": t.hotels.areaOptions["an-vien"],
+    "infinity-pool": t.hotels.amenityOptions["infinity-pool"],
+    "private-beach": t.hotels.amenityOptions["private-beach"],
+    buffet: t.hotels.amenityOptions.buffet,
+    "airport-shuttle": t.hotels.amenityOptions["airport-shuttle"],
+    "water-park": t.hotels.amenityOptions["water-park"],
+    spa: t.hotels.amenityOptions.spa,
+    "kids-free": t.hotels.amenityOptions["kids-free"],
+    "free-cancel": t.hotels.policyOptions["free-cancel"],
+    "zero-deposit": t.hotels.policyOptions["zero-deposit"],
+  };
 
   return (
     <div className="grid gap-6">
@@ -34,20 +66,22 @@ export function HotelFilterPanel({
           >
             tune
           </span>
-          Bộ lọc tìm kiếm
+          {t.hotels.filterTitle}
         </h2>
         <button
           type="button"
           onClick={onReset}
           className="min-h-11 shrink-0 rounded-xl bg-surface-muted px-2 text-sm font-bold text-on-surface hover:bg-surface-brand"
         >
-          Đặt lại
+          {t.common.reset}
         </button>
       </div>
 
       {filterGroups.map((group) => (
         <fieldset key={group.key} className="min-w-0">
-          <legend className="mb-2 text-sm font-extrabold">{group.title}</legend>
+          <legend className="mb-2 text-sm font-extrabold">
+            {groupTitles[group.key] ?? group.title}
+          </legend>
           <div
             className={
               group.key === "stars" ? "hotel-filter-stars" : "grid gap-1"
@@ -72,7 +106,7 @@ export function HotelFilterPanel({
                         <span key={index} className="hotel-filter-star-icon" />
                       ))}
                     </span>
-                    {option.label}
+                    {optionLabels[option.id] ?? option.label}
                   </button>
                 );
               }
@@ -83,7 +117,9 @@ export function HotelFilterPanel({
                     checked={checked}
                     onChange={() => onToggle(group.key, option.id)}
                   />
-                  <span className="flex-1">{option.label}</span>
+                  <span className="flex-1">
+                    {optionLabels[option.id] ?? option.label}
+                  </span>
                   {group.key === "areas" && (
                     <span className="text-xs">
                       ({areaCounts[option.id] ?? 0})
@@ -96,7 +132,7 @@ export function HotelFilterPanel({
           {group.key === "priceRanges" && (
             <div className="mt-3 grid gap-1">
               <label htmlFor={priceId} className="sr-only">
-                Mức giá tối đa mỗi đêm
+                {t.hotels.maxPriceLabel}
               </label>
               <input
                 id={priceId}
@@ -109,14 +145,16 @@ export function HotelFilterPanel({
                 onChange={(event) => onMaxPrice(Number(event.target.value))}
                 aria-valuetext={
                   filters.maxPrice === MAX_SLIDER_PRICE
-                    ? "Không giới hạn"
-                    : money(filters.maxPrice)
+                    ? t.hotels.unlimitedPrice
+                    : formatMoney(filters.maxPrice, locale)
                 }
               />
               <div className="flex items-center justify-between gap-1 text-xs font-bold text-primary">
                 <span>500k</span>
                 {filters.maxPrice < MAX_SLIDER_PRICE && (
-                  <output htmlFor={priceId}>{money(filters.maxPrice)}</output>
+                  <output htmlFor={priceId}>
+                    {formatMoney(filters.maxPrice, locale)}
+                  </output>
                 )}
                 <span>8.000k+</span>
               </div>
@@ -127,10 +165,10 @@ export function HotelFilterPanel({
 
       <div className="grid gap-2 rounded-xl bg-surface-muted p-3">
         <h3 className="text-sm font-extrabold text-primary">
-          Cần phòng gấp giá đoàn?
+          {t.hotels.urgentGroupTitle}
         </h3>
         <p className="text-sm leading-snug text-on-surface-variant">
-          Liên hệ để được tư vấn giữ phòng và báo giá cho nhóm, gia đình.
+          {t.hotels.urgentGroupDesc}
         </p>
         <ContentLink
           contentKey="hotels.attributes-042"
@@ -139,7 +177,7 @@ export function HotelFilterPanel({
           target="_blank"
           rel="noopener"
         >
-          Chat Zalo ngay (24/7)
+          {t.hotels.chatZalo247}
         </ContentLink>
       </div>
     </div>

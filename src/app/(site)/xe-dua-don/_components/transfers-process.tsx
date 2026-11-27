@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { ContentText } from "@/components/content";
+import { ContentText, useT } from "@/components/content";
 import brand from "@/config/brand.json";
 import {
   TransferCallout,
@@ -10,14 +10,6 @@ import {
 } from "./transfers-ui";
 
 type FaqCategory = "all" | "rental" | "airport" | "payment" | "other";
-
-const faqTabs: { id: FaqCategory; label: string }[] = [
-  { id: "all", label: "Tất cả" },
-  { id: "rental", label: "Thuê xe" },
-  { id: "airport", label: "Đón tại sân bay" },
-  { id: "payment", label: "Thanh toán" },
-  { id: "other", label: "Khác" },
-];
 
 const faqItems = [
   {
@@ -58,6 +50,7 @@ const faqItems = [
 ];
 
 export function TransfersProcess() {
+  const t = useT();
   const [tab, setTab] = useState<FaqCategory>("all");
   const [openId, setOpenId] = useState<number | null>(1);
   const visible =
@@ -69,19 +62,19 @@ export function TransfersProcess() {
         <TransferHeading
           eyebrow="transfers.text-163"
           titleKey="transfers.text-164"
-          accent="Khi Thuê Xe Đưa Đón"
+          accent={t.transfers.faq.title}
           centered
         >
           <p className="mt-3 text-sm text-on-surface-variant">
-            Câu hỏi phổ biến về dịch vụ đưa đón tại {brand.name}.
+            {t.transfers.faq.subtitle.replace("{brand}", brand.name)}
           </p>
         </TransferHeading>
         <div
           className="my-7 flex flex-wrap justify-center gap-3 sm:my-8"
           role="group"
-          aria-label="Phân loại câu hỏi"
+          aria-label={t.transfers.faq.categoryAria}
         >
-          {faqTabs.map((item) => (
+          {t.transfers.faq.tabs.map((item) => (
             <button
               key={item.id}
               type="button"
@@ -138,10 +131,10 @@ export function TransfersProcess() {
 
         <TransferCallout
           className="mt-8 sm:px-8"
-          title="Vẫn còn thắc mắc?"
-          actions={<TransferZaloLink>Tư vấn ngay qua Zalo</TransferZaloLink>}
+          title={t.transfers.faq.stillHaveQuestions}
+          actions={<TransferZaloLink>{t.transfers.faq.zaloConsult}</TransferZaloLink>}
         >
-          Liên hệ ngay với đội ngũ {brand.name} để được hỗ trợ nhanh nhất.
+          {t.transfers.faq.contactTeamTemplate.replace("{brand}", brand.name)}
         </TransferCallout>
       </div>
     </section>

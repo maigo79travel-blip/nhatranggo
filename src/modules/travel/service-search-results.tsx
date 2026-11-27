@@ -4,6 +4,7 @@ import {
   type ServiceType,
 } from "./service-routes";
 import { getPublicDestinations, getPublicLocale } from "@/lib/catalog";
+import { getMessages } from "@/lib/i18n";
 import { z } from "zod";
 import Link from "next/link";
 import {
@@ -18,19 +19,17 @@ import { listPublicProducts } from "./public-products";
 import { ServiceCards } from "./catalog-list";
 import { ServiceFilters } from "./service-filters";
 import { bookingDraft, vietnamToday } from "./search";
-const searchTitles: Record<ServiceType, string> = {
-  hotel: "Tìm khách sạn & resort",
-  tour: "Tìm tour du lịch",
-  combo: "Combo du lịch",
-  transfer: "Tìm xe đưa đón",
-};
+import { TourCards } from "./tour-cards";
+import { TourFilters, TourSortSelect } from "./tour-filters";
 
 export async function ServiceSearchResults({
   type,
   searchParams,
+  hero,
 }: {
   type: ServiceType;
   searchParams: ServiceSearchParams;
+  hero?: { image: string };
 }) {
   const params = Object.fromEntries(
     Object.entries(searchParams).map(([key, value]) => [
@@ -40,6 +39,7 @@ export async function ServiceSearchResults({
   );
   const draft = bookingDraft(params);
   const locale = await getPublicLocale();
+  const t = getMessages(locale);
   const categories =
     type === "tour" ? tourCategories : type === "hotel" ? hotelCategories : {};
   const categoryTerms = Object.hasOwn(categories, params.category)
@@ -66,6 +66,9 @@ export async function ServiceSearchResults({
     getPublicDestinations(),
   ]);
   const products = rows.slice(0, pageSize);
+  const isTourCatalog = type === "tour" || type === "combo";
+  const filterKey = JSON.stringify(params);
+  const filterProps = { params, draft, destinations, today: vietnamToday() };
   function pageHref(next: number) {
     const query = new URLSearchParams(params);
     query.set("page", String(next));
@@ -73,42 +76,73 @@ export async function ServiceSearchResults({
     return serviceSearchHref(type).split("?")[0] + "?" + query;
   }
   return (
-    <PublicPage title={searchTitles[type]}>
-      <ServiceFilters
-        key={JSON.stringify(params)}
-        type={type}
-        params={params}
-        resetHref={serviceSearchHref(type)}
-        draft={draft}
-        destinations={destinations}
-        today={vietnamToday()}
-      />
-      <p role="status" className="text-xl font-bold mt-8 mb-5">
-        {page > 1 || rows.length > pageSize
-          ? `Hiển thị ${products.length} dịch vụ · Trang ${page}`
-          : `${products.length} dịch vụ phù hợp`}
-      </p>
+    <PublicPage title={t.serviceSearch.titles[type]} hero={hero}>
+      {isTourCatalog ? (
+        <TourFilters key={filterKey} {...filterProps} type={type} />
+      ) : (
+        <ServiceFilters
+          key={filterKey}
+          {...filterProps}
+          type={type}
+          resetHref={serviceSearchHref(type)}
+        />
+      )}
+      <div className="mb-5 mt-8 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          {isTourCatalog && (
+            <h2 className="text-2xl font-extrabold tracking-tight sm:text-headline-lg">
+              {t.tours.resultsHeading}
+            </h2>
+          )}
+          <p
+            role="status"
+            className={
+              isTourCatalog
+                ? "mt-1 text-sm text-on-surface-variant"
+                : "text-xl font-bold"
+            }
+          >
+            {page > 1 || rows.length > pageSize
+              ? t.serviceSearch.paginatedSummaryTemplate
+                  .replace("{count}", String(products.length))
+                  .replace("{page}", String(page))
+              : t.serviceSearch.totalSummaryTemplate.replace(
+                  "{count}",
+                  String(products.length),
+                )}
+          </p>
+        </div>
+        {isTourCatalog && <TourSortSelect type={type} params={params} />}
+      </div>
       {(draft.date || draft.guests) && (
         <p className="text-sm text-on-surface-variant leading-relaxed mb-6 flex items-start gap-2">
           <PublicIcon name="info" className="text-lg shrink-0 mt-0.5" />
-          Ngày và số khách được chuyển sang yêu cầu đặt chỗ. Nhân viên sẽ kiểm
-          tra tình trạng chỗ và xác nhận với đối tác.
+          {t.serviceSearch.draftNote}
         </p>
       )}
       <CatalogProvider>
-        <ServiceCards products={products} initialValues={draft} />
+        {isTourCatalog ? (
+          <TourCards products={products} draft={draft} />
+        ) : (
+          <ServiceCards products={products} initialValues={draft} />
+        )}
       </CatalogProvider>
       {(page > 1 || rows.length > pageSize) && (
-        <nav className="mt-6 flex gap-4" aria-label="Phân trang dịch vụ">
-          {page > 1 && <Link href={pageHref(page - 1)}>Trang trước</Link>}
+        <nav
+          className="mt-6 flex gap-4"
+          aria-label={t.serviceSearch.paginationAria}
+        >
+          {page > 1 && (
+            <Link href={pageHref(page - 1)}>{t.common.prevPage}</Link>
+          )}
           {rows.length > pageSize && (
-            <Link href={pageHref(page + 1)}>Trang sau</Link>
+            <Link href={pageHref(page + 1)}>{t.common.nextPage}</Link>
           )}
         </nav>
       )}
       {!products.length && (
-        <PublicEmptyState>
-          Chưa có dịch vụ phù hợp. Hãy đổi từ khóa, điểm đến hoặc ngày sử dụng.
+        <PublicEmptyState heading={t.common.emptySelect}>
+          {t.serviceSearch.emptyHint}
         </PublicEmptyState>
       )}
     </PublicPage>

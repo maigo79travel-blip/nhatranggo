@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { useSiteData } from "@/components/content";
+import { useSiteData, useT } from "@/components/content";
 import { contactInfo } from "@/lib/content-values";
 import { PublicIcon } from "@/components/site/public-ui";
 import { contactChannels } from "./contact-channels";
@@ -9,12 +9,13 @@ import { contactCopy } from "./contact-copy";
 
 export function FloatingContacts() {
   const { content, locale } = useSiteData();
+  const t = useT();
   const contact = contactInfo(content);
   const copy = contactCopy[locale];
   const dialog = useRef<HTMLDialogElement>(null);
   return (
     <>
-      <nav aria-label="Liên hệ nhanh" className="floating-contacts">
+      <nav aria-label={t.common.quickContactAria} className="floating-contacts">
         {contactChannels(contact).map((channel) => {
           const label =
             channel.key === "telephone"

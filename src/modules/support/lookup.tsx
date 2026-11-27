@@ -3,8 +3,10 @@ import { useState } from "react";
 import { DialogField } from "@/components/catalog/dialog-field";
 import Link from "next/link";
 import { PublicIcon } from "@/components/site/public-ui";
+import { useT } from "@/components/content";
 import { SupportGuide } from "./support-guide";
 export function BookingLookup() {
+  const t = useT();
   const [data, setData] = useState<Record<string, unknown> | null>(null);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -41,11 +43,11 @@ export function BookingLookup() {
             <div className="inline-flex p-3 rounded-xl bg-surface-brand text-primary mb-4">
               <PublicIcon name="manage_search" className="text-3xl" />
             </div>
-            <h2 className="text-2xl font-bold">Thông tin đặt chỗ</h2>
+            <h2 className="text-2xl font-bold">{t.support.lookupTitle}</h2>
           </div>
-          <DialogField label="Mã booking" name="id" required />
+          <DialogField label={t.support.bookingCode} name="id" required />
           <DialogField
-            label="Số điện thoại đã đặt"
+            label={t.support.bookingPhone}
             name="phone"
             type="tel"
             required
@@ -55,7 +57,7 @@ export function BookingLookup() {
             className="public-primary-button w-full"
             disabled={busy}
           >
-            {busy ? "Đang tra cứu…" : "Tra cứu booking"}
+            {busy ? t.support.lookingUp : t.support.lookupSubmit}
             <PublicIcon name="search" className="text-xl" />
           </button>
         </form>
@@ -73,19 +75,19 @@ export function BookingLookup() {
             >
               <span aria-hidden="true">●</span>
               {{
-                confirmed: "Đã xác nhận",
-                completed: "Hoàn tất",
-                cancelled: "Đã hủy",
-                pending: "Chờ xác nhận",
+                confirmed: t.support.status.confirmed,
+                completed: t.support.status.completed,
+                cancelled: t.support.status.cancelled,
+                pending: t.support.status.pending,
               }[String(data.status)] || String(data.status)}
             </span>
-            <p>Ngày sử dụng: {String(data.departure_date)}</p>
+            <p>{t.booking.useDate}: {String(data.departure_date)}</p>
             {!!data.departure_time && (
-              <p>Giờ đón: {String(data.departure_time).slice(0, 5)}</p>
+              <p>{t.booking.pickupTime}: {String(data.departure_time).slice(0, 5)}</p>
             )}
             {!!data.return_date && (
               <p>
-                {data.return_time ? "Lượt về" : "Ngày trả phòng"}:{" "}
+                {data.return_time ? t.booking.returnTrip : t.booking.checkOut}:{" "}
                 {String(data.return_date)}
                 {data.return_time
                   ? ` · ${String(data.return_time).slice(0, 5)}`
@@ -93,14 +95,14 @@ export function BookingLookup() {
               </p>
             )}
             {!!data.flight_number && (
-              <p>Số hiệu chuyến bay: {String(data.flight_number)}</p>
+              <p>{t.booking.flightNumber}: {String(data.flight_number)}</p>
             )}
-            <p>Số khách: {String(data.guests)}</p>
+            <p>{t.booking.guests}: {String(data.guests)}</p>
             <Link
               className="inline-flex min-h-11 items-center text-primary font-bold underline underline-offset-4"
               href="/lien-he"
             >
-              Gửi yêu cầu hỗ trợ
+              {t.support.sendSupportRequest}
             </Link>
           </div>
         )}

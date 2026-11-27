@@ -9,7 +9,9 @@
     "typecheck": "next typegen && tsc --noEmit",
     "db:migrate": "node --env-file=.env scripts/database.mjs migrate",
     "db:seed": "node --env-file=.env scripts/database.mjs seed",
+    "db:seed:articles": "node --env-file=.env scripts/seed-articles.mjs",
     "db:content": "node --env-file=.env scripts/seed-content.mjs",
+    "db:translations": "node --env-file=.env scripts/seed-translations.mjs",
     "admin:setup": "node --env-file=.env scripts/setup-admin.mjs",
     "test": "node --env-file=.env tests/e2e/verify.mjs",
     "test:cms": "node --env-file=.env tests/e2e/verify-cms.mjs",
@@ -19,6 +21,7 @@
     "test:navigation": "node --env-file=.env tests/e2e/navigation.mjs",
     "prestart": "node --env-file-if-exists=.env scripts/check-env.mjs",
     "test:production": "node --env-file=.env tests/e2e/production.mjs",
+    "test:i18n": "node --test tests/unit/i18n.mjs && node --env-file=.env tests/e2e/i18n.mjs",
     "fonts:refresh": "node scripts/maintenance/fonts.mjs",
     "test:deployment": "node tests/unit/deployment.mjs",
     "test:theme": "node --test tests/unit/theme.mjs"

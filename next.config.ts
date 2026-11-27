@@ -27,6 +27,7 @@ const config: NextConfig = {
         permanent: true,
       })),
       { source: "/dich-vu", destination: "/", permanent: true },
+      { source: "/fast-track", destination: "/e-visa", permanent: true },
     ];
   },
   async headers() {

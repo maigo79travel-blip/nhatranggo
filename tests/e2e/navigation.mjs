@@ -32,19 +32,24 @@ try {
     if (await page.locator("main.public-page").count()) {
       const styling = await page
         .locator("main.public-page")
-        .evaluate((main) => ({
-          padding: parseFloat(getComputedStyle(main).paddingTop),
-          headingSize: parseFloat(
-            getComputedStyle(main.querySelector("h1")).fontSize,
-          ),
-          heroBackground: getComputedStyle(
-            main.querySelector(".public-page-hero"),
-          ).backgroundImage,
-        }));
+        .evaluate((main) => {
+          const hero = main.querySelector(".public-page-hero");
+          const art = hero.querySelector(".public-page-hero-art");
+          return {
+            padding: parseFloat(getComputedStyle(main).paddingTop),
+            headingSize: parseFloat(
+              getComputedStyle(main.querySelector("h1")).fontSize,
+            ),
+            heroStyled: art
+              ? getComputedStyle(art).position === "absolute" &&
+                getComputedStyle(art.querySelector("img")).objectFit === "cover"
+              : getComputedStyle(hero).backgroundImage !== "none",
+          };
+        });
       assert.ok(
         styling.padding >= 76 &&
           styling.headingSize >= 28 &&
-          styling.heroBackground !== "none",
+          styling.heroStyled,
         path + " lost CSS after client navigation",
       );
     }
@@ -67,7 +72,9 @@ try {
             !href.includes("#"),
         ),
     );
-  assert.ok(!hrefs.some((href) => href.startsWith("/dich-vu")));
+  assert.ok(
+    !hrefs.some((href) => /^\/(?:dich-vu|fast-track)(?:[/?#]|$)/.test(href)),
+  );
   for (const href of hrefs.filter((href) => href !== "/")) {
     await desktop.locator(`a[href="${href}"]`).click();
     await check(href);
@@ -111,7 +118,11 @@ try {
             !href.includes("#"),
         ),
     );
-  assert.ok(!mobileHrefs.some((href) => href.startsWith("/dich-vu")));
+  assert.ok(
+    !mobileHrefs.some((href) =>
+      /^\/(?:dich-vu|fast-track)(?:[/?#]|$)/.test(href),
+    ),
+  );
   for (const href of ["/khach-san", "/tour-hang-ngay", "/xe-dua-don"]) {
     assert.ok(mobileHrefs.includes(href), href + " missing from mobile menu");
   }

@@ -4,12 +4,12 @@ import { title, text, phone, status } from "@/lib/validation";
 export const supportResources: Record<string, ResourceDefinition> = {
   requests: {
     table: "service_requests",
-    label: "E-Visa & Fast-track",
+    label: "E-Visa",
     icon: "flight_land",
     roles: ["booking"],
-    columns: ["kind", "name", "airport", "status"],
+    columns: ["name", "airport", "status"],
     schema: z.object({
-      kind: z.enum(["evisa", "fast-track"]),
+      kind: z.literal("evisa").default("evisa"),
       name: title,
       phone,
       email: z.email(),
@@ -20,15 +20,6 @@ export const supportResources: Record<string, ResourceDefinition> = {
       status,
     }),
     fields: [
-      {
-        name: "kind",
-        label: "Dịch vụ",
-        type: "select",
-        options: [
-          { value: "evisa", label: "E-Visa" },
-          { value: "fast-track", label: "Fast-track" },
-        ],
-      },
       { name: "name", label: "Họ tên", required: true },
       { name: "phone", label: "Điện thoại", required: true },
       { name: "email", label: "Email", type: "email", required: true },

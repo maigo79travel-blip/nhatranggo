@@ -17,11 +17,17 @@ export function PublicIcon({
   );
 }
 
-export function PublicEmptyState({ children }: { children: ReactNode }) {
+export function PublicEmptyState({
+  children,
+  heading = "Chưa tìm thấy kết quả",
+}: {
+  children: ReactNode;
+  heading?: string;
+}) {
   return (
     <div className="public-empty-state">
       <PublicIcon name="search_off" className="text-primary text-4xl" />
-      <h2 className="font-bold text-lg">Chưa tìm thấy kết quả</h2>
+      <h2 className="font-bold text-lg">{heading}</h2>
       <p className="text-on-surface-variant">{children}</p>
     </div>
   );

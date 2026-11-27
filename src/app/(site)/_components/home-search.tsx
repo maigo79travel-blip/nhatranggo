@@ -3,7 +3,7 @@
 import Form from "next/form";
 import { serviceRoutes } from "@/modules/travel/service-routes";
 import { useState, type ReactNode } from "react";
-import { ContentText, useSiteData } from "@/components/content";
+import { ContentText, useSiteData, useT } from "@/components/content";
 import { CustomSelect } from "@/components/ui/custom-select";
 import { nextDate, vietnamToday } from "@/modules/travel/search";
 import type { HomeSuggestion } from "./home-navigation";
@@ -54,11 +54,12 @@ export function HomeSearch({ suggestions }: { suggestions: HomeSuggestion[] }) {
   const [type, setType] = useState<(typeof tabs)[number]["type"]>("hotel");
   const [date, setDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
-  const { content } = useSiteData();
+  const { content, locale } = useSiteData();
+  const t = useT();
   const attributes = content["home.attributes-002"]?.value as
     { placeholder?: string } | undefined;
   const hotel = type === "hotel";
-  const departureLabel = hotel ? "Ngày nhận phòng" : "Ngày sử dụng";
+  const departureLabel = hotel ? t.home.search.checkIn : t.home.search.useDate;
   const today = vietnamToday();
 
   return (
@@ -107,16 +108,30 @@ export function HomeSearch({ suggestions }: { suggestions: HomeSuggestion[] }) {
           <input type="hidden" name="type" value={type} />
           <SearchField
             icon="location_on"
-            label={<ContentText contentKey="home.text-051" />}
+            label={
+              locale === "vi" ? (
+                <ContentText contentKey="home.text-051" />
+              ) : hotel ? (
+                t.home.search.destinationHotel
+              ) : (
+                t.home.search.destinationService
+              )
+            }
             wide
           >
             <input
               className={inputClass}
               name="q"
               maxLength={150}
-              aria-label="Điểm đến hoặc tên dịch vụ"
+              aria-label={
+                hotel
+                  ? t.home.search.destinationHotel
+                  : t.home.search.destinationService
+              }
               placeholder={
-                attributes?.placeholder || "Điểm đến hoặc tên dịch vụ"
+                locale === "vi"
+                  ? attributes?.placeholder || t.home.search.destinationHotel
+                  : t.home.search.destinationPlaceholder
               }
             />
           </SearchField>
@@ -140,12 +155,12 @@ export function HomeSearch({ suggestions }: { suggestions: HomeSuggestion[] }) {
           </SearchField>
 
           {hotel && (
-            <SearchField icon="calendar_today" label="Ngày trả phòng">
+            <SearchField icon="calendar_today" label={t.home.search.checkOut}>
               <input
                 className={inputClass}
                 name="returnDate"
                 type="date"
-                aria-label="Ngày trả phòng"
+                aria-label={t.home.search.checkOut}
                 min={date ? nextDate(date) : today}
                 value={returnDate}
                 required={Boolean(date)}
@@ -154,12 +169,12 @@ export function HomeSearch({ suggestions }: { suggestions: HomeSuggestion[] }) {
             </SearchField>
           )}
 
-          <SearchField icon="group" label="Số khách">
+          <SearchField icon="group" label={t.home.search.guests}>
             <input
               className={inputClass}
               name="guests"
               type="number"
-              aria-label="Số khách"
+              aria-label={t.home.search.guests}
               min={1}
               max={100}
               defaultValue={2}
@@ -168,17 +183,17 @@ export function HomeSearch({ suggestions }: { suggestions: HomeSuggestion[] }) {
           </SearchField>
 
           {hotel && (
-            <SearchField icon="hotel_class" label="Loại hình/ Sao">
+            <SearchField icon="hotel_class" label={t.home.search.categoryLabel}>
               <CustomSelect
                 name="category"
                 defaultValue=""
-                ariaLabel="Loại hình hoặc hạng sao"
+                ariaLabel={t.home.search.categoryLabel}
                 buttonClassName={`${inputClass} cursor-pointer`}
                 options={[
-                  { value: "", label: "Tất cả" },
-                  { value: "5 sao", label: "5 Sao Quốc Tế" },
-                  { value: "resort", label: "Resort nghỉ dưỡng" },
-                  { value: "4 sao", label: "4 Sao Cao Cấp" },
+                  { value: "", label: t.home.search.categoryAll },
+                  { value: "5 sao", label: t.home.search.category5Star },
+                  { value: "resort", label: t.home.search.categoryResort },
+                  { value: "4 sao", label: t.home.search.category4Star },
                 ]}
               />
             </SearchField>
@@ -194,7 +209,11 @@ export function HomeSearch({ suggestions }: { suggestions: HomeSuggestion[] }) {
             >
               search
             </span>
-            <ContentText contentKey="home.text-058" />
+            {locale === "vi" ? (
+              <ContentText contentKey="home.text-058" />
+            ) : (
+              t.home.search.submit
+            )}
           </button>
         </Form>
 
