@@ -8,7 +8,7 @@ Phạm vi đối chiếu: sự hiện diện và luồng sử dụng của modul
 | Đặt xe                  | `/xe-dua-don`, chọn điểm đón/trả, báo giá, gửi ngày/giờ và yêu cầu | Địa phương/Điểm đến, Tuyến xe, Bảng giá xe, Booking, Đối tác/Tài xế                                                             | Có      |
 | Đặt phòng               | `/khach-san`, chọn loại phòng và ngày nhận/trả                        | Dịch vụ, Loại phòng, Địa phương, Booking, Đối tác                                                                               | Có      |
 | Đặt tour                | `/tour-hang-ngay`, ngày khởi hành, số khách                            | Dịch vụ, Lịch khởi hành tour, Địa phương, Đối tác, Booking                                                                      | Có      |
-| E-Visa                  | `/e-visa`, ngày giờ đến, sân bay, yêu cầu tư vấn có mã | `/admin/e-visa`, danh sách, chi tiết và trạng thái | Có |
+| Fast-track              | `/fast-track`, giờ đến, sân bay và mã yêu cầu | `/admin/fast-track`, danh sách, chi tiết và trạng thái | Có |
 | Blog / Bài viết         | `/blog`, tìm theo từ khóa/chuyên mục; `/blog/[slug]`                                         | Blog & Tin tức, Chuyên mục; soạn Markdown có thanh công cụ và xem trước, tải ảnh hoặc chèn bằng URL, nháp/đăng/ẩn/xóa, SEO                    | Có      |
 | Đơn hàng / Booking      | Mã booking và `/tra-cuu` theo mã + điện thoại; gửi hỗ trợ qua `/lien-he`                     | Danh sách chung, lọc, tạo thủ công, sửa khách, đối tác/tài xế, ghi chú, xác nhận/hoàn tất/hủy, lịch sử, xuất Excel theo bộ lọc | Có      |
 | Liên hệ & Hỗ trợ        | `/lien-he`, form và điện thoại/Zalo/WhatsApp/Telegram/email đã cấu hình                      | Liên hệ & Hỗ trợ; `site.contact` trong Nội dung website                                                                         | Có      |
@@ -24,7 +24,7 @@ Phạm vi đối chiếu: sự hiện diện và luồng sử dụng của modul
 
 ## Quy tắc dữ liệu
 
-- Booking và yêu cầu E-Visa khởi tạo ở `pending`. Không tự xác nhận còn phòng, ghế hay dịch vụ.
+- Booking và yêu cầu Fast-track khởi tạo ở `pending`. Không tự xác nhận còn phòng, ghế hay dịch vụ.
 - Booking hủy vẫn giữ bản ghi và lịch sử. Khách chỉ tra cứu được khi khớp cả mã và số điện thoại; ghi chú nội bộ không trả về API công khai.
 - Dịch vụ, phòng, lịch tour, tuyến, địa phương và đối tác dùng ẩn/lưu trữ để giữ liên kết. Bài viết/trang/chuyên mục có khóa ngoại bảo vệ các liên kết đang dùng.
 - Mật khẩu băm scrypt; không đưa hash vào API quản trị. Khi đổi quyền/khóa tài khoản, các phiên đăng nhập của tài khoản đó bị thu hồi. Không cho tự khóa/hạ quyền quản trị đang dùng hoặc làm mất quản trị cao nhất cuối cùng.
@@ -34,7 +34,7 @@ Phạm vi đối chiếu: sự hiện diện và luồng sử dụng của modul
 
 ## Phần ngoài phạm vi đã loại bỏ
 
-- Fast-track đã được gỡ khỏi website, Admin và API tiếp nhận. Đường dẫn cũ chuyển sang E-Visa. Database giữ các yêu cầu lịch sử.
+- E-Visa đã ngừng tiếp nhận yêu cầu. URL cũ chuyển sang Fast-track. Database giữ các yêu cầu E-Visa lịch sử.
 - Yêu thích: bỏ API, trạng thái trình duyệt, nút và hộp thoại.
 - Email ưu đãi/newsletter: bỏ API đăng ký, form và menu quản trị.
 - Bỏ công cụ chuyển HTML/trích xuất nội dung cũ và dependency `cheerio` chỉ phục vụ chuyển đổi.
@@ -43,4 +43,4 @@ Phạm vi đối chiếu: sự hiện diện và luồng sử dụng của modul
 
 ## Kiểm thử
 
-`npm run test:modules` dùng PostgreSQL và server thực để kiểm tra CRUD, công bố/nháp, tuyến/giá, phòng/lịch tour, booking/lịch sử/xuất danh sách, CRM, E-Visa, liên hệ, bản dịch và phân quyền. Test tạo dữ liệu có mã riêng và xóa dữ liệu đó ở cuối; chỉ chạy trên database phát triển/kiểm thử.
+`npm run test:modules` dùng PostgreSQL và server thực để kiểm tra CRUD, công bố/nháp, tuyến/giá, phòng/lịch tour, booking/lịch sử/xuất danh sách, CRM, Fast-track, liên hệ, bản dịch và phân quyền. Test tạo dữ liệu có mã riêng và xóa dữ liệu đó ở cuối; chỉ chạy trên database phát triển/kiểm thử.

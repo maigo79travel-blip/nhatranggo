@@ -32,8 +32,11 @@ export const publicFareFrom = `
 export const publicFareWhere = `f.active AND p.active AND ${publicRouteWhere}`;
 
 // Public views never select internal relationships, timestamps or future columns.
-export const publicProductFields = `
-  p.id,p.type,p.price,p.image,p.rating,p.original_price,p.active,
+export const publicProductFields = (
+  price = "p.price",
+  originalPrice = "p.original_price",
+) => `
+  p.id,p.type,${price} AS price,p.image,p.rating,${originalPrice} AS original_price,p.active,
   p.position,p.collection_id,p.template_id,p.destination_id,
   concat_ws(
     ' ',

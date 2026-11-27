@@ -9,10 +9,18 @@ import {
 import { bookingSchema } from "@/modules/bookings/validation";
 import { db } from "@/lib/db";
 import { writeFare } from "@/modules/travel/fare-admin";
+import {
+  closeAdminDeparture,
+  listAdminDepartures,
+  listAdminTourOptions,
+  saveAdminDeparture,
+} from "@/modules/travel/departure-admin";
 import { publicProductWhere } from "@/modules/travel/product-visibility";
 import {
   getAdminOverview,
   getAdminResourceList,
+  getAdminTourTemplate,
+  createAdminTour,
   cloneAdminProduct,
   updateAdminProduct,
   updateAdminContent,
@@ -59,6 +67,12 @@ async function handle(request: Request, context: Context) {
       return Response.json({ error: "Yêu cầu không hợp lệ" }, { status: 403 });
     if (method === "GET") {
       const { searchParams } = new URL(request.url);
+      if (resource === "departures")
+        return Response.json(
+          searchParams.get("options") === "1"
+            ? { data: await listAdminTourOptions() }
+            : await listAdminDepartures(searchParams),
+        );
       if (resource === "booking-export") {
         const format = z
           .enum(["csv", "xlsx"])
@@ -114,7 +128,13 @@ async function handle(request: Request, context: Context) {
         return Response.json({ data: rows });
       }
       if (resource === "requests" && searchParams.has("kind"))
-        z.literal("evisa").parse(searchParams.get("kind"));
+        z.literal("fast-track").parse(searchParams.get("kind"));
+      if (resource === "products" && searchParams.has("tourTemplate"))
+        return Response.json({
+          data: await getAdminTourTemplate(
+            z.string().min(1).max(100).parse(searchParams.get("tourTemplate")),
+          ),
+        });
       const data = Object.hasOwn(resources, resource)
         ? await listRecords(resource)
         : await getAdminResourceList(resource, {
@@ -137,6 +157,14 @@ async function handle(request: Request, context: Context) {
       return Response.json({ data });
     }
     const body = await readJson(request, 1048576);
+    if (resource === "departures") {
+      if (method === "DELETE")
+        return Response.json({ data: await closeAdminDeparture(body) });
+      const id = method === "PATCH" ? z.uuid().parse(body.id) : undefined;
+      return Response.json(await saveAdminDeparture(body, id), {
+        status: method === "POST" ? 201 : 200,
+      });
+    }
     if (Object.hasOwn(resources, resource)) {
       if (method === "DELETE")
         return Response.json({
@@ -164,22 +192,31 @@ async function handle(request: Request, context: Context) {
         return Response.json({ data: result.rows[0] });
       }
       if (method === "POST") {
+        if (body.action === "create-tour")
+          return Response.json(
+            { data: await createAdminTour(body) },
+            { status: 201 },
+          );
         const input = z
           .object({
             cloneId: z.string().max(100).optional(),
             title: z.string().trim().min(2).max(300),
-            type: z.enum(["hotel", "tour", "combo"]).default("hotel"),
+            type: z.enum(["hotel", "tour", "combo"]).optional(),
           })
           .parse(body);
         if (input.cloneId) {
-          const data = await cloneAdminProduct(input.cloneId, input.title);
+          const data = await cloneAdminProduct(
+            input.cloneId,
+            input.title,
+            input.type,
+          );
           if (!data) throw new AppError("Mẫu không tồn tại", 404);
           return Response.json({ data }, { status: 201 });
         }
         const data = (
           await db.query(
             "INSERT INTO products(id,type,title,price,location,active) VALUES(gen_random_uuid()::text,$1,$2,0,'',false) RETURNING *",
-            [input.type, input.title],
+            [input.type ?? "hotel", input.title],
           )
         ).rows[0];
         return Response.json({ data }, { status: 201 });

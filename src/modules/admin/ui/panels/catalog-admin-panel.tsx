@@ -1,10 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Product } from "@/lib/types";
 import { normalizeSearch } from "@/modules/travel/search";
 import { CustomSelect } from "@/components/ui/custom-select";
-import type { ContentScope, ProductSection } from "../../routes";
+import {
+  tourCreatePath,
+  type ContentScope,
+  type ProductSection,
+} from "../../routes";
 import { api, rowKey, typeLabels, type Row } from "../api";
 import { ContentEditor, Field, ProductEditor, Save } from "../editors";
 import { AdminNotice, useAdminNotice } from "../primitives/admin-notice";
@@ -156,9 +161,8 @@ export function CatalogAdminPanel({
       ? "Thêm mức giá"
       : product === "hotel"
         ? "Thêm khách sạn"
-        : product === "tour"
-          ? "Thêm tour"
-          : "Thêm combo";
+        : "Thêm combo";
+  const cloneSources = rows.filter((row) => row.template_id);
   const drawerNotice = notice?.error && (selected || creating);
   const open = (row: Row) => {
     clearNotice();
@@ -168,23 +172,30 @@ export function CatalogAdminPanel({
   return (
     <>
       <AdminPageHeading title={title} description={description}>
-        {resource !== "content" && (
-          <button
-            type="button"
-            className="ad-button ad-button-primary"
-            disabled={loading}
-            onClick={() => {
-              clearNotice();
-              setCreating(true);
-            }}
-          >
+        {product === "tour" ? (
+          <Link href={tourCreatePath} className="ad-button ad-button-primary">
             <Icon name="add" />
-            {createLabel}
-          </button>
+            Thêm tour
+          </Link>
+        ) : (
+          resource !== "content" && (
+            <button
+              type="button"
+              className="ad-button ad-button-primary"
+              disabled={loading}
+              onClick={() => {
+                clearNotice();
+                setCreating(true);
+              }}
+            >
+              <Icon name="add" />
+              {createLabel}
+            </button>
+          )
         )}
       </AdminPageHeading>
       <section className="ad-panel" aria-busy={loading}>
-        <div className="ad-toolbar">
+        <div className="ad-toolbar ad-catalog-toolbar">
           <label className="ad-search">
             <Icon name="search" />
             <input
@@ -233,6 +244,7 @@ export function CatalogAdminPanel({
               section={resource}
               rows={visible}
               loading={loading}
+              tourCatalog={product === "tour"}
               onEdit={open}
               routeLabel={fareLabel}
             />
@@ -443,7 +455,7 @@ export function CatalogAdminPanel({
               minLength={2}
               maxLength={300}
             />
-            {rows.some((row) => row.template_id) && (
+            {cloneSources.length > 0 && (
               <label className="ad-field">
                 Sao chép từ dịch vụ có sẵn (tùy chọn)
                 <CustomSelect
@@ -454,12 +466,10 @@ export function CatalogAdminPanel({
                   buttonClassName="ad-input cursor-pointer"
                   options={[
                     { value: "", label: "Tạo mới" },
-                    ...rows
-                      .filter((row) => row.template_id)
-                      .map((row) => ({
-                        value: String(row.id),
-                        label: String(row.title),
-                      })),
+                    ...cloneSources.map((row) => ({
+                      value: String(row.id),
+                      label: String(row.title),
+                    })),
                   ]}
                 />
               </label>

@@ -1,9 +1,10 @@
 "use client";
 import { useEffect, useState, type FormEvent } from "react";
 import type { BookingDraft } from "@/modules/travel/search";
+import type { TourDeparture } from "@/modules/travel/tour-departure-types";
 import { nextDate } from "@/modules/travel/search";
 import type { Product } from "@/lib/types";
-import { formatMoney } from "@/lib/i18n/format";
+import { formatMoney, intlLocaleFor } from "@/lib/i18n/format";
 import { useSiteData, useT } from "@/components/content";
 import { CustomSelect } from "@/components/ui/custom-select";
 import { DialogField } from "./dialog-field";
@@ -52,16 +53,31 @@ export function BookingDialogContent({
       description: string;
       image: string;
     }[];
-    departures: { date: string; notes: string }[];
+    departures: TourDeparture[];
+    tourScheduled?: boolean;
+    basePrice?: number;
     maxGuests?: number;
   }>({ rooms: [], departures: [] });
   const [loading, setLoading] = useState(initialValues.maxGuests == null);
   const [detailError, setDetailError] = useState("");
+  const [detailsRevision, setDetailsRevision] = useState(0);
   const room = details.rooms.find((item) => item.id === roomId);
+  const departure = details.departures.find((item) => item.date === date);
+  const dateFormatter = new Intl.DateTimeFormat(intlLocaleFor(locale), {
+    dateStyle: "medium",
+    timeZone: "UTC",
+  });
+  const scheduled = Boolean(details.tourScheduled);
   const maxGuests =
-    initialValues.maxGuests ?? details.maxGuests ?? room?.capacity;
+    initialValues.maxGuests ??
+    details.maxGuests ??
+    room?.capacity ??
+    Math.min(departure?.remaining_seats ?? 100, 100);
   const referencePrice =
-    (room?.price ?? product.price) + (initialValues.returnPrice ?? 0);
+    (room?.price ??
+      departure?.price_override ??
+      details.basePrice ??
+      product.price) + (initialValues.returnPrice ?? 0);
   useEffect(() => {
     if (initialValues.maxGuests != null) return;
     const controller = new AbortController();
@@ -83,11 +99,11 @@ export function BookingDialogContent({
         if (!controller.signal.aborted) setLoading(false);
       });
     return () => controller.abort();
-  }, [product.id, initialValues.maxGuests]);
+  }, [product.id, initialValues.maxGuests, detailsRevision]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (busy || loading || detailError) return;
+    if (busy || loading || detailError || (scheduled && !departure)) return;
     setBusy(true);
     try {
       const values = Object.fromEntries(
@@ -101,6 +117,8 @@ export function BookingDialogContent({
       );
     } catch (e) {
       onError((e as Error).message);
+      if (product.type === "tour")
+        setDetailsRevision((previous) => previous + 1);
     } finally {
       setBusy(false);
     }
@@ -151,7 +169,9 @@ export function BookingDialogContent({
           />
           {product.type === "hotel" && !!details.rooms.length && (
             <div className="block">
-              <span className="mb-1 block text-body-sm">{t.booking.roomType}</span>
+              <span className="mb-1 block text-body-sm">
+                {t.booking.roomType}
+              </span>
               <CustomSelect
                 name="roomId"
                 ariaLabel={t.booking.roomType}
@@ -172,25 +192,53 @@ export function BookingDialogContent({
               />
             </div>
           )}
-          {!!details.departures.length && (
-            <p className="text-body-md">
-              {t.booking.departures} {details.departures.map((d) => d.date).join(", ")}
+          {scheduled && !details.departures.length && (
+            <p className="text-error text-body-sm" role="status">
+              {t.errors.tourNoOpenDates}
             </p>
           )}
           <div className="grid grid-cols-2 gap-3">
-            <DialogField
-              label={
-                product.type === "hotel" ? t.booking.checkIn : t.booking.useDate
-              }
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              name="date"
-              type="date"
-              required
-              min={new Date().toLocaleDateString("sv-SE", {
-                timeZone: "Asia/Ho_Chi_Minh",
-              })}
-            />
+            {scheduled ? (
+              <label className="block min-w-0 text-body-sm">
+                {t.booking.useDate}
+                <select
+                  className="mt-1 block min-h-11 w-full rounded-lg border border-border-default bg-white p-2"
+                  name="date"
+                  value={departure?.date ?? ""}
+                  onChange={(event) => setDate(event.target.value)}
+                  required
+                  disabled={!details.departures.length}
+                >
+                  <option value="" disabled>
+                    {t.booking.selectDeparture}
+                  </option>
+                  {details.departures.map((item) => (
+                    <option key={item.id} value={item.date}>
+                      {dateFormatter.format(new Date(item.date))}
+                      {item.remaining_seats !== null
+                        ? ` · ${t.booking.tourSeatsLeft.replace("{count}", String(item.remaining_seats))}`
+                        : ""}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            ) : (
+              <DialogField
+                label={
+                  product.type === "hotel"
+                    ? t.booking.checkIn
+                    : t.booking.useDate
+                }
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                name="date"
+                type="date"
+                required
+                min={new Date().toLocaleDateString("sv-SE", {
+                  timeZone: "Asia/Ho_Chi_Minh",
+                })}
+              />
+            )}
             {product.type === "hotel" && (
               <DialogField
                 label={t.booking.checkOut}
@@ -218,7 +266,7 @@ export function BookingDialogContent({
                 defaultValue={initialValues.guests ?? 2}
                 required
                 min="1"
-                max={maxGuests ?? 100}
+                max={maxGuests}
               />
             </div>
           </div>
@@ -266,7 +314,12 @@ export function BookingDialogContent({
               : t.booking.adminHint}
           </p>
           <button
-            disabled={busy || loading || Boolean(detailError)}
+            disabled={
+              busy ||
+              loading ||
+              Boolean(detailError) ||
+              (scheduled && !departure)
+            }
             className="w-full py-3 rounded-xl bg-primary text-white font-bold disabled:opacity-50"
           >
             {busy

@@ -30,12 +30,12 @@
 | `/tour-hang-ngay`, `/tour-hang-ngay?type=combo` | `/admin/tour`, `/admin/tour/lich-khoi-hanh`, `/admin/combo` | Danh mục và lọc theo lịch; tour và combo có mục quản lý riêng. Trang chủ hiển thị 3 thẻ tour một hàng trên desktop. |
 | `/xe-dua-don` | `/admin/xe-dua-don`, `/admin/xe-dua-don/tuyen-xe`, `/admin/diem-den` | Báo giá theo tuyến và loại xe, kiểm tra sức chứa và lưu thông tin khứ hồi. Tuyến, điểm đón/trả, giá và sản phẩm xe cùng quyết định trạng thái công khai. |
 | `/tra-cuu` | `/admin/dat-cho`, `/admin/khach-hang`, `/admin/doi-tac` | Tạo đơn thủ công, lọc, phân công, xác nhận, hủy, lưu lịch sử, xuất Excel. Khách tra cứu bằng mã đơn và điện thoại. |
-| `/e-visa`, `/lien-he` | `/admin/e-visa`, `/admin/lien-he` | Tiếp nhận yêu cầu E-Visa và liên hệ, cập nhật trạng thái và ghi chú. |
+| `/fast-track`, `/lien-he` | `/admin/fast-track`, `/admin/lien-he` | Tiếp nhận yêu cầu Fast-track và liên hệ, cập nhật trạng thái và ghi chú. |
 | `/blog`, `/blog/[slug]`, `/thong-tin/[slug]` | `/admin/bai-viet`, `/admin/bai-viet/chuyen-muc`, `/admin/trang-thong-tin` | Bài viết và trang thông tin có nháp, đăng và ẩn; editor Markdown có xem trước và tải ảnh. |
 
 Admin có đăng nhập tại `/admin/dang-nhap`, điều hướng có URL riêng và quay về trang đích sau đăng nhập. `/admin/noi-dung` tập hợp trình sửa theo từng trang, trong đó `/admin/noi-dung/giao-dien-chung` quản lý logo và menu, còn `/admin/noi-dung/lien-he` quản lý kênh liên hệ. `/admin/ban-dich` có biểu mẫu cho văn bản và dịch vụ, cấu hình phức tạp dùng JSON nâng cao. Tài khoản cá nhân và phân quyền nằm ở `/admin/tai-khoan` và `/admin/phan-quyen`.
 
-Bản local đã gỡ Fast-track khỏi menu, Admin và API, chuyển URL cũ sang E-Visa. Bản local cũng đã làm lại Tour, E-Visa và Blog.
+Fast-track đã được khôi phục trên website, Admin và API. URL E-Visa cũ chuyển sang Fast-track. Các yêu cầu E-Visa lịch sử vẫn nằm trong database.
 
 Booking công khai lấy chi tiết qua `/api/products/[id]` và gửi qua `/api/bookings`. Máy chủ kiểm tra giá và dữ liệu khi lưu. Trạng thái ban đầu là chờ xác nhận để nhân viên kiểm tra với đối tác. Đơn đã hủy được giữ lịch sử. `/dich-vu` đã bỏ khỏi menu và chuyển đường dẫn cũ sang trang phù hợp. Module yêu thích và newsletter đã bỏ trong phạm vi đề án. [Đối chiếu module](docs/modules.md)
 

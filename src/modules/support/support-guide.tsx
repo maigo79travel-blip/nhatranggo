@@ -5,20 +5,20 @@ import { PublicIcon } from "@/components/site/public-ui";
 
 export function SupportGuide({
   lookup = false,
-  visa = false,
+  fastTrack = false,
 }: {
   lookup?: boolean;
-  visa?: boolean;
+  fastTrack?: boolean;
 }) {
   const t = useT();
   const guide = t.pages.supportGuide;
   const icons = lookup
     ? ["receipt_long", "phone_in_talk", "update"]
-    : ["edit_note", "support_agent", visa ? "check_circle" : "task_alt"];
+    : ["edit_note", "support_agent", fastTrack ? "check_circle" : "task_alt"];
   const rawSteps = lookup
     ? guide.lookupSteps
-    : visa
-      ? guide.visaSteps
+    : fastTrack
+      ? guide.fastTrackSteps
       : guide.contactSteps;
   const steps = rawSteps.map(([title, description], index) => [
     icons[index],
@@ -32,13 +32,13 @@ export function SupportGuide({
           name={
             lookup
               ? "travel_explore"
-              : visa
+              : fastTrack
                 ? "contact_support"
                 : "support_agent"
           }
         />
       </div>
-      {!visa && (
+      {!fastTrack && (
         <p className="text-primary text-xs font-bold uppercase tracking-widest">
           {brand.name} {guide.companionSuffix}
         </p>
@@ -46,8 +46,8 @@ export function SupportGuide({
       <h2 className="text-2xl font-bold">
         {lookup
           ? guide.lookupHeading
-          : visa
-            ? guide.visaHeading
+          : fastTrack
+            ? guide.fastTrackHeading
             : guide.contactHeading}
       </h2>
       <ol className="space-y-6">

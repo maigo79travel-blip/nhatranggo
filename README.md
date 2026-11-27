@@ -1,6 +1,6 @@
 # NhaTrangGo — Booking portal
 
-Next.js App Router, React, TypeScript và PostgreSQL. Website cho khách gửi yêu cầu xe, phòng, tour, E-Visa và đọc bài viết; `/admin` quản lý dữ liệu và xử lý yêu cầu.
+Next.js App Router, React, TypeScript và PostgreSQL. Website cho khách gửi yêu cầu xe, phòng, tour, Fast-track và đọc bài viết; `/admin` quản lý dữ liệu và xử lý yêu cầu.
 
 [Đối chiếu các module với đề án](docs/modules.md) · [Cấu trúc dự án](docs/architecture.md) · [Hệ thống thiết kế](docs/design-system.md)
 
@@ -29,13 +29,13 @@ PostgreSQL mặc định dùng cổng 15432. Nếu cổng đã được dùng, s
 | `/xe-dua-don`            | Tuyến xe, loại xe và báo giá                   |
 | `/khach-san`             | Khách sạn và loại phòng                        |
 | `/tour-hang-ngay`        | Tour và lịch khởi hành                         |
-| `/e-visa`                | Gửi yêu cầu tư vấn E-Visa                       |
+| `/fast-track`                | Gửi yêu cầu hỗ trợ Fast-track                       |
 | `/blog`, `/blog/[slug]`  | Bài viết, chủ đề, tìm kiếm                     |
 | `/tra-cuu`               | Tra cứu booking theo mã + điện thoại           |
 | `/lien-he`               | Liên hệ và gửi hỗ trợ                          |
 | `/thong-tin/[slug]`      | Giới thiệu, điều khoản, chính sách đã đăng     |
 
-Admin có Dịch vụ, Loại phòng, Lịch khởi hành tour, Tuyến xe, Bảng giá, Địa phương, Blog/Chuyên mục, Booking, E-Visa, Khách hàng, Đối tác/Tài xế, Liên hệ, Nội dung website, Trang thông tin, Ngôn ngữ và Tài khoản/Phân quyền.
+Admin có Dịch vụ, Loại phòng, Lịch khởi hành tour, Tuyến xe, Bảng giá, Địa phương, Blog/Chuyên mục, Booking, Fast-track, Khách hàng, Đối tác/Tài xế, Liên hệ, Nội dung website, Trang thông tin, Ngôn ngữ và Tài khoản/Phân quyền.
 
 - Tạo dịch vụ mới từ mẫu hoặc tạo độc lập. Dịch vụ đã bật hiển thị xuất hiện trong kết quả tìm kiếm của trang tương ứng. Khách sạn và tour độc lập cũng được hiển thị trong danh sách cùng loại.
 - Tạo địa phương trước, tạo tuyến từ hai điểm đến rồi thêm mức giá theo loại xe. Mã tuyến sinh từ mã hai điểm đến. Không đổi mã điểm đến/tuyến đã có liên kết giá; tạo tuyến mới khi thay đổi hành trình.

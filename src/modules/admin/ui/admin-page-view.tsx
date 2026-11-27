@@ -10,6 +10,8 @@ import {
   AdminOverview,
 } from "./panels/operations";
 import { CatalogAdminPanel } from "./panels/catalog-admin-panel";
+import { TourDeparturesPanel } from "./panels/tour-departures-panel";
+import { TourCreatePanel } from "./panels/tour-create-panel";
 import { ModulePanel } from "./module-panel";
 
 const scopedRelated = {
@@ -17,7 +19,7 @@ const scopedRelated = {
   hotels: ["/admin/khach-san"],
   tours: ["/admin/tour", "/admin/combo"],
   transfers: ["/admin/xe-dua-don"],
-  evisa: ["/admin/e-visa"],
+  "fast-track": ["/admin/fast-track"],
   contact: ["/admin/lien-he"],
   lookup: ["/admin/dat-cho"],
   blog: ["/admin/bai-viet"],
@@ -28,10 +30,12 @@ export function AdminPageView({
   href,
   page,
   user,
+  initialTour = "",
 }: {
   href: string;
   page: NonNullable<ReturnType<typeof adminPage>>;
   user: AdminUser;
+  initialTour?: string;
 }) {
   const { resource, label, description, scope, product } = page;
   const related = [
@@ -53,6 +57,8 @@ export function AdminPageView({
   if (resource === "bookings")
     return <AdminBookings description={description} />;
   if (resource === "account") return <AdminAccount user={user} />;
+  if (page.create && product === "tour")
+    return <TourCreatePanel title={label} />;
   if (resource === "content" && !scope)
     return (
       <>
@@ -105,6 +111,13 @@ export function AdminPageView({
           description={description}
           product={product}
           scope={scope}
+        />
+      ) : resource === "departures" ? (
+        <TourDeparturesPanel
+          key={initialTour}
+          initialTour={initialTour}
+          title={label}
+          description={description}
         />
       ) : (
         <>

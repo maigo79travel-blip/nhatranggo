@@ -5,6 +5,7 @@ import { db } from "@/lib/db";
 import { AppError } from "@/lib/errors";
 import { status, id, text } from "@/lib/validation";
 import type { BookingFilters } from "./admin-filters";
+import { reserveTourSeats } from "@/modules/travel/tour-availability";
 
 function bookingSelection(filters: BookingFilters) {
   const params: string[] = [];
@@ -81,6 +82,32 @@ export async function updateBooking(
   const client = await db.connect();
   try {
     await client.query("BEGIN");
+    const {
+      rows: [current],
+    } = await client.query<{
+      product_id: string;
+      date: string;
+      guests: number;
+      status: string;
+      type: string;
+    }>(
+      `SELECT b.product_id,b.departure_date::text AS date,b.guests,b.status,p.type
+       FROM bookings b JOIN products p ON p.id=b.product_id
+       WHERE b.id=$1 FOR UPDATE OF b FOR SHARE OF p`,
+      [input.id],
+    );
+    if (!current) throw new AppError("Không tìm thấy yêu cầu", 404);
+    if (
+      current.type === "tour" &&
+      current.status === "cancelled" &&
+      input.status !== "cancelled"
+    )
+      await reserveTourSeats(
+        client,
+        current.product_id,
+        current.date,
+        current.guests,
+      );
     if (input.partner_id) {
       const partner = await client.query(
         `SELECT id FROM partners WHERE id=$1 AND
@@ -101,7 +128,6 @@ export async function updateBooking(
         input.confirmed_total,
       ],
     );
-    if (!result.rowCount) throw new AppError("Không tìm thấy yêu cầu", 404);
     await client.query(
       "INSERT INTO booking_history(id,booking_id,actor_id,status,notes) VALUES($1,$2,$3,$4,$5)",
       [randomUUID(), input.id, actorId, input.status, input.internal_notes],

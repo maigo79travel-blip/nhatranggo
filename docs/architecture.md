@@ -20,7 +20,7 @@ src/
     bookings/            Cập nhật đơn, lịch sử, tạo thủ công, xuất danh sách
     crm/                 Khách hàng, đối tác, tài xế
     settings/            Tài khoản, ngôn ngữ, trang thông tin
-    support/             E-Visa, liên hệ, tra cứu
+    support/             Fast-track, liên hệ, tra cứu
     travel/              Địa phương, tuyến, phòng, lịch tour, thẻ danh mục
   components/            Giao diện tái sử dụng giữa nhiều trang
     site/                Header, footer, điều hướng, khung trang và bộ lọc dùng chung

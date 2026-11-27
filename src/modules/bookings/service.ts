@@ -9,6 +9,7 @@ import { AppError } from "@/lib/errors";
 import { getCurrentMessages } from "@/lib/i18n";
 import { publicProductWhere } from "@/modules/travel/product-visibility";
 import { getTransferFareForProduct } from "@/modules/travel/fare-service";
+import { reserveTourSeats } from "@/modules/travel/tour-availability";
 type CreateBookingInput = z.infer<typeof bookingSchema>;
 export async function createBooking(
   input: CreateBookingInput,
@@ -92,16 +93,14 @@ export async function createBooking(
       );
       if (rooms.rowCount) throw new AppError(t.errors.roomRequired);
     }
-    if (product.type === "tour") {
-      const {
-        rows: [schedule],
-      } = await client.query<{ blocked: boolean }>(
-        `SELECT EXISTS(SELECT 1 FROM departures WHERE product_id=$1 AND active)
-            AND NOT EXISTS(SELECT 1 FROM departures WHERE product_id=$1 AND active AND date=$2::date) AS blocked`,
-        [input.productId, input.date],
-      );
-      if (schedule.blocked) throw new AppError(t.errors.tourNoDeparture);
-    }
+    if (product.type === "tour")
+      price =
+        (await reserveTourSeats(
+          client,
+          input.productId,
+          input.date,
+          input.guests,
+        )) ?? price;
     const bookingId = randomUUID();
     await client.query(
       "INSERT INTO bookings(id,product_id,customer_name,phone,departure_date,guests,unit_price,notes,return_date,departure_time,room_id,return_time,return_unit_price,flight_number) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)",

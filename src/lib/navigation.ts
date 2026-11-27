@@ -2,6 +2,8 @@ import { isPublicImageUrl } from "./content-attributes";
 import type { Locale } from "./locale";
 import type { Messages } from "./i18n/types";
 
+const legacyVisaHref = /^\/e-visa(?:[/?#]|$)/i;
+
 export function localizedNavLabel(
   href: string,
   fallback: string,
@@ -14,7 +16,6 @@ export function localizedNavLabel(
     "/xe-dua-don": nav.transfers,
     "/khach-san": nav.hotels,
     "/tour-hang-ngay": nav.tours,
-    "/e-visa": nav.evisa,
     "/fast-track": nav.fastTrack,
     "/blog": nav.blog,
     "/tra-cuu": nav.lookup,
@@ -24,18 +25,25 @@ export function localizedNavLabel(
 }
 
 export function isNavigationHref(href: string) {
-  if (/^\/fast-track(?:[/?#]|$)/i.test(href)) return false;
+  if (legacyVisaHref.test(href)) return false;
   return isPublicImageUrl(href) || /^#[^\s\\]*$/.test(href);
 }
 
 export function navigationItems(value: unknown) {
   if (!Array.isArray(value)) return [];
-  return value.filter(
+  const items = value.filter(
     (item): item is { href: string; label: string } =>
       typeof item?.label === "string" &&
       typeof item?.href === "string" &&
-      isNavigationHref(item.href),
+      (isNavigationHref(item.href) || legacyVisaHref.test(item.href)),
   );
+  let hasFastTrack = items.some(({ href }) => href === "/fast-track");
+  return items.flatMap((item) => {
+    if (!legacyVisaHref.test(item.href)) return [item];
+    if (hasFastTrack) return [];
+    hasFastTrack = true;
+    return [{ href: "/fast-track", label: "Fast-track" }];
+  });
 }
 
 export function activeNavigationHref(

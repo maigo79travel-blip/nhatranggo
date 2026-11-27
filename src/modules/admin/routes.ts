@@ -25,11 +25,11 @@ export const contentScopes = {
     icon: "airport_shuttle",
     publicHref: "/xe-dua-don",
   },
-  evisa: {
-    slug: "e-visa",
-    label: "E-Visa",
+  "fast-track": {
+    slug: "fast-track",
+    label: "Fast-track",
     icon: "flight_land",
-    publicHref: "/e-visa",
+    publicHref: "/fast-track",
   },
   contact: {
     slug: "lien-he",
@@ -59,6 +59,8 @@ export const scopedContent = Object.entries(contentScopes) as [
 ][];
 export const adminContentHref = (scope: ContentScope) =>
   "/admin/noi-dung/" + contentScopes[scope].slug;
+export const tourDeparturesPath = "/admin/tour/lich-khoi-hanh";
+export const tourCreatePath = "/admin/tour/them-moi";
 
 type PageInfo = {
   label: string;
@@ -66,6 +68,7 @@ type PageInfo = {
   resource: string;
   description?: string;
   product?: ProductSection;
+  create?: true;
   scope?: ContentScope;
   publicHref?: string;
   related?: readonly string[];
@@ -96,12 +99,13 @@ export const adminPages: Record<string, PageInfo> = {
     resource: "partners",
     description: "Quản lý nhà cung cấp và tài xế để phân công đơn.",
   },
-  "/admin/e-visa": {
-    label: "E-Visa",
+  "/admin/fast-track": {
+    label: "Fast-track",
     icon: "flight_land",
     resource: "requests",
-    publicHref: "/e-visa",
-    related: [adminContentHref("evisa")],
+    description: "Theo dõi giờ đến, sân bay và trạng thái hỗ trợ khách.",
+    publicHref: "/fast-track",
+    related: [adminContentHref("fast-track")],
   },
   "/admin/lien-he": {
     label: "Liên hệ & Hỗ trợ",
@@ -133,12 +137,20 @@ export const adminPages: Record<string, PageInfo> = {
     product: "tour",
     description: "Đăng tour, cập nhật giá, mô tả và đối tác cung cấp.",
     publicHref: "/tour-hang-ngay",
-    related: ["/admin/tour/lich-khoi-hanh", adminContentHref("tours")],
+    related: [tourDeparturesPath, adminContentHref("tours")],
   },
-  "/admin/tour/lich-khoi-hanh": {
+  [tourCreatePath]: {
+    label: "Thêm tour",
+    icon: "add",
+    resource: "products",
+    product: "tour",
+    create: true,
+  },
+  [tourDeparturesPath]: {
     label: "Lịch khởi hành tour",
     icon: "calendar_month",
     resource: "departures",
+    description: "Mở bán theo ngày, đặt sức chứa và theo dõi số chỗ đã giữ.",
     related: ["/admin/tour"],
   },
   "/admin/combo": {
@@ -238,7 +250,7 @@ export const adminNav = [
     paths: [
       "/admin/dat-cho",
       "/admin/khach-hang",
-      "/admin/e-visa",
+      "/admin/fast-track",
       "/admin/lien-he",
       "/admin/doi-tac",
     ],

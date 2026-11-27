@@ -22,7 +22,6 @@ export interface Messages {
     transfers: string;
     hotels: string;
     tours: string;
-    evisa: string;
     fastTrack: string;
     blog: string;
     lookup: string;
@@ -314,6 +313,8 @@ export interface Messages {
     perNight: string;
     maxGuests: string;
     departures: string;
+    selectDeparture: string;
+    tourSeatsLeft: string;
     checkIn: string;
     useDate: string;
     checkOut: string;
@@ -342,7 +343,7 @@ export interface Messages {
     lookupSubmit: string;
     contactTitle: string;
     requestTitle: string;
-    visaAction: string;
+    fastTrackAction: string;
     contactInfoLegend: string;
     name: string;
     phone: string;
@@ -430,15 +431,14 @@ export interface Messages {
     bookAction: string;
   };
   pages: {
-    evisaTitle: string;
     fastTrackTitle: string;
     contactTitle: string;
     lookupTitle: string;
     notFoundTitle: string;
     backHome: string;
     supportGuide: {
-      visaHeading: string;
-      visaSteps: [string, string][];
+      fastTrackHeading: string;
+      fastTrackSteps: [string, string][];
       companionSuffix: string;
       lookupHeading: string;
       contactHeading: string;
@@ -466,6 +466,8 @@ export interface Messages {
     roomCapacityExceeded: string;
     roomRequired: string;
     tourNoDeparture: string;
+    tourNoOpenDates: string;
+    tourSeatsUnavailable: string;
     bookingReceivedTemplate: string;
   };
 }

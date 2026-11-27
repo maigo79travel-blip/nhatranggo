@@ -1,6 +1,14 @@
 "use client";
 
-import { useEffect, useId, useMemo, useRef, useState } from "react";
+import {
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 import { useSiteData } from "@/components/content";
 
 export interface CustomSelectOption {
@@ -30,6 +38,7 @@ export function CustomSelect({
   searchable = false,
   searchPlaceholder,
   emptyText,
+  leadingIcon,
   buttonClassName = "",
   menuClassName = "",
   align = "left",
@@ -47,6 +56,7 @@ export function CustomSelect({
   searchable?: boolean;
   searchPlaceholder?: string;
   emptyText?: string;
+  leadingIcon?: ReactNode;
   buttonClassName?: string;
   menuClassName?: string;
   align?: "left" | "right";
@@ -57,9 +67,8 @@ export function CustomSelect({
   const resolvedEmptyText =
     emptyText ?? messages?.common.emptySelect ?? "Không tìm thấy kết quả";
   const isControlled = value !== undefined;
-  const [internalValue, setInternalValue] = useState(
-    defaultValue ?? options[0]?.value ?? "",
-  );
+  const initialValue = defaultValue ?? options[0]?.value ?? "";
+  const [internalValue, setInternalValue] = useState(initialValue);
   useEffect(() => {
     if (!isControlled && defaultValue !== undefined) {
       setInternalValue(defaultValue);
@@ -70,6 +79,9 @@ export function CustomSelect({
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const rootRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const generatedId = useId();
   const listboxId = `${id ?? generatedId}-listbox`;
@@ -86,7 +98,11 @@ export function CustomSelect({
       if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
     };
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setOpen(false);
+        triggerRef.current?.focus();
+      }
     };
     document.addEventListener("mousedown", onPointerDown);
     document.addEventListener("keydown", onKeyDown);
@@ -95,6 +111,47 @@ export function CustomSelect({
       document.removeEventListener("keydown", onKeyDown);
     };
   }, [open, searchable]);
+
+  useLayoutEffect(() => {
+    const root = rootRef.current;
+    const trigger = triggerRef.current;
+    const menu = menuRef.current;
+    const list = listRef.current;
+    if (!open || !root || !trigger || !menu || !list) return;
+
+    const position = (event?: Event) => {
+      if (event?.target instanceof Node && menu.contains(event.target)) return;
+      let top = 0;
+      let bottom = window.innerHeight;
+      for (
+        let parent = root.parentElement;
+        parent && parent !== document.body;
+        parent = parent.parentElement
+      ) {
+        if (getComputedStyle(parent).overflowY === "visible") continue;
+        const edge = parent.getBoundingClientRect().top + parent.clientTop;
+        top = Math.max(top, edge);
+        bottom = Math.min(bottom, edge + parent.clientHeight);
+      }
+      const anchor = trigger.getBoundingClientRect();
+      const above = anchor.top - top - 8;
+      const below = bottom - anchor.bottom - 8;
+      const chrome = menu.offsetHeight - list.offsetHeight;
+      const desiredHeight = chrome + Math.min(240, list.scrollHeight);
+      const opensAbove = below < desiredHeight && above > below;
+      menu.dataset.side = opensAbove ? "top" : "bottom";
+      const space = (opensAbove ? above : below) - chrome;
+      list.style.maxHeight = `${Math.max(0, Math.min(240, Math.floor(space)))}px`;
+    };
+
+    position();
+    window.addEventListener("resize", position);
+    document.addEventListener("scroll", position, true);
+    return () => {
+      window.removeEventListener("resize", position);
+      document.removeEventListener("scroll", position, true);
+    };
+  }, [open]);
 
   const selected = useMemo(
     () => options.find((option) => option.value === currentValue),
@@ -121,9 +178,17 @@ export function CustomSelect({
     const onFormData = (event: FormDataEvent) => {
       event.formData.set(name, currentValue);
     };
+    const onReset = () => {
+      if (!isControlled) setInternalValue(initialValue);
+      setOpen(false);
+    };
     form.addEventListener("formdata", onFormData);
-    return () => form.removeEventListener("formdata", onFormData);
-  }, [name, currentValue]);
+    form.addEventListener("reset", onReset);
+    return () => {
+      form.removeEventListener("formdata", onFormData);
+      form.removeEventListener("reset", onReset);
+    };
+  }, [name, currentValue, initialValue, isControlled]);
 
   return (
     <div ref={rootRef} className="relative min-w-0">
@@ -138,6 +203,7 @@ export function CustomSelect({
         />
       )}
       <button
+        ref={triggerRef}
         id={id}
         type="button"
         disabled={disabled}
@@ -148,8 +214,11 @@ export function CustomSelect({
         onClick={() => setOpen((prev) => !prev)}
         className={`flex w-full items-center justify-between gap-2 text-left disabled:cursor-not-allowed disabled:opacity-60 ${buttonClassName}`}
       >
-        <span className="min-w-0 truncate">
-          {selected?.label ?? placeholder ?? options[0]?.label ?? ""}
+        <span className="flex min-w-0 items-center gap-2">
+          {leadingIcon}
+          <span className="truncate">
+            {selected?.label ?? placeholder ?? options[0]?.label ?? ""}
+          </span>
         </span>
         <span
           aria-hidden="true"
@@ -161,7 +230,9 @@ export function CustomSelect({
 
       {open && (
         <div
-          className={`absolute top-full z-50 mt-2 min-w-full w-max max-w-[min(22rem,calc(100vw-2rem))] rounded-2xl border border-brand-light bg-surface p-1.5 shadow-floating ${align === "right" ? "right-0" : "left-0"} ${menuClassName}`}
+          ref={menuRef}
+          data-select-menu=""
+          className={`absolute top-full z-50 mt-2 min-w-full w-max max-w-[min(22rem,calc(100vw-2rem))] rounded-2xl border border-brand-light bg-surface p-1.5 shadow-floating data-[side=top]:bottom-full data-[side=top]:top-auto data-[side=top]:mb-2 data-[side=top]:mt-0 ${align === "right" ? "right-0" : "left-0"} ${menuClassName}`}
         >
           {searchable && (
             <div className="mb-1.5 flex items-center gap-2 rounded-xl border border-border-subtle bg-surface-muted px-2.5 py-1.5">
@@ -184,6 +255,7 @@ export function CustomSelect({
             </div>
           )}
           <ul
+            ref={listRef}
             id={listboxId}
             role="listbox"
             aria-label={ariaLabel}
@@ -207,7 +279,9 @@ export function CustomSelect({
                           : "font-medium text-on-surface hover:bg-surface-muted"
                       }`}
                     >
-                      <span className="truncate">{option.label}</span>
+                      <span data-select-option-label="" className="truncate">
+                        {option.label}
+                      </span>
                       {active && (
                         <span
                           aria-hidden="true"

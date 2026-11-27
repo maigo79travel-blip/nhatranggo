@@ -24,7 +24,6 @@ export const messagesRu: Messages = {
     transfers: "Трансфер",
     hotels: "Отели",
     tours: "Туры",
-    evisa: "E-Visa",
     fastTrack: "Fast-track",
     blog: "Блог",
     lookup: "Проверка",
@@ -376,6 +375,8 @@ export const messagesRu: Messages = {
     DALAT_1D: "Тур в Далат на 1 день",
   },
   booking: {
+    selectDeparture: "Выберите дату отправления",
+    tourSeatsLeft: "Свободных мест: {count}",
     title: "Заявка на бронирование",
     refPrice: "Ориентировочная цена:",
     unitHotel: "номер/ночь",
@@ -411,14 +412,14 @@ export const messagesRu: Messages = {
     reopenHint: "Пожалуйста, закройте и откройте заявку снова.",
   },
   support: {
-    visaAction: "Запросить консультацию по E-Visa",
+    fastTrackAction: "Запросить Fast-track",
     lookupTitle: "Информация о бронировании",
     bookingCode: "Код брони",
     bookingPhone: "Телефон",
     lookingUp: "Поиск…",
     lookupSubmit: "Проверить бронь",
     contactTitle: "Напишите нам",
-    requestTitle: "Заявка на консультацию",
+    requestTitle: "Заявка на Fast-track в аэропорту",
     contactInfoLegend: "Контактные данные",
     name: "Имя",
     phone: "Телефон",
@@ -508,26 +509,25 @@ export const messagesRu: Messages = {
     bookAction: "Отправить заявку",
   },
   pages: {
-    evisaTitle: "E-Visa",
     fastTrackTitle: "Fast-track в аэропорту",
     contactTitle: "Контакты и поддержка",
     lookupTitle: "Проверка брони",
     notFoundTitle: "Страница не найдена",
     backHome: "На главную",
     supportGuide: {
-      visaHeading: "Порядок консультации по E-Visa",
-      visaSteps: [
+      fastTrackHeading: "Как работает Fast-track в аэропорту",
+      fastTrackSteps: [
         [
-          "Укажите сведения о поездке",
-          "Введите гражданство, аэропорт и предполагаемую дату прибытия.",
+          "Укажите данные рейса",
+          "Укажите аэропорт и время прибытия. Добавьте номер рейса и число пассажиров в примечаниях.",
         ],
         [
-          "Обсудите документы",
-          "Наши специалисты свяжутся с вами и расскажут о необходимых документах.",
+          "Подтвердите услугу",
+          "Мы проверим данные рейса, доступность услуги в аэропорту и её стоимость.",
         ],
         [
-          "Согласуйте дальнейшие шаги",
-          "Уточните данные, стоимость и ориентировочные сроки у специалиста.",
+          "Получите инструкции о встрече",
+          "После подтверждения мы сообщим место встречи и контактные данные в аэропорту.",
         ],
       ],
       companionSuffix: "рядом",
@@ -548,6 +548,8 @@ export const messagesRu: Messages = {
     },
   },
   errors: {
+    tourNoOpenDates: "На ближайшие даты тура нет свободных мест.",
+    tourSeatsUnavailable: "На эту дату больше нет мест для всей группы.",
     invalidRequest: "Некорректный запрос",
     languageSwitchFailed: "Не удалось сменить язык",
     bookingNotFound: "Заявка не найдена",
