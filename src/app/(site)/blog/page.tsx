@@ -112,7 +112,9 @@ export default async function BlogPage({
         ))}
       </div>
       {!articles.length && (
-        <PublicEmptyState>{t.home.noArticlesInLocale}</PublicEmptyState>
+        <PublicEmptyState heading={t.common.emptySelect}>
+          {t.home.noArticlesInLocale}
+        </PublicEmptyState>
       )}
     </PublicPage>
   );

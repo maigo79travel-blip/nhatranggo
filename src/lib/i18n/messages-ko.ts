@@ -10,6 +10,13 @@ export const messagesKo: Messages = {
     viewMore: "더보기",
     readMore: "자세히 보기",
     noResults: "일치하는 상품이 없습니다.",
+    quickContactAria: "빠른 문의",
+    closeNotificationAria: "알림 닫기",
+    prevPage: "이전 페이지",
+    nextPage: "다음 페이지",
+    errorTitle: "콘텐츠를 불러올 수 없습니다",
+    errorSubtitle: "잠시 후 다시 시도해 주세요.",
+    retry: "다시 시도",
   },
   nav: {
     mainLabel: "주요 메뉴",
@@ -182,6 +189,10 @@ export const messagesKo: Messages = {
     showingPrefix: "표시",
     ofTotal: "전체",
     hotelsNoun: "개 호텔",
+    listingAria: "호텔 목록",
+    filterAria: "호텔 필터",
+    paginationAria: "호텔 페이지 탐색",
+    viewResultsTemplate: "{count}개 결과 보기",
     commitments: [
       {
         id: "price",
@@ -456,6 +467,32 @@ export const messagesKo: Messages = {
     sortRecommended: "추천순",
     resetFilters: "필터 초기화",
   },
+  serviceSearch: {
+    titles: {
+      hotel: "호텔 & 리조트 검색",
+      tour: "투어 검색",
+      combo: "여행 콤보",
+      transfer: "차량 픽업 검색",
+    },
+    typeLabels: {
+      hotel: "호텔",
+      tour: "투어",
+      combo: "콤보",
+      transfer: "차량 픽업",
+      default: "서비스",
+    },
+    paginatedSummaryTemplate: "{count}개 서비스 표시 · {page}페이지",
+    totalSummaryTemplate: "일치하는 서비스 {count}개",
+    draftNote:
+      "선택한 날짜와 인원이 예약 요청에 반영됩니다. 담당자가 가능 여부를 확인 후 안내해 드립니다.",
+    paginationAria: "서비스 페이지 탐색",
+    emptyHint:
+      "일치하는 서비스가 없습니다. 검색어, 목적지 또는 이용 날짜를 변경해 보세요.",
+    newServicesTitle: "신규 서비스",
+    ratingLabel: "평점",
+    priceFrom: "최저가",
+    bookAction: "예약 요청하기",
+  },
   pages: {
     evisaTitle: "E-Visa",
     fastTrackTitle: "공항 패스트트랙",
@@ -491,5 +528,15 @@ export const messagesKo: Messages = {
     requestReceivedTemplate: "요청이 접수되었습니다. {brand}에서 확인 후 연락드리겠습니다.",
     productNotFound: "서비스를 찾을 수 없습니다",
     transferUnavailable: "이 이동 노선은 더 이상 예약을 받지 않습니다",
+    checkOutAfterCheckIn: "체크아웃 날짜는 체크인 날짜 이후여야 합니다",
+    transferDetailsInvalid: "선택한 서비스에 맞지 않는 차량 정보입니다",
+    noReturnDate: "이 서비스에는 복편 날짜가 지원되지 않습니다",
+    pickupTimeRequired: "픽업 시간을 선택해 주세요",
+    roomTypeInvalid: "선택한 서비스에 맞지 않는 객실 유형입니다",
+    roomCapacityExceeded: "선택한 객실의 최대 투숙 인원을 초과했습니다",
+    roomRequired: "객실 유형을 선택해 주세요",
+    tourNoDeparture: "선택한 날짜에 출발하는 투어 일정이 없습니다",
+    bookingReceivedTemplate:
+      "요청이 접수되었습니다. {brand}에서 제휴사와 가능 여부를 확인한 후 총 금액을 안내해 드리겠습니다.",
   },
 };

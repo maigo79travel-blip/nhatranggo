@@ -8,6 +8,13 @@ export interface Messages {
     viewMore: string;
     readMore: string;
     noResults: string;
+    quickContactAria: string;
+    closeNotificationAria: string;
+    prevPage: string;
+    nextPage: string;
+    errorTitle: string;
+    errorSubtitle: string;
+    retry: string;
   };
   nav: {
     mainLabel: string;
@@ -175,6 +182,10 @@ export interface Messages {
     showingPrefix: string;
     ofTotal: string;
     hotelsNoun: string;
+    listingAria: string;
+    filterAria: string;
+    paginationAria: string;
+    viewResultsTemplate: string;
     commitments: {
       id: "price" | "support" | "flexible";
       icon: string;
@@ -380,6 +391,30 @@ export interface Messages {
     sortRecommended: string;
     resetFilters: string;
   };
+  serviceSearch: {
+    titles: {
+      hotel: string;
+      tour: string;
+      combo: string;
+      transfer: string;
+    };
+    typeLabels: {
+      hotel: string;
+      tour: string;
+      combo: string;
+      transfer: string;
+      default: string;
+    };
+    paginatedSummaryTemplate: string;
+    totalSummaryTemplate: string;
+    draftNote: string;
+    paginationAria: string;
+    emptyHint: string;
+    newServicesTitle: string;
+    ratingLabel: string;
+    priceFrom: string;
+    bookAction: string;
+  };
   pages: {
     evisaTitle: string;
     fastTrackTitle: string;
@@ -407,5 +442,14 @@ export interface Messages {
     requestReceivedTemplate: string;
     productNotFound: string;
     transferUnavailable: string;
+    checkOutAfterCheckIn: string;
+    transferDetailsInvalid: string;
+    noReturnDate: string;
+    pickupTimeRequired: string;
+    roomTypeInvalid: string;
+    roomCapacityExceeded: string;
+    roomRequired: string;
+    tourNoDeparture: string;
+    bookingReceivedTemplate: string;
   };
 }

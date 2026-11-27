@@ -135,11 +135,11 @@ export function HotelsListing({
   return (
     <section
       className="site-container hotel-listing"
-      aria-label="Danh sách khách sạn"
+      aria-label={t.hotels.listingAria}
     >
       <aside
         className="hotel-sidebar hidden lg:block"
-        aria-label="Bộ lọc khách sạn"
+        aria-label={t.hotels.filterAria}
       >
         <HotelFilterPanel {...filterProps} />
       </aside>
@@ -216,12 +216,12 @@ export function HotelsListing({
             {pageCount > 1 && (
               <nav
                 className="flex items-center gap-2"
-                aria-label="Phân trang khách sạn"
+                aria-label={t.hotels.paginationAria}
               >
                 <button
                   type="button"
                   className="hotel-button hotel-button-secondary"
-                  aria-label="Trang trước"
+                  aria-label={t.common.prevPage}
                   disabled={currentPage === 1}
                   onClick={() => changePage(currentPage - 1)}
                 >
@@ -238,7 +238,7 @@ export function HotelsListing({
                 <button
                   type="button"
                   className="hotel-button hotel-button-secondary"
-                  aria-label="Trang sau"
+                  aria-label={t.common.nextPage}
                   disabled={currentPage === pageCount}
                   onClick={() => changePage(currentPage + 1)}
                 >
@@ -257,18 +257,21 @@ export function HotelsListing({
 
       <dialog
         ref={drawer}
-        aria-label="Bộ lọc khách sạn"
+        aria-label={t.hotels.filterAria}
         className="hotel-filter-drawer lg:hidden"
       >
         <form method="dialog" className="mb-3 flex justify-end">
           <button type="submit" className="hotel-button hotel-button-secondary">
-            Đóng
+            {t.common.close}
           </button>
         </form>
         <HotelFilterPanel {...filterProps} />
         <form method="dialog" className="sticky bottom-0 mt-4 bg-surface py-3">
           <button className="hotel-button w-full" type="submit">
-            Xem {hotels.length} kết quả
+            {t.hotels.viewResultsTemplate.replace(
+              "{count}",
+              String(hotels.length),
+            )}
           </button>
         </form>
       </dialog>

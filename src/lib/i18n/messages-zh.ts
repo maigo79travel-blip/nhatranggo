@@ -10,6 +10,13 @@ export const messagesZh: Messages = {
     viewMore: "查看更多",
     readMore: "阅读全文",
     noResults: "未找到匹配的服务。",
+    quickContactAria: "快速联系",
+    closeNotificationAria: "关闭通知",
+    prevPage: "上一页",
+    nextPage: "下一页",
+    errorTitle: "无法加载内容",
+    errorSubtitle: "请稍后再试。",
+    retry: "重试",
   },
   nav: {
     mainLabel: "主导航",
@@ -181,6 +188,10 @@ export const messagesZh: Messages = {
     showingPrefix: "显示",
     ofTotal: "共",
     hotelsNoun: "家酒店",
+    listingAria: "酒店列表",
+    filterAria: "酒店筛选",
+    paginationAria: "酒店分页",
+    viewResultsTemplate: "查看 {count} 个结果",
     commitments: [
       {
         id: "price",
@@ -452,6 +463,31 @@ export const messagesZh: Messages = {
     sortRecommended: "推荐",
     resetFilters: "清除筛选",
   },
+  serviceSearch: {
+    titles: {
+      hotel: "搜索酒店与度假村",
+      tour: "搜索一日游",
+      combo: "旅游套餐",
+      transfer: "搜索接送包车",
+    },
+    typeLabels: {
+      hotel: "酒店",
+      tour: "一日游",
+      combo: "套餐",
+      transfer: "接送",
+      default: "服务",
+    },
+    paginatedSummaryTemplate: "显示 {count} 项服务 · 第 {page} 页",
+    totalSummaryTemplate: "共找到 {count} 项匹配服务",
+    draftNote:
+      "所选日期与人数已带入预订请求，客服人员将核实余位并与合作方确认。",
+    paginationAria: "服务分页",
+    emptyHint: "未找到匹配的服务。请尝试更换关键词、目的地或出行日期。",
+    newServicesTitle: "新上线服务",
+    ratingLabel: "评分",
+    priceFrom: "起价",
+    bookAction: "提交预订请求",
+  },
   pages: {
     evisaTitle: "电子签证 E-Visa",
     fastTrackTitle: "机场快速通道 Fast-track",
@@ -487,5 +523,15 @@ export const messagesZh: Messages = {
     requestReceivedTemplate: "已收到您的请求，{brand} 将核实并与您联系确认服务。",
     productNotFound: "未找到该服务",
     transferUnavailable: "该接送路线暂不接受预订",
+    checkOutAfterCheckIn: "退房日期必须晚于入住日期",
+    transferDetailsInvalid: "所选服务不支持该接送信息",
+    noReturnDate: "该服务不支持返程日期",
+    pickupTimeRequired: "请选择接送时间",
+    roomTypeInvalid: "所选服务不支持该房型",
+    roomCapacityExceeded: "所选房型无法容纳该入住人数",
+    roomRequired: "请选择房型",
+    tourNoDeparture: "所选日期暂无该行程出发安排",
+    bookingReceivedTemplate:
+      "已收到您的预订请求。{brand} 将与合作方核实余位并联系您确认总价。",
   },
 };

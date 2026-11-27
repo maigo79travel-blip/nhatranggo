@@ -10,6 +10,13 @@ export const messagesEn: Messages = {
     viewMore: "View more",
     readMore: "Read more",
     noResults: "No matching services found.",
+    quickContactAria: "Quick contact",
+    closeNotificationAria: "Close notification",
+    prevPage: "Previous page",
+    nextPage: "Next page",
+    errorTitle: "Unable to load content",
+    errorSubtitle: "Please try again in a few minutes.",
+    retry: "Try again",
   },
   nav: {
     mainLabel: "Main navigation",
@@ -182,6 +189,10 @@ export const messagesEn: Messages = {
     showingPrefix: "Showing",
     ofTotal: "of",
     hotelsNoun: "hotels",
+    listingAria: "Hotel list",
+    filterAria: "Hotel filters",
+    paginationAria: "Hotel pagination",
+    viewResultsTemplate: "View {count} results",
     commitments: [
       {
         id: "price",
@@ -456,6 +467,32 @@ export const messagesEn: Messages = {
     sortRecommended: "Recommended",
     resetFilters: "Clear filters",
   },
+  serviceSearch: {
+    titles: {
+      hotel: "Find Hotels & Resorts",
+      tour: "Find Tours",
+      combo: "Travel Combos",
+      transfer: "Find Airport & Private Transfers",
+    },
+    typeLabels: {
+      hotel: "Hotel",
+      tour: "Tour",
+      combo: "Combo",
+      transfer: "Transfer",
+      default: "Service",
+    },
+    paginatedSummaryTemplate: "Showing {count} services · Page {page}",
+    totalSummaryTemplate: "{count} matching services",
+    draftNote:
+      "Your selected date and guest count are carried into the booking request. Our staff will check availability and confirm with our partner.",
+    paginationAria: "Service pagination",
+    emptyHint:
+      "No matching services found. Try changing your keyword, destination, or date.",
+    newServicesTitle: "New Services",
+    ratingLabel: "Rating",
+    priceFrom: "From",
+    bookAction: "Send Booking Request",
+  },
   pages: {
     evisaTitle: "E-Visa",
     fastTrackTitle: "Airport Fast-Track",
@@ -491,5 +528,15 @@ export const messagesEn: Messages = {
     requestReceivedTemplate: "Request received. {brand} will check and contact you to confirm.",
     productNotFound: "Service not found",
     transferUnavailable: "This transfer route is no longer accepting requests",
+    checkOutAfterCheckIn: "Check-out date must be after check-in date",
+    transferDetailsInvalid: "Transfer details are not valid for this service",
+    noReturnDate: "This service does not support a return date",
+    pickupTimeRequired: "Please select a pick-up time",
+    roomTypeInvalid: "Room type is not valid for this service",
+    roomCapacityExceeded: "Selected room cannot accommodate the number of guests",
+    roomRequired: "Please select a room type",
+    tourNoDeparture: "No tour departure is scheduled for the selected date",
+    bookingReceivedTemplate:
+      "Request received. {brand} will check availability with our partner and contact you to confirm the total price.",
   },
 };

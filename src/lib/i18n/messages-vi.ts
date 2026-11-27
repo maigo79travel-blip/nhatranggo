@@ -10,6 +10,13 @@ export const messagesVi: Messages = {
     viewMore: "Xem thêm",
     readMore: "Đọc tiếp",
     noResults: "Không tìm thấy dịch vụ phù hợp.",
+    quickContactAria: "Liên hệ nhanh",
+    closeNotificationAria: "Đóng thông báo",
+    prevPage: "Trang trước",
+    nextPage: "Trang sau",
+    errorTitle: "Chưa thể tải nội dung",
+    errorSubtitle: "Vui lòng thử lại sau ít phút.",
+    retry: "Thử lại",
   },
   nav: {
     mainLabel: "Điều hướng chính",
@@ -182,6 +189,10 @@ export const messagesVi: Messages = {
     showingPrefix: "Hiển thị",
     ofTotal: "trên tổng số",
     hotelsNoun: "khách sạn",
+    listingAria: "Danh sách khách sạn",
+    filterAria: "Bộ lọc khách sạn",
+    paginationAria: "Phân trang khách sạn",
+    viewResultsTemplate: "Xem {count} kết quả",
     commitments: [
       {
         id: "price",
@@ -456,6 +467,32 @@ export const messagesVi: Messages = {
     sortRecommended: "Đề xuất",
     resetFilters: "Xóa bộ lọc",
   },
+  serviceSearch: {
+    titles: {
+      hotel: "Tìm khách sạn & resort",
+      tour: "Tìm tour du lịch",
+      combo: "Combo du lịch",
+      transfer: "Tìm xe đưa đón",
+    },
+    typeLabels: {
+      hotel: "Khách sạn",
+      tour: "Tour du lịch",
+      combo: "Combo du lịch",
+      transfer: "Xe đưa đón",
+      default: "Dịch vụ",
+    },
+    paginatedSummaryTemplate: "Hiển thị {count} dịch vụ · Trang {page}",
+    totalSummaryTemplate: "{count} dịch vụ phù hợp",
+    draftNote:
+      "Ngày và số khách được chuyển sang yêu cầu đặt chỗ. Nhân viên sẽ kiểm tra tình trạng chỗ và xác nhận với đối tác.",
+    paginationAria: "Phân trang dịch vụ",
+    emptyHint:
+      "Chưa có dịch vụ phù hợp. Hãy đổi từ khóa, điểm đến hoặc ngày sử dụng.",
+    newServicesTitle: "Dịch vụ mới",
+    ratingLabel: "Đánh giá",
+    priceFrom: "Giá từ",
+    bookAction: "Gửi yêu cầu đặt chỗ",
+  },
   pages: {
     evisaTitle: "E-Visa",
     fastTrackTitle: "Fast-track sân bay",
@@ -491,5 +528,15 @@ export const messagesVi: Messages = {
     requestReceivedTemplate: "Đã nhận yêu cầu. {brand} sẽ kiểm tra và liên hệ xác nhận dịch vụ.",
     productNotFound: "Dịch vụ không tồn tại",
     transferUnavailable: "Tuyến xe không còn nhận yêu cầu",
+    checkOutAfterCheckIn: "Ngày trả phòng phải sau ngày nhận phòng",
+    transferDetailsInvalid: "Thông tin chuyến xe không phù hợp với dịch vụ",
+    noReturnDate: "Dịch vụ này không có ngày sử dụng lượt về",
+    pickupTimeRequired: "Vui lòng chọn giờ đón",
+    roomTypeInvalid: "Loại phòng không phù hợp với dịch vụ",
+    roomCapacityExceeded: "Loại phòng không phù hợp số khách",
+    roomRequired: "Vui lòng chọn loại phòng",
+    tourNoDeparture: "Tour chưa có lịch khởi hành ngày đã chọn",
+    bookingReceivedTemplate:
+      "Đã nhận yêu cầu. {brand} sẽ kiểm tra với đối tác và liên hệ xác nhận tình trạng chỗ, tổng giá.",
   },
 };

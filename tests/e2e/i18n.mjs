@@ -65,7 +65,7 @@ try {
     "Expected English cruise tour filter to return results",
   );
 
-  // Verify zero Vietnamese diacritics leak across all 8 public routes in English mode
+  // Verify zero Vietnamese diacritics leak across all 9 public routes in en, ru, ko, zh
   const vnDiacritics =
     /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]/;
   const publicRoutes = [
@@ -77,23 +77,32 @@ try {
     "/fast-track",
     "/lien-he",
     "/tra-cuu",
+    "/blog",
   ];
-  for (const route of publicRoutes) {
-    await page.goto(base + route);
-    await page.locator("body[data-hydrated=true]").waitFor();
-    const text = await page.evaluate(() => document.body.innerText);
-    const cleaned = text
-      .replace(/Tiếng Việt/g, "")
-      .replace(/Mövenpick|Meliá|Canapé/gi, "");
-    const lines = cleaned
-      .split(/\r?\n/)
-      .map((l) => l.trim())
-      .filter((l) => l && vnDiacritics.test(l));
-    assert.deepEqual(
-      lines,
-      [],
-      `Found untranslated Vietnamese text on ${route} in English mode: ${lines.slice(0, 5).join(" | ")}`,
+  for (const item of cases.filter((c) => c.code !== "vi")) {
+    await page.getByLabel("Ngôn ngữ / Language").click();
+    await page.getByRole("option", { name: item.label, exact: true }).click();
+    await page.waitForFunction(
+      (expected) => document.documentElement.lang === expected,
+      item.code,
     );
+    for (const route of publicRoutes) {
+      await page.goto(base + route);
+      await page.locator("body[data-hydrated=true]").waitFor();
+      const text = await page.evaluate(() => document.body.innerText);
+      const cleaned = text
+        .replace(/Tiếng Việt/g, "")
+        .replace(/Mövenpick|Meliá|Canapé/gi, "");
+      const lines = cleaned
+        .split(/\r?\n/)
+        .map((l) => l.trim())
+        .filter((l) => l && vnDiacritics.test(l) && !/homeqa/i.test(l));
+      assert.deepEqual(
+        lines,
+        [],
+        `Found untranslated Vietnamese text on ${route} in ${item.code} mode: ${lines.slice(0, 5).join(" | ")}`,
+      );
+    }
   }
 
   // Restore Vietnamese
@@ -102,7 +111,7 @@ try {
   await page.waitForFunction(() => document.documentElement.lang === "vi");
 
   console.log(
-    "PASS i18n: 5-locale switching, <html lang>, cookie, English filters, footer fallback, & 8-route zero-VN check",
+    "PASS i18n: 5-locale switching, <html lang>, cookie, English filters, footer fallback, & 9-route 4-locale zero-VN check",
   );
 } finally {
   await browser.close();

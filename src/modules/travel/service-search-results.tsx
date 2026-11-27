@@ -18,12 +18,7 @@ import { listPublicProducts } from "./public-products";
 import { ServiceCards } from "./catalog-list";
 import { ServiceFilters } from "./service-filters";
 import { bookingDraft, vietnamToday } from "./search";
-const searchTitles: Record<ServiceType, string> = {
-  hotel: "Tìm khách sạn & resort",
-  tour: "Tìm tour du lịch",
-  combo: "Combo du lịch",
-  transfer: "Tìm xe đưa đón",
-};
+import { getMessages } from "@/lib/i18n";
 
 export async function ServiceSearchResults({
   type,
@@ -40,6 +35,7 @@ export async function ServiceSearchResults({
   );
   const draft = bookingDraft(params);
   const locale = await getPublicLocale();
+  const t = getMessages(locale);
   const categories =
     type === "tour" ? tourCategories : type === "hotel" ? hotelCategories : {};
   const categoryTerms = Object.hasOwn(categories, params.category)
@@ -73,7 +69,7 @@ export async function ServiceSearchResults({
     return serviceSearchHref(type).split("?")[0] + "?" + query;
   }
   return (
-    <PublicPage title={searchTitles[type]}>
+    <PublicPage title={t.serviceSearch.titles[type]}>
       <ServiceFilters
         key={JSON.stringify(params)}
         type={type}
@@ -85,30 +81,39 @@ export async function ServiceSearchResults({
       />
       <p role="status" className="text-xl font-bold mt-8 mb-5">
         {page > 1 || rows.length > pageSize
-          ? `Hiển thị ${products.length} dịch vụ · Trang ${page}`
-          : `${products.length} dịch vụ phù hợp`}
+          ? t.serviceSearch.paginatedSummaryTemplate
+              .replace("{count}", String(products.length))
+              .replace("{page}", String(page))
+          : t.serviceSearch.totalSummaryTemplate.replace(
+              "{count}",
+              String(products.length),
+            )}
       </p>
       {(draft.date || draft.guests) && (
         <p className="text-sm text-on-surface-variant leading-relaxed mb-6 flex items-start gap-2">
           <PublicIcon name="info" className="text-lg shrink-0 mt-0.5" />
-          Ngày và số khách được chuyển sang yêu cầu đặt chỗ. Nhân viên sẽ kiểm
-          tra tình trạng chỗ và xác nhận với đối tác.
+          {t.serviceSearch.draftNote}
         </p>
       )}
       <CatalogProvider>
         <ServiceCards products={products} initialValues={draft} />
       </CatalogProvider>
       {(page > 1 || rows.length > pageSize) && (
-        <nav className="mt-6 flex gap-4" aria-label="Phân trang dịch vụ">
-          {page > 1 && <Link href={pageHref(page - 1)}>Trang trước</Link>}
+        <nav
+          className="mt-6 flex gap-4"
+          aria-label={t.serviceSearch.paginationAria}
+        >
+          {page > 1 && (
+            <Link href={pageHref(page - 1)}>{t.common.prevPage}</Link>
+          )}
           {rows.length > pageSize && (
-            <Link href={pageHref(page + 1)}>Trang sau</Link>
+            <Link href={pageHref(page + 1)}>{t.common.nextPage}</Link>
           )}
         </nav>
       )}
       {!products.length && (
-        <PublicEmptyState>
-          Chưa có dịch vụ phù hợp. Hãy đổi từ khóa, điểm đến hoặc ngày sử dụng.
+        <PublicEmptyState heading={t.common.emptySelect}>
+          {t.serviceSearch.emptyHint}
         </PublicEmptyState>
       )}
     </PublicPage>

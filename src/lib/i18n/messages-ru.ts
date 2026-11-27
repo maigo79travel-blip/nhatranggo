@@ -10,6 +10,13 @@ export const messagesRu: Messages = {
     viewMore: "Подробнее",
     readMore: "Читать далее",
     noResults: "Подходящие услуги не найдены.",
+    quickContactAria: "Быстрая связь",
+    closeNotificationAria: "Закрыть уведомление",
+    prevPage: "Предыдущая страница",
+    nextPage: "Следующая страница",
+    errorTitle: "Не удалось загрузить содержимое",
+    errorSubtitle: "Пожалуйста, попробуйте снова через несколько минут.",
+    retry: "Повторить",
   },
   nav: {
     mainLabel: "Основная навигация",
@@ -182,6 +189,10 @@ export const messagesRu: Messages = {
     showingPrefix: "Показано",
     ofTotal: "из",
     hotelsNoun: "отелей",
+    listingAria: "Список отелей",
+    filterAria: "Фильтры отелей",
+    paginationAria: "Навигация по страницам отелей",
+    viewResultsTemplate: "Показать {count} вариантов",
     commitments: [
       {
         id: "price",
@@ -456,6 +467,32 @@ export const messagesRu: Messages = {
     sortRecommended: "Рекомендуемые",
     resetFilters: "Сбросить фильтры",
   },
+  serviceSearch: {
+    titles: {
+      hotel: "Поиск отелей и курортов",
+      tour: "Поиск туров",
+      combo: "Туристические комбо",
+      transfer: "Поиск трансферов",
+    },
+    typeLabels: {
+      hotel: "Отель",
+      tour: "Тур",
+      combo: "Комбо",
+      transfer: "Трансфер",
+      default: "Услуга",
+    },
+    paginatedSummaryTemplate: "Показано {count} услуг · Страница {page}",
+    totalSummaryTemplate: "Найдено услуг: {count}",
+    draftNote:
+      "Выбранная дата и количество гостей передаются в заявку. Наш менеджер проверит наличие и подтвердит детали.",
+    paginationAria: "Навигация по страницам услуг",
+    emptyHint:
+      "Подходящие услуги не найдены. Попробуйте изменить запрос, направление или дату.",
+    newServicesTitle: "Новые услуги",
+    ratingLabel: "Рейтинг",
+    priceFrom: "От",
+    bookAction: "Отправить заявку",
+  },
   pages: {
     evisaTitle: "E-Visa",
     fastTrackTitle: "Fast-track в аэропорту",
@@ -491,5 +528,15 @@ export const messagesRu: Messages = {
     requestReceivedTemplate: "Запрос получен. {brand} проверит данные и свяжется для подтверждения.",
     productNotFound: "Услуга не найдена",
     transferUnavailable: "Этот маршрут больше не принимает заявки",
+    checkOutAfterCheckIn: "Дата выезда должна быть позже даты заезда",
+    transferDetailsInvalid: "Данные трансфера не подходят для этой услуги",
+    noReturnDate: "Для этой услуги не предусмотрена дата возврата",
+    pickupTimeRequired: "Пожалуйста, выберите время подачи",
+    roomTypeInvalid: "Тип номера не подходит для этой услуги",
+    roomCapacityExceeded: "Выбранный номер не вмещает указанное количество гостей",
+    roomRequired: "Пожалуйста, выберите тип номера",
+    tourNoDeparture: "На выбранную дату нет отправления тура",
+    bookingReceivedTemplate:
+      "Заявка получена. {brand} проверит наличие у партнёра и свяжется с вами для подтверждения стоимости.",
   },
 };
