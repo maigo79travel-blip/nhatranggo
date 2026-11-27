@@ -4,7 +4,7 @@ Next.js App Router, React, TypeScript và PostgreSQL. Website cho khách gửi y
 
 [Đối chiếu các module với đề án](docs/modules.md) · [Cấu trúc dự án](docs/architecture.md) · [Hệ thống thiết kế](docs/design-system.md)
 
-## Chạy local
+## Chạy local    
 
 Yêu cầu Node.js 22+ và Docker Desktop. Tạo `.env` từ `.env.example`, sau đó:
 
