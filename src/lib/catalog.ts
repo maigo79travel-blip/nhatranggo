@@ -70,6 +70,7 @@ export const getSiteData = cache(
         : listPublicProducts({
             locale,
             types: pageProductTypes[scope],
+            featuredFirst: scope === "tours",
           }),
       getSiteContent(scope),
       transfersPage

@@ -1,6 +1,7 @@
 import { isPublicImageUrl } from "./content-attributes";
 
 export function isNavigationHref(href: string) {
+  if (/^\/fast-track(?:[/?#]|$)/i.test(href)) return false;
   return isPublicImageUrl(href) || /^#[^\s\\]*$/.test(href);
 }
 

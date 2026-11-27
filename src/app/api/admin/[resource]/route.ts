@@ -113,16 +113,10 @@ async function handle(request: Request, context: Context) {
         );
         return Response.json({ data: rows });
       }
+      if (resource === "requests" && searchParams.has("kind"))
+        z.literal("evisa").parse(searchParams.get("kind"));
       const data = Object.hasOwn(resources, resource)
-        ? await listRecords(
-            resource,
-            resource === "requests"
-              ? z
-                  .enum(["evisa", "fast-track"])
-                  .optional()
-                  .parse(searchParams.get("kind") ?? undefined)
-              : undefined,
-          )
+        ? await listRecords(resource)
         : await getAdminResourceList(resource, {
             type:
               resource === "products"

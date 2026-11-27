@@ -18,7 +18,6 @@ const scopedRelated = {
   tours: ["/admin/tour", "/admin/combo"],
   transfers: ["/admin/xe-dua-don"],
   evisa: ["/admin/e-visa"],
-  "fast-track": ["/admin/fast-track"],
   contact: ["/admin/lien-he"],
   lookup: ["/admin/dat-cho"],
   blog: ["/admin/bai-viet"],
@@ -34,7 +33,7 @@ export function AdminPageView({
   page: NonNullable<ReturnType<typeof adminPage>>;
   user: AdminUser;
 }) {
-  const { resource, label, description, scope, product, request } = page;
+  const { resource, label, description, scope, product } = page;
   const related = [
     ...(scope
       ? ["/admin/noi-dung", ...scopedRelated[scope]]
@@ -110,7 +109,7 @@ export function AdminPageView({
       ) : (
         <>
           <AdminPageHeading title={label} description={description} />
-          <ModulePanel key={href} resource={resource} request={request} />
+          <ModulePanel key={href} resource={resource} />
         </>
       )}
     </>

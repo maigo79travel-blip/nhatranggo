@@ -1,0 +1,43 @@
+.tour-search-form {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.tour-search-form .catalog-filter-field {
+  @apply min-h-[72px] rounded-xl border border-transparent bg-surface-muted px-2.5 py-1.5 focus-within:border-focus-ring sm:px-3;
+}
+.tour-search-form .catalog-filter-control {
+  @apply text-sm font-bold;
+  padding-block: 2px;
+  min-height: 44px;
+}
+.tour-search-form .catalog-filter-icon {
+  @apply hidden sm:inline-block;
+}
+.tour-search-keyword {
+  grid-column: 1 / -1;
+}
+.tour-search-submit {
+  @apply px-3 sm:px-5;
+}
+@media (min-width: 640px) {
+  .tour-search-keyword {
+    grid-column: auto;
+  }
+  .tour-search-submit {
+    grid-column: 1 / -1;
+  }
+}
+@media (min-width: 1024px) {
+  .tour-search-form {
+    grid-template-columns:
+      minmax(0, 1.55fr) minmax(0, 1.1fr) minmax(0, 1.05fr)
+      minmax(0, 0.75fr) auto;
+  }
+  .tour-search-submit {
+    grid-column: auto;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .tour-search-form .catalog-filter-icon {
+    display: none;
+  }
+}

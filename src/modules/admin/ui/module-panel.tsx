@@ -11,7 +11,6 @@ import { ImageField } from "./primitives/admin-image";
 import { MarkdownEditor } from "@/modules/blog/markdown-editor";
 import { CustomSelect } from "@/components/ui/custom-select";
 import type { FieldDefinition } from "../types";
-import type { RequestSection } from "../routes";
 import { TranslationFields } from "./panels/translation-fields";
 function inputValue(field: FieldDefinition, value: unknown) {
   if (field.type === "json") return JSON.stringify(value ?? {}, null, 2);
@@ -23,26 +22,11 @@ function inputValue(field: FieldDefinition, value: unknown) {
   if (field.type === "date" && value) return String(value).slice(0, 10);
   return String(value ?? "");
 }
-export function ModulePanel({
-  resource,
-  request,
-}: {
-  resource: string;
-  request?: RequestSection;
-}) {
+export function ModulePanel({ resource }: { resource: string }) {
   const definition = resources[resource];
-  const fields = definition.fields.filter(
-    (field) => !request || field.name !== "kind",
-  );
-  const columns = definition.columns.filter(
-    (column) => !request || column !== "kind",
-  );
-  const moduleLabel =
-    request === "evisa"
-      ? "yêu cầu E-Visa"
-      : request === "fast-track"
-        ? "yêu cầu Fast-track"
-        : definition.label;
+  const { fields, columns } = definition;
+  const isRequest = resource === "requests";
+  const moduleLabel = isRequest ? "yêu cầu E-Visa" : definition.label;
   const [rows, setRows] = useState<Row[]>([]);
   const [selected, setSelected] = useState<Row | null>(null);
   const [options, setOptions] = useState<Record<string, Row[]>>({});
@@ -68,12 +52,7 @@ export function ModulePanel({
           ),
         ];
         const result = await Promise.all([
-          api(
-            resource + (request ? "?kind=" + request : ""),
-            "GET",
-            undefined,
-            controller.signal,
-          ),
+          api(resource, "GET", undefined, controller.signal),
           ...refs.map((ref) => api(ref, "GET", undefined, controller.signal)),
         ]);
         if (controller.signal.aborted) return;
@@ -91,7 +70,7 @@ export function ModulePanel({
       }
     })();
     return () => controller.abort();
-  }, [resource, definition, request, revision]);
+  }, [resource, definition, revision]);
   const displayCell = (column: string, value: unknown) => {
     if (typeof value === "boolean") return value ? "Hiển thị" : "Đã ẩn";
     if (column === "updated_at" || column === "created_at")
@@ -238,7 +217,9 @@ export function ModulePanel({
                             setMessage("");
                           }}
                         >
-                          {request || resource === "contacts" ? "Xử lý" : "Sửa"}
+                          {isRequest || resource === "contacts"
+                            ? "Xử lý"
+                            : "Sửa"}
                         </button>
                       </td>
                     </tr>
@@ -299,7 +280,6 @@ export function ModulePanel({
                 const form = new FormData(e.currentTarget);
                 const value: Row = {
                   ...(selected.id ? { id: selected.id } : {}),
-                  ...(request ? { kind: request } : {}),
                 };
                 for (const f of fields) {
                   const raw = form.get(f.name);

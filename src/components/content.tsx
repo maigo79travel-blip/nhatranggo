@@ -5,10 +5,6 @@ import {
   useContext,
   useMemo,
   type ReactNode,
-  type ReactElement,
-  Children,
-  isValidElement,
-  cloneElement,
   type AnchorHTMLAttributes,
 } from "react";
 import Link from "next/link";
@@ -35,7 +31,6 @@ const DataContext = createContext<
   destinations: [],
   locale: "vi",
 });
-const ScopeContext = createContext<string | null>(null);
 export function SiteDataProvider({
   data,
   children,
@@ -59,16 +54,11 @@ export function SiteDataProvider({
 }
 export const useSiteData = () => useContext(DataContext);
 export function useProduct(id?: string) {
-  const scope = useContext(ScopeContext);
-  return useSiteData().productById.get(scope || id || "");
+  return useSiteData().productById.get(id || "");
 }
 export function useContent(key: string): unknown {
   const data = useSiteData();
-  const scope = useContext(ScopeContext);
-  const value = scope
-    ? data.productById.get(scope)?.content?.[key]?.value
-    : data.content[key]?.value;
-  return resolveContent(value, contactInfo(data.content));
+  return resolveContent(data.content[key]?.value, contactInfo(data.content));
 }
 export function ContentText({ contentKey }: { contentKey: string }) {
   const value = useContent(contentKey);
@@ -150,16 +140,6 @@ export function ContentElement({
     children,
   );
 }
-export function ProductValue({
-  id,
-  field,
-}: {
-  id: string;
-  field: "rating" | "description" | "location";
-}) {
-  const p = useProduct(id);
-  return <>{p?.[field]}</>;
-}
 export function FareValue({
   route,
   vehicle,
@@ -171,37 +151,4 @@ export function FareValue({
     (f) => f.route === route && f.vehicle === vehicle,
   );
   return <>{fare ? money(fare.price) : ""}</>;
-}
-export function CatalogCollection({
-  collectionId,
-  productIds,
-  children,
-}: {
-  collectionId: string;
-  productIds?: string[];
-  children: ReactNode;
-}) {
-  const products = useSiteData().products.filter(
-    (p) =>
-      p.collection_id === collectionId &&
-      (!productIds || productIds.includes(p.id)),
-  );
-  const templates = Children.toArray(children).filter(
-    isValidElement,
-  ) as ReactElement<{ productId: string; children: ReactNode }>[];
-  return (
-    <>
-      {products.map((product) => {
-        const template = templates.find(
-          (t) => t.props.productId === product.template_id,
-        );
-        if (!template) return null;
-        return (
-          <ScopeContext.Provider key={product.id} value={product.id}>
-            {cloneElement(template, { productId: product.id })}
-          </ScopeContext.Provider>
-        );
-      })}
-    </>
-  );
 }

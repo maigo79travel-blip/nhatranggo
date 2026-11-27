@@ -3,14 +3,11 @@ import { useState } from "react";
 import { DialogField } from "@/components/catalog/dialog-field";
 import { PublicIcon } from "@/components/site/public-ui";
 import { SupportGuide } from "./support-guide";
-export function PublicForm({
-  kind,
-}: {
-  kind: "contact" | "evisa" | "fast-track";
-}) {
+export function PublicForm({ kind }: { kind: "contact" | "evisa" }) {
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const isVisa = kind === "evisa";
   return (
     <div className="public-form-layout">
       <form
@@ -48,10 +45,13 @@ export function PublicForm({
         }}
       >
         <div className="public-form-heading">
+          {isVisa && (
+            <PublicIcon name="description" className="visa-form-icon" />
+          )}
           <h2 className="text-2xl font-bold">
             {kind === "contact"
               ? "Gửi lời nhắn cho chúng tôi"
-              : "Đăng ký tư vấn dịch vụ"}
+              : "Đăng ký tư vấn E-Visa"}
           </h2>
         </div>
         <fieldset className="public-form-fields">
@@ -174,7 +174,7 @@ export function PublicForm({
           <PublicIcon name="arrow_forward" className="text-lg" />
         </button>
       </form>
-      <SupportGuide />
+      <SupportGuide visa={isVisa} />
     </div>
   );
 }

@@ -3,7 +3,7 @@ import "server-only";
 import { getSiteContent } from "./catalog";
 
 export async function getPublicPageCopy(
-  scope: "evisa" | "fast-track" | "contact" | "lookup" | "blog",
+  scope: "evisa" | "contact" | "lookup" | "blog",
   title: string,
 ) {
   const copy = await getSiteContent(scope);

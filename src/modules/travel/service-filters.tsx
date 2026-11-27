@@ -17,7 +17,7 @@ export function ServiceFilters({
   destinations,
   today,
 }: {
-  type: ServiceType;
+  type: Exclude<ServiceType, "tour" | "combo">;
   params: Record<string, string>;
   resetHref: string;
   draft: BookingDraft;
@@ -31,8 +31,6 @@ export function ServiceFilters({
       className="catalog-filters"
       aria-label="Lọc dịch vụ"
     >
-      {type === "combo" && <input type="hidden" name="type" value="combo" />}
-
       <div className="catalog-search-bar">
         <FilterField
           label="Từ khóa"
@@ -108,32 +106,20 @@ export function ServiceFilters({
             />
           </FilterField>
         )}
-        {(type === "tour" || type === "hotel") && (
+        {type === "hotel" && (
           <FilterField label="Loại dịch vụ" icon="filter_list">
             <CustomSelect
               name="category"
-              ariaLabel={type === "tour" ? "Loại tour" : "Loại hình / Sao"}
+              ariaLabel="Loại hình / Sao"
               defaultValue={params.category || ""}
               buttonClassName="catalog-filter-control cursor-pointer"
-              options={
-                type === "tour"
-                  ? [
-                      { value: "", label: "Tất cả tour" },
-                      { value: "dao-nha-trang", label: "Đảo Nha Trang" },
-                      { value: "du-thuyen", label: "Du thuyền" },
-                      { value: "lan-bien", label: "Lặn biển" },
-                      { value: "vinh-hy", label: "Vĩnh Hy" },
-                      { value: "city", label: "City tour" },
-                      { value: "da-lat", label: "Đà Lạt" },
-                    ]
-                  : [
-                      { value: "", label: "Tất cả" },
-                      { value: "3 sao", label: "3 sao" },
-                      { value: "4 sao", label: "4 sao" },
-                      { value: "5 sao", label: "5 sao" },
-                      { value: "resort", label: "Resort" },
-                    ]
-              }
+              options={[
+                { value: "", label: "Tất cả" },
+                { value: "3 sao", label: "3 sao" },
+                { value: "4 sao", label: "4 sao" },
+                { value: "5 sao", label: "5 sao" },
+                { value: "resort", label: "Resort" },
+              ]}
             />
           </FilterField>
         )}

@@ -9,6 +9,7 @@
     "typecheck": "next typegen && tsc --noEmit",
     "db:migrate": "node --env-file=.env scripts/database.mjs migrate",
     "db:seed": "node --env-file=.env scripts/database.mjs seed",
+    "db:seed:articles": "node --env-file=.env scripts/seed-articles.mjs",
     "db:content": "node --env-file=.env scripts/seed-content.mjs",
     "admin:setup": "node --env-file=.env scripts/setup-admin.mjs",
     "test": "node --env-file=.env tests/e2e/verify.mjs",

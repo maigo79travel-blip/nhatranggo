@@ -6,13 +6,12 @@ import { passwordHash } from "./auth";
 import type { AdminUser } from "@/lib/types";
 import { resources } from "./resources";
 import { AppError } from "@/lib/errors";
-import type { RequestSection } from "./routes";
-export async function listRecords(resource: string, kind?: RequestSection) {
+export async function listRecords(resource: string) {
   const definition = resources[resource];
   if (!definition) throw new AppError("Không tìm thấy module", 404);
   const columns =
     resource === "users" ? "id,username,role,active,created_at" : "*";
-  const scoped = resource === "requests" && kind !== undefined;
+  const requestScope = resource === "requests" ? " WHERE kind='evisa'" : "";
   const order =
     resource === "articles"
       ? "updated_at DESC,id"
@@ -21,8 +20,7 @@ export async function listRecords(resource: string, kind?: RequestSection) {
         : "id";
   return (
     await db.query(
-      `SELECT ${columns} FROM ${definition.table}${scoped ? " WHERE kind=$1" : ""} ORDER BY ${order} LIMIT 2000`,
-      scoped ? [kind] : [],
+      `SELECT ${columns} FROM ${definition.table}${requestScope} ORDER BY ${order} LIMIT 2000`,
     )
   ).rows;
 }
@@ -144,7 +142,7 @@ export async function saveRecord(
     let result;
     if (recordId)
       result = await client.query(
-        `UPDATE ${definition.table} SET ${columns.map((key, index) => `${key}=$${index + 1}`).join(",")}${["articles", "information_pages"].includes(definition.table) ? ",updated_at=now()" : ""} WHERE id=$${columns.length + 1} RETURNING *`,
+        `UPDATE ${definition.table} SET ${columns.map((key, index) => `${key}=$${index + 1}`).join(",")}${["articles", "information_pages"].includes(definition.table) ? ",updated_at=now()" : ""} WHERE id=$${columns.length + 1}${resource === "requests" ? " AND kind='evisa'" : ""} RETURNING *`,
         [...params, recordId],
       );
     else

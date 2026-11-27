@@ -2,7 +2,13 @@ import brand from "@/config/brand.json";
 import Link from "next/link";
 import { PublicIcon } from "@/components/site/public-ui";
 
-export function SupportGuide({ lookup = false }: { lookup?: boolean }) {
+export function SupportGuide({
+  lookup = false,
+  visa = false,
+}: {
+  lookup?: boolean;
+  visa?: boolean;
+}) {
   const steps = lookup
     ? [
         [
@@ -21,43 +27,70 @@ export function SupportGuide({ lookup = false }: { lookup?: boolean }) {
           "Xem lịch trình và trạng thái xác nhận của booking.",
         ],
       ]
-    : [
-        [
-          "edit_note",
-          "Gửi thông tin",
-          "Điền thông tin liên hệ và nội dung bạn cần hỗ trợ.",
-        ],
-        [
-          "support_agent",
-          "Nhận tư vấn",
-          `Đội ngũ ${brand.name} sẽ liên hệ để kiểm tra thông tin.`,
-        ],
-        [
-          "task_alt",
-          "Xác nhận dịch vụ",
-          "Lịch trình và chi phí được thống nhất trước khi xác nhận.",
-        ],
-      ];
+    : visa
+      ? [
+          [
+            "edit_note",
+            "Gửi thông tin chuyến đi",
+            "Điền quốc tịch, sân bay và ngày dự kiến nhập cảnh.",
+          ],
+          [
+            "support_agent",
+            "Trao đổi về hồ sơ",
+            "Nhân viên liên hệ để tư vấn giấy tờ phù hợp với chuyến đi.",
+          ],
+          [
+            "check_circle",
+            "Thống nhất bước tiếp theo",
+            "Kiểm tra lại thông tin, chi phí và thời gian dự kiến với nhân viên.",
+          ],
+        ]
+      : [
+          [
+            "edit_note",
+            "Gửi thông tin",
+            "Điền thông tin liên hệ và nội dung bạn cần hỗ trợ.",
+          ],
+          [
+            "support_agent",
+            "Nhận tư vấn",
+            `Đội ngũ ${brand.name} sẽ liên hệ để kiểm tra thông tin.`,
+          ],
+          [
+            "task_alt",
+            "Xác nhận dịch vụ",
+            "Lịch trình và chi phí được thống nhất trước khi xác nhận.",
+          ],
+        ];
   return (
     <aside className="public-support-card">
       <div className="public-support-heading">
-        <PublicIcon name={lookup ? "travel_explore" : "support_agent"} />
+        <PublicIcon
+          name={
+            lookup
+              ? "travel_explore"
+              : visa
+                ? "contact_support"
+                : "support_agent"
+          }
+        />
       </div>
-      <p className="text-primary text-xs font-bold uppercase tracking-widest">
-        {brand.name} đồng hành
-      </p>
+      {!visa && (
+        <p className="text-primary text-xs font-bold uppercase tracking-widest">
+          {brand.name} đồng hành
+        </p>
+      )}
       <h2 className="text-2xl font-bold">
         {lookup
           ? "Thông tin chuyến đi trong tầm tay"
-          : "An tâm cho hành trình của bạn"}
+          : visa
+            ? "Quy trình tư vấn E-Visa"
+            : "An tâm cho hành trình của bạn"}
       </h2>
       <ol className="space-y-6">
         {steps.map(([icon, title, description]) => (
           <li key={icon} className="flex gap-3">
-            <PublicIcon
-              name={icon}
-              className="text-primary mt-0.5 shrink-0"
-            />
+            <PublicIcon name={icon} className="text-primary mt-0.5 shrink-0" />
             <div>
               <h3 className="font-bold text-sm">{title}</h3>
               <p className="text-sm text-on-surface-variant leading-relaxed mt-1">

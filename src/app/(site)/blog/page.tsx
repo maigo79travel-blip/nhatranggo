@@ -1,116 +1,83 @@
-import { getPublicPageCopy } from "@/lib/public-page-copy";
-import { listArticles } from "@/modules/blog/service";
-import { db } from "@/lib/db";
-import { PublicPage } from "@/components/site/public-page";
 import Link from "next/link";
-import Form from "next/form";
-import { FilterField } from "@/components/site/filter-field";
-import { PublicEmptyState, PublicIcon } from "@/components/site/public-ui";
-import { CustomSelect } from "@/components/ui/custom-select";
-export default async function BlogPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ category?: string; q?: string }>;
-}) {
-  const params = await searchParams;
-  const [articles, categories, copy] = await Promise.all([
-    listArticles(params.category, params.q),
-    db.query(
-      "SELECT title,slug FROM article_categories WHERE active=true ORDER BY title",
-    ),
+import { PublicPage } from "@/components/site/public-page";
+import { PublicIcon } from "@/components/site/public-ui";
+import { getPublicPageCopy } from "@/lib/public-page-copy";
+import { ArticleCard } from "@/modules/blog/article-card";
+import { listArticles } from "@/modules/blog/service";
+import "./blog.css";
+
+const pageSize = 12;
+
+function pageHref(page: number) {
+  return page === 1 ? "/blog" : `/blog?page=${page}`;
+}
+
+export default async function BlogPage({ searchParams }: PageProps<"/blog">) {
+  const raw = await searchParams;
+  const page =
+    typeof raw.page === "string" && /^\d{1,4}$/.test(raw.page)
+      ? Math.max(1, Math.min(1000, Number(raw.page)))
+      : 1;
+  const [rows, copy] = await Promise.all([
+    listArticles(pageSize + 1, (page - 1) * pageSize),
     getPublicPageCopy("blog", "Blog & Tin tức"),
   ]);
+  const articles = rows.slice(0, pageSize);
+  const hasNext = rows.length > pageSize && page < 1000;
+  const lead = page === 1 ? articles[0] : undefined;
+  const cards = lead ? articles.slice(1) : articles;
+
   return (
-    <PublicPage {...copy}>
-      <Form
-        key={JSON.stringify(params)}
-        action="/blog"
-        scroll={false}
-        className="catalog-search-bar mb-8"
-      >
-        <FilterField
-          label="Từ khóa"
-          icon="search"
-          className="catalog-keyword-field"
+    <PublicPage
+      {...copy}
+      className="blog-page"
+      hero={{ image: "/images/figma/hero-beach.png" }}
+    >
+      <section aria-labelledby="blog-list-heading">
+        <h2
+          id="blog-list-heading"
+          className="mb-4 text-2xl font-extrabold tracking-tight sm:mb-5 sm:text-headline-lg"
         >
-          <input
-            className="catalog-filter-control"
-            placeholder="Tìm kinh nghiệm, điểm đến…"
-            name="q"
-            defaultValue={params.q}
-          />
-        </FilterField>
-        <FilterField
-          label="Chuyên mục"
-          icon="category"
-          className="catalog-destination-field"
-        >
-          <CustomSelect
-            name="category"
-            ariaLabel="Chuyên mục"
-            searchable={categories.rows.length > 5}
-            defaultValue={params.category || ""}
-            buttonClassName="catalog-filter-control cursor-pointer"
-            options={[
-              { value: "", label: "Tất cả" },
-              ...categories.rows.map((c) => ({
-                value: String(c.slug),
-                label: String(c.title),
-              })),
-            ]}
-          />
-        </FilterField>
-        <button
-          type="submit"
-          aria-label="Tìm bài viết"
-          className="public-primary-button catalog-search-submit"
-        >
-          <PublicIcon name="search" className="text-xl" />
-          <span className="hidden sm:inline">Tìm bài viết</span>
-        </button>
-      </Form>
-      <div className="public-card-grid">
-        {articles.map((article) => (
-          <article key={article.id} className="public-service-card">
-            {article.image && (
-              <Link
-                href={"/blog/" + article.slug}
-                aria-label={article.title}
-                className="public-card-image"
-              >
-                <img src={article.image} alt="" loading="lazy" />
+          Bài viết mới nhất
+        </h2>
+
+        {lead && <ArticleCard article={lead} variant="lead" />}
+        {cards.length > 0 && (
+          <div
+            className={`grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6 ${lead ? "mt-5 sm:mt-6" : ""}`}
+          >
+            {cards.map((article) => (
+              <ArticleCard key={article.id} article={article} />
+            ))}
+          </div>
+        )}
+        {!articles.length && (
+          <div className="public-empty-state">
+            <PublicIcon name="article" className="text-4xl text-primary" />
+            <p className="text-lg font-bold">Chưa có bài viết được đăng</p>
+          </div>
+        )}
+        {(page > 1 || hasNext) && (
+          <nav
+            aria-label="Phân trang bài viết"
+            className="mt-6 flex flex-wrap items-center justify-center gap-4"
+          >
+            {page > 1 && (
+              <Link href={pageHref(page - 1)} className="public-contact-link">
+                Trang trước
               </Link>
             )}
-            <div className="public-card-content">
-              <span className="text-primary text-xs font-bold uppercase tracking-wider">
-                {article.category || "Cẩm nang du lịch"}
-              </span>
-              <h2 className="font-bold text-xl leading-snug">
-                <Link
-                  className="hover:text-primary transition-colors"
-                  href={"/blog/" + article.slug}
-                >
-                  {article.title}
-                </Link>
-              </h2>
-              <p className="text-sm text-on-surface-variant leading-relaxed line-clamp-3">
-                {article.excerpt}
-              </p>
-              <Link
-                href={"/blog/" + article.slug}
-                className="inline-flex items-center gap-2 text-primary text-sm font-bold mt-auto pt-3 min-h-11"
-              >
-                Đọc tiếp <PublicIcon name="arrow_forward" className="text-lg" />
+            <span className="text-sm text-on-surface-variant">
+              Trang {page}
+            </span>
+            {hasNext && (
+              <Link href={pageHref(page + 1)} className="public-contact-link">
+                Trang sau
               </Link>
-            </div>
-          </article>
-        ))}
-      </div>
-      {!articles.length && (
-        <PublicEmptyState>
-          Chưa có bài viết phù hợp trong ngôn ngữ này.
-        </PublicEmptyState>
-      )}
+            )}
+          </nav>
+        )}
+      </section>
     </PublicPage>
   );
 }

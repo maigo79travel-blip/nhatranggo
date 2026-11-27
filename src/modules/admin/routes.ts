@@ -1,5 +1,4 @@
 export type ProductSection = "hotel" | "tour" | "combo";
-export type RequestSection = "evisa" | "fast-track";
 
 export const contentScopes = {
   home: {
@@ -31,12 +30,6 @@ export const contentScopes = {
     label: "E-Visa",
     icon: "flight_land",
     publicHref: "/e-visa",
-  },
-  "fast-track": {
-    slug: "fast-track",
-    label: "Fast-track",
-    icon: "speed",
-    publicHref: "/fast-track",
   },
   contact: {
     slug: "lien-he",
@@ -73,7 +66,6 @@ type PageInfo = {
   resource: string;
   description?: string;
   product?: ProductSection;
-  request?: RequestSection;
   scope?: ContentScope;
   publicHref?: string;
   related?: readonly string[];
@@ -108,17 +100,8 @@ export const adminPages: Record<string, PageInfo> = {
     label: "E-Visa",
     icon: "flight_land",
     resource: "requests",
-    request: "evisa",
     publicHref: "/e-visa",
     related: [adminContentHref("evisa")],
-  },
-  "/admin/fast-track": {
-    label: "Fast-track",
-    icon: "speed",
-    resource: "requests",
-    request: "fast-track",
-    publicHref: "/fast-track",
-    related: [adminContentHref("fast-track")],
   },
   "/admin/lien-he": {
     label: "Liên hệ & Hỗ trợ",
@@ -256,7 +239,6 @@ export const adminNav = [
       "/admin/dat-cho",
       "/admin/khach-hang",
       "/admin/e-visa",
-      "/admin/fast-track",
       "/admin/lien-he",
       "/admin/doi-tac",
     ],
