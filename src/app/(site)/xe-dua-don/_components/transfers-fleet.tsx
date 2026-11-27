@@ -1,12 +1,17 @@
 "use client";
 
-import { ContentText, ContentElement, useSiteData } from "@/components/content";
+import {
+  ContentText,
+  ContentElement,
+  useSiteData,
+  useT,
+} from "@/components/content";
 import {
   defaultRoute,
   quoteAnchor,
   transferVehicleOptions,
 } from "./transfer-options";
-import { money } from "@/lib/types";
+import { formatMoney } from "@/lib/i18n/format";
 import { TransferHeading, TransferIcon } from "./transfers-ui";
 import { useTransferVehicle } from "./transfers-vehicle-selection";
 
@@ -39,7 +44,8 @@ const fleetVehicles = [
 
 export function TransfersFleet() {
   const { selectVehicle } = useTransferVehicle();
-  const { fares, transferRoutes, transferVehicleTypes } = useSiteData();
+  const { fares, transferRoutes, transferVehicleTypes, locale } = useSiteData();
+  const t = useT();
   const vehicles = transferVehicleOptions(transferVehicleTypes);
   const airportRoute = transferRoutes.find(
     (route) => route.category === defaultRoute.id,
@@ -70,6 +76,12 @@ export function TransfersFleet() {
                 fare.route === airportRoute?.code &&
                 fare.vehicle === vehicle.id,
             )?.price;
+            const routeLabel = airportRoute
+              ? t.destinations[airportRoute.pickup] &&
+                t.destinations[airportRoute.dropoff]
+                ? `${t.destinations[airportRoute.pickup]} → ${t.destinations[airportRoute.dropoff]}`
+                : airportRoute.title
+              : t.transfers.airportPriceLabel;
             return (
               <article
                 key={item.vehicle}
@@ -95,7 +107,12 @@ export function TransfersFleet() {
                     <ContentText contentKey={item.models} />
                   </p>
                   <ul className="my-4 grid grid-cols-2 gap-2 text-xs">
-                    <li>Tối đa {vehicle.maxGuests} khách</li>
+                    <li>
+                      {t.transfers.maxGuestsTemplate.replace(
+                        "{n}",
+                        String(vehicle.maxGuests),
+                      )}
+                    </li>
                     {item.specs.map((specKey) => (
                       <li key={specKey} className="flex items-start gap-1">
                         <TransferIcon className="text-sm text-primary">
@@ -110,15 +127,15 @@ export function TransfersFleet() {
                       {price != null ? (
                         <>
                           <span className="block text-sm text-on-surface-variant">
-                            {airportRoute?.title}
+                            {routeLabel}
                           </span>
                           <span className="text-xl font-bold text-primary">
-                            {money(price)}
+                            {formatMoney(price, locale)}
                           </span>
                         </>
                       ) : (
                         <span className="text-sm text-on-surface-variant">
-                          Liên hệ để báo giá
+                          {t.transfers.contactForQuote}
                         </span>
                       )}
                     </div>
@@ -127,7 +144,7 @@ export function TransfersFleet() {
                       onClick={() => selectVehicle(item.vehicle)}
                       className="transfer-pill transfer-pill-muted px-3"
                     >
-                      Chọn xe này
+                      {t.transfers.selectVehicle}
                       <span className="sr-only">
                         {" "}
                         — <ContentText contentKey={item.title} />

@@ -2,12 +2,14 @@
 import { useState } from "react";
 import { DialogField } from "@/components/catalog/dialog-field";
 import { PublicIcon } from "@/components/site/public-ui";
+import { useT } from "@/components/content";
 import { SupportGuide } from "./support-guide";
 export function PublicForm({
   kind,
 }: {
   kind: "contact" | "evisa" | "fast-track";
 }) {
+  const t = useT();
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
@@ -38,7 +40,7 @@ export function PublicForm({
             );
             const body = await result.json();
             if (!result.ok) throw Error(body.error);
-            setMessage(body.message + " Mã yêu cầu: " + body.id);
+            setMessage(`${body.message} ${t.support.requestCodePrefix} ${body.id}`);
             form.reset();
           } catch (err) {
             setError((err as Error).message);
@@ -50,14 +52,16 @@ export function PublicForm({
         <div className="public-form-heading">
           <h2 className="text-2xl font-bold">
             {kind === "contact"
-              ? "Gửi lời nhắn cho chúng tôi"
-              : "Đăng ký tư vấn dịch vụ"}
+              ? t.support.contactTitle
+              : t.support.requestTitle}
           </h2>
         </div>
         <fieldset className="public-form-fields">
-          <legend className="public-fieldset-title">Thông tin liên hệ</legend>
+          <legend className="public-fieldset-title">
+            {t.support.contactInfoLegend}
+          </legend>
           <DialogField
-            label="Họ và tên"
+            label={t.support.name}
             name="name"
             autoComplete="name"
             required
@@ -65,7 +69,7 @@ export function PublicForm({
             maxLength={120}
           />
           <DialogField
-            label="Điện thoại"
+            label={t.support.phone}
             name="phone"
             type="tel"
             autoComplete="tel"
@@ -86,22 +90,22 @@ export function PublicForm({
         {kind === "contact" ? (
           <fieldset className="public-form-fields">
             <legend className="public-fieldset-title">
-              Nội dung cần hỗ trợ
+              {t.support.supportContentLegend}
             </legend>
             <div className="sm:col-span-2">
               <DialogField
-                label="Chủ đề / Mã booking cần hỗ trợ"
+                label={t.support.subjectLabel}
                 name="subject"
                 required
                 maxLength={300}
               />
             </div>
             <label className="public-field sm:col-span-2">
-              Nội dung
+              {t.support.message}
               <textarea
                 className="public-control"
                 rows={5}
-                placeholder="Chia sẻ nội dung bạn cần tư vấn hoặc hỗ trợ…"
+                placeholder={t.support.messagePlaceholder}
                 name="message"
                 required
                 minLength={10}
@@ -113,34 +117,34 @@ export function PublicForm({
           <>
             <fieldset className="public-form-fields">
               <legend className="public-fieldset-title">
-                Thông tin chuyến đến
+                {t.support.arrivalLegend}
               </legend>
               <div className="sm:col-span-2">
                 <DialogField
-                  label="Ngày giờ đến (giờ Việt Nam)"
+                  label={t.support.arrivalDateTime}
                   name="arrival_at"
                   type="datetime-local"
                   required
                 />
               </div>
               <DialogField
-                label="Sân bay đến"
+                label={t.support.airport}
                 name="airport"
                 required
                 maxLength={300}
               />
               <DialogField
-                label="Quốc tịch"
+                label={t.support.nationality}
                 name="nationality"
                 required
                 maxLength={100}
               />
               <label className="public-field sm:col-span-2">
-                Ghi chú
+                {t.support.notes}
                 <textarea
                   className="public-control"
                   rows={4}
-                  placeholder="Số hiệu chuyến bay, số khách hoặc yêu cầu riêng…"
+                  placeholder={t.support.notesPlaceholder}
                   name="notes"
                   maxLength={2000}
                 />
@@ -148,10 +152,7 @@ export function PublicForm({
             </fieldset>
             <p className="public-form-note">
               <PublicIcon name="info" className="text-xl shrink-0" />
-              <span>
-                Đây là yêu cầu tư vấn; dịch vụ chỉ được xác nhận sau khi nhân
-                viên kiểm tra.
-              </span>
+              <span>{t.support.advisoryNote}</span>
             </p>
           </>
         )}
@@ -170,7 +171,7 @@ export function PublicForm({
           disabled={busy}
           type="submit"
         >
-          {busy ? "Đang gửi…" : "Gửi yêu cầu"}
+          {busy ? t.support.submitting : t.support.submitContact}
           <PublicIcon name="arrow_forward" className="text-lg" />
         </button>
       </form>

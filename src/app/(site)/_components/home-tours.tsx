@@ -1,11 +1,12 @@
 "use client";
 import { HomeHeading, HomeSectionLink } from "./home-heading";
-import { ContentText, useSiteData } from "@/components/content";
+import { ContentText, useSiteData, useT } from "@/components/content";
 import { PriceStack } from "@/components/price-stack";
 import { CatalogCard, ProductField } from "@/components/catalog";
 import { HomeCardRating } from "./home-card-rating";
 
 export function HomeTours() {
+  const t = useT();
   const tours = useSiteData().products.filter((p) => p.type === "tour");
 
   return (
@@ -19,7 +20,7 @@ export function HomeTours() {
         </HomeSectionLink>
       </HomeHeading>
 
-      {!tours.length && <p>Chưa có tour đang nhận yêu cầu.</p>}
+      {!tours.length && <p>{t.home.noToursAvailable}</p>}
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
         {tours.map((tour) => {
           return (
@@ -66,7 +67,7 @@ export function HomeTours() {
                     />
                   </PriceStack>
                   <button type="button" className="home-booking-button">
-                    Đặt tour
+                    {t.home.bookTour}
                   </button>
                 </div>
               </div>

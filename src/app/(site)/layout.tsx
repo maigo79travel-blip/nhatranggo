@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import type { Metadata } from "next";
 import { getPublicLocale, getSiteContent } from "@/lib/catalog";
+import { getMessages } from "@/lib/i18n";
 import { SiteDataProvider } from "@/components/content";
 import { WebsiteShell } from "@/components/site/website-shell";
 import { contactInfo, resolveContent } from "@/lib/content-values";
@@ -28,10 +29,17 @@ export default async function SiteLayout({
   const [content, pages] = await Promise.all([
     getSiteContent("shared"),
     db.query(
-      "SELECT title,slug FROM information_pages WHERE status='published' AND locale=$1 ORDER BY title",
+      `SELECT title, slug FROM (
+         SELECT DISTINCT ON (slug) title, slug
+         FROM information_pages
+         WHERE status='published' AND locale IN ($1, 'vi')
+         ORDER BY slug, (locale = $1) DESC
+       ) pages
+       ORDER BY title`,
       [locale],
     ),
   ]);
+  const messages = getMessages(locale);
   const informationLinks = pages.rows.map((page) => (
     <li key={page.slug}>
       <a
@@ -43,7 +51,7 @@ export default async function SiteLayout({
     </li>
   ));
   return (
-    <SiteDataProvider data={{ content, locale }}>
+    <SiteDataProvider data={{ content, locale, messages }}>
       <WebsiteShell informationLinks={informationLinks}>
         {children}
       </WebsiteShell>

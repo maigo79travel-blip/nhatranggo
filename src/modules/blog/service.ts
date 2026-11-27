@@ -6,7 +6,18 @@ export async function listArticles(category = "", query = "", limit = 100) {
   const locale = parseLocale((await cookies()).get("site_locale")?.value);
   return (
     await db.query(
-      "SELECT a.id,a.title,a.slug,a.excerpt,a.image,a.updated_at,c.title AS category FROM articles a LEFT JOIN article_categories c ON c.id=a.category_id WHERE a.status='published' AND a.locale=$1 AND ($2='' OR c.slug=$2) AND ($3='' OR a.title ILIKE '%'||$3||'%' OR a.excerpt ILIKE '%'||$3||'%') ORDER BY a.updated_at DESC,a.id LIMIT $4",
+      `SELECT id, title, slug, excerpt, image, updated_at, category FROM (
+         SELECT DISTINCT ON (a.slug) a.id, a.title, a.slug, a.excerpt, a.image, a.updated_at, c.title AS category
+         FROM articles a
+         LEFT JOIN article_categories c ON c.id=a.category_id
+         WHERE a.status='published'
+           AND a.locale IN ($1, 'vi')
+           AND ($2='' OR c.slug=$2)
+           AND ($3='' OR a.title ILIKE '%'||$3||'%' OR a.excerpt ILIKE '%'||$3||'%')
+         ORDER BY a.slug, (a.locale=$1) DESC, a.updated_at DESC
+       ) latest
+       ORDER BY updated_at DESC, id
+       LIMIT $4`,
       [locale, category, query, limit],
     )
   ).rows;
@@ -17,7 +28,11 @@ export async function getPublishedPage(type: "article" | "page", slug: string) {
   return (
     (
       await db.query(
-        `SELECT title,body${type === "article" ? ",image,seo_title,seo_description" : ""} FROM ${table} WHERE slug=$1 AND locale=$2 AND status='published'`,
+        `SELECT title, body${type === "article" ? ", image, seo_title, seo_description" : ""}
+         FROM ${table}
+         WHERE slug=$1 AND locale IN ($2, 'vi') AND status='published'
+         ORDER BY (locale=$2) DESC
+         LIMIT 1`,
         [slug, locale],
       )
     ).rows[0] || null

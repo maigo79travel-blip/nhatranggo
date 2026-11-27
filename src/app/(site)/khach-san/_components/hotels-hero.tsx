@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
-import { useContent } from "@/components/content";
+import { useContent, useT } from "@/components/content";
 import { CustomSelect } from "@/components/ui/custom-select";
 import { nextDate, vietnamToday } from "@/modules/travel/search";
 
@@ -56,6 +56,7 @@ export function HotelsHero({
   onSearch: (next: HotelSearchState) => void;
 }) {
   const [draft, setDraft] = useState(search);
+  const t = useT();
   const storedTitle = useContent("hotels.text-046");
   const heroTitle = typeof storedTitle === "string" ? storedTitle.trim() : "";
   const customTitle =
@@ -82,11 +83,11 @@ export function HotelsHero({
             heroTitle
           ) : (
             <>
-              Tìm &amp; Đặt Phòng
+              {t.hotels.heroTitleLine1}
               <span className="hotel-hero-accent mt-3 block uppercase">
-                Khách sạn &amp; Resort
+                {t.hotels.heroTitleAccent1}
                 <br />
-                Giá tốt nhất
+                {t.hotels.heroTitleAccent2}
               </span>
             </>
           )}
@@ -94,13 +95,13 @@ export function HotelsHero({
 
         <form
           className="hotel-search"
-          aria-label="Tìm khách sạn"
+          aria-label={t.hotels.searchAria}
           onSubmit={handleSubmit}
         >
           <div className="hotel-search-fields">
             <SearchField
               icon="pin"
-              label="Điểm đến"
+              label={t.hotels.destination}
               className="col-span-full xl:col-span-1"
             >
               <input
@@ -110,10 +111,10 @@ export function HotelsHero({
                 onChange={(event) =>
                   setDraft({ ...draft, query: event.target.value })
                 }
-                placeholder="Nha Trang, Khánh Hòa"
+                placeholder={t.hotels.destinationPlaceholder}
               />
             </SearchField>
-            <SearchField icon="calendar" label="Ngày nhận phòng">
+            <SearchField icon="calendar" label={t.hotels.checkIn}>
               <input
                 className="hotel-search-control"
                 type="date"
@@ -129,7 +130,7 @@ export function HotelsHero({
                 }}
               />
             </SearchField>
-            <SearchField icon="calendar" label="Ngày trả phòng">
+            <SearchField icon="calendar" label={t.hotels.checkOut}>
               <input
                 className="hotel-search-control"
                 type="date"
@@ -140,33 +141,33 @@ export function HotelsHero({
                 }
               />
             </SearchField>
-            <SearchField icon="users" label="Số khách">
+            <SearchField icon="users" label={t.hotels.guests}>
               <CustomSelect
-                ariaLabel="Số khách"
+                ariaLabel={t.hotels.guests}
                 buttonClassName="hotel-search-control cursor-pointer"
                 value={draft.guests}
                 onChange={(guests) => setDraft({ ...draft, guests })}
                 options={[
                   ...Array.from({ length: 6 }, (_, index) => ({
                     value: String(index + 1),
-                    label: `${index + 1} người`,
+                    label: `${index + 1} ${t.hotels.guestUnit}`,
                   })),
-                  { value: "7", label: "7+ người" },
+                  { value: "7", label: t.hotels.guest7Plus },
                 ]}
               />
             </SearchField>
-            <SearchField icon="hotel-type" label="Loại hình / Sao">
+            <SearchField icon="hotel-type" label={t.hotels.category}>
               <CustomSelect
-                ariaLabel="Loại hình / Sao"
+                ariaLabel={t.hotels.category}
                 buttonClassName="hotel-search-control cursor-pointer"
                 value={draft.category}
                 onChange={(category) => setDraft({ ...draft, category })}
                 options={[
-                  { value: "all", label: "Tất cả khách sạn" },
-                  { value: "5-star", label: "5 sao quốc tế" },
-                  { value: "4-star", label: "4 sao cao cấp" },
-                  { value: "3-star", label: "3 sao" },
-                  { value: "resort", label: "Resort nghỉ dưỡng" },
+                  { value: "all", label: t.hotels.categoryAll },
+                  { value: "5-star", label: t.hotels.category5Star },
+                  { value: "4-star", label: t.hotels.category4Star },
+                  { value: "3-star", label: t.hotels.category3Star },
+                  { value: "resort", label: t.hotels.categoryResort },
                 ]}
               />
             </SearchField>
@@ -180,12 +181,12 @@ export function HotelsHero({
               >
                 search
               </span>
-              Tìm kiếm
+              {t.hotels.submit}
             </button>
           </div>
           <div className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-on-surface-variant sm:text-sm">
-            <span>Gợi ý tìm kiếm hot</span>
-            {hotSuggestions.map((item) => (
+            <span>{t.hotels.hotSuggestions}</span>
+            {hotSuggestions.map((item, index) => (
               <button
                 key={item.query}
                 className="min-h-8 whitespace-normal text-left font-bold text-primary hover:underline"
@@ -198,7 +199,7 @@ export function HotelsHero({
                   onSearch(next);
                 }}
               >
-                {item.label}
+                {t.hotels.hotSuggestionLabels[index] ?? item.label}
               </button>
             ))}
           </div>

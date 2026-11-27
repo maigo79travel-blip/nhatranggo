@@ -1,8 +1,8 @@
 "use client";
 import { createElement, type ReactNode } from "react";
-import { money } from "@/lib/types";
+import { formatMoney } from "@/lib/i18n/format";
 import { isPublicImageUrl } from "@/lib/content-attributes";
-import { useProduct, useContentAttributes } from "@/components/content";
+import { useProduct, useContentAttributes, useSiteData } from "@/components/content";
 
 export function ProductField({
   id,
@@ -17,6 +17,7 @@ export function ProductField({
   contentKey?: string;
   [key: string]: unknown;
 }) {
+  const { locale } = useSiteData();
   const p = useProduct(id);
   const attributes = useContentAttributes(contentKey);
   props = { ...props, ...attributes };
@@ -40,7 +41,7 @@ export function ProductField({
     { ...props, ...(field === "price" ? { "data-sale-price": true } : {}) },
     field === "price" ? (
       <>
-        {money(p.price)}
+        {formatMoney(p.price, locale)}
         {props.children as ReactNode}
       </>
     ) : (

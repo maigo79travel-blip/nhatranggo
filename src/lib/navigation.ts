@@ -1,4 +1,27 @@
 import { isPublicImageUrl } from "./content-attributes";
+import type { Locale } from "./locale";
+import type { Messages } from "./i18n/types";
+
+export function localizedNavLabel(
+  href: string,
+  fallback: string,
+  locale: Locale,
+  nav: Messages["nav"],
+) {
+  if (locale === "vi") return fallback;
+  const byHref: Record<string, string> = {
+    "/": nav.home,
+    "/xe-dua-don": nav.transfers,
+    "/khach-san": nav.hotels,
+    "/tour-hang-ngay": nav.tours,
+    "/e-visa": nav.evisa,
+    "/fast-track": nav.fastTrack,
+    "/blog": nav.blog,
+    "/tra-cuu": nav.lookup,
+    "/lien-he": nav.contact,
+  };
+  return byHref[href] ?? fallback;
+}
 
 export function isNavigationHref(href: string) {
   return isPublicImageUrl(href) || /^#[^\s\\]*$/.test(href);

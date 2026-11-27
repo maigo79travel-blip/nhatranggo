@@ -1,16 +1,20 @@
 import Link from "next/link";
 import { ContentText } from "@/components/content";
 import { listArticles } from "@/modules/blog/service";
+import { getPublicLocale } from "@/lib/catalog";
+import { getMessages } from "@/lib/i18n";
+import { intlLocaleFor } from "@/lib/i18n/format";
 import { HomeHeading, HomeSectionLink } from "./home-heading";
 
-const dateFormat = new Intl.DateTimeFormat("vi-VN", {
-  day: "2-digit",
-  month: "2-digit",
-  year: "numeric",
-  timeZone: "Asia/Ho_Chi_Minh",
-});
-
 export async function HomeArticles() {
+  const locale = await getPublicLocale();
+  const t = getMessages(locale);
+  const dateFormat = new Intl.DateTimeFormat(intlLocaleFor(locale), {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    timeZone: "Asia/Ho_Chi_Minh",
+  });
   const articles = await listArticles("", "", 3);
   return (
     <section
@@ -31,7 +35,7 @@ export async function HomeArticles() {
             >
               <Link
                 href={`/blog/${article.slug}`}
-                aria-label={`Đọc tiếp: ${article.title}`}
+                aria-label={`${t.home.readMorePrefix} ${article.title}`}
                 className="group flex h-full flex-col"
               >
                 <div className="aspect-[2.57] overflow-hidden bg-surface-muted">
@@ -76,12 +80,12 @@ export async function HomeArticles() {
         </div>
       ) : (
         <div className="rounded-[22px] border border-border-subtle bg-white p-6 text-on-surface-variant shadow-card">
-          Chưa có bài viết được đăng trong ngôn ngữ này.
+          {t.home.noArticlesInLocale}
           <Link
             className="ml-2 inline-flex min-h-11 items-center font-bold text-primary hover:underline"
             href="/blog"
           >
-            Xem chuyên mục bài viết
+            {t.home.viewBlogCategory}
           </Link>
         </div>
       )}

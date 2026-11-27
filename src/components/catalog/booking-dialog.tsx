@@ -3,7 +3,8 @@ import { useEffect, useState, type FormEvent } from "react";
 import type { BookingDraft } from "@/modules/travel/search";
 import { nextDate } from "@/modules/travel/search";
 import type { Product } from "@/lib/types";
-import { money } from "@/lib/types";
+import { formatMoney } from "@/lib/i18n/format";
+import { useSiteData, useT } from "@/components/content";
 import { CustomSelect } from "@/components/ui/custom-select";
 import { DialogField } from "./dialog-field";
 
@@ -34,6 +35,8 @@ export function BookingDialogContent({
   onError: (msg: string) => void;
   submitBooking?: SubmitBooking;
 }) {
+  const { locale } = useSiteData();
+  const t = useT();
   const roundTrip =
     product.type === "transfer" && initialValues.returnPrice != null;
   const [date, setDate] = useState(initialValues.date || "");
@@ -94,7 +97,7 @@ export function BookingDialogContent({
       );
       const result = await submitBooking({ ...values, productId: product.id });
       setSuccess(
-        `${result.message}\nMã yêu cầu: ${result.id}\nHãy lưu mã này để tra cứu.`,
+        `${result.message}\n${t.booking.requestCode} ${result.id}\n${t.booking.saveCodeHint}`,
       );
     } catch (e) {
       onError((e as Error).message);
@@ -107,19 +110,19 @@ export function BookingDialogContent({
     <>
       <h3 className="text-title-md mb-2">{product.title}</h3>
       <p className="text-primary font-bold mb-3">
-        Giá tham khảo: {money(referencePrice)} /{" "}
+        {t.booking.refPrice} {formatMoney(referencePrice, locale)} /{" "}
         {roundTrip
-          ? "khứ hồi"
+          ? t.booking.unitRoundTrip
           : product.type === "hotel"
-            ? "phòng/đêm"
+            ? t.booking.unitHotel
             : product.type === "transfer"
-              ? "chuyến"
-              : "người"}
+              ? t.booking.unitTransfer
+              : t.booking.unitDefault}
       </p>
 
       {detailError && (
         <p role="alert" className="text-error">
-          {detailError}. Hãy đóng và mở lại yêu cầu.
+          {detailError}. {t.booking.reopenHint}
         </p>
       )}
       {success ? (
@@ -132,14 +135,14 @@ export function BookingDialogContent({
       ) : (
         <form className="space-y-2.5" onSubmit={handleSubmit}>
           <DialogField
-            label="Họ và tên"
+            label={t.booking.fullName}
             name="name"
             autoComplete="name"
             required
             minLength={2}
           />
           <DialogField
-            label="Số điện thoại"
+            label={t.booking.phone}
             name="phone"
             type="tel"
             autoComplete="tel"
@@ -148,22 +151,22 @@ export function BookingDialogContent({
           />
           {product.type === "hotel" && !!details.rooms.length && (
             <div className="block">
-              <span className="mb-1 block text-body-sm">Loại phòng</span>
+              <span className="mb-1 block text-body-sm">{t.booking.roomType}</span>
               <CustomSelect
                 name="roomId"
-                ariaLabel="Loại phòng"
+                ariaLabel={t.booking.roomType}
                 required
                 searchable={details.rooms.length > 5}
-                searchPlaceholder="Tìm loại phòng…"
+                searchPlaceholder={t.booking.searchRoom}
                 value={roomId}
                 onChange={setRoomId}
-                placeholder="Chọn loại phòng"
+                placeholder={t.booking.selectRoom}
                 buttonClassName="w-full rounded-lg border border-border-default bg-white p-2 text-sm text-on-surface"
                 options={[
-                  { value: "", label: "Chọn loại phòng" },
+                  { value: "", label: t.booking.selectRoom },
                   ...details.rooms.map((room) => ({
                     value: room.id,
-                    label: `${room.title} · ${money(room.price)} / đêm · tối đa ${room.capacity} khách`,
+                    label: `${room.title} · ${formatMoney(room.price, locale)} ${t.booking.perNight} · ${t.booking.maxGuests} ${room.capacity} ${t.hotels.guestUnit}`,
                   })),
                 ]}
               />
@@ -171,13 +174,13 @@ export function BookingDialogContent({
           )}
           {!!details.departures.length && (
             <p className="text-body-md">
-              Lịch khởi hành: {details.departures.map((d) => d.date).join(", ")}
+              {t.booking.departures} {details.departures.map((d) => d.date).join(", ")}
             </p>
           )}
           <div className="grid grid-cols-2 gap-3">
             <DialogField
               label={
-                product.type === "hotel" ? "Ngày nhận phòng" : "Ngày sử dụng"
+                product.type === "hotel" ? t.booking.checkIn : t.booking.useDate
               }
               value={date}
               onChange={(e) => setDate(e.target.value)}
@@ -190,7 +193,7 @@ export function BookingDialogContent({
             />
             {product.type === "hotel" && (
               <DialogField
-                label="Ngày trả phòng"
+                label={t.booking.checkOut}
                 defaultValue={initialValues.returnDate}
                 min={date ? nextDate(date) : undefined}
                 name="returnDate"
@@ -200,7 +203,7 @@ export function BookingDialogContent({
             )}
             {product.type === "transfer" && (
               <DialogField
-                label="Giờ đón"
+                label={t.booking.pickupTime}
                 name="departureTime"
                 defaultValue={initialValues.departureTime}
                 type="time"
@@ -209,7 +212,7 @@ export function BookingDialogContent({
             )}
             <div className={product.type === "hotel" ? "col-span-2" : ""}>
               <DialogField
-                label="Số khách"
+                label={t.booking.guests}
                 name="guests"
                 type="number"
                 defaultValue={initialValues.guests ?? 2}
@@ -222,7 +225,7 @@ export function BookingDialogContent({
           {roundTrip && (
             <div className="grid grid-cols-2 gap-3">
               <DialogField
-                label="Ngày đón lượt về"
+                label={t.booking.returnDate}
                 type="date"
                 name="returnDate"
                 min={date}
@@ -230,7 +233,7 @@ export function BookingDialogContent({
                 required
               />
               <DialogField
-                label="Giờ đón lượt về"
+                label={t.booking.returnTime}
                 type="time"
                 name="returnTime"
                 defaultValue={initialValues.returnTime}
@@ -240,7 +243,7 @@ export function BookingDialogContent({
           )}
           {product.type === "transfer" && (
             <DialogField
-              label="Số hiệu chuyến bay"
+              label={t.booking.flightNumber}
               name="flightNumber"
               maxLength={30}
               pattern="[A-Za-z0-9 \-]*"
@@ -248,7 +251,7 @@ export function BookingDialogContent({
             />
           )}
           <label className="block text-body-sm">
-            Ghi chú (số phòng, điểm đón, giờ đón)
+            {t.booking.notes}
             <textarea
               name="notes"
               rows={2}
@@ -259,18 +262,18 @@ export function BookingDialogContent({
           </label>
           <p className="text-body-sm text-on-surface-variant">
             {submitBooking === submitPublicBooking
-              ? "Đây là yêu cầu tư vấn. Nhân viên sẽ xác nhận chỗ trống và tổng giá trước khi thanh toán."
-              : "Đơn mới sẽ ở trạng thái chờ xác nhận."}
+              ? t.booking.publicHint
+              : t.booking.adminHint}
           </p>
           <button
             disabled={busy || loading || Boolean(detailError)}
             className="w-full py-3 rounded-xl bg-primary text-white font-bold disabled:opacity-50"
           >
             {busy
-              ? "Đang gửi…"
+              ? t.booking.submitting
               : submitBooking === submitPublicBooking
-                ? "Gửi yêu cầu đặt chỗ"
-                : "Tạo đơn đặt chỗ"}
+                ? t.booking.submitPublic
+                : t.booking.submitAdmin}
           </button>
         </form>
       )}

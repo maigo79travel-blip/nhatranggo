@@ -2,6 +2,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { AppError } from "@/lib/errors";
 import { errorResponse } from "@/lib/http";
+import { getCurrentMessages } from "@/lib/i18n";
 import { publicProductWhere } from "@/modules/travel/product-visibility";
 import { getTransferFareForProduct } from "@/modules/travel/fare-service";
 import { vietnamToday } from "@/modules/travel/search";
@@ -16,13 +17,14 @@ export async function GET(
       .min(1)
       .max(100)
       .parse((await params).id);
-    const {
-      rows: [product],
-    } = await db.query<{ type: string }>(
-      `SELECT p.type FROM products p WHERE p.id=$1 AND ${publicProductWhere}`,
-      [id],
-    );
-    if (!product) throw new AppError("Dịch vụ không tồn tại", 404);
+    const [t, { rows: [product] }] = await Promise.all([
+      getCurrentMessages(),
+      db.query<{ type: string }>(
+        `SELECT p.type FROM products p WHERE p.id=$1 AND ${publicProductWhere}`,
+        [id],
+      ),
+    ]);
+    if (!product) throw new AppError(t.errors.productNotFound, 404);
     const rooms =
       product.type === "hotel"
         ? (
@@ -44,7 +46,7 @@ export async function GET(
     const quote =
       product.type === "transfer" ? await getTransferFareForProduct(id) : null;
     if (product.type === "transfer" && !quote)
-      throw new AppError("Tuyến xe không còn nhận yêu cầu", 404);
+      throw new AppError(t.errors.transferUnavailable, 404);
     return Response.json({
       rooms,
       departures,

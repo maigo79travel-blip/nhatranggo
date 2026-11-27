@@ -1,5 +1,10 @@
 "use client";
-import { ContentText, ContentLink, useSiteData } from "@/components/content";
+import {
+  ContentText,
+  ContentLink,
+  useSiteData,
+  useT,
+} from "@/components/content";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { LanguageSelector } from "./language-selector";
@@ -9,7 +14,11 @@ import { isLegacyServiceHref } from "@/modules/travel/service-routes";
 import { usePathname, useSearchParams } from "next/navigation";
 import brand from "@/config/brand.json";
 import { contentImageUrl } from "@/lib/content-values";
-import { activeNavigationHref, navigationItems } from "@/lib/navigation";
+import {
+  activeNavigationHref,
+  localizedNavLabel,
+  navigationItems,
+} from "@/lib/navigation";
 function HeaderNavLink({
   children,
   href,
@@ -38,7 +47,8 @@ function HeaderNavLink({
   );
 }
 export function SiteHeader() {
-  const { content } = useSiteData();
+  const { content, locale } = useSiteData();
+  const t = useT();
   const pathname = usePathname();
   const search = useSearchParams();
   const navigation = navigationItems(content["site.navigation"]?.value).filter(
@@ -79,7 +89,7 @@ export function SiteHeader() {
           </div>
         </ContentLink>
         <nav
-          aria-label="Điều hướng chính"
+          aria-label={t.nav.mainLabel}
           className="hidden xl:flex shrink-0 items-center gap-1 whitespace-nowrap"
         >
           {navigation
@@ -90,7 +100,7 @@ export function SiteHeader() {
                 href={item.href}
                 active={item.href === activeHref}
               >
-                {item.label}
+                {localizedNavLabel(item.href, item.label, locale, t.nav)}
               </HeaderNavLink>
             ))}
         </nav>
@@ -105,7 +115,7 @@ export function SiteHeader() {
             >
               search
             </span>
-            <span>Tra cứu</span>
+            <span>{t.nav.lookup}</span>
           </Link>
           <div className="hidden sm:block">
             <LanguageSelector />
@@ -115,7 +125,9 @@ export function SiteHeader() {
             aria-current={activeHref === "/lien-he" ? "page" : undefined}
             className="hidden h-10 items-center justify-center rounded-full border border-brand-light px-5 font-label-lg text-label-lg font-bold text-on-surface transition-colors hover:border-primary hover:bg-surface-muted sm:inline-flex"
           >
-            {contactLink?.label || "Liên hệ"}
+            {locale === "vi"
+              ? contactLink?.label || t.nav.contact
+              : t.nav.contact}
           </Link>
           <MobileNav />
         </div>

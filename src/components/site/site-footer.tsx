@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useSiteData } from "@/components/content";
+import { useSiteData, useT } from "@/components/content";
 import { contactInfo, contentImageUrl } from "@/lib/content-values";
 import { ContentText, ContentElement } from "@/components/content";
 import type { ReactNode } from "react";
@@ -29,29 +29,21 @@ const socialLinks = [
   },
 ];
 
-const serviceLinks = [
-  { href: "/khach-san", textKey: "footer.text-032", fallback: "Khách sạn" },
-  {
-    href: "/tour-hang-ngay",
-    textKey: "footer.text-033",
-    fallback: "Tour du lịch",
-  },
-  { href: "/xe-dua-don", textKey: "footer.text-034", fallback: "Xe đưa đón" },
-  { href: "/#combo", textKey: "footer.text-035", fallback: "Combo du lịch" },
-  {
-    href: "/tour-hang-ngay?type=combo",
-    textKey: "footer.text-036",
-    fallback: "Ưu đãi & khuyến mãi",
-  },
-] as const;
-
 export function SiteFooter({
   informationLinks,
 }: {
   informationLinks: ReactNode;
 }) {
-  const { content } = useSiteData();
+  const { content, locale } = useSiteData();
+  const t = useT();
   const contact = contactInfo(content);
+  const serviceItems = [
+    { href: "/khach-san", textKey: "footer.text-032", label: t.footer.services.hotels },
+    { href: "/tour-hang-ngay", textKey: "footer.text-033", label: t.footer.services.tours },
+    { href: "/xe-dua-don", textKey: "footer.text-034", label: t.footer.services.transfers },
+    { href: "/#combo", textKey: "footer.text-035", label: t.footer.services.combos },
+    { href: "/tour-hang-ngay?type=combo", textKey: "footer.text-036", label: t.footer.services.deals },
+  ];
   return (
     <footer
       className="w-full bg-background text-on-surface pt-10 pb-24 md:pb-8"
@@ -114,19 +106,19 @@ export function SiteFooter({
 
           <div className="lg:col-span-3 flex flex-col gap-3">
             <h4 className="text-sm font-extrabold leading-[20px] text-on-surface">
-              <ContentText contentKey="footer.text-031" />
+              {locale === "vi" ? <ContentText contentKey="footer.text-031" /> : t.footer.servicesTitle}
             </h4>
             <ul className="flex flex-col gap-2.5 text-sm font-medium leading-[20px] text-on-surface-variant">
-              {serviceLinks.map((item) => (
+              {serviceItems.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
                     className="hover:text-primary transition-colors"
                   >
-                    {content[item.textKey]?.value ? (
+                    {locale === "vi" && content[item.textKey]?.value ? (
                       <ContentText contentKey={item.textKey} />
                     ) : (
-                      item.fallback
+                      item.label
                     )}
                   </Link>
                 </li>
@@ -136,7 +128,7 @@ export function SiteFooter({
 
           <div className="lg:col-span-2 flex flex-col gap-3">
             <h4 className="text-sm font-extrabold leading-[20px] text-on-surface">
-              <ContentText contentKey="footer.text-038" />
+              {locale === "vi" ? <ContentText contentKey="footer.text-038" /> : t.footer.aboutTitle}
             </h4>
             <ul className="flex flex-col gap-2.5 text-sm font-medium leading-[20px] text-on-surface-variant">
               {informationLinks}
@@ -145,7 +137,7 @@ export function SiteFooter({
 
           <div className="lg:col-span-3 flex flex-col gap-3">
             <h4 className="text-sm font-extrabold leading-[20px] text-on-surface">
-              Liên hệ
+              {t.footer.contactTitle}
             </h4>
             <div className="flex flex-col gap-3 text-sm font-medium leading-[20px] text-on-surface-variant">
               <ContentElement
@@ -157,7 +149,7 @@ export function SiteFooter({
                   {"call"}
                 </span>
                 <span>
-                  <ContentText contentKey="footer.text-027" />{" "}
+                  {locale === "vi" ? <ContentText contentKey="footer.text-027" /> : t.footer.hotlinePrefix}{" "}
                   <strong className="text-on-surface font-semibold">
                     <ContentText contentKey="footer.text-028" />
                   </strong>

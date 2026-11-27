@@ -5,6 +5,7 @@ import {
   ContentText,
   SiteDataProvider,
   useSiteData,
+  useT,
 } from "@/components/content";
 import {
   homeHotelFilters,
@@ -15,8 +16,8 @@ import type { Product } from "@/lib/types";
 import { PriceStack, ProductDiscount } from "@/components/price-stack";
 import { CatalogCard, ProductField } from "@/components/catalog";
 import { HomeCardRating } from "./home-card-rating";
-
 export function HomeHotels() {
+  const t = useT();
   const [filter, setFilter] = useState<HomeHotelFilter>("all");
   const [results, setResults] = useState<{
     filter: HomeHotelFilter;
@@ -101,12 +102,12 @@ export function HomeHotels() {
         }
       >
         {loading
-          ? "Đang tải khách sạn…"
+          ? t.home.loadingHotels
           : result?.error
-            ? "Chưa thể tải danh sách khách sạn."
+            ? t.home.hotelsLoadError
             : products.length
-              ? `${products.length} khách sạn đang hiển thị`
-              : "Chưa có khách sạn phù hợp với bộ lọc."}
+              ? `${products.length} ${t.home.servicesCountSuffix}`
+              : t.home.noHotelsMatch}
       </p>
       {result?.error && (
         <button
@@ -206,12 +207,12 @@ export function HomeHotels() {
                         className="text-[clamp(1.125rem,2.25vw,1.625rem)] font-extrabold leading-tight text-sale-price"
                       >
                         <span className="font-body-sm text-xs text-on-surface-variant font-normal ml-1">
-                          /đêm
+                          {t.home.perNight}
                         </span>
                       </ProductField>
                     </PriceStack>
                     <button type="button" className="home-booking-button">
-                      Đặt phòng
+                      {t.home.bookRoom}
                     </button>
                   </div>
                 </div>

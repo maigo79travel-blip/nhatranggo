@@ -70,6 +70,7 @@ try {
       await client.query("COMMIT");
       console.log(`Seeded ${products.length} cards and 24 transfer fares`);
       await import("./seed-content.mjs");
+      await import("./seed-translations.mjs");
     } catch (e) {
       await client.query("ROLLBACK");
       throw e;

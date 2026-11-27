@@ -1,7 +1,12 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { ContentText, ContentElement, useSiteData } from "@/components/content";
+import {
+  ContentText,
+  ContentElement,
+  useSiteData,
+  useT,
+} from "@/components/content";
 import { CustomSelect } from "@/components/ui/custom-select";
 import { vietnamToday } from "@/modules/travel/search";
 
@@ -11,6 +16,7 @@ import { serviceRoutes } from "@/modules/travel/service-routes";
 export function ToursHero() {
   const router = useRouter();
   const { products, destinations } = useSiteData();
+  const t = useT();
   const [destination, setDestination] = useState("");
   const [date, setDate] = useState("");
   const [guests, setGuests] = useState("2");
@@ -18,10 +24,13 @@ export function ToursHero() {
     products.map((product) => product.destination_id),
   );
   const departureOptions = [
-    { value: "", label: "Tất cả điểm đến" },
+    { value: "", label: t.tours.allDestinations },
     ...destinations
       .filter((item) => linkedDestinations.has(item.id))
-      .map((item) => ({ value: item.id, label: item.name })),
+      .map((item) => ({
+        value: item.id,
+        label: t.destinations[item.code] ?? item.name,
+      })),
   ];
   const handleSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -79,7 +88,7 @@ export function ToursHero() {
 
           {products.length > 0 && (
             <p className="rounded-2xl bg-surface-muted px-4 py-3 text-sm font-semibold text-on-surface-variant">
-              {products.length} tour đang nhận yêu cầu
+              {products.length} {t.tours.toursAvailableSuffix}
             </p>
           )}
         </div>
@@ -174,10 +183,10 @@ export function ToursHero() {
               </div>
               <div className="flex flex-col flex-1 min-w-0">
                 <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
-                  Điểm đến
+                  {t.tours.departureLabel}
                 </span>
                 <CustomSelect
-                  ariaLabel="Điểm đến"
+                  ariaLabel={t.tours.departureLabel}
                   value={destination}
                   onChange={setDestination}
                   options={departureOptions}
@@ -221,7 +230,7 @@ export function ToursHero() {
                   <ContentText contentKey="tours.text-030" />
                 </span>
                 <input
-                  aria-label="Số lượng khách"
+                  aria-label={t.tours.guestLabel}
                   type="number"
                   min={1}
                   max={100}

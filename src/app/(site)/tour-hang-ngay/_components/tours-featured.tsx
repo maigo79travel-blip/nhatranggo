@@ -1,3 +1,4 @@
+import { getCurrentMessages } from "@/lib/i18n";
 import {
   ContentText,
   ProductValue,
@@ -6,7 +7,8 @@ import {
 import { PriceStack, ProductDiscount } from "@/components/price-stack";
 import { CatalogCard, ProductField } from "@/components/catalog";
 
-export function ToursFeatured() {
+export async function ToursFeatured() {
+  const t = await getCurrentMessages();
   return (
     <section className="w-full py-16 bg-surface-muted">
       <div className="site-container">
@@ -53,7 +55,7 @@ export function ToursFeatured() {
                   <span className="material-symbols-outlined text-[14px]">
                     {"local_fire_department"}
                   </span>
-                  <span>Nổi bật</span>
+                  <span>{t.tours.featuredBadge}</span>
                 </div>
 
                 <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-on-primary text-body-sm font-body-sm">

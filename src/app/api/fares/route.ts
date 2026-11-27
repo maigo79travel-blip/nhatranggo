@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { errorResponse } from "@/lib/http";
 import { AppError } from "@/lib/errors";
+import { getCurrentMessages } from "@/lib/i18n";
 import { vehicleCode } from "@/modules/travel/transfer-values";
 import { getFareQuote } from "@/modules/travel/fare-service";
 
@@ -19,18 +20,13 @@ export async function GET(request: Request) {
     const { pickup, dropoff, vehicle, roundTrip } = quoteQuery.parse(
       Object.fromEntries(new URL(request.url).searchParams),
     );
-    const quote = await getFareQuote(
-      pickup,
-      dropoff,
-      vehicle,
-      Boolean(roundTrip),
-    );
-    if (!quote) throw new AppError("Tuyến này cần liên hệ để báo giá.", 404);
+    const [t, quote] = await Promise.all([
+      getCurrentMessages(),
+      getFareQuote(pickup, dropoff, vehicle, Boolean(roundTrip)),
+    ]);
+    if (!quote) throw new AppError(t.transfers.contactForQuote, 404);
     if (roundTrip && quote.returnPrice == null)
-      throw new AppError(
-        "Chưa có giá niêm yết cho lượt về. Vui lòng liên hệ.",
-        404,
-      );
+      throw new AppError(t.transfers.missingReturnFare, 404);
     return Response.json(quote);
   } catch (error) {
     return errorResponse(error);
