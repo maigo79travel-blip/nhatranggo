@@ -24,7 +24,6 @@ export const messagesVi: Messages = {
     transfers: "Đặt xe",
     hotels: "Khách sạn",
     tours: "Tour",
-    evisa: "E-Visa",
     fastTrack: "Fast-track",
     blog: "Blog",
     lookup: "Tra cứu",
@@ -376,6 +375,8 @@ export const messagesVi: Messages = {
     DALAT_1D: "Tour Đà Lạt trong ngày",
   },
   booking: {
+    selectDeparture: "Chọn ngày khởi hành",
+    tourSeatsLeft: "Còn {count} chỗ",
     title: "Yêu cầu đặt chỗ",
     refPrice: "Giá tham khảo:",
     unitHotel: "phòng/đêm",
@@ -411,14 +412,14 @@ export const messagesVi: Messages = {
     reopenHint: "Hãy đóng và mở lại yêu cầu.",
   },
   support: {
-    visaAction: "Gửi yêu cầu tư vấn",
+    fastTrackAction: "Gửi yêu cầu Fast-track",
     lookupTitle: "Thông tin đặt chỗ",
     bookingCode: "Mã booking",
     bookingPhone: "Số điện thoại đã đặt",
     lookingUp: "Đang tra cứu…",
     lookupSubmit: "Tra cứu booking",
     contactTitle: "Gửi lời nhắn cho chúng tôi",
-    requestTitle: "Đăng ký tư vấn dịch vụ",
+    requestTitle: "Đăng ký hỗ trợ Fast-track",
     contactInfoLegend: "Thông tin liên hệ",
     name: "Họ và tên",
     phone: "Điện thoại",
@@ -508,26 +509,25 @@ export const messagesVi: Messages = {
     bookAction: "Gửi yêu cầu đặt chỗ",
   },
   pages: {
-    evisaTitle: "E-Visa",
     fastTrackTitle: "Fast-track sân bay",
     contactTitle: "Liên hệ & Hỗ trợ",
     lookupTitle: "Tra cứu booking",
     notFoundTitle: "Không tìm thấy trang",
     backHome: "Về trang chủ",
     supportGuide: {
-      visaHeading: "Quy trình tư vấn E-Visa",
-      visaSteps: [
+      fastTrackHeading: "Quy trình hỗ trợ Fast-track",
+      fastTrackSteps: [
         [
-          "Gửi thông tin chuyến đi",
-          "Điền quốc tịch, sân bay và ngày dự kiến nhập cảnh.",
+          "Gửi thông tin chuyến bay",
+          "Điền sân bay, giờ đến và ghi chú số hiệu chuyến bay cùng số khách.",
         ],
         [
-          "Trao đổi về hồ sơ",
-          "Nhân viên liên hệ để tư vấn giấy tờ phù hợp với chuyến đi.",
+          "Xác nhận dịch vụ",
+          "Nhân viên liên hệ để xác nhận sân bay, lịch bay, phạm vi hỗ trợ và chi phí.",
         ],
         [
-          "Thống nhất bước tiếp theo",
-          "Kiểm tra lại thông tin, chi phí và thời gian dự kiến với nhân viên.",
+          "Nhận hướng dẫn gặp nhân viên",
+          "Sau khi xác nhận, bạn sẽ nhận điểm gặp và cách liên hệ tại sân bay.",
         ],
       ],
       companionSuffix: "đồng hành",
@@ -548,6 +548,8 @@ export const messagesVi: Messages = {
     },
   },
   errors: {
+    tourNoOpenDates: "Tour hiện chưa có lịch còn chỗ để đặt.",
+    tourSeatsUnavailable: "Lịch khởi hành không còn đủ chỗ cho số khách đã chọn.",
     invalidRequest: "Yêu cầu không hợp lệ",
     languageSwitchFailed: "Không đổi được ngôn ngữ",
     bookingNotFound: "Không tìm thấy yêu cầu đặt chỗ",

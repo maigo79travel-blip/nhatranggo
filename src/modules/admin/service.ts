@@ -11,7 +11,8 @@ export async function listRecords(resource: string) {
   if (!definition) throw new AppError("Không tìm thấy module", 404);
   const columns =
     resource === "users" ? "id,username,role,active,created_at" : "*";
-  const requestScope = resource === "requests" ? " WHERE kind='evisa'" : "";
+  const requestScope =
+    resource === "requests" ? " WHERE kind='fast-track'" : "";
   const order =
     resource === "articles"
       ? "updated_at DESC,id"
@@ -126,11 +127,12 @@ export async function saveRecord(
           "Tuyến đã có bảng giá; hãy tạo tuyến mới khi đổi điểm đón trả",
         );
     }
-    if (resource === "rooms" || resource === "departures") {
-      const p = await client.query("SELECT type FROM products WHERE id=$1", [
-        values.product_id,
-      ]);
-      if (p.rows[0]?.type !== (resource === "rooms" ? "hotel" : "tour"))
+    if (resource === "rooms") {
+      const p = await client.query(
+        "SELECT type FROM products WHERE id=$1 FOR SHARE",
+        [values.product_id],
+      );
+      if (p.rows[0]?.type !== "hotel")
         throw new AppError("Loại dịch vụ không phù hợp");
     }
     const columns = Object.keys(values);
@@ -142,7 +144,7 @@ export async function saveRecord(
     let result;
     if (recordId)
       result = await client.query(
-        `UPDATE ${definition.table} SET ${columns.map((key, index) => `${key}=$${index + 1}`).join(",")}${["articles", "information_pages"].includes(definition.table) ? ",updated_at=now()" : ""} WHERE id=$${columns.length + 1}${resource === "requests" ? " AND kind='evisa'" : ""} RETURNING *`,
+        `UPDATE ${definition.table} SET ${columns.map((key, index) => `${key}=$${index + 1}`).join(",")}${["articles", "information_pages"].includes(definition.table) ? ",updated_at=now()" : ""} WHERE id=$${columns.length + 1}${resource === "requests" ? " AND kind='fast-track'" : ""} RETURNING *`,
         [...params, recordId],
       );
     else

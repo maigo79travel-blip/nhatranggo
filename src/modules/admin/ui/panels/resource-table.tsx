@@ -1,5 +1,7 @@
 "use client";
+import Link from "next/link";
 import { money } from "@/lib/types";
+import { tourDeparturesPath } from "../../routes";
 import { Icon } from "../primitives/admin-icon";
 import { Badge, Status } from "../primitives/admin-badge";
 import { typeLabels, scopeLabels, dateLabel, rowKey, type Row } from "../api";
@@ -8,18 +10,26 @@ export function ResourceTable({
   section,
   rows,
   loading,
+  tourCatalog = false,
   onEdit,
   routeLabel = String,
 }: {
   section: string;
   rows: Row[];
   loading: boolean;
+  tourCatalog?: boolean;
   onEdit: (r: Row) => void;
   routeLabel?: (v: unknown, row?: Row) => string;
 }) {
   const headings =
     section === "products"
-      ? ["Dịch vụ", "Giá bán", "Trạng thái", "Trang chủ"]
+      ? [
+          "Dịch vụ",
+          "Giá bán",
+          "Trạng thái",
+          "Trang chủ",
+          ...(tourCatalog ? ["Lịch khởi hành"] : []),
+        ]
       : section === "content"
         ? ["Nội dung", "Trang", "Loại nội dung", "Cập nhật"]
         : section === "fares"
@@ -112,6 +122,29 @@ export function ResourceTable({
                       <td className="ad-cell-muted">
                         {row.featured ? "Ưu tiên" : "—"}
                       </td>
+                      {tourCatalog && (
+                        <td>
+                          <small>
+                            {row.next_departure
+                              ? `Tiếp theo ${dateLabel(row.next_departure)}`
+                              : row.has_departures
+                                ? "Chưa có ngày còn chỗ"
+                                : "Theo yêu cầu"}
+                          </small>
+                          <Link
+                            className="ad-text-button"
+                            href={
+                              tourDeparturesPath +
+                              "?" +
+                              new URLSearchParams({ tour: String(row.id) })
+                            }
+                            aria-label={`Quản lý lịch ${String(row.title)}`}
+                            prefetch={false}
+                          >
+                            Quản lý lịch
+                          </Link>
+                        </td>
+                      )}
                     </>
                   ) : section === "content" ? (
                     <>

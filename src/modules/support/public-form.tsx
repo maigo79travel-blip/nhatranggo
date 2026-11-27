@@ -4,12 +4,12 @@ import { DialogField } from "@/components/catalog/dialog-field";
 import { PublicIcon } from "@/components/site/public-ui";
 import { useT } from "@/components/content";
 import { SupportGuide } from "./support-guide";
-export function PublicForm({ kind }: { kind: "contact" | "evisa" }) {
+export function PublicForm({ kind }: { kind: "contact" | "fast-track" }) {
   const t = useT();
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const isVisa = kind === "evisa";
+  const isFastTrack = kind === "fast-track";
   return (
     <div className="public-form-layout">
       <form
@@ -49,8 +49,8 @@ export function PublicForm({ kind }: { kind: "contact" | "evisa" }) {
         }}
       >
         <div className="public-form-heading">
-          {isVisa && (
-            <PublicIcon name="description" className="visa-form-icon" />
+          {isFastTrack && (
+            <PublicIcon name="flight_land" className="fast-track-form-icon" />
           )}
           <h2 className="text-2xl font-bold">
             {kind === "contact"
@@ -177,7 +177,7 @@ export function PublicForm({ kind }: { kind: "contact" | "evisa" }) {
           <PublicIcon name="arrow_forward" className="text-lg" />
         </button>
       </form>
-      <SupportGuide visa={isVisa} />
+      <SupportGuide fastTrack={isFastTrack} />
     </div>
   );
 }

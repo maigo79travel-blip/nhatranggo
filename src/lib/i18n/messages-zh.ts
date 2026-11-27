@@ -24,7 +24,6 @@ export const messagesZh: Messages = {
     transfers: "接送包车",
     hotels: "酒店",
     tours: "一日游",
-    evisa: "电子签证",
     fastTrack: "快速通道",
     blog: "攻略博客",
     lookup: "订单查询",
@@ -373,6 +372,8 @@ export const messagesZh: Messages = {
     DALAT_1D: "大叻一日游",
   },
   booking: {
+    selectDeparture: "选择出发日期",
+    tourSeatsLeft: "剩余 {count} 个名额",
     title: "预订申请",
     refPrice: "参考价格：",
     unitHotel: "间/晚",
@@ -407,14 +408,14 @@ export const messagesZh: Messages = {
     reopenHint: "请关闭后重新打开申请。",
   },
   support: {
-    visaAction: "申请电子签证咨询",
+    fastTrackAction: "申请机场快速通道",
     lookupTitle: "订单查询",
     bookingCode: "订单编号",
     bookingPhone: "预订联系电话",
     lookingUp: "查询中…",
     lookupSubmit: "查询订单",
     contactTitle: "给我们留言",
-    requestTitle: "服务咨询登记",
+    requestTitle: "申请机场快速通道服务",
     contactInfoLegend: "联系信息",
     name: "姓名",
     phone: "电话",
@@ -503,26 +504,25 @@ export const messagesZh: Messages = {
     bookAction: "提交预订请求",
   },
   pages: {
-    evisaTitle: "电子签证 E-Visa",
     fastTrackTitle: "机场快速通道 Fast-track",
     contactTitle: "联系与支持",
     lookupTitle: "订单查询",
     notFoundTitle: "页面未找到",
     backHome: "返回首页",
     supportGuide: {
-      visaHeading: "电子签证咨询流程",
-      visaSteps: [
+      fastTrackHeading: "机场快速通道服务流程",
+      fastTrackSteps: [
         [
-          "填写行程信息",
-          "填写国籍、抵达机场和预计入境日期。",
+          "提交航班信息",
+          "填写机场和抵达时间，并在备注中注明航班号和人数。",
         ],
         [
-          "咨询申请材料",
-          "工作人员会与您联系，说明行程所需的材料。",
+          "确认服务",
+          "工作人员将核对航班、机场、可提供的协助及费用。",
         ],
         [
-          "确认下一步",
-          "与工作人员核对信息、费用和预计办理时间。",
+          "获取会面指引",
+          "确认后，您将收到机场会面地点和联系方式。",
         ],
       ],
       companionSuffix: "伴您同行",
@@ -543,6 +543,8 @@ export const messagesZh: Messages = {
     },
   },
   errors: {
+    tourNoOpenDates: "当前没有可预订的行程日期。",
+    tourSeatsUnavailable: "该出发日期没有足够名额容纳所选人数。",
     invalidRequest: "请求无效",
     languageSwitchFailed: "无法切换语言",
     bookingNotFound: "未找到预订信息",

@@ -65,7 +65,7 @@ try {
     "Expected English cruise tour filter to return results",
   );
 
-  // Verify zero Vietnamese diacritics leak across all 9 public routes in en, ru, ko, zh
+  // Verify zero Vietnamese diacritics leak across all 8 public routes in en, ru, ko, zh
   const vnDiacritics =
     /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]/;
   const publicRoutes = [
@@ -73,7 +73,6 @@ try {
     "/khach-san",
     "/tour-hang-ngay",
     "/xe-dua-don",
-    "/e-visa",
     "/fast-track",
     "/lien-he",
     "/tra-cuu",
@@ -111,7 +110,7 @@ try {
   await page.waitForFunction(() => document.documentElement.lang === "vi");
 
   console.log(
-    "PASS i18n: 5-locale switching, <html lang>, cookie, English filters, footer fallback, & 9-route 4-locale zero-VN check",
+    "PASS i18n: 5-locale switching, <html lang>, cookie, English filters, footer fallback, & 8-route 4-locale zero-VN check",
   );
 } finally {
   await browser.close();

@@ -23,7 +23,10 @@ const fare = (
   )
 ).rows[0];
 const editableTitle = (
-  await db.query("SELECT * FROM site_content WHERE key='evisa.title'")
+  await db.query("SELECT * FROM site_content WHERE key='fast-track.title'")
+).rows[0];
+const fastTrackRates = (
+  await db.query("SELECT * FROM site_content WHERE key='fast-track.rates'")
 ).rows[0];
 const archiveKey = { route: "CXR_BAI_DAI", vehicle: "4cho" };
 const archiveId = `transfer-${archiveKey.route}-${archiveKey.vehicle}`;
@@ -125,21 +128,60 @@ try {
     data: contact,
   });
   assert.equal(saveContact.status(), 200);
-  await page.goto(base + "/admin/noi-dung/e-visa");
+  await page.goto(base + "/admin/noi-dung/fast-track");
   await page
     .getByRole("button", { name: "Tiêu đề trang", exact: true })
     .click();
   await page
     .getByLabel("Nội dung", { exact: true })
-    .fill("Dịch vụ thị thực điện tử");
+    .fill("Fast-track Cam Ranh từ CMS");
   await page.getByRole("button", { name: "Lưu thay đổi", exact: true }).click();
   await page.getByRole("dialog").waitFor({ state: "hidden" });
-  await site.goto(base + "/e-visa");
+  await site.goto(base + "/fast-track");
   await site
-    .getByRole("heading", { level: 1, name: "Dịch vụ thị thực điện tử" })
+    .getByRole("heading", { level: 1, name: "Fast-track Cam Ranh từ CMS" })
     .waitFor();
   console.log(
-    "Admin updates public E-Visa copy and saves configured contact channels",
+    "Admin updates public Fast-track copy and saves configured contact channels",
+  );
+  await site.getByRole("link", { name: "Xem bảng giá", exact: true }).click();
+  await site.waitForURL(/#bang-gia-fast-track$/);
+  assert.equal(await site.locator("[data-rate]").count(), 10);
+  const nightRate = site.locator('[data-rate="night-arrival"]');
+  assert.deepEqual(await nightRate.locator("dd").allTextContents(), [
+    "+5",
+    "+132.500",
+  ]);
+  const passportRate = site.locator('[data-rate="passport-control"]');
+  assert.deepEqual(await passportRate.locator("dd").allTextContents(), [
+    "20",
+    "530.000",
+  ]);
+  await page
+    .getByRole("button", { name: "Bảng giá Fast-track Cam Ranh", exact: true })
+    .click();
+  await page
+    .getByLabel("Kiểm soát hộ chiếu · VND", { exact: true })
+    .fill("555000");
+  await page
+    .getByRole("dialog")
+    .getByRole("button", { name: "Lưu thay đổi", exact: true })
+    .click();
+  await page.getByRole("dialog").waitFor({ state: "hidden" });
+  await site.reload();
+  await passportRate.getByText("555.000", { exact: true }).waitFor();
+  const invalidRates = await page.request.patch(base + "/api/admin/content", {
+    data: {
+      ...fastTrackRates,
+      value: {
+        ...fastTrackRates.value,
+        "passport-control": { usd: -1, vnd: 555000 },
+      },
+    },
+  });
+  assert.equal(invalidRates.status(), 400);
+  console.log(
+    "Fast-track rate groups, currency values, CMS edits and price validation passed",
   );
   const updateHotelHeading = await page.request.patch(
     base + "/api/admin/content",
@@ -283,11 +325,12 @@ try {
     "UPDATE products SET title=$2,price=$3,original_price=$4 WHERE id=$1",
     [product.id, product.title, product.price, product.original_price],
   );
-  if (editableTitle) {
-    await db.query("UPDATE site_content SET value=$2 WHERE key=$1", [
-      editableTitle.key,
-      JSON.stringify(editableTitle.value),
-    ]);
+  for (const entry of [editableTitle, fastTrackRates]) {
+    if (entry)
+      await db.query("UPDATE site_content SET value=$2 WHERE key=$1", [
+        entry.key,
+        JSON.stringify(entry.value),
+      ]);
   }
   await db.query("UPDATE site_content SET value=$2 WHERE key=$1", [
     hero.key,

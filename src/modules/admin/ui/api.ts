@@ -39,12 +39,13 @@ export const scopeLabels: Record<string, string> = {
   footer: "Chân trang",
   site: "Toàn website",
 };
-export const dateLabel = (value: unknown) =>
+export const dateLabel = (value: unknown, withTime = false) =>
   value
     ? new Intl.DateTimeFormat("vi-VN", {
         day: "2-digit",
         month: "2-digit",
         year: "numeric",
+        ...(withTime ? { hour: "2-digit", minute: "2-digit" } : {}),
         timeZone: "Asia/Ho_Chi_Minh",
       }).format(new Date(String(value)))
     : "—";

@@ -1,0 +1,103 @@
+.fast-track-page .public-page-hero-art img {
+  object-position: center 20%;
+}
+.fast-track-page .public-form-card,
+.fast-track-page .public-support-card {
+  @apply rounded-[24px] border-border-subtle bg-surface shadow-card;
+}
+.fast-track-page .public-form-heading {
+  @apply flex items-center gap-3 pb-4 sm:pb-5;
+}
+.fast-track-page .fast-track-form-icon,
+.fast-track-page .public-support-heading {
+  @apply grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-surface-brand text-2xl text-primary;
+}
+.fast-track-page .public-support-card {
+  @apply space-y-4;
+  background-image: none;
+}
+.fast-track-page .public-support-heading .material-symbols-outlined {
+  @apply text-2xl;
+}
+.fast-track-page .public-form-note {
+  @apply bg-surface-muted;
+}
+
+.fast-track-rate-panel {
+  @apply relative -mt-16 rounded-2xl border border-border-subtle bg-surface p-3 shadow-card sm:-mt-20 sm:p-4;
+}
+.fast-track-pricing-heading {
+  @apply mb-3;
+}
+.fast-track-pricing-heading h2 {
+  @apply text-xl font-extrabold leading-tight tracking-tight sm:text-2xl;
+  overflow-wrap: anywhere;
+}
+.fast-track-rate-links {
+  @apply mt-2 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap;
+}
+.fast-track-rate-links a {
+  @apply inline-flex min-h-11 items-center justify-center rounded-lg border border-border-subtle bg-surface-muted px-3 py-1 text-center text-sm font-bold text-on-surface hover:border-primary hover:text-primary;
+}
+.fast-track-rate-group + .fast-track-rate-group {
+  @apply mt-3;
+}
+.fast-track-rate-group {
+  @apply min-w-0 rounded-xl border border-border-subtle;
+}
+.fast-track-rate-group-heading {
+  @apply rounded-t-xl bg-surface-brand/60 px-3 py-2 sm:px-4;
+}
+.fast-track-rate-group-heading h3 {
+  @apply flex min-w-0 items-center gap-2 text-sm font-extrabold sm:text-base;
+}
+.fast-track-rate-group-heading h3 .material-symbols-outlined {
+  @apply shrink-0 text-xl text-primary;
+}
+.fast-track-rate-currencies {
+  @apply hidden text-sm font-bold text-on-surface-brand md:grid;
+}
+.fast-track-rate-row {
+  @apply grid min-w-0 gap-1.5 px-3 py-2 sm:px-4 md:py-2.5;
+}
+.fast-track-rate-row + .fast-track-rate-row {
+  @apply border-t border-border-subtle;
+}
+.fast-track-rate-row h4 {
+  @apply text-sm font-extrabold sm:text-base;
+}
+.fast-track-rate-row p {
+  @apply mt-0.5 text-sm leading-snug text-on-surface-variant;
+}
+.fast-track-rate-row :is(h4, p) {
+  overflow-wrap: anywhere;
+}
+.fast-track-rate-values {
+  grid-template-columns: minmax(0, 4fr) minmax(0, 5fr);
+  @apply grid min-w-0 gap-2 text-on-surface;
+  font-variant-numeric: tabular-nums;
+}
+.fast-track-rate-values dt {
+  @apply text-xs font-bold text-on-surface-variant;
+}
+.fast-track-rate-values dd {
+  @apply min-w-0 text-sm font-extrabold md:text-base;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 767px) {
+  .fast-track-rate-values > div {
+    @apply flex min-w-0 flex-wrap items-baseline gap-x-1.5 rounded-md bg-surface-muted px-2 py-1;
+  }
+}
+@media (min-width: 768px) {
+  .fast-track-rate-group-heading,
+  .fast-track-rate-row {
+    grid-template-columns: minmax(0, 1fr) minmax(13.5rem, 24%);
+    @apply grid items-center gap-4;
+  }
+  .fast-track-rate-values,
+  .fast-track-rate-currencies {
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+    @apply gap-3 text-right;
+  }
+}

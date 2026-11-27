@@ -285,11 +285,13 @@ try {
     original_price: null,
     active: true,
   });
-  await create("departures", {
+  const departure = await create("departures", {
     product_id: tour.id,
     date: "2099-12-01",
     notes: "Lịch trình QA",
     active: true,
+    capacity: 3,
+    price_override: 325000,
   });
   await call(
     anonymous,
@@ -297,6 +299,180 @@ try {
     "/api/bookings",
     { productId: tour.id, name: tag, phone, date: "2099-12-02", guests: 2 },
     400,
+  );
+  const posted = await call(anonymous, "GET", "/api/products/" + tour.id);
+  assert.equal(posted.tourScheduled, true);
+  assert.deepEqual(posted.departures, [
+    {
+      id: departure.id,
+      date: "2099-12-01",
+      price_override: 325000,
+      remaining_seats: 3,
+    },
+  ]);
+  const catalog = `/api/products?type=tour&q=${encodeURIComponent(tour.title)}&date=2099-12-01`;
+  assert.equal((await call(anonymous, "GET", catalog)).data[0].price, 325000);
+  assert.deepEqual(
+    (await call(anonymous, "GET", catalog + "&guests=4")).data,
+    [],
+  );
+  await call(admin, "POST", "/api/admin/departures", departure, 409);
+  const batch = await call(
+    admin,
+    "POST",
+    "/api/admin/departures",
+    {
+      product_id: tour.id,
+      date: "2099-12-01",
+      end_date: "2099-12-03",
+      capacity: 8,
+      active: true,
+    },
+    201,
+  );
+  assert.equal(batch.saved, 2);
+  assert.equal(batch.skipped, 1);
+  const clone = (
+    await call(
+      admin,
+      "POST",
+      "/api/admin/products",
+      {
+        title: "Bản sao tour " + tag,
+        type: "tour",
+        cloneId: tour.id,
+      },
+      201,
+    )
+  ).data;
+  created.products.push(clone.id);
+  assert.equal(clone.active, false);
+  assert.equal(
+    (await call(admin, "GET", "/api/admin/departures?tour=" + clone.id)).data
+      .length,
+    0,
+  );
+  await call(
+    admin,
+    "POST",
+    "/api/admin/products",
+    {
+      title: "Bản sao sai loại " + tag,
+      type: "hotel",
+      cloneId: tour.id,
+    },
+    404,
+  );
+
+  const seatsRequest = {
+    productId: tour.id,
+    date: departure.date,
+    guests: 2,
+    name: tag,
+    phone,
+  };
+  const concurrent = await Promise.all(
+    [seatsRequest, seatsRequest].map((data) =>
+      anonymous.post("/api/bookings", { data }),
+    ),
+  );
+  assert.deepEqual(
+    concurrent.map((response) => response.status()).sort(),
+    [201, 409],
+  );
+  const first = await concurrent
+    .find((response) => response.status() === 201)
+    .json();
+  const tourBooking = await call(
+    anonymous,
+    "GET",
+    `/api/bookings?id=${first.id}&phone=${phone}`,
+  );
+  assert.equal(tourBooking.unit_price, 325000);
+  assert.deepEqual(
+    (await call(anonymous, "GET", catalog + "&guests=2")).data,
+    [],
+  );
+  await call(
+    admin,
+    "PATCH",
+    "/api/admin/departures",
+    { ...departure, capacity: 1 },
+    409,
+  );
+  await call(
+    admin,
+    "PATCH",
+    "/api/admin/departures",
+    { ...departure, date: "2099-12-08" },
+    409,
+  );
+  const edited = (
+    await call(admin, "PATCH", "/api/admin/departures", {
+      ...departure,
+      price_override: 350000,
+    })
+  ).data;
+  await call(
+    admin,
+    "PATCH",
+    "/api/admin/departures",
+    { ...departure, price_override: 330000 },
+    409,
+  );
+  assert.equal(
+    (
+      await call(
+        anonymous,
+        "GET",
+        `/api/bookings?id=${first.id}&phone=${phone}`,
+      )
+    ).unit_price,
+    325000,
+  );
+
+  await call(admin, "PATCH", "/api/admin/bookings", {
+    id: first.id,
+    status: "cancelled",
+  });
+  const replacement = await call(
+    anonymous,
+    "POST",
+    "/api/bookings",
+    { ...seatsRequest, guests: 3 },
+    201,
+  );
+  await call(
+    admin,
+    "PATCH",
+    "/api/admin/bookings",
+    { id: first.id, status: "pending" },
+    409,
+  );
+  await call(admin, "PATCH", "/api/admin/bookings", {
+    id: replacement.id,
+    status: "cancelled",
+  });
+  const inventory = await call(
+    admin,
+    "GET",
+    "/api/admin/departures?tour=" + tour.id,
+  );
+  assert.equal(inventory.data.length, 3);
+  assert.equal(inventory.data[0].revision, edited.revision);
+  for (const row of inventory.data)
+    await call(admin, "DELETE", "/api/admin/departures", {
+      id: row.id,
+      revision: row.revision,
+    });
+  assert.deepEqual(
+    (await call(anonymous, "GET", "/api/products/" + tour.id)).departures,
+    [],
+  );
+  assert.deepEqual((await call(anonymous, "GET", catalog)).data, []);
+  await call(anonymous, "POST", "/api/bookings", seatsRequest, 400);
+  console.log(
+    "PASS tour operations: batch scheduling, cloning, date pricing, concurrent seats, cancellation, stale edit and closed schedule",
   );
   await call(
     anonymous,
@@ -409,27 +585,27 @@ try {
     arrival_at: "2099-12-01T10:00:00+07:00",
     nationality: "VN",
   };
-  const visa = await call(
-    anonymous,
-    "POST",
-    "/api/requests",
-    { ...requestData, kind: "evisa" },
-    201,
-  );
-  created.requests = [visa.id];
-  await call(
+  const fastTrack = await call(
     anonymous,
     "POST",
     "/api/requests",
     { ...requestData, kind: "fast-track" },
+    201,
+  );
+  created.requests = [fastTrack.id];
+  await call(
+    anonymous,
+    "POST",
+    "/api/requests",
+    { ...requestData, kind: "evisa" },
     400,
   );
-  const retiredPage = await anonymous.get("/fast-track", { maxRedirects: 0 });
-  assert.equal(retiredPage.status(), 308);
-  assert.equal(retiredPage.headers().location, "/e-visa");
+  const retiredPage = await anonymous.get("/e-visa", { maxRedirects: 0 });
+  assert.equal(retiredPage.status(), 307);
+  assert.equal(retiredPage.headers().location, "/fast-track?via=legacy");
   const retired = (
     await db.query(
-      "INSERT INTO service_requests(id,kind,name,phone,email,airport,arrival_at,nationality) VALUES(gen_random_uuid(),'fast-track',$1,$2,$3,$4,$5,$6) RETURNING id",
+      "INSERT INTO service_requests(id,kind,name,phone,email,airport,arrival_at,nationality) VALUES(gen_random_uuid(),'evisa',$1,$2,$3,$4,$5,$6) RETURNING id",
       [
         requestData.name,
         requestData.phone,
@@ -441,6 +617,14 @@ try {
     )
   ).rows[0];
   created.requests.push(retired.id);
+  const handled = await call(admin, "PATCH", "/api/admin/requests", {
+    ...requestData,
+    id: fastTrack.id,
+    kind: "fast-track",
+    status: "confirmed",
+    notes: "Đã xác nhận với khách",
+  });
+  assert.equal(handled.data.status, "confirmed");
   await call(
     admin,
     "PATCH",
@@ -448,25 +632,20 @@ try {
     {
       ...requestData,
       id: retired.id,
-      kind: "evisa",
+      kind: "fast-track",
       status: "pending",
     },
     404,
   );
-  await call(
-    admin,
-    "GET",
-    "/api/admin/requests?kind=fast-track",
-    undefined,
-    400,
-  );
+  await call(admin, "GET", "/api/admin/requests?kind=fast-track");
+  await call(admin, "GET", "/api/admin/requests?kind=evisa", undefined, 400);
   assert.equal(
     (
       await db.query("SELECT kind FROM service_requests WHERE id=$1", [
         retired.id,
       ])
     ).rows[0].kind,
-    "fast-track",
+    "evisa",
   );
   const contact = await call(
     anonymous,
@@ -562,6 +741,14 @@ try {
     400,
   );
   assert.equal((await anonymous.get("/api/favorites")).status(), 404);
+  const protectedCreateTour = await anonymous.get("/admin/tour/them-moi", {
+    maxRedirects: 0,
+  });
+  assert.equal(protectedCreateTour.status(), 307);
+  assert.match(
+    protectedCreateTour.headers().location,
+    /\/admin\/dang-nhap\?next=/,
+  );
   assert.equal(
     (
       await anonymous.post("/api/subscribe", {
@@ -646,11 +833,190 @@ try {
   ).toBeVisible();
   await ui.keyboard.press("Escape");
 
+  await ui.goto(baseURL + "/admin/tour");
+  const statusFilter = ui.getByRole("button", {
+    name: "Lọc danh sách",
+    exact: true,
+  });
+  await statusFilter.click();
+  const statusMenu = ui.getByRole("listbox", {
+    name: "Lọc danh sách",
+    exact: true,
+  });
+  await expect(statusMenu).toBeVisible();
+  const [filterBounds, menuBounds] = await Promise.all([
+    statusFilter.boundingBox(),
+    statusMenu.boundingBox(),
+  ]);
+  assert.ok(Math.abs(menuBounds.x - filterBounds.x) < 8);
+  assert.ok(Math.abs(menuBounds.width - filterBounds.width) < 16);
+  await ui.keyboard.press("Escape");
+  await ui.getByRole("link", { name: "Thêm tour", exact: true }).click();
+  await expect(ui).toHaveURL(/\/admin\/tour\/them-moi$/);
+  await expect(ui.getByRole("heading", { level: 1 })).toHaveText("Thêm tour");
+  await expect(ui.getByRole("dialog")).toHaveCount(0);
+  await ui.setViewportSize({ width: 390, height: 844 });
+  assert.equal(
+    await ui.evaluate(() => document.documentElement.scrollWidth > innerWidth),
+    false,
+  );
+  const draftTourName = "Tour nháp " + tag;
+  await ui.getByLabel("Tên tour", { exact: true }).fill(draftTourName);
+  await ui.getByLabel("Giá bán / khách (VND)", { exact: true }).fill("520000");
+  await ui
+    .getByLabel("Giá gốc (VND, bỏ trống để ẩn)", { exact: true })
+    .fill("500000");
+  await ui.getByRole("button", { name: "Lưu bản nháp", exact: true }).click();
+  await expect(ui.locator("#ad-record-form").getByRole("alert")).toHaveText(
+    "Giá gốc phải lớn hơn hoặc bằng giá bán",
+  );
+  await ui
+    .getByLabel("Giá gốc (VND, bỏ trống để ẩn)", { exact: true })
+    .fill("");
+  await ui
+    .getByLabel("Mô tả tour", { exact: true })
+    .fill("Mô tả tour lưu trực tiếp từ trang tạo.");
+  const [savedDraftTour] = await Promise.all([
+    ui.waitForResponse(
+      (response) =>
+        response.url().endsWith("/api/admin/products") &&
+        response.request().method() === "POST",
+    ),
+    ui.getByRole("button", { name: "Lưu bản nháp", exact: true }).click(),
+  ]);
+  assert.equal(savedDraftTour.status(), 201);
+  const draftTour = (await savedDraftTour.json()).data;
+  created.products.push(draftTour.id);
+  assert.equal(draftTour.active, false);
+  assert.equal(draftTour.price, 520000);
+  assert.equal(draftTour.description, "Mô tả tour lưu trực tiếp từ trang tạo.");
+  assert.equal(
+    (await anonymous.get("/api/products/" + draftTour.id)).status(),
+    404,
+  );
+  await expect(
+    ui.getByRole("link", { name: "Thêm lịch khởi hành" }),
+  ).toHaveAttribute("href", "/admin/tour/lich-khoi-hanh?tour=" + draftTour.id);
+  await ui.setViewportSize({ width: 1440, height: 1000 });
+  await ui.getByRole("link", { name: "Danh sách tour", exact: true }).click();
+  await ui.getByRole("link", { name: "Thêm tour", exact: true }).click();
+  await ui.getByRole("button", { name: "Chọn tour mẫu", exact: true }).click();
+  await ui.getByRole("option", { name: tour.title, exact: true }).click();
+  await ui.getByRole("button", { name: "Áp dụng mẫu", exact: true }).click();
+  await expect(
+    ui.getByLabel("Giá bán / khách (VND)", { exact: true }),
+  ).toHaveValue("250000");
+  await ui.getByLabel("Tên tour", { exact: true }).fill("Tour đăng mới " + tag);
+  const [publishedTourResponse] = await Promise.all([
+    ui.waitForResponse(
+      (response) =>
+        response.url().endsWith("/api/admin/products") &&
+        response.request().method() === "POST",
+    ),
+    ui.getByRole("button", { name: "Đăng tour", exact: true }).click(),
+  ]);
+  assert.equal(publishedTourResponse.status(), 201);
+  const publishedTour = (await publishedTourResponse.json()).data;
+  created.products.push(publishedTour.id);
+  assert.equal(publishedTour.active, true);
+  assert.equal(publishedTour.price, 250000);
+  await expect(ui.locator(".ad-tour-create").getByRole("status")).toContainText(
+    "Đã đăng tour",
+  );
+  assert.equal(
+    (await anonymous.get("/api/products/" + publishedTour.id)).status(),
+    200,
+  );
+  assert.equal(
+    (await call(admin, "GET", "/api/admin/departures?tour=" + publishedTour.id))
+      .data.length,
+    0,
+  );
+  await ui.getByRole("link", { name: "Danh sách tour", exact: true }).click();
+  console.log(
+    "PASS dedicated tour creation: access, draft validation, templates and publication",
+  );
+
+  await ui.getByLabel("Tìm dữ liệu", { exact: true }).fill(tour.title);
+  await ui.getByRole("link", { name: "Quản lý lịch " + tour.title }).click();
+  await expect(ui).toHaveURL(
+    new RegExp(`/admin/tour/lich-khoi-hanh\\?tour=${tour.id}$`),
+  );
+  await expect(ui.getByRole("heading", { level: 1 })).toHaveText(
+    "Lịch khởi hành tour",
+  );
+  await ui.setViewportSize({ width: 320, height: 844 });
+  await ui.getByRole("button", { name: "Khoảng lịch", exact: true }).click();
+  await expect(
+    ui.getByRole("option", { name: "Sắp tới", exact: true }),
+  ).toBeVisible();
+  await ui.keyboard.press("Escape");
+  await ui.setViewportSize({ width: 1440, height: 1000 });
+  await ui.getByRole("button", { name: "Thêm lịch", exact: true }).click();
+  const departureEditor = ui.getByRole("dialog", {
+    name: "Thêm lịch khởi hành",
+  });
+  await expect(
+    departureEditor.getByRole("button", { name: "Tour", exact: true }),
+  ).toContainText(tour.title);
+  await departureEditor
+    .getByLabel("Ngày khởi hành", { exact: true })
+    .fill("2099-12-10");
+  await departureEditor.getByLabel("Sức chứa (chỗ)", { exact: true }).fill("8");
+  await departureEditor
+    .getByLabel("Giá riêng / khách (VND)", { exact: true })
+    .fill("450000");
+  await departureEditor
+    .getByRole("button", { name: "Lưu thay đổi", exact: true })
+    .click();
+  const newDeparture = ui.getByRole("row").filter({ hasText: "10/12/2099" });
+  await expect(newDeparture).toContainText("450.000");
+  await expect(newDeparture).toContainText("Còn 8 chỗ");
+  await newDeparture.getByRole("button", { name: /Sửa lịch/ }).click();
+  const editDeparture = ui.getByRole("dialog", {
+    name: "Chỉnh sửa lịch khởi hành",
+  });
+  await editDeparture.getByLabel("Mở bán lịch này", { exact: true }).uncheck();
+  await editDeparture
+    .getByRole("button", { name: "Lưu thay đổi", exact: true })
+    .click();
+  await expect(newDeparture).toContainText("Đóng bán");
+  await newDeparture.getByRole("button", { name: /Sửa lịch/ }).click();
+  await editDeparture.getByLabel("Mở bán lịch này", { exact: true }).check();
+  await editDeparture
+    .getByRole("button", { name: "Lưu thay đổi", exact: true })
+    .click();
+  await expect(newDeparture).toContainText("Đang mở bán");
+  await create("departures", {
+    product_id: tour.id,
+    date: "2099-12-11",
+    active: true,
+  });
+  await ui.setViewportSize({ width: 390, height: 844 });
+  assert.equal(
+    await ui.evaluate(() => document.documentElement.scrollWidth > innerWidth),
+    false,
+  );
+  await ui.setViewportSize({ width: 1440, height: 1000 });
+  await ui.goto(
+    baseURL +
+      "/tour-hang-ngay?date=2099-12-10&q=" +
+      encodeURIComponent(tour.title),
+  );
+  await ui
+    .locator(`[data-service-id="${tour.id}"]`)
+    .getByRole("button", { name: "Đặt tour", exact: true })
+    .click();
+  const tourDialog = ui.getByRole("dialog");
+  await expect(tourDialog).toContainText("450.000");
+  await tourDialog.locator('select[name="date"]').selectOption("2099-12-11");
+  await expect(tourDialog).toContainText("250.000");
+
   for (const [path, label] of [
     ["bai-viet", "Blog & Tin tức"],
     ["tour/lich-khoi-hanh", "Lịch khởi hành tour"],
     ["xe-dua-don/tuyen-xe", "Tuyến xe"],
-    ["e-visa", "E-Visa"],
+    ["fast-track", "Fast-track"],
     ["khach-hang", "Khách hàng"],
     ["doi-tac", "Đối tác & Tài xế"],
     ["lien-he", "Liên hệ & Hỗ trợ"],
@@ -663,24 +1029,35 @@ try {
     if (path !== "lien-he")
       await expect(
         ui.getByRole("button", {
-          name: path === "bai-viet" ? "Viết bài mới" : "Thêm mới",
+          name:
+            path === "bai-viet"
+              ? "Viết bài mới"
+              : path === "tour/lich-khoi-hanh"
+                ? "Thêm lịch"
+                : "Thêm mới",
           exact: true,
         }),
       ).toBeEnabled();
   }
   await expect(
     nav.getByRole("link", { name: "Fast-track", exact: true }),
+  ).toBeVisible();
+  await expect(
+    nav.getByRole("link", { name: "E-Visa", exact: true }),
   ).toHaveCount(0);
-  assert.equal(
-    (await ui.request.get(baseURL + "/admin/fast-track")).status(),
-    404,
-  );
+  const retiredAdminPage = await ui.request.get(baseURL + "/admin/e-visa", {
+    maxRedirects: 0,
+  });
+  assert.equal(retiredAdminPage.status(), 307);
+  assert.equal(retiredAdminPage.headers().location, "/admin/fast-track");
   const records = await call(admin, "GET", "/api/admin/requests");
-  assert.ok(records.data.some((row) => row.id === visa.id));
-  assert.ok(records.data.every((row) => row.kind === "evisa"));
-  await ui.goto(baseURL + "/admin/e-visa");
+  assert.ok(records.data.some((row) => row.id === fastTrack.id));
+  assert.ok(records.data.every((row) => row.kind === "fast-track"));
+  await ui.goto(baseURL + "/admin/fast-track");
   const requestRow = ui.getByRole("row").filter({ hasText: tag });
   await expect(requestRow).toHaveCount(1);
+  await expect(requestRow).toContainText("Đã xác nhận");
+  await expect(requestRow).toContainText("01/12/2099");
   await requestRow.getByRole("button", { name: "Xử lý" }).click();
   await expect(ui.getByRole("dialog")).toBeVisible();
   await expect(
@@ -763,7 +1140,8 @@ try {
   await manual.getByRole("option", { name: tour.title }).click();
   await manual.getByLabel("Họ và tên").fill(`Thủ công ${tag}`);
   await manual.getByLabel("Số điện thoại").fill(phone);
-  await manual.getByLabel("Ngày sử dụng").fill("2099-12-01");
+  await manual.locator('select[name="date"]').selectOption("2099-12-10");
+  await expect(manual).toContainText("450.000");
   await manual
     .getByRole("button", { name: "Tạo đơn đặt chỗ", exact: true })
     .click();
@@ -812,7 +1190,7 @@ try {
     for (const path of [
       "/khach-san?q=Bãi%20Dài",
       "/blog",
-      "/e-visa",
+      "/fast-track",
       "/lien-he",
       "/tra-cuu",
       "/blog/" + article.slug,
@@ -896,39 +1274,46 @@ try {
     .getByRole("link", { name: "Blog" })
     .click();
   await expect(ui).toHaveURL(/\/blog$/);
-  await ui.goto(baseURL + "/e-visa");
-  await ui.screenshot({ path: "test-results/modules/e-visa-mobile.png" });
+  await ui.goto(baseURL + "/fast-track");
+  await ui.screenshot({ path: "test-results/modules/fast-track-mobile.png" });
   await ui
-    .getByRole("link", { name: "Gửi yêu cầu tư vấn", exact: true })
+    .getByRole("link", { name: "Gửi yêu cầu Fast-track", exact: true })
     .click();
-  await expect(ui).toHaveURL(/#yeu-cau-e-visa$/);
-  const visaForm = ui.locator("#yeu-cau-e-visa form");
-  await visaForm.getByLabel("Họ và tên").fill(tag + " visa");
-  await visaForm.getByLabel("Điện thoại").fill(phone);
-  await visaForm.getByLabel("Email").fill("visa-qa@example.test");
-  await visaForm
+  await expect(ui).toHaveURL(/#yeu-cau-fast-track$/);
+  const fastTrackForm = ui.locator("#yeu-cau-fast-track form");
+  await fastTrackForm.getByLabel("Họ và tên").fill(tag + " fast-track");
+  await fastTrackForm.getByLabel("Điện thoại").fill(phone);
+  await fastTrackForm.getByLabel("Email").fill("fast-track-qa@example.test");
+  await fastTrackForm
     .getByLabel("Ngày giờ đến (giờ Việt Nam)")
     .fill("2099-12-01T10:00");
-  await visaForm.getByLabel("Sân bay đến").fill("Cam Ranh");
-  await visaForm.getByLabel("Quốc tịch").fill("Hàn Quốc");
-  const [visaResponse] = await Promise.all([
+  await fastTrackForm.getByLabel("Sân bay đến").fill("Cam Ranh");
+  await fastTrackForm.getByLabel("Quốc tịch").fill("Hàn Quốc");
+  const [fastTrackResponse] = await Promise.all([
     ui.waitForResponse(
       (response) =>
         response.url().endsWith("/api/requests") &&
         response.request().method() === "POST",
     ),
-    visaForm.getByRole("button", { name: "Gửi yêu cầu", exact: true }).click(),
+    fastTrackForm
+      .getByRole("button", { name: "Gửi yêu cầu", exact: true })
+      .click(),
   ]);
-  assert.equal(visaResponse.status(), 201);
-  const visaRequest = await visaResponse.json();
-  created.requests.push(visaRequest.id);
-  await expect(visaForm.getByRole("status")).toContainText(visaRequest.id);
-  const storedVisa = (
+  assert.equal(fastTrackResponse.status(), 201);
+  const fastTrackRequest = await fastTrackResponse.json();
+  created.requests.push(fastTrackRequest.id);
+  await expect(fastTrackForm.getByRole("status")).toContainText(
+    fastTrackRequest.id,
+  );
+  const storedFastTrack = (
     await db.query("SELECT kind,airport FROM service_requests WHERE id=$1", [
-      visaRequest.id,
+      fastTrackRequest.id,
     ])
   ).rows[0];
-  assert.deepEqual(storedVisa, { kind: "evisa", airport: "Cam Ranh" });
+  assert.deepEqual(storedFastTrack, {
+    kind: "fast-track",
+    airport: "Cam Ranh",
+  });
   await ui.goto(baseURL + "/tra-cuu");
   await ui.getByLabel("Mã booking", { exact: true }).fill(booking.id);
   await ui.getByLabel("Số điện thoại đã đặt", { exact: true }).fill(phone);

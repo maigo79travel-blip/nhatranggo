@@ -73,8 +73,9 @@ try {
         ),
     );
   assert.ok(
-    !hrefs.some((href) => /^\/(?:dich-vu|fast-track)(?:[/?#]|$)/.test(href)),
+    !hrefs.some((href) => /^\/(?:dich-vu|e-visa)(?:[/?#]|$)/.test(href)),
   );
+  assert.equal(hrefs.filter((href) => href === "/fast-track").length, 1);
   for (const href of hrefs.filter((href) => href !== "/")) {
     await desktop.locator(`a[href="${href}"]`).click();
     await check(href);
@@ -119,11 +120,14 @@ try {
         ),
     );
   assert.ok(
-    !mobileHrefs.some((href) =>
-      /^\/(?:dich-vu|fast-track)(?:[/?#]|$)/.test(href),
-    ),
+    !mobileHrefs.some((href) => /^\/(?:dich-vu|e-visa)(?:[/?#]|$)/.test(href)),
   );
-  for (const href of ["/khach-san", "/tour-hang-ngay", "/xe-dua-don"]) {
+  for (const href of [
+    "/khach-san",
+    "/tour-hang-ngay",
+    "/xe-dua-don",
+    "/fast-track",
+  ]) {
     assert.ok(mobileHrefs.includes(href), href + " missing from mobile menu");
   }
   await page.getByRole("button", { name: "Đóng menu", exact: true }).click();

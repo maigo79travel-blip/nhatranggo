@@ -24,7 +24,6 @@ export const messagesEn: Messages = {
     transfers: "Transfers",
     hotels: "Hotels",
     tours: "Tours",
-    evisa: "E-Visa",
     fastTrack: "Fast-track",
     blog: "Blog",
     lookup: "Lookup",
@@ -376,6 +375,8 @@ export const messagesEn: Messages = {
     DALAT_1D: "Da Lat Day Tour",
   },
   booking: {
+    selectDeparture: "Select a departure",
+    tourSeatsLeft: "{count} seats left",
     title: "Booking Request",
     refPrice: "Reference price:",
     unitHotel: "room/night",
@@ -411,14 +412,14 @@ export const messagesEn: Messages = {
     reopenHint: "Please close and reopen the request.",
   },
   support: {
-    visaAction: "Request E-Visa advice",
+    fastTrackAction: "Request Fast-track",
     lookupTitle: "Booking Information",
     bookingCode: "Booking ID",
     bookingPhone: "Phone number",
     lookingUp: "Searching…",
     lookupSubmit: "Check Booking",
     contactTitle: "Send us a message",
-    requestTitle: "Service Consultation Request",
+    requestTitle: "Request airport Fast-track assistance",
     contactInfoLegend: "Contact Information",
     name: "Full name",
     phone: "Phone",
@@ -508,26 +509,25 @@ export const messagesEn: Messages = {
     bookAction: "Send Booking Request",
   },
   pages: {
-    evisaTitle: "E-Visa",
     fastTrackTitle: "Airport Fast-Track",
     contactTitle: "Contact & Support",
     lookupTitle: "Booking Lookup",
     notFoundTitle: "Page not found",
     backHome: "Back to home",
     supportGuide: {
-      visaHeading: "How E-Visa consultation works",
-      visaSteps: [
+      fastTrackHeading: "How airport Fast-track works",
+      fastTrackSteps: [
         [
-          "Share your travel details",
-          "Enter your nationality, arrival airport and expected arrival date.",
+          "Share your flight details",
+          "Enter your airport and arrival time. Add your flight number and group size in the notes.",
         ],
         [
-          "Discuss your documents",
-          "Our team will contact you about the documents for your trip.",
+          "Confirm the service",
+          "Our team will check your flight, airport, available assistance and price.",
         ],
         [
-          "Confirm the next steps",
-          "Review the details, costs and estimated timeline with our team.",
+          "Get meeting instructions",
+          "Once confirmed, you will receive the meeting point and airport contact details.",
         ],
       ],
       companionSuffix: "with you",
@@ -548,6 +548,8 @@ export const messagesEn: Messages = {
     },
   },
   errors: {
+    tourNoOpenDates: "There are no tour departures with available seats.",
+    tourSeatsUnavailable: "This departure no longer has enough seats for your group.",
     invalidRequest: "Invalid request",
     languageSwitchFailed: "Could not switch language",
     bookingNotFound: "Booking request not found",

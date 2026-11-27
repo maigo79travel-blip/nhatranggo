@@ -1,6 +1,6 @@
 import { z } from "zod";
 import type { ResourceDefinition } from "../admin/types";
-import { title, text, url, money, date } from "@/lib/validation";
+import { title, text, url, money } from "@/lib/validation";
 export const travelResources: Record<string, ResourceDefinition> = {
   destinations: {
     table: "destinations",
@@ -111,32 +111,6 @@ export const travelResources: Record<string, ResourceDefinition> = {
       },
       { name: "image", label: "Ảnh phòng", type: "image" },
       { name: "description", label: "Mô tả", type: "textarea" },
-      { name: "active", label: "Hiển thị", type: "checkbox" },
-    ],
-  },
-  departures: {
-    table: "departures",
-    label: "Lịch khởi hành tour",
-    icon: "calendar_month",
-    roles: ["editor"],
-    archive: true,
-    columns: ["product_id", "date", "active"],
-    schema: z.object({
-      product_id: title,
-      date,
-      notes: text,
-      active: z.boolean(),
-    }),
-    fields: [
-      {
-        name: "product_id",
-        label: "Tour",
-        type: "select",
-        resource: "products",
-        required: true,
-      },
-      { name: "date", label: "Ngày khởi hành", type: "date", required: true },
-      { name: "notes", label: "Lịch trình / ghi chú", type: "textarea" },
       { name: "active", label: "Hiển thị", type: "checkbox" },
     ],
   },

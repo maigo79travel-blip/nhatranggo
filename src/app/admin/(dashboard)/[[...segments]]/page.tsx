@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props) {
   return { title: adminPage(await path(params))?.label };
 }
 
-export default async function AdminPage({ params }: Props) {
+export default async function AdminPage({ params, searchParams }: Props) {
   const href = await path(params);
   const page = adminPage(href);
   if (!page) notFound();
@@ -25,5 +25,15 @@ export default async function AdminPage({ params }: Props) {
   if (!user)
     redirect("/admin/dang-nhap?" + new URLSearchParams({ next: href }));
   if (!canOpenAdminPage(user, href)) notFound();
-  return <AdminPageView key={href} href={href} page={page} user={user} />;
+  const tour =
+    page.resource === "departures" ? (await searchParams).tour : undefined;
+  return (
+    <AdminPageView
+      key={href}
+      href={href}
+      page={page}
+      user={user}
+      initialTour={typeof tour === "string" ? tour.trim().slice(0, 100) : ""}
+    />
+  );
 }

@@ -4,10 +4,15 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Product } from "@/lib/types";
 import { CustomSelect } from "@/components/ui/custom-select";
+import { fastTrackRatesKey } from "@/modules/support/fast-track-rates";
 import { api, inputClass, type Row } from "./api";
 import { ImageField } from "./primitives/admin-image";
 import { Icon } from "./primitives/admin-icon";
 import type { ProductSection } from "../routes";
+import {
+  FastTrackRateFields,
+  readFastTrackRateFields,
+} from "./panels/fast-track-rate-fields";
 export function Field({
   label,
   ...props
@@ -33,13 +38,15 @@ export function Save({ busy }: { busy: boolean }) {
 export function ProductEditor({
   product,
   fixedType,
+  creating = false,
   busy,
   onSave,
 }: {
   product: Product;
   fixedType?: ProductSection;
+  creating?: boolean;
   busy: boolean;
-  onSave: (p: unknown) => Promise<void>;
+  onSave: (p: Record<string, unknown>) => Promise<void>;
 }) {
   const [error, setError] = useState("");
   const [tab, setTab] = useState("general");
@@ -47,6 +54,8 @@ export function ProductEditor({
     destinations: Row[];
     partners: Row[];
   }>({ destinations: [], partners: [] });
+  const hasDetailFields =
+    !creating || Object.keys(product.content || {}).length > 0;
   useEffect(() => {
     let live = true;
     void Promise.all([api("destinations"), api("partners")])
@@ -62,11 +71,12 @@ export function ProductEditor({
   }, []);
   return (
     <form
-      className="ad-editor space-y-4"
+      className={`ad-editor space-y-4${creating ? " ad-tour-create-editor" : ""}`}
       id="ad-record-form"
       noValidate
       onSubmit={(e) => {
         e.preventDefault();
+        if (busy) return;
         if (!e.currentTarget.checkValidity()) {
           const form = e.currentTarget;
           setTab("general");
@@ -101,45 +111,53 @@ export function ProductEditor({
             description: f.get("description"),
             rating: Number(f.get("rating")),
             position: Number(f.get("position")),
-            active: f.get("active") === "on",
+            active: creating
+              ? (e.nativeEvent as SubmitEvent).submitter?.getAttribute(
+                  "value",
+                ) === "publish"
+              : f.get("active") === "on",
             featured: f.get("featured") === "on",
             content,
             destination_id: f.get("destination_id") || null,
             partner_id: f.get("partner_id") || null,
-          });
+          }).catch((error: Error) => setError(error.message));
         } catch {
           setError("Thuộc tính bổ sung phải là JSON hợp lệ.");
         }
       }}
     >
-      <div
-        className="ad-editor-tabs"
-        role="tablist"
-        aria-label="Thông tin dịch vụ"
-      >
-        <button
-          type="button"
-          role="tab"
-          aria-selected={tab === "general"}
-          onClick={() => setTab("general")}
+      {hasDetailFields && (
+        <div
+          className="ad-editor-tabs"
+          role="tablist"
+          aria-label="Thông tin dịch vụ"
         >
-          Thông tin chung
-        </button>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={tab === "details"}
-          onClick={() => setTab("details")}
-        >
-          Ưu đãi & tiện ích
-        </button>
-      </div>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={tab === "general"}
+            onClick={() => setTab("general")}
+          >
+            Thông tin chung
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={tab === "details"}
+            onClick={() => setTab("details")}
+          >
+            Ưu đãi & tiện ích
+          </button>
+        </div>
+      )}
       <div className="ad-product-basic" hidden={tab !== "general"}>
         <Field
-          label="Tên dịch vụ"
+          label={creating ? "Tên tour" : "Tên dịch vụ"}
           name="title"
           defaultValue={product.title}
           required
+          minLength={2}
+          maxLength={300}
         />
         <div className="grid sm:grid-cols-2 gap-3">
           {!fixedType && (
@@ -159,14 +177,7 @@ export function ProductEditor({
             </div>
           )}
           <Field
-            label="Thứ tự"
-            name="position"
-            type="number"
-            min={0}
-            defaultValue={product.position || 0}
-          />
-          <Field
-            label="Giá bán (VND)"
+            label={creating ? "Giá bán / khách (VND)" : "Giá bán (VND)"}
             name="price"
             type="number"
             min={0}
@@ -180,13 +191,29 @@ export function ProductEditor({
             min={0}
             defaultValue={product.original_price ?? ""}
           />
+          <Field
+            label="Thứ tự hiển thị"
+            name="position"
+            type="number"
+            min={0}
+            defaultValue={product.position || 0}
+          />
+          <Field
+            label="Điểm đánh giá"
+            name="rating"
+            type="number"
+            min={0}
+            max={5}
+            step="0.1"
+            defaultValue={product.rating}
+          />
         </div>
         <ImageField
-          label="Đường dẫn ảnh"
+          label={creating ? "Ảnh bìa tour" : "Đường dẫn ảnh"}
           name="image"
           initialValue={product.image}
         />
-        <div className="block">
+        <div className="ad-tour-create-half min-w-0">
           <span className="mb-1 block">Địa phương</span>
           <CustomSelect
             name="destination_id"
@@ -204,7 +231,7 @@ export function ProductEditor({
             ]}
           />
         </div>
-        <div className="block">
+        <div className="ad-tour-create-half min-w-0">
           <span className="mb-1 block">Đối tác cung cấp</span>
           <CustomSelect
             name="partner_id"
@@ -227,31 +254,24 @@ export function ProductEditor({
           name="location"
           defaultValue={product.location}
         />
-        <Field
-          label="Điểm đánh giá"
-          name="rating"
-          type="number"
-          min={0}
-          max={5}
-          step="0.1"
-          defaultValue={product.rating}
-        />
         <label className="block text-body-sm">
-          Mô tả
+          {creating ? "Mô tả tour" : "Mô tả"}
           <textarea
             className={`${inputClass} min-h-24`}
             name="description"
             defaultValue={product.description}
           />
         </label>
-        <label className="flex gap-2 items-center">
-          <input
-            type="checkbox"
-            name="active"
-            defaultChecked={product.active}
-          />
-          Hiển thị trên website
-        </label>
+        {!creating && (
+          <label className="flex gap-2 items-center">
+            <input
+              type="checkbox"
+              name="active"
+              defaultChecked={product.active}
+            />
+            Hiển thị trên website
+          </label>
+        )}
         <label className="flex gap-2 items-center">
           <input
             type="checkbox"
@@ -261,40 +281,59 @@ export function ProductEditor({
           Ưu tiên trên trang chủ
         </label>
       </div>
-      <details
-        className="border border-border-subtle rounded-xl p-4"
-        open={tab === "details"}
-        hidden={tab !== "details"}
-      >
-        <summary className="cursor-pointer font-semibold">
-          Nhãn ưu đãi, tiện ích, lịch trình và liên kết (
-          {Object.keys(product.content || {}).length})
-        </summary>
-        <div className="mt-4 space-y-4">
-          {Object.entries(product.content || {}).map(([key, entry]) => (
-            <label className="block text-body-sm" key={key}>
-              <span className="block text-on-surface-variant mb-1 break-words">
-                {key} · {entry.label}
-              </span>
-              <textarea
-                className={`${inputClass} ${entry.kind === "text" ? "min-h-16" : "min-h-28 font-mono"}`}
-                name={"content:" + key}
-                defaultValue={
-                  entry.kind === "text"
-                    ? String(entry.value)
-                    : JSON.stringify(entry.value, null, 2)
-                }
-              />
-            </label>
-          ))}
-        </div>
-      </details>
+      {hasDetailFields && (
+        <details
+          className="border border-border-subtle rounded-xl p-4"
+          open={tab === "details"}
+          hidden={tab !== "details"}
+        >
+          <summary className="cursor-pointer font-semibold">
+            Nhãn ưu đãi, tiện ích, lịch trình và liên kết (
+            {Object.keys(product.content || {}).length})
+          </summary>
+          <div className="mt-4 space-y-4">
+            {Object.entries(product.content || {}).map(([key, entry]) => (
+              <label className="block text-body-sm" key={key}>
+                <span className="block text-on-surface-variant mb-1 break-words">
+                  {key} · {entry.label}
+                </span>
+                <textarea
+                  className={`${inputClass} ${entry.kind === "text" ? "min-h-16" : "min-h-28 font-mono"}`}
+                  name={"content:" + key}
+                  defaultValue={
+                    entry.kind === "text"
+                      ? String(entry.value)
+                      : JSON.stringify(entry.value, null, 2)
+                  }
+                />
+              </label>
+            ))}
+          </div>
+        </details>
+      )}
       {error && (
         <p className="text-error" role="alert">
           {error}
         </p>
       )}
-      <Save busy={busy} />
+      {creating ? (
+        <div className="ad-tour-create-actions">
+          <button type="submit" className="ad-button" disabled={busy}>
+            Lưu bản nháp
+          </button>
+          <button
+            type="submit"
+            value="publish"
+            className="ad-button ad-button-primary"
+            disabled={busy}
+          >
+            <Icon name="check" />
+            {busy ? "Đang lưu…" : "Đăng tour"}
+          </button>
+        </div>
+      ) : (
+        <Save busy={busy} />
+      )}
     </form>
   );
 }
@@ -397,6 +436,7 @@ export function ContentEditor({
   const [error, setError] = useState("");
   const isNavigation =
     row.key === "site.navigation" || row.key === "site.mobile-navigation";
+  const isFastTrackRates = row.key === fastTrackRatesKey;
   const [value, setValue] = useState(() =>
     isNavigation ? navigationItems(row.value) : row.value,
   );
@@ -407,7 +447,7 @@ export function ContentEditor({
     !Array.isArray(value) &&
     Object.values(value).every((v) => typeof v === "string");
   const [rawMode, setRawMode] = useState(
-    !isNavigation && !flat && row.kind !== "text",
+    !isNavigation && !isFastTrackRates && !flat && row.kind !== "text",
   );
   function setAttribute(key: string, text: string) {
     setValue((previous: unknown) => {
@@ -451,7 +491,11 @@ export function ContentEditor({
         try {
           void onSave({
             ...row,
-            value: rawMode ? JSON.parse(raw) : value,
+            value: isFastTrackRates
+              ? readFastTrackRateFields(new FormData(e.currentTarget))
+              : rawMode
+                ? JSON.parse(raw)
+                : value,
           });
           setError("");
         } catch {
@@ -462,7 +506,9 @@ export function ContentEditor({
       <h3 className="text-title-md font-bold break-words">
         {String(row.display_label ?? row.label).trim()}
       </h3>
-      {isNavigation ? (
+      {isFastTrackRates ? (
+        <FastTrackRateFields value={value} />
+      ) : isNavigation ? (
         <NavigationFields
           items={Array.isArray(value) ? value : []}
           update={setValue}

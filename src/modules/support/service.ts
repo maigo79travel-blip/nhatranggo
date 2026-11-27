@@ -3,6 +3,18 @@ import { randomUUID } from "node:crypto";
 import { db } from "@/lib/db";
 import { z } from "zod";
 import { title, text, phone } from "@/lib/validation";
+import { fastTrackRatesKey, fastTrackRatesSchema } from "./fast-track-rates";
+
+export async function getFastTrackRates() {
+  const {
+    rows: [row],
+  } = await db.query<{ value: unknown }>(
+    "SELECT value FROM site_content WHERE key=$1",
+    [fastTrackRatesKey],
+  );
+  const result = fastTrackRatesSchema.safeParse(row?.value);
+  return result.success ? result.data : undefined;
+}
 const contactSchema = z.object({
   name: title,
   phone: z.string().max(30).default(""),
@@ -11,7 +23,7 @@ const contactSchema = z.object({
   message: z.string().trim().min(10).max(10000),
 });
 const requestSchema = z.object({
-  kind: z.literal("evisa"),
+  kind: z.literal("fast-track"),
   name: title,
   phone,
   email: z.email().max(254),

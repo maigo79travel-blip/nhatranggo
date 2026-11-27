@@ -15,12 +15,12 @@ export function Filter({
 }) {
   return (
     <div className="ad-filter">
-      <Icon name="filter_list" />
       <CustomSelect
         ariaLabel={label}
         value={value}
         onChange={onChange}
-        buttonClassName="cursor-pointer bg-transparent text-sm font-medium text-on-surface"
+        leadingIcon={<Icon name="filter_list" className="ad-filter-icon" />}
+        buttonClassName="ad-filter-button"
         options={options.map(([id, optLabel]) => ({
           value: id,
           label: optLabel,

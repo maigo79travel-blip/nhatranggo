@@ -27,7 +27,22 @@ const config: NextConfig = {
         permanent: true,
       })),
       { source: "/dich-vu", destination: "/", permanent: true },
-      { source: "/fast-track", destination: "/e-visa", permanent: true },
+      // A distinct URL avoids sending browsers back to the previous cached 308.
+      {
+        source: "/e-visa",
+        destination: "/fast-track?via=legacy",
+        permanent: false,
+      },
+      {
+        source: "/admin/e-visa",
+        destination: "/admin/fast-track",
+        permanent: false,
+      },
+      {
+        source: "/admin/noi-dung/e-visa",
+        destination: "/admin/noi-dung/fast-track",
+        permanent: false,
+      },
     ];
   },
   async headers() {

@@ -26,7 +26,7 @@ export function ModulePanel({ resource }: { resource: string }) {
   const definition = resources[resource];
   const { fields, columns } = definition;
   const isRequest = resource === "requests";
-  const moduleLabel = isRequest ? "yêu cầu E-Visa" : definition.label;
+  const moduleLabel = isRequest ? "yêu cầu Fast-track" : definition.label;
   const [rows, setRows] = useState<Row[]>([]);
   const [selected, setSelected] = useState<Row | null>(null);
   const [options, setOptions] = useState<Record<string, Row[]>>({});
@@ -76,6 +76,7 @@ export function ModulePanel({ resource }: { resource: string }) {
     if (column === "updated_at" || column === "created_at")
       return dateLabel(value);
     const field = definition.fields.find((field) => field.name === column);
+    if (field?.type === "datetime-local") return dateLabel(value, true);
     const option = field?.options?.find(
       (option) => option.value === String(value),
     );

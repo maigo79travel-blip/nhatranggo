@@ -24,7 +24,6 @@ export const messagesKo: Messages = {
     transfers: "차량 픽업",
     hotels: "호텔",
     tours: "투어",
-    evisa: "E-비자",
     fastTrack: "패스트트랙",
     blog: "블로그",
     lookup: "예약 조회",
@@ -376,6 +375,8 @@ export const messagesKo: Messages = {
     DALAT_1D: "달랏 일일 투어",
   },
   booking: {
+    selectDeparture: "출발일 선택",
+    tourSeatsLeft: "{count}석 남음",
     title: "예약 신청",
     refPrice: "참고 요금:",
     unitHotel: "객실/1박",
@@ -411,14 +412,14 @@ export const messagesKo: Messages = {
     reopenHint: "창을 닫았다가 다시 열어 주세요.",
   },
   support: {
-    visaAction: "전자비자 상담 요청",
+    fastTrackAction: "패스트트랙 요청",
     lookupTitle: "예약 정보 조회",
     bookingCode: "예약 코드",
     bookingPhone: "예약 시 입력한 전화번호",
     lookingUp: "조회 중…",
     lookupSubmit: "예약 조회",
     contactTitle: "문의 메시지 보내기",
-    requestTitle: "서비스 상담 신청",
+    requestTitle: "공항 패스트트랙 신청",
     contactInfoLegend: "연락처 정보",
     name: "성함",
     phone: "전화번호",
@@ -508,26 +509,25 @@ export const messagesKo: Messages = {
     bookAction: "예약 요청하기",
   },
   pages: {
-    evisaTitle: "E-Visa",
     fastTrackTitle: "공항 패스트트랙",
     contactTitle: "문의 & 고객지원",
     lookupTitle: "예약 조회",
     notFoundTitle: "페이지를 찾을 수 없습니다",
     backHome: "홈으로 돌아가기",
     supportGuide: {
-      visaHeading: "전자비자 상담 절차",
-      visaSteps: [
+      fastTrackHeading: "공항 패스트트랙 이용 절차",
+      fastTrackSteps: [
         [
-          "여행 정보 입력",
-          "국적, 도착 공항 및 입국 예정일을 입력하세요.",
+          "항공편 정보 입력",
+          "공항과 도착 시간을 입력하고 메모에 항공편 번호와 인원수를 적어 주세요.",
         ],
         [
-          "필요 서류 상담",
-          "담당자가 연락해 여행에 필요한 서류를 안내합니다.",
+          "서비스 확인",
+          "담당자가 항공편, 공항, 지원 범위와 비용을 확인해 드립니다.",
         ],
         [
-          "다음 단계 확인",
-          "담당자와 정보, 비용 및 예상 일정을 확인하세요.",
+          "미팅 안내 받기",
+          "예약 확정 후 만나는 장소와 공항 연락처를 안내해 드립니다.",
         ],
       ],
       companionSuffix: "동행",
@@ -548,6 +548,8 @@ export const messagesKo: Messages = {
     },
   },
   errors: {
+    tourNoOpenDates: "현재 예약 가능한 투어 출발일이 없습니다.",
+    tourSeatsUnavailable: "이 출발일에 일행 전체가 예약할 좌석이 부족합니다.",
     invalidRequest: "잘못된 요청입니다",
     languageSwitchFailed: "언어를 변경할 수 없습니다",
     bookingNotFound: "예약 정보를 찾을 수 없습니다",

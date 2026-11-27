@@ -3,12 +3,18 @@ import { randomUUID } from "node:crypto";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { AppError } from "@/lib/errors";
+import {
+  fastTrackRatesKey,
+  fastTrackRatesSchema,
+} from "@/modules/support/fast-track-rates";
 import { isNavigationHref } from "@/lib/navigation";
 import { passwordHash, verifyPassword } from "./auth";
 import type { AdminOverviewData, AdminUser } from "@/lib/types";
-import type { productSchema, contentSchema } from "./content-validation";
+import { productSchema, type contentSchema } from "./content-validation";
 import type { ContentScope, ProductSection } from "./routes";
 import { homeContentFields } from "./home-content-fields";
+import { vietnamToday } from "@/modules/travel/search";
+import { tourBookedGuests } from "@/modules/travel/tour-availability";
 
 export async function getAdminOverview(
   includeBookings: boolean,
@@ -63,8 +69,7 @@ export async function getAdminOverview(
 
 const RESOURCE_QUERIES: Record<string, string> = {
   products: "SELECT * FROM products ORDER BY position,id",
-  content:
-    "SELECT * FROM site_content WHERE scope<>'fast-track' ORDER BY scope,key",
+  content: "SELECT * FROM site_content WHERE scope<>'evisa' ORDER BY scope,key",
   fares:
     "SELECT f.route,f.vehicle,f.price,r.title AS route_title FROM transfer_fares f LEFT JOIN transfer_routes r ON r.code=f.route WHERE f.active ORDER BY r.title,f.route,f.vehicle",
   bookings:
@@ -75,6 +80,18 @@ export async function getAdminResourceList(
   resource: string,
   filters: { scope?: ContentScope; type?: ProductSection } = {},
 ): Promise<Record<string, unknown>[] | null> {
+  if (resource === "products" && filters.type === "tour")
+    return (
+      await db.query(
+        `SELECT p.*,
+            EXISTS(SELECT 1 FROM departures d WHERE d.product_id=p.id) AS has_departures,
+            (SELECT min(d.date)::text FROM departures d
+             WHERE d.product_id=p.id AND d.active AND d.date >= $1::date
+               AND (d.capacity IS NULL OR d.capacity > ${tourBookedGuests})) AS next_departure
+         FROM products p WHERE p.type='tour' ORDER BY p.position,p.id`,
+        [vietnamToday()],
+      )
+    ).rows;
   if (resource === "products" && filters.type)
     return (
       await db.query(
@@ -109,43 +126,120 @@ export async function getAdminResourceList(
   return result.rows;
 }
 
-export async function cloneAdminProduct(cloneId: string, title: string) {
+export async function cloneAdminProduct(
+  cloneId: string,
+  title: string,
+  type?: ProductSection,
+) {
   const id = "product-" + randomUUID();
   const { rows } = await db.query(
-    `INSERT INTO products(id,type,title,price,image,location,rating,description,position,original_price,collection_id,template_id,active,content)
- SELECT $1,type,$2,price,image,location,rating,description,position+1,original_price,collection_id,template_id,false,content FROM products WHERE id=$3 AND type<>'transfer' AND template_id IS NOT NULL RETURNING *`,
-    [id, title, cloneId],
+    `INSERT INTO products(id,type,title,price,image,location,rating,description,position,original_price,collection_id,template_id,active,content,destination_id,partner_id)
+     SELECT $1,type,$2,price,image,location,rating,description,position,original_price,collection_id,template_id,false,content,destination_id,partner_id
+     FROM products WHERE id=$3 AND type<>'transfer' AND ($4::text IS NULL OR type=$4)
+       AND (type='tour' OR template_id IS NOT NULL) RETURNING *`,
+    [id, title, cloneId, type ?? null],
   );
   return rows[0] || null;
+}
+
+export async function getAdminTourTemplate(id: string) {
+  const {
+    rows: [tour],
+  } = await db.query("SELECT * FROM products WHERE id=$1 AND type='tour'", [
+    id,
+  ]);
+  if (!tour) throw new AppError("Không tìm thấy tour mẫu", 404);
+  return tour;
+}
+
+function productValues(p: z.infer<typeof productSchema>) {
+  return [
+    p.id,
+    p.title,
+    p.type,
+    p.price,
+    p.original_price,
+    p.image,
+    p.location,
+    p.rating,
+    p.description,
+    p.position,
+    p.active,
+    JSON.stringify(p.content),
+    p.destination_id,
+    p.partner_id,
+    p.featured ?? null,
+  ];
+}
+
+export async function createAdminTour(body: Record<string, unknown>) {
+  const tour = productSchema.parse({ ...body, id: randomUUID(), type: "tour" });
+  const template = z.string().min(1).max(100).optional().parse(body.cloneId);
+  const {
+    rows: [saved],
+  } = await db.query(
+    `INSERT INTO products(
+       id,title,type,price,original_price,image,location,rating,description,position,
+       active,content,destination_id,partner_id,featured,collection_id,template_id
+     )
+     SELECT $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,
+            COALESCE($15::boolean,false),source.collection_id,source.template_id
+     FROM (SELECT $16::text AS id) selected
+     LEFT JOIN products source ON source.id=selected.id AND source.type='tour'
+     WHERE selected.id IS NULL OR source.id IS NOT NULL
+     RETURNING *`,
+    [...productValues(tour), template ?? null],
+  );
+  if (!saved) throw new AppError("Không tìm thấy tour mẫu", 404);
+  return saved;
 }
 
 export async function updateAdminProduct(p: z.infer<typeof productSchema>) {
   if (p.type === "transfer") {
     throw new AppError("Sửa giá xe tại mục Bảng giá xe");
   }
-  const { rows } = await db.query(
-    "UPDATE products SET title=$2,type=$3,price=$4,original_price=$5,image=$6,location=$7,rating=$8,description=$9,position=$10,active=$11,content=$12,destination_id=$13,partner_id=$14,featured=COALESCE($15,featured),updated_at=now() WHERE id=$1 AND type<>'transfer' RETURNING *",
-    [
-      p.id,
-      p.title,
-      p.type,
-      p.price,
-      p.original_price,
-      p.image,
-      p.location,
-      p.rating,
-      p.description,
-      p.position,
-      p.active,
-      JSON.stringify(p.content),
-      p.destination_id,
-      p.partner_id,
-      p.featured ?? null,
-    ],
-  );
-  if (!rows[0])
-    throw new AppError("Không tìm thấy dịch vụ có thể chỉnh sửa", 404);
-  return rows[0];
+  const client = await db.connect();
+  try {
+    await client.query("BEGIN");
+    const {
+      rows: [existing],
+    } = await client.query<{ type: string }>(
+      "SELECT type FROM products WHERE id=$1 AND type<>'transfer' FOR NO KEY UPDATE",
+      [p.id],
+    );
+    if (!existing)
+      throw new AppError("Không tìm thấy dịch vụ có thể chỉnh sửa", 404);
+    if (
+      existing.type !== p.type &&
+      (existing.type === "tour" || p.type === "tour")
+    ) {
+      const {
+        rows: [inUse],
+      } = await client.query<{ linked: boolean }>(
+        `SELECT EXISTS(SELECT 1 FROM departures WHERE product_id=$1)
+           OR EXISTS(SELECT 1 FROM bookings WHERE product_id=$1)
+           OR EXISTS(SELECT 1 FROM rooms WHERE product_id=$1) AS linked`,
+        [p.id],
+      );
+      if (inUse.linked)
+        throw new AppError(
+          "Dịch vụ đã có lịch, loại phòng hoặc đơn đặt nên không thể đổi loại.",
+          409,
+        );
+    }
+    const { rows } = await client.query(
+      `UPDATE products SET title=$2,type=$3,price=$4,original_price=$5,image=$6,location=$7,rating=$8,description=$9,position=$10,active=$11,content=$12,destination_id=$13,partner_id=$14,featured=COALESCE($15,featured),updated_at=now()
+       WHERE id=$1 RETURNING *`,
+      productValues(p),
+    );
+    await client.query("COMMIT");
+    return rows[0];
+  } catch (error) {
+    await client.query("ROLLBACK");
+    throw error;
+  } finally {
+    client.release();
+  }
 }
 
 export async function updateAdminContent(
@@ -153,7 +247,7 @@ export async function updateAdminContent(
   p: z.infer<typeof contentSchema>,
 ) {
   const existing = await db.query(
-    "SELECT kind FROM site_content WHERE key=$1 AND scope<>'fast-track'",
+    "SELECT kind FROM site_content WHERE key=$1 AND scope<>'evisa'",
     [key],
   );
   if (!existing.rows[0]) throw new AppError("Không tìm thấy nội dung", 404);
@@ -161,16 +255,17 @@ export async function updateAdminContent(
     throw new AppError("Không được đổi loại trường nội dung");
   }
 
-  if (/^(evisa|contact|lookup|blog)\.title$/.test(key)) {
+  if (/^(fast-track|contact|lookup|blog)\.title$/.test(key)) {
     z.string()
       .trim()
       .min(1, "Tiêu đề không được bỏ trống")
       .max(200)
       .parse(p.value);
   }
-  if (/^(evisa|contact|lookup|blog)\.intro$/.test(key)) {
+  if (/^(fast-track|contact|lookup|blog)\.intro$/.test(key)) {
     z.string().max(2000).parse(p.value);
   }
+  if (key === fastTrackRatesKey) fastTrackRatesSchema.parse(p.value);
 
   if (key === "site.contact") {
     const optionalChannel = z

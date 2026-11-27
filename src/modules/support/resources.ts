@@ -4,12 +4,12 @@ import { title, text, phone, status } from "@/lib/validation";
 export const supportResources: Record<string, ResourceDefinition> = {
   requests: {
     table: "service_requests",
-    label: "E-Visa",
+    label: "Fast-track",
     icon: "flight_land",
     roles: ["booking"],
-    columns: ["name", "airport", "status"],
+    columns: ["name", "airport", "arrival_at", "status"],
     schema: z.object({
-      kind: z.literal("evisa").default("evisa"),
+      kind: z.literal("fast-track").default("fast-track"),
       name: title,
       phone,
       email: z.email(),

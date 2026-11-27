@@ -8,6 +8,7 @@ import {
   publicRouteDestinations,
 } from "./product-visibility";
 import { normalizeSearch } from "./search";
+import { tourBookedGuests } from "./tour-availability";
 import {
   homeHotelTerms,
   homeProductLimits,
@@ -16,8 +17,8 @@ import {
 
 const sortOrders = {
   recommended: "p.position,p.id",
-  price: "p.price,p.id",
-  "price-desc": "p.price DESC,p.id",
+  price: "price,p.id",
+  "price-desc": "price DESC,p.id",
   rating: "p.rating DESC,p.id",
 } as const;
 
@@ -37,7 +38,7 @@ export async function listHomeProducts(locale: Locale) {
     `SELECT card.*
      FROM unnest($2::text[], $3::int[]) AS section(type, size)
      CROSS JOIN LATERAL (
-       SELECT ${publicProductFields},p.featured
+       SELECT ${publicProductFields()},p.featured
        FROM products p LEFT JOIN translations t
          ON t.entity='product' AND t.entity_key=p.id AND t.locale=$1
        WHERE p.type=section.type AND p.active
@@ -116,10 +117,13 @@ export async function listPublicProducts({
         : `${categorySearch} LIKE ANY(${bind(homeHotelTerms[homeHotelFilter].map(pattern))}::text[])`,
     );
   }
-  if (date) {
-    where.push(`(p.type<>'tour' OR NOT EXISTS (SELECT 1 FROM departures d WHERE d.product_id=p.id AND d.active)
-      OR EXISTS (SELECT 1 FROM departures d WHERE d.product_id=p.id AND d.active AND d.date=${bind(date)}::date))`);
-  }
+  const departureJoin = date
+    ? `LEFT JOIN departures d ON p.type='tour' AND d.product_id=p.id AND d.date=${bind(date)}::date`
+    : "";
+  if (date)
+    where.push(`(p.type<>'tour'
+      OR (d.id IS NULL AND NOT EXISTS (SELECT 1 FROM departures other WHERE other.product_id=p.id))
+      OR (d.active AND (d.capacity IS NULL OR d.capacity-${tourBookedGuests}>=${bind(guests ?? 1)})))`);
   if (guests) {
     const capacity = bind(guests);
     where.push(`(p.type<>'hotel' OR NOT EXISTS (SELECT 1 FROM rooms r WHERE r.product_id=p.id AND r.active)
@@ -128,11 +132,18 @@ export async function listPublicProducts({
       WHERE v.code=split_part(p.id,'-',3) AND v.passenger_capacity>=${capacity}))`);
   }
 
+  const fields = date
+    ? publicProductFields(
+        "COALESCE(d.price_override,p.price)",
+        "CASE WHEN d.price_override IS NULL THEN p.original_price END",
+      )
+    : publicProductFields();
   return (
     await db.query<Product>(
-      `SELECT ${publicProductFields}
+      `SELECT ${fields}
        FROM products p LEFT JOIN translations t
          ON t.entity='product' AND t.entity_key=p.id AND t.locale=$1
+       ${departureJoin}
        WHERE ${where.join(" AND ")}
        ORDER BY ${featuredFirst ? "p.featured DESC," : ""}${sortOrders[sort]} LIMIT ${bind(limit ?? null)} OFFSET ${bind(offset)}`,
       values,
