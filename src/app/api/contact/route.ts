@@ -1,15 +1,16 @@
 import { sendContact } from "@/modules/support/service";
+import { getCurrentMessages } from "@/lib/i18n";
 import { errorResponse, readJson } from "@/lib/http";
-import { sameOrigin, rateLimit } from "@/lib/request-security";
+import { requireSameOrigin, rateLimit } from "@/lib/request-security";
 export async function POST(request: Request) {
-  if (!sameOrigin(request))
-    return Response.json({ error: "Yêu cầu không hợp lệ" }, { status: 403 });
   try {
+    const t = await getCurrentMessages();
+    requireSameOrigin(request, t.errors.invalidRequest);
     await rateLimit(request, "contact", 15, 900);
     return Response.json(
       {
         id: await sendContact(await readJson(request)),
-        message: "Đã nhận yêu cầu. Nhân viên sẽ liên hệ hỗ trợ.",
+        message: t.errors.contactReceived,
       },
       { status: 201 },
     );

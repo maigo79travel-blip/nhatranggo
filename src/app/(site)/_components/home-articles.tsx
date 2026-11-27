@@ -1,11 +1,15 @@
 import Link from "next/link";
 import { ContentText } from "@/components/content";
+import { getCurrentMessages } from "@/lib/i18n";
 import { listArticles } from "@/modules/blog/service";
 import { ArticleCard } from "@/modules/blog/article-card";
 import { HomeHeading, HomeSectionLink } from "./home-heading";
 
 export async function HomeArticles() {
-  const articles = await listArticles(3);
+  const [articles, t] = await Promise.all([
+    listArticles(3),
+    getCurrentMessages(),
+  ]);
   return (
     <section
       id="cam-nang"
@@ -24,12 +28,12 @@ export async function HomeArticles() {
         </div>
       ) : (
         <div className="rounded-[22px] border border-border-subtle bg-white p-6 text-on-surface-variant shadow-card">
-          Chưa có bài viết được đăng trong ngôn ngữ này.
+          {t.home.noArticlesInLocale}
           <Link
             className="ml-2 inline-flex min-h-11 items-center font-bold text-primary hover:underline"
             href="/blog"
           >
-            Xem chuyên mục bài viết
+            {t.home.viewBlogCategory}
           </Link>
         </div>
       )}

@@ -42,6 +42,15 @@ export function sameOrigin(request: Request) {
   return true;
 }
 
+export function requireSameOrigin(
+  request: Request,
+  message = "Yêu cầu không hợp lệ.",
+) {
+  if (!sameOrigin(request)) {
+    throw new AppError(message, 403);
+  }
+}
+
 export function secureCookies(request: Request) {
   return (
     Boolean(process.env.VERCEL) || publicOrigin(request).startsWith("https:")

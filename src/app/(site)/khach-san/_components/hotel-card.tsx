@@ -3,6 +3,7 @@
 import type { Product } from "@/lib/types";
 import { ProductField } from "@/components/catalog";
 import { useCatalog } from "@/components/catalog/catalog-context";
+import { useT } from "@/components/content";
 import { PriceStack, ProductDiscount } from "@/components/price-stack";
 import { bookingDraft } from "@/modules/travel/search";
 import type { HotelSearchState } from "./hotels-hero";
@@ -14,6 +15,7 @@ export function HotelCard({
   product: Product;
   search: HotelSearchState;
 }) {
+  const t = useT();
   const catalog = useCatalog();
   const contentValue = (index: number) => {
     const key = `field-${String(index).padStart(3, "0")}`;
@@ -34,9 +36,9 @@ export function HotelCard({
     .filter(Boolean);
   const policy = homeCard ? "" : contentValue(12 + shift);
   const mealNote = homeCard ? "" : contentValue(14 + shift);
-  const unit = contentValue(homeCard ? 10 : 13 + shift) || "/đêm";
+  const unit = contentValue(homeCard ? 10 : 13 + shift) || t.hotels.perNight;
   const cta =
-    contentValue(homeCard ? 11 : 15 + shift) || "Xem phòng & Đặt ngay";
+    contentValue(homeCard ? 11 : 15 + shift) || t.hotels.viewRoomsBook;
   const sale =
     product.original_price != null && product.original_price > product.price;
 
@@ -84,7 +86,7 @@ export function HotelCard({
           <div className="ml-auto flex items-center gap-2 text-right">
             <span
               className="grid min-h-10 min-w-10 place-items-center rounded-xl bg-primary px-1.5 text-base font-extrabold text-on-primary"
-              aria-label={`Điểm đánh giá ${product.rating.toFixed(1)} trên 5`}
+              aria-label={`${t.hotels.ratingAriaPrefix} ${product.rating.toFixed(1)} ${t.hotels.ratingAriaOutOf}`}
             >
               {product.rating.toFixed(1)}
             </span>

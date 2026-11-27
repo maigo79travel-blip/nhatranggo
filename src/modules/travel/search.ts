@@ -24,6 +24,7 @@ export function normalizeSearch(value: string) {
 export function productSearchBlob(product: Product) {
   return normalizeSearch(
     [
+      product.search_text,
       product.title,
       product.location,
       product.description,
@@ -32,6 +33,17 @@ export function productSearchBlob(product: Product) {
         .map((entry) => String(entry.value)),
     ].join(" "),
   );
+}
+export function productCardMatchesTerms(
+  card: HTMLElement,
+  products: readonly Product[],
+  terms: readonly string[],
+) {
+  if (terms.length === 0) return true;
+  const product = products.find((p) => p.id === card.dataset.productId);
+  const text =
+    `${product?.search_text ?? ""} ${product?.title ?? ""} ${card.textContent ?? ""}`.toLowerCase();
+  return terms.some((term) => text.includes(term));
 }
 export function matchesSearch(value: string, query: string) {
   const terms = query.split(/[,;]/).map(normalizeSearch).filter(Boolean);

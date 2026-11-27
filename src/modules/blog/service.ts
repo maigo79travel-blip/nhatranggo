@@ -1,7 +1,6 @@
 import "server-only";
 import { db } from "@/lib/db";
-import { cookies } from "next/headers";
-import { parseLocale } from "@/lib/locale";
+import { getPublicLocale } from "@/lib/i18n";
 import { cache } from "react";
 
 export type ArticleSummary = {
@@ -15,13 +14,19 @@ export type ArticleSummary = {
 };
 
 export async function listArticles(limit: number, offset = 0) {
-  const locale = parseLocale((await cookies()).get("site_locale")?.value);
+  const locale = await getPublicLocale();
   return (
     await db.query<ArticleSummary>(
-      `SELECT a.id,a.title,a.slug,a.excerpt,a.image,a.updated_at,c.title AS category
-       FROM articles a LEFT JOIN article_categories c ON c.id=a.category_id AND c.active
-       WHERE a.status='published' AND a.locale=$1
-       ORDER BY a.updated_at DESC,a.id LIMIT $2 OFFSET $3`,
+      `SELECT id, title, slug, excerpt, image, updated_at, category FROM (
+         SELECT DISTINCT ON (a.slug) a.id, a.title, a.slug, a.excerpt, a.image,
+                a.updated_at, c.title AS category
+         FROM articles a
+         LEFT JOIN article_categories c ON c.id=a.category_id AND c.active
+         WHERE a.status='published' AND a.locale IN ($1, 'vi')
+         ORDER BY a.slug, (a.locale=$1) DESC
+       ) latest
+       ORDER BY updated_at DESC, id
+       LIMIT $2 OFFSET $3`,
       [locale, limit, offset],
     )
   ).rows;
@@ -29,12 +34,16 @@ export async function listArticles(limit: number, offset = 0) {
 
 export const getPublishedPage = cache(
   async (type: "article" | "page", slug: string) => {
-    const locale = parseLocale((await cookies()).get("site_locale")?.value);
+    const locale = await getPublicLocale();
     const table = type === "article" ? "articles" : "information_pages";
     return (
       (
         await db.query(
-          `SELECT title,body${type === "article" ? ",image,updated_at,seo_title,seo_description" : ""} FROM ${table} WHERE slug=$1 AND locale=$2 AND status='published'`,
+          `SELECT title, body${type === "article" ? ", image, updated_at, seo_title, seo_description" : ""}
+           FROM ${table}
+           WHERE slug=$1 AND locale IN ($2, 'vi') AND status='published'
+           ORDER BY (locale=$2) DESC
+           LIMIT 1`,
           [slug, locale],
         )
       ).rows[0] || null

@@ -3,6 +3,7 @@
 import Form from "next/form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useT } from "@/components/content";
 import { FilterField } from "@/components/site/filter-field";
 import { PublicIcon } from "@/components/site/public-ui";
 import { CustomSelect } from "@/components/ui/custom-select";
@@ -16,21 +17,13 @@ import {
 type TourType = "tour" | "combo";
 
 const categories = [
-  ["all", "Tất cả"],
-  ["dao-nha-trang", "Tour đảo"],
-  ["du-thuyen", "Du thuyền"],
-  ["lan-bien", "Lặn biển"],
-  ["vinh-hy", "Vĩnh Hy"],
-  ["city", "City tour"],
-  ["da-lat", "Đà Lạt"],
+  ["dao-nha-trang", "island"],
+  ["du-thuyen", "cruise"],
+  ["lan-bien", "diving"],
+  ["vinh-hy", "vinhHy"],
+  ["city", "city"],
+  ["da-lat", "dalat"],
 ] as const;
-
-const sortOptions = [
-  { value: "recommended", label: "Đề xuất" },
-  { value: "price", label: "Giá thấp nhất" },
-  { value: "price-desc", label: "Giá cao nhất" },
-  { value: "rating", label: "Đánh giá cao nhất" },
-];
 
 function filterHref(
   type: TourType,
@@ -62,10 +55,17 @@ export function TourSortSelect({
   params?: Record<string, string>;
 }) {
   const router = useRouter();
+  const t = useT();
+  const sortOptions = [
+    { value: "recommended", label: t.serviceFilters.sortRecommended },
+    { value: "price", label: t.tours.sort.priceAsc },
+    { value: "price-desc", label: t.tours.sort.priceDesc },
+    { value: "rating", label: t.tours.sort.rating },
+  ];
   return (
     <div className="min-w-0 sm:w-52">
       <CustomSelect
-        ariaLabel="Sắp xếp tour"
+        ariaLabel={t.tours.sortLabel}
         align="right"
         buttonClassName="min-h-11 cursor-pointer rounded-xl border border-border-default bg-surface px-3 text-sm font-bold"
         value={params.sort || "recommended"}
@@ -96,16 +96,26 @@ export function TourFilters({
   type?: TourType;
   params?: Record<string, string>;
   draft?: BookingDraft;
-  destinations: { id: string; name: string }[];
+  destinations: { id: string; name: string; code?: string }[];
   today: string;
 }) {
   const category = params.category || "all";
   const hasFilters = hasServiceSearch(params);
+  const t = useT();
+  const formLabel =
+    type === "combo" ? t.tours.comboSubmit : t.tours.searchSubmit;
+  const categoryOptions = [
+    { key: "all", label: t.serviceFilters.categoryAll },
+    ...categories.map(([key, label]) => ({
+      key,
+      label: t.serviceFilters.tourCategories[label],
+    })),
+  ];
   return (
     <div className="relative z-10 -mt-16 rounded-[24px] border border-border-subtle bg-surface p-3 shadow-card sm:-mt-20 sm:p-4">
       <Form
         className="tour-search-form grid items-stretch gap-2 sm:gap-3"
-        aria-label="Tìm tour"
+        aria-label={formLabel}
         action={serviceRoutes[type]}
         scroll={false}
       >
@@ -115,7 +125,7 @@ export function TourFilters({
         )}
         {params.sort && <input type="hidden" name="sort" value={params.sort} />}
         <FilterField
-          label="Tên tour hoặc điểm đến"
+          label={t.home.search.destinationService}
           icon="search"
           className="tour-search-keyword"
         >
@@ -124,27 +134,33 @@ export function TourFilters({
             name="q"
             className="catalog-filter-control"
             defaultValue={params.q}
-            placeholder="Bạn muốn khám phá đâu?"
+            placeholder={t.serviceFilters.keywordPlaceholder}
             maxLength={150}
           />
         </FilterField>
-        <FilterField label="Địa phương" icon="location_on">
+        <FilterField
+          label={t.serviceFilters.destinationLabel}
+          icon="location_on"
+        >
           <CustomSelect
             name="destination"
-            ariaLabel="Địa phương"
+            ariaLabel={t.serviceFilters.destinationLabel}
             defaultValue={params.destination || ""}
             searchable={destinations.length > 5}
+            searchPlaceholder={t.serviceFilters.searchDestination}
             buttonClassName="catalog-filter-control cursor-pointer"
             options={[
-              { value: "", label: "Tất cả" },
+              { value: "", label: t.serviceFilters.destinationAll },
               ...destinations.map((place) => ({
                 value: place.id,
-                label: place.name,
+                label: place.code
+                  ? (t.destinations[place.code] ?? place.name)
+                  : place.name,
               })),
             ]}
           />
         </FilterField>
-        <FilterField label="Ngày khởi hành" icon="calendar_today">
+        <FilterField label={t.tours.departureDate} icon="calendar_today">
           <input
             id="tour-departure-date"
             type="date"
@@ -154,7 +170,7 @@ export function TourFilters({
             min={today}
           />
         </FilterField>
-        <FilterField label="Số lượng khách" icon="group">
+        <FilterField label={t.tours.guestLabel} icon="group">
           <input
             type="number"
             name="guests"
@@ -170,17 +186,17 @@ export function TourFilters({
           className="tour-search-submit public-primary-button rounded-xl"
         >
           <PublicIcon name="search" className="text-xl" />
-          {type === "combo" ? "Tìm combo" : "Tìm tour"}
+          {formLabel}
         </button>
       </Form>
       {(type === "tour" || hasFilters) && (
         <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-border-subtle pt-2.5">
           {type === "tour" && (
             <nav
-              aria-label="Loại tour"
+              aria-label={t.serviceFilters.tourCategoryAria}
               className="grid w-full grid-cols-3 gap-1.5 min-[360px]:grid-cols-4 sm:flex sm:w-auto sm:flex-1 sm:flex-wrap"
             >
-              {categories.map(([key, label]) => (
+              {categoryOptions.map(({ key, label }) => (
                 <Link
                   key={key}
                   className={`tour-cat-btn inline-flex min-h-11 items-center justify-center rounded-full px-2 text-center text-xs font-bold transition-colors sm:px-3.5 sm:text-sm ${category === key ? "bg-primary text-on-primary" : "bg-surface-muted text-on-surface hover:bg-surface-brand hover:text-primary"}`}
@@ -206,7 +222,7 @@ export function TourFilters({
               scroll={false}
             >
               <PublicIcon name="restart_alt" className="text-xl" />
-              Xóa bộ lọc
+              {t.serviceFilters.resetFilters}
             </Link>
           )}
         </div>

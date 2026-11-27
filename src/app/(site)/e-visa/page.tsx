@@ -2,10 +2,12 @@ import { getPublicPageCopy } from "@/lib/public-page-copy";
 import { PublicForm } from "@/modules/support/public-form";
 import { PublicPage } from "@/components/site/public-page";
 import { PublicIcon } from "@/components/site/public-ui";
+import { getCurrentMessages } from "@/lib/i18n";
 import "./visa.css";
 
 export default async function VisaPage() {
-  const copy = await getPublicPageCopy("evisa", "E-Visa");
+  const t = await getCurrentMessages();
+  const copy = await getPublicPageCopy("evisa", t.pages.evisaTitle);
   return (
     <PublicPage
       {...copy}
@@ -14,7 +16,7 @@ export default async function VisaPage() {
         image: "/images/figma/transfers/airport.webp",
         actions: (
           <a href="#yeu-cau-e-visa" className="public-primary-button">
-            Gửi yêu cầu tư vấn
+            {t.support.visaAction}
             <PublicIcon name="arrow_downward" className="text-lg" />
           </a>
         ),

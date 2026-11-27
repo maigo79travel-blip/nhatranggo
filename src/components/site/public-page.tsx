@@ -1,7 +1,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { getCurrentMessages } from "@/lib/i18n";
 import { PublicIcon } from "./public-ui";
-export function PublicPage({
+export async function PublicPage({
   title,
   intro,
   hero,
@@ -16,6 +17,7 @@ export function PublicPage({
   className?: string;
   children: ReactNode;
 }) {
+  const t = await getCurrentMessages();
   return (
     <main className={`public-page ${className}`}>
       <div
@@ -27,8 +29,8 @@ export function PublicPage({
           </div>
         )}
         <div className="public-container relative">
-          <nav aria-label="Đường dẫn" className="public-breadcrumb">
-            <Link href="/">Trang chủ</Link>
+          <nav aria-label={t.nav.breadcrumbLabel} className="public-breadcrumb">
+            <Link href="/">{t.nav.home}</Link>
             <PublicIcon name="chevron_right" />
             {parentBreadcrumb && (
               <>

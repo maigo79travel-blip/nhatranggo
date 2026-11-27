@@ -1,0 +1,1996 @@
+{
+  "content": {
+    "home.text-043": "푸른 바다 – 새로운 경험 – 매일 특가",
+    "home.text-044": "냐",
+    "home.text-045": "짱",
+    "home.text-046": "호텔 • 5성급 리조트 • 데일리 아일랜드 투어 • 올인원 할인 콤보",
+    "home.text-047": "호텔 예약",
+    "home.text-048": "투어",
+    "home.text-049": "여행 콤보",
+    "home.text-050": "티켓 & 쇼",
+    "home.text-051": "여행지",
+    "home.text-052": "체크인 - 체크아웃",
+    "home.text-053": "11/11/2026",
+    "home.text-054": "1박",
+    "home.text-055": "12/11/2026",
+    "home.text-056": "객실 및 인원",
+    "home.text-057": "객실 1개, 성인 2명",
+    "home.text-058": "검색",
+    "home.text-059": "인기 검색어:",
+    "home.text-060": "바이다이 깜라인 리조트",
+    "home.text-061": "냐짱 3섬 VIP 투어",
+    "home.text-062": "빈원더스 혼째",
+    "home.text-063": "푸꾸옥 2박3일 콤보",
+    "home.text-064": "호텔",
+    "home.text-065": "다양한 호텔 및 리조트",
+    "home.text-066": "특가",
+    "home.text-067": "여행 콤보 둘러보기",
+    "home.text-068": "24/7 지원",
+    "home.text-069": "핫라인 및 Zalo 상담",
+    "home.text-070": "예약",
+    "home.text-071": "실시간 즉시 확정",
+    "home.text-072": "방금 예약 완료:",
+    "home.text-073": "깜람, 카인호아",
+    "home.text-074": ": 고객님",
+    "home.text-075": "0888xxx***",
+    "home.text-076": "님이 방금 예약했습니다:",
+    "home.text-077": "디럭스 오션뷰 1객실",
+    "home.text-078": "!",
+    "home.text-079": "스페셜 올인클루시브 특가",
+    "home.text-080": "인기 특가 상품",
+    "home.text-081": "가족, 커플, 친구 그룹을 위해 일정과 예산을 최적화한 올인원 여행 패키지입니다.",
+    "home.text-082": "특가 종료까지:",
+    "home.text-083": "02",
+    "home.text-084": "일",
+    "home.text-085": ":",
+    "home.text-086": "14",
+    "home.text-087": "시간",
+    "home.text-088": ":",
+    "home.text-089": "38",
+    "home.text-090": "분",
+    "home.text-091": ":",
+    "home.text-092": "45",
+    "home.text-093": "초",
+    "home.text-094": "{{brand.name}} 단독 특가",
+    "home.text-095": "최저가 추천 호텔",
+    "home.text-096": "전체",
+    "home.text-097": "깜라인",
+    "home.text-098": "냐짱",
+    "home.text-099": "비치프론트",
+    "home.text-100": "인피니티 풀",
+    "home.text-101": "전체 보기",
+    "home.text-102": "만과 크루즈 탐험",
+    "home.text-103": "가성비 최고 데일리 투어",
+    "home.text-104": "투어 전체 보기",
+    "home.text-105": "여행지별 탐색",
+    "home.text-106": "인기 여행지 둘러보기",
+    "home.text-107": "모든 여행지 보기",
+    "home.text-108": "인기 1위 여행지",
+    "home.text-109": "냐짱",
+    "home.text-110": "푸른 바다의 천국",
+    "home.text-111": "호텔 & 리조트 1,024곳",
+    "home.text-112": "달랏",
+    "home.text-113": "천 개의 꽃의 도시",
+    "home.text-114": "호텔 1,186곳",
+    "home.text-115": "다낭",
+    "home.text-116": "활기찬 해안 도시",
+    "home.text-117": "호텔 1,356곳",
+    "home.text-118": "푸꾸옥",
+    "home.text-119": "진주섬 힐링 휴양지",
+    "home.text-120": "호텔 921곳",
+    "home.text-121": "호이안",
+    "home.text-122": "등불이 빛나는 고대 도시",
+    "home.text-123": "호텔 612곳",
+    "home.text-124": "하롱",
+    "home.text-125": "세계자연유산 만 & 5성급 크루즈",
+    "home.text-126": "호텔 679곳",
+    "home.text-127": "호이안",
+    "home.text-128": "유네스코 구시가지 & 로컬 문화",
+    "home.text-129": "호텔 785곳",
+    "home.text-130": "붕따우",
+    "home.text-131": "호치민 근교 주말 휴양지",
+    "home.text-132": "호텔 524곳",
+    "home.text-133": "꾸이년",
+    "home.text-134": "청정 해변과 신선한 해산물",
+    "home.text-135": "호텔 332곳",
+    "home.text-136": "알짜 여행 가이드북",
+    "home.text-137": "최신 여행 아티클",
+    "home.text-138": "전체 글 보기",
+    "home.text-139": "조회수 202",
+    "home.text-140": "26/10/2026",
+    "home.text-141": "더 아남 깜라인 리뷰: 바이다이 해변의 품격 있는 럭셔리 리조트",
+    "home.text-142": "인도차이나 감성 건축, 해변 인피니티 풀, 5성급 서비스를 갖춘 더 아남 깜라인을 만나보세요.",
+    "home.text-143": "자세히 보기",
+    "home.text-144": "조회수 427",
+    "home.text-145": "24/09/2026",
+    "home.text-146": "냐짱 여행 최적기는 언제일까? 계절별 날씨 및 실전 꿀팁",
+    "home.text-147": "냐짱을 방문하기 가장 좋은 달은? 사계절 날씨 정보와 잔잔한 바다 시즌, 특가 숙소 예약 팁을 확인하세요.",
+    "home.text-148": "자세히 보기",
+    "home.text-149": "조회수 433",
+    "home.text-150": "23/09/2026",
+    "home.text-151": "더 아남 깜라인 리뷰: 바이다이 해변 5성급 휴양 리조트",
+    "home.text-152": "푸른 정원, 전용 해변, 다채로운 다이닝으로 신혼여행과 가족 여행에 완벽한 리조트입니다.",
+    "home.text-153": "자세히 보기",
+    "home.text-154": "조회수 401",
+    "home.text-155": "22/09/2026",
+    "home.text-156": "냐짱 출발 빈히 만 - 항라이 - 양떼 목장 일일 투어 코스",
+    "home.text-157": "베트남에서 가장 아름다운 해안 도로: 항라이 고대 산호초, 양떼 목장 인생샷, 빈히 신선한 해산물.",
+    "home.text-158": "자세히 보기",
+    "home.text-159": "가장 많이 읽은 주제",
+    "home.text-160": "다가오는 여행을 위한 유용한 팁을 저장하세요",
+    "home.text-161": "아이와 함께하는 푸꾸옥 가이드",
+    "home.text-162": "달랏 자유여행 핸드북",
+    "home.text-163": "쩐푸 오션뷰 객실 특가",
+    "home.text-164": "혼문 스노클링 가이드",
+    "home.text-165": "함께하는 성장",
+    "home.text-166": "{{brand.name}}에서 특가 혜택 받기",
+    "home.text-167": "완벽한 휴가를 위한 호텔, 투어, 콤보 상품을 둘러보세요.",
+    "home.text-168": "Zalo 제휴 문의 ({{contact.phone}})",
+    "home.text-169": "핫라인 바로 전화하기",
+    "home.text-170": "{{brand.name}} 서비스 약속",
+    "home.text-171": "숨겨진 추가 요금 없는 100% 투명한 요금",
+    "home.text-172": "실시간 객실 가능 여부 확인 및 즉시 홀딩",
+    "home.text-173": "현지 사정에 정통한 전문 상담팀",
+    "home.text-174": "유연한 결제: VNPAY, MoMo, Visa/MC",
+    "hotels.text-043": "홈",
+    "hotels.text-044": "호텔 & 리조트",
+    "hotels.text-045": "1,200+ 파트너 호텔 & 럭셔리 리조트",
+    "hotels.text-046": "최저가로 호텔 및 리조트 검색 & 예약",
+    "hotels.text-047": "글로벌 OTA보다 저렴한 에이전시 직거래 요금, Zalo 빠른 객실 홀딩, 무료 조식 및 가능 시 룸 업그레이드 혜택을 제공합니다.",
+    "hotels.text-048": "공식 파트너 보장",
+    "hotels.text-049": "100% 즉시 확정",
+    "hotels.text-050": "여행지",
+    "hotels.text-051": "냐짱 - 카인호아",
+    "hotels.text-052": "바이다이 깜라인",
+    "hotels.text-053": "푸꾸옥 (끼엔장)",
+    "hotels.text-054": "다낭 & 호이안",
+    "hotels.text-055": "달랏 (럼동)",
+    "hotels.text-056": "붕따우 & 호짬",
+    "hotels.text-057": "꾸이년 - 빈딘",
+    "hotels.text-058": "체크인",
+    "hotels.text-059": "체크아웃",
+    "hotels.text-060": "인원 & 객실",
+    "hotels.text-061": "성인 2명, 객실 1개",
+    "hotels.text-062": "성인 2명, 아동 1명",
+    "hotels.text-063": "성인 4명, 객실 2개",
+    "hotels.text-064": "가족 6명, 풀빌라",
+    "hotels.text-065": "단체/기업 (>10명)",
+    "hotels.text-066": "숙소 유형 / 등급",
+    "hotels.text-067": "전체 호텔",
+    "hotels.text-068": "5성급 비치프론트 리조트",
+    "hotels.text-069": "프라이빗 풀빌라",
+    "hotels.text-070": "4성급 시티 호텔",
+    "hotels.text-071": "고급 오션뷰 아파트",
+    "hotels.text-072": "검색",
+    "hotels.text-073": "인기 검색어:",
+    "hotels.text-074": "바이다이 깜라인 올인클루시브",
+    "hotels.text-075": "쩐푸 해변가 숙소",
+    "hotels.text-076": "프라이빗 풀빌라",
+    "hotels.text-077": "150만 VND 이하 5성급 호텔",
+    "hotels.text-078": "상세 필터",
+    "hotels.text-079": "초기화",
+    "hotels.text-080": "1박 요금대",
+    "hotels.text-081": "VND",
+    "hotels.text-082": "1,000,000 VND 미만",
+    "hotels.text-083": "(18)",
+    "hotels.text-084": "1,000,000 - 2,000,000 VND",
+    "hotels.text-085": "(54)",
+    "hotels.text-086": "2,000,000 - 4,000,000 VND",
+    "hotels.text-087": "(42)",
+    "hotels.text-088": "4,000,000 VND 이상 (럭셔리)",
+    "hotels.text-089": "(14)",
+    "hotels.text-090": "500k",
+    "hotels.text-091": "최대 3,500k/박",
+    "hotels.text-092": "8,000k+",
+    "hotels.text-093": "국제 호텔 등급",
+    "hotels.text-094": "3성급",
+    "hotels.text-095": "4성급",
+    "hotels.text-096": "5성급 VIP",
+    "hotels.text-097": "지역",
+    "hotels.text-098": "쩐푸 해안도로",
+    "hotels.text-099": "(64)",
+    "hotels.text-100": "바이다이 깜라인 리조트",
+    "hotels.text-101": "(38)",
+    "hotels.text-102": "혼째 섬 (빈펄)",
+    "hotels.text-103": "(9)",
+    "hotels.text-104": "응우옌 티엔 투앗 중심가",
+    "hotels.text-105": "(22)",
+    "hotels.text-106": "안비엔 해변 빌라 단지",
+    "hotels.text-107": "(11)",
+    "hotels.text-108": "주요 편의시설",
+    "hotels.text-109": "인피니티 풀",
+    "hotels.text-110": "전용 해변",
+    "hotels.text-111": "무료 고급 조식 뷔페",
+    "hotels.text-112": "무료 공항 픽업/샌딩",
+    "hotels.text-113": "리조트 내 워터파크",
+    "hotels.text-114": "스파 & 마사지 무료 제공",
+    "hotels.text-115": "만 6-12세 아동 1-2명 무료",
+    "hotels.text-116": "유연한 정책",
+    "hotels.text-117": "48시간 전 무료 취소",
+    "hotels.text-118": "유연한 결제 / 선결제 없이 홀딩",
+    "hotels.text-119": "긴급 단체 객실이 필요하신가요?",
+    "hotels.text-120": "냐짱 및 깜라인 전용 특가 바우처 견적을 위해 상담팀에 바로 문의하세요.",
+    "hotels.text-121": "지금 Zalo 상담 (24/7)",
+    "hotels.text-122": "지도에서 128개 호텔 보기",
+    "hotels.text-123": "해변과 맛집 근처 최고의 위치를 확인하세요",
+    "hotels.text-124": "128개 호텔 & 리조트",
+    "hotels.text-125": "냐짱 - 깜라인 지역",
+    "hotels.text-126": "정렬:",
+    "hotels.text-127": "최고 혜택순",
+    "hotels.text-128": "낮은 가격순",
+    "hotels.text-129": "평점 높은순",
+    "hotels.text-130": "해변 가까운순",
+    "hotels.text-131": "표시 중:",
+    "hotels.text-132": "1 - 6",
+    "hotels.text-133": "전체",
+    "hotels.text-134": "128",
+    "hotels.text-135": "개 호텔",
+    "hotels.text-136": "1",
+    "hotels.text-137": "2",
+    "hotels.text-138": "3",
+    "hotels.text-139": "...",
+    "hotels.text-140": "12",
+    "hotels.text-141": "안심하고 예약하는 여행",
+    "hotels.text-142": "{{brand.name}} 서비스 품질 약속",
+    "hotels.text-143": "냐짱 - 깜라인 글로벌 호텔 그룹의 1차 공식 파트너로서 고객님께 최상의 혜택을 제공합니다.",
+    "hotels.text-144": "투명한 요금 - 숨겨진 비용 없음",
+    "hotels.text-145": "표시된 요금은 부가세, 봉사료, 조식 뷔페가 모두 포함된 최종 결제 금액입니다. 더 저렴한 공개 요금 발견 시 차액을 환불해 드립니다.",
+    "hotels.text-146": "객실 홀딩 & 24/7 Zalo 케어",
+    "hotels.text-147": "냐짱 38 응우옌 타이 혹 현지 전문가가 여행 전·중·후 모든 과정을 지원하며 얼리 체크인 및 무료 뷰 업그레이드를 도와드립니다.",
+    "hotels.text-148": "유연한 날짜 변경 & 빠른 환불",
+    "hotels.text-149": "날씨, 출장 일정 또는 건강 문제 시 유연한 날짜 변경이 가능하며 영업시간 기준 2-4시간 내 투명하게 환불 처리됩니다.",
+    "hotels.text-150": "Vinpearl, Accor, Melia 공식 에이전시",
+    "hotels.text-151": "PCI-DSS 인증 결제 보안",
+    "hotels.text-152": "취향에 맞는 호텔 추천 상담:",
+    "hotels.text-153": "{{contact.phone}}",
+    "hotels.text-154": "Zalo로 견적 문의",
+    "tours.text-008": "홈",
+    "tours.text-009": "/",
+    "tours.text-010": "데일리 투어",
+    "tours.text-011": "냐짱 전문 아일랜드 투어 & 액티비티",
+    "tours.text-012": "매일 출발 조인 & 단독 투어 -",
+    "tours.text-013": "5성급 프리미엄 경험",
+    "tours.text-014": "최신 스피드보트와 친절한 현지 가이드와 함께 냐짱 만, 혼문 산호초, 로맨틱 선셋 크루즈, 남중부 해안 코스를 탐험하세요.",
+    "tours.text-015": "4.96",
+    "tours.text-016": "18,500+ 실제 이용객 평점",
+    "tours.text-017": "전체 (28)",
+    "tours.text-018": "냐짱 VIP 3섬 투어",
+    "tours.text-019": "선셋 디너 크루즈",
+    "tours.text-020": "혼문 스노클링 & 다이빙",
+    "tours.text-021": "빈히 - 항라이 투어",
+    "tours.text-022": "시티 & 문화 투어",
+    "tours.text-023": "달랏 일일 투어",
+    "tours.text-024": "출발지",
+    "tours.text-025": "냐짱 시내 (중심가 호텔)",
+    "tours.text-026": "바이다이 / 깜라인 리조트",
+    "tours.text-027": "달랏 시 (럼동)",
+    "tours.text-028": "판랑 - 닌투언",
+    "tours.text-029": "출발일",
+    "tours.text-030": "인원 수",
+    "tours.text-031": "성인 2명 (커플 / 소가족)",
+    "tours.text-032": "1명 (1인 조인 투어)",
+    "tours.text-033": "4-6명 (친구 / 가족)",
+    "tours.text-034": "단체 (> 10명 - 단독 스피드보트)",
+    "tours.text-035": "지금 투어 찾기",
+    "tours.text-036": "24시간 전 무료 취소",
+    "tours.text-037": "2024년형 최신 보트",
+    "tours.text-038": "각 투어별 보험 조건 확인 지원",
+    "tours.text-039": "인기 & 베스트셀러 해양 투어",
+    "tours.text-040": "이번 주 가장 사랑받는 투어",
+    "tours.text-041": "단 1명부터도 매일 출발 보장, 국제 표준의 일관된 고품격 서비스를 제공합니다.",
+    "tours.text-042": "다채로운 탐험 경험",
+    "tours.text-043": "매일 출발 투어 목록",
+    "tours.text-044": "정렬:",
+    "tours.text-045": "인기 & 예약 많은순",
+    "tours.text-046": "낮은 가격순",
+    "tours.text-047": "높은 가격순",
+    "tours.text-048": "5성급 평점 높은순",
+    "tours.text-049": "단독 스피드보트 대여 또는 맞춤 단체 투어가 필요하신가요?",
+    "tours.text-050": "가족 및 기업 단체를 위해 출발 시간을 자유롭게 조율할 수 있는 12~45인승 최신 스피드보트를 보유하고 있습니다.",
+    "tours.text-051": "핫라인: {{contact.phone}}",
+    "tours.text-052": "Zalo 즉시 견적",
+    "tours.text-053": "3분 만에 초고속 투어 예약",
+    "tours.text-054": "간편한 절차 & 품질 보장",
+    "tours.text-055": "결제, 일정 변경 및 취소 조건은 투어 상담 시 확정 안내됩니다.",
+    "tours.text-056": "1",
+    "tours.text-057": "투어 & 날짜 선택",
+    "tours.text-058": "원하는 코스와 출발일을 선택하고 호텔 정보를 입력하면 문 앞까지 픽업해 드립니다.",
+    "tours.text-059": "2",
+    "tours.text-060": "Zalo 즉시 예약 확정",
+    "tours.text-061": "운영팀이 5분 내에 차량 번호와 기사/가이드 정보가 담긴 확정서를 Zalo로 발송합니다.",
+    "tours.text-062": "3",
+    "tours.text-063": "정시 호텔 픽업",
+    "tours.text-064": "최신 투어 차량과 가이드가 호텔 로비에서 정시에 모시며 수하물 이동을 정성껏 도와드립니다.",
+    "tours.text-065": "4",
+    "tours.text-066": "투어 체험 & 후불 결제",
+    "tours.text-067": "5성급 서비스를 만끽하신 후 현금 또는 계좌이체로 편리하게 결제하세요.",
+    "tours.text-068": "5성급 현지 가이드",
+    "tours.text-069": "섬 문화를 깊이 이해하고 열정적이며 멋진 인생샷 촬영까지 도와드립니다.",
+    "tours.text-070": "최대 한도 여행자 보험",
+    "tours.text-071": "담당자가 선택하신 투어에 적용되는 보험 혜택을 확인해 드립니다.",
+    "tours.text-072": "24시간 전 무료 취소",
+    "tours.text-073": "출발 여건이 변경될 경우 일정 변경 지원을 위해 문의해 주세요.",
+    "tours.text-074": "냐짱 아일랜드 투어 자주 묻는 질문",
+    "tours.text-075": "어린이나 어르신도 3섬 스피드보트 투어에 참여할 수 있나요?",
+    "tours.text-076": "네, 가능합니다! {{brand.name}}은 지붕이 있는 최신 보트를 사용하여 잔잔한 냐짱 만을 부드럽게 운항합니다. 혼땀 섬에서는 전동 카트로 머드 온천과 레스토랑까지 편하게 이동합니다.",
+    "tours.text-077": "수영을 못해도 산호초 다이빙에 참여할 수 있나요?",
+    "tours.text-078": "물론입니다! 스쿠버 다이빙이나 씨워커 체험 시 전문 다이버가 1:1로 안전하게 안내합니다. 구명조끼와 스노클링 장비도 기본 제공됩니다.",
+    "tours.text-079": "비가 오거나 파도가 높으면 투어는 어떻게 진행되나요?",
+    "tours.text-080": "고객님의 안전이 {{brand.name}}의 최우선 가치입니다. 기상 악화로 출항이 통제되면 사전에 안내드리고 예약금을 100% 환불하거나 시내 투어로 변경해 드립니다.",
+    "transfers.text-025": "2023 - 2024년형 최신 차량",
+    "transfers.text-026": "올인클루시브 정찰제 - 추가 요금 없음",
+    "transfers.text-027": "공항 픽업 & 프라이빗 차량",
+    "transfers.text-028": "깜라인 공항",
+    "transfers.text-029": "& 믿을 수 있는 전용 차량 투어",
+    "transfers.text-030": "최신 4, 7, 16, 29, 45인승 차량. 냐짱, 바이다이, 달랏, 푸옌 도어투도어 픽업. 친절하고 정시를 지키는 기사님과 무료 항공편 추적 서비스를 제공합니다.",
+    "transfers.text-031": "24/7 배차 핫라인",
+    "transfers.text-032": "{{contact.phone}}",
+    "transfers.text-033": "Zalo 60초 이내 즉시 응답",
+    "transfers.text-034": "깜라인 공항 픽업/샌딩",
+    "transfers.text-035": "도시간 이동 (달랏 - 푸옌)",
+    "transfers.text-036": "일일 차량 대여 / 시티 투어",
+    "transfers.text-037": "편도 (One-way)",
+    "transfers.text-038": "왕복 (Round-trip) - 10% 추가 할인",
+    "transfers.text-039": "출발지",
+    "transfers.text-040": "깜라인 공항 (국내선 / 국제선)",
+    "transfers.text-041": "냐짱 시내 (쩐푸 / 여행자 거리)",
+    "transfers.text-042": "바이다이 리조트 단지 (깜람)",
+    "transfers.text-043": "달랏 시 (럼동)",
+    "transfers.text-044": "직접 입력 / 기타 호텔...",
+    "transfers.text-045": "도착지 / 호텔",
+    "transfers.text-046": "냐짱 시내 (쩐푸, 흥브엉)",
+    "transfers.text-047": "바이다이 리조트 (뫼벤픽, 알마, 아남...)",
+    "transfers.text-048": "깜라인 국제공항 (CXR)",
+    "transfers.text-049": "독렛 해변 / 닌호아 리조트",
+    "transfers.text-050": "달랏 시내 (호텔 / 빌라)",
+    "transfers.text-051": "뚜이호아 - 푸옌",
+    "transfers.text-052": "픽업 날짜 & 시간",
+    "transfers.text-053": "항공편명 (선택 사항)",
+    "transfers.text-054": "차량 종류",
+    "transfers.text-055": "4인승 세단 (Vios, Accent, City)",
+    "transfers.text-056": "4인승",
+    "transfers.text-057": "7인승",
+    "transfers.text-058": "16인승",
+    "transfers.text-060": "요금 조회 & 즉시 예약",
+    "transfers.text-061": "추천 노선:",
+    "transfers.text-062": "깜라인 공항 ⇄ 냐짱 시내 (쩐푸)",
+    "transfers.text-063": "네임보드 픽업, 공항 주차비 및 통행료, 생수, 물티슈, 항공편 지연 시 무료 시간 조정 포함.",
+    "transfers.text-064": "편도 올인클루시브 요금",
+    "transfers.text-065": "250,000 VND",
+    "transfers.text-066": "Zalo 빠른 예약",
+    "transfers.text-067": "항공편 실시간 자동 추적",
+    "transfers.text-068": "정중한 네임보드 영접",
+    "transfers.text-069": "2시간 전 무료 취소",
+    "transfers.text-070": "야간 할증 없음 (22시 이전)",
+    "transfers.text-071": "투명하고 정확한 요금",
+    "transfers.text-072": "공항 및 도시간 차량 공식 요금표",
+    "transfers.text-073": "아래 요금은 2025년 기준 모든 비용이 포함된 정찰가이며 추가 요금이 전혀 발생하지 않습니다.",
+    "transfers.text-074": "부가세 및 통행료 포함",
+    "transfers.text-075": "인기 노선 안내",
+    "transfers.text-076": "4인승 차량",
+    "transfers.text-077": "세단 최대 3명",
+    "transfers.text-078": "7인승 차량",
+    "transfers.text-079": "SUV 최대 5명",
+    "transfers.text-080": "16인승 밴",
+    "transfers.text-081": "Transit 12-15명",
+    "transfers.text-084": "예약",
+    "transfers.text-085": "깜라인 공항 ⇄ 냐짱 시내 중심",
+    "transfers.text-086": "거리 35km • 소요 시간: 35-40분 (꾸힌 고개)",
+    "transfers.text-087": "예약하기",
+    "transfers.text-088": "깜라인 공항 ⇄ 바이다이 리조트 (깜람)",
+    "transfers.text-089": "거리 7 - 12km (뫼벤픽, 알마, 래디슨 블루, 더 아남...)",
+    "transfers.text-090": "예약하기",
+    "transfers.text-091": "냐짱 ⇄ 달랏 시내 (안개 낀 카인레 고개)",
+    "transfers.text-092": "거리 135km • 소요 시간: 3.0 - 3.5시간",
+    "transfers.text-093": "예약하기",
+    "transfers.text-094": "냐짱 ⇄ 뚜이호아 (푸옌) / 까 고개",
+    "transfers.text-095": "거리 120km • 요청 시 무이디엔 - 붕로 경유 가능",
+    "transfers.text-096": "예약하기",
+    "transfers.text-097": "냐짱 ⇄ 판랑 - 탑짬 / 닌투언",
+    "transfers.text-098": "거리 105km • 빈흥 - 빈히 해안 절경 코스",
+    "transfers.text-099": "예약하기",
+    "transfers.text-100": "안내:",
+    "transfers.text-101": "유류비, 도로 통행료, 공항 주차비 및 기사 수고비가 모두 포함되어 있습니다. 22:00 이전 야간 할증 없음.",
+    "transfers.text-102": "2025년 12월 31일까지 유효",
+    "transfers.text-103": "5성급 차량 품질",
+    "transfers.text-104": "최신 프리미엄 관광 차량단",
+    "transfers.text-105": "노선별 차량 유형, 최대 탑승 인원 및 참고 요금을 확인하세요.",
+    "transfers.text-106": "스탠다드 세단",
+    "transfers.text-107": "편안한 4인승 승용차",
+    "transfers.text-108": "Toyota Vios, Hyundai Accent, Honda City",
+    "transfers.text-109": "최대 3명 탑승",
+    "transfers.text-110": "대형 캐리어 2개 + 백팩 2개",
+    "transfers.text-111": "강력한 냉방 에어컨",
+    "transfers.text-112": "편안한 가죽 시트",
+    "transfers.text-113": "최저",
+    "transfers.text-114": "250,000 VND",
+    "transfers.text-115": "이 차량 선택",
+    "transfers.text-116": "가족 & 친구 추천",
+    "transfers.text-117": "넓고 쾌적한 7인승 SUV",
+    "transfers.text-118": "Mitsubishi Xpander, Toyota Innova, Fortuner",
+    "transfers.text-119": "최대 5-6명 탑승",
+    "transfers.text-120": "중형 캐리어 4개 + 백팩",
+    "transfers.text-121": "여유로운 실내 공간",
+    "transfers.text-122": "휴대폰 충전 포트 완비",
+    "transfers.text-123": "최저",
+    "transfers.text-124": "300,000 VND",
+    "transfers.text-125": "이 차량 선택",
+    "transfers.text-136": "단체 투어 / 기업",
+    "transfers.text-137": "16인승 투어 미니밴",
+    "transfers.text-138": "신형 Ford Transit & Hyundai Solati",
+    "transfers.text-139": "최대 12-15명 탑승",
+    "transfers.text-140": "넓은 수하물 적재 공간",
+    "transfers.text-141": "가이드용 마이크 구비",
+    "transfers.text-142": "차체 자세 제어 안전 시스템",
+    "transfers.text-143": "최저",
+    "transfers.text-144": "550,000 VND",
+    "transfers.text-145": "이 차량 선택",
+    "transfers.text-146": "안심 이동 서비스",
+    "transfers.text-147": "{{brand.name}} 차량 예약만의 특별한 혜택",
+    "transfers.text-148": "승객의 안전과 만족을 최우선으로 하는 전문적인 서비스 기준을 제공합니다.",
+    "transfers.text-149": "항공편 자동 추적",
+    "transfers.text-150": "비행기가 연착되거나 조기 도착해도 기사님이 공항에서 대기 시간을 맞춰드리며 추가 대기 요금이 없습니다.",
+    "transfers.text-151": "2시간 전 무료 취소",
+    "transfers.text-152": "갑작스러운 일정 변경에도 2시간 전까지 핫라인 또는 Zalo로 알려주시면 100% 무료 변경 및 취소가 가능합니다.",
+    "transfers.text-153": "친절하고 지리에 밝은 기사님",
+    "transfers.text-154": "단정한 복장의 현지 기사님이 짐 운반을 직접 도와드리며 숨은 현지 맛집도 추천해 드립니다.",
+    "transfers.text-155": "24/7 실시간 배차 센터",
+    "transfers.text-156": "자동 챗봇이 아닌 실제 상담원이 Zalo 및 핫라인으로 24시간 응대합니다:",
+    "transfers.text-157": "{{contact.phone}}",
+    "transfers.text-158": "30초 내 신속 해결.",
+    "transfers.text-159": "깜라인 공항에서 15분 내 긴급 픽업이 필요하신가요?",
+    "transfers.text-160": "깜라인 공항 주차장과 냐짱 시내에 차량이 상시 대기 중이어서 착륙 즉시 배차해 드립니다!",
+    "transfers.text-161": "지금 전화 {{contact.phone}}",
+    "transfers.text-162": "Zalo 견적 문의",
+    "transfers.text-163": "궁금증 해결",
+    "transfers.text-164": "차량 픽업/샌딩 자주 묻는 질문",
+    "transfers.text-165": "1. 깜라인 공항에서 픽업 기사님을 어떻게 찾나요?",
+    "transfers.text-166": "착륙 30분 전 Zalo/문자로 기사님 성함, 연락처, 차량 번호를 보내드립니다. 입국장 출구에서 기사님이",
+    "transfers.text-167": "고객님 성함이 적힌 피켓",
+    "transfers.text-168": "을 들고 대기합니다. 찾기 어려우실 경우 기사님 또는 {{contact.phone}}으로 전화 주시면 즉시 안내해 드립니다.",
+    "transfers.text-169": "2. 비행기가 연착되면 추가 대기 요금이 발생하나요?",
+    "transfers.text-170": "추가 요금이 전혀 없습니다!",
+    "transfers.text-171": "{{brand.name}} 운영팀이 항공편 레이더를 실시간 추적합니다. 1~3시간 연착되더라도 변경된 도착 시간에 맞춰 안전하게 모십니다.",
+    "transfers.text-172": "3. 웹사이트 요금에 세금과 통행료가 모두 포함되어 있나요?",
+    "transfers.text-173": "{{brand.name}}의 모든 요금은",
+    "transfers.text-174": "올인클루시브 정찰가",
+    "transfers.text-175": "입니다. 유류비, 기사 수고비, 깜라인 공항 입장료, 고속도로 통행료가 모두 포함되어 있으며 팁이나 숨겨진 비용이 없습니다.",
+    "transfers.text-176": "4. 냐짱에서 달랏이나 푸옌 이동 중 사진 촬영을 위해 정차할 수 있나요?",
+    "transfers.text-177": "네! 단독 프라이빗 차량이므로 일정을 자유롭게 조율할 수 있습니다. 카인레 고개나 붕로 만 전망 포인트에서 15~20분 무료 정차가 가능합니다.",
+    "transfers.text-178": "5. 차량 이용 요금은 어떻게 결제하나요?",
+    "transfers.text-179": "편리한 결제 방식을 선택하세요:",
+    "transfers.text-180": "운행 종료 후 기사님께 직접 현금 결제",
+    "transfers.text-181": "하시거나 VietQR / MoMo / VNPay로 {{brand.name}} 계좌에 이체하실 수 있습니다.",
+    "header.text-014": "24/7 핫라인:",
+    "header.text-015": "{{contact.phone}}",
+    "header.text-016": "Zalo 파트너십",
+    "header.text-017": "즐겨찾기",
+    "header.text-018": "VI",
+    "header.text-019": "|",
+    "header.text-020": "EN",
+    "header.text-021": "{{brand.wordmarkPrimary}}",
+    "header.text-022": "{{brand.wordmarkSecondary}}",
+    "header.text-023": "여행 & 액티비티",
+    "header.text-024": "홈",
+    "header.text-025": "호텔",
+    "header.text-026": "데일리 투어",
+    "header.text-027": "올인원 콤보",
+    "header.text-028": "차량 픽업",
+    "header.text-029": "여행 가이드",
+    "header.text-030": "문의하기",
+    "header.text-031": "Zalo 상담",
+    "footer.text-023": "{{brand.name}}",
+    "footer.text-024": "온라인 여행 플랫폼",
+    "footer.text-025": "냐짱 호텔 예약, 섬 투어 및 데일리 체험 전문 플랫폼.",
+    "footer.text-026": "카인호아성 냐짱시 반탄동 응우옌 타이 혹 A동 1층 38호",
+    "footer.text-027": "고객 지원 핫라인:",
+    "footer.text-028": "{{contact.phone}}",
+    "footer.text-029": "{{contact.email}}",
+    "footer.text-030": "{{brand.name}}",
+    "footer.text-031": "서비스",
+    "footer.text-032": "호텔",
+    "footer.text-033": "투어",
+    "footer.text-034": "차량 픽업",
+    "footer.text-035": "여행 콤보",
+    "footer.text-036": "특가 & 프로모션",
+    "footer.text-037": "공항 픽업/샌딩",
+    "footer.text-038": "회사 소개",
+    "footer.text-039": "결제 정책",
+    "footer.text-040": "취소 및 일정 변경",
+    "footer.text-041": "개인정보 처리방침",
+    "footer.text-042": "이용약관",
+    "footer.text-043": "OTA 운영 규정",
+    "footer.text-044": "민원 처리 절차",
+    "footer.text-045": "결제 수단",
+    "footer.text-046": "VNPAY",
+    "footer.text-047": "MOMO",
+    "footer.text-048": "ZALOPAY",
+    "footer.text-049": "VISA/MC",
+    "footer.text-050": "VIP 특가 뉴스레터 구독",
+    "footer.text-051": "전송",
+    "footer.text-052": "© {{brand.name}}. All rights reserved.",
+    "footer.text-053": "이용약관",
+    "footer.text-054": "개인정보",
+    "footer.text-055": "문의하기",
+    "evisa.title": "E-Visa",
+    "fast-track.title": "공항 패스트트랙",
+    "contact.title": "문의 & 고객지원",
+    "lookup.title": "예약 조회",
+    "blog.title": "블로그 & 뉴스"
+  },
+  "products": {
+    "hotels-1": {
+      "title": "더 엠피리언 냐짱 호텔 (The Empyrean)",
+      "location": "냐짱시 록토동 쩐푸 2번지 (2/4 광장에서 100m)",
+      "description": "오늘의 플래시 딜 25% 할인! 40층 인피니티 풀, 냐짱 만 파노라마 뷰, 무료 조식 뷔페 및 48시간 전 무료 취소 제공.",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "25% 할인",
+          "value": "25% 할인"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "오늘의 플래시 딜",
+          "value": "오늘의 플래시 딜"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "사진 32장",
+          "value": "사진 32장"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "5성급 인터내셔널",
+          "value": "5성급 인터내셔널"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "최고예요",
+          "value": "최고예요"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "리뷰 1,250건",
+          "value": "리뷰 1,250건"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "40층 인피니티 풀",
+          "value": "40층 인피니티 풀"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "냐짱 만 파노라마 오션뷰",
+          "value": "냐짱 만 파노라마 오션뷰"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "2인 무료 조식 뷔페",
+          "value": "2인 무료 조식 뷔페"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "48시간 전 무료 취소 • Zalo 즉시 확정",
+          "value": "48시간 전 무료 취소 • Zalo 즉시 확정"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "/박",
+          "value": "/박"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "세금, 봉사료 및 조식 포함",
+          "value": "세금, 봉사료 및 조식 포함"
+        },
+        "field-016": {
+          "kind": "text",
+          "label": "객실 보기 & 예약",
+          "value": "객실 보기 & 예약"
+        }
+      }
+    },
+    "hotels-2": {
+      "title": "뫼벤픽 리조트 깜라인 (Mövenpick)",
+      "location": "깜라인 깜하이동 바이다이 (깜라인 공항 10분 거리)",
+      "description": "아코르 5성급 비치 리조트: 무료 초콜릿 아워, 6,000m² 워터파크, 800m 전용 백사장 및 냐짱 시내 셔틀버스 무료 제공.",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "아코르 글로벌 브랜드",
+          "value": "아코르 글로벌 브랜드"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "여름 특가 30% 할인",
+          "value": "여름 특가 30% 할인"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "사진 48장",
+          "value": "사진 48장"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "5성급 리조트",
+          "value": "5성급 리조트"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "훌륭해요",
+          "value": "훌륭해요"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "리뷰 890건",
+          "value": "리뷰 890건"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "무료 초콜릿 아워 (Chocolate Hour)",
+          "value": "무료 초콜릿 아워 (Chocolate Hour)"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "6,000m² 워터파크",
+          "value": "6,000m² 워터파크"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "800m 전용 백사장 해변",
+          "value": "800m 전용 백사장 해변"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "아동 워터파크 무료 입장 • 냐짱 시내 셔틀",
+          "value": "아동 워터파크 무료 입장 • 냐짱 시내 셔틀"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "/박",
+          "value": "/박"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "씨뷰 디럭스 • 5성급 조식 포함",
+          "value": "씨뷰 디럭스 • 5성급 조식 포함"
+        },
+        "field-016": {
+          "kind": "text",
+          "label": "객실 보기 & 예약",
+          "value": "객실 보기 & 예약"
+        }
+      }
+    },
+    "hotels-3": {
+      "title": "알마 리조트 깜라인 (Alma Resort)",
+      "location": "카인호아 깜라인 바이다이 응우옌 탓 탄",
+      "description": "최고의 가족형 5성급 럭셔리 리조트: 12개 오션뷰 인피니티 풀, 무료 알마 시네마, 어린이 과학관 및 7일 전 예약 시 30만 VND 식사 바우처 증정.",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "인기 가족 리조트",
+          "value": "인기 가족 리조트"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "사진 55장",
+          "value": "사진 55장"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "5성급 울트라 럭셔리",
+          "value": "5성급 울트라 럭셔리"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "훌륭해요",
+          "value": "훌륭해요"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "리뷰 1,040건",
+          "value": "리뷰 1,040건"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "오션뷰 인피니티 풀 12개",
+          "value": "오션뷰 인피니티 풀 12개"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "무료 알마 시네마 영화관",
+          "value": "무료 알마 시네마 영화관"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "어린이 과학 박물관",
+          "value": "어린이 과학 박물관"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "7일 전 예약 시 300,000 VND 다이닝 바우처",
+          "value": "7일 전 예약 시 300,000 VND 다이닝 바우처"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/박",
+          "value": "/박"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "1베드룸 스위트 • 인터내셔널 조식",
+          "value": "1베드룸 스위트 • 인터내셔널 조식"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "객실 보기 & 예약",
+          "value": "객실 보기 & 예약"
+        }
+      }
+    },
+    "hotels-4": {
+      "title": "퓨전 리조트 깜라인 (올 스파 인클루시브)",
+      "location": "카인호아 깜라인 깜하이동 바이다이",
+      "description": "매일 무료 스파가 포함된 5성급 럭셔리 리조트: 전 객실 프라이빗 풀빌라, 언제 어디서나 즐기는 조식 및 5일 전 무료 일정 변경.",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "전 투숙객 스파 포함",
+          "value": "전 투숙객 스파 포함"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "사진 40장",
+          "value": "사진 40장"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "5성급 럭셔리",
+          "value": "5성급 럭셔리"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "최상급",
+          "value": "최상급"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "리뷰 650건",
+          "value": "리뷰 650건"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "매일 1인당 무료 스파 제공",
+          "value": "매일 1인당 무료 스파 제공"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "언제 어디서나 즐기는 조식",
+          "value": "언제 어디서나 즐기는 조식"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "독채 프라이빗 풀빌라",
+          "value": "독채 프라이빗 풀빌라"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "5일 전 무료 날짜 변경",
+          "value": "5일 전 무료 날짜 변경"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/박",
+          "value": "/박"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "시크 스위트 프라이빗 풀 • 스파 포함",
+          "value": "시크 스위트 프라이빗 풀 • 스파 포함"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "객실 보기 & 예약",
+          "value": "객실 보기 & 예약"
+        }
+      }
+    },
+    "hotels-5": {
+      "title": "다이아몬드 베이 호텔 냐짱",
+      "location": "냐짱시 록토동 쩐푸 20번지 (냐짱 센터 맞은편)",
+      "description": "해변 바로 앞 4성급 시내 중심 호텔: 냐짱 센터 쇼핑몰과 연결되어 있으며 매일 조식 뷔페와 야시장 도보 이동이 편리합니다.",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "시내 해변 중심가",
+          "value": "시내 해변 중심가"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "사진 28장",
+          "value": "사진 28장"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "4성급 슈페리어",
+          "value": "4성급 슈페리어"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "매우 좋음",
+          "value": "매우 좋음"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "리뷰 740건",
+          "value": "리뷰 740건"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "해변 정면 오션뷰",
+          "value": "해변 정면 오션뷰"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "쇼핑몰 및 레스토랑 연결",
+          "value": "쇼핑몰 및 레스토랑 연결"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "매일 조식 뷔페 포함",
+          "value": "매일 조식 뷔페 포함"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "해변 및 야시장 도보 이동 편리",
+          "value": "해변 및 야시장 도보 이동 편리"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/박",
+          "value": "/박"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "디럭스 시티 • 2인 조식 포함",
+          "value": "디럭스 시티 • 2인 조식 포함"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "객실 보기 & 예약",
+          "value": "객실 보기 & 예약"
+        }
+      }
+    },
+    "hotels-6": {
+      "title": "주옌 하 리조트 깜라인 (Duyen Ha)",
+      "location": "카인호아 북부 깜라인 반도 D9B",
+      "description": "가족 친화적 5성급 리조트: 6개 아시안-유러피언 레스토랑, 2,500m² 열대 정원 수영장, 공항 셔틀 및 만 12세 미만 아동 1명 무료 숙박.",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "가족 콤보 특가",
+          "value": "가족 콤보 특가"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "사진 36장",
+          "value": "사진 36장"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "5성급 리조트",
+          "value": "5성급 리조트"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "최고예요",
+          "value": "최고예요"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "리뷰 510건",
+          "value": "리뷰 510건"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "6개 아시안-유러피언 레스토랑",
+          "value": "6개 아시안-유러피언 레스토랑"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "열대 정원 내 2,500m² 대형 수영장",
+          "value": "열대 정원 내 2,500m² 대형 수영장"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "정기 공항 셔틀 운행",
+          "value": "정기 공항 셔틀 운행"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "만 12세 미만 아동 1명 무료",
+          "value": "만 12세 미만 아동 1명 무료"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/박",
+          "value": "/박"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "디럭스 가든뷰 • 조식 뷔페",
+          "value": "디럭스 가든뷰 • 조식 뷔페"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "객실 보기 & 예약",
+          "value": "객실 보기 & 예약"
+        }
+      }
+    },
+    "tours-1": {
+      "title": "냐짱 VIP 3섬 투어: 혼문 - 어촌 마을 - 혼땀 머드 온천",
+      "location": "냐짱, 카인호아",
+      "description": "최신 스피드보트로 떠나는 베스트셀러 일일 투어: 5성급 혼땀 머드 온천, 혼문 산호초 스노클링, 해상 해산물 중식 및 호텔 왕복 픽업 포함.",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "판매 1위 • 15% 할인",
+          "value": "판매 1위 • 15% 할인"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "08:00 - 16:00 매일",
+          "value": "08:00 - 16:00 매일"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "고속 스피드보트",
+          "value": "고속 스피드보트"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "냐짱 • 산호만",
+          "value": "냐짱 • 산호만"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "(예약 3.4k)",
+          "value": "(예약 3.4k)"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "혼땀 5성급 머드 온천",
+          "value": "혼땀 5성급 머드 온천"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "혼문 산호초 스노클링",
+          "value": "혼문 산호초 스노클링"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "해상 해산물 중식",
+          "value": "해상 해산물 중식"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "호텔 왕복 픽업",
+          "value": "호텔 왕복 픽업"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/인",
+          "value": "/인"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "오늘 -15%",
+          "value": "오늘 -15%"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "일정 보기",
+          "value": "일정 보기"
+        },
+        "field-016": {
+          "kind": "text",
+          "label": "지금 예약",
+          "value": "지금 예약"
+        }
+      }
+    },
+    "tours-2": {
+      "title": "냐짱 만 선셋 크루즈 & 랍스터 BBQ 디너",
+      "location": "냐짱, 카인호아",
+      "description": "냐짱 만의 로맨틱한 5성급 선셋 크루즈: 랍스터 & 미국산 스테이크 세트, 라이브 바이올린·기타 연주, 무료 칵테일 및 전담 포토그래퍼.",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "5성급 럭셔리 크루즈",
+          "value": "5성급 럭셔리 크루즈"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "16:30 - 21:00 매일",
+          "value": "16:30 - 21:00 매일"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "Sealife / Emperor Cruises",
+          "value": "Sealife / Emperor Cruises"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "냐짱 만 선셋",
+          "value": "냐짱 만 선셋"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "(리뷰 1.8k)",
+          "value": "(리뷰 1.8k)"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "랍스터 & 스테이크 세트",
+          "value": "랍스터 & 스테이크 세트"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "바이올린 & 기타 라이브",
+          "value": "바이올린 & 기타 라이브"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "무료 칵테일 & 카나페",
+          "value": "무료 칵테일 & 카나페"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "전담 사진작가 동행",
+          "value": "전담 사진작가 동행"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/인",
+          "value": "/인"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "와인 무료 증정",
+          "value": "와인 무료 증정"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "일정 보기",
+          "value": "일정 보기"
+        },
+        "field-016": {
+          "kind": "text",
+          "label": "지금 예약",
+          "value": "지금 예약"
+        }
+      }
+    },
+    "tours-3": {
+      "title": "빈히 만 - 항라이 - 포도 농장 - 양떼 목장 해안 투어",
+      "location": "냐짱, 카인호아",
+      "description": "리무진 Dcar로 떠나는 환상적인 해안 코스: 항라이 바다 폭포, 신선한 포도 따기 체험, 쑤오이티엔 양떼 목장, 빈히 해상 레스토랑 중식.",
+      "content": {
+        "field-004": {
+          "kind": "text",
+          "label": "최고의 해안 절경 코스",
+          "value": "최고의 해안 절경 코스"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "07:30 - 17:00 매일",
+          "value": "07:30 - 17:00 매일"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "리무진 / Dcar 밴",
+          "value": "리무진 / Dcar 밴"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "닌투언 • 빈히",
+          "value": "닌투언 • 빈히"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "(리뷰 2.1k)",
+          "value": "(리뷰 2.1k)"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "항라이 바다 폭포",
+          "value": "항라이 바다 폭포"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "포도 농장 수확 체험",
+          "value": "포도 농장 수확 체험"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "쑤오이티엔 양떼 목장",
+          "value": "쑤오이티엔 양떼 목장"
+        },
+        "field-012": {
+          "kind": "text",
+          "label": "해상 레스토랑 중식 포함",
+          "value": "해상 레스토랑 중식 포함"
+        },
+        "field-013": {
+          "kind": "text",
+          "label": "/인",
+          "value": "/인"
+        },
+        "field-014": {
+          "kind": "text",
+          "label": "올인원 -12%",
+          "value": "올인원 -12%"
+        },
+        "field-015": {
+          "kind": "text",
+          "label": "일정 보기",
+          "value": "일정 보기"
+        },
+        "field-016": {
+          "kind": "text",
+          "label": "지금 예약",
+          "value": "지금 예약"
+        }
+      }
+    },
+    "tours-4": {
+      "title": "혼문 스쿠버 다이빙 & 씨워커 (해저 산책) 투어",
+      "location": "냐짱, 카인호아",
+      "description": "수영을 못해도 OK! PADI 국제 자격증을 보유한 전문 강사가 1:1로 안전하게 안내하며 고급 다이빙 장비와 전용 보험이 포함됩니다.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "전문가 1:1 밀착 케어",
+          "value": "전문가 1:1 밀착 케어"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "수중 사진 & 영상 무료 증정",
+          "value": "수중 사진 & 영상 무료 증정"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "혼문 해양 보호구역",
+          "value": "혼문 해양 보호구역"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "4.9 (980)",
+          "value": "4.9 (980)"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "올인클루시브",
+          "value": "올인클루시브"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "지금 예약",
+          "value": "지금 예약"
+        }
+      }
+    },
+    "tours-5": {
+      "title": "냐짱 시티 투어: 포나가르 사원 - 해양박물관 - 롱선사",
+      "location": "냐짱, 카인호아",
+      "description": "반일 또는 종일 코스로 즐기는 냐짱 역사 문화 탐방: 최신 에어컨 차량, 입장권 및 냐짱 명물 넴느엉 중식 포함.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "가족 여행 추천",
+          "value": "가족 여행 추천"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "조인 또는 단독 차량",
+          "value": "조인 또는 단독 차량"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "역사 문화 유적지",
+          "value": "역사 문화 유적지"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "4.8 (1.2k)",
+          "value": "4.8 (1.2k)"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "올인클루시브",
+          "value": "올인클루시브"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "지금 예약",
+          "value": "지금 예약"
+        }
+      }
+    },
+    "tours-6": {
+      "title": "냐짱 출발 달랏 구름 사냥 일일 투어 (당일치기)",
+      "location": "냐짱, 카인호아",
+      "description": "웅장한 카인레 고개를 넘어 꺼우닷 차밭의 운해, 수국 정원, 달랏 명물 레구다 야채 훠궈를 하루 만에 즐기세요.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "냐짱 시내 출발",
+          "value": "냐짱 시내 출발"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "카인레 운해 드라이브",
+          "value": "카인레 운해 드라이브"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "달랏 고원 꽃마을",
+          "value": "달랏 고원 꽃마을"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "4.9 (1.5k)",
+          "value": "4.9 (1.5k)"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "올인클루시브",
+          "value": "올인클루시브"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "지금 예약",
+          "value": "지금 예약"
+        }
+      }
+    },
+    "tours-7": {
+      "title": "디엡선 섬 바닷길 산책 & 독렛 비치 일일 투어",
+      "location": "냐짱, 카인호아",
+      "description": "바다 한가운데 펼쳐진 신비로운 백사장 모랫길을 걷고, 한적한 독렛 해변에서 해수욕과 신선한 해산물 구이를 즐기세요.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "바다 위 신비의 모랫길",
+          "value": "바다 위 신비의 모랫길"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "반퐁 만",
+          "value": "반퐁 만"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "4.8 (850)",
+          "value": "4.8 (850)"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "올인클루시브",
+          "value": "올인클루시브"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "지금 예약",
+          "value": "지금 예약"
+        }
+      }
+    },
+    "tours-8": {
+      "title": "냐푸 만 생태 투어: 오키드 섬 & 원숭이 섬",
+      "location": "냐짱, 카인호아",
+      "description": "1,200여 마리의 야생 원숭이, 동물 서커스, 대형 나비 정원, 난초 섬의 알록달록한 농라(전통 모자) 거리를 즐기세요.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "생동감 넘치는 에코 투어",
+          "value": "생동감 넘치는 에코 투어"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "냐푸 석호",
+          "value": "냐푸 석호"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "4.7 (720)",
+          "value": "4.7 (720)"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "올인클루시브",
+          "value": "올인클루시브"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "지금 예약",
+          "value": "지금 예약"
+        }
+      }
+    },
+    "tours-9": {
+      "title": "로빈슨 섬 체험: 해상 플로팅 바, SUP & 카약 레이스",
+      "location": "냐짱, 카인호아",
+      "description": "청정 백사장에서 즐기는 비치 파티, 바다 위 플로팅 칵테일 바, 카약 레이스 및 자유 스노클링 체험.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "바다 위 플로팅 바 파티",
+          "value": "바다 위 플로팅 바 파티"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "로빈슨 섬",
+          "value": "로빈슨 섬"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "4.9 (1.1k)",
+          "value": "4.9 (1.1k)"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "올인클루시브",
+          "value": "올인클루시브"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "지금 예약",
+          "value": "지금 예약"
+        }
+      }
+    },
+    "home-1": {
+      "title": "푸꾸옥 3박4일 5성급 리조트 콤보",
+      "location": "냐짱, 카인호아",
+      "description": "4-5성급 비치프론트 리조트 3박 + 왕복 항공권 + 산호 스노클링 투어 포함.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "올인원 패키지",
+          "value": "올인원 패키지"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "3박 4일",
+          "value": "3박 4일"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "매일 출발",
+          "value": "매일 출발"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "최저",
+          "value": "최저"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "콤보 예약",
+          "value": "콤보 예약"
+        }
+      }
+    },
+    "home-2": {
+      "title": "푸꾸옥 바이다이 2박3일 콤보",
+      "location": "냐짱, 카인호아",
+      "description": "선셋 인피니티 풀이 있는 4-5성급 해변 리조트 숙박 + 혼똔 케이블카 티켓 포함.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "초특가 핫 콤보",
+          "value": "초특가 핫 콤보"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "2박 3일",
+          "value": "2박 3일"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "매일 출발",
+          "value": "매일 출발"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "최저",
+          "value": "최저"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "콤보 예약",
+          "value": "콤보 예약"
+        }
+      }
+    },
+    "home-3": {
+      "title": "냐짱 블루씨 3박4일 콤보",
+      "location": "냐짱, 카인호아",
+      "description": "냐짱 시내 4-5성급 호텔 3박 + VIP 3섬 스피드보트 투어 + 혼땀 머드 온천 포함.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "베스트셀러",
+          "value": "베스트셀러"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "3박 4일",
+          "value": "3박 4일"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "매일 출발",
+          "value": "매일 출발"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "최저",
+          "value": "최저"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "콤보 예약",
+          "value": "콤보 예약"
+        }
+      }
+    },
+    "home-4": {
+      "title": "엠피리언 호텔 냐짱",
+      "location": "냐짱시 록토동 응우옌 티 민 카이 02번지",
+      "description": "20% 할인! 냐짱 만 전망 인피니티 풀, 2/4 광장 맞은편, 쩐푸 해변과 야시장 도보 거리.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "20% 할인",
+          "value": "20% 할인"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "잔여 2객실",
+          "value": "잔여 2객실"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "냐짱 만 파노라마 인피니티 풀",
+          "value": "냐짱 만 파노라마 인피니티 풀"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "중심가 2/4 광장 바로 맞은편",
+          "value": "중심가 2/4 광장 바로 맞은편"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "쩐푸 해변 & 야시장 바로 앞",
+          "value": "쩐푸 해변 & 야시장 바로 앞"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "특가 마감:",
+          "value": "특가 마감:"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 30/05/2026",
+          "value": "23:59, 30/05/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/박",
+          "value": "/박"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "객실 예약",
+          "value": "객실 예약"
+        }
+      }
+    },
+    "home-5": {
+      "title": "뫼벤픽 리조트 깜라인",
+      "location": "카인호아 깜람 깜하이동 바이다이",
+      "description": "24% 할인, 무료 취소, 매일 무료 스위스 초콜릿 아워, 스릴 넘치는 워터파크 & 스위스 빌리지.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "24% 할인",
+          "value": "24% 할인"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "무료 취소",
+          "value": "무료 취소"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "매일 무료 스위스 초콜릿 아워",
+          "value": "매일 무료 스위스 초콜릿 아워"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "어드벤처 워터파크",
+          "value": "어드벤처 워터파크"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "활기찬 스위스 빌리지 엔터테인먼트",
+          "value": "활기찬 스위스 빌리지 엔터테인먼트"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "특가 마감:",
+          "value": "특가 마감:"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 31/05/2026",
+          "value": "23:59, 31/05/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/박",
+          "value": "/박"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "객실 예약",
+          "value": "객실 예약"
+        }
+      }
+    },
+    "home-6": {
+      "title": "알마 리조트 깜라인",
+      "location": "카인호아 깜람 북부 깜라인 반도",
+      "description": "18% 할인, 바이다이 해변 인근, 6,000m² 스플래시 워터파크, 12개 인피니티 풀 & 무료 영화관.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "18% 할인",
+          "value": "18% 할인"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "바이다이 해변 인근",
+          "value": "바이다이 해변 인근"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "6,000m² 스플래시 워터파크",
+          "value": "6,000m² 스플래시 워터파크"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "해변을 마주한 12개 계단식 인피니티 풀",
+          "value": "해변을 마주한 12개 계단식 인피니티 풀"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "무료 알마 시네마 영화관",
+          "value": "무료 알마 시네마 영화관"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "특가 마감:",
+          "value": "특가 마감:"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 02/06/2026",
+          "value": "23:59, 02/06/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/박",
+          "value": "/박"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "객실 예약",
+          "value": "객실 예약"
+        }
+      }
+    },
+    "home-7": {
+      "title": "퓨전 리조트 깜라인",
+      "location": "깜라인 바이다이 응우옌 탓 탄",
+      "description": "22% 할인, 매일 무료 스파 트리트먼트, 언제 어디서나 즐기는 조식 및 오션뷰 풀빌라.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "22% 할인",
+          "value": "22% 할인"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "스파 포함",
+          "value": "스파 포함"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "매일 올인클루시브 스파 무료",
+          "value": "매일 올인클루시브 스파 무료"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "독점 애니타임 애니웨어 조식",
+          "value": "독점 애니타임 애니웨어 조식"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "오션뷰 독채 프라이빗 풀빌라",
+          "value": "오션뷰 독채 프라이빗 풀빌라"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "특가 마감:",
+          "value": "특가 마감:"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 05/06/2026",
+          "value": "23:59, 05/06/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/박",
+          "value": "/박"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "객실 예약",
+          "value": "객실 예약"
+        }
+      }
+    },
+    "home-8": {
+      "title": "주옌 하 리조트 깜라인",
+      "location": "깜람 깜하이동 바이다이",
+      "description": "20% 할인, 바이다이 전용 백사장, 열대 야외 수영장 및 6개 아시안-유러피언 레스토랑.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "20% 할인",
+          "value": "20% 할인"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "잔여 2객실",
+          "value": "잔여 2객실"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "바이다이 전용 백사장 해변",
+          "value": "바이다이 전용 백사장 해변"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "열대 정원 스타일 야외 수영장",
+          "value": "열대 정원 스타일 야외 수영장"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "6개 프리미엄 아시안-유러피언 레스토랑 & 바",
+          "value": "6개 프리미엄 아시안-유러피언 레스토랑 & 바"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "특가 마감:",
+          "value": "특가 마감:"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 30/05/2026",
+          "value": "23:59, 30/05/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/박",
+          "value": "/박"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "객실 예약",
+          "value": "객실 예약"
+        }
+      }
+    },
+    "home-9": {
+      "title": "코스타벨라 리조트 냐짱",
+      "location": "냐짱시 프억동 프억하",
+      "description": "24% 할인, 무료 취소, 조용한 전용 해변, 아쿠아 파크 워터파크 & 마운틴 뷰 수영장.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "24% 할인",
+          "value": "24% 할인"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "무료 취소",
+          "value": "무료 취소"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "한적한 전용 해변",
+          "value": "한적한 전용 해변"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "아쿠아 워터파크",
+          "value": "아쿠아 워터파크"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "탁 트인 마운틴 뷰 야외 수영장",
+          "value": "탁 트인 마운틴 뷰 야외 수영장"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "특가 마감:",
+          "value": "특가 마감:"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 31/05/2026",
+          "value": "23:59, 31/05/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/박",
+          "value": "/박"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "객실 예약",
+          "value": "객실 예약"
+        }
+      }
+    },
+    "home-10": {
+      "title": "스완도르 리조트 깜라인",
+      "location": "깜람 바이다이 응우옌 탓 탄",
+      "description": "18% 할인, 청정 바이다이 해변 바로 앞, 24시간 울트라 올인클루시브 다이닝 & 대형 수영장.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "18% 할인",
+          "value": "18% 할인"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "바이다이 해변 인근",
+          "value": "바이다이 해변 인근"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "천혜의 바이다이 해변 바로 앞",
+          "value": "천혜의 바이다이 해변 바로 앞"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "24시간 울트라 올인클루시브 식사",
+          "value": "24시간 울트라 올인클루시브 식사"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "초대형 야외 수영장 단지",
+          "value": "초대형 야외 수영장 단지"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "특가 마감:",
+          "value": "특가 마감:"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 02/06/2026",
+          "value": "23:59, 02/06/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/박",
+          "value": "/박"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "객실 예약",
+          "value": "객실 예약"
+        }
+      }
+    },
+    "home-11": {
+      "title": "다이아몬드 베이 호텔 냐짱",
+      "location": "냐짱시 록토동 쩐푸 20번지",
+      "description": "24% 할인, 무료 취소, 쩐푸 해변 정면 뷰, 루프탑 인피니티 풀 & 풍성한 조식 뷔페.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "24% 할인",
+          "value": "24% 할인"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "무료 취소",
+          "value": "무료 취소"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "환상적인 쩐푸 정면 오션뷰",
+          "value": "환상적인 쩐푸 정면 오션뷰"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "루프탑 야외 인피니티 풀",
+          "value": "루프탑 야외 인피니티 풀"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "풍성한 아시안-유러피언 조식 뷔페",
+          "value": "풍성한 아시안-유러피언 조식 뷔페"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "특가 마감:",
+          "value": "특가 마감:"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "23:59, 31/05/2026",
+          "value": "23:59, 31/05/2026"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "/박",
+          "value": "/박"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "객실 예약",
+          "value": "객실 예약"
+        }
+      }
+    },
+    "home-12": {
+      "title": "냐짱 만 선셋 크루즈 & BBQ 디너",
+      "location": "냐짱, 카인호아",
+      "description": "로맨틱한 냐짱 만에서 석양을 감상하며 고급 해산물 뷔페, 칵테일, 라이브 음악을 즐기세요.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "5성급 경험",
+          "value": "5성급 경험"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "매일 출발",
+          "value": "매일 출발"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "•",
+          "value": "•"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "예약 1.2k+",
+          "value": "예약 1.2k+"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "•",
+          "value": "•"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "당일 투어",
+          "value": "당일 투어"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "냐짱 시내 호텔 왕복 픽업",
+          "value": "냐짱 시내 호텔 왕복 픽업"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "올인원 최저",
+          "value": "올인원 최저"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "투어 예약",
+          "value": "투어 예약"
+        }
+      }
+    },
+    "home-13": {
+      "title": "냐짱 VIP 3섬 투어: 혼문 – 어촌 마을 – 혼땀",
+      "location": "냐짱, 카인호아",
+      "description": "최신 스피드보트, 혼문 산호 스노클링, 어촌 해산물 중식 및 혼땀 리조트 머드 온천 포함.",
+      "content": {
+        "field-003": {
+          "kind": "text",
+          "label": "베스트셀러",
+          "value": "베스트셀러"
+        },
+        "field-004": {
+          "kind": "text",
+          "label": "매일 출발",
+          "value": "매일 출발"
+        },
+        "field-005": {
+          "kind": "text",
+          "label": "•",
+          "value": "•"
+        },
+        "field-006": {
+          "kind": "text",
+          "label": "예약 1.2k+",
+          "value": "예약 1.2k+"
+        },
+        "field-007": {
+          "kind": "text",
+          "label": "•",
+          "value": "•"
+        },
+        "field-008": {
+          "kind": "text",
+          "label": "당일 투어",
+          "value": "당일 투어"
+        },
+        "field-009": {
+          "kind": "text",
+          "label": "냐짱 중심가 호텔 픽업",
+          "value": "냐짱 중심가 호텔 픽업"
+        },
+        "field-010": {
+          "kind": "text",
+          "label": "올인원 최저",
+          "value": "올인원 최저"
+        },
+        "field-011": {
+          "kind": "text",
+          "label": "투어 예약",
+          "value": "투어 예약"
+        }
+      }
+    }
+  },
+  "information_pages": [
+    {
+      "slug": "gioi-thieu",
+      "title": "회사 소개",
+      "body": "NhaTrangGo는 투명한 가격과 24/7 고객 지원을 제공하는 깜라인-냐짱 호텔, 아일랜드 투어 및 공항 픽업 예약 플랫폼입니다."
+    },
+    {
+      "slug": "dieu-khoan-su-dung",
+      "title": "이용약관",
+      "body": "결제 전 상담원이 안내한 일정, 픽업/샌딩 시간 및 예약 확정 내역을 정확히 확인해 주시기 바랍니다."
+    },
+    {
+      "slug": "chinh-sach-bao-mat",
+      "title": "개인정보 처리방침",
+      "body": "NhaTrangGo는 고객님의 개인정보, 연락처 및 여행 일정을 안전하게 보호하며 예약 확정 및 여행 지원 목적으로만 사용합니다."
+    },
+    {
+      "slug": "ho-tro-khach-hang",
+      "title": "고객 지원",
+      "body": "NhaTrangGo 운영팀은 핫라인 0878.458.885, Zalo, Telegram, WhatsApp을 통해 24시간 연중무휴로 예약 상담을 지원합니다."
+    }
+  ]
+}

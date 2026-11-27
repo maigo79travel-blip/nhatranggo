@@ -1,5 +1,6 @@
 import { ContentLink, ContentText } from "@/components/content";
 import brand from "@/config/brand.json";
+import { getCurrentMessages } from "@/lib/i18n";
 import { quoteAnchor } from "./transfer-options";
 import {
   TransferCallout,
@@ -15,7 +16,9 @@ const benefits = [
   { id: "155", body: "156", icon: "call" },
 ] as const;
 
-export function TransfersBenefits() {
+export async function TransfersBenefits() {
+  const t = await getCurrentMessages();
+  const titleLines = t.transfers.benefits.airportTitle.split("\n");
   return (
     <section className="transfer-section bg-surface">
       <div className="site-container">
@@ -60,19 +63,22 @@ export function TransfersBenefits() {
           <div className="transfer-airport-banner flex items-center rounded-[22px] bg-primary px-6 py-9 text-on-primary sm:px-10">
             <div className="relative max-w-[34ch]">
               <h3 className="text-2xl font-extrabold leading-tight sm:text-[32px]">
-                Đón xe sân bay
-                <br />
-                nhanh chóng – tiện lợi
+                {titleLines[0]}
+                {titleLines[1] && (
+                  <>
+                    <br />
+                    {titleLines[1]}
+                  </>
+                )}
               </h3>
               <p className="mb-4 mt-2 text-sm sm:text-base">
-                Đội xe luôn túc trực tại sân bay Cam Ranh và trung tâm Nha
-                Trang.
+                {t.transfers.benefits.airportDesc}
               </p>
               <a
                 href={quoteAnchor}
                 className="transfer-pill transfer-pill-white"
               >
-                Đặt xe ngay{" "}
+                {t.transfers.benefits.bookCarNow}{" "}
                 <TransferIcon className="text-lg">arrow_forward</TransferIcon>
               </a>
             </div>

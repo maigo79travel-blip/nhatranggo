@@ -3,6 +3,7 @@ import { SiteDataProvider } from "@/components/content";
 import { PublicPage } from "@/components/site/public-page";
 import { PublicEmptyState } from "@/components/site/public-ui";
 import { getSiteData } from "@/lib/catalog";
+import { getCurrentMessages } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/page-metadata";
 import { vietnamToday } from "@/modules/travel/search";
 import {
@@ -32,16 +33,20 @@ export default async function ToursPage({
     );
   }
 
-  const { products, destinations, content } = await getSiteData("tours");
+  const [{ products, destinations, content, locale }, t] = await Promise.all([
+    getSiteData("tours"),
+    getCurrentMessages(),
+  ]);
   const featured = products.slice(0, 3);
   const more = products.slice(3);
   const storedTitle = content["tours.text-012"]?.value;
   const customTitle = typeof storedTitle === "string" ? storedTitle.trim() : "";
   const title =
     customTitle &&
-    customTitle !== "Tour Ghép & Tour Riêng Khởi Hành Hàng Ngày -"
+    (locale !== "vi" ||
+      customTitle !== "Tour Ghép & Tour Riêng Khởi Hành Hàng Ngày -")
       ? customTitle
-      : "Tour du lịch Nha Trang";
+      : t.tours.catalogTitle;
 
   return (
     <PublicPage title={title} hero={hero}>
@@ -56,14 +61,16 @@ export default async function ToursPage({
               id="featured-tour-title"
               className="text-2xl font-extrabold tracking-tight sm:text-headline-lg"
             >
-              Tour nổi bật
+              {t.tours.featuredTitle}
             </h2>
             <TourSortSelect />
           </div>
           {featured.length ? (
             <TourCards products={featured} />
           ) : (
-            <PublicEmptyState>Chưa có tour đang nhận yêu cầu.</PublicEmptyState>
+            <PublicEmptyState heading={t.common.emptySelect}>
+              {t.home.noToursAvailable}
+            </PublicEmptyState>
           )}
         </section>
         {more.length > 0 && (
@@ -72,14 +79,14 @@ export default async function ToursPage({
               id="daily-tour-title"
               className="mb-4 text-2xl font-extrabold tracking-tight sm:mb-5 sm:text-headline-lg"
             >
-              Danh sách tour
+              {t.tours.listTitle}
             </h2>
             <TourCards products={more} />
           </section>
         )}
       </CatalogProvider>
       <SiteDataProvider data={{ content }}>
-        <ToursFaq />
+        <ToursFaq stepsTitle={t.tours.stepsTitle} />
       </SiteDataProvider>
     </PublicPage>
   );

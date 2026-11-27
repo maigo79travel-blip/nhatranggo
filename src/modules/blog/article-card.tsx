@@ -1,16 +1,18 @@
 import Link from "next/link";
 import { PublicIcon } from "@/components/site/public-ui";
 import { isPublicImageUrl } from "@/lib/content-attributes";
+import { getCurrentMessages, getPublicLocale } from "@/lib/i18n";
+import { intlLocaleFor } from "@/lib/i18n/format";
 import type { ArticleSummary } from "./service";
 
-const dateFormat = new Intl.DateTimeFormat("vi-VN", {
-  day: "2-digit",
-  month: "2-digit",
-  year: "numeric",
-  timeZone: "Asia/Ho_Chi_Minh",
-});
-
-export function ArticleDate({ date }: { date: Date }) {
+export async function ArticleDate({ date }: { date: Date }) {
+  const locale = await getPublicLocale();
+  const dateFormat = new Intl.DateTimeFormat(intlLocaleFor(locale), {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    timeZone: "Asia/Ho_Chi_Minh",
+  });
   return (
     <span className="inline-flex items-center gap-2 text-sm font-medium text-on-surface-variant">
       <PublicIcon name="calendar_today" className="text-[18px] text-primary" />
@@ -19,13 +21,14 @@ export function ArticleDate({ date }: { date: Date }) {
   );
 }
 
-export function ArticleCard({
+export async function ArticleCard({
   article,
   variant = "standard",
 }: {
   article: ArticleSummary;
   variant?: "compact" | "standard" | "lead";
 }) {
+  const t = await getCurrentMessages();
   const lead = variant === "lead";
   const compact = variant === "compact";
   const hasImage = isPublicImageUrl(article.image);
@@ -34,7 +37,7 @@ export function ArticleCard({
     <article className="min-w-0 rounded-[22px] border border-border-subtle bg-surface shadow-card transition-shadow hover:shadow-card-hover">
       <Link
         href={`/blog/${article.slug}`}
-        aria-label={`Đọc tiếp: ${article.title}`}
+        aria-label={`${t.home.readMorePrefix} ${article.title}`}
         className={`group flex h-full flex-col overflow-hidden rounded-[22px] ${lead ? "md:grid md:grid-cols-[minmax(0,1.18fr)_minmax(0,1fr)]" : ""}`}
       >
         <div

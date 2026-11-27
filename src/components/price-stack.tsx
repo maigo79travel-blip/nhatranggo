@@ -1,7 +1,7 @@
 "use client";
 import type { ReactNode } from "react";
-import { useProduct } from "./content";
-import { money } from "@/lib/types";
+import { useProduct, useSiteData, useT } from "./content";
+import { formatMoney } from "@/lib/i18n/format";
 export function PriceStack({
   productId,
   children,
@@ -11,6 +11,7 @@ export function PriceStack({
   children: ReactNode;
   className?: string;
 }) {
+  const { locale } = useSiteData();
   const product = useProduct(productId);
   return (
     <div
@@ -22,7 +23,7 @@ export function PriceStack({
             data-original-price
             className="block whitespace-nowrap font-body-sm text-body-sm text-on-surface-variant line-through"
           >
-            {money(product.original_price)}
+            {formatMoney(product.original_price, locale)}
           </span>
         )}
       <div>{children}</div>
@@ -37,6 +38,7 @@ export function ProductDiscount({
   productId: string;
   className?: string;
 }) {
+  const t = useT();
   const product = useProduct(productId);
   if (!product?.original_price || product.original_price <= product.price)
     return null;
@@ -44,6 +46,8 @@ export function ProductDiscount({
     (1 - product.price / product.original_price) * 100,
   );
   return percent > 0 ? (
-    <span className={className}>Giảm {percent}%</span>
+    <span className={className}>
+      {t.home.dealBadgePrefix} {percent}%
+    </span>
   ) : null;
 }

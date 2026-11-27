@@ -1,4 +1,5 @@
 import type { Locale } from "./locale";
+import type { Messages } from "./i18n/types";
 
 export type ContentEntry = {
   kind: "text" | "attributes" | "settings";
@@ -23,6 +24,7 @@ export type Product = {
   position?: number;
   destination_id?: string | null;
   partner_id?: string | null;
+  search_text?: string;
   content?: Record<string, ContentEntry>;
 };
 
@@ -55,6 +57,7 @@ export type SiteData = {
   hotelCapacities: Record<string, number>;
   destinations: { id: string; name: string; code: string }[];
   locale: Locale;
+  messages?: Messages;
 };
 
 export type Booking = {

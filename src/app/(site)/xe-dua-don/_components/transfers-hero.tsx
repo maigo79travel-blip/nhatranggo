@@ -6,10 +6,11 @@ import {
   ContentText,
   useContent,
   useSiteData,
+  useT,
 } from "@/components/content";
 import { useCatalog } from "@/components/catalog/catalog-context";
 import { CustomSelect } from "@/components/ui/custom-select";
-import { money } from "@/lib/types";
+import { formatMoney } from "@/lib/i18n/format";
 import { vietnamToday } from "@/modules/travel/search";
 import {
   defaultRoute,
@@ -56,8 +57,10 @@ export function TransfersHero() {
     destinations,
     transferRoutes: routes,
     transferVehicleTypes,
+    locale,
   } = useSiteData();
   const catalog = useCatalog();
+  const t = useT();
   const heroLabel = useContent("transfers.text-027");
   const heroSubtitle = useContent("transfers.text-029");
   const defaultLabel = "Dịch Vụ Xe Đưa Đón";
@@ -89,7 +92,7 @@ export function TransfersHero() {
   const [error, setError] = useState("");
   const destinationOptions = destinations.map((d) => ({
     value: d.code,
-    label: d.name,
+    label: t.destinations[d.code] ?? d.name,
   }));
   const route = `${pickup}_${dropoff}`;
   const productId = `transfer-${route}-${vehicle}`;
@@ -97,10 +100,13 @@ export function TransfersHero() {
   const fare =
     product &&
     fares.find((item) => item.route === route && item.vehicle === vehicle);
-  const pickupName = destinations.find((item) => item.code === pickup)?.name;
-  const dropoffName = destinations.find((item) => item.code === dropoff)?.name;
+  const pickupName =
+    t.destinations[pickup] ??
+    destinations.find((item) => item.code === pickup)?.name;
+  const dropoffName =
+    t.destinations[dropoff] ??
+    destinations.find((item) => item.code === dropoff)?.name;
   const vehicles = transferVehicleOptions(transferVehicleTypes);
-  const selectedVehicle = vehicles.find((item) => item.id === vehicle);
   const roundTrip = trip === "round-trip";
   const reverseRoute = roundTrip
     ? routes.find((item) => item.pickup === dropoff && item.dropoff === pickup)
@@ -128,7 +134,7 @@ export function TransfersHero() {
       roundTrip &&
       `${returnDate}T${returnTime}` <= `${date}T${departureTime}`
     ) {
-      setError("Thời điểm lượt về phải sau giờ đón lượt đi.");
+      setError(t.transfers.returnAfterDepartureError);
       return;
     }
     setBusy(true);
@@ -146,7 +152,7 @@ export function TransfersHero() {
       catalog.open(
         {
           ...product,
-          title: `${pickupName} → ${dropoffName} · ${selectedVehicle?.label}`,
+          title: `${pickupName} → ${dropoffName} · ${t.transfers.vehicles[vehicle].label}`,
           price: quote.price,
         },
         {
@@ -160,7 +166,7 @@ export function TransfersHero() {
         },
       );
     } catch {
-      setError("Không thể tải báo giá. Vui lòng thử lại hoặc nhắn Zalo.");
+      setError(t.errors.submitFailed);
     } finally {
       setBusy(false);
     }
@@ -178,12 +184,12 @@ export function TransfersHero() {
           className="transfer-hero-heading tracking-tight font-extrabold"
         >
           <span className="block">
-            {label === defaultLabel ? "Dịch vụ xe đưa đón" : label}
+            {label === t.transfers.defaultHeroLabel ? t.transfers.defaultHeroTitle : label}
           </span>
           <span className="transfer-accent mt-2 inline-block uppercase">
             <ContentText contentKey="transfers.text-028" />
             <br />
-            {subtitle === defaultSubtitle ? "& xe hợp đồng uy tín" : subtitle}
+            {subtitle === t.transfers.defaultHeroSubtitle ? t.transfers.defaultHeroSubtitle : subtitle}
           </span>
         </h1>
 
@@ -192,18 +198,18 @@ export function TransfersHero() {
           className="transfer-quote"
           onChange={() => setError("")}
           onSubmit={openBooking}
-          aria-label="Tra cứu giá xe"
+          aria-label={t.transfers.quoteFormAria}
         >
           <fieldset
             className="grid min-w-0 gap-4 disabled:opacity-75"
             disabled={busy}
           >
-            <legend className="sr-only">Thông tin chuyến xe</legend>
+            <legend className="sr-only">{t.transfers.tripInfoLegend}</legend>
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div
                 className="flex flex-wrap gap-2"
                 role="group"
-                aria-label="Dịch vụ xe"
+                aria-label={t.transfers.fleetLabel}
               >
                 {routeChoices.map((option) => (
                   <button
@@ -225,14 +231,14 @@ export function TransfersHero() {
                     <TransferIcon className="text-lg">
                       {option.icon}
                     </TransferIcon>
-                    {option.label}
+                    {t.transfers.routes[option.id as keyof typeof t.transfers.routes]?.label ?? option.label}
                   </button>
                 ))}
               </div>
               <div
                 className="flex flex-wrap gap-x-4 gap-y-2 text-sm font-bold"
                 role="group"
-                aria-label="Kiểu hành trình"
+                aria-label={t.transfers.tripTypeAria}
               >
                 <label className="inline-flex min-h-10 cursor-pointer items-center gap-2">
                   <input
@@ -243,7 +249,7 @@ export function TransfersHero() {
                     checked={trip === "one-way"}
                     onChange={() => setTrip("one-way")}
                   />
-                  Một chiều (One-way)
+                  {t.transfers.oneWay}
                 </label>
                 <label className="inline-flex min-h-10 cursor-pointer items-center gap-2">
                   <input
@@ -254,7 +260,7 @@ export function TransfersHero() {
                     checked={trip === "round-trip"}
                     onChange={() => setTrip("round-trip")}
                   />
-                  Khứ hồi (Round-trip)
+                  {t.transfers.roundTrip}
                 </label>
               </div>
             </div>
@@ -266,14 +272,14 @@ export function TransfersHero() {
                 </TransferIcon>
                 <div className="min-w-0 flex-1">
                   <span className="block text-xs text-on-surface-variant">
-                    Điểm đón
+                    {t.transfers.pickup}
                   </span>
                   <CustomSelect
                     id="pickup-select"
-                    ariaLabel="Điểm đón"
+                    ariaLabel={t.transfers.pickup}
                     searchable
                     required
-                    searchPlaceholder="Tìm điểm đón…"
+                    searchPlaceholder={t.transfers.searchPickup}
                     buttonClassName="transfer-control cursor-pointer"
                     value={pickup}
                     onChange={setPickup}
@@ -285,14 +291,14 @@ export function TransfersHero() {
                 <TransferIcon className="text-primary">flag</TransferIcon>
                 <div className="min-w-0 flex-1">
                   <span className="block text-xs text-on-surface-variant">
-                    Điểm đến / Khách sạn
+                    {t.transfers.dropoff}
                   </span>
                   <CustomSelect
                     id="dropoff-select"
-                    ariaLabel="Điểm đến / Khách sạn"
+                    ariaLabel={t.transfers.dropoff}
                     searchable
                     required
-                    searchPlaceholder="Tìm điểm đến…"
+                    searchPlaceholder={t.transfers.searchDropoff}
                     buttonClassName="transfer-control cursor-pointer"
                     value={dropoff}
                     onChange={setDropoff}
@@ -303,13 +309,13 @@ export function TransfersHero() {
               <QuoteField
                 id="transfer-date"
                 icon="calendar_today"
-                label="Ngày & giờ đón"
+                label={t.transfers.dateTime}
               >
                 <div className="grid grid-cols-[minmax(0,1.27fr)_minmax(0,1fr)] gap-1">
                   <input
                     className="transfer-control"
                     id="transfer-date"
-                    aria-label="Ngày đón"
+                    aria-label={t.transfers.dateLabel}
                     name="date"
                     type="date"
                     min={vietnamToday()}
@@ -317,7 +323,7 @@ export function TransfersHero() {
                   />
                   <input
                     className="transfer-control"
-                    aria-label="Giờ đón"
+                    aria-label={t.transfers.timeLabel}
                     name="departureTime"
                     type="time"
                     required
@@ -327,14 +333,14 @@ export function TransfersHero() {
               <QuoteField
                 id="transfer-flight"
                 icon="flight_takeoff"
-                label="Số hiệu chuyến bay"
+                label={t.transfers.flightLabel}
               >
                 <input
                   id="transfer-flight"
                   name="flight"
                   className="transfer-control placeholder:text-on-surface-variant"
                   type="text"
-                  placeholder="VN1340, VJ772…"
+                  placeholder={t.transfers.flightPlaceholder}
                   maxLength={30}
                   pattern="[A-Za-z0-9 \-]*"
                 />
@@ -346,7 +352,7 @@ export function TransfersHero() {
                 disabled={price == null || busy}
               >
                 <TransferIcon className="text-lg">search</TransferIcon>
-                {busy ? "Đang tra cứu…" : "Tra cứu giá & Đặt xe ngay"}
+                {busy ? t.transfers.searching : t.transfers.searchSubmit}
               </button>
             </div>
 
@@ -355,7 +361,7 @@ export function TransfersHero() {
                 <QuoteField
                   id="transfer-return-date"
                   icon="event_available"
-                  label="Ngày đón lượt về"
+                  label={t.booking.returnDate}
                 >
                   <input
                     id="transfer-return-date"
@@ -369,7 +375,7 @@ export function TransfersHero() {
                 <QuoteField
                   id="transfer-return-time"
                   icon="schedule"
-                  label="Giờ đón lượt về"
+                  label={t.booking.returnTime}
                 >
                   <input
                     id="transfer-return-time"
@@ -383,12 +389,16 @@ export function TransfersHero() {
             )}
 
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
-              <span className="text-on-surface-variant">Dòng xe phục vụ</span>
-              <strong className="text-primary">{selectedVehicle?.model}</strong>
+              <span className="text-on-surface-variant">
+                {t.transfers.fleetLabel}
+              </span>
+              <strong className="text-primary">
+                {t.transfers.vehicles[vehicle].model}
+              </strong>
               <div
                 className="flex flex-wrap gap-2"
                 role="group"
-                aria-label="Dòng xe"
+                aria-label={t.transfers.fleetLabel}
               >
                 {vehicles.map((item) => (
                   <button
@@ -402,7 +412,7 @@ export function TransfersHero() {
                       setError("");
                     }}
                   >
-                    {item.chip}
+                    {t.transfers.vehicles[item.id].chip}
                   </button>
                 ))}
               </div>
@@ -416,7 +426,7 @@ export function TransfersHero() {
               </TransferIcon>
               <div>
                 <p className="text-sm font-bold">
-                  Tuyến đề xuất · {pickupName} → {dropoffName}
+                  {t.transfers.suggestedRoute} · {pickupName} → {dropoffName}
                 </p>
                 <p className="mt-1 text-xs leading-relaxed text-on-surface-variant">
                   <ContentText contentKey="transfers.text-063" />
@@ -427,8 +437,8 @@ export function TransfersHero() {
               <div aria-live="polite">
                 <p className="text-xs font-semibold">
                   {roundTrip
-                    ? "Giá tham khảo khứ hồi"
-                    : "Giá tham khảo một chiều"}
+                    ? t.transfers.roundTripNote
+                    : t.transfers.oneWayNote}
                 </p>
                 <p
                   id="route-price"
@@ -440,10 +450,10 @@ export function TransfersHero() {
                 >
                   {error ||
                     (price != null
-                      ? money(price)
+                      ? formatMoney(price, locale)
                       : roundTrip && fare
-                        ? "Chưa có giá lượt về. Vui lòng liên hệ."
-                        : "Tuyến này cần liên hệ để báo giá.")}
+                        ? t.transfers.missingReturnFare
+                        : t.transfers.contactForQuote)}
                 </p>
               </div>
               <ContentLink
@@ -452,7 +462,7 @@ export function TransfersHero() {
                 rel="noopener"
                 className="transfer-button"
               >
-                Đặt nhanh qua Zalo
+                {t.transfers.quickZalo}
               </ContentLink>
             </div>
           </div>

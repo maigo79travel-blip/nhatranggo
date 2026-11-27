@@ -876,7 +876,7 @@ try {
       );
       if (width === 1440 || width === 390) {
         await ui.screenshot({
-          path: `test-results/modules/${path.slice(1).replaceAll("/", "-")}-${width}.png`,
+          path: `test-results/modules/${path.slice(1).replace(/[^a-zA-Z0-9_-]+/g, "-")}-${width}.png`,
           animations: "disabled",
         });
       }

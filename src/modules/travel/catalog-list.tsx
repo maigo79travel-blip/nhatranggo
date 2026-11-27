@@ -1,7 +1,9 @@
 "use client";
 import { useCatalog } from "@/components/catalog/catalog-context";
+import { useSiteData, useT } from "@/components/content";
+import { formatMoney } from "@/lib/i18n/format";
 import type { BookingDraft } from "./search";
-import { money, type Product } from "@/lib/types";
+import type { Product } from "@/lib/types";
 import { PublicIcon } from "@/components/site/public-ui";
 export function ServiceCards({
   products,
@@ -11,6 +13,9 @@ export function ServiceCards({
   initialValues?: BookingDraft;
 }) {
   const catalog = useCatalog();
+  const { locale } = useSiteData();
+  const t = useT();
+  const typeLabels: Record<string, string> = t.serviceSearch.typeLabels;
   return (
     <div className="public-card-grid">
       {products.map((p) => (
@@ -36,12 +41,7 @@ export function ServiceCards({
               />
             )}
             <span className="public-type-badge">
-              {{
-                hotel: "Khách sạn",
-                tour: "Tour du lịch",
-                combo: "Combo du lịch",
-                transfer: "Xe đưa đón",
-              }[p.type] || "Dịch vụ"}
+              {typeLabels[p.type] || t.serviceSearch.typeLabels.default}
             </span>
           </div>
           <div className="public-card-content">
@@ -49,7 +49,7 @@ export function ServiceCards({
               <p className="flex items-center gap-1.5 text-sm text-on-surface-variant">
                 <PublicIcon name="star" className="text-promo-ink text-lg" />
                 <span className="font-bold">{p.rating}</span>
-                <span>Đánh giá</span>
+                <span>{t.serviceSearch.ratingLabel}</span>
               </p>
             )}
             <h2 className="text-xl font-bold leading-snug line-clamp-2">
@@ -64,13 +64,15 @@ export function ServiceCards({
             </p>
             <div className="public-card-bottom">
               <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                <span className="text-sm text-on-surface-variant">Giá từ</span>
+                <span className="text-sm text-on-surface-variant">
+                  {t.serviceSearch.priceFrom}
+                </span>
                 <p className="text-primary font-extrabold text-xl">
-                  {money(p.price)}
+                  {formatMoney(p.price, locale)}
                 </p>
                 {!!p.original_price && p.original_price > p.price && (
                   <del className="text-sm text-on-surface-variant">
-                    {money(p.original_price)}
+                    {formatMoney(p.original_price, locale)}
                   </del>
                 )}
               </div>
@@ -79,7 +81,7 @@ export function ServiceCards({
                 type="button"
                 onClick={() => catalog.open(p, initialValues)}
               >
-                Gửi yêu cầu đặt chỗ
+                {t.serviceSearch.bookAction}
                 <PublicIcon name="arrow_forward" className="text-lg" />
               </button>
             </div>

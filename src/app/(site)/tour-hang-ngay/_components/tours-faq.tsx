@@ -14,7 +14,7 @@ const questions = [
   ["tours.text-079", "tours.text-080"],
 ] as const;
 
-export function ToursFaq() {
+export function ToursFaq({ stepsTitle }: { stepsTitle: string }) {
   return (
     <div className="mt-10 space-y-8 border-t border-border-subtle pt-8 sm:mt-14 sm:pt-10">
       <section aria-labelledby="tour-steps-title">
@@ -22,7 +22,7 @@ export function ToursFaq() {
           id="tour-steps-title"
           className="mb-4 text-2xl font-extrabold tracking-tight"
         >
-          Cách đặt tour
+          {stepsTitle}
         </h2>
         <ol className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {steps.map(({ icon, title, text }) => (

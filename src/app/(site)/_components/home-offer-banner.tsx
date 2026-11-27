@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { ContentText } from "@/components/content";
+import { getCurrentMessages } from "@/lib/i18n";
 
-export function HomeOfferBanner() {
+export async function HomeOfferBanner() {
+  const t = await getCurrentMessages();
   return (
     <section className="site-container w-full pb-12 lg:pb-16">
       <div className="relative isolate flex min-h-[226px] items-center overflow-hidden rounded-[28px] bg-primary px-5 py-8 text-white shadow-card sm:px-9 lg:pl-[23%]">
@@ -33,13 +35,13 @@ export function HomeOfferBanner() {
               >
                 sell
               </span>
-              Xem ưu đãi đang có
+              {t.home.viewDeals}
             </Link>
             <Link
               href="/lien-he"
               className="home-booking-button border border-white/40"
             >
-              Liên hệ tư vấn
+              {t.home.contactConsult}
             </Link>
           </div>
         </div>

@@ -7,8 +7,9 @@ import {
   type ReactNode,
 } from "react";
 import { usePathname } from "next/navigation";
-import type { BookingDraft } from "@/modules/travel/search";
+import { type BookingDraft } from "@/modules/travel/search";
 import type { Product } from "@/lib/types";
+import { useT } from "@/components/content";
 import { CatalogContext } from "./catalog-context";
 import { BookingDialogContent } from "./booking-dialog";
 import { ToastNotification } from "./toast-notification";
@@ -26,6 +27,7 @@ export function CatalogProvider({ children }: { children: ReactNode }) {
   const [message, setMessage] = useState("");
   const dialog = useRef<HTMLDialogElement>(null);
   const pathname = usePathname();
+  const t = useT();
   useEffect(() => {
     setSelected(null);
     setMessage("");
@@ -60,11 +62,11 @@ export function CatalogProvider({ children }: { children: ReactNode }) {
       >
         <div className="mb-3 flex items-center justify-between gap-3">
           <h2 id="catalog-dialog-title" className="text-headline-md">
-            Yêu cầu đặt chỗ
+            {t.booking.title}
           </h2>
           <button
             type="button"
-            aria-label="Đóng"
+            aria-label={t.common.close}
             className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-2xl text-on-surface-variant transition-colors hover:bg-surface-muted hover:text-on-surface"
             onClick={closeDialog}
           >

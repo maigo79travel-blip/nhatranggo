@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getCurrentMessages } from "@/lib/i18n";
 import { CatalogCard, ProductField } from "@/components/catalog";
 import { PriceStack, ProductDiscount } from "@/components/price-stack";
 import type { Product } from "@/lib/types";
@@ -9,11 +10,20 @@ import {
 import { HomeHeading, HomeSectionLink } from "./home-heading";
 import { HomeCardRating } from "./home-card-rating";
 
-export function HomeFlashDeals({ products }: { products: Product[] }) {
+export async function HomeFlashDeals({ products }: { products: Product[] }) {
+  const t = await getCurrentMessages();
   const combos = products.filter((product) => product.type === "combo");
   const offers = [
-    { type: "hotel", title: "Khách sạn & resort", action: "Xem khách sạn" },
-    { type: "tour", title: "Tour du lịch", action: "Xem tour" },
+    {
+      type: "hotel",
+      title: t.home.offerHotelTitle,
+      action: t.home.offerHotelAction,
+    },
+    {
+      type: "tour",
+      title: t.home.offerTourTitle,
+      action: t.home.offerTourAction,
+    },
   ] as const;
 
   return (
@@ -31,15 +41,15 @@ export function HomeFlashDeals({ products }: { products: Product[] }) {
         >
           bolt
         </span>
-        <span>Đã gửi yêu cầu đặt chỗ?</span>
-        <strong className="text-primary">Tra cứu booking</strong>
+        <span>{t.home.lookupBannerPrefix}</span>
+        <strong className="text-primary">{t.home.lookupBannerAction}</strong>
       </Link>
 
       {!!combos.length && (
         <>
           <HomeHeading contentKey="home.text-080">
             <HomeSectionLink href={serviceSearchHref("combo")}>
-              Xem tất cả ưu đãi
+              {t.home.viewAllDeals}
             </HomeSectionLink>
           </HomeHeading>
           <div className="rounded-[28px] bg-gradient-to-b from-primary via-primary via-30% to-brand-light p-4 sm:p-6 lg:p-[30px]">
@@ -87,7 +97,7 @@ export function HomeFlashDeals({ products }: { products: Product[] }) {
                         />
                       </PriceStack>
                       <button type="button" className="home-booking-button">
-                        Đặt combo
+                        {t.home.bookCombo}
                       </button>
                     </div>
                   </div>

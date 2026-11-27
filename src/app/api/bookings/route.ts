@@ -1,6 +1,7 @@
 import { AppError } from "@/lib/errors";
+import { getCurrentMessages } from "@/lib/i18n";
 import { errorResponse, readJson } from "@/lib/http";
-import { rateLimit, sameOrigin } from "@/lib/request-security";
+import { rateLimit, requireSameOrigin } from "@/lib/request-security";
 import { bookingSchema } from "@/modules/bookings/validation";
 import {
   createBooking,
@@ -9,7 +10,8 @@ import {
 
 export async function POST(request: Request) {
   try {
-    if (!sameOrigin(request)) throw new AppError("Yêu cầu không hợp lệ", 403);
+    const t = await getCurrentMessages();
+    requireSameOrigin(request, t.errors.invalidRequest);
     const input = bookingSchema.parse(await readJson(request));
     await rateLimit(request, "booking", 40, 900);
     return Response.json(await createBooking(input), { status: 201 });
@@ -28,10 +30,15 @@ export async function GET(request: Request) {
         id,
       ) ||
       !/^(\+84|0)[0-9]{9,10}$/.test(phone)
-    )
-      throw new AppError("Nhập mã đặt chỗ và số điện thoại");
+    ) {
+      const t = await getCurrentMessages();
+      throw new AppError(t.errors.missingLookupParams);
+    }
     const booking = await getBookingByIdAndPhone(id, phone);
-    if (!booking) throw new AppError("Không tìm thấy yêu cầu phù hợp", 404);
+    if (!booking) {
+      const t = await getCurrentMessages();
+      throw new AppError(t.errors.bookingNotFound, 404);
+    }
     return Response.json(booking, {
       headers: { "Cache-Control": "private, no-store" },
     });

@@ -1,11 +1,12 @@
 "use client";
 
 import { useCatalog } from "@/components/catalog/catalog-context";
-import { SiteDataProvider } from "@/components/content";
+import { SiteDataProvider, useSiteData, useT } from "@/components/content";
 import { PriceStack } from "@/components/price-stack";
 import { PublicIcon } from "@/components/site/public-ui";
 import { isPublicImageUrl } from "@/lib/content-attributes";
-import { money, type Product } from "@/lib/types";
+import { formatMoney } from "@/lib/i18n/format";
+import type { Product } from "@/lib/types";
 import type { BookingDraft } from "./search";
 
 export function TourCards({
@@ -16,6 +17,8 @@ export function TourCards({
   draft?: BookingDraft;
 }) {
   const catalog = useCatalog();
+  const { locale } = useSiteData();
+  const t = useT();
   return (
     <SiteDataProvider data={{ products }}>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
@@ -50,7 +53,9 @@ export function TourCards({
                         aria-hidden="true"
                         className="h-4 w-4 bg-current [mask:url('/images/figma/icons/star-filled.svg')_center/contain_no-repeat]"
                       />
-                      <span className="sr-only">Điểm đánh giá </span>
+                      <span className="sr-only">
+                        {t.hotels.ratingAriaPrefix}{" "}
+                      </span>
                       {product.rating.toFixed(1)}
                     </span>
                   )}
@@ -79,11 +84,11 @@ export function TourCards({
                     data-sale-price
                     className="text-xl font-extrabold leading-tight text-sale-price sm:text-[23px]"
                   >
-                    {money(product.price)}
+                    {formatMoney(product.price, locale)}
                   </span>
                   {product.type === "tour" && (
                     <span className="ml-1 text-xs text-on-surface-variant">
-                      /khách
+                      {t.tours.perGuest}
                     </span>
                   )}
                 </PriceStack>
@@ -92,7 +97,9 @@ export function TourCards({
                   className="public-primary-button rounded-xl px-4"
                   onClick={() => catalog.open(product, draft)}
                 >
-                  {product.type === "combo" ? "Đặt combo" : "Đặt tour"}
+                  {product.type === "combo"
+                    ? t.home.bookCombo
+                    : t.home.bookTour}
                 </button>
               </div>
             </div>

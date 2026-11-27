@@ -1,12 +1,15 @@
 import { cookies } from "next/headers";
 import { z } from "zod";
-import { sameOrigin, secureCookies } from "@/lib/request-security";
+import { getCurrentMessages } from "@/lib/i18n";
+import { requireSameOrigin, secureCookies } from "@/lib/request-security";
 import { localeSchema } from "@/lib/locale";
 import { readJson, errorResponse } from "@/lib/http";
 export async function POST(request: Request) {
-  if (!sameOrigin(request))
-    return Response.json({ error: "Yêu cầu không hợp lệ" }, { status: 403 });
   try {
+    requireSameOrigin(
+      request,
+      (await getCurrentMessages()).errors.invalidRequest,
+    );
     const body = z
       .object({ locale: localeSchema })
       .parse(await readJson(request, 1024));

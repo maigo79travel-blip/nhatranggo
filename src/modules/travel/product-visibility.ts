@@ -35,8 +35,19 @@ export const publicFareWhere = `f.active AND p.active AND ${publicRouteWhere}`;
 export const publicProductFields = `
   p.id,p.type,p.price,p.image,p.rating,p.original_price,p.active,
   p.position,p.collection_id,p.template_id,p.destination_id,
+  concat_ws(
+    ' ',
+    p.title,
+    p.location,
+    p.description,
+    (
+      SELECT string_agg(entry.value->>'value', ' ')
+      FROM jsonb_each(COALESCE(p.content, '{}'::jsonb)) AS entry
+      WHERE entry.value->>'kind' = 'text'
+    )
+  ) AS search_text,
   COALESCE(t.value->>'title',p.title) AS title,
   COALESCE(t.value->>'description',p.description) AS description,
   COALESCE(t.value->>'location',p.location) AS location,
-  COALESCE(t.value->'content',p.content) AS content
+  p.content || COALESCE(t.value->'content','{}'::jsonb) AS content
 `;

@@ -9,7 +9,9 @@ import {
 } from "react";
 import Link from "next/link";
 import type { SiteData } from "@/lib/types";
-import { money } from "@/lib/types";
+import { formatMoney } from "@/lib/i18n/format";
+import { messagesVi } from "@/lib/i18n/messages-vi";
+import type { Messages } from "@/lib/i18n/types";
 import {
   contentAttributeKeys,
   isPublicBackgroundImage,
@@ -53,6 +55,9 @@ export function SiteDataProvider({
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 }
 export const useSiteData = () => useContext(DataContext);
+export function useT(): Messages {
+  return useContext(DataContext).messages ?? messagesVi;
+}
 export function useProduct(id?: string) {
   return useSiteData().productById.get(id || "");
 }
@@ -147,8 +152,7 @@ export function FareValue({
   route: string;
   vehicle: string;
 }) {
-  const fare = useSiteData().fares.find(
-    (f) => f.route === route && f.vehicle === vehicle,
-  );
-  return <>{fare ? money(fare.price) : ""}</>;
+  const { fares, locale } = useSiteData();
+  const fare = fares.find((f) => f.route === route && f.vehicle === vehicle);
+  return <>{fare ? formatMoney(fare.price, locale) : ""}</>;
 }

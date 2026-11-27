@@ -3,6 +3,7 @@ import { getPublishedPage } from "@/modules/blog/service";
 import { Markdown } from "@/modules/blog/markdown";
 import { PublicPage } from "@/components/site/public-page";
 import { isPublicImageUrl } from "@/lib/content-attributes";
+import { getCurrentMessages } from "@/lib/i18n";
 import { ArticleDate } from "@/modules/blog/article-card";
 export async function generateMetadata({
   params,
@@ -24,10 +25,11 @@ export default async function ArticlePage({
   const { slug } = await params;
   const article = await getPublishedPage("article", slug);
   if (!article) notFound();
+  const t = await getCurrentMessages();
   return (
     <PublicPage
       title={article.title}
-      parentBreadcrumb={{ href: "/blog", label: "Blog" }}
+      parentBreadcrumb={{ href: "/blog", label: t.nav.blog }}
     >
       <article className="mx-auto overflow-hidden rounded-[24px] border border-border-subtle bg-surface shadow-card">
         {isPublicImageUrl(article.image) && (

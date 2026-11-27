@@ -1,9 +1,13 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { activeNavigationHref, navigationItems } from "@/lib/navigation";
+import {
+  activeNavigationHref,
+  localizedNavLabel,
+  navigationItems,
+} from "@/lib/navigation";
 import Link from "next/link";
-import { useSiteData } from "@/components/content";
+import { useSiteData, useT } from "@/components/content";
 import { LanguageSelector } from "./language-selector";
 import {
   isLegacyServiceHref,
@@ -21,7 +25,8 @@ export function MobileNav() {
   const ref = useRef<HTMLDivElement>(null);
   const button = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
-  const { content } = useSiteData();
+  const { content, locale } = useSiteData();
+  const t = useT();
   const search = useSearchParams();
   const savedItems = navigationItems(content["site.mobile-navigation"]?.value);
   const firstLegacyItem = savedItems.findIndex((item) =>
@@ -67,7 +72,7 @@ export function MobileNav() {
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-controls="mobile-navigation"
-        aria-label={open ? "Đóng menu" : "Mở menu"}
+        aria-label={open ? t.nav.mobileMenuClose : t.nav.mobileMenuOpen}
         className="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border-subtle bg-surface-muted text-on-surface hover:border-primary transition-colors"
       >
         <span aria-hidden="true" className="material-symbols-outlined">
@@ -77,7 +82,7 @@ export function MobileNav() {
       {open && (
         <nav
           id="mobile-navigation"
-          aria-label="Điều hướng trên điện thoại"
+          aria-label={t.nav.mobileNavLabel}
           className="absolute right-0 mt-2 w-60 max-h-[calc(100dvh-6rem)] overflow-y-auto bg-surface border border-border-subtle rounded-2xl shadow-floating p-3 flex flex-col gap-1"
         >
           {items.map(({ href, label }) => (
@@ -92,7 +97,7 @@ export function MobileNav() {
               aria-current={activeHref === href ? "page" : undefined}
               onClick={() => setOpen(false)}
             >
-              {label}
+              {localizedNavLabel(href, label, locale, t.nav)}
             </Link>
           ))}
           {!items.some((item) => item.href === "/tra-cuu") && (
@@ -107,7 +112,7 @@ export function MobileNav() {
               >
                 search
               </span>
-              <span>Tra cứu</span>
+              <span>{t.nav.lookup}</span>
             </Link>
           )}
           <div className="sm:hidden px-3 pt-2">

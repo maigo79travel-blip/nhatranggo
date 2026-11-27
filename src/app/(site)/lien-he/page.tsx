@@ -5,16 +5,21 @@ import { getSiteContent } from "@/lib/catalog";
 import { PublicIcon } from "@/components/site/public-ui";
 import { contactInfo } from "@/lib/content-values";
 import { contactChannels } from "@/modules/support/contact-channels";
+import { getMessages } from "@/lib/i18n";
+import { getPublicLocale } from "@/lib/catalog";
+
 export default async function ContactPage() {
-  const [content, copy] = await Promise.all([
+  const [content, locale] = await Promise.all([
     getSiteContent("shared"),
-    getPublicPageCopy("contact", "Liên hệ & Hỗ trợ"),
+    getPublicLocale(),
   ]);
+  const t = getMessages(locale);
+  const copy = await getPublicPageCopy("contact", t.pages.contactTitle);
   const contact = contactInfo(content);
   return (
     <PublicPage {...copy}>
       <div className="flex flex-wrap gap-3 mb-7">
-        {contactChannels(contact)
+        {contactChannels(contact, t.support.callHotlinePrefix)
           .filter((channel) => channel.href)
           .map((channel) => (
             <a

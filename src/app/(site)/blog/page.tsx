@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PublicPage } from "@/components/site/public-page";
 import { PublicIcon } from "@/components/site/public-ui";
+import { getCurrentMessages } from "@/lib/i18n";
 import { getPublicPageCopy } from "@/lib/public-page-copy";
 import { ArticleCard } from "@/modules/blog/article-card";
 import { listArticles } from "@/modules/blog/service";
@@ -18,9 +19,10 @@ export default async function BlogPage({ searchParams }: PageProps<"/blog">) {
     typeof raw.page === "string" && /^\d{1,4}$/.test(raw.page)
       ? Math.max(1, Math.min(1000, Number(raw.page)))
       : 1;
+  const t = await getCurrentMessages();
   const [rows, copy] = await Promise.all([
     listArticles(pageSize + 1, (page - 1) * pageSize),
-    getPublicPageCopy("blog", "Blog & Tin tức"),
+    getPublicPageCopy("blog", t.blog.title),
   ]);
   const articles = rows.slice(0, pageSize);
   const hasNext = rows.length > pageSize && page < 1000;
@@ -38,7 +40,7 @@ export default async function BlogPage({ searchParams }: PageProps<"/blog">) {
           id="blog-list-heading"
           className="mb-4 text-2xl font-extrabold tracking-tight sm:mb-5 sm:text-headline-lg"
         >
-          Bài viết mới nhất
+          {t.blog.latestTitle}
         </h2>
 
         {lead && <ArticleCard article={lead} variant="lead" />}
@@ -54,25 +56,25 @@ export default async function BlogPage({ searchParams }: PageProps<"/blog">) {
         {!articles.length && (
           <div className="public-empty-state">
             <PublicIcon name="article" className="text-4xl text-primary" />
-            <p className="text-lg font-bold">Chưa có bài viết được đăng</p>
+            <p className="text-lg font-bold">{t.home.noArticlesInLocale}</p>
           </div>
         )}
         {(page > 1 || hasNext) && (
           <nav
-            aria-label="Phân trang bài viết"
+            aria-label={t.blog.paginationAria}
             className="mt-6 flex flex-wrap items-center justify-center gap-4"
           >
             {page > 1 && (
               <Link href={pageHref(page - 1)} className="public-contact-link">
-                Trang trước
+                {t.common.prevPage}
               </Link>
             )}
             <span className="text-sm text-on-surface-variant">
-              Trang {page}
+              {t.blog.pageLabel.replace("{page}", String(page))}
             </span>
             {hasNext && (
               <Link href={pageHref(page + 1)} className="public-contact-link">
-                Trang sau
+                {t.common.nextPage}
               </Link>
             )}
           </nav>
